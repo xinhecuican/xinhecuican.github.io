@@ -5,16 +5,16 @@
   
 
   
-  <title>string 中的reverse | Hexo</title>
+  <title>组合 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="reverse(s.begin(), s.end())">
+  <meta name="description" content="本程序的思路是开一个数组，其下标表示1到n个数，数组元素的值为1表示其代表的数被选中，为0则没选中。 首先初始化，将数组前n个元素置1，表示第一个组合为前n个数。 然后从左到右扫描数组元素值的“10”组合，找到第一个“10”组合后将其变为“01”组合，同时将其左边的所有“1”全部移动到数组的最左端。 当第一个“1”移动到数组的n-m的位置，即n个“1”全部移动到最右端时，就得到了最后一个组合。 例">
 <meta property="og:type" content="article">
-<meta property="og:title" content="string 中的reverse">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;01&#x2F;02&#x2F;string-%E4%B8%AD%E7%9A%84reverse&#x2F;index.html">
+<meta property="og:title" content="组合">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;01&#x2F;03&#x2F;%E7%BB%84%E5%90%88&#x2F;index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="reverse(s.begin(), s.end())">
+<meta property="og:description" content="本程序的思路是开一个数组，其下标表示1到n个数，数组元素的值为1表示其代表的数被选中，为0则没选中。 首先初始化，将数组前n个元素置1，表示第一个组合为前n个数。 然后从左到右扫描数组元素值的“10”组合，找到第一个“10”组合后将其变为“01”组合，同时将其左边的所有“1”全部移动到数组的最左端。 当第一个“1”移动到数组的n-m的位置，即n个“1”全部移动到最右端时，就得到了最后一个组合。 例">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-01-02T04:08:39.649Z">
+<meta property="og:updated_time" content="2020-01-03T09:33:05.273Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -62,10 +62,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-string-中的reverse" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-组合" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2020/01/02/string-%E4%B8%AD%E7%9A%84reverse/" class="article-date">
-  <time datetime="2020-01-02T04:08:04.000Z" itemprop="datePublished">2020-01-02</time>
+    <a href="/2020/01/03/%E7%BB%84%E5%90%88/" class="article-date">
+  <time datetime="2020-01-03T09:32:29.000Z" itemprop="datePublished">2020-01-03</time>
 </a>
     
   </div>
@@ -76,7 +76,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      string 中的reverse
+      组合
     </h1>
   
 
@@ -84,12 +84,26 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>reverse(s.begin(), s.end())</p>
+        <p>本程序的思路是开一个数组，其下标表示1到n个数，数组元素的值为1表示其代表的数被选中，为0则没选中。</p>
+<p>首先初始化，将数组前n个元素置1，表示第一个组合为前n个数。</p>
+<p>然后从左到右扫描数组元素值的“10”组合，找到第一个“10”组合后将其变为“01”组合，同时将其左边的所有“1”全部移动到数组的最左端。</p>
+<p>当第一个“1”移动到数组的n-m的位置，即n个“1”全部移动到最右端时，就得到了最后一个组合。</p>
+<p>例如求5中选3的组合：</p>
+<p>1 1 1 0 0 //1,2,3</p>
+<p>1 1 0 1 0 //1,2,4</p>
+<p>1 0 1 1 0 //1,3,4</p>
+<p>0 1 1 1 0 //2,3,4</p>
+<p>1 1 0 0 1 //1,2,5</p>
+<p>1 0 1 0 1 //1,3,5</p>
+<p>0 1 1 0 1 //2,3,5</p>
+<p>1 0 0 1 1 //1,4,5</p>
+<p>0 1 0 1 1 //2,4,5</p>
+<p>0 0 1 1 1 //3,4,5<br>————————————————<br>版权声明：本文为CSDN博主「文如王勃三生慧」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a href="https://blog.csdn.net/hf19931101/article/details/79452799" target="_blank" rel="noopener">https://blog.csdn.net/hf19931101/article/details/79452799</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/01/02/string-%E4%B8%AD%E7%9A%84reverse/" data-id="ck4xynh9x0001sguicuvuceoq" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/01/03/%E7%BB%84%E5%90%88/" data-id="ck4xynhae0003sguidfgt0357" class="article-share-link">Share</a>
       
       
     </footer>
@@ -98,19 +112,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2020/01/03/%E7%BB%84%E5%90%88/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          组合
-        
-      </div>
-    </a>
   
-  
-    <a href="/2020/01/01/%E2%80%9Dstring%E7%B1%BB%E5%AD%97%E7%AC%A6%E5%A4%A7%E5%B0%8F%E5%86%99%E8%BD%AC%E6%8D%A2%E2%80%9C/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2020/01/02/string-%E4%B8%AD%E7%9A%84reverse/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">afd</div>
+      <div class="article-nav-title">string 中的reverse</div>
     </a>
   
 </nav>

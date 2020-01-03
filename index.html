@@ -61,6 +61,57 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-组合" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/01/03/%E7%BB%84%E5%90%88/" class="article-date">
+  <time datetime="2020-01-03T09:32:29.000Z" itemprop="datePublished">2020-01-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/01/03/%E7%BB%84%E5%90%88/">组合</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>本程序的思路是开一个数组，其下标表示1到n个数，数组元素的值为1表示其代表的数被选中，为0则没选中。</p>
+<p>首先初始化，将数组前n个元素置1，表示第一个组合为前n个数。</p>
+<p>然后从左到右扫描数组元素值的“10”组合，找到第一个“10”组合后将其变为“01”组合，同时将其左边的所有“1”全部移动到数组的最左端。</p>
+<p>当第一个“1”移动到数组的n-m的位置，即n个“1”全部移动到最右端时，就得到了最后一个组合。</p>
+<p>例如求5中选3的组合：</p>
+<p>1 1 1 0 0 //1,2,3</p>
+<p>1 1 0 1 0 //1,2,4</p>
+<p>1 0 1 1 0 //1,3,4</p>
+<p>0 1 1 1 0 //2,3,4</p>
+<p>1 1 0 0 1 //1,2,5</p>
+<p>1 0 1 0 1 //1,3,5</p>
+<p>0 1 1 0 1 //2,3,5</p>
+<p>1 0 0 1 1 //1,4,5</p>
+<p>0 1 0 1 1 //2,4,5</p>
+<p>0 0 1 1 1 //3,4,5<br>————————————————<br>版权声明：本文为CSDN博主「文如王勃三生慧」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a href="https://blog.csdn.net/hf19931101/article/details/79452799" target="_blank" rel="noopener">https://blog.csdn.net/hf19931101/article/details/79452799</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/01/03/%E7%BB%84%E5%90%88/" data-id="ck4xynhae0003sguidfgt0357" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-string-中的reverse" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/01/02/string-%E4%B8%AD%E7%9A%84reverse/" class="article-date">
@@ -88,7 +139,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/01/02/string-%E4%B8%AD%E7%9A%84reverse/" data-id="ck4w7nhvy0002kouieecz05if" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/01/02/string-%E4%B8%AD%E7%9A%84reverse/" data-id="ck4xynh9x0001sguicuvuceoq" class="article-share-link">Share</a>
       
       
     </footer>
@@ -125,7 +176,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/01/01/%E2%80%9Dstring%E7%B1%BB%E5%AD%97%E7%AC%A6%E5%A4%A7%E5%B0%8F%E5%86%99%E8%BD%AC%E6%8D%A2%E2%80%9C/" data-id="ck4w7oh3m0000skuidwe4cpyg" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/01/01/%E2%80%9Dstring%E7%B1%BB%E5%AD%97%E7%AC%A6%E5%A4%A7%E5%B0%8F%E5%86%99%E8%BD%AC%E6%8D%A2%E2%80%9C/" data-id="ck4xynhad0002sgui2pvhd2ol" class="article-share-link">Share</a>
       
       
     </footer>
@@ -163,7 +214,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/31/%E2%80%9C%E5%87%B8%E5%8C%85%E2%80%9D/" data-id="ck4w7nhw00003koui7vo3g4sf" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/31/%E2%80%9C%E5%87%B8%E5%8C%85%E2%80%9D/" data-id="ck4xynhag0005sguigrx398ry" class="article-share-link">Share</a>
       
       
     </footer>
@@ -200,7 +251,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/05/%E7%A5%9E%E5%A5%87%E7%9A%84%E9%80%97%E5%8F%B7%E8%BF%90%E7%AE%97%E7%AC%A6/" data-id="ck4w7nhw20004kouif6mr1ka2" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/05/%E7%A5%9E%E5%A5%87%E7%9A%84%E9%80%97%E5%8F%B7%E8%BF%90%E7%AE%97%E7%AC%A6/" data-id="ck4xynhaf0004sguic7brgawu" class="article-share-link">Share</a>
       
       
     </footer>
@@ -249,7 +300,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/04/hello-world/" data-id="ck4w7nhvr0000kouiegfnaf4b" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/04/hello-world/" data-id="ck4xynh8d0000sguidxxod35r" class="article-share-link">Share</a>
       
       
     </footer>
@@ -290,6 +341,10 @@
       <ul>
         
           <li>
+            <a href="/2020/01/03/%E7%BB%84%E5%90%88/">组合</a>
+          </li>
+        
+          <li>
             <a href="/2020/01/02/string-%E4%B8%AD%E7%9A%84reverse/">string 中的reverse</a>
           </li>
         
@@ -303,10 +358,6 @@
         
           <li>
             <a href="/2019/12/05/%E7%A5%9E%E5%A5%87%E7%9A%84%E9%80%97%E5%8F%B7%E8%BF%90%E7%AE%97%E7%AC%A6/">神奇的逗号运算符</a>
-          </li>
-        
-          <li>
-            <a href="/2019/12/04/hello-world/">Hello World</a>
           </li>
         
       </ul>
