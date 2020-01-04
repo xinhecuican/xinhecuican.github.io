@@ -5,16 +5,16 @@
   
 
   
-  <title>神奇的逗号运算符 | Hexo</title>
+  <title>线性筛 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="cout&amp;lt;&amp;lt;(a,c),此时只会输出c的内容，但是a中的内容也会被计算，例如a&#x3D;5,b&#x3D;6,c&#x3D;7  cout&amp;lt;&amp;lt;(（d&#x3D;a+b),c) 输出为7，d&#x3D;11">
+  <meta name="description" content="埃氏筛中有重复，例如6,2与3都筛了一次，效率低线性筛定理，（口语不准确）一个数i乘以小于等于它的最小素因数的素数所得到的合数之间没有重复#define N 10000    int flag[N+1],prime[N+1],pnum;    &#x2F;*    flag[n] 表示n是否是素数，1是素数，0不是    prime   中是所有的素数按从小到大排列、    pnum  表示素数的个数">
 <meta property="og:type" content="article">
-<meta property="og:title" content="神奇的逗号运算符">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;12&#x2F;05&#x2F;%E7%A5%9E%E5%A5%87%E7%9A%84%E9%80%97%E5%8F%B7%E8%BF%90%E7%AE%97%E7%AC%A6&#x2F;index.html">
+<meta property="og:title" content="线性筛">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;01&#x2F;04&#x2F;%E7%BA%BF%E6%80%A7%E7%AD%9B&#x2F;index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="cout&amp;lt;&amp;lt;(a,c),此时只会输出c的内容，但是a中的内容也会被计算，例如a&#x3D;5,b&#x3D;6,c&#x3D;7  cout&amp;lt;&amp;lt;(（d&#x3D;a+b),c) 输出为7，d&#x3D;11">
+<meta property="og:description" content="埃氏筛中有重复，例如6,2与3都筛了一次，效率低线性筛定理，（口语不准确）一个数i乘以小于等于它的最小素因数的素数所得到的合数之间没有重复#define N 10000    int flag[N+1],prime[N+1],pnum;    &#x2F;*    flag[n] 表示n是否是素数，1是素数，0不是    prime   中是所有的素数按从小到大排列、    pnum  表示素数的个数">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-12-29T11:58:20.000Z">
+<meta property="og:updated_time" content="2020-01-04T04:25:19.203Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -62,10 +62,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-神奇的逗号运算符" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-线性筛" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/12/05/%E7%A5%9E%E5%A5%87%E7%9A%84%E9%80%97%E5%8F%B7%E8%BF%90%E7%AE%97%E7%AC%A6/" class="article-date">
-  <time datetime="2019-12-05T04:40:16.000Z" itemprop="datePublished">2019-12-05</time>
+    <a href="/2020/01/04/%E7%BA%BF%E6%80%A7%E7%AD%9B/" class="article-date">
+  <time datetime="2020-01-04T04:21:16.000Z" itemprop="datePublished">2020-01-04</time>
 </a>
     
   </div>
@@ -76,7 +76,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      神奇的逗号运算符
+      线性筛
     </h1>
   
 
@@ -84,12 +84,13 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>   cout&lt;&lt;(a,c),此时只会输出c的内容，但是a中的内容也会被计算，例如a=5,b=6,c=7  cout&lt;&lt;(（d=a+b),c) 输出为7，d=11</p>
+        <p>埃氏筛中有重复，例如6,2与3都筛了一次，效率低<br>线性筛定理，（口语不准确）一个数i乘以小于等于它的最小素因数的素数所得到的合数之间没有重复<br>#define N 10000<br>    int flag[N+1],prime[N+1],pnum;<br>    /*<br>    flag[n] 表示n是否是素数，1是素数，0不是<br>    prime   中是所有的素数按从小到大排列、<br>    pnum  表示素数的个数<br>    <em>/<br>    void CreatePrime(){<br>        pnum=0;//初始化没有素数<br>        //先将所有数看做素数，然后开始筛选<br>        for(int i=0; i&lt;=N; i++){<br>            flag[i]=1;<br>        }<br>        //遍历筛去所有最大因数是i的合数<br>        for(int i=2; i&lt;=N; i++){<br>            if(flag[i]==1){<br>            //把素数记录下来<br>                p[pnum++]=i;<br>            }<br>            //遍历已知素数表中比i的最小素因数小的素数，并筛去合数<br>            for(int j=0; j&lt;pnum &amp;&amp; p[j]</em>i&lt;=N; j++){<br>            //筛去合数<br>                flag[p[j]*i]=0;<br>                if(i%p[j]==0)<br>                //找到i的最小素因数，找到了就终止<br>                    break;<br>            }<br>        }</p>
+<p>————————————————<br>版权声明：本文为CSDN博主「太上绝情」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a href="https://blog.csdn.net/bjrxyz/article/details/8125913" target="_blank" rel="noopener">https://blog.csdn.net/bjrxyz/article/details/8125913</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/05/%E7%A5%9E%E5%A5%87%E7%9A%84%E9%80%97%E5%8F%B7%E8%BF%90%E7%AE%97%E7%AC%A6/" data-id="ck4z33fym0007oouighdig9nu" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/01/04/%E7%BA%BF%E6%80%A7%E7%AD%9B/" data-id="ck4z33fyl0006ooui4euh9kq6" class="article-share-link">Share</a>
       
       
     </footer>
@@ -98,19 +99,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2019/12/31/%E2%80%9C%E5%87%B8%E5%8C%85%E2%80%9D/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          “凸包”
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/12/04/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2020/01/04/%E5%9F%83%E6%B0%8F%E7%AD%9B/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Hello World</div>
+      <div class="article-nav-title">埃氏筛</div>
     </a>
   
 </nav>
