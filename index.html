@@ -61,6 +61,43 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-埃氏筛" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/01/04/%E5%9F%83%E6%B0%8F%E7%AD%9B/" class="article-date">
+  <time datetime="2020-01-04T03:52:58.000Z" itemprop="datePublished">2020-01-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/01/04/%E5%9F%83%E6%B0%8F%E7%AD%9B/">埃氏筛</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在筛质数时，我们会发现，筛去2后，2的倍数4、6、8等一定不是素数;筛去3后，3的倍数6、9、12等一定不是倍数。简单模拟这个过程如下<br>const int MAXN = 1000000；<br>void Prime()<br>{<br>    for (int i=0; i&lt;MAXN; i++) prime[i]=1;  //先把每个数都定义为合数<br>    prime[0]=prime[1]=0;<br>    for (int i=2; i&lt;MAXN; i++)<br>    {<br>        if (!prime[i]) continue;<br>        for (int j=i*2; j&lt;MAXN; j+=i) prime[j] = 0;  //将i的倍数标记为合数<br>    }<br>}</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/01/04/%E5%9F%83%E6%B0%8F%E7%AD%9B/" data-id="ck4z22v3k0000d4uidymz6i3q" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-set" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/01/03/set/" class="article-date">
@@ -88,7 +125,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/01/03/set/" data-id="ck4xzlsnz0003wsui1i1t5kha" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/01/03/set/" data-id="ck4z22v4g0003d4uifcbdbpv7" class="article-share-link">Share</a>
       
       
     </footer>
@@ -139,7 +176,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/01/03/%E7%BB%84%E5%90%88/" data-id="ck4xzlso30006wsui0yh76ccr" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/01/03/%E7%BB%84%E5%90%88/" data-id="ck4z22v6j0007d4uicysr5br6" class="article-share-link">Share</a>
       
       
     </footer>
@@ -176,7 +213,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/01/02/string-%E4%B8%AD%E7%9A%84reverse/" data-id="ck4xzlsnv0001wsuihyerfiwm" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/01/02/string-%E4%B8%AD%E7%9A%84reverse/" data-id="ck4z22v660006d4ui8np5bnkg" class="article-share-link">Share</a>
       
       
     </footer>
@@ -213,7 +250,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/01/01/%E2%80%9Dstring%E7%B1%BB%E5%AD%97%E7%AC%A6%E5%A4%A7%E5%B0%8F%E5%86%99%E8%BD%AC%E6%8D%A2%E2%80%9C/" data-id="ck4xzlsny0002wsui1e2we52t" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/01/01/%E2%80%9Dstring%E7%B1%BB%E5%AD%97%E7%AC%A6%E5%A4%A7%E5%B0%8F%E5%86%99%E8%BD%AC%E6%8D%A2%E2%80%9C/" data-id="ck4z22v4i0004d4ui9wcbdvqq" class="article-share-link">Share</a>
       
       
     </footer>
@@ -251,7 +288,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/31/%E2%80%9C%E5%87%B8%E5%8C%85%E2%80%9D/" data-id="ck4xzlso10004wsui4o6hfmhs" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/31/%E2%80%9C%E5%87%B8%E5%8C%85%E2%80%9D/" data-id="ck4z22v480001d4uibkakbs4s" class="article-share-link">Share</a>
       
       
     </footer>
@@ -288,7 +325,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/05/%E7%A5%9E%E5%A5%87%E7%9A%84%E9%80%97%E5%8F%B7%E8%BF%90%E7%AE%97%E7%AC%A6/" data-id="ck4xzlso20005wsuigvea4mjt" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/05/%E7%A5%9E%E5%A5%87%E7%9A%84%E9%80%97%E5%8F%B7%E8%BF%90%E7%AE%97%E7%AC%A6/" data-id="ck4z22v4a0002d4uiged9ed4z" class="article-share-link">Share</a>
       
       
     </footer>
@@ -337,7 +374,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/04/hello-world/" data-id="ck4xzlsno0000wsui1w716p2b" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/04/hello-world/" data-id="ck4z22v640005d4uifd8bc5j9" class="article-share-link">Share</a>
       
       
     </footer>
@@ -378,6 +415,10 @@
       <ul>
         
           <li>
+            <a href="/2020/01/04/%E5%9F%83%E6%B0%8F%E7%AD%9B/">埃氏筛</a>
+          </li>
+        
+          <li>
             <a href="/2020/01/03/set/">set</a>
           </li>
         
@@ -391,10 +432,6 @@
         
           <li>
             <a href="/2020/01/01/%E2%80%9Dstring%E7%B1%BB%E5%AD%97%E7%AC%A6%E5%A4%A7%E5%B0%8F%E5%86%99%E8%BD%AC%E6%8D%A2%E2%80%9C/">afd</a>
-          </li>
-        
-          <li>
-            <a href="/2019/12/31/%E2%80%9C%E5%87%B8%E5%8C%85%E2%80%9D/">“凸包”</a>
           </li>
         
       </ul>

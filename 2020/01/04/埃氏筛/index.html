@@ -5,16 +5,16 @@
   
 
   
-  <title>afd | Hexo</title>
+  <title>埃氏筛 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="在algorithm库中有transform函数transform(str.begin(),str.end(),str.begin(),::toupper)注意transform有四个输入参数1：str.begin()字符串的起始地址；2：str.end()字符串的终止地址；3：str.begin()是转换之后，输出到原str字符串的起始地址；4：转换操作，可以选择toupper，tolower。">
+  <meta name="description" content="在筛质数时，我们会发现，筛去2后，2的倍数4、6、8等一定不是素数;筛去3后，3的倍数6、9、12等一定不是倍数。简单模拟这个过程如下const int MAXN &#x3D; 1000000；void Prime(){    for (int i&#x3D;0; i&amp;lt;MAXN; i++) prime[i]&#x3D;1;  &#x2F;&#x2F;先把每个数都定义为合数    prime[0]&#x3D;prime[1]&#x3D;0;    for (in">
 <meta property="og:type" content="article">
-<meta property="og:title" content="afd">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;01&#x2F;01&#x2F;%E2%80%9Dstring%E7%B1%BB%E5%AD%97%E7%AC%A6%E5%A4%A7%E5%B0%8F%E5%86%99%E8%BD%AC%E6%8D%A2%E2%80%9C&#x2F;index.html">
+<meta property="og:title" content="埃氏筛">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;01&#x2F;04&#x2F;%E5%9F%83%E6%B0%8F%E7%AD%9B&#x2F;index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="在algorithm库中有transform函数transform(str.begin(),str.end(),str.begin(),::toupper)注意transform有四个输入参数1：str.begin()字符串的起始地址；2：str.end()字符串的终止地址；3：str.begin()是转换之后，输出到原str字符串的起始地址；4：转换操作，可以选择toupper，tolower。">
+<meta property="og:description" content="在筛质数时，我们会发现，筛去2后，2的倍数4、6、8等一定不是素数;筛去3后，3的倍数6、9、12等一定不是倍数。简单模拟这个过程如下const int MAXN &#x3D; 1000000；void Prime(){    for (int i&#x3D;0; i&amp;lt;MAXN; i++) prime[i]&#x3D;1;  &#x2F;&#x2F;先把每个数都定义为合数    prime[0]&#x3D;prime[1]&#x3D;0;    for (in">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-01-01T08:44:24.568Z">
+<meta property="og:updated_time" content="2020-01-04T03:56:51.820Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -62,10 +62,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-”string类字符大小写转换“" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-埃氏筛" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2020/01/01/%E2%80%9Dstring%E7%B1%BB%E5%AD%97%E7%AC%A6%E5%A4%A7%E5%B0%8F%E5%86%99%E8%BD%AC%E6%8D%A2%E2%80%9C/" class="article-date">
-  <time datetime="2020-01-01T08:42:46.000Z" itemprop="datePublished">2020-01-01</time>
+    <a href="/2020/01/04/%E5%9F%83%E6%B0%8F%E7%AD%9B/" class="article-date">
+  <time datetime="2020-01-04T03:52:58.000Z" itemprop="datePublished">2020-01-04</time>
 </a>
     
   </div>
@@ -76,7 +76,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      afd
+      埃氏筛
     </h1>
   
 
@@ -84,12 +84,12 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>在algorithm库中有transform函数<br>transform(str.begin(),str.end(),str.begin(),::toupper)<br>注意transform有四个输入参数<br>1：str.begin()字符串的起始地址；<br>2：str.end()字符串的终止地址；<br>3：str.begin()是转换之后，输出到原str字符串的起始地址；<br>4：转换操作，可以选择toupper，tolower。</p>
+        <p>在筛质数时，我们会发现，筛去2后，2的倍数4、6、8等一定不是素数;筛去3后，3的倍数6、9、12等一定不是倍数。简单模拟这个过程如下<br>const int MAXN = 1000000；<br>void Prime()<br>{<br>    for (int i=0; i&lt;MAXN; i++) prime[i]=1;  //先把每个数都定义为合数<br>    prime[0]=prime[1]=0;<br>    for (int i=2; i&lt;MAXN; i++)<br>    {<br>        if (!prime[i]) continue;<br>        for (int j=i*2; j&lt;MAXN; j+=i) prime[j] = 0;  //将i的倍数标记为合数<br>    }<br>}</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/01/01/%E2%80%9Dstring%E7%B1%BB%E5%AD%97%E7%AC%A6%E5%A4%A7%E5%B0%8F%E5%86%99%E8%BD%AC%E6%8D%A2%E2%80%9C/" data-id="ck4z22v4i0004d4ui9wcbdvqq" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/01/04/%E5%9F%83%E6%B0%8F%E7%AD%9B/" data-id="ck4z22v3k0000d4uidymz6i3q" class="article-share-link">Share</a>
       
       
     </footer>
@@ -98,19 +98,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2020/01/02/string-%E4%B8%AD%E7%9A%84reverse/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          string 中的reverse
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/12/31/%E2%80%9C%E5%87%B8%E5%8C%85%E2%80%9D/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2020/01/03/set/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">“凸包”</div>
+      <div class="article-nav-title">set</div>
     </a>
   
 </nav>
