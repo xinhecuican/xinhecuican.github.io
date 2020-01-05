@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://xinhecuican.github.io/"/>
-  <updated>2020-01-05T11:55:56.730Z</updated>
+  <updated>2020-01-05T12:00:52.885Z</updated>
   <id>http://xinhecuican.github.io/</id>
   
   <author>
@@ -20,8 +20,8 @@
     <title>快速排序</title>
     <link href="http://xinhecuican.github.io/2020/01/05/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/"/>
     <id>http://xinhecuican.github.io/2020/01/05/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/</id>
-    <published>2020-01-05T05:42:46.000Z</published>
-    <updated>2020-01-05T11:55:56.730Z</updated>
+    <published>2020-01-05T05:42:00.000Z</published>
+    <updated>2020-01-05T12:00:52.885Z</updated>
     
     <content type="html"><![CDATA[<p>步骤：<br>1.先从数列中取出一个数作为基准数。</p><p>2．分区过程，将比这个数大的数全放到它的右边，小于或等于它的数全放到它的左边。</p><p>3．再对左右区间重复第二步，直到各区间只有一个数。</p><p>例 6 1 2 7 9 3 4 5 10 8 进行排序<br> 1 以6为基准数，先从右边找比6小的数，我们用一个变量j一步步向左移动，好在移动三次后我<br> 们找到了5，j为7。现在再让另一个变量i向右移动去找比6大的数，当i为3时找到了7.现在再让5<br> 和7互换，得到了6 1 2 5 9 3 4 7 10 8,。在让j向左移动，找到了4，i向右找到了9，再让两个数<br> 互换，j再向左到3，此时i向左也到3，两者相遇，便让3和6互换，第一次结束<br> （想想原因）<br> 2 现在分为两部分，左边全比6小，右边全比6大，为3 1 2 5 4 6 9 7 10 8<br> 再在3 1 2 5 4 中用同样的方法搜索一次得到2 1 3 5 4,再在2 1 中搜索得到1 2<br> 然后在5 4 中搜索得到4 5，左边排序完成，右边用同样的方法排序就可得到答案</p><p> 不说了，上代码<br>  void sort(int a[],int l,int r)<br>  {<br>      if(l&lt;r)//l大于等于r时这一段排序结束<br>      {<br>          int i=l,j=r,x=a[l];<br>          while(i&lt;j)<br>          {<br>              while(i&lt;j&amp;&amp;a[j]&gt;=x)<br>              {<br>                  j–;<br>              }<br>              if(i&lt;j)<br>              {<br>                  a[i++]=a[j];<br>              }<br>              while(i&lt;j&amp;&amp;a[i]&lt;x)<br>              {<br>                  i++;<br>              }<br>              if(i&lt;j)<br>              {<br>                  s[j–]=s[i];<br>              }<br>          }<br>          s[i]=x;<br>          sort(s,l,i-1);<br>          sort(s,i+1,r);<br>     }<br>  }<br>  引用 转载请标明出处，原文地址：<a href="http://blog.csdn.net/morewindows/article/details/6684558" target="_blank" rel="noopener">http://blog.csdn.net/morewindows/article/details/6684558</a><br>         csdn 我见过最通俗易懂的快速排序过程讲解，转自《坐在马桶上看算法：快速排序》</p>]]></content>
     
@@ -38,6 +38,10 @@
     </summary>
     
     
+      <category term="算法" scheme="http://xinhecuican.github.io/categories/%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="快排" scheme="http://xinhecuican.github.io/tags/%E5%BF%AB%E6%8E%92/"/>
     
   </entry>
   
