@@ -61,6 +61,47 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-快速排序" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/01/05/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/" class="article-date">
+  <time datetime="2020-01-05T05:42:46.000Z" itemprop="datePublished">2020-01-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/01/05/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/">快速排序</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>步骤：<br>1.先从数列中取出一个数作为基准数。</p>
+<p>2．分区过程，将比这个数大的数全放到它的右边，小于或等于它的数全放到它的左边。</p>
+<p>3．再对左右区间重复第二步，直到各区间只有一个数。</p>
+<p>例 6 1 2 7 9 3 4 5 10 8 进行排序<br> 1 以6为基准数，先从右边找比6小的数，我们用一个变量j一步步向左移动，好在移动三次后我<br> 们找到了5，j为7。现在再让另一个变量i向右移动去找比6大的数，当i为3时找到了7.现在再让5<br> 和7互换，得到了6 1 2 5 9 3 4 7 10 8,。在让j向左移动，找到了4，i向右找到了9，再让两个数<br> 互换，j再向左到3，此时i向左也到3，两者相遇，便让3和6互换，第一次结束<br> （想想原因）<br> 2 现在分为两部分，左边全比6小，右边全比6大，为3 1 2 5 4 6 9 7 10 8<br> 再在3 1 2 5 4 中用同样的方法搜索一次得到2 1 3 5 4,再在2 1 中搜索得到1 2<br> 然后在5 4 中搜索得到4 5，左边排序完成，右边用同样的方法排序就可得到答案</p>
+<p> 不说了，上代码<br>  void sort(int a[],int l,int r)<br>  {<br>      if(l&lt;r)//l大于等于r时这一段排序结束<br>      {<br>          int i=l,j=r,x=a[l];<br>          while(i&lt;j)<br>          {<br>              while(i&lt;j&amp;&amp;a[j]&gt;=x)<br>              {<br>                  j–;<br>              }<br>              if(i&lt;j)<br>              {<br>                  a[i++]=a[j];<br>              }<br>              while(i&lt;j&amp;&amp;a[i]&lt;x)<br>              {<br>                  i++;<br>              }<br>              if(i&lt;j)<br>              {<br>                  s[j–]=s[i];<br>              }<br>          }<br>          s[i]=x;<br>          sort(s,l,i-1);<br>          sort(s,i+1,r);<br>     }<br>  }<br>  引用 转载请标明出处，原文地址：<a href="http://blog.csdn.net/morewindows/article/details/6684558" target="_blank" rel="noopener">http://blog.csdn.net/morewindows/article/details/6684558</a><br>         csdn 我见过最通俗易懂的快速排序过程讲解，转自《坐在马桶上看算法：快速排序》</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/01/05/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/" data-id="ck50msab4000448uidw1wewa4" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-动态规划背包问题" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/01/04/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/" class="article-date">
@@ -98,7 +139,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/01/04/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/" data-id="ck4zon7f50001g4ui5x3a3vk4" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/01/04/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/" data-id="ck50msab2000248uigwmbg21p" class="article-share-link">Share</a>
       
       
     </footer>
@@ -136,7 +177,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/01/04/%E7%BA%BF%E6%80%A7%E7%AD%9B/" data-id="ck4zon7g50008g4ui9la87mh8" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/01/04/%E7%BA%BF%E6%80%A7%E7%AD%9B/" data-id="ck50msab6000648uibwz1hma3" class="article-share-link">Share</a>
       
       
     </footer>
@@ -173,7 +214,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/01/04/%E5%9F%83%E6%B0%8F%E7%AD%9B/" data-id="ck4zon7f70003g4uiav4whq8q" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/01/04/%E5%9F%83%E6%B0%8F%E7%AD%9B/" data-id="ck50msab3000348uiaopp88xn" class="article-share-link">Share</a>
       
       
     </footer>
@@ -210,7 +251,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/01/03/set/" data-id="ck4zon7f60002g4ui2rg0fvzo" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/01/03/set/" data-id="ck50msa9z000048uidnlnej5o" class="article-share-link">Share</a>
       
       
     </footer>
@@ -261,7 +302,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/01/03/%E7%BB%84%E5%90%88/" data-id="ck4zon7g60009g4uicqpd5x4c" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/01/03/%E7%BB%84%E5%90%88/" data-id="ck50msacj000a48ui9zprg0yv" class="article-share-link">Share</a>
       
       
     </footer>
@@ -298,7 +339,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/01/02/string-%E4%B8%AD%E7%9A%84reverse/" data-id="ck4zon7dn0000g4ui5g341nbi" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/01/02/string-%E4%B8%AD%E7%9A%84reverse/" data-id="ck50msaaz000148uie2gd4ehd" class="article-share-link">Share</a>
       
       
     </footer>
@@ -335,7 +376,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/01/01/%E2%80%9Dstring%E7%B1%BB%E5%AD%97%E7%AC%A6%E5%A4%A7%E5%B0%8F%E5%86%99%E8%BD%AC%E6%8D%A2%E2%80%9C/" data-id="ck4zon7g00007g4uiacwdchjo" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/01/01/%E2%80%9Dstring%E7%B1%BB%E5%AD%97%E7%AC%A6%E5%A4%A7%E5%B0%8F%E5%86%99%E8%BD%AC%E6%8D%A2%E2%80%9C/" data-id="ck50msac8000948uiddq599i4" class="article-share-link">Share</a>
       
       
     </footer>
@@ -373,7 +414,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/31/%E2%80%9C%E5%87%B8%E5%8C%85%E2%80%9D/" data-id="ck4zon7fy0006g4ui9vby23ph" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/31/%E2%80%9C%E5%87%B8%E5%8C%85%E2%80%9D/" data-id="ck50msab7000748ui9f1w6o0b" class="article-share-link">Share</a>
       
       
     </footer>
@@ -410,56 +451,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/05/%E7%A5%9E%E5%A5%87%E7%9A%84%E9%80%97%E5%8F%B7%E8%BF%90%E7%AE%97%E7%AC%A6/" data-id="ck4zon7f80004g4uiftm7da14" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/12/04/hello-world/" class="article-date">
-  <time datetime="2019-12-04T10:26:30.245Z" itemprop="datePublished">2019-12-04</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/12/04/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ hexo server</span></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ hexo generate</span></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/12/04/hello-world/" data-id="ck4zon7f90005g4ui8cngae99" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/12/05/%E7%A5%9E%E5%A5%87%E7%9A%84%E9%80%97%E5%8F%B7%E8%BF%90%E7%AE%97%E7%AC%A6/" data-id="ck50msab5000548uicst24puw" class="article-share-link">Share</a>
       
       
     </footer>
@@ -470,6 +462,11 @@
 
   
 
+
+  <nav id="page-nav">
+    
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
+  </nav>
 
 </section>
         
@@ -500,6 +497,10 @@
       <ul>
         
           <li>
+            <a href="/2020/01/05/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/">快速排序</a>
+          </li>
+        
+          <li>
             <a href="/2020/01/04/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/">动态规划背包问题</a>
           </li>
         
@@ -513,10 +514,6 @@
         
           <li>
             <a href="/2020/01/03/set/">set</a>
-          </li>
-        
-          <li>
-            <a href="/2020/01/03/%E7%BB%84%E5%90%88/">组合</a>
           </li>
         
       </ul>
