@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Hexo</title>
+  
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://xinhecuican.github.io/"/>
+  <updated>2020-01-05T12:01:53.662Z</updated>
+  <id>http://xinhecuican.github.io/</id>
+  
+  <author>
+    <name>John Doe</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>快速排序</title>
+    <link href="http://xinhecuican.github.io/2020/01/05/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/"/>
+    <id>http://xinhecuican.github.io/2020/01/05/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/</id>
+    <published>2020-01-05T05:42:00.000Z</published>
+    <updated>2020-01-05T12:01:53.662Z</updated>
+    
+    <content type="html"><![CDATA[<p>步骤：<br>1.先从数列中取出一个数作为基准数。</p><p>2．分区过程，将比这个数大的数全放到它的右边，小于或等于它的数全放到它的左边。</p><p>3．再对左右区间重复第二步，直到各区间只有一个数。</p><p>例 6 1 2 7 9 3 4 5 10 8 进行排序<br> 1 以6为基准数，先从右边找比6小的数，我们用一个变量j一步步向左移动，好在移动三次后我<br> 们找到了5，j为7。现在再让另一个变量i向右移动去找比6大的数，当i为3时找到了7.现在再让5<br> 和7互换，得到了6 1 2 5 9 3 4 7 10 8,。在让j向左移动，找到了4，i向右找到了9，再让两个数<br> 互换，j再向左到3，此时i向左也到3，两者相遇，便让3和6互换，第一次结束<br> （想想原因）<br> 2 现在分为两部分，左边全比6小，右边全比6大，为3 1 2 5 4 6 9 7 10 8<br> 再在3 1 2 5 4 中用同样的方法搜索一次得到2 1 3 5 4,再在2 1 中搜索得到1 2<br> 然后在5 4 中搜索得到4 5，左边排序完成，右边用同样的方法排序就可得到答案</p><p> 不说了，上代码<br>  void sort(int a[],int l,int r)<br>  {<br>      if(l&lt;r)//l大于等于r时这一段排序结束<br>      {<br>          int i=l,j=r,x=a[l];<br>          while(i&lt;j)<br>          {<br>              while(i&lt;j&amp;&amp;a[j]&gt;=x)<br>              {<br>                  j–;<br>              }<br>              if(i&lt;j)<br>              {<br>                  a[i++]=a[j];<br>              }<br>              while(i&lt;j&amp;&amp;a[i]&lt;x)<br>              {<br>                  i++;<br>              }<br>              if(i&lt;j)<br>              {<br>                  s[j–]=s[i];<br>              }<br>          }<br>          s[i]=x;<br>          sort(s,l,i-1);<br>          sort(s,i+1,r);<br>     }<br>  }<br>  引用 转载请标明出处，原文地址：<a href="http://blog.csdn.net/morewindows/article/details/6684558" target="_blank" rel="noopener">http://blog.csdn.net/morewindows/article/details/6684558</a><br>         csdn 我见过最通俗易懂的快速排序过程讲解，转自《坐在马桶上看算法：快速排序》</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;步骤：&lt;br&gt;1.先从数列中取出一个数作为基准数。&lt;/p&gt;
+&lt;p&gt;2．分区过程，将比这个数大的数全放到它的右边，小于或等于它的数全放到它的左边。&lt;/p&gt;
+&lt;p&gt;3．再对左右区间重复第二步，直到各区间只有一个数。&lt;/p&gt;
+&lt;p&gt;例 6 1 2 7 9 3 4 5 10 8 进
+      
+    
+    </summary>
+    
+    
+      <category term="算法" scheme="http://xinhecuican.github.io/categories/%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="快排" scheme="http://xinhecuican.github.io/tags/%E5%BF%AB%E6%8E%92/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>动态规划背包问题</title>
+    <link href="http://xinhecuican.github.io/2020/01/04/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/"/>
+    <id>http://xinhecuican.github.io/2020/01/04/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/</id>
+    <published>2020-01-04T14:00:51.000Z</published>
+    <updated>2020-01-04T14:28:27.376Z</updated>
+    
+    <content type="html"><![CDATA[<p>有几个重量和价值分别为Wi和Vi的物品。从这些物品中挑选出总重量不超过W的物品，求所有挑选方案中价值总和最大的值。</p><p>dp[i+1][j]:=从前i个物品中挑选出总重量不超过j的物品时，总价值的最大值<br>w[i]表示第i个物体的重量，v[i]表示第i个物体的价值<br>d[0][j]=0;<br>dp[i+1][j]={  dp[i][j],(j&lt;w[i])<br>              max(dp[i][j],dp[i][j−w[i]]+v[i])<br>        注解：这个函数中max(dp[i][j],dp[i][j−w[i]]+v[i])表示不动用w（i)的空间与动用w（i)的空间在加上v[i]的价值哪个更好</p><p>在w比较大的情况下用这种比较好<br>dp[i+1][j]:=前i个物品中挑选出价值总和为j时总重量最小值（不存在时就是INF）</p><p>分析：</p><p>由于前0个物品没有重量，所以：<br>dp[0][j]=INFdp[0][0]=0dp[0][j] = INF \ dp[0][0] = 0<br>dp[0][j]=INF<br>dp[0][0]=0</p><p>和前文同理可得递推关系式：</p><p>dp[0][0]=0dp[0][j]=INF,j!=0dp[i+1][j]={min(dp[i][j],dp[i+1][j−v[i]]+w[i]),j&gt;=v[i]dp[i][j],j&lt;v[i]\begin{aligned} &amp;dp[0][0] = 0 \&amp;dp[0][j] = INF , j != 0 \&amp;dp[i+1][j] = \left { \begin{aligned} &amp; min( dp[i][j], dp[i+1][j-v[i]] +w[i] ) , \qquad j&gt;=v[i]\ &amp; dp[i][j] ,\qquad j&lt;v[i] \end{aligned} \right.\end{aligned}<br>​    </p><p>dp[0][0]=0<br>dp[0][j]=INF,j!=0<br>dp[i+1][j]={<br>​    </p><p>min(dp[i][j],dp[i+1][j−v[i]]+w[i]),j&gt;=v[i]<br>dp[i][j],j&lt;v[i]</p><p>后一种代码<br>int dp[MAX_N+1][MAX_N * MAX_V+1]; //能够容纳的最大价值MAX_N * MAX_V<br>int solve(){<br>    fill(dp[0],dp[0]+MAX_N * MAX_V +1 , INF);<br>    dp[0][0] = 0;<br>    for(int i =0; i&lt; n ; i++){<br>        for(int j =0; j&lt;= MAX_N<em>MAX_V; j++){<br>            if(j &lt; v[i]){<br>                dp[i+1][j] = dp[i][j];<br>            else{<br>                dp[i+1][j] = dp[i+1][j-v[i]] +w[i];<br>            }<br>        }<br>    }<br>    // 在最后一行找到dp[n][j]&lt;=W 时的j<br>    res = 0;<br>    for(int i = 0; i&lt;= MAX_N</em>MAX_V;i++)<br>        if(dp[n][i] &gt; W){<br>             res =i-1;<br>             break;<br>        }<br>    return res;<br>}<br>————————————————<br>版权声明：本文为CSDN博主「wyc-」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a href="https://blog.csdn.net/qq_28120673/article/details/81037700" target="_blank" rel="noopener">https://blog.csdn.net/qq_28120673/article/details/81037700</a></p><p>​    </p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;有几个重量和价值分别为Wi和Vi的物品。从这些物品中挑选出总重量不超过W的物品，求所有挑选方案中价值总和最大的值。&lt;/p&gt;
+&lt;p&gt;dp[i+1][j]:=从前i个物品中挑选出总重量不超过j的物品时，总价值的最大值&lt;br&gt;w[i]表示第i个物体的重量，v[i]表示第i个物体的
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>线性筛</title>
+    <link href="http://xinhecuican.github.io/2020/01/04/%E7%BA%BF%E6%80%A7%E7%AD%9B/"/>
+    <id>http://xinhecuican.github.io/2020/01/04/%E7%BA%BF%E6%80%A7%E7%AD%9B/</id>
+    <published>2020-01-04T04:21:16.000Z</published>
+    <updated>2020-01-04T04:25:19.203Z</updated>
+    
+    <content type="html"><![CDATA[<p>埃氏筛中有重复，例如6,2与3都筛了一次，效率低<br>线性筛定理，（口语不准确）一个数i乘以小于等于它的最小素因数的素数所得到的合数之间没有重复<br>#define N 10000<br>    int flag[N+1],prime[N+1],pnum;<br>    /*<br>    flag[n] 表示n是否是素数，1是素数，0不是<br>    prime   中是所有的素数按从小到大排列、<br>    pnum  表示素数的个数<br>    <em>/<br>    void CreatePrime(){<br>        pnum=0;//初始化没有素数<br>        //先将所有数看做素数，然后开始筛选<br>        for(int i=0; i&lt;=N; i++){<br>            flag[i]=1;<br>        }<br>        //遍历筛去所有最大因数是i的合数<br>        for(int i=2; i&lt;=N; i++){<br>            if(flag[i]==1){<br>            //把素数记录下来<br>                p[pnum++]=i;<br>            }<br>            //遍历已知素数表中比i的最小素因数小的素数，并筛去合数<br>            for(int j=0; j&lt;pnum &amp;&amp; p[j]</em>i&lt;=N; j++){<br>            //筛去合数<br>                flag[p[j]*i]=0;<br>                if(i%p[j]==0)<br>                //找到i的最小素因数，找到了就终止<br>                    break;<br>            }<br>        }</p><p>————————————————<br>版权声明：本文为CSDN博主「太上绝情」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a href="https://blog.csdn.net/bjrxyz/article/details/8125913" target="_blank" rel="noopener">https://blog.csdn.net/bjrxyz/article/details/8125913</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;埃氏筛中有重复，例如6,2与3都筛了一次，效率低&lt;br&gt;线性筛定理，（口语不准确）一个数i乘以小于等于它的最小素因数的素数所得到的合数之间没有重复&lt;br&gt;#define N 10000&lt;br&gt;    int flag[N+1],prime[N+1],pnum;&lt;br&gt;   
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>埃氏筛</title>
+    <link href="http://xinhecuican.github.io/2020/01/04/%E5%9F%83%E6%B0%8F%E7%AD%9B/"/>
+    <id>http://xinhecuican.github.io/2020/01/04/%E5%9F%83%E6%B0%8F%E7%AD%9B/</id>
+    <published>2020-01-04T03:52:58.000Z</published>
+    <updated>2020-01-04T11:51:10.662Z</updated>
+    
+    <content type="html"><![CDATA[<p>在筛质数时，我们会发现，筛去2后，2的倍数4、6、8等一定不是素数;筛去3后，3的倍数6、9、12等一定不是倍数。简单模拟这个过程如下<br>const int MAXN = 1000000；<br>void Prime()<br>{<br>    for (int i=0; i&lt;MAXN; i++) prime[i]=1;  //先把每个数都定义为质数<br>    prime[0]=prime[1]=0;<br>    for (int i=2; i&lt;MAXN; i++)<br>    {<br>        if (!prime[i]) continue;<br>        for (int j=i*2; j&lt;MAXN; j+=i) prime[j] = 0;  //将i的倍数标记为合数<br>    }<br>}</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;在筛质数时，我们会发现，筛去2后，2的倍数4、6、8等一定不是素数;筛去3后，3的倍数6、9、12等一定不是倍数。简单模拟这个过程如下&lt;br&gt;const int MAXN = 1000000；&lt;br&gt;void Prime()&lt;br&gt;{&lt;br&gt;    for (int i=0
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>set</title>
+    <link href="http://xinhecuican.github.io/2020/01/03/set/"/>
+    <id>http://xinhecuican.github.io/2020/01/03/set/</id>
+    <published>2020-01-03T09:59:00.000Z</published>
+    <updated>2020-01-03T09:59:51.709Z</updated>
+    
+    <content type="html"><![CDATA[<p>如何判断set是否成功插入<br>typedef pair&lt;iterator, bool&gt; _Pairib;<br>    pair&lt;set&lt;Student,FuncStudent&gt;::iterator,bool&gt; pair1=set1.insert(s1);<br>    if(pair1.second==true)<br>    {<br>        cout&lt;&lt;”插入s1成功”&lt;&lt;endl;<br>    }<br>    else<br>    {<br>        cout&lt;&lt;”插入s1失败”&lt;&lt;endl;<br>    }<br>————————————————<br>版权声明：本文为CSDN博主「阳光下的Smiles」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a href="https://blog.csdn.net/liyuqian199695/article/details/49100543" target="_blank" rel="noopener">https://blog.csdn.net/liyuqian199695/article/details/49100543</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;如何判断set是否成功插入&lt;br&gt;typedef pair&amp;lt;iterator, bool&amp;gt; _Pairib;&lt;br&gt;    pair&amp;lt;set&amp;lt;Student,FuncStudent&amp;gt;::iterator,bool&amp;gt; pair1=set1.
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>组合</title>
+    <link href="http://xinhecuican.github.io/2020/01/03/%E7%BB%84%E5%90%88/"/>
+    <id>http://xinhecuican.github.io/2020/01/03/%E7%BB%84%E5%90%88/</id>
+    <published>2020-01-03T09:32:29.000Z</published>
+    <updated>2020-01-03T09:33:05.273Z</updated>
+    
+    <content type="html"><![CDATA[<p>本程序的思路是开一个数组，其下标表示1到n个数，数组元素的值为1表示其代表的数被选中，为0则没选中。</p><p>首先初始化，将数组前n个元素置1，表示第一个组合为前n个数。</p><p>然后从左到右扫描数组元素值的“10”组合，找到第一个“10”组合后将其变为“01”组合，同时将其左边的所有“1”全部移动到数组的最左端。</p><p>当第一个“1”移动到数组的n-m的位置，即n个“1”全部移动到最右端时，就得到了最后一个组合。</p><p>例如求5中选3的组合：</p><p>1 1 1 0 0 //1,2,3</p><p>1 1 0 1 0 //1,2,4</p><p>1 0 1 1 0 //1,3,4</p><p>0 1 1 1 0 //2,3,4</p><p>1 1 0 0 1 //1,2,5</p><p>1 0 1 0 1 //1,3,5</p><p>0 1 1 0 1 //2,3,5</p><p>1 0 0 1 1 //1,4,5</p><p>0 1 0 1 1 //2,4,5</p><p>0 0 1 1 1 //3,4,5<br>————————————————<br>版权声明：本文为CSDN博主「文如王勃三生慧」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a href="https://blog.csdn.net/hf19931101/article/details/79452799" target="_blank" rel="noopener">https://blog.csdn.net/hf19931101/article/details/79452799</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;本程序的思路是开一个数组，其下标表示1到n个数，数组元素的值为1表示其代表的数被选中，为0则没选中。&lt;/p&gt;
+&lt;p&gt;首先初始化，将数组前n个元素置1，表示第一个组合为前n个数。&lt;/p&gt;
+&lt;p&gt;然后从左到右扫描数组元素值的“10”组合，找到第一个“10”组合后将其变为“01”
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>string 中的reverse</title>
+    <link href="http://xinhecuican.github.io/2020/01/02/string-%E4%B8%AD%E7%9A%84reverse/"/>
+    <id>http://xinhecuican.github.io/2020/01/02/string-%E4%B8%AD%E7%9A%84reverse/</id>
+    <published>2020-01-02T04:08:04.000Z</published>
+    <updated>2020-01-02T04:08:39.649Z</updated>
+    
+    <content type="html"><![CDATA[<p>reverse(s.begin(), s.end())</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;reverse(s.begin(), s.end())&lt;/p&gt;
+
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>afd</title>
+    <link href="http://xinhecuican.github.io/2020/01/01/%E2%80%9Dstring%E7%B1%BB%E5%AD%97%E7%AC%A6%E5%A4%A7%E5%B0%8F%E5%86%99%E8%BD%AC%E6%8D%A2%E2%80%9C/"/>
+    <id>http://xinhecuican.github.io/2020/01/01/%E2%80%9Dstring%E7%B1%BB%E5%AD%97%E7%AC%A6%E5%A4%A7%E5%B0%8F%E5%86%99%E8%BD%AC%E6%8D%A2%E2%80%9C/</id>
+    <published>2020-01-01T08:42:46.000Z</published>
+    <updated>2020-01-01T08:44:24.568Z</updated>
+    
+    <content type="html"><![CDATA[<p>在algorithm库中有transform函数<br>transform(str.begin(),str.end(),str.begin(),::toupper)<br>注意transform有四个输入参数<br>1：str.begin()字符串的起始地址；<br>2：str.end()字符串的终止地址；<br>3：str.begin()是转换之后，输出到原str字符串的起始地址；<br>4：转换操作，可以选择toupper，tolower。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;在algorithm库中有transform函数&lt;br&gt;transform(str.begin(),str.end(),str.begin(),::toupper)&lt;br&gt;注意transform有四个输入参数&lt;br&gt;1：str.begin()字符串的起始地址；&lt;br&gt;2：s
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>“凸包”</title>
+    <link href="http://xinhecuican.github.io/2019/12/31/%E2%80%9C%E5%87%B8%E5%8C%85%E2%80%9D/"/>
+    <id>http://xinhecuican.github.io/2019/12/31/%E2%80%9C%E5%87%B8%E5%8C%85%E2%80%9D/</id>
+    <published>2019-12-31T02:50:45.000Z</published>
+    <updated>2019-12-31T03:06:23.227Z</updated>
+    
+    <content type="html"><![CDATA[<p>凸包就是把平面中所有点都包进去的凸多边形，当然多边形上的点也是题目中给出的点</p><p>分治法<br>  1 首先，横坐标最小p1和最大pn的点一定是凸包上的点<br>  2上包，即离p1pn最远的点，记pmax<br>  3再把pmax与p1连接，求左侧的上包，重复上述过程即可求解<img src="/images/20150530094927274" alt=""></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;凸包就是把平面中所有点都包进去的凸多边形，当然多边形上的点也是题目中给出的点&lt;/p&gt;
+&lt;p&gt;分治法&lt;br&gt;  1 首先，横坐标最小p1和最大pn的点一定是凸包上的点&lt;br&gt;  2上包，即离p1pn最远的点，记pmax&lt;br&gt;  3再把pmax与p1连接，求左侧的上包，重复上
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>神奇的逗号运算符</title>
+    <link href="http://xinhecuican.github.io/2019/12/05/%E7%A5%9E%E5%A5%87%E7%9A%84%E9%80%97%E5%8F%B7%E8%BF%90%E7%AE%97%E7%AC%A6/"/>
+    <id>http://xinhecuican.github.io/2019/12/05/%E7%A5%9E%E5%A5%87%E7%9A%84%E9%80%97%E5%8F%B7%E8%BF%90%E7%AE%97%E7%AC%A6/</id>
+    <published>2019-12-05T04:40:16.000Z</published>
+    <updated>2019-12-29T11:58:20.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>   cout&lt;&lt;(a,c),此时只会输出c的内容，但是a中的内容也会被计算，例如a=5,b=6,c=7  cout&lt;&lt;(（d=a+b),c) 输出为7，d=11</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;   cout&amp;lt;&amp;lt;(a,c),此时只会输出c的内容，但是a中的内容也会被计算，例如a=5,b=6,c=7  cout&amp;lt;&amp;lt;(（d=a+b),c) 输出为7，d=11&lt;/p&gt;
+
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="http://xinhecuican.github.io/2019/12/04/hello-world/"/>
+    <id>http://xinhecuican.github.io/2019/12/04/hello-world/</id>
+    <published>2019-12-04T10:26:30.245Z</published>
+    <updated>2019-12-04T10:26:30.245Z</updated>
+    
+    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+</feed>
