@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://xinhecuican.github.io/"/>
-  <updated>2020-01-07T09:11:22.673Z</updated>
+  <updated>2020-01-07T10:35:51.731Z</updated>
   <id>http://xinhecuican.github.io/</id>
   
   <author>
@@ -17,11 +17,35 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>字符数组</title>
+    <link href="http://xinhecuican.github.io/2020/01/07/%E5%AD%97%E7%AC%A6%E6%95%B0%E7%BB%84/"/>
+    <id>http://xinhecuican.github.io/2020/01/07/%E5%AD%97%E7%AC%A6%E6%95%B0%E7%BB%84/</id>
+    <published>2020-01-07T10:23:00.000Z</published>
+    <updated>2020-01-07T10:35:51.731Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="前方高能"><a href="#前方高能" class="headerlink" title="前方高能"></a>前方高能</h3><pre><code>char a[4]={&apos;a&apos;,&apos;b&apos;,&apos;c&apos;,&apos;d&apos;};cout&lt;&lt;a&lt;&lt;endl;</code></pre><p>这将输出什么呢，是<code>abcd</code>，实际上是<code>abcdPpB</code></p><p>这就有点神奇</p><h4 id="字符数组"><a href="#字符数组" class="headerlink" title="字符数组"></a>字符数组</h4><p>char +标识符+[]，注意字符数组的最后一定会有’\0’，</p><p>例如<code>char[]=&quot;abcd&quot;,这就是一个合法的赋值，但是char[4]=&quot;abcd&quot;是不合法的因为带双引号的为字符串，赋值给字符数组时编译器会自动加上&#39;\0&#39;这时需要5个空间</code></p><h3 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h3><p>因为本来是要加上’\0’的，但是这时位子不够了，编译器只好帮它扩扩容，也就是说这是字符数组（其实现在已经不是字符数组了）长度已经不是4了，编译器会为后面几个位子附上值（不是随机的，我也有点不清楚，这样解释先），因此后面会多输出一些。但是如果开始就把长度设为5，这时’\0’就有位子放了，也就不会多出后面那些奇奇怪怪的字符</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;前方高能&quot;&gt;&lt;a href=&quot;#前方高能&quot; class=&quot;headerlink&quot; title=&quot;前方高能&quot;&gt;&lt;/a&gt;前方高能&lt;/h3&gt;&lt;pre&gt;&lt;code&gt;char a[4]={&amp;apos;a&amp;apos;,&amp;apos;b&amp;apos;,&amp;apos;c&amp;apos;,&amp;
+      
+    
+    </summary>
+    
+    
+      <category term="基础" scheme="http://xinhecuican.github.io/categories/%E5%9F%BA%E7%A1%80/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>next主题出现404的一个解决方法</title>
     <link href="http://xinhecuican.github.io/2020/01/07/next%E4%B8%BB%E9%A2%98%E5%87%BA%E7%8E%B0404%E7%9A%84%E4%B8%80%E4%B8%AA%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/"/>
     <id>http://xinhecuican.github.io/2020/01/07/next%E4%B8%BB%E9%A2%98%E5%87%BA%E7%8E%B0404%E7%9A%84%E4%B8%80%E4%B8%AA%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</id>
     <published>2020-01-07T09:08:00.000Z</published>
-    <updated>2020-01-07T09:11:22.673Z</updated>
+    <updated>2020-01-07T10:24:10.881Z</updated>
     
     <content type="html"><![CDATA[<p>在<code>主题配置文件中</code></p><figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">menu:</span></span><br><span class="line"></span><br><span class="line"><span class="symbol">home:</span> /|| home</span><br><span class="line"></span><br><span class="line"><span class="symbol">about:</span> <span class="meta-keyword">/about/</span>|| user</span><br><span class="line"></span><br><span class="line"><span class="symbol">tags:</span> <span class="meta-keyword">/tags/</span>|| tags</span><br><span class="line"></span><br><span class="line"><span class="symbol">categories:</span> <span class="meta-keyword">/categories/</span>|| th</span><br><span class="line"></span><br><span class="line"><span class="symbol">archives:</span> <span class="meta-keyword">/archives/</span>|| archive</span><br><span class="line"></span><br><span class="line"><span class="meta">#schedule: /schedule/|| calendar</span></span><br><span class="line"><span class="meta">#sitemap: /sitemap.xml || sitemap</span></span><br><span class="line"><span class="meta">#commonweal: /404/|| heartbeat</span></span><br></pre></td></tr></table></figure>  <p>注意/||，原来是/ ||，不要中间那个空格，亲测有效]]></content>
     
