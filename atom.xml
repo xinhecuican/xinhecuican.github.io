@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://xinhecuican.github.io/"/>
-  <updated>2020-01-07T06:15:48.667Z</updated>
+  <updated>2020-01-07T09:11:22.673Z</updated>
   <id>http://xinhecuican.github.io/</id>
   
   <author>
@@ -15,6 +15,57 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>next主题出现404的一个解决方法</title>
+    <link href="http://xinhecuican.github.io/2020/01/07/next%E4%B8%BB%E9%A2%98%E5%87%BA%E7%8E%B0404%E7%9A%84%E4%B8%80%E4%B8%AA%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/"/>
+    <id>http://xinhecuican.github.io/2020/01/07/next%E4%B8%BB%E9%A2%98%E5%87%BA%E7%8E%B0404%E7%9A%84%E4%B8%80%E4%B8%AA%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</id>
+    <published>2020-01-07T09:08:00.000Z</published>
+    <updated>2020-01-07T09:11:22.673Z</updated>
+    
+    <content type="html"><![CDATA[<p>在<code>主题配置文件中</code></p><figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">menu:</span></span><br><span class="line"></span><br><span class="line"><span class="symbol">home:</span> /|| home</span><br><span class="line"></span><br><span class="line"><span class="symbol">about:</span> <span class="meta-keyword">/about/</span>|| user</span><br><span class="line"></span><br><span class="line"><span class="symbol">tags:</span> <span class="meta-keyword">/tags/</span>|| tags</span><br><span class="line"></span><br><span class="line"><span class="symbol">categories:</span> <span class="meta-keyword">/categories/</span>|| th</span><br><span class="line"></span><br><span class="line"><span class="symbol">archives:</span> <span class="meta-keyword">/archives/</span>|| archive</span><br><span class="line"></span><br><span class="line"><span class="meta">#schedule: /schedule/|| calendar</span></span><br><span class="line"><span class="meta">#sitemap: /sitemap.xml || sitemap</span></span><br><span class="line"><span class="meta">#commonweal: /404/|| heartbeat</span></span><br></pre></td></tr></table></figure>  <p>注意/||，原来是/ ||，不要中间那个空格，亲测有效]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;在&lt;code&gt;主题配置文件中&lt;/code&gt;&lt;/p&gt;
+&lt;figure class=&quot;highlight dts&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;li
+      
+    
+    </summary>
+    
+    
+      <category term="next" scheme="http://xinhecuican.github.io/categories/next/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>文件输入输出</title>
+    <link href="http://xinhecuican.github.io/2020/01/07/%E6%96%87%E4%BB%B6%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA/"/>
+    <id>http://xinhecuican.github.io/2020/01/07/%E6%96%87%E4%BB%B6%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA/</id>
+    <published>2020-01-07T08:57:00.000Z</published>
+    <updated>2020-01-07T09:08:09.935Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="文件输入in"><a href="#文件输入in" class="headerlink" title="文件输入in"></a>文件输入in</h4><p>文件输入指的是从文件_输入_给程序，对应的有in，get，read，seekg等<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">seekg和seekp中有三个定位基址，分别是cur（当前）beg（开始），end（末尾）&lt;p&gt;</span><br><span class="line">例如 seekg（<span class="number">100</span>，ios：：beg）；seekg（<span class="number">2</span>*sizeof(Student)) student是一个类</span><br></pre></td></tr></table></figure><h4 id="文件输出out"><a href="#文件输出out" class="headerlink" title="文件输出out"></a>文件输出out</h4><p>文件输出指的是从程序<code>输出</code>给文件，对应的有out，put，write，seekp等</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h4 id=&quot;文件输入in&quot;&gt;&lt;a href=&quot;#文件输入in&quot; class=&quot;headerlink&quot; title=&quot;文件输入in&quot;&gt;&lt;/a&gt;文件输入in&lt;/h4&gt;&lt;p&gt;文件输入指的是从文件_输入_给程序，对应的有in，get，read，seekg等
+
+&lt;figure clas
+      
+    
+    </summary>
+    
+    
+      <category term="基础" scheme="http://xinhecuican.github.io/categories/%E5%9F%BA%E7%A1%80/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>Hello World</title>
