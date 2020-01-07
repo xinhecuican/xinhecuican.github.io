@@ -76,20 +76,13 @@
           {
               j--;
           }
-          if(i&lt;j)
-          {
-              a[i++]=a[j];
-          }
           while(i&lt;j&amp;&amp;a[i]&lt;x)
           {
               i++;
           }
-          if(i&lt;j)
-          {
-              s[j--]=s[i];
-          }
+          swap(a[i],a[j]);
       }
-      s[i]=x;
+      swap(a[l],a[i]);
       sort(s,l,i-1);
       sort(s,i+1,r);
  }</code></pre><p>  }<br>  引用 转载请标明出处，原文地址：<a href="http://blog.csdn.net/morewindows/article/details/6684558" target="_blank" rel="noopener">http://blog.csdn.net/morewindows/article/details/6684558</a><br>         csdn 我见过最通俗易懂的快速排序过程讲解，转自《坐在马桶上看算法：快速排序》</p>
