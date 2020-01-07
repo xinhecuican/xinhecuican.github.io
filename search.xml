@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>&amp;&amp;与||小提示</title>
+    <url>/2020/01/07/%E4%B8%8E-%E5%B0%8F%E6%8F%90%E7%A4%BA/</url>
+    <content><![CDATA[<h4 id="amp-amp"><a href="#amp-amp" class="headerlink" title="&amp;&amp;"></a>&amp;&amp;</h4><p>&amp;&amp;运算符从左自由依次判断 ，如果判断有一个为假则停止判断</p>
+<h4 id=""><a href="#" class="headerlink" title="||"></a>||</h4><p>同理如果判断有一个为真则停止判断</p>
+<h4 id="例"><a href="#例" class="headerlink" title="例"></a>例</h4><pre><code>#include&lt;iostream&gt;
+using namespace std;
+int main()
+{
+    int a=0,b=1,c;
+    c = (a != b) || (++a == b++);
+    cout&lt;&lt;a&lt;&lt;&quot; &quot;&lt;&lt;b&lt;&lt;endl;
+    return 0;
+}</code></pre><p>输出为0 1因为前面一个为真，直接退出判断</p>
+]]></content>
+  </entry>
+  <entry>
     <title>字符数组</title>
     <url>/2020/01/07/%E5%AD%97%E7%AC%A6%E6%95%B0%E7%BB%84/</url>
     <content><![CDATA[<h3 id="前方高能"><a href="#前方高能" class="headerlink" title="前方高能"></a>前方高能</h3><pre><code>char a[4]={&apos;a&apos;,&apos;b&apos;,&apos;c&apos;,&apos;d&apos;};
@@ -80,6 +96,9 @@ cout&lt;&lt;a&lt;&lt;endl;</code></pre><p>这将输出什么呢，是<code>abcd<
         }
         return -mid-1;
      }</code></pre>]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
   </entry>
   <entry>
     <title>合法的字符常量</title>
@@ -167,6 +186,12 @@ for(int i = 0; i&lt;= MAX_N*MAX_V;i++)
 return res;</code></pre><p>}<br>————————————————<br>版权声明：本文为CSDN博主「wyc-」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a href="https://blog.csdn.net/qq_28120673/article/details/81037700" target="_blank" rel="noopener">https://blog.csdn.net/qq_28120673/article/details/81037700</a></p>
 <p>​</p>
 ]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>动态规划</tag>
+      </tags>
   </entry>
   <entry>
     <title>线性筛</title>
@@ -201,6 +226,9 @@ void CreatePrime(){
         }
     }</code></pre><p>————————————————<br>版权声明：本文为CSDN博主「太上绝情」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a href="https://blog.csdn.net/bjrxyz/article/details/8125913" target="_blank" rel="noopener">https://blog.csdn.net/bjrxyz/article/details/8125913</a></p>
 ]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
   </entry>
   <entry>
     <title>埃氏筛</title>
@@ -217,6 +245,9 @@ void Prime()
         for (int j=i*2; j&lt;MAXN; j+=i) prime[j] = 0;  //将i的倍数标记为合数
     }  
 }</code></pre>]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
   </entry>
   <entry>
     <title>set</title>
@@ -233,6 +264,9 @@ else
     cout&lt;&lt;&quot;插入s1失败&quot;&lt;&lt;endl;
 }</code></pre><p>————————————————<br>版权声明：本文为CSDN博主「阳光下的Smiles」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a href="https://blog.csdn.net/liyuqian199695/article/details/49100543" target="_blank" rel="noopener">https://blog.csdn.net/liyuqian199695/article/details/49100543</a></p>
 ]]></content>
+      <categories>
+        <category>stl</category>
+      </categories>
   </entry>
   <entry>
     <title>组合</title>
@@ -253,18 +287,18 @@ else
 <p>0 1 0 1 1 //2,4,5</p>
 <p>0 0 1 1 1 //3,4,5<br>————————————————<br>版权声明：本文为CSDN博主「文如王勃三生慧」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a href="https://blog.csdn.net/hf19931101/article/details/79452799" target="_blank" rel="noopener">https://blog.csdn.net/hf19931101/article/details/79452799</a></p>
 ]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
   </entry>
   <entry>
-    <title>string 中的reverse</title>
-    <url>/2020/01/02/string-%E4%B8%AD%E7%9A%84reverse/</url>
-    <content><![CDATA[<p>reverse(s.begin(), s.end())</p>
-]]></content>
-  </entry>
-  <entry>
-    <title>afd</title>
+    <title>string大小写字母转换</title>
     <url>/2020/01/01/%E2%80%9Dstring%E7%B1%BB%E5%AD%97%E7%AC%A6%E5%A4%A7%E5%B0%8F%E5%86%99%E8%BD%AC%E6%8D%A2%E2%80%9C/</url>
     <content><![CDATA[<p>在algorithm库中有transform函数<br>transform(str.begin(),str.end(),str.begin(),::toupper)<br>注意transform有四个输入参数<br>1：str.begin()字符串的起始地址；<br>2：str.end()字符串的终止地址；<br>3：str.begin()是转换之后，输出到原str字符串的起始地址；<br>4：转换操作，可以选择toupper，tolower。</p>
 ]]></content>
+      <categories>
+        <category>stl</category>
+      </categories>
   </entry>
   <entry>
     <title>“凸包”</title>
@@ -272,6 +306,9 @@ else
     <content><![CDATA[<p>凸包就是把平面中所有点都包进去的凸多边形，当然多边形上的点也是题目中给出的点</p>
 <p>分治法<br>  1 首先，横坐标最小p1和最大pn的点一定是凸包上的点<br>  2上包，即离p1pn最远的点，记pmax<br>  3再把pmax与p1连接，求左侧的上包，重复上述过程即可求解<img src="/images/20150530094927274" alt=""></p>
 ]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
   </entry>
   <entry>
     <title>神奇的逗号运算符</title>
