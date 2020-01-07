@@ -81,14 +81,14 @@
 
 
 
-<meta name="description" content="埃氏筛中有重复，例如6,2与3都筛了一次，效率低线性筛定理，（口语不准确）一个数i乘以小于等于它的最小素因数的素数所得到的合数之间没有重复#define N 10000    int flag[N+1],prime[N+1],pnum;    &#x2F;*    flag[n] 表示n是否是素数，1是素数，0不是    prime   中是所有的素数按从小到大排列、    pnum  表示素数的个数">
+<meta name="description" content="埃氏筛中有重复，例如6,2与3都筛了一次，效率低线性筛定理，（口语不准确）一个数i乘以小于等于它的最小素因数的素数所得到的合数之间没有重复 #define N 10000 int flag[N+1],prime[N+1],pnum; &#x2F;* flag[n] 表示n是否是素数，1是素数，0不是 prime   中是所有的素数按从小到大排列、 pnum  表示素数的个数 *&#x2F; void CreatePr">
 <meta property="og:type" content="article">
 <meta property="og:title" content="线性筛">
 <meta property="og:url" content="http://xinhecuican.github.io/2020/01/04/%E7%BA%BF%E6%80%A7%E7%AD%9B/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="埃氏筛中有重复，例如6,2与3都筛了一次，效率低线性筛定理，（口语不准确）一个数i乘以小于等于它的最小素因数的素数所得到的合数之间没有重复#define N 10000    int flag[N+1],prime[N+1],pnum;    &#x2F;*    flag[n] 表示n是否是素数，1是素数，0不是    prime   中是所有的素数按从小到大排列、    pnum  表示素数的个数">
+<meta property="og:description" content="埃氏筛中有重复，例如6,2与3都筛了一次，效率低线性筛定理，（口语不准确）一个数i乘以小于等于它的最小素因数的素数所得到的合数之间没有重复 #define N 10000 int flag[N+1],prime[N+1],pnum; &#x2F;* flag[n] 表示n是否是素数，1是素数，0不是 prime   中是所有的素数按从小到大排列、 pnum  表示素数的个数 *&#x2F; void CreatePr">
 <meta property="article:published_time" content="2020-01-04T04:21:16.000Z">
-<meta property="article:modified_time" content="2020-01-04T04:25:19.203Z">
+<meta property="article:modified_time" content="2020-01-07T06:15:20.212Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 
@@ -385,8 +385,35 @@
       
 
       
-        <p>埃氏筛中有重复，例如6,2与3都筛了一次，效率低<br>线性筛定理，（口语不准确）一个数i乘以小于等于它的最小素因数的素数所得到的合数之间没有重复<br>#define N 10000<br>    int flag[N+1],prime[N+1],pnum;<br>    /*<br>    flag[n] 表示n是否是素数，1是素数，0不是<br>    prime   中是所有的素数按从小到大排列、<br>    pnum  表示素数的个数<br>    <em>/<br>    void CreatePrime(){<br>        pnum=0;//初始化没有素数<br>        //先将所有数看做素数，然后开始筛选<br>        for(int i=0; i&lt;=N; i++){<br>            flag[i]=1;<br>        }<br>        //遍历筛去所有最大因数是i的合数<br>        for(int i=2; i&lt;=N; i++){<br>            if(flag[i]==1){<br>            //把素数记录下来<br>                p[pnum++]=i;<br>            }<br>            //遍历已知素数表中比i的最小素因数小的素数，并筛去合数<br>            for(int j=0; j&lt;pnum &amp;&amp; p[j]</em>i&lt;=N; j++){<br>            //筛去合数<br>                flag[p[j]*i]=0;<br>                if(i%p[j]==0)<br>                //找到i的最小素因数，找到了就终止<br>                    break;<br>            }<br>        }</p>
-<p>————————————————<br>版权声明：本文为CSDN博主「太上绝情」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a href="https://blog.csdn.net/bjrxyz/article/details/8125913" target="_blank" rel="noopener">https://blog.csdn.net/bjrxyz/article/details/8125913</a></p>
+        <p>埃氏筛中有重复，例如6,2与3都筛了一次，效率低<br>线性筛定理，（口语不准确）一个数i乘以小于等于它的最小素因数的素数所得到的合数之间没有重复</p>
+<pre><code>#define N 10000
+int flag[N+1],prime[N+1],pnum;
+/*
+flag[n] 表示n是否是素数，1是素数，0不是
+prime   中是所有的素数按从小到大排列、
+pnum  表示素数的个数
+*/
+void CreatePrime(){
+    pnum=0;//初始化没有素数
+    //先将所有数看做素数，然后开始筛选
+    for(int i=0; i&lt;=N; i++){
+        flag[i]=1;
+    }
+    //遍历筛去所有最大因数是i的合数
+    for(int i=2; i&lt;=N; i++){
+        if(flag[i]==1){
+        //把素数记录下来
+            p[pnum++]=i;
+        }
+        //遍历已知素数表中比i的最小素因数小的素数，并筛去合数
+        for(int j=0; j&lt;pnum &amp;&amp; p[j]*i&lt;=N; j++){
+        //筛去合数
+            flag[p[j]*i]=0;
+            if(i%p[j]==0)
+            //找到i的最小素因数，找到了就终止
+                break;
+        }
+    }</code></pre><p>————————————————<br>版权声明：本文为CSDN博主「太上绝情」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a href="https://blog.csdn.net/bjrxyz/article/details/8125913" target="_blank" rel="noopener">https://blog.csdn.net/bjrxyz/article/details/8125913</a></p>
 
       
     </div>
@@ -501,7 +528,7 @@
               
                 <a href="/archives/%20%7C%7C%20archive">
               
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -512,7 +539,7 @@
               
               <div class="site-state-item site-state-categories">
                 
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">分类</span>
                 
               </div>
@@ -523,7 +550,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

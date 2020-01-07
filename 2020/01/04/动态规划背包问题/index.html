@@ -88,7 +88,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="有几个重量和价值分别为Wi和Vi的物品。从这些物品中挑选出总重量不超过W的物品，求所有挑选方案中价值总和最大的值。 dp[i+1][j]:&#x3D;从前i个物品中挑选出总重量不超过j的物品时，总价值的最大值w[i]表示第i个物体的重量，v[i]表示第i个物体的价值d[0][j]&#x3D;0;dp[i+1][j]&#x3D;{  dp[i][j],(j&lt;w[i])              max(dp[i][j],d">
 <meta property="article:published_time" content="2020-01-04T14:00:51.000Z">
-<meta property="article:modified_time" content="2020-01-04T14:28:27.376Z">
+<meta property="article:modified_time" content="2020-01-07T06:14:08.075Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 
@@ -394,8 +394,29 @@
 <p>dp[0][0]=0dp[0][j]=INF,j!=0dp[i+1][j]={min(dp[i][j],dp[i+1][j−v[i]]+w[i]),j&gt;=v[i]dp[i][j],j&lt;v[i]\begin{aligned} &amp;dp[0][0] = 0 \&amp;dp[0][j] = INF , j != 0 \&amp;dp[i+1][j] = \left { \begin{aligned} &amp; min( dp[i][j], dp[i+1][j-v[i]] +w[i] ) , \qquad j&gt;=v[i]\ &amp; dp[i][j] ,\qquad j&lt;v[i] \end{aligned} \right.\end{aligned}<br>​    </p>
 <p>dp[0][0]=0<br>dp[0][j]=INF,j!=0<br>dp[i+1][j]={<br>​    </p>
 <p>min(dp[i][j],dp[i+1][j−v[i]]+w[i]),j&gt;=v[i]<br>dp[i][j],j&lt;v[i]</p>
-<p>后一种代码<br>int dp[MAX_N+1][MAX_N * MAX_V+1]; //能够容纳的最大价值MAX_N * MAX_V<br>int solve(){<br>    fill(dp[0],dp[0]+MAX_N * MAX_V +1 , INF);<br>    dp[0][0] = 0;<br>    for(int i =0; i&lt; n ; i++){<br>        for(int j =0; j&lt;= MAX_N<em>MAX_V; j++){<br>            if(j &lt; v[i]){<br>                dp[i+1][j] = dp[i][j];<br>            else{<br>                dp[i+1][j] = dp[i+1][j-v[i]] +w[i];<br>            }<br>        }<br>    }<br>    // 在最后一行找到dp[n][j]&lt;=W 时的j<br>    res = 0;<br>    for(int i = 0; i&lt;= MAX_N</em>MAX_V;i++)<br>        if(dp[n][i] &gt; W){<br>             res =i-1;<br>             break;<br>        }<br>    return res;<br>}<br>————————————————<br>版权声明：本文为CSDN博主「wyc-」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a href="https://blog.csdn.net/qq_28120673/article/details/81037700" target="_blank" rel="noopener">https://blog.csdn.net/qq_28120673/article/details/81037700</a></p>
-<p>​    </p>
+<p>后一种代码</p>
+<pre><code>int dp[MAX_N+1][MAX_N * MAX_V+1]; //能够容纳的最大价值MAX_N * MAX_V
+int solve(){
+fill(dp[0],dp[0]+MAX_N * MAX_V +1 , INF);
+dp[0][0] = 0;
+for(int i =0; i&lt; n ; i++){
+    for(int j =0; j&lt;= MAX_N*MAX_V; j++){
+        if(j &lt; v[i]){
+            dp[i+1][j] = dp[i][j];
+        else{
+            dp[i+1][j] = dp[i+1][j-v[i]] +w[i];
+        }
+    }
+}
+// 在最后一行找到dp[n][j]&lt;=W 时的j
+res = 0;
+for(int i = 0; i&lt;= MAX_N*MAX_V;i++) 
+    if(dp[n][i] &gt; W){
+         res =i-1;
+         break;
+    }
+return res;</code></pre><p>}<br>————————————————<br>版权声明：本文为CSDN博主「wyc-」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a href="https://blog.csdn.net/qq_28120673/article/details/81037700" target="_blank" rel="noopener">https://blog.csdn.net/qq_28120673/article/details/81037700</a></p>
+<p>​</p>
 
       
     </div>
@@ -510,7 +531,7 @@
               
                 <a href="/archives/%20%7C%7C%20archive">
               
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -521,7 +542,7 @@
               
               <div class="site-state-item site-state-categories">
                 
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">分类</span>
                 
               </div>
@@ -532,7 +553,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

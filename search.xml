@@ -1,13 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Hello World</title>
+    <url>/2020/01/07/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>二分搜索</title>
+    <url>/2020/01/07/%E4%BA%8C%E5%88%86%E6%90%9C%E7%B4%A2/</url>
+    <content><![CDATA[<h1 id="（主要是怕自己忘记了）"><a href="#（主要是怕自己忘记了）" class="headerlink" title="（主要是怕自己忘记了）"></a>（主要是怕自己忘记了）<p></h1><p>  一个要点，用二分时要先排序<p></p>
+<pre><code>int erfen(int arr[],int key,int n)
+    {
+        int low=0,high=n-1;
+        while(low&lt;=high)
+        {
+            int mid=(low+high)/2;
+            if(arr[mid]&lt;key)
+            {
+                low=mid+1;
+            }
+            if(arr[mid]==key)
+            {
+                return mid;
+            }
+            if(arr[mid]&gt;key)
+            {
+                high=mid-1;
+            }
+        }
+        return -mid-1;
+     }</code></pre>]]></content>
+  </entry>
+  <entry>
+    <title>合法的字符常量</title>
+    <url>/2020/01/07/%E5%90%88%E6%B3%95%E7%9A%84%E5%AD%97%E7%AC%A6%E5%B8%B8%E9%87%8F/</url>
+    <content><![CDATA[<p>用英文单引号括起来的一个字符，例如’a’,’ ‘等等。空格也是一个字符常量</p>
+<p>注意<p>
+  1.转义字符也属于字符常量，例如'\t','\n'等，但是'\97'不算]]></content>
+      <categories>
+        <category>基础</category>
+      </categories>
+      <tags>
+        <tag>字符常量</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>快速排序</title>
     <url>/2020/01/05/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/</url>
     <content><![CDATA[<p>步骤：<br>1.先从数列中取出一个数作为基准数。</p>
 <p>2．分区过程，将比这个数大的数全放到它的右边，小于或等于它的数全放到它的左边。</p>
 <p>3．再对左右区间重复第二步，直到各区间只有一个数。</p>
 <p>例 6 1 2 7 9 3 4 5 10 8 进行排序<p><br> 1 以6为基准数，先从右边找比6小的数，我们用一个变量j一步步向左移动，好在移动三次后我<br> 们找到了5，j为7。现在再让另一个变量i向右移动去找比6大的数，当i为3时找到了7.现在再让5<br> 和7互换，得到了6 1 2 5 9 3 4 7 10 8,。在让j向左移动，找到了4，i向右找到了9，再让两个数<br> 互换，j再向左到3，此时i向左也到3，两者相遇，便让3和6互换，第一次结束<br> （想想原因）<p><br> 2 现在分为两部分，左边全比6小，右边全比6大，为3 1 2 5 4 6 9 7 10 8<br> 再在3 1 2 5 4 中用同样的方法搜索一次得到2 1 3 5 4,再在2 1 中搜索得到1 2<br> 然后在5 4 中搜索得到4 5，左边排序完成，右边用同样的方法排序就可得到答案</p>
-<p> 不说了，上代码<br>  void sort(int a[],int l,int r)<br>  {<br>      if(l&lt;r)//l大于等于r时这一段排序结束<br>      {<br>          int i=l,j=r,x=a[l];<br>          while(i&lt;j)<br>          {<br>              while(i&lt;j&amp;&amp;a[j]&gt;=x)<br>              {<br>                  j–;<br>              }<br>              if(i&lt;j)<br>              {<br>                  a[i++]=a[j];<br>              }<br>              while(i&lt;j&amp;&amp;a[i]&lt;x)<br>              {<br>                  i++;<br>              }<br>              if(i&lt;j)<br>              {<br>                  s[j–]=s[i];<br>              }<br>          }<br>          s[i]=x;<br>          sort(s,l,i-1);<br>          sort(s,i+1,r);<br>     }<br>  }<br>  引用 转载请标明出处，原文地址：<a href="http://blog.csdn.net/morewindows/article/details/6684558" target="_blank" rel="noopener">http://blog.csdn.net/morewindows/article/details/6684558</a><br>         csdn 我见过最通俗易懂的快速排序过程讲解，转自《坐在马桶上看算法：快速排序》</p>
+<p> 不说了，上代码</p>
+<pre><code>void sort(int a[],int l,int r)
+{
+  if(l&lt;r)//l大于等于r时这一段排序结束
+  {
+      int i=l,j=r,x=a[l];
+      while(i&lt;j)
+      {
+          while(i&lt;j&amp;&amp;a[j]&gt;=x)
+          {
+              j--;
+          }
+          if(i&lt;j)
+          {
+              a[i++]=a[j];
+          }
+          while(i&lt;j&amp;&amp;a[i]&lt;x)
+          {
+              i++;
+          }
+          if(i&lt;j)
+          {
+              s[j--]=s[i];
+          }
+      }
+      s[i]=x;
+      sort(s,l,i-1);
+      sort(s,i+1,r);
+ }</code></pre><p>  }<br>  引用 转载请标明出处，原文地址：<a href="http://blog.csdn.net/morewindows/article/details/6684558" target="_blank" rel="noopener">http://blog.csdn.net/morewindows/article/details/6684558</a><br>         csdn 我见过最通俗易懂的快速排序过程讲解，转自《坐在马桶上看算法：快速排序》</p>
 ]]></content>
       <categories>
         <category>算法</category>
@@ -28,27 +113,95 @@
 <p>dp[0][0]=0dp[0][j]=INF,j!=0dp[i+1][j]={min(dp[i][j],dp[i+1][j−v[i]]+w[i]),j&gt;=v[i]dp[i][j],j&lt;v[i]\begin{aligned} &amp;dp[0][0] = 0 \&amp;dp[0][j] = INF , j != 0 \&amp;dp[i+1][j] = \left { \begin{aligned} &amp; min( dp[i][j], dp[i+1][j-v[i]] +w[i] ) , \qquad j&gt;=v[i]\ &amp; dp[i][j] ,\qquad j&lt;v[i] \end{aligned} \right.\end{aligned}<br>​    </p>
 <p>dp[0][0]=0<br>dp[0][j]=INF,j!=0<br>dp[i+1][j]={<br>​    </p>
 <p>min(dp[i][j],dp[i+1][j−v[i]]+w[i]),j&gt;=v[i]<br>dp[i][j],j&lt;v[i]</p>
-<p>后一种代码<br>int dp[MAX_N+1][MAX_N * MAX_V+1]; //能够容纳的最大价值MAX_N * MAX_V<br>int solve(){<br>    fill(dp[0],dp[0]+MAX_N * MAX_V +1 , INF);<br>    dp[0][0] = 0;<br>    for(int i =0; i&lt; n ; i++){<br>        for(int j =0; j&lt;= MAX_N<em>MAX_V; j++){<br>            if(j &lt; v[i]){<br>                dp[i+1][j] = dp[i][j];<br>            else{<br>                dp[i+1][j] = dp[i+1][j-v[i]] +w[i];<br>            }<br>        }<br>    }<br>    // 在最后一行找到dp[n][j]&lt;=W 时的j<br>    res = 0;<br>    for(int i = 0; i&lt;= MAX_N</em>MAX_V;i++)<br>        if(dp[n][i] &gt; W){<br>             res =i-1;<br>             break;<br>        }<br>    return res;<br>}<br>————————————————<br>版权声明：本文为CSDN博主「wyc-」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a href="https://blog.csdn.net/qq_28120673/article/details/81037700" target="_blank" rel="noopener">https://blog.csdn.net/qq_28120673/article/details/81037700</a></p>
-<p>​    </p>
+<p>后一种代码</p>
+<pre><code>int dp[MAX_N+1][MAX_N * MAX_V+1]; //能够容纳的最大价值MAX_N * MAX_V
+int solve(){
+fill(dp[0],dp[0]+MAX_N * MAX_V +1 , INF);
+dp[0][0] = 0;
+for(int i =0; i&lt; n ; i++){
+    for(int j =0; j&lt;= MAX_N*MAX_V; j++){
+        if(j &lt; v[i]){
+            dp[i+1][j] = dp[i][j];
+        else{
+            dp[i+1][j] = dp[i+1][j-v[i]] +w[i];
+        }
+    }
+}
+// 在最后一行找到dp[n][j]&lt;=W 时的j
+res = 0;
+for(int i = 0; i&lt;= MAX_N*MAX_V;i++) 
+    if(dp[n][i] &gt; W){
+         res =i-1;
+         break;
+    }
+return res;</code></pre><p>}<br>————————————————<br>版权声明：本文为CSDN博主「wyc-」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a href="https://blog.csdn.net/qq_28120673/article/details/81037700" target="_blank" rel="noopener">https://blog.csdn.net/qq_28120673/article/details/81037700</a></p>
+<p>​</p>
 ]]></content>
   </entry>
   <entry>
     <title>线性筛</title>
     <url>/2020/01/04/%E7%BA%BF%E6%80%A7%E7%AD%9B/</url>
-    <content><![CDATA[<p>埃氏筛中有重复，例如6,2与3都筛了一次，效率低<br>线性筛定理，（口语不准确）一个数i乘以小于等于它的最小素因数的素数所得到的合数之间没有重复<br>#define N 10000<br>    int flag[N+1],prime[N+1],pnum;<br>    /*<br>    flag[n] 表示n是否是素数，1是素数，0不是<br>    prime   中是所有的素数按从小到大排列、<br>    pnum  表示素数的个数<br>    <em>/<br>    void CreatePrime(){<br>        pnum=0;//初始化没有素数<br>        //先将所有数看做素数，然后开始筛选<br>        for(int i=0; i&lt;=N; i++){<br>            flag[i]=1;<br>        }<br>        //遍历筛去所有最大因数是i的合数<br>        for(int i=2; i&lt;=N; i++){<br>            if(flag[i]==1){<br>            //把素数记录下来<br>                p[pnum++]=i;<br>            }<br>            //遍历已知素数表中比i的最小素因数小的素数，并筛去合数<br>            for(int j=0; j&lt;pnum &amp;&amp; p[j]</em>i&lt;=N; j++){<br>            //筛去合数<br>                flag[p[j]*i]=0;<br>                if(i%p[j]==0)<br>                //找到i的最小素因数，找到了就终止<br>                    break;<br>            }<br>        }</p>
-<p>————————————————<br>版权声明：本文为CSDN博主「太上绝情」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a href="https://blog.csdn.net/bjrxyz/article/details/8125913" target="_blank" rel="noopener">https://blog.csdn.net/bjrxyz/article/details/8125913</a></p>
+    <content><![CDATA[<p>埃氏筛中有重复，例如6,2与3都筛了一次，效率低<br>线性筛定理，（口语不准确）一个数i乘以小于等于它的最小素因数的素数所得到的合数之间没有重复</p>
+<pre><code>#define N 10000
+int flag[N+1],prime[N+1],pnum;
+/*
+flag[n] 表示n是否是素数，1是素数，0不是
+prime   中是所有的素数按从小到大排列、
+pnum  表示素数的个数
+*/
+void CreatePrime(){
+    pnum=0;//初始化没有素数
+    //先将所有数看做素数，然后开始筛选
+    for(int i=0; i&lt;=N; i++){
+        flag[i]=1;
+    }
+    //遍历筛去所有最大因数是i的合数
+    for(int i=2; i&lt;=N; i++){
+        if(flag[i]==1){
+        //把素数记录下来
+            p[pnum++]=i;
+        }
+        //遍历已知素数表中比i的最小素因数小的素数，并筛去合数
+        for(int j=0; j&lt;pnum &amp;&amp; p[j]*i&lt;=N; j++){
+        //筛去合数
+            flag[p[j]*i]=0;
+            if(i%p[j]==0)
+            //找到i的最小素因数，找到了就终止
+                break;
+        }
+    }</code></pre><p>————————————————<br>版权声明：本文为CSDN博主「太上绝情」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a href="https://blog.csdn.net/bjrxyz/article/details/8125913" target="_blank" rel="noopener">https://blog.csdn.net/bjrxyz/article/details/8125913</a></p>
 ]]></content>
   </entry>
   <entry>
     <title>埃氏筛</title>
     <url>/2020/01/04/%E5%9F%83%E6%B0%8F%E7%AD%9B/</url>
-    <content><![CDATA[<p>在筛质数时，我们会发现，筛去2后，2的倍数4、6、8等一定不是素数;筛去3后，3的倍数6、9、12等一定不是倍数。简单模拟这个过程如下<br>const int MAXN = 1000000；<br>void Prime()<br>{<br>    for (int i=0; i&lt;MAXN; i++) prime[i]=1;  //先把每个数都定义为质数<br>    prime[0]=prime[1]=0;<br>    for (int i=2; i&lt;MAXN; i++)<br>    {<br>        if (!prime[i]) continue;<br>        for (int j=i*2; j&lt;MAXN; j+=i) prime[j] = 0;  //将i的倍数标记为合数<br>    }<br>}</p>
-]]></content>
+    <content><![CDATA[<p>在筛质数时，我们会发现，筛去2后，2的倍数4、6、8等一定不是素数;筛去3后，3的倍数6、9、12等一定不是倍数。简单模拟这个过程如下</p>
+<pre><code>const int MAXN = 1000000；  
+void Prime()  
+{  
+    for (int i=0; i&lt;MAXN; i++) prime[i]=1;  //先把每个数都定义为质数
+    prime[0]=prime[1]=0;  
+    for (int i=2; i&lt;MAXN; i++)  
+    {  
+        if (!prime[i]) continue;  
+        for (int j=i*2; j&lt;MAXN; j+=i) prime[j] = 0;  //将i的倍数标记为合数
+    }  
+}</code></pre>]]></content>
   </entry>
   <entry>
     <title>set</title>
     <url>/2020/01/03/set/</url>
-    <content><![CDATA[<p>如何判断set是否成功插入<br>typedef pair&lt;iterator, bool&gt; _Pairib;<br>    pair&lt;set&lt;Student,FuncStudent&gt;::iterator,bool&gt; pair1=set1.insert(s1);<br>    if(pair1.second==true)<br>    {<br>        cout&lt;&lt;”插入s1成功”&lt;&lt;endl;<br>    }<br>    else<br>    {<br>        cout&lt;&lt;”插入s1失败”&lt;&lt;endl;<br>    }<br>————————————————<br>版权声明：本文为CSDN博主「阳光下的Smiles」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a href="https://blog.csdn.net/liyuqian199695/article/details/49100543" target="_blank" rel="noopener">https://blog.csdn.net/liyuqian199695/article/details/49100543</a></p>
+    <content><![CDATA[<p>如何判断set是否成功插入</p>
+<pre><code>typedef pair&lt;iterator, bool&gt; _Pairib;
+pair&lt;set&lt;Student,FuncStudent&gt;::iterator,bool&gt; pair1=set1.insert(s1);
+if(pair1.second==true)
+{
+    cout&lt;&lt;&quot;插入s1成功&quot;&lt;&lt;endl;
+}
+else
+{
+    cout&lt;&lt;&quot;插入s1失败&quot;&lt;&lt;endl;
+}</code></pre><p>————————————————<br>版权声明：本文为CSDN博主「阳光下的Smiles」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a href="https://blog.csdn.net/liyuqian199695/article/details/49100543" target="_blank" rel="noopener">https://blog.csdn.net/liyuqian199695/article/details/49100543</a></p>
 ]]></content>
   </entry>
   <entry>
@@ -94,24 +247,6 @@
     <title>神奇的逗号运算符</title>
     <url>/2019/12/05/%E7%A5%9E%E5%A5%87%E7%9A%84%E9%80%97%E5%8F%B7%E8%BF%90%E7%AE%97%E7%AC%A6/</url>
     <content><![CDATA[<p>   cout&lt;&lt;(a,c),此时只会输出c的内容，但是a中的内容也会被计算，例如a=5,b=6,c=7  cout&lt;&lt;(（d=a+b),c) 输出为7，d=11</p>
-]]></content>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/2019/12/04/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
 ]]></content>
   </entry>
 </search>
