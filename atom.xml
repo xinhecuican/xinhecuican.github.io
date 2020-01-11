@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://xinhecuican.github.io/"/>
-  <updated>2020-01-07T11:08:14.084Z</updated>
+  <updated>2020-01-11T07:02:19.510Z</updated>
   <id>http://xinhecuican.github.io/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>set</title>
+    <link href="http://xinhecuican.github.io/2020/01/11/set/"/>
+    <id>http://xinhecuican.github.io/2020/01/11/set/</id>
+    <published>2020-01-11T06:53:00.000Z</published>
+    <updated>2020-01-11T07:02:19.510Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="set之iterator"><a href="#set之iterator" class="headerlink" title="set之iterator"></a>set之iterator</h3><p>定义：set<int>::iterator iter</p><p>  运用：*iter</p><p>  遍历 for(iter=set.begin();iter!=set.end();iter++)</p><h4 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h4><p>  iterator只能用++，–运算符。不能*（iter-1），另外还要注意iter++后自身会改变</p><p>  例：set中有0,2,4，iter指向2，现在<code>cout&lt;&lt;*iter&lt;&lt;&quot; &quot;&lt;&lt;*(iter--)&lt;&lt;endl;</code></p><p>  输出0,2，先执行iter–，我也不知道为什么</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;set之iterator&quot;&gt;&lt;a href=&quot;#set之iterator&quot; class=&quot;headerlink&quot; title=&quot;set之iterator&quot;&gt;&lt;/a&gt;set之iterator&lt;/h3&gt;&lt;p&gt;定义：set&lt;int&gt;::iterator iter&lt;/p&gt;
+      
+    
+    </summary>
+    
+    
+      <category term="stl" scheme="http://xinhecuican.github.io/categories/stl/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>&amp;&amp;与||小提示</title>
@@ -223,16 +247,15 @@
     <link href="http://xinhecuican.github.io/2020/01/04/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/"/>
     <id>http://xinhecuican.github.io/2020/01/04/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/</id>
     <published>2020-01-04T14:00:00.000Z</published>
-    <updated>2020-01-07T11:09:11.646Z</updated>
+    <updated>2020-01-11T02:02:35.573Z</updated>
     
-    <content type="html"><![CDATA[<p>有几个重量和价值分别为Wi和Vi的物品。从这些物品中挑选出总重量不超过W的物品，求所有挑选方案中价值总和最大的值。</p><p>dp[i+1][j]:=从前i个物品中挑选出总重量不超过j的物品时，总价值的最大值<br>w[i]表示第i个物体的重量，v[i]表示第i个物体的价值<br>d[0][j]=0;<br>dp[i+1][j]={  dp[i][j],(j&lt;w[i])<br>              max(dp[i][j],dp[i][j−w[i]]+v[i])<br>        注解：这个函数中max(dp[i][j],dp[i][j−w[i]]+v[i])表示不动用w（i)的空间与动用w（i)的空间在加上v[i]的价值哪个更好</p><p>在w比较大的情况下用这种比较好<br>dp[i+1][j]:=前i个物品中挑选出价值总和为j时总重量最小值（不存在时就是INF）</p><p>分析：</p><p>由于前0个物品没有重量，所以：<br>dp[0][j]=INFdp[0][0]=0dp[0][j] = INF \ dp[0][0] = 0<br>dp[0][j]=INF<br>dp[0][0]=0</p><p>和前文同理可得递推关系式：</p><p>dp[0][0]=0dp[0][j]=INF,j!=0dp[i+1][j]={min(dp[i][j],dp[i+1][j−v[i]]+w[i]),j&gt;=v[i]dp[i][j],j&lt;v[i]\begin{aligned} &amp;dp[0][0] = 0 \&amp;dp[0][j] = INF , j != 0 \&amp;dp[i+1][j] = \left { \begin{aligned} &amp; min( dp[i][j], dp[i+1][j-v[i]] +w[i] ) , \qquad j&gt;=v[i]\ &amp; dp[i][j] ,\qquad j&lt;v[i] \end{aligned} \right.\end{aligned}<br>​    </p><p>dp[0][0]=0<br>dp[0][j]=INF,j!=0<br>dp[i+1][j]={<br>​    </p><p>min(dp[i][j],dp[i+1][j−v[i]]+w[i]),j&gt;=v[i]<br>dp[i][j],j&lt;v[i]</p><p>后一种代码</p><pre><code>int dp[MAX_N+1][MAX_N * MAX_V+1]; //能够容纳的最大价值MAX_N * MAX_Vint solve(){fill(dp[0],dp[0]+MAX_N * MAX_V +1 , INF);dp[0][0] = 0;for(int i =0; i&lt; n ; i++){    for(int j =0; j&lt;= MAX_N*MAX_V; j++){        if(j &lt; v[i]){            dp[i+1][j] = dp[i][j];        else{            dp[i+1][j] = dp[i+1][j-v[i]] +w[i];        }    }}// 在最后一行找到dp[n][j]&lt;=W 时的jres = 0;for(int i = 0; i&lt;= MAX_N*MAX_V;i++)     if(dp[n][i] &gt; W){         res =i-1;         break;    }return res;</code></pre><p>}<br>————————————————<br>版权声明：本文为CSDN博主「wyc-」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a href="https://blog.csdn.net/qq_28120673/article/details/81037700" target="_blank" rel="noopener">https://blog.csdn.net/qq_28120673/article/details/81037700</a></p><p>​</p>]]></content>
+    <content type="html"><![CDATA[<h3 id="第一类背包问题"><a href="#第一类背包问题" class="headerlink" title="第一类背包问题"></a>第一类背包问题</h3><p>问题，有N件物品和一个容量为V的背包。第i件物品的大小是c[i]，价值是w[i]。求解将哪些物品装入背包可使价值总和最大。</p><p><strong>思路</strong> 可以用一个二维数组a[i][j]，表示把前i个物体放入一个容量为j的容器中所获得的最大价值，而a[i][j]=max(a[i-1][j],a[i-1][j-c[i]]+w[i])</p><p>这个式子表示到底是不装第i个物品价值大还是花去c[i]的空间装获得w[i]的价值所得的总价值最大，</p><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">n w v    <span class="number">1</span>   <span class="number">2</span>  <span class="number">3</span>  <span class="number">4</span>  <span class="number">5</span>  <span class="number">6</span>  <span class="number">7</span>  <span class="number">8</span>  <span class="number">9</span>  <span class="number">10</span></span><br><span class="line">a<span class="number">2</span><span class="number">6</span><span class="number">0</span><span class="number">6</span><span class="number">6</span><span class="number">9</span><span class="number">9</span><span class="number">12</span><span class="number">12</span><span class="number">15</span><span class="number">15</span><span class="number">15</span></span><br><span class="line">b<span class="number">2</span><span class="number">3</span><span class="number">0</span><span class="number">3</span><span class="number">3</span><span class="number">6</span><span class="number">6</span><span class="number">9</span><span class="number">9</span><span class="number">9</span><span class="number">10</span><span class="number">11</span></span><br><span class="line">c<span class="number">6</span><span class="number">5</span><span class="number">0</span><span class="number">0</span><span class="number">0</span><span class="number">6</span><span class="number">6</span><span class="number">6</span><span class="number">6</span><span class="number">6</span><span class="number">10</span><span class="number">11</span></span><br><span class="line">d<span class="number">5</span><span class="number">4</span><span class="number">0</span><span class="number">0</span><span class="number">0</span><span class="number">6</span><span class="number">6</span><span class="number">6</span><span class="number">6</span><span class="number">6</span><span class="number">10</span><span class="number">10</span></span><br><span class="line">e<span class="number">4</span><span class="number">6</span><span class="number">0</span><span class="number">0</span><span class="number">0</span><span class="number">6</span><span class="number">6</span><span class="number">6</span><span class="number">6</span><span class="number">6</span><span class="number">6</span><span class="number">6</span></span><br></pre></td></tr></table></figure><p>为了叙述方便，用e2单元格表示e行2列的单元格，这个单元格的意义是用来表示只有物品e时，有个承重为2的背包，那么这个背包的最大价值是0，因为e物品的重量是4，背包装不了。</p><p>对于d2单元格，表示只有物品e，d时,承重为2的背包,所能装入的最大价值，仍然是0，因为物品e,d都不是这个背包能装的。</p><p>上代码</p><p>————————————————<br>版权声明：本文为CSDN博主「从杰」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a href="https://blog.csdn.net/mu399/article/details/7722810" target="_blank" rel="noopener">https://blog.csdn.net/mu399/article/details/7722810</a></p>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;p&gt;有几个重量和价值分别为Wi和Vi的物品。从这些物品中挑选出总重量不超过W的物品，求所有挑选方案中价值总和最大的值。&lt;/p&gt;
-&lt;p&gt;dp[i+1][j]:=从前i个物品中挑选出总重量不超过j的物品时，总价值的最大值&lt;br&gt;w[i]表示第i个物体的重量，v[i]表示第i个物体的
+        &lt;h3 id=&quot;第一类背包问题&quot;&gt;&lt;a href=&quot;#第一类背包问题&quot; class=&quot;headerlink&quot; title=&quot;第一类背包问题&quot;&gt;&lt;/a&gt;第一类背包问题&lt;/h3&gt;&lt;p&gt;问题，有N件物品和一个容量为V的背包。第i件物品的大小是c[i]，价值是w[i]。求解将哪些物品装入
       
     
     </summary>
@@ -296,32 +319,6 @@ void Prime()
     
     
       <category term="算法" scheme="http://xinhecuican.github.io/categories/%E7%AE%97%E6%B3%95/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>set</title>
-    <link href="http://xinhecuican.github.io/2020/01/03/set/"/>
-    <id>http://xinhecuican.github.io/2020/01/03/set/</id>
-    <published>2020-01-03T09:59:00.000Z</published>
-    <updated>2020-01-07T11:10:00.246Z</updated>
-    
-    <content type="html"><![CDATA[<p>如何判断set是否成功插入</p><pre><code>typedef pair&lt;iterator, bool&gt; _Pairib;pair&lt;set&lt;Student,FuncStudent&gt;::iterator,bool&gt; pair1=set1.insert(s1);if(pair1.second==true){    cout&lt;&lt;&quot;插入s1成功&quot;&lt;&lt;endl;}else{    cout&lt;&lt;&quot;插入s1失败&quot;&lt;&lt;endl;}</code></pre><p>————————————————<br>版权声明：本文为CSDN博主「阳光下的Smiles」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a href="https://blog.csdn.net/liyuqian199695/article/details/49100543" target="_blank" rel="noopener">https://blog.csdn.net/liyuqian199695/article/details/49100543</a></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;如何判断set是否成功插入&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;typedef pair&amp;lt;iterator, bool&amp;gt; _Pairib;
-pair&amp;lt;set&amp;lt;Student,FuncStudent&amp;gt;::iterator,bool&amp;gt; pair1=
-      
-    
-    </summary>
-    
-    
-      <category term="stl" scheme="http://xinhecuican.github.io/categories/stl/"/>
     
     
   </entry>
