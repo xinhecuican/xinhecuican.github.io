@@ -1,290 +1,330 @@
 <?xml version="1.0" encoding="utf-8"?>
-<search>
-  <entry>
-    <title>set</title>
-    <url>/2020/01/11/set/</url>
-    <content><![CDATA[<h3 id="set之iterator"><a href="#set之iterator" class="headerlink" title="set之iterator"></a>set之iterator</h3><p>定义：set<int>::iterator iter</p>
-<p>  运用：*iter</p>
-<p>  遍历 for(iter=set.begin();iter!=set.end();iter++)</p>
-<h4 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h4><p>  iterator只能用++，–运算符。不能*（iter-1），另外还要注意iter++后自身会改变</p>
-<p>  例：set中有0,2,4，iter指向2，现在<code>cout&lt;&lt;*iter&lt;&lt;&quot; &quot;&lt;&lt;*(iter--)&lt;&lt;endl;</code></p>
-<p>  输出0,2，先执行iter–，我也不知道为什么</p>
-]]></content>
+<search> 
+  
+  
+    
+    <entry>
+      <title>prioity_queue</title>
+      <link href="/2020/01/11/prioity-queue/"/>
+      <url>/2020/01/11/prioity-queue/</url>
+      
+        <content type="html"><![CDATA[<h3 id="prioity-queue"><a href="#prioity-queue" class="headerlink" title="prioity_queue"></a>prioity_queue</h3><p>实际上是一个大顶堆，定义在<code>&lt;queue&gt;</code>中</p><p><code>prioity_queue&lt;int&gt; qu</code>为大顶堆</p><p><code>priority_queue&lt;int,vector&lt;int&gt;,greater&lt;int&gt; &gt; qu;</code>为小顶堆</p><p>.push()</p><p>.pop()取出元素，但不返回值</p><p>.top()不取出元素，返回值</p>]]></content>
+      
+      
       <categories>
-        <category>stl</category>
+          
+          <category> stl </category>
+          
       </categories>
-  </entry>
-  <entry>
-    <title>&amp;&amp;与||小提示</title>
-    <url>/2020/01/07/%E4%B8%8E-%E5%B0%8F%E6%8F%90%E7%A4%BA/</url>
-    <content><![CDATA[<h4 id="amp-amp"><a href="#amp-amp" class="headerlink" title="&amp;&amp;"></a>&amp;&amp;</h4><p>&amp;&amp;运算符从左自由依次判断 ，如果判断有一个为假则停止判断</p>
-<h4 id=""><a href="#" class="headerlink" title="||"></a>||</h4><p>同理如果判断有一个为真则停止判断</p>
-<h4 id="例"><a href="#例" class="headerlink" title="例"></a>例</h4><pre><code>#include&lt;iostream&gt;
-using namespace std;
-int main()
-{
-    int a=0,b=1,c;
-    c = (a != b) || (++a == b++);
-    cout&lt;&lt;a&lt;&lt;&quot; &quot;&lt;&lt;b&lt;&lt;endl;
-    return 0;
-}</code></pre><p>输出为0 1因为前面一个为真，直接退出判断</p>
-]]></content>
-  </entry>
-  <entry>
-    <title>字符数组</title>
-    <url>/2020/01/07/%E5%AD%97%E7%AC%A6%E6%95%B0%E7%BB%84/</url>
-    <content><![CDATA[<h3 id="前方高能"><a href="#前方高能" class="headerlink" title="前方高能"></a>前方高能</h3><pre><code>char a[4]={&apos;a&apos;,&apos;b&apos;,&apos;c&apos;,&apos;d&apos;};
-cout&lt;&lt;a&lt;&lt;endl;</code></pre><p>这将输出什么呢，是<code>abcd</code>，实际上是<code>abcdPpB</code></p>
-<p>这就有点神奇</p>
-<h4 id="字符数组"><a href="#字符数组" class="headerlink" title="字符数组"></a>字符数组</h4><p>char +标识符+[]，注意字符数组的最后一定会有’\0’，</p>
-<p>例如<code>char[]=&quot;abcd&quot;,这就是一个合法的赋值，但是char[4]=&quot;abcd&quot;是不合法的因为带双引号的为字符串，赋值给字符数组时编译器会自动加上&#39;\0&#39;这时需要5个空间</code></p>
-<h3 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h3><p>因为本来是要加上’\0’的，但是这时位子不够了，编译器只好帮它扩扩容，也就是说这是字符数组（其实现在已经不是字符数组了）长度已经不是4了，编译器会为后面几个位子附上值（不是随机的，我也有点不清楚，这样解释先），因此后面会多输出一些。但是如果开始就把长度设为5，这时’\0’就有位子放了，也就不会多出后面那些奇奇怪怪的字符</p>
-]]></content>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>set</title>
+      <link href="/2020/01/11/set/"/>
+      <url>/2020/01/11/set/</url>
+      
+        <content type="html"><![CDATA[<h3 id="set之iterator"><a href="#set之iterator" class="headerlink" title="set之iterator"></a>set之iterator</h3><p>定义：set::iterator iter</p><p>运用：*iter</p><p>遍历 for(iter=set.begin();iter!=set.end();iter++)</p><p><strong>注意</strong><br>iterator只能用++，–运算符。不能*（iter-1），另外还要注意iter++后自身会改变</p><p>例：set中有0,2,4，iter指向2，现在cout&lt;&lt;<em>iter&lt;&lt;” “&lt;&lt;</em>(iter–)&lt;&lt;endl;</p><p>输出0,2，先执行iter–，我也不知道为什么</p><h3 id="set之lower-bound"><a href="#set之lower-bound" class="headerlink" title="set之lower_bound()"></a>set之lower_bound()</h3><p>lower_bound()返回从first开始的第一个大于或等于val的元素的地址。如果所有元素都小于val，则返回last的地址，所以必须要</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt;::iterator iter;</span><br><span class="line">iter=st.lower_bound(一个数字)</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
       <categories>
-        <category>基础</category>
+          
+          <category> stl </category>
+          
       </categories>
-  </entry>
-  <entry>
-    <title>next主题出现404的一个解决方法</title>
-    <url>/2020/01/07/next%E4%B8%BB%E9%A2%98%E5%87%BA%E7%8E%B0404%E7%9A%84%E4%B8%80%E4%B8%AA%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</url>
-    <content><![CDATA[<p>在<code>主题配置文件中</code></p>
-<figure class="highlight dts"><table><tr><td class="code"><pre><span class="line"><span class="symbol">menu:</span></span><br><span class="line"></span><br><span class="line"><span class="symbol">home:</span> /|| home</span><br><span class="line"></span><br><span class="line"><span class="symbol">about:</span> <span class="meta-keyword">/about/</span>|| user</span><br><span class="line"></span><br><span class="line"><span class="symbol">tags:</span> <span class="meta-keyword">/tags/</span>|| tags</span><br><span class="line"></span><br><span class="line"><span class="symbol">categories:</span> <span class="meta-keyword">/categories/</span>|| th</span><br><span class="line"></span><br><span class="line"><span class="symbol">archives:</span> <span class="meta-keyword">/archives/</span>|| archive</span><br><span class="line"></span><br><span class="line"><span class="meta">#schedule: /schedule/|| calendar</span></span><br><span class="line"><span class="meta">#sitemap: /sitemap.xml || sitemap</span></span><br><span class="line"><span class="meta">#commonweal: /404/|| heartbeat</span></span><br></pre></td></tr></table></figure>
-  <p>注意/||，原来是/ ||，不要中间那个空格，亲测有效]]></content>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>&amp;&amp;与||小提示</title>
+      <link href="/2020/01/07/%E4%B8%8E-%E5%B0%8F%E6%8F%90%E7%A4%BA/"/>
+      <url>/2020/01/07/%E4%B8%8E-%E5%B0%8F%E6%8F%90%E7%A4%BA/</url>
+      
+        <content type="html"><![CDATA[<h4 id="amp-amp"><a href="#amp-amp" class="headerlink" title="&amp;&amp;"></a>&amp;&amp;</h4><p>&amp;&amp;运算符从左自由依次判断 ，如果判断有一个为假则停止判断</p><h4 id=""><a href="#" class="headerlink" title="||"></a>||</h4><p>同理如果判断有一个为真则停止判断</p><h4 id="例"><a href="#例" class="headerlink" title="例"></a>例</h4><pre><code>#include&lt;iostream&gt;using namespace std;int main(){    int a=0,b=1,c;    c = (a != b) || (++a == b++);    cout&lt;&lt;a&lt;&lt;&quot; &quot;&lt;&lt;b&lt;&lt;endl;    return 0;}</code></pre><p>输出为0 1因为前面一个为真，直接退出判断</p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>字符数组</title>
+      <link href="/2020/01/07/%E5%AD%97%E7%AC%A6%E6%95%B0%E7%BB%84/"/>
+      <url>/2020/01/07/%E5%AD%97%E7%AC%A6%E6%95%B0%E7%BB%84/</url>
+      
+        <content type="html"><![CDATA[<h3 id="前方高能"><a href="#前方高能" class="headerlink" title="前方高能"></a>前方高能</h3><pre><code>char a[4]={&apos;a&apos;,&apos;b&apos;,&apos;c&apos;,&apos;d&apos;};cout&lt;&lt;a&lt;&lt;endl;</code></pre><p>这将输出什么呢，是<code>abcd</code>，实际上是<code>abcdPpB</code></p><p>这就有点神奇</p><h4 id="字符数组"><a href="#字符数组" class="headerlink" title="字符数组"></a>字符数组</h4><p>char +标识符+[]，注意字符数组的最后一定会有’\0’，</p><p>例如<code>char[]=&quot;abcd&quot;,这就是一个合法的赋值，但是char[4]=&quot;abcd&quot;是不合法的因为带双引号的为字符串，赋值给字符数组时编译器会自动加上&#39;\0&#39;这时需要5个空间</code></p><h3 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h3><p>因为本来是要加上’\0’的，但是这时位子不够了，编译器只好帮它扩扩容，也就是说这是字符数组（其实现在已经不是字符数组了）长度已经不是4了，编译器会为后面几个位子附上值（不是随机的，我也有点不清楚，这样解释先），因此后面会多输出一些。但是如果开始就把长度设为5，这时’\0’就有位子放了，也就不会多出后面那些奇奇怪怪的字符</p>]]></content>
+      
+      
       <categories>
-        <category>next</category>
+          
+          <category> 基础 </category>
+          
       </categories>
-  </entry>
-  <entry>
-    <title>文件输入输出</title>
-    <url>/2020/01/07/%E6%96%87%E4%BB%B6%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA/</url>
-    <content><![CDATA[<h4 id="文件输入in"><a href="#文件输入in" class="headerlink" title="文件输入in"></a>文件输入in</h4><p>文件输入指的是从文件_输入_给程序，对应的有in，get，read，seekg等
-
-<figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line">seekg和seekp中有三个定位基址，分别是cur（当前）beg（开始），end（末尾）&lt;p&gt;</span><br><span class="line">例如 seekg（<span class="number">100</span>，ios：：beg）；seekg（<span class="number">2</span>*sizeof(Student)) student是一个类</span><br></pre></td></tr></table></figure>
-
-<h4 id="文件输出out"><a href="#文件输出out" class="headerlink" title="文件输出out"></a>文件输出out</h4><p>文件输出指的是从程序<code>输出</code>给文件，对应的有out，put，write，seekp等</p>
-]]></content>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>next主题出现404的一个解决方法</title>
+      <link href="/2020/01/07/next%E4%B8%BB%E9%A2%98%E5%87%BA%E7%8E%B0404%E7%9A%84%E4%B8%80%E4%B8%AA%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/"/>
+      <url>/2020/01/07/next%E4%B8%BB%E9%A2%98%E5%87%BA%E7%8E%B0404%E7%9A%84%E4%B8%80%E4%B8%AA%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</url>
+      
+        <content type="html"><![CDATA[<p>在<code>主题配置文件中</code></p><figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">menu:</span></span><br><span class="line"></span><br><span class="line"><span class="symbol">home:</span> /|| home</span><br><span class="line"></span><br><span class="line"><span class="symbol">about:</span> <span class="meta-keyword">/about/</span>|| user</span><br><span class="line"></span><br><span class="line"><span class="symbol">tags:</span> <span class="meta-keyword">/tags/</span>|| tags</span><br><span class="line"></span><br><span class="line"><span class="symbol">categories:</span> <span class="meta-keyword">/categories/</span>|| th</span><br><span class="line"></span><br><span class="line"><span class="symbol">archives:</span> <span class="meta-keyword">/archives/</span>|| archive</span><br><span class="line"></span><br><span class="line"><span class="meta">#schedule: /schedule/|| calendar</span></span><br><span class="line"><span class="meta">#sitemap: /sitemap.xml || sitemap</span></span><br><span class="line"><span class="meta">#commonweal: /404/|| heartbeat</span></span><br></pre></td></tr></table></figure>  <p>注意/||，原来是/ ||，不要中间那个空格，亲测有效]]></content>
+      
+      
       <categories>
-        <category>基础</category>
+          
+          <category> next </category>
+          
       </categories>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/2020/01/07/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-]]></content>
-  </entry>
-  <entry>
-    <title>二分搜索</title>
-    <url>/2020/01/07/%E4%BA%8C%E5%88%86%E6%90%9C%E7%B4%A2/</url>
-    <content><![CDATA[<h1 id="（主要是怕自己忘记了）"><a href="#（主要是怕自己忘记了）" class="headerlink" title="（主要是怕自己忘记了）"></a>（主要是怕自己忘记了）<p></h1><p>  一个要点，用二分时要先排序<p></p>
-<pre><code>int erfen(int arr[],int key,int n)
-    {
-        int low=0,high=n-1;
-        while(low&lt;=high)
-        {
-            int mid=(low+high)/2;
-            if(arr[mid]&lt;key)
-            {
-                low=mid+1;
-            }
-            if(arr[mid]==key)
-            {
-                return mid;
-            }
-            if(arr[mid]&gt;key)
-            {
-                high=mid-1;
-            }
-        }
-        return -mid-1;
-     }</code></pre>]]></content>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>文件输入输出</title>
+      <link href="/2020/01/07/%E6%96%87%E4%BB%B6%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA/"/>
+      <url>/2020/01/07/%E6%96%87%E4%BB%B6%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA/</url>
+      
+        <content type="html"><![CDATA[<h4 id="文件输入in"><a href="#文件输入in" class="headerlink" title="文件输入in"></a>文件输入in</h4><p>文件输入指的是从文件_输入_给程序，对应的有in，get，read，seekg等<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">seekg和seekp中有三个定位基址，分别是cur（当前）beg（开始），end（末尾）&lt;p&gt;</span><br><span class="line">例如 seekg（<span class="number">100</span>，ios：：beg）；seekg（<span class="number">2</span>*sizeof(Student)) student是一个类</span><br></pre></td></tr></table></figure><h4 id="文件输出out"><a href="#文件输出out" class="headerlink" title="文件输出out"></a>文件输出out</h4><p>文件输出指的是从程序<code>输出</code>给文件，对应的有out，put，write，seekp等</p>]]></content>
+      
+      
       <categories>
-        <category>算法</category>
+          
+          <category> 基础 </category>
+          
       </categories>
-  </entry>
-  <entry>
-    <title>合法的字符常量</title>
-    <url>/2020/01/07/%E5%90%88%E6%B3%95%E7%9A%84%E5%AD%97%E7%AC%A6%E5%B8%B8%E9%87%8F/</url>
-    <content><![CDATA[<p>用英文单引号括起来的一个字符，例如’a’,’ ‘等等。空格也是一个字符常量</p>
-<p>注意<p>
-  1.转义字符也属于字符常量，例如'\t','\n'等，但是'\97'不算]]></content>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Hello World</title>
+      <link href="/2020/01/07/hello-world/"/>
+      <url>/2020/01/07/hello-world/</url>
+      
+        <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>二分搜索</title>
+      <link href="/2020/01/07/%E4%BA%8C%E5%88%86%E6%90%9C%E7%B4%A2/"/>
+      <url>/2020/01/07/%E4%BA%8C%E5%88%86%E6%90%9C%E7%B4%A2/</url>
+      
+        <content type="html"><![CDATA[<h1 id="（主要是怕自己忘记了）"><a href="#（主要是怕自己忘记了）" class="headerlink" title="（主要是怕自己忘记了）"></a>（主要是怕自己忘记了）<p></h1><p>  一个要点，用二分时要先排序<p></p><pre><code>int erfen(int arr[],int key,int n)    {        int low=0,high=n-1;        while(low&lt;=high)        {            int mid=(low+high)/2;            if(arr[mid]&lt;key)            {                low=mid+1;            }            if(arr[mid]==key)            {                return mid;            }            if(arr[mid]&gt;key)            {                high=mid-1;            }        }        return -mid-1;     }</code></pre>]]></content>
+      
+      
       <categories>
-        <category>基础</category>
+          
+          <category> 算法 </category>
+          
       </categories>
-      <tags>
-        <tag>字符常量</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>快速排序</title>
-    <url>/2020/01/05/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/</url>
-    <content><![CDATA[<p>步骤：<br>1.先从数列中取出一个数作为基准数。</p>
-<p>2．分区过程，将比这个数大的数全放到它的右边，小于或等于它的数全放到它的左边。</p>
-<p>3．再对左右区间重复第二步，直到各区间只有一个数。</p>
-<p>例 6 1 2 7 9 3 4 5 10 8 进行排序<p><br> 1 以6为基准数，先从右边找比6小的数，我们用一个变量j一步步向左移动，好在移动三次后我<br> 们找到了5，j为7。现在再让另一个变量i向右移动去找比6大的数，当i为3时找到了7.现在再让5<br> 和7互换，得到了6 1 2 5 9 3 4 7 10 8,。在让j向左移动，找到了4，i向右找到了9，再让两个数<br> 互换，j再向左到3，此时i向左也到3，两者相遇，便让3和6互换，第一次结束<br> （想想原因）<p><br> 2 现在分为两部分，左边全比6小，右边全比6大，为3 1 2 5 4 6 9 7 10 8<br> 再在3 1 2 5 4 中用同样的方法搜索一次得到2 1 3 5 4,再在2 1 中搜索得到1 2<br> 然后在5 4 中搜索得到4 5，左边排序完成，右边用同样的方法排序就可得到答案</p>
-<p> 不说了，上代码</p>
-<pre><code>void sort(int a[],int l,int r)
-{
-  if(l&lt;r)//l大于等于r时这一段排序结束
-  {
-      int i=l,j=r,x=a[l];
-      while(i&lt;j)
-      {
-          while(i&lt;j&amp;&amp;a[j]&gt;=x)
-          {
-              j--;
-          }
-          while(i&lt;j&amp;&amp;a[i]&lt;x)
-          {
-              i++;
-          }
-          swap(a[i],a[j]);
-      }
-      swap(a[l],a[i]);
-      sort(s,l,i-1);
-      sort(s,i+1,r);
- }</code></pre><p>  }<br>  引用 转载请标明出处，原文地址：<a href="http://blog.csdn.net/morewindows/article/details/6684558" target="_blank" rel="noopener">http://blog.csdn.net/morewindows/article/details/6684558</a><br>         csdn 我见过最通俗易懂的快速排序过程讲解，转自《坐在马桶上看算法：快速排序》</p>
-]]></content>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>合法的字符常量</title>
+      <link href="/2020/01/07/%E5%90%88%E6%B3%95%E7%9A%84%E5%AD%97%E7%AC%A6%E5%B8%B8%E9%87%8F/"/>
+      <url>/2020/01/07/%E5%90%88%E6%B3%95%E7%9A%84%E5%AD%97%E7%AC%A6%E5%B8%B8%E9%87%8F/</url>
+      
+        <content type="html"><![CDATA[<p>用英文单引号括起来的一个字符，例如’a’,’ ‘等等。空格也是一个字符常量</p><p>注意<p>  1.转义字符也属于字符常量，例如'\t','\n'等，但是'\97'不算]]></content>
+      
+      
       <categories>
-        <category>算法</category>
+          
+          <category> 基础 </category>
+          
       </categories>
-      <tags>
-        <tag>快排</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>动态规划背包问题</title>
-    <url>/2020/01/04/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/</url>
-    <content><![CDATA[<h3 id="第一类背包问题"><a href="#第一类背包问题" class="headerlink" title="第一类背包问题"></a>第一类背包问题</h3><p>问题，有N件物品和一个容量为V的背包。第i件物品的大小是c[i]，价值是w[i]。求解将哪些物品装入背包可使价值总和最大。</p>
-<p><strong>思路</strong> 可以用一个二维数组a[i][j]，表示把前i个物体放入一个容量为j的容器中所获得的最大价值，而a[i][j]=max(a[i-1][j],a[i-1][j-c[i]]+w[i])</p>
-<p>这个式子表示到底是不装第i个物品价值大还是花去c[i]的空间装获得w[i]的价值所得的总价值最大，</p>
-<figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line">n 	w v    <span class="number">1</span>   <span class="number">2</span>  <span class="number">3</span>	  <span class="number">4</span>	  <span class="number">5</span>	  <span class="number">6</span>	  <span class="number">7</span>	  <span class="number">8</span>	  <span class="number">9</span>	  <span class="number">10</span></span><br><span class="line">a	<span class="number">2</span>	<span class="number">6</span>	<span class="number">0</span>	<span class="number">6</span>	<span class="number">6</span>	<span class="number">9</span>	<span class="number">9</span>	<span class="number">12</span>	<span class="number">12</span>	<span class="number">15</span>	<span class="number">15</span>	<span class="number">15</span></span><br><span class="line">b	<span class="number">2</span>	<span class="number">3</span>	<span class="number">0</span>	<span class="number">3</span>	<span class="number">3</span>	<span class="number">6</span>	<span class="number">6</span>	<span class="number">9</span>	<span class="number">9</span>	<span class="number">9</span>	<span class="number">10</span>	<span class="number">11</span></span><br><span class="line">c	<span class="number">6</span>	<span class="number">5</span>	<span class="number">0</span>	<span class="number">0</span>	<span class="number">0</span>	<span class="number">6</span>	<span class="number">6</span>	<span class="number">6</span>	<span class="number">6</span>	<span class="number">6</span>	<span class="number">10</span>	<span class="number">11</span></span><br><span class="line">d	<span class="number">5</span>	<span class="number">4</span>	<span class="number">0</span>	<span class="number">0</span>	<span class="number">0</span>	<span class="number">6</span>	<span class="number">6</span>	<span class="number">6</span>	<span class="number">6</span>	<span class="number">6</span>	<span class="number">10</span>	<span class="number">10</span></span><br><span class="line">e	<span class="number">4</span>	<span class="number">6</span>	<span class="number">0</span>	<span class="number">0</span>	<span class="number">0</span>	<span class="number">6</span>	<span class="number">6</span>	<span class="number">6</span>	<span class="number">6</span>	<span class="number">6</span>	<span class="number">6</span>	<span class="number">6</span></span><br></pre></td></tr></table></figure>
-<p>为了叙述方便，用e2单元格表示e行2列的单元格，这个单元格的意义是用来表示只有物品e时，有个承重为2的背包，那么这个背包的最大价值是0，因为e物品的重量是4，背包装不了。</p>
-<p>对于d2单元格，表示只有物品e，d时,承重为2的背包,所能装入的最大价值，仍然是0，因为物品e,d都不是这个背包能装的。</p>
-<p>上代码</p>
-<p>————————————————<br>版权声明：本文为CSDN博主「从杰」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a href="https://blog.csdn.net/mu399/article/details/7722810" target="_blank" rel="noopener">https://blog.csdn.net/mu399/article/details/7722810</a></p>
-]]></content>
+      
+      
+        <tags>
+            
+            <tag> 字符常量 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>快速排序</title>
+      <link href="/2020/01/05/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/"/>
+      <url>/2020/01/05/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/</url>
+      
+        <content type="html"><![CDATA[<p>步骤：<br>1.先从数列中取出一个数作为基准数。</p><p>2．分区过程，将比这个数大的数全放到它的右边，小于或等于它的数全放到它的左边。</p><p>3．再对左右区间重复第二步，直到各区间只有一个数。</p><p>例 6 1 2 7 9 3 4 5 10 8 进行排序<p><br> 1 以6为基准数，先从右边找比6小的数，我们用一个变量j一步步向左移动，好在移动三次后我<br> 们找到了5，j为7。现在再让另一个变量i向右移动去找比6大的数，当i为3时找到了7.现在再让5<br> 和7互换，得到了6 1 2 5 9 3 4 7 10 8,。在让j向左移动，找到了4，i向右找到了9，再让两个数<br> 互换，j再向左到3，此时i向左也到3，两者相遇，便让3和6互换，第一次结束<br> （想想原因）<p><br> 2 现在分为两部分，左边全比6小，右边全比6大，为3 1 2 5 4 6 9 7 10 8<br> 再在3 1 2 5 4 中用同样的方法搜索一次得到2 1 3 5 4,再在2 1 中搜索得到1 2<br> 然后在5 4 中搜索得到4 5，左边排序完成，右边用同样的方法排序就可得到答案</p><p> 不说了，上代码</p><pre><code>void sort(int a[],int l,int r){  if(l&lt;r)//l大于等于r时这一段排序结束  {      int i=l,j=r,x=a[l];      while(i&lt;j)      {          while(i&lt;j&amp;&amp;a[j]&gt;=x)          {              j--;          }          while(i&lt;j&amp;&amp;a[i]&lt;x)          {              i++;          }          swap(a[i],a[j]);      }      swap(a[l],a[i]);      sort(s,l,i-1);      sort(s,i+1,r); }</code></pre><p>  }<br>  引用 转载请标明出处，原文地址：<a href="http://blog.csdn.net/morewindows/article/details/6684558" target="_blank" rel="noopener">http://blog.csdn.net/morewindows/article/details/6684558</a><br>         csdn 我见过最通俗易懂的快速排序过程讲解，转自《坐在马桶上看算法：快速排序》</p>]]></content>
+      
+      
       <categories>
-        <category>算法</category>
+          
+          <category> 算法 </category>
+          
       </categories>
-      <tags>
-        <tag>动态规划</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>线性筛</title>
-    <url>/2020/01/04/%E7%BA%BF%E6%80%A7%E7%AD%9B/</url>
-    <content><![CDATA[<p>埃氏筛中有重复，例如6,2与3都筛了一次，效率低<br>线性筛定理，（口语不准确）一个数i乘以小于等于它的最小素因数的素数所得到的合数之间没有重复</p>
-<pre><code>#define N 10000
-int flag[N+1],prime[N+1],pnum;
-/*
-flag[n] 表示n是否是素数，1是素数，0不是
-prime   中是所有的素数按从小到大排列、
-pnum  表示素数的个数
-*/
-void CreatePrime(){
-    pnum=0;//初始化没有素数
-    //先将所有数看做素数，然后开始筛选
-    for(int i=0; i&lt;=N; i++){
-        flag[i]=1;
-    }
-    //遍历筛去所有最大因数是i的合数
-    for(int i=2; i&lt;=N; i++){
-        if(flag[i]==1){
-        //把素数记录下来
-            p[pnum++]=i;
-        }
-        //遍历已知素数表中比i的最小素因数小的素数，并筛去合数
-        for(int j=0; j&lt;pnum &amp;&amp; p[j]*i&lt;=N; j++){
-        //筛去合数
-            flag[p[j]*i]=0;
-            if(i%p[j]==0)
-            //找到i的最小素因数，找到了就终止
-                break;
-        }
-    }</code></pre><p>————————————————<br>版权声明：本文为CSDN博主「太上绝情」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a href="https://blog.csdn.net/bjrxyz/article/details/8125913" target="_blank" rel="noopener">https://blog.csdn.net/bjrxyz/article/details/8125913</a></p>
-]]></content>
+      
+      
+        <tags>
+            
+            <tag> 快排 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>动态规划背包问题</title>
+      <link href="/2020/01/04/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/"/>
+      <url>/2020/01/04/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/</url>
+      
+        <content type="html"><![CDATA[<h3 id="第一类背包问题"><a href="#第一类背包问题" class="headerlink" title="第一类背包问题"></a>第一类背包问题</h3><p>问题，有N件物品和一个容量为V的背包。第i件物品的大小是c[i]，价值是w[i]。求解将哪些物品装入背包可使价值总和最大。</p><p><strong>思路</strong> 可以用一个二维数组a[i][j]，表示把前i个物体放入一个容量为j的容器中所获得的最大价值，而a[i][j]=max(a[i-1][j],a[i-1][j-c[i]]+w[i])</p><p>这个式子表示到底是不装第i个物品价值大还是花去c[i]的空间装获得w[i]的价值所得的总价值最大，</p><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">n w v    <span class="number">1</span>   <span class="number">2</span>  <span class="number">3</span>  <span class="number">4</span>  <span class="number">5</span>  <span class="number">6</span>  <span class="number">7</span>  <span class="number">8</span>  <span class="number">9</span>  <span class="number">10</span></span><br><span class="line">a<span class="number">2</span><span class="number">6</span><span class="number">0</span><span class="number">6</span><span class="number">6</span><span class="number">9</span><span class="number">9</span><span class="number">12</span><span class="number">12</span><span class="number">15</span><span class="number">15</span><span class="number">15</span></span><br><span class="line">b<span class="number">2</span><span class="number">3</span><span class="number">0</span><span class="number">3</span><span class="number">3</span><span class="number">6</span><span class="number">6</span><span class="number">9</span><span class="number">9</span><span class="number">9</span><span class="number">10</span><span class="number">11</span></span><br><span class="line">c<span class="number">6</span><span class="number">5</span><span class="number">0</span><span class="number">0</span><span class="number">0</span><span class="number">6</span><span class="number">6</span><span class="number">6</span><span class="number">6</span><span class="number">6</span><span class="number">10</span><span class="number">11</span></span><br><span class="line">d<span class="number">5</span><span class="number">4</span><span class="number">0</span><span class="number">0</span><span class="number">0</span><span class="number">6</span><span class="number">6</span><span class="number">6</span><span class="number">6</span><span class="number">6</span><span class="number">10</span><span class="number">10</span></span><br><span class="line">e<span class="number">4</span><span class="number">6</span><span class="number">0</span><span class="number">0</span><span class="number">0</span><span class="number">6</span><span class="number">6</span><span class="number">6</span><span class="number">6</span><span class="number">6</span><span class="number">6</span><span class="number">6</span></span><br></pre></td></tr></table></figure><p>为了叙述方便，用e2单元格表示e行2列的单元格，这个单元格的意义是用来表示只有物品e时，有个承重为2的背包，那么这个背包的最大价值是0，因为e物品的重量是4，背包装不了。</p><p>对于d2单元格，表示只有物品e，d时,承重为2的背包,所能装入的最大价值，仍然是0，因为物品e,d都不是这个背包能装的。</p><p>上代码</p><p>————————————————<br>版权声明：本文为CSDN博主「从杰」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a href="https://blog.csdn.net/mu399/article/details/7722810" target="_blank" rel="noopener">https://blog.csdn.net/mu399/article/details/7722810</a></p>]]></content>
+      
+      
       <categories>
-        <category>算法</category>
+          
+          <category> 算法 </category>
+          
       </categories>
-  </entry>
-  <entry>
-    <title>埃氏筛</title>
-    <url>/2020/01/04/%E5%9F%83%E6%B0%8F%E7%AD%9B/</url>
-    <content><![CDATA[<p>在筛质数时，我们会发现，筛去2后，2的倍数4、6、8等一定不是素数;筛去3后，3的倍数6、9、12等一定不是倍数。简单模拟这个过程如下</p>
-<pre><code>const int MAXN = 1000000；  
-void Prime()  
-{  
-    for (int i=0; i&lt;MAXN; i++) prime[i]=1;  //先把每个数都定义为质数
-    prime[0]=prime[1]=0;  
-    for (int i=2; i&lt;MAXN; i++)  
-    {  
-        if (!prime[i]) continue;  
-        for (int j=i*2; j&lt;MAXN; j+=i) prime[j] = 0;  //将i的倍数标记为合数
-    }  
-}</code></pre>]]></content>
+      
+      
+        <tags>
+            
+            <tag> 动态规划 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>线性筛</title>
+      <link href="/2020/01/04/%E7%BA%BF%E6%80%A7%E7%AD%9B/"/>
+      <url>/2020/01/04/%E7%BA%BF%E6%80%A7%E7%AD%9B/</url>
+      
+        <content type="html"><![CDATA[<p>埃氏筛中有重复，例如6,2与3都筛了一次，效率低<br>线性筛定理，（口语不准确）一个数i乘以小于等于它的最小素因数的素数所得到的合数之间没有重复</p><pre><code>#define N 10000int flag[N+1],prime[N+1],pnum;/*flag[n] 表示n是否是素数，1是素数，0不是prime   中是所有的素数按从小到大排列、pnum  表示素数的个数*/void CreatePrime(){    pnum=0;//初始化没有素数    //先将所有数看做素数，然后开始筛选    for(int i=0; i&lt;=N; i++){        flag[i]=1;    }    //遍历筛去所有最大因数是i的合数    for(int i=2; i&lt;=N; i++){        if(flag[i]==1){        //把素数记录下来            p[pnum++]=i;        }        //遍历已知素数表中比i的最小素因数小的素数，并筛去合数        for(int j=0; j&lt;pnum &amp;&amp; p[j]*i&lt;=N; j++){        //筛去合数            flag[p[j]*i]=0;            if(i%p[j]==0)            //找到i的最小素因数，找到了就终止                break;        }    }</code></pre><p>————————————————<br>版权声明：本文为CSDN博主「太上绝情」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a href="https://blog.csdn.net/bjrxyz/article/details/8125913" target="_blank" rel="noopener">https://blog.csdn.net/bjrxyz/article/details/8125913</a></p>]]></content>
+      
+      
       <categories>
-        <category>算法</category>
+          
+          <category> 算法 </category>
+          
       </categories>
-  </entry>
-  <entry>
-    <title>组合</title>
-    <url>/2020/01/03/%E7%BB%84%E5%90%88/</url>
-    <content><![CDATA[<p>本程序的思路是开一个数组，其下标表示1到n个数，数组元素的值为1表示其代表的数被选中，为0则没选中。</p>
-<p>首先初始化，将数组前n个元素置1，表示第一个组合为前n个数。</p>
-<p>然后从左到右扫描数组元素值的“10”组合，找到第一个“10”组合后将其变为“01”组合，同时将其左边的所有“1”全部移动到数组的最左端。</p>
-<p>当第一个“1”移动到数组的n-m的位置，即n个“1”全部移动到最右端时，就得到了最后一个组合。</p>
-<p>例如求5中选3的组合：</p>
-<p>1 1 1 0 0 //1,2,3</p>
-<p>1 1 0 1 0 //1,2,4</p>
-<p>1 0 1 1 0 //1,3,4</p>
-<p>0 1 1 1 0 //2,3,4</p>
-<p>1 1 0 0 1 //1,2,5</p>
-<p>1 0 1 0 1 //1,3,5</p>
-<p>0 1 1 0 1 //2,3,5</p>
-<p>1 0 0 1 1 //1,4,5</p>
-<p>0 1 0 1 1 //2,4,5</p>
-<p>0 0 1 1 1 //3,4,5<br>————————————————<br>版权声明：本文为CSDN博主「文如王勃三生慧」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a href="https://blog.csdn.net/hf19931101/article/details/79452799" target="_blank" rel="noopener">https://blog.csdn.net/hf19931101/article/details/79452799</a></p>
-]]></content>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>埃氏筛</title>
+      <link href="/2020/01/04/%E5%9F%83%E6%B0%8F%E7%AD%9B/"/>
+      <url>/2020/01/04/%E5%9F%83%E6%B0%8F%E7%AD%9B/</url>
+      
+        <content type="html"><![CDATA[<p>在筛质数时，我们会发现，筛去2后，2的倍数4、6、8等一定不是素数;筛去3后，3的倍数6、9、12等一定不是倍数。简单模拟这个过程如下</p><pre><code>const int MAXN = 1000000；  void Prime()  {      for (int i=0; i&lt;MAXN; i++) prime[i]=1;  //先把每个数都定义为质数    prime[0]=prime[1]=0;      for (int i=2; i&lt;MAXN; i++)      {          if (!prime[i]) continue;          for (int j=i*2; j&lt;MAXN; j+=i) prime[j] = 0;  //将i的倍数标记为合数    }  }</code></pre>]]></content>
+      
+      
       <categories>
-        <category>算法</category>
+          
+          <category> 算法 </category>
+          
       </categories>
-  </entry>
-  <entry>
-    <title>string大小写字母转换</title>
-    <url>/2020/01/01/%E2%80%9Dstring%E7%B1%BB%E5%AD%97%E7%AC%A6%E5%A4%A7%E5%B0%8F%E5%86%99%E8%BD%AC%E6%8D%A2%E2%80%9C/</url>
-    <content><![CDATA[<p>在algorithm库中有transform函数<br>transform(str.begin(),str.end(),str.begin(),::toupper)<br>注意transform有四个输入参数<br>1：str.begin()字符串的起始地址；<br>2：str.end()字符串的终止地址；<br>3：str.begin()是转换之后，输出到原str字符串的起始地址；<br>4：转换操作，可以选择toupper，tolower。</p>
-]]></content>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>组合</title>
+      <link href="/2020/01/03/%E7%BB%84%E5%90%88/"/>
+      <url>/2020/01/03/%E7%BB%84%E5%90%88/</url>
+      
+        <content type="html"><![CDATA[<p>本程序的思路是开一个数组，其下标表示1到n个数，数组元素的值为1表示其代表的数被选中，为0则没选中。</p><p>首先初始化，将数组前n个元素置1，表示第一个组合为前n个数。</p><p>然后从左到右扫描数组元素值的“10”组合，找到第一个“10”组合后将其变为“01”组合，同时将其左边的所有“1”全部移动到数组的最左端。</p><p>当第一个“1”移动到数组的n-m的位置，即n个“1”全部移动到最右端时，就得到了最后一个组合。</p><p>例如求5中选3的组合：</p><p>1 1 1 0 0 //1,2,3</p><p>1 1 0 1 0 //1,2,4</p><p>1 0 1 1 0 //1,3,4</p><p>0 1 1 1 0 //2,3,4</p><p>1 1 0 0 1 //1,2,5</p><p>1 0 1 0 1 //1,3,5</p><p>0 1 1 0 1 //2,3,5</p><p>1 0 0 1 1 //1,4,5</p><p>0 1 0 1 1 //2,4,5</p><p>0 0 1 1 1 //3,4,5<br>————————————————<br>版权声明：本文为CSDN博主「文如王勃三生慧」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a href="https://blog.csdn.net/hf19931101/article/details/79452799" target="_blank" rel="noopener">https://blog.csdn.net/hf19931101/article/details/79452799</a></p>]]></content>
+      
+      
       <categories>
-        <category>stl</category>
+          
+          <category> 算法 </category>
+          
       </categories>
-  </entry>
-  <entry>
-    <title>“凸包”</title>
-    <url>/2019/12/31/%E2%80%9C%E5%87%B8%E5%8C%85%E2%80%9D/</url>
-    <content><![CDATA[<p>凸包就是把平面中所有点都包进去的凸多边形，当然多边形上的点也是题目中给出的点</p>
-<p>分治法<br>  1 首先，横坐标最小p1和最大pn的点一定是凸包上的点<br>  2上包，即离p1pn最远的点，记pmax<br>  3再把pmax与p1连接，求左侧的上包，重复上述过程即可求解<img src="/images/20150530094927274" alt=""></p>
-]]></content>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>string大小写字母转换</title>
+      <link href="/2020/01/01/%E2%80%9Dstring%E7%B1%BB%E5%AD%97%E7%AC%A6%E5%A4%A7%E5%B0%8F%E5%86%99%E8%BD%AC%E6%8D%A2%E2%80%9C/"/>
+      <url>/2020/01/01/%E2%80%9Dstring%E7%B1%BB%E5%AD%97%E7%AC%A6%E5%A4%A7%E5%B0%8F%E5%86%99%E8%BD%AC%E6%8D%A2%E2%80%9C/</url>
+      
+        <content type="html"><![CDATA[<p>在algorithm库中有transform函数<br>transform(str.begin(),str.end(),str.begin(),::toupper)<br>注意transform有四个输入参数<br>1：str.begin()字符串的起始地址；<br>2：str.end()字符串的终止地址；<br>3：str.begin()是转换之后，输出到原str字符串的起始地址；<br>4：转换操作，可以选择toupper，tolower。</p>]]></content>
+      
+      
       <categories>
-        <category>算法</category>
+          
+          <category> stl </category>
+          
       </categories>
-  </entry>
-  <entry>
-    <title>神奇的逗号运算符</title>
-    <url>/2019/12/05/%E7%A5%9E%E5%A5%87%E7%9A%84%E9%80%97%E5%8F%B7%E8%BF%90%E7%AE%97%E7%AC%A6/</url>
-    <content><![CDATA[<p>   cout&lt;&lt;(a,c),此时只会输出c的内容，但是a中的内容也会被计算，例如a=5,b=6,c=7  cout&lt;&lt;(（d=a+b),c) 输出为7，d=11</p>
-]]></content>
-  </entry>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>“凸包”</title>
+      <link href="/2019/12/31/%E2%80%9C%E5%87%B8%E5%8C%85%E2%80%9D/"/>
+      <url>/2019/12/31/%E2%80%9C%E5%87%B8%E5%8C%85%E2%80%9D/</url>
+      
+        <content type="html"><![CDATA[<p>凸包就是把平面中所有点都包进去的凸多边形，当然多边形上的点也是题目中给出的点</p><p>分治法<br>  1 首先，横坐标最小p1和最大pn的点一定是凸包上的点<br>  2上包，即离p1pn最远的点，记pmax<br>  3再把pmax与p1连接，求左侧的上包，重复上述过程即可求解<img src="/images/20150530094927274" alt=""></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 算法 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>神奇的逗号运算符</title>
+      <link href="/2019/12/05/%E7%A5%9E%E5%A5%87%E7%9A%84%E9%80%97%E5%8F%B7%E8%BF%90%E7%AE%97%E7%AC%A6/"/>
+      <url>/2019/12/05/%E7%A5%9E%E5%A5%87%E7%9A%84%E9%80%97%E5%8F%B7%E8%BF%90%E7%AE%97%E7%AC%A6/</url>
+      
+        <content type="html"><![CDATA[<p>   cout&lt;&lt;(a,c),此时只会输出c的内容，但是a中的内容也会被计算，例如a=5,b=6,c=7  cout&lt;&lt;(（d=a+b),c) 输出为7，d=11</p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+  
+  
 </search>

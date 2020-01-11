@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://xinhecuican.github.io/"/>
-  <updated>2020-01-11T07:02:19.510Z</updated>
+  <updated>2020-01-11T08:18:01.763Z</updated>
   <id>http://xinhecuican.github.io/</id>
   
   <author>
@@ -17,19 +17,44 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>set</title>
-    <link href="http://xinhecuican.github.io/2020/01/11/set/"/>
-    <id>http://xinhecuican.github.io/2020/01/11/set/</id>
-    <published>2020-01-11T06:53:00.000Z</published>
-    <updated>2020-01-11T07:02:19.510Z</updated>
+    <title>prioity_queue</title>
+    <link href="http://xinhecuican.github.io/2020/01/11/prioity-queue/"/>
+    <id>http://xinhecuican.github.io/2020/01/11/prioity-queue/</id>
+    <published>2020-01-11T08:13:00.000Z</published>
+    <updated>2020-01-11T08:18:01.763Z</updated>
     
-    <content type="html"><![CDATA[<h3 id="set之iterator"><a href="#set之iterator" class="headerlink" title="set之iterator"></a>set之iterator</h3><p>定义：set<int>::iterator iter</p><p>  运用：*iter</p><p>  遍历 for(iter=set.begin();iter!=set.end();iter++)</p><h4 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h4><p>  iterator只能用++，–运算符。不能*（iter-1），另外还要注意iter++后自身会改变</p><p>  例：set中有0,2,4，iter指向2，现在<code>cout&lt;&lt;*iter&lt;&lt;&quot; &quot;&lt;&lt;*(iter--)&lt;&lt;endl;</code></p><p>  输出0,2，先执行iter–，我也不知道为什么</p>]]></content>
+    <content type="html"><![CDATA[<h3 id="prioity-queue"><a href="#prioity-queue" class="headerlink" title="prioity_queue"></a>prioity_queue</h3><p>实际上是一个大顶堆，定义在<code>&lt;queue&gt;</code>中</p><p><code>prioity_queue&lt;int&gt; qu</code>为大顶堆</p><p><code>priority_queue&lt;int,vector&lt;int&gt;,greater&lt;int&gt; &gt; qu;</code>为小顶堆</p><p>.push()</p><p>.pop()取出元素，但不返回值</p><p>.top()不取出元素，返回值</p>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;h3 id=&quot;set之iterator&quot;&gt;&lt;a href=&quot;#set之iterator&quot; class=&quot;headerlink&quot; title=&quot;set之iterator&quot;&gt;&lt;/a&gt;set之iterator&lt;/h3&gt;&lt;p&gt;定义：set&lt;int&gt;::iterator iter&lt;/p&gt;
+        &lt;h3 id=&quot;prioity-queue&quot;&gt;&lt;a href=&quot;#prioity-queue&quot; class=&quot;headerlink&quot; title=&quot;prioity_queue&quot;&gt;&lt;/a&gt;prioity_queue&lt;/h3&gt;&lt;p&gt;实际上是一个大顶堆，定义在&lt;code&gt;&amp;lt;que
+      
+    
+    </summary>
+    
+    
+      <category term="stl" scheme="http://xinhecuican.github.io/categories/stl/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>set</title>
+    <link href="http://xinhecuican.github.io/2020/01/11/set/"/>
+    <id>http://xinhecuican.github.io/2020/01/11/set/</id>
+    <published>2020-01-11T08:08:00.000Z</published>
+    <updated>2020-01-11T08:18:06.452Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="set之iterator"><a href="#set之iterator" class="headerlink" title="set之iterator"></a>set之iterator</h3><p>定义：set::iterator iter</p><p>运用：*iter</p><p>遍历 for(iter=set.begin();iter!=set.end();iter++)</p><p><strong>注意</strong><br>iterator只能用++，–运算符。不能*（iter-1），另外还要注意iter++后自身会改变</p><p>例：set中有0,2,4，iter指向2，现在cout&lt;&lt;<em>iter&lt;&lt;” “&lt;&lt;</em>(iter–)&lt;&lt;endl;</p><p>输出0,2，先执行iter–，我也不知道为什么</p><h3 id="set之lower-bound"><a href="#set之lower-bound" class="headerlink" title="set之lower_bound()"></a>set之lower_bound()</h3><p>lower_bound()返回从first开始的第一个大于或等于val的元素的地址。如果所有元素都小于val，则返回last的地址，所以必须要</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt;::iterator iter;</span><br><span class="line">iter=st.lower_bound(一个数字)</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;set之iterator&quot;&gt;&lt;a href=&quot;#set之iterator&quot; class=&quot;headerlink&quot; title=&quot;set之iterator&quot;&gt;&lt;/a&gt;set之iterator&lt;/h3&gt;&lt;p&gt;定义：set::iterator iter&lt;/p&gt;
+&lt;p&gt;运
       
     
     </summary>
