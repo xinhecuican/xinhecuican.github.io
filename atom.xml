@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://xinhecuican.github.io/"/>
-  <updated>2020-01-11T10:39:01.783Z</updated>
+  <updated>2020-01-11T10:54:16.063Z</updated>
   <id>http://xinhecuican.github.io/</id>
   
   <author>
@@ -15,6 +15,81 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>memset</title>
+    <link href="http://xinhecuican.github.io/2020/01/11/memset/"/>
+    <id>http://xinhecuican.github.io/2020/01/11/memset/</id>
+    <published>2020-01-11T10:52:00.000Z</published>
+    <updated>2020-01-11T10:54:16.063Z</updated>
+    
+    <content type="html"><![CDATA[<p>memset(标识符，填充数据,大小)</p><p>memset是一个字节一个字节填充的，所以一般只能填充0或-1因为这个一个字节和四个字节相同</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;memset(标识符，填充数据,大小)&lt;/p&gt;
+&lt;p&gt;memset是一个字节一个字节填充的，所以一般只能填充0或-1因为这个一个字节和四个字节相同&lt;/p&gt;
+
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>快速输入</title>
+    <link href="http://xinhecuican.github.io/2020/01/11/%E5%BF%AB%E9%80%9F%E8%BE%93%E5%85%A5/"/>
+    <id>http://xinhecuican.github.io/2020/01/11/%E5%BF%AB%E9%80%9F%E8%BE%93%E5%85%A5/</id>
+    <published>2020-01-11T10:47:00.000Z</published>
+    <updated>2020-01-11T10:51:31.455Z</updated>
+    
+    <content type="html"><![CDATA[<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">inline int read()</span><br><span class="line">&#123;</span><br><span class="line">    int <span class="attribute">x</span>=0,f=1;</span><br><span class="line">    char <span class="attribute">ch</span>=getchar();</span><br><span class="line">    <span class="keyword">while</span> (ch&lt;<span class="string">'0'</span>||ch&gt;<span class="string">'9'</span>)&#123;<span class="keyword">if</span> (<span class="attribute">ch</span>=='-') <span class="attribute">f</span>=-1;ch=getchar();&#125;</span><br><span class="line">    <span class="keyword">while</span> (ch&gt;=<span class="string">'0'</span>&amp;&amp;ch&lt;=<span class="string">'9'</span>)&#123;<span class="attribute">x</span>=x*10+ch-'0';ch=getchar();&#125;</span><br><span class="line">    return x<span class="number">*f</span>;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>这个快速输入只适合int类型，另外如果参加比赛，最好不要用cin，cout，速度较慢<br>用scanf，printf更好</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;figure class=&quot;highlight routeros&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span cl
+      
+    
+    </summary>
+    
+    
+      <category term="算法" scheme="http://xinhecuican.github.io/categories/%E7%AE%97%E6%B3%95/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>qsort</title>
+    <link href="http://xinhecuican.github.io/2020/01/11/qsort/"/>
+    <id>http://xinhecuican.github.io/2020/01/11/qsort/</id>
+    <published>2020-01-11T10:46:00.000Z</published>
+    <updated>2020-01-11T10:47:30.678Z</updated>
+    
+    <content type="html"><![CDATA[<p>自带的快排函数</p><p>qsortvoid qsort(void <em>base, size_t nitems, size_t size, int (*compar)(const void *, const void</em>))</p><p>参数</p><p>base– 指向要排序的数组的第一个元素的指针。<br>nitems– 由 base 指向的数组中元素的个数。<br>size– 数组中每个元素的大小，以字节为单位。<br>compar– 用来比较两个元素的函数，即函数指针（回调函数）</p><p>回调函数：</p><p>回调函数就是一个通过函数指针调用的函数。如果把函数的指针（地址）作为参数传递给另一个函数，当这个指针被用来调用其所指向的函数时，就说这是回调函数。 [2]<br>compar参数<br>compar参数指向一个比较两个元素的函数。比较函数的原型应该像下面这样。注意两个形参必须是const void *型，同时在调用compar 函数（compar实质为函数指针，这里称它所指向的函数也为compar）时，传入的实参也必须转换成const void *型。在compar函数内部会将const void *型转换成实际类型。<br>int compar(const void *p1, const void *p2);</p><p>如果compar返回值小于0（&lt; 0），那么p1所指向元素会被排在p2所指向元素的左面；<br>　　如果compar返回值等于0（= 0），那么p1所指向元素与p2所指向元素的顺序不确定；<br>　　如果compar返回值大于0（&gt; 0），那么p1所指向元素会被排在p2所指向元素的右面。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;自带的快排函数&lt;/p&gt;
+&lt;p&gt;qsortvoid qsort(void &lt;em&gt;base, size_t nitems, size_t size, int (*compar)(const void *, const void&lt;/em&gt;))&lt;/p&gt;
+&lt;p&gt;参数&lt;/p&gt;
+&lt;p&gt;
+      
+    
+    </summary>
+    
+    
+      <category term="stl" scheme="http://xinhecuican.github.io/categories/stl/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>pair</title>
@@ -445,78 +520,6 @@ void Prime()
     
     
       <category term="算法" scheme="http://xinhecuican.github.io/categories/%E7%AE%97%E6%B3%95/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>string大小写字母转换</title>
-    <link href="http://xinhecuican.github.io/2020/01/01/%E2%80%9Dstring%E7%B1%BB%E5%AD%97%E7%AC%A6%E5%A4%A7%E5%B0%8F%E5%86%99%E8%BD%AC%E6%8D%A2%E2%80%9C/"/>
-    <id>http://xinhecuican.github.io/2020/01/01/%E2%80%9Dstring%E7%B1%BB%E5%AD%97%E7%AC%A6%E5%A4%A7%E5%B0%8F%E5%86%99%E8%BD%AC%E6%8D%A2%E2%80%9C/</id>
-    <published>2020-01-01T08:42:00.000Z</published>
-    <updated>2020-01-07T11:10:32.667Z</updated>
-    
-    <content type="html"><![CDATA[<p>在algorithm库中有transform函数<br>transform(str.begin(),str.end(),str.begin(),::toupper)<br>注意transform有四个输入参数<br>1：str.begin()字符串的起始地址；<br>2：str.end()字符串的终止地址；<br>3：str.begin()是转换之后，输出到原str字符串的起始地址；<br>4：转换操作，可以选择toupper，tolower。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;在algorithm库中有transform函数&lt;br&gt;transform(str.begin(),str.end(),str.begin(),::toupper)&lt;br&gt;注意transform有四个输入参数&lt;br&gt;1：str.begin()字符串的起始地址；&lt;br&gt;2：s
-      
-    
-    </summary>
-    
-    
-      <category term="stl" scheme="http://xinhecuican.github.io/categories/stl/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>“凸包”</title>
-    <link href="http://xinhecuican.github.io/2019/12/31/%E2%80%9C%E5%87%B8%E5%8C%85%E2%80%9D/"/>
-    <id>http://xinhecuican.github.io/2019/12/31/%E2%80%9C%E5%87%B8%E5%8C%85%E2%80%9D/</id>
-    <published>2019-12-31T02:50:00.000Z</published>
-    <updated>2020-01-07T11:10:44.446Z</updated>
-    
-    <content type="html"><![CDATA[<p>凸包就是把平面中所有点都包进去的凸多边形，当然多边形上的点也是题目中给出的点</p><p>分治法<br>  1 首先，横坐标最小p1和最大pn的点一定是凸包上的点<br>  2上包，即离p1pn最远的点，记pmax<br>  3再把pmax与p1连接，求左侧的上包，重复上述过程即可求解<img src="/images/20150530094927274" alt=""></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;凸包就是把平面中所有点都包进去的凸多边形，当然多边形上的点也是题目中给出的点&lt;/p&gt;
-&lt;p&gt;分治法&lt;br&gt;  1 首先，横坐标最小p1和最大pn的点一定是凸包上的点&lt;br&gt;  2上包，即离p1pn最远的点，记pmax&lt;br&gt;  3再把pmax与p1连接，求左侧的上包，重复上
-      
-    
-    </summary>
-    
-    
-      <category term="算法" scheme="http://xinhecuican.github.io/categories/%E7%AE%97%E6%B3%95/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>神奇的逗号运算符</title>
-    <link href="http://xinhecuican.github.io/2019/12/05/%E7%A5%9E%E5%A5%87%E7%9A%84%E9%80%97%E5%8F%B7%E8%BF%90%E7%AE%97%E7%AC%A6/"/>
-    <id>http://xinhecuican.github.io/2019/12/05/%E7%A5%9E%E5%A5%87%E7%9A%84%E9%80%97%E5%8F%B7%E8%BF%90%E7%AE%97%E7%AC%A6/</id>
-    <published>2019-12-05T04:40:00.000Z</published>
-    <updated>2020-01-07T11:10:51.763Z</updated>
-    
-    <content type="html"><![CDATA[<p>   cout&lt;&lt;(a,c),此时只会输出c的内容，但是a中的内容也会被计算，例如a=5,b=6,c=7  cout&lt;&lt;(（d=a+b),c) 输出为7，d=11</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;   cout&amp;lt;&amp;lt;(a,c),此时只会输出c的内容，但是a中的内容也会被计算，例如a=5,b=6,c=7  cout&amp;lt;&amp;lt;(（d=a+b),c) 输出为7，d=11&lt;/p&gt;
-
-      
-    
-    </summary>
-    
     
     
   </entry>

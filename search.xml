@@ -4,6 +4,57 @@
   
     
     <entry>
+      <title>memset</title>
+      <link href="/2020/01/11/memset/"/>
+      <url>/2020/01/11/memset/</url>
+      
+        <content type="html"><![CDATA[<p>memset(标识符，填充数据,大小)</p><p>memset是一个字节一个字节填充的，所以一般只能填充0或-1因为这个一个字节和四个字节相同</p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>快速输入</title>
+      <link href="/2020/01/11/%E5%BF%AB%E9%80%9F%E8%BE%93%E5%85%A5/"/>
+      <url>/2020/01/11/%E5%BF%AB%E9%80%9F%E8%BE%93%E5%85%A5/</url>
+      
+        <content type="html"><![CDATA[<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">inline int read()</span><br><span class="line">&#123;</span><br><span class="line">    int <span class="attribute">x</span>=0,f=1;</span><br><span class="line">    char <span class="attribute">ch</span>=getchar();</span><br><span class="line">    <span class="keyword">while</span> (ch&lt;<span class="string">'0'</span>||ch&gt;<span class="string">'9'</span>)&#123;<span class="keyword">if</span> (<span class="attribute">ch</span>=='-') <span class="attribute">f</span>=-1;ch=getchar();&#125;</span><br><span class="line">    <span class="keyword">while</span> (ch&gt;=<span class="string">'0'</span>&amp;&amp;ch&lt;=<span class="string">'9'</span>)&#123;<span class="attribute">x</span>=x*10+ch-'0';ch=getchar();&#125;</span><br><span class="line">    return x<span class="number">*f</span>;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>这个快速输入只适合int类型，另外如果参加比赛，最好不要用cin，cout，速度较慢<br>用scanf，printf更好</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 算法 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>qsort</title>
+      <link href="/2020/01/11/qsort/"/>
+      <url>/2020/01/11/qsort/</url>
+      
+        <content type="html"><![CDATA[<p>自带的快排函数</p><p>qsortvoid qsort(void <em>base, size_t nitems, size_t size, int (*compar)(const void *, const void</em>))</p><p>参数</p><p>base– 指向要排序的数组的第一个元素的指针。<br>nitems– 由 base 指向的数组中元素的个数。<br>size– 数组中每个元素的大小，以字节为单位。<br>compar– 用来比较两个元素的函数，即函数指针（回调函数）</p><p>回调函数：</p><p>回调函数就是一个通过函数指针调用的函数。如果把函数的指针（地址）作为参数传递给另一个函数，当这个指针被用来调用其所指向的函数时，就说这是回调函数。 [2]<br>compar参数<br>compar参数指向一个比较两个元素的函数。比较函数的原型应该像下面这样。注意两个形参必须是const void *型，同时在调用compar 函数（compar实质为函数指针，这里称它所指向的函数也为compar）时，传入的实参也必须转换成const void *型。在compar函数内部会将const void *型转换成实际类型。<br>int compar(const void *p1, const void *p2);</p><p>如果compar返回值小于0（&lt; 0），那么p1所指向元素会被排在p2所指向元素的左面；<br>　　如果compar返回值等于0（= 0），那么p1所指向元素与p2所指向元素的顺序不确定；<br>　　如果compar返回值大于0（&gt; 0），那么p1所指向元素会被排在p2所指向元素的右面。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> stl </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>pair</title>
       <link href="/2020/01/11/pair/"/>
       <url>/2020/01/11/pair/</url>
