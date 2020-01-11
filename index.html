@@ -1428,8 +1428,8 @@ priority_queue&lt;int,vector&lt;int&gt;,greater&lt;int&gt; &gt; qu;为小顶堆
           set之iterator定义：set::iterator iter
 运用：*iter
 遍历 for(iter=set.begin();iter!=set.end();iter++)
-注意iterator只能用++，–运算符。不能*（iter-1），另外还要注意iter++后自身会改变
-例：set中有
+还可以直接用auto it=set.begin() (auto是自动匹配类型)
+注意iterator只能用++，–运算
           ...
           <!--noindex-->
           <div class="post-button text-center">

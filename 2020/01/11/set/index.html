@@ -81,14 +81,14 @@
 
 
 
-<meta name="description" content="set之iterator定义：set::iterator iter 运用：*iter 遍历 for(iter&#x3D;set.begin();iter!&#x3D;set.end();iter++) 注意iterator只能用++，–运算符。不能*（iter-1），另外还要注意iter++后自身会改变 例：set中有0,2,4，iter指向2，现在cout&lt;&lt;iter&lt;&lt;” “&lt;&amp;lt">
+<meta name="description" content="set之iterator定义：set::iterator iter 运用：*iter 遍历 for(iter&#x3D;set.begin();iter!&#x3D;set.end();iter++) 还可以直接用auto it&#x3D;set.begin() (auto是自动匹配类型) 注意iterator只能用++，–运算符。不能*（iter-1），另外还要注意iter++后自身会改变 例：set中有0,2,4，iter">
 <meta property="og:type" content="article">
 <meta property="og:title" content="set">
 <meta property="og:url" content="http://xinhecuican.github.io/2020/01/11/set/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="set之iterator定义：set::iterator iter 运用：*iter 遍历 for(iter&#x3D;set.begin();iter!&#x3D;set.end();iter++) 注意iterator只能用++，–运算符。不能*（iter-1），另外还要注意iter++后自身会改变 例：set中有0,2,4，iter指向2，现在cout&lt;&lt;iter&lt;&lt;” “&lt;&amp;lt">
+<meta property="og:description" content="set之iterator定义：set::iterator iter 运用：*iter 遍历 for(iter&#x3D;set.begin();iter!&#x3D;set.end();iter++) 还可以直接用auto it&#x3D;set.begin() (auto是自动匹配类型) 注意iterator只能用++，–运算符。不能*（iter-1），另外还要注意iter++后自身会改变 例：set中有0,2,4，iter">
 <meta property="article:published_time" content="2020-01-11T08:08:00.000Z">
-<meta property="article:modified_time" content="2020-01-11T10:43:35.252Z">
+<meta property="article:modified_time" content="2020-01-11T11:03:35.064Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 
@@ -390,6 +390,7 @@
         <h3 id="set之iterator"><a href="#set之iterator" class="headerlink" title="set之iterator"></a>set之iterator</h3><p>定义：set::iterator iter</p>
 <p>运用：*iter</p>
 <p>遍历 for(iter=set.begin();iter!=set.end();iter++)</p>
+<p>还可以直接用auto it=set.begin() (auto是自动匹配类型)</p>
 <p><strong>注意</strong><br>iterator只能用++，–运算符。不能*（iter-1），另外还要注意iter++后自身会改变</p>
 <p>例：set中有0,2,4，iter指向2，现在cout&lt;&lt;<em>iter&lt;&lt;” “&lt;&lt;</em>(iter–)&lt;&lt;endl;</p>
 <p>输出0,2，先执行iter–，我也不知道为什么</p>
@@ -419,9 +420,6 @@
 <p>当set中没有元素的时候，*s.end()=0</p>
 <p>insert(某一个值),将一个值插入set中，<strong>注意</strong>这是唯一的将元素弄到set中的方法，并且重复插入无效</p>
 <h6 id="判断insert插入是否成功的方法（具体可看"><a href="#判断insert插入是否成功的方法（具体可看" class="headerlink" title="判断insert插入是否成功的方法（具体可看)"></a>判断insert插入是否成功的方法（<a href="https://blog.csdn.net/liyuqian199695/article/details/49100543" target="_blank" rel="noopener">具体可看</a>)</h6><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//typedef pair&lt;iterator, bool&gt; _Pairib;</span></span><br><span class="line">	pair&lt;<span class="built_in">set</span>&lt;Student,FuncStudent&gt;::iterator,<span class="keyword">bool</span>&gt; pair1=set1.insert(s1);</span><br><span class="line">	<span class="keyword">if</span>(pair1.second==<span class="literal">true</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cout</span>&lt;&lt;<span class="string">"插入s1成功"</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cout</span>&lt;&lt;<span class="string">"插入s1失败"</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-
-
-
       
     </div>
     
