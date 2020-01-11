@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title>vector</title>
+      <link href="/2020/01/11/vector/"/>
+      <url>/2020/01/11/vector/</url>
+      
+        <content type="html"><![CDATA[<h3 id="vector的定义"><a href="#vector的定义" class="headerlink" title="vector的定义"></a>vector的定义</h3><p>vector&lt;数据类型&gt; 标识符</p><h3 id="vector的函数"><a href="#vector的函数" class="headerlink" title="vector的函数"></a>vector的函数</h3><p>begin()返回开头元素的迭代器</p><p>end()同理</p><p>front() 返回开头元素的引用</p><p>back() 返回末尾元素的引用</p><p>size()返回vector内元素的数量</p><p>erase(迭代器) 删除一个元素</p><p>clear() 清空</p><p>insert(迭代器，a) 把a插入迭代器后</p><p><strong>例</strong>vector中现在有1 2 3 三个元素，vec.insert(vec.begin()+2,4)得到1 2 4 3</p><h3 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h3><p>reverse(vec.begin(),vec.end()) <strong>(头文件<code>&lt;algorithm&gt;</code>)</strong></p><p>实际上不一定是begin到end，也可以begin()+1到、、、，只需要用迭代器就行了<p>sort排序，也要用<code>&lt;algorithm&gt;</code>默认升序</p><figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">bool</span> <span class="constructor">Comp(<span class="params">const</span> <span class="params">int</span> &amp;<span class="params">a</span>,<span class="params">const</span> <span class="params">int</span> &amp;<span class="params">b</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    return a&gt;b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>调用时:sort(vec.begin(),vec.end(),Comp)，这样就降序排序。</p><h3 id="二维数组"><a href="#二维数组" class="headerlink" title="二维数组"></a>二维数组</h3><pre><code>vector&lt;vector&lt;数据类型&gt; &gt; vec[3];//3行vector&lt;数据类型&gt; veci;for(int i=0;i&lt;3;i++){   for(int k=0;k&lt;4;k++)   {      veci.push_back();   }   vec.push_back(veci);}//四列</code></pre>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>prioity_queue</title>
       <link href="/2020/01/11/prioity-queue/"/>
       <url>/2020/01/11/prioity-queue/</url>
