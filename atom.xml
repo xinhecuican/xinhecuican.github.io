@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://xinhecuican.github.io/"/>
-  <updated>2020-01-11T09:49:59.907Z</updated>
+  <updated>2020-01-11T10:39:01.783Z</updated>
   <id>http://xinhecuican.github.io/</id>
   
   <author>
@@ -15,6 +15,58 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>pair</title>
+    <link href="http://xinhecuican.github.io/2020/01/11/pair/"/>
+    <id>http://xinhecuican.github.io/2020/01/11/pair/</id>
+    <published>2020-01-11T10:28:00.000Z</published>
+    <updated>2020-01-11T10:39:01.783Z</updated>
+    
+    <content type="html"><![CDATA[<p>pair实际上是一个结构体，它可以把两种类型结合起来使用,定义在<code>&lt;utility&gt;</code>中</p><p>定义：pair&lt;类型A,类型B&gt; 标识符</p><p>操作 pa.first 表示类型A pa.second 表示类型B</p><p>注意不能用-> 操作符，虽然我也不知道为什么]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;pair实际上是一个结构体，它可以把两种类型结合起来使用,定义在&lt;code&gt;&amp;lt;utility&amp;gt;&lt;/code&gt;中&lt;/p&gt;
+&lt;p&gt;定义：pair&amp;lt;类型A,类型B&amp;gt; 标识符&lt;/p&gt;
+&lt;p&gt;操作 pa.first 表示类型A pa.second 表示类型B&lt;
+      
+    
+    </summary>
+    
+    
+      <category term="stl" scheme="http://xinhecuican.github.io/categories/stl/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>迭代器支持的运算</title>
+    <link href="http://xinhecuican.github.io/2020/01/11/%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%94%AF%E6%8C%81%E7%9A%84%E8%BF%90%E7%AE%97/"/>
+    <id>http://xinhecuican.github.io/2020/01/11/%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%94%AF%E6%8C%81%E7%9A%84%E8%BF%90%E7%AE%97/</id>
+    <published>2020-01-11T10:12:00.000Z</published>
+    <updated>2020-01-11T10:13:03.292Z</updated>
+    
+    <content type="html"><![CDATA[<p>之前写搜狗在线测试题目的时候，曾经想遍历一个set遍历。当时是这样写的。</p><p>set<int>::iterator b = a.begin()+1</p><p>后来发现程序报错。究其原因是，set迭代器不支持加减数操作。<br>查看了一下维基百科，下面是有关说明。</p><p>1.所有迭代器都应该实现自增算符：iter++,++iter</p><p>2.Bidirectional迭代器：是在前向迭代器的基础上，多了单步向后遍历的能力。也就是–iter,iter–。</p><p>3.Random Access迭代器：在双向迭代器基础上，具有直接访问各数据元素的能力。随机迭代器增加了“迭代器算术运算”：</p><p>iter+=i 迭代器递增i位</p><p>iter-=i 迭代器递减i位</p><p>iter+i 加i位后的迭代器</p><p>iter-i 减i位后的迭代器</p><p>iter[i] 加i位后的迭代器的解引用</p><p>iter&lt;iter1 如果迭代器iter的位置在iter1前，返回true，否则返回false</p><p>iter&lt;=iter1 如果iter的位置在iter1的前面或同一位置时返回true，否则返回false</p><p>iter&gt;iter1 如果迭代器iter的位置在iter1后，返回true，否则返回false</p><p>iter&gt;=iter1 如果iter的位置在iter1的后面或同一位置时返回true，否则返回false</p><p>4.在STL定义的容器中，string，vector与deque提供了随机访问迭代器，list、set、multiset、map、multimap提供了双向迭代器。</p><p>————————————————</p><p>版权声明：本文为CSDN博主「ShenYounger」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a href="https://blog.csdn.net/wusecaiyun/article/details/49563197" target="_blank" rel="noopener">https://blog.csdn.net/wusecaiyun/article/details/49563197</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;之前写搜狗在线测试题目的时候，曾经想遍历一个set遍历。当时是这样写的。&lt;/p&gt;
+&lt;p&gt;set&lt;int&gt;::iterator b = a.begin()+1&lt;/p&gt;
+&lt;p&gt;后来发现程序报错。究其原因是，set迭代器不支持加减数操作。&lt;br&gt;查看了一下维基百科，下面是有关说明
+      
+    
+    </summary>
+    
+    
+      <category term="stl" scheme="http://xinhecuican.github.io/categories/stl/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>vector</title>
@@ -68,9 +120,9 @@
     <link href="http://xinhecuican.github.io/2020/01/11/set/"/>
     <id>http://xinhecuican.github.io/2020/01/11/set/</id>
     <published>2020-01-11T08:08:00.000Z</published>
-    <updated>2020-01-11T08:18:06.452Z</updated>
+    <updated>2020-01-11T10:43:35.252Z</updated>
     
-    <content type="html"><![CDATA[<h3 id="set之iterator"><a href="#set之iterator" class="headerlink" title="set之iterator"></a>set之iterator</h3><p>定义：set::iterator iter</p><p>运用：*iter</p><p>遍历 for(iter=set.begin();iter!=set.end();iter++)</p><p><strong>注意</strong><br>iterator只能用++，–运算符。不能*（iter-1），另外还要注意iter++后自身会改变</p><p>例：set中有0,2,4，iter指向2，现在cout&lt;&lt;<em>iter&lt;&lt;” “&lt;&lt;</em>(iter–)&lt;&lt;endl;</p><p>输出0,2，先执行iter–，我也不知道为什么</p><h3 id="set之lower-bound"><a href="#set之lower-bound" class="headerlink" title="set之lower_bound()"></a>set之lower_bound()</h3><p>lower_bound()返回从first开始的第一个大于或等于val的元素的地址。如果所有元素都小于val，则返回last的地址，所以必须要</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt;::iterator iter;</span><br><span class="line">iter=st.lower_bound(一个数字)</span><br></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<h3 id="set之iterator"><a href="#set之iterator" class="headerlink" title="set之iterator"></a>set之iterator</h3><p>定义：set::iterator iter</p><p>运用：*iter</p><p>遍历 for(iter=set.begin();iter!=set.end();iter++)</p><p><strong>注意</strong><br>iterator只能用++，–运算符。不能*（iter-1），另外还要注意iter++后自身会改变</p><p>例：set中有0,2,4，iter指向2，现在cout&lt;&lt;<em>iter&lt;&lt;” “&lt;&lt;</em>(iter–)&lt;&lt;endl;</p><p>输出0,2，先执行iter–，我也不知道为什么</p><h3 id="set之lower-bound"><a href="#set之lower-bound" class="headerlink" title="set之lower_bound()"></a>set之lower_bound()</h3><p>lower_bound()返回从first开始的第一个大于或等于val的元素的地址。如果所有元素都小于val，则返回last的地址，所以必须要</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt;::iterator iter;</span><br><span class="line">iter=st.lower_bound(一个数字)</span><br></pre></td></tr></table></figure><p>upper_bound()返回最后一个大于等于val的元素的地址</p><h3 id="set基础"><a href="#set基础" class="headerlink" title="set基础"></a>set基础</h3><p>定义：set&lt;数据类型&gt; 标识符 ，set中元素都唯一</p><p>set实际上运用了红黑树。另外，set中元素会自动排序</p><h4 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h4><p>begin()，返回的是开头元素迭代器</p><p>end()</p><p>clear()</p><p>empty()</p><p>size()</p><h4 id="进阶"><a href="#进阶" class="headerlink" title="进阶"></a>进阶</h4><p> count(数据)判断某个值是否在set中</p><ul><li><p>erase(iterator) 删去迭代器所指向的值</p></li><li><p>erase(iteratora,iteratorb)删去a，b之间的值</p></li><li><p>erase(数据)删去该数据</p></li><li><p>set删除是不会检查任何错误的，使用时小心</p></li></ul><p>find(数据)返回指定元素的迭代器，没有则返回最后一个元素的迭代器</p><p>当set中没有元素的时候，*s.end()=0</p><p>insert(某一个值),将一个值插入set中，<strong>注意</strong>这是唯一的将元素弄到set中的方法，并且重复插入无效</p><h6 id="判断insert插入是否成功的方法（具体可看"><a href="#判断insert插入是否成功的方法（具体可看" class="headerlink" title="判断insert插入是否成功的方法（具体可看)"></a>判断insert插入是否成功的方法（<a href="https://blog.csdn.net/liyuqian199695/article/details/49100543" target="_blank" rel="noopener">具体可看</a>)</h6><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//typedef pair&lt;iterator, bool&gt; _Pairib;</span></span><br><span class="line">pair&lt;<span class="built_in">set</span>&lt;Student,FuncStudent&gt;::iterator,<span class="keyword">bool</span>&gt; pair1=set1.insert(s1);</span><br><span class="line"><span class="keyword">if</span>(pair1.second==<span class="literal">true</span>)</span><br><span class="line">&#123;</span><br><span class="line"><span class="built_in">cout</span>&lt;&lt;<span class="string">"插入s1成功"</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="built_in">cout</span>&lt;&lt;<span class="string">"插入s1失败"</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
     
     <summary type="html">
     
