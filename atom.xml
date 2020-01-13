@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://xinhecuican.github.io/"/>
-  <updated>2020-01-13T02:08:35.898Z</updated>
+  <updated>2020-01-13T06:59:00.695Z</updated>
   <id>http://xinhecuican.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>归并排序</title>
+    <link href="http://xinhecuican.github.io/2020/01/13/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/"/>
+    <id>http://xinhecuican.github.io/2020/01/13/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/</id>
+    <published>2020-01-13T06:31:00.000Z</published>
+    <updated>2020-01-13T06:59:00.695Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h4><p>归并排序运用了分治的思想，先将数组二分成一个元素（一个元素时看为有序），然后将这些元素不断合并，每合并一次排一次序，最后就可以得到有序的数组。</p><p>比如说一个序列:12 ,23,1,44,233,10,9,8。我们先分成两段：12 ,23,1,44 和 233,10,9,8，<br>发现还能再分成4段：12 ,23 和 1,44——233,10 和 9,8。<br>再分成8段：12–23–1–44 和233–10–9–8。<br>这时候开始把子序列进行排序合并，一个元素就是有序的。所以不用排序。<br>合并成2个一组排序得到：12，23—-1，44—10，233—8，9。<br>再合并成4个一组排序得到：1，12，23，44—8，9，10，233。<br>最后合并得到最终结果：1，8，9，10，12，23，44，233。</p><p>合并过程看代码</p><p>链接：<a href="https://www.jianshu.com/p/b50a6034eb90" target="_blank" rel="noopener">https://www.jianshu.com/p/b50a6034eb90</a></p><h4 id="图解"><a href="#图解" class="headerlink" title="图解"></a>图解</h4><p><img src="/images/1024555-20161218163120151-452283750.png" alt=""></p><p>这个图片蓝色部分就是拆的过程，而绿的部分为并的过程</p><h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">paixu</span><span class="params">(<span class="keyword">int</span> first,<span class="keyword">int</span> mid,<span class="keyword">int</span> last,<span class="keyword">int</span> a[],<span class="keyword">int</span> temp[])</span><span class="comment">//这是合并过程</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> l1=first,l2=mid+<span class="number">1</span>,r1=mid,r2=last;</span><br><span class="line">    <span class="keyword">int</span> k=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(l1&lt;=r1&amp;&amp;l2&lt;=r2)<span class="comment">//两部分都存在时看哪个小就加上哪个</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(a[l1]&lt;=a[l2])</span><br><span class="line">        &#123;</span><br><span class="line">            temp[k++]=a[l1++];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            temp[k++]=a[l2++];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(l1&lt;=r1)<span class="comment">//第一部分有剩余就把第一部分剩下的全加上</span></span><br><span class="line">    &#123;</span><br><span class="line">        temp[k++]=a[l1++];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(l2&lt;=r2)</span><br><span class="line">    &#123;</span><br><span class="line">        temp[k++]=a[l2++];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;k;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        a[i+first]=temp[i];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">xunhuan</span><span class="params">(<span class="keyword">int</span> first,<span class="keyword">int</span> last,<span class="keyword">int</span> a[],<span class="keyword">int</span> temp[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(first&lt;last)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> mid=(first+last)/<span class="number">2</span>;</span><br><span class="line">        xunhuan(first,mid,a,temp);<span class="comment">//拆左边</span></span><br><span class="line">        xunhuan(mid+<span class="number">1</span>,last,a,temp);<span class="comment">//拆右边</span></span><br><span class="line">        paixu(first,mid,last,a,temp);<span class="comment">//合并</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">mergesort</span><span class="params">(<span class="keyword">int</span> a[],<span class="keyword">int</span> first,<span class="keyword">int</span> last)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span>* p=<span class="keyword">new</span> <span class="keyword">int</span>[last-first];<span class="comment">//建一个临时数组，合并时用</span></span><br><span class="line">    <span class="keyword">if</span>(p==<span class="literal">NULL</span>)<span class="comment">//判断是否传入空数组</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    xunhuan(first,last,a,p);</span><br><span class="line">    <span class="keyword">delete</span> [] p;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h4 id=&quot;基本原理&quot;&gt;&lt;a href=&quot;#基本原理&quot; class=&quot;headerlink&quot; title=&quot;基本原理&quot;&gt;&lt;/a&gt;基本原理&lt;/h4&gt;&lt;p&gt;归并排序运用了分治的思想，先将数组二分成一个元素（一个元素时看为有序），然后将这些元素不断合并，每合并一次排一次序，最后就可
+      
+    
+    </summary>
+    
+    
+      <category term="算法" scheme="http://xinhecuican.github.io/categories/%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="排序" scheme="http://xinhecuican.github.io/tags/%E6%8E%92%E5%BA%8F/"/>
+    
+  </entry>
   
   <entry>
     <title>前缀和</title>
@@ -491,33 +517,6 @@
     
     
       <category term="动态规划" scheme="http://xinhecuican.github.io/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>线性筛</title>
-    <link href="http://xinhecuican.github.io/2020/01/04/%E7%BA%BF%E6%80%A7%E7%AD%9B/"/>
-    <id>http://xinhecuican.github.io/2020/01/04/%E7%BA%BF%E6%80%A7%E7%AD%9B/</id>
-    <published>2020-01-04T04:21:00.000Z</published>
-    <updated>2020-01-07T11:09:26.517Z</updated>
-    
-    <content type="html"><![CDATA[<p>埃氏筛中有重复，例如6,2与3都筛了一次，效率低<br>线性筛定理，（口语不准确）一个数i乘以小于等于它的最小素因数的素数所得到的合数之间没有重复</p><pre><code>#define N 10000int flag[N+1],prime[N+1],pnum;/*flag[n] 表示n是否是素数，1是素数，0不是prime   中是所有的素数按从小到大排列、pnum  表示素数的个数*/void CreatePrime(){    pnum=0;//初始化没有素数    //先将所有数看做素数，然后开始筛选    for(int i=0; i&lt;=N; i++){        flag[i]=1;    }    //遍历筛去所有最大因数是i的合数    for(int i=2; i&lt;=N; i++){        if(flag[i]==1){        //把素数记录下来            p[pnum++]=i;        }        //遍历已知素数表中比i的最小素因数小的素数，并筛去合数        for(int j=0; j&lt;pnum &amp;&amp; p[j]*i&lt;=N; j++){        //筛去合数            flag[p[j]*i]=0;            if(i%p[j]==0)            //找到i的最小素因数，找到了就终止                break;        }    }</code></pre><p>————————————————<br>版权声明：本文为CSDN博主「太上绝情」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a href="https://blog.csdn.net/bjrxyz/article/details/8125913" target="_blank" rel="noopener">https://blog.csdn.net/bjrxyz/article/details/8125913</a></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;埃氏筛中有重复，例如6,2与3都筛了一次，效率低&lt;br&gt;线性筛定理，（口语不准确）一个数i乘以小于等于它的最小素因数的素数所得到的合数之间没有重复&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;#define N 10000
-int flag[N+1],prime[N+1],pnum;
-/
-      
-    
-    </summary>
-    
-    
-      <category term="算法" scheme="http://xinhecuican.github.io/categories/%E7%AE%97%E6%B3%95/"/>
-    
     
   </entry>
   

@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="排序," />
 
 
 
@@ -81,18 +81,19 @@
 
 
 
-<meta name="description" content="前缀和概念前缀和指的是用另一个数组b[n]来保存a[n]中前n项的和 例如，b[0]&#x3D;a[0],b[1]&#x3D;a[0]+a[1],… 应用求数组某一区间长度数字的和如果我给你一串长度为n的数列a1,a2,a3……an,再给出m个询问，每次询问给出L，R两个数，要求给出区间[L,R]里的数的和，一般可能是从L到R遍历一次，但这样很花时间，有了前缀和之后可以直接b[R]-b[L]就得到L到R的和 差分差分">
+<meta name="description" content="基本原理归并排序运用了分治的思想，先将数组二分成一个元素（一个元素时看为有序），然后将这些元素不断合并，每合并一次排一次序，最后就可以得到有序的数组。 比如说一个序列:12 ,23,1,44,233,10,9,8。我们先分成两段：12 ,23,1,44 和 233,10,9,8，发现还能再分成4段：12 ,23 和 1,44——233,10 和 9,8。再分成8段：12–23–1–44 和233–">
 <meta property="og:type" content="article">
-<meta property="og:title" content="前缀和">
-<meta property="og:url" content="http://xinhecuican.github.io/2020/01/13/%E5%89%8D%E7%BC%80%E5%92%8C/index.html">
+<meta property="og:title" content="归并排序">
+<meta property="og:url" content="http://xinhecuican.github.io/2020/01/13/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="前缀和概念前缀和指的是用另一个数组b[n]来保存a[n]中前n项的和 例如，b[0]&#x3D;a[0],b[1]&#x3D;a[0]+a[1],… 应用求数组某一区间长度数字的和如果我给你一串长度为n的数列a1,a2,a3……an,再给出m个询问，每次询问给出L，R两个数，要求给出区间[L,R]里的数的和，一般可能是从L到R遍历一次，但这样很花时间，有了前缀和之后可以直接b[R]-b[L]就得到L到R的和 差分差分">
-<meta property="og:image" content="http://xinhecuican.github.io/images/20180817161822690.png">
-<meta property="article:published_time" content="2020-01-13T01:16:00.000Z">
-<meta property="article:modified_time" content="2020-01-13T02:08:35.898Z">
+<meta property="og:description" content="基本原理归并排序运用了分治的思想，先将数组二分成一个元素（一个元素时看为有序），然后将这些元素不断合并，每合并一次排一次序，最后就可以得到有序的数组。 比如说一个序列:12 ,23,1,44,233,10,9,8。我们先分成两段：12 ,23,1,44 和 233,10,9,8，发现还能再分成4段：12 ,23 和 1,44——233,10 和 9,8。再分成8段：12–23–1–44 和233–">
+<meta property="og:image" content="http://xinhecuican.github.io/images/1024555-20161218163120151-452283750.png">
+<meta property="article:published_time" content="2020-01-13T06:31:00.000Z">
+<meta property="article:modified_time" content="2020-01-13T06:59:00.695Z">
 <meta property="article:author" content="John Doe">
+<meta property="article:tag" content="排序">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://xinhecuican.github.io/images/20180817161822690.png">
+<meta name="twitter:image" content="http://xinhecuican.github.io/images/1024555-20161218163120151-452283750.png">
 
 
 
@@ -122,13 +123,13 @@
 
 
 
-  <link rel="canonical" href="http://xinhecuican.github.io/2020/01/13/前缀和/"/>
+  <link rel="canonical" href="http://xinhecuican.github.io/2020/01/13/归并排序/"/>
 
 
 
 
 
-  <title>前缀和 | Hexo</title>
+  <title>归并排序 | Hexo</title>
   
 
 
@@ -300,7 +301,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://xinhecuican.github.io/2020/01/13/%E5%89%8D%E7%BC%80%E5%92%8C/">
+    <link itemprop="mainEntityOfPage" href="http://xinhecuican.github.io/2020/01/13/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -317,7 +318,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">前缀和</h1>
+          <h1 class="post-title" itemprop="name headline">归并排序</h1>
         
 
         <div class="post-meta">
@@ -329,7 +330,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-13T09:16:00+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-13T14:31:00+08:00">
                 2020-01-13
               </time>
             
@@ -389,34 +390,13 @@
       
 
       
-        <h3 id="前缀和概念"><a href="#前缀和概念" class="headerlink" title="前缀和概念"></a>前缀和概念</h3><p>前缀和指的是用另一个数组b[n]来保存a[n]中前n项的和</p>
-<p>例如，b[0]=a[0],b[1]=a[0]+a[1],…</p>
-<h3 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h3><h4 id="求数组某一区间长度数字的和"><a href="#求数组某一区间长度数字的和" class="headerlink" title="求数组某一区间长度数字的和"></a>求数组某一区间长度数字的和</h4><p>如果我给你一串长度为n的数列a1,a2,a3……an,再给出m个询问，每次询问给出L，R两个数，要求给出区间[L,R]里的数的和，一般可能是从L到R遍历一次，但这样很花时间，有了前缀和之后可以直接b[R]-b[L]就得到L到R的和</p>
-<h3 id="差分"><a href="#差分" class="headerlink" title="差分"></a>差分</h3><p>差分就是将数列中的每一项分别与前一项数做差</p>
-<p>一个序列1 2 5 4 7 3，差分后得到1 1 3 -1 3 -4 -3</p>
-<p>这里注意得到的差分序列第一个数和原来的第一个数一样（相当于第一个数减0）<br>差分序列最后比原序列多一个数（相当于0减最后一个数）</p>
-<p>例 给你一串长度为n的数列a1,a2,a3……an，要求对a[L]~a[R]进行m次操作：</p>
-<p>操作一：将a[L]~a[R]内的元素都加上P</p>
-<p>操作二：将a[L]~a[R]内的元素都减去P</p>
-<p>最后再给出一个询问求a[L]-a[R]内的元素之和？</p>
-<p>如果用一般做法就是遍历加减，时间复杂度高，现在可以直接让b[L] 加上P，再让b[R+1]减去P，这样因为b[L+1]=b[L]+a[L+1]，所以L到R上每一项都会加P，而b[R+1]减去P是为了对后面的数不产生影响</p>
-<p>如果有多次修改操作，可以先将每次修改保存到一个数组中，然后求前缀和时再加上<br>    #include&lt;bits/stdc++.h&gt;<br>    using namespace std;<br>    const int maxn=1e5+9;<br>    int a[maxn],b[maxn];<br>    int main(){<br>     int i,j,k,n,m,p;<br>     cin&gt;&gt;n&gt;&gt;m;<br>     for(i=1;i&lt;=n;i++){<br>        cin&gt;&gt;a[i];<br>     }<br>     for(i=1;i&lt;=m;i++){<br>        int L,R,t;<br>        cin&gt;&gt;t&gt;&gt;L&gt;&gt;R&gt;&gt;p;<br>        if(t==1){<br>            b[L]+=p;b[R+1]-=p; //仔细想想为什么b[R+1]要减去p<br>        }<br>        else{<br>            b[L]-=p;b[R+1]+=p;//这是减去p<br>        }<br>    }<br>    int add=0;<br>    for(i=1;i&lt;=n;i++){<br>        add+=b[i];<br>        a[i]+=a[i-1]+add;//这是求前缀和数组，并且add是把需要加p的地方加上<br>    }<br>    int x,y;<br>    cin&gt;&gt;x&gt;&gt;y;<br>    cout&lt;&lt;a[y]-a[x-1]&lt;&lt;endl;<br>}</p>
-<h4 id="性质："><a href="#性质：" class="headerlink" title="性质："></a>性质：</h4><p>1、差分序列求前缀和可得原序列</p>
-<p>2、将原序列区间[L,R]中的元素全部+1，可以转化操作为差分序列L处+1，R+1处-1</p>
-<p>3、按照性质2得到，每次修改原序列一个区间+1，那么每次差分序列修改处增加的和减少的相同</p>
-<h3 id="二维前缀和"><a href="#二维前缀和" class="headerlink" title="二维前缀和"></a>二维前缀和</h3><p>二维前缀和对应的是二维数组</p>
-<p><img src="/images/20180817161822690.png" alt=""></p>
-<p>b[2][4]表示的是b[1][1]+b[1][2]+b[1][3]+b[1][4]+b[2][1]+b[2][2]+b[2][3]</p>
-<p>因此可以先加上b[1][4]+b[2][3]，这时重复了b[1][3]，再减去</p>
-<p>因此公式<br>a[i][j]+=a[i][j-1]+a[i-1][j]-a[i-1][j-1]，因为这样，二维前缀和最好从一开始，0处全赋值为0</p>
-<p>这时想知道从(x1,y1)到(x2,y2)的和要a[x2][y2]-a[x1-1][y2]-a[x2][y1-1]+a[x1-1][y1-1]</p>
-<p>例如，求(3,3)到(4,4)的值，实际上是a[3][3]+a[3][4]+a[4][3]+a[4][4]</p>
-<h3 id="二维差分（不是很清楚）"><a href="#二维差分（不是很清楚）" class="headerlink" title="二维差分（不是很清楚）"></a>二维差分（不是很清楚）</h3><p>和一维差分的第四个问题类似，让（x1,y1)和（x2,y2）矩形内的数都加上x</p>
-<p>b[x1][y1]+=x; b[x2+1][y2+1]+=x;</p>
-<p>b[x1][y2+1]-=x; b[x2+1][y1]-=x;</p>
-<p> 参考博客<a href="https://blog.csdn.net/k_r_forever/article/details/81775899" target="_blank" rel="noopener">https://blog.csdn.net/k_r_forever/article/details/81775899</a></p>
-<p> <a href="https://blog.csdn.net/Healer66/article/details/87201014" target="_blank" rel="noopener">https://blog.csdn.net/Healer66/article/details/87201014</a></p>
-
+        <h4 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h4><p>归并排序运用了分治的思想，先将数组二分成一个元素（一个元素时看为有序），然后将这些元素不断合并，每合并一次排一次序，最后就可以得到有序的数组。</p>
+<p>比如说一个序列:12 ,23,1,44,233,10,9,8。我们先分成两段：12 ,23,1,44 和 233,10,9,8，<br>发现还能再分成4段：12 ,23 和 1,44——233,10 和 9,8。<br>再分成8段：12–23–1–44 和233–10–9–8。<br>这时候开始把子序列进行排序合并，一个元素就是有序的。所以不用排序。<br>合并成2个一组排序得到：12，23—-1，44—10，233—8，9。<br>再合并成4个一组排序得到：1，12，23，44—8，9，10，233。<br>最后合并得到最终结果：1，8，9，10，12，23，44，233。</p>
+<p>合并过程看代码</p>
+<p>链接：<a href="https://www.jianshu.com/p/b50a6034eb90" target="_blank" rel="noopener">https://www.jianshu.com/p/b50a6034eb90</a></p>
+<h4 id="图解"><a href="#图解" class="headerlink" title="图解"></a>图解</h4><p><img src="/images/1024555-20161218163120151-452283750.png" alt=""></p>
+<p>这个图片蓝色部分就是拆的过程，而绿的部分为并的过程</p>
+<h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">paixu</span><span class="params">(<span class="keyword">int</span> first,<span class="keyword">int</span> mid,<span class="keyword">int</span> last,<span class="keyword">int</span> a[],<span class="keyword">int</span> temp[])</span><span class="comment">//这是合并过程</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> l1=first,l2=mid+<span class="number">1</span>,r1=mid,r2=last;</span><br><span class="line">    <span class="keyword">int</span> k=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(l1&lt;=r1&amp;&amp;l2&lt;=r2)<span class="comment">//两部分都存在时看哪个小就加上哪个</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(a[l1]&lt;=a[l2])</span><br><span class="line">        &#123;</span><br><span class="line">            temp[k++]=a[l1++];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            temp[k++]=a[l2++];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(l1&lt;=r1)<span class="comment">//第一部分有剩余就把第一部分剩下的全加上</span></span><br><span class="line">    &#123;</span><br><span class="line">        temp[k++]=a[l1++];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(l2&lt;=r2)</span><br><span class="line">    &#123;</span><br><span class="line">        temp[k++]=a[l2++];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;k;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        a[i+first]=temp[i];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">xunhuan</span><span class="params">(<span class="keyword">int</span> first,<span class="keyword">int</span> last,<span class="keyword">int</span> a[],<span class="keyword">int</span> temp[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(first&lt;last)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> mid=(first+last)/<span class="number">2</span>;</span><br><span class="line">        xunhuan(first,mid,a,temp);<span class="comment">//拆左边</span></span><br><span class="line">        xunhuan(mid+<span class="number">1</span>,last,a,temp);<span class="comment">//拆右边</span></span><br><span class="line">        paixu(first,mid,last,a,temp);<span class="comment">//合并</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">mergesort</span><span class="params">(<span class="keyword">int</span> a[],<span class="keyword">int</span> first,<span class="keyword">int</span> last)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span>* p=<span class="keyword">new</span> <span class="keyword">int</span>[last-first];<span class="comment">//建一个临时数组，合并时用</span></span><br><span class="line">    <span class="keyword">if</span>(p==<span class="literal">NULL</span>)<span class="comment">//判断是否传入空数组</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    xunhuan(first,last,a,p);</span><br><span class="line">    <span class="keyword">delete</span> [] p;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -436,6 +416,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/%E6%8E%92%E5%BA%8F/" rel="tag"><i class="fa fa-tag"></i> 排序</a>
+          
+        </div>
+      
 
       
       
@@ -445,8 +431,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/01/12/%E7%BB%93%E6%9E%84%E4%BD%93/" rel="next" title="结构体">
-                <i class="fa fa-chevron-left"></i> 结构体
+              <a href="/2020/01/13/%E5%89%8D%E7%BC%80%E5%92%8C/" rel="next" title="前缀和">
+                <i class="fa fa-chevron-left"></i> 前缀和
               </a>
             
           </div>
@@ -454,10 +440,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/01/13/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/" rel="prev" title="归并排序">
-                归并排序 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -601,7 +583,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前缀和概念"><span class="nav-number">1.</span> <span class="nav-text">前缀和概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用"><span class="nav-number">2.</span> <span class="nav-text">应用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#求数组某一区间长度数字的和"><span class="nav-number">2.1.</span> <span class="nav-text">求数组某一区间长度数字的和</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#差分"><span class="nav-number">3.</span> <span class="nav-text">差分</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#性质："><span class="nav-number">3.1.</span> <span class="nav-text">性质：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二维前缀和"><span class="nav-number">4.</span> <span class="nav-text">二维前缀和</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二维差分（不是很清楚）"><span class="nav-number">5.</span> <span class="nav-text">二维差分（不是很清楚）</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#基本原理"><span class="nav-number">1.</span> <span class="nav-text">基本原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#图解"><span class="nav-number">2.</span> <span class="nav-text">图解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码实现"><span class="nav-number">3.</span> <span class="nav-text">代码实现</span></a></li></ol></div>
             
 
           </div>
