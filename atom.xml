@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://xinhecuican.github.io/"/>
-  <updated>2020-01-13T06:59:00.695Z</updated>
+  <updated>2020-01-14T06:26:33.231Z</updated>
   <id>http://xinhecuican.github.io/</id>
   
   <author>
@@ -17,13 +17,62 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>深度优先搜索和广度优先搜索</title>
+    <link href="http://xinhecuican.github.io/2020/01/14/%E6%B7%B1%E5%BA%A6%E6%90%9C%E7%B4%A2%E5%92%8C%E5%B9%BF%E5%BA%A6%E6%90%9C%E7%B4%A2/"/>
+    <id>http://xinhecuican.github.io/2020/01/14/%E6%B7%B1%E5%BA%A6%E6%90%9C%E7%B4%A2%E5%92%8C%E5%B9%BF%E5%BA%A6%E6%90%9C%E7%B4%A2/</id>
+    <published>2020-01-14T01:04:00.000Z</published>
+    <updated>2020-01-14T06:26:33.231Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="深度优先搜索"><a href="#深度优先搜索" class="headerlink" title="深度优先搜索"></a>深度优先搜索</h3><p>基本思想：它的思想是从一个顶点V0开始，沿着一条路一直走到底，如果发现不能到达目标解，那就返回到上一个节点，然后从另一条路开始走到底，这种尽量往深处走的概念即是深度优先的概念</p><p>例<img src="/images/%E5%9B%BE%E7%89%871.png" alt=""></p><p>V0-&gt;V1-&gt;V4-&gt;V3-&gt;V5-&gt;V6,先从v0到V1，再从V1到V4，发现到了终点，就退回到V1继续寻找</p><p>代码</p><p>注意恢复初始状态十分重要，在一种情况走不了的情况下它可以使其恢复初始状态试下一条路</p><p><img src="/images/%E5%9B%BE%E7%89%872.png" alt=""></p><p>例题：<img src="/images/%E5%9B%BE%E7%89%873.png" alt=""></p><p>遍历连通图，能否从v0到v6</p><p>答案<img src="/images/%E5%9B%BE%E7%89%874.png" alt=""></p><h3 id="广度优先搜索"><a href="#广度优先搜索" class="headerlink" title="广度优先搜索"></a>广度优先搜索</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">广度优先搜索是最简便的图的搜索算法之一，别名又叫BFS，属于一种盲目搜寻法，目的是系统地展开并检查图中的所有节点，以找寻结果。换句话说，它并不考虑结果的可能位置，彻底地搜索整张图，直到找到结果为止。所有因为展开节点而得到的子节点都会被加进一个先进先出的队列中</span><br></pre></td></tr></table></figure><p>模板<br><img src="/images/%E5%9B%BE%E7%89%875.png" alt=""></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;深度优先搜索&quot;&gt;&lt;a href=&quot;#深度优先搜索&quot; class=&quot;headerlink&quot; title=&quot;深度优先搜索&quot;&gt;&lt;/a&gt;深度优先搜索&lt;/h3&gt;&lt;p&gt;基本思想：它的思想是从一个顶点V0开始，沿着一条路一直走到底，如果发现不能到达目标解，那就返回到上一个节点，
+      
+    
+    </summary>
+    
+    
+      <category term="算法" scheme="http://xinhecuican.github.io/categories/%E7%AE%97%E6%B3%95/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>scanf printf</title>
+    <link href="http://xinhecuican.github.io/2020/01/13/scanf-printf/"/>
+    <id>http://xinhecuican.github.io/2020/01/13/scanf-printf/</id>
+    <published>2020-01-13T12:18:00.000Z</published>
+    <updated>2020-01-13T12:45:34.898Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="scanf"><a href="#scanf" class="headerlink" title="scanf"></a>scanf</h3><p>格式：scanf(const char *format, …)</p><p>format – 这是 C 字符串，包含了以下各项中的一个或多个：空格字符、非空格字符 和 format 说明符。</p><p>format 说明符形式为:</p><p>[=%[*][width][modifiers]type=]</p><p><code>*</code>这是一个可选的星号，表示数据是从流 stream 中读取的，但是可以被忽视，即它不存储在对应的参数中。</p><p>width    这指定了在当前读取操作中读取的最大字符数。</p><p>modifiers    为对应的附加参数所指向的数据指定一个不同于整型（针对 d、i 和 n）、无符号整型（针对 o、u 和 x）或浮点型（针对 e、f 和 g）的大小： h ：短整型（针对 d、i 和 n），或无符号短整型（针对 o、u 和 x） l ：长整型（针对 d、i 和 n），或无符号长整型（针对 o、u 和 x），或双精度型（针对 e、f 和 g） L ：长双精度型（针对 e、f 和 g）</p><p>type    一个字符，指定了要被读取的数据类型以及数据读取方式。具体参见下一个表格</p><p>| %a、%A|读入一个浮点值(仅 C99 有效)|float*|<br>| :——————————————-|<br>| %c     | 单个字符：读取下一个字符。如果指定了一个不为 1 的宽度 width，函数会读取 width 个字符，并通过参数传递，把它们存储在数组中连续位置。在末尾不会追加空字符。|    char *<br>|%d    |十进制整数：数字前面的 + 或 - 号是可选的。|    int *<br>|%e、%E、%f、%F、%g、%G    |浮点数：包含了一个小数点、一个可选的前置符号 + 或 -、一个可选的后置字符 e 或 E，以及一个十进制数字。两个有效的实例 -732.103 和 7.12e4    |float *<br>|%i|    读入十进制，八进制，十六进制整数 。|    int *<br>|%o    |八进制整数。|    int *<br>|%s    |字符串。这将读取连续字符，直到遇到一个空格字符（空格字符可以是空白、换行和制表符）。|    char *<br>|%u    |无符号的十进制整数。|    unsigned int *</p><h4 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h4><p>用%c 读数组时注意它不会读入换行符，因此每次用完之后要用getchar()<br>，而%s就不用担心这个问题</p><h3 id="printf"><a href="#printf" class="headerlink" title="printf"></a>printf</h3><p>格式 printf(“&lt;格式化字符串&gt;”, &lt;参量表&gt;);</p><p>声明 printf(const char *format, …)</p><p>|格式字符|    意义<br>|————————-|<br>|d|    以十进制形式输出带符号整数(正数不输出符号)<br>|o    |以八进制形式输出无符号整数(不输出前缀0)<br>|x,X    |以十六进制形式输出无符号整数(不输出前缀Ox)<br>|u    |以十进制形式输出无符号整数<br>|f|    以小数形式输出单、双精度实数<br>|e,E    |以指数形式输出单、双精度实数<br>|g,G    |以%f或%e中较短的输出宽度输出单、双精度实数<br>|c|    输出单个字符<br>|s    |输出字符串<br>|p|    输出指针地址<br>|lu    |32位无符号整数<br>|llu|    64位无符号整数</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;scanf&quot;&gt;&lt;a href=&quot;#scanf&quot; class=&quot;headerlink&quot; title=&quot;scanf&quot;&gt;&lt;/a&gt;scanf&lt;/h3&gt;&lt;p&gt;格式：scanf(const char *format, …)&lt;/p&gt;
+&lt;p&gt;format – 这是 C 字符串，包
+      
+    
+    </summary>
+    
+    
+      <category term="基础" scheme="http://xinhecuican.github.io/categories/%E5%9F%BA%E7%A1%80/"/>
+    
+    
+  </entry>
+  
+  <entry>
     <title>归并排序</title>
     <link href="http://xinhecuican.github.io/2020/01/13/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/"/>
     <id>http://xinhecuican.github.io/2020/01/13/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/</id>
     <published>2020-01-13T06:31:00.000Z</published>
-    <updated>2020-01-13T06:59:00.695Z</updated>
+    <updated>2020-01-13T07:12:13.018Z</updated>
     
-    <content type="html"><![CDATA[<h4 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h4><p>归并排序运用了分治的思想，先将数组二分成一个元素（一个元素时看为有序），然后将这些元素不断合并，每合并一次排一次序，最后就可以得到有序的数组。</p><p>比如说一个序列:12 ,23,1,44,233,10,9,8。我们先分成两段：12 ,23,1,44 和 233,10,9,8，<br>发现还能再分成4段：12 ,23 和 1,44——233,10 和 9,8。<br>再分成8段：12–23–1–44 和233–10–9–8。<br>这时候开始把子序列进行排序合并，一个元素就是有序的。所以不用排序。<br>合并成2个一组排序得到：12，23—-1，44—10，233—8，9。<br>再合并成4个一组排序得到：1，12，23，44—8，9，10，233。<br>最后合并得到最终结果：1，8，9，10，12，23，44，233。</p><p>合并过程看代码</p><p>链接：<a href="https://www.jianshu.com/p/b50a6034eb90" target="_blank" rel="noopener">https://www.jianshu.com/p/b50a6034eb90</a></p><h4 id="图解"><a href="#图解" class="headerlink" title="图解"></a>图解</h4><p><img src="/images/1024555-20161218163120151-452283750.png" alt=""></p><p>这个图片蓝色部分就是拆的过程，而绿的部分为并的过程</p><h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">paixu</span><span class="params">(<span class="keyword">int</span> first,<span class="keyword">int</span> mid,<span class="keyword">int</span> last,<span class="keyword">int</span> a[],<span class="keyword">int</span> temp[])</span><span class="comment">//这是合并过程</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> l1=first,l2=mid+<span class="number">1</span>,r1=mid,r2=last;</span><br><span class="line">    <span class="keyword">int</span> k=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(l1&lt;=r1&amp;&amp;l2&lt;=r2)<span class="comment">//两部分都存在时看哪个小就加上哪个</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(a[l1]&lt;=a[l2])</span><br><span class="line">        &#123;</span><br><span class="line">            temp[k++]=a[l1++];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            temp[k++]=a[l2++];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(l1&lt;=r1)<span class="comment">//第一部分有剩余就把第一部分剩下的全加上</span></span><br><span class="line">    &#123;</span><br><span class="line">        temp[k++]=a[l1++];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(l2&lt;=r2)</span><br><span class="line">    &#123;</span><br><span class="line">        temp[k++]=a[l2++];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;k;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        a[i+first]=temp[i];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">xunhuan</span><span class="params">(<span class="keyword">int</span> first,<span class="keyword">int</span> last,<span class="keyword">int</span> a[],<span class="keyword">int</span> temp[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(first&lt;last)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> mid=(first+last)/<span class="number">2</span>;</span><br><span class="line">        xunhuan(first,mid,a,temp);<span class="comment">//拆左边</span></span><br><span class="line">        xunhuan(mid+<span class="number">1</span>,last,a,temp);<span class="comment">//拆右边</span></span><br><span class="line">        paixu(first,mid,last,a,temp);<span class="comment">//合并</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">mergesort</span><span class="params">(<span class="keyword">int</span> a[],<span class="keyword">int</span> first,<span class="keyword">int</span> last)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span>* p=<span class="keyword">new</span> <span class="keyword">int</span>[last-first];<span class="comment">//建一个临时数组，合并时用</span></span><br><span class="line">    <span class="keyword">if</span>(p==<span class="literal">NULL</span>)<span class="comment">//判断是否传入空数组</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    xunhuan(first,last,a,p);</span><br><span class="line">    <span class="keyword">delete</span> [] p;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<h4 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h4><p>归并排序运用了分治的思想，先将数组二分成一个元素（一个元素时看为有序），然后将这些元素不断合并，每合并一次排一次序，最后就可以得到有序的数组。</p><p>比如说一个序列:12 ,23,1,44,233,10,9,8。我们先分成两段：12 ,23,1,44 和 233,10,9,8，<br>发现还能再分成4段：12 ,23 和 1,44——233,10 和 9,8。<br>再分成8段：12–23–1–44 和233–10–9–8。<br>这时候开始把子序列进行排序合并，一个元素就是有序的。所以不用排序。<br>合并成2个一组排序得到：12，23—-1，44—10，233—8，9。<br>再合并成4个一组排序得到：1，12，23，44—8，9，10，233。<br>最后合并得到最终结果：1，8，9，10，12，23，44，233。</p><p>合并过程看代码</p><p>链接：<a href="https://www.jianshu.com/p/b50a6034eb90" target="_blank" rel="noopener">https://www.jianshu.com/p/b50a6034eb90</a></p><h4 id="图解"><a href="#图解" class="headerlink" title="图解"></a>图解</h4><p><img src="/images/1024555-20161218163120151-452283750.png" alt=""></p><p>这个图片蓝色部分就是拆的过程，而绿的部分为并的过程</p><h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">paixu</span><span class="params">(<span class="keyword">int</span> first,<span class="keyword">int</span> mid,<span class="keyword">int</span> last,<span class="keyword">int</span> a[],<span class="keyword">int</span> temp[])</span><span class="comment">//这是合并过程</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> l1=first,l2=mid+<span class="number">1</span>,r1=mid,r2=last;</span><br><span class="line">    <span class="keyword">int</span> k=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(l1&lt;=r1&amp;&amp;l2&lt;=r2)<span class="comment">//两部分都存在时看哪个小就加上哪个</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(a[l1]&lt;=a[l2])</span><br><span class="line">        &#123;</span><br><span class="line">            temp[k++]=a[l1++];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            temp[k++]=a[l2++];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(l1&lt;=r1)<span class="comment">//第一部分有剩余就把第一部分剩下的全加上</span></span><br><span class="line">    &#123;</span><br><span class="line">        temp[k++]=a[l1++];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(l2&lt;=r2)</span><br><span class="line">    &#123;</span><br><span class="line">        temp[k++]=a[l2++];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;k;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        a[i+first]=temp[i];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">xunhuan</span><span class="params">(<span class="keyword">int</span> first,<span class="keyword">int</span> last,<span class="keyword">int</span> a[],<span class="keyword">int</span> temp[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(first&lt;last)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> mid=(first+last)/<span class="number">2</span>;</span><br><span class="line">        xunhuan(first,mid,a,temp);<span class="comment">//拆左边</span></span><br><span class="line">        xunhuan(mid+<span class="number">1</span>,last,a,temp);<span class="comment">//拆右边</span></span><br><span class="line">        paixu(first,mid,last,a,temp);<span class="comment">//合并</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">mergesort</span><span class="params">(<span class="keyword">int</span> a[],<span class="keyword">int</span> first,<span class="keyword">int</span> last)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span>* p=<span class="keyword">new</span> <span class="keyword">int</span>[last-first];<span class="comment">//建一个临时数组，合并时用</span></span><br><span class="line">    <span class="keyword">if</span>(p==<span class="literal">NULL</span>)<span class="comment">//判断是否传入空数组</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    xunhuan(first,last,a,p);</span><br><span class="line">    <span class="keyword">delete</span> [] p;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
     
     <summary type="html">
     
@@ -462,61 +511,6 @@
     
     
       <category term="字符常量" scheme="http://xinhecuican.github.io/tags/%E5%AD%97%E7%AC%A6%E5%B8%B8%E9%87%8F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>快速排序</title>
-    <link href="http://xinhecuican.github.io/2020/01/05/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/"/>
-    <id>http://xinhecuican.github.io/2020/01/05/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/</id>
-    <published>2020-01-05T05:42:00.000Z</published>
-    <updated>2020-01-07T07:15:00.460Z</updated>
-    
-    <content type="html"><![CDATA[<p>步骤：<br>1.先从数列中取出一个数作为基准数。</p><p>2．分区过程，将比这个数大的数全放到它的右边，小于或等于它的数全放到它的左边。</p><p>3．再对左右区间重复第二步，直到各区间只有一个数。</p><p>例 6 1 2 7 9 3 4 5 10 8 进行排序<p><br> 1 以6为基准数，先从右边找比6小的数，我们用一个变量j一步步向左移动，好在移动三次后我<br> 们找到了5，j为7。现在再让另一个变量i向右移动去找比6大的数，当i为3时找到了7.现在再让5<br> 和7互换，得到了6 1 2 5 9 3 4 7 10 8,。在让j向左移动，找到了4，i向右找到了9，再让两个数<br> 互换，j再向左到3，此时i向左也到3，两者相遇，便让3和6互换，第一次结束<br> （想想原因）<p><br> 2 现在分为两部分，左边全比6小，右边全比6大，为3 1 2 5 4 6 9 7 10 8<br> 再在3 1 2 5 4 中用同样的方法搜索一次得到2 1 3 5 4,再在2 1 中搜索得到1 2<br> 然后在5 4 中搜索得到4 5，左边排序完成，右边用同样的方法排序就可得到答案</p><p> 不说了，上代码</p><pre><code>void sort(int a[],int l,int r){  if(l&lt;r)//l大于等于r时这一段排序结束  {      int i=l,j=r,x=a[l];      while(i&lt;j)      {          while(i&lt;j&amp;&amp;a[j]&gt;=x)          {              j--;          }          while(i&lt;j&amp;&amp;a[i]&lt;x)          {              i++;          }          swap(a[i],a[j]);      }      swap(a[l],a[i]);      sort(s,l,i-1);      sort(s,i+1,r); }</code></pre><p>  }<br>  引用 转载请标明出处，原文地址：<a href="http://blog.csdn.net/morewindows/article/details/6684558" target="_blank" rel="noopener">http://blog.csdn.net/morewindows/article/details/6684558</a><br>         csdn 我见过最通俗易懂的快速排序过程讲解，转自《坐在马桶上看算法：快速排序》</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;步骤：&lt;br&gt;1.先从数列中取出一个数作为基准数。&lt;/p&gt;
-&lt;p&gt;2．分区过程，将比这个数大的数全放到它的右边，小于或等于它的数全放到它的左边。&lt;/p&gt;
-&lt;p&gt;3．再对左右区间重复第二步，直到各区间只有一个数。&lt;/p&gt;
-&lt;p&gt;例 6 1 2 7 9 3 4 5 10 8 进
-      
-    
-    </summary>
-    
-    
-      <category term="算法" scheme="http://xinhecuican.github.io/categories/%E7%AE%97%E6%B3%95/"/>
-    
-    
-      <category term="快排" scheme="http://xinhecuican.github.io/tags/%E5%BF%AB%E6%8E%92/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>动态规划背包问题</title>
-    <link href="http://xinhecuican.github.io/2020/01/04/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/"/>
-    <id>http://xinhecuican.github.io/2020/01/04/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/</id>
-    <published>2020-01-04T14:00:00.000Z</published>
-    <updated>2020-01-11T02:02:35.573Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="第一类背包问题"><a href="#第一类背包问题" class="headerlink" title="第一类背包问题"></a>第一类背包问题</h3><p>问题，有N件物品和一个容量为V的背包。第i件物品的大小是c[i]，价值是w[i]。求解将哪些物品装入背包可使价值总和最大。</p><p><strong>思路</strong> 可以用一个二维数组a[i][j]，表示把前i个物体放入一个容量为j的容器中所获得的最大价值，而a[i][j]=max(a[i-1][j],a[i-1][j-c[i]]+w[i])</p><p>这个式子表示到底是不装第i个物品价值大还是花去c[i]的空间装获得w[i]的价值所得的总价值最大，</p><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">n w v    <span class="number">1</span>   <span class="number">2</span>  <span class="number">3</span>  <span class="number">4</span>  <span class="number">5</span>  <span class="number">6</span>  <span class="number">7</span>  <span class="number">8</span>  <span class="number">9</span>  <span class="number">10</span></span><br><span class="line">a<span class="number">2</span><span class="number">6</span><span class="number">0</span><span class="number">6</span><span class="number">6</span><span class="number">9</span><span class="number">9</span><span class="number">12</span><span class="number">12</span><span class="number">15</span><span class="number">15</span><span class="number">15</span></span><br><span class="line">b<span class="number">2</span><span class="number">3</span><span class="number">0</span><span class="number">3</span><span class="number">3</span><span class="number">6</span><span class="number">6</span><span class="number">9</span><span class="number">9</span><span class="number">9</span><span class="number">10</span><span class="number">11</span></span><br><span class="line">c<span class="number">6</span><span class="number">5</span><span class="number">0</span><span class="number">0</span><span class="number">0</span><span class="number">6</span><span class="number">6</span><span class="number">6</span><span class="number">6</span><span class="number">6</span><span class="number">10</span><span class="number">11</span></span><br><span class="line">d<span class="number">5</span><span class="number">4</span><span class="number">0</span><span class="number">0</span><span class="number">0</span><span class="number">6</span><span class="number">6</span><span class="number">6</span><span class="number">6</span><span class="number">6</span><span class="number">10</span><span class="number">10</span></span><br><span class="line">e<span class="number">4</span><span class="number">6</span><span class="number">0</span><span class="number">0</span><span class="number">0</span><span class="number">6</span><span class="number">6</span><span class="number">6</span><span class="number">6</span><span class="number">6</span><span class="number">6</span><span class="number">6</span></span><br></pre></td></tr></table></figure><p>为了叙述方便，用e2单元格表示e行2列的单元格，这个单元格的意义是用来表示只有物品e时，有个承重为2的背包，那么这个背包的最大价值是0，因为e物品的重量是4，背包装不了。</p><p>对于d2单元格，表示只有物品e，d时,承重为2的背包,所能装入的最大价值，仍然是0，因为物品e,d都不是这个背包能装的。</p><p>上代码</p><p>————————————————<br>版权声明：本文为CSDN博主「从杰」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a href="https://blog.csdn.net/mu399/article/details/7722810" target="_blank" rel="noopener">https://blog.csdn.net/mu399/article/details/7722810</a></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;第一类背包问题&quot;&gt;&lt;a href=&quot;#第一类背包问题&quot; class=&quot;headerlink&quot; title=&quot;第一类背包问题&quot;&gt;&lt;/a&gt;第一类背包问题&lt;/h3&gt;&lt;p&gt;问题，有N件物品和一个容量为V的背包。第i件物品的大小是c[i]，价值是w[i]。求解将哪些物品装入
-      
-    
-    </summary>
-    
-    
-      <category term="算法" scheme="http://xinhecuican.github.io/categories/%E7%AE%97%E6%B3%95/"/>
-    
-    
-      <category term="动态规划" scheme="http://xinhecuican.github.io/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
     
   </entry>
   

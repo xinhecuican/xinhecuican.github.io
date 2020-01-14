@@ -1,495 +1,540 @@
 <?xml version="1.0" encoding="utf-8"?>
-<search> 
-  
-  
-    
-    <entry>
-      <title>归并排序</title>
-      <link href="/2020/01/13/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/"/>
-      <url>/2020/01/13/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/</url>
-      
-        <content type="html"><![CDATA[<h4 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h4><p>归并排序运用了分治的思想，先将数组二分成一个元素（一个元素时看为有序），然后将这些元素不断合并，每合并一次排一次序，最后就可以得到有序的数组。</p><p>比如说一个序列:12 ,23,1,44,233,10,9,8。我们先分成两段：12 ,23,1,44 和 233,10,9,8，<br>发现还能再分成4段：12 ,23 和 1,44——233,10 和 9,8。<br>再分成8段：12–23–1–44 和233–10–9–8。<br>这时候开始把子序列进行排序合并，一个元素就是有序的。所以不用排序。<br>合并成2个一组排序得到：12，23—-1，44—10，233—8，9。<br>再合并成4个一组排序得到：1，12，23，44—8，9，10，233。<br>最后合并得到最终结果：1，8，9，10，12，23，44，233。</p><p>合并过程看代码</p><p>链接：<a href="https://www.jianshu.com/p/b50a6034eb90" target="_blank" rel="noopener">https://www.jianshu.com/p/b50a6034eb90</a></p><h4 id="图解"><a href="#图解" class="headerlink" title="图解"></a>图解</h4><p><img src="/images/1024555-20161218163120151-452283750.png" alt=""></p><p>这个图片蓝色部分就是拆的过程，而绿的部分为并的过程</p><h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">paixu</span><span class="params">(<span class="keyword">int</span> first,<span class="keyword">int</span> mid,<span class="keyword">int</span> last,<span class="keyword">int</span> a[],<span class="keyword">int</span> temp[])</span><span class="comment">//这是合并过程</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> l1=first,l2=mid+<span class="number">1</span>,r1=mid,r2=last;</span><br><span class="line">    <span class="keyword">int</span> k=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(l1&lt;=r1&amp;&amp;l2&lt;=r2)<span class="comment">//两部分都存在时看哪个小就加上哪个</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(a[l1]&lt;=a[l2])</span><br><span class="line">        &#123;</span><br><span class="line">            temp[k++]=a[l1++];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            temp[k++]=a[l2++];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(l1&lt;=r1)<span class="comment">//第一部分有剩余就把第一部分剩下的全加上</span></span><br><span class="line">    &#123;</span><br><span class="line">        temp[k++]=a[l1++];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(l2&lt;=r2)</span><br><span class="line">    &#123;</span><br><span class="line">        temp[k++]=a[l2++];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;k;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        a[i+first]=temp[i];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">xunhuan</span><span class="params">(<span class="keyword">int</span> first,<span class="keyword">int</span> last,<span class="keyword">int</span> a[],<span class="keyword">int</span> temp[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(first&lt;last)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> mid=(first+last)/<span class="number">2</span>;</span><br><span class="line">        xunhuan(first,mid,a,temp);<span class="comment">//拆左边</span></span><br><span class="line">        xunhuan(mid+<span class="number">1</span>,last,a,temp);<span class="comment">//拆右边</span></span><br><span class="line">        paixu(first,mid,last,a,temp);<span class="comment">//合并</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">mergesort</span><span class="params">(<span class="keyword">int</span> a[],<span class="keyword">int</span> first,<span class="keyword">int</span> last)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span>* p=<span class="keyword">new</span> <span class="keyword">int</span>[last-first];<span class="comment">//建一个临时数组，合并时用</span></span><br><span class="line">    <span class="keyword">if</span>(p==<span class="literal">NULL</span>)<span class="comment">//判断是否传入空数组</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    xunhuan(first,last,a,p);</span><br><span class="line">    <span class="keyword">delete</span> [] p;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-      
-      
+<search>
+  <entry>
+    <title>深度优先搜索和广度优先搜索</title>
+    <url>/2020/01/14/%E6%B7%B1%E5%BA%A6%E6%90%9C%E7%B4%A2%E5%92%8C%E5%B9%BF%E5%BA%A6%E6%90%9C%E7%B4%A2/</url>
+    <content><![CDATA[<h3 id="深度优先搜索"><a href="#深度优先搜索" class="headerlink" title="深度优先搜索"></a>深度优先搜索</h3><p>基本思想：它的思想是从一个顶点V0开始，沿着一条路一直走到底，如果发现不能到达目标解，那就返回到上一个节点，然后从另一条路开始走到底，这种尽量往深处走的概念即是深度优先的概念</p>
+<p>例<img src="/images/%E5%9B%BE%E7%89%871.png" alt=""></p>
+<p>V0-&gt;V1-&gt;V4-&gt;V3-&gt;V5-&gt;V6,先从v0到V1，再从V1到V4，发现到了终点，就退回到V1继续寻找</p>
+<p>代码</p>
+<p>注意恢复初始状态十分重要，在一种情况走不了的情况下它可以使其恢复初始状态试下一条路</p>
+<p><img src="/images/%E5%9B%BE%E7%89%872.png" alt=""></p>
+<p>例题：<img src="/images/%E5%9B%BE%E7%89%873.png" alt=""></p>
+<p>遍历连通图，能否从v0到v6</p>
+<p>答案<img src="/images/%E5%9B%BE%E7%89%874.png" alt=""></p>
+<h3 id="广度优先搜索"><a href="#广度优先搜索" class="headerlink" title="广度优先搜索"></a>广度优先搜索</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">广度优先搜索是最简便的图的搜索算法之一，别名又叫BFS，属于一种盲目搜寻法，目的是系统地展开并检查图中的所有节点，以找寻结果。换句话说，它并不考虑结果的可能位置，彻底地搜索整张图，直到找到结果为止。所有因为展开节点而得到的子节点都会被加进一个先进先出的队列中</span><br></pre></td></tr></table></figure>
+<p>模板<br><img src="/images/%E5%9B%BE%E7%89%875.png" alt=""></p>
+]]></content>
       <categories>
-          
-          <category> 算法 </category>
-          
+        <category>算法</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> 排序 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>前缀和</title>
-      <link href="/2020/01/13/%E5%89%8D%E7%BC%80%E5%92%8C/"/>
-      <url>/2020/01/13/%E5%89%8D%E7%BC%80%E5%92%8C/</url>
-      
-        <content type="html"><![CDATA[<h3 id="前缀和概念"><a href="#前缀和概念" class="headerlink" title="前缀和概念"></a>前缀和概念</h3><p>前缀和指的是用另一个数组b[n]来保存a[n]中前n项的和</p><p>例如，b[0]=a[0],b[1]=a[0]+a[1],…</p><h3 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h3><h4 id="求数组某一区间长度数字的和"><a href="#求数组某一区间长度数字的和" class="headerlink" title="求数组某一区间长度数字的和"></a>求数组某一区间长度数字的和</h4><p>如果我给你一串长度为n的数列a1,a2,a3……an,再给出m个询问，每次询问给出L，R两个数，要求给出区间[L,R]里的数的和，一般可能是从L到R遍历一次，但这样很花时间，有了前缀和之后可以直接b[R]-b[L]就得到L到R的和</p><h3 id="差分"><a href="#差分" class="headerlink" title="差分"></a>差分</h3><p>差分就是将数列中的每一项分别与前一项数做差</p><p>一个序列1 2 5 4 7 3，差分后得到1 1 3 -1 3 -4 -3</p><p>这里注意得到的差分序列第一个数和原来的第一个数一样（相当于第一个数减0）<br>差分序列最后比原序列多一个数（相当于0减最后一个数）</p><p>例 给你一串长度为n的数列a1,a2,a3……an，要求对a[L]~a[R]进行m次操作：</p><p>操作一：将a[L]~a[R]内的元素都加上P</p><p>操作二：将a[L]~a[R]内的元素都减去P</p><p>最后再给出一个询问求a[L]-a[R]内的元素之和？</p><p>如果用一般做法就是遍历加减，时间复杂度高，现在可以直接让b[L] 加上P，再让b[R+1]减去P，这样因为b[L+1]=b[L]+a[L+1]，所以L到R上每一项都会加P，而b[R+1]减去P是为了对后面的数不产生影响</p><p>如果有多次修改操作，可以先将每次修改保存到一个数组中，然后求前缀和时再加上<br>    #include&lt;bits/stdc++.h&gt;<br>    using namespace std;<br>    const int maxn=1e5+9;<br>    int a[maxn],b[maxn];<br>    int main(){<br>     int i,j,k,n,m,p;<br>     cin&gt;&gt;n&gt;&gt;m;<br>     for(i=1;i&lt;=n;i++){<br>        cin&gt;&gt;a[i];<br>     }<br>     for(i=1;i&lt;=m;i++){<br>        int L,R,t;<br>        cin&gt;&gt;t&gt;&gt;L&gt;&gt;R&gt;&gt;p;<br>        if(t==1){<br>            b[L]+=p;b[R+1]-=p; //仔细想想为什么b[R+1]要减去p<br>        }<br>        else{<br>            b[L]-=p;b[R+1]+=p;//这是减去p<br>        }<br>    }<br>    int add=0;<br>    for(i=1;i&lt;=n;i++){<br>        add+=b[i];<br>        a[i]+=a[i-1]+add;//这是求前缀和数组，并且add是把需要加p的地方加上<br>    }<br>    int x,y;<br>    cin&gt;&gt;x&gt;&gt;y;<br>    cout&lt;&lt;a[y]-a[x-1]&lt;&lt;endl;<br>}</p><h4 id="性质："><a href="#性质：" class="headerlink" title="性质："></a>性质：</h4><p>1、差分序列求前缀和可得原序列</p><p>2、将原序列区间[L,R]中的元素全部+1，可以转化操作为差分序列L处+1，R+1处-1</p><p>3、按照性质2得到，每次修改原序列一个区间+1，那么每次差分序列修改处增加的和减少的相同</p><h3 id="二维前缀和"><a href="#二维前缀和" class="headerlink" title="二维前缀和"></a>二维前缀和</h3><p>二维前缀和对应的是二维数组</p><p><img src="/images/20180817161822690.png" alt=""></p><p>b[2][4]表示的是b[1][1]+b[1][2]+b[1][3]+b[1][4]+b[2][1]+b[2][2]+b[2][3]</p><p>因此可以先加上b[1][4]+b[2][3]，这时重复了b[1][3]，再减去</p><p>因此公式<br>a[i][j]+=a[i][j-1]+a[i-1][j]-a[i-1][j-1]，因为这样，二维前缀和最好从一开始，0处全赋值为0</p><p>这时想知道从(x1,y1)到(x2,y2)的和要a[x2][y2]-a[x1-1][y2]-a[x2][y1-1]+a[x1-1][y1-1]</p><p>例如，求(3,3)到(4,4)的值，实际上是a[3][3]+a[3][4]+a[4][3]+a[4][4]</p><h3 id="二维差分（不是很清楚）"><a href="#二维差分（不是很清楚）" class="headerlink" title="二维差分（不是很清楚）"></a>二维差分（不是很清楚）</h3><p>和一维差分的第四个问题类似，让（x1,y1)和（x2,y2）矩形内的数都加上x</p><p>b[x1][y1]+=x; b[x2+1][y2+1]+=x;</p><p>b[x1][y2+1]-=x; b[x2+1][y1]-=x;</p><p> 参考博客<a href="https://blog.csdn.net/k_r_forever/article/details/81775899" target="_blank" rel="noopener">https://blog.csdn.net/k_r_forever/article/details/81775899</a></p><p> <a href="https://blog.csdn.net/Healer66/article/details/87201014" target="_blank" rel="noopener">https://blog.csdn.net/Healer66/article/details/87201014</a></p>]]></content>
-      
-      
+  </entry>
+  <entry>
+    <title>scanf printf</title>
+    <url>/2020/01/13/scanf-printf/</url>
+    <content><![CDATA[<h3 id="scanf"><a href="#scanf" class="headerlink" title="scanf"></a>scanf</h3><p>格式：scanf(const char *format, …)</p>
+<p>format – 这是 C 字符串，包含了以下各项中的一个或多个：空格字符、非空格字符 和 format 说明符。</p>
+<p>format 说明符形式为:</p>
+<p>[=%[*][width][modifiers]type=]</p>
+<p><code>*</code>这是一个可选的星号，表示数据是从流 stream 中读取的，但是可以被忽视，即它不存储在对应的参数中。</p>
+<p>width    这指定了在当前读取操作中读取的最大字符数。</p>
+<p>modifiers    为对应的附加参数所指向的数据指定一个不同于整型（针对 d、i 和 n）、无符号整型（针对 o、u 和 x）或浮点型（针对 e、f 和 g）的大小： h ：短整型（针对 d、i 和 n），或无符号短整型（针对 o、u 和 x） l ：长整型（针对 d、i 和 n），或无符号长整型（针对 o、u 和 x），或双精度型（针对 e、f 和 g） L ：长双精度型（针对 e、f 和 g）</p>
+<p>type    一个字符，指定了要被读取的数据类型以及数据读取方式。具体参见下一个表格</p>
+<p>| %a、%A|读入一个浮点值(仅 C99 有效)|float*|<br>| :——————————————-|<br>| %c     | 单个字符：读取下一个字符。如果指定了一个不为 1 的宽度 width，函数会读取 width 个字符，并通过参数传递，把它们存储在数组中连续位置。在末尾不会追加空字符。|    char *<br>|%d    |十进制整数：数字前面的 + 或 - 号是可选的。|    int *<br>|%e、%E、%f、%F、%g、%G    |浮点数：包含了一个小数点、一个可选的前置符号 + 或 -、一个可选的后置字符 e 或 E，以及一个十进制数字。两个有效的实例 -732.103 和 7.12e4    |float *<br>|%i|    读入十进制，八进制，十六进制整数 。|    int *<br>|%o    |八进制整数。|    int *<br>|%s    |字符串。这将读取连续字符，直到遇到一个空格字符（空格字符可以是空白、换行和制表符）。|    char *<br>|%u    |无符号的十进制整数。|    unsigned int *</p>
+<h4 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h4><p>用%c 读数组时注意它不会读入换行符，因此每次用完之后要用getchar()<br>，而%s就不用担心这个问题</p>
+<h3 id="printf"><a href="#printf" class="headerlink" title="printf"></a>printf</h3><p>格式 printf(“&lt;格式化字符串&gt;”, &lt;参量表&gt;);</p>
+<p>声明 printf(const char *format, …)</p>
+<p>|格式字符|    意义<br>|————————-|<br>|d|    以十进制形式输出带符号整数(正数不输出符号)<br>|o    |以八进制形式输出无符号整数(不输出前缀0)<br>|x,X    |以十六进制形式输出无符号整数(不输出前缀Ox)<br>|u    |以十进制形式输出无符号整数<br>|f|    以小数形式输出单、双精度实数<br>|e,E    |以指数形式输出单、双精度实数<br>|g,G    |以%f或%e中较短的输出宽度输出单、双精度实数<br>|c|    输出单个字符<br>|s    |输出字符串<br>|p|    输出指针地址<br>|lu    |32位无符号整数<br>|llu|    64位无符号整数</p>
+]]></content>
       <categories>
-          
-          <category> 算法 </category>
-          
+        <category>基础</category>
       </categories>
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>结构体</title>
-      <link href="/2020/01/12/%E7%BB%93%E6%9E%84%E4%BD%93/"/>
-      <url>/2020/01/12/%E7%BB%93%E6%9E%84%E4%BD%93/</url>
-      
-        <content type="html"><![CDATA[<p>在c++中，结构体与类类似，都有个体域和成员函数，不同是class中默认的成员访问权限是private的，而struct中则是public的。 (2)class继承默认是private继承，而从struct继承默认是public继承。</p><p>定义：</p><pre><code> struct tag {  member-list}variable-list;</code></pre><p>注：struct为结构体关键字；<br>   tag为结构体的标志；<br>   member-list为结构体成员变量及成员函数列表，其必须列出其所有成员；<br>   variable-list为此结构体声明的变量；</p><p>tag相当于class中的类名，而variable-list相当于class中创建的对象</p><p>另外，如果想多创建几个对象，只需要<code>tag 变量名</code>即可</p><p>在c++中，可以直接用<code>variable-list+变量名</code>创建对象</p>]]></content>
-      
-      
+  </entry>
+  <entry>
+    <title>归并排序</title>
+    <url>/2020/01/13/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/</url>
+    <content><![CDATA[<h4 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h4><p>归并排序运用了分治的思想，先将数组二分成一个元素（一个元素时看为有序），然后将这些元素不断合并，每合并一次排一次序，最后就可以得到有序的数组。</p>
+<p>比如说一个序列:12 ,23,1,44,233,10,9,8。我们先分成两段：12 ,23,1,44 和 233,10,9,8，<br>发现还能再分成4段：12 ,23 和 1,44——233,10 和 9,8。<br>再分成8段：12–23–1–44 和233–10–9–8。<br>这时候开始把子序列进行排序合并，一个元素就是有序的。所以不用排序。<br>合并成2个一组排序得到：12，23—-1，44—10，233—8，9。<br>再合并成4个一组排序得到：1，12，23，44—8，9，10，233。<br>最后合并得到最终结果：1，8，9，10，12，23，44，233。</p>
+<p>合并过程看代码</p>
+<p>链接：<a href="https://www.jianshu.com/p/b50a6034eb90" target="_blank" rel="noopener">https://www.jianshu.com/p/b50a6034eb90</a></p>
+<h4 id="图解"><a href="#图解" class="headerlink" title="图解"></a>图解</h4><p><img src="/images/1024555-20161218163120151-452283750.png" alt=""></p>
+<p>这个图片蓝色部分就是拆的过程，而绿的部分为并的过程</p>
+<h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">paixu</span><span class="params">(<span class="keyword">int</span> first,<span class="keyword">int</span> mid,<span class="keyword">int</span> last,<span class="keyword">int</span> a[],<span class="keyword">int</span> temp[])</span><span class="comment">//这是合并过程</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> l1=first,l2=mid+<span class="number">1</span>,r1=mid,r2=last;</span><br><span class="line">    <span class="keyword">int</span> k=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(l1&lt;=r1&amp;&amp;l2&lt;=r2)<span class="comment">//两部分都存在时看哪个小就加上哪个</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(a[l1]&lt;=a[l2])</span><br><span class="line">        &#123;</span><br><span class="line">            temp[k++]=a[l1++];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            temp[k++]=a[l2++];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(l1&lt;=r1)<span class="comment">//第一部分有剩余就把第一部分剩下的全加上</span></span><br><span class="line">    &#123;</span><br><span class="line">        temp[k++]=a[l1++];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(l2&lt;=r2)</span><br><span class="line">    &#123;</span><br><span class="line">        temp[k++]=a[l2++];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;k;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        a[i+first]=temp[i];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">xunhuan</span><span class="params">(<span class="keyword">int</span> first,<span class="keyword">int</span> last,<span class="keyword">int</span> a[],<span class="keyword">int</span> temp[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(first&lt;last)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> mid=(first+last)/<span class="number">2</span>;</span><br><span class="line">        xunhuan(first,mid,a,temp);<span class="comment">//拆左边</span></span><br><span class="line">        xunhuan(mid+<span class="number">1</span>,last,a,temp);<span class="comment">//拆右边</span></span><br><span class="line">        paixu(first,mid,last,a,temp);<span class="comment">//合并</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">mergesort</span><span class="params">(<span class="keyword">int</span> a[],<span class="keyword">int</span> first,<span class="keyword">int</span> last)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span>* p=<span class="keyword">new</span> <span class="keyword">int</span>[last-first];<span class="comment">//建一个临时数组，合并时用</span></span><br><span class="line">    <span class="keyword">if</span>(p==<span class="literal">NULL</span>)<span class="comment">//判断是否传入空数组</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    xunhuan(first,last,a,p);</span><br><span class="line">    <span class="keyword">delete</span> [] p;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
-          
-          <category> 基础 </category>
-          
+        <category>算法</category>
       </categories>
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>memset</title>
-      <link href="/2020/01/11/memset/"/>
-      <url>/2020/01/11/memset/</url>
-      
-        <content type="html"><![CDATA[<p>memset(标识符，填充数据,大小)</p><p>memset是一个字节一个字节填充的，所以一般只能填充0或-1因为这个一个字节和四个字节相同</p>]]></content>
-      
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>快速输入</title>
-      <link href="/2020/01/11/%E5%BF%AB%E9%80%9F%E8%BE%93%E5%85%A5/"/>
-      <url>/2020/01/11/%E5%BF%AB%E9%80%9F%E8%BE%93%E5%85%A5/</url>
-      
-        <content type="html"><![CDATA[<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">inline int read()</span><br><span class="line">&#123;</span><br><span class="line">    int <span class="attribute">x</span>=0,f=1;</span><br><span class="line">    char <span class="attribute">ch</span>=getchar();</span><br><span class="line">    <span class="keyword">while</span> (ch&lt;<span class="string">'0'</span>||ch&gt;<span class="string">'9'</span>)&#123;<span class="keyword">if</span> (<span class="attribute">ch</span>=='-') <span class="attribute">f</span>=-1;ch=getchar();&#125;</span><br><span class="line">    <span class="keyword">while</span> (ch&gt;=<span class="string">'0'</span>&amp;&amp;ch&lt;=<span class="string">'9'</span>)&#123;<span class="attribute">x</span>=x*10+ch-'0';ch=getchar();&#125;</span><br><span class="line">    return x<span class="number">*f</span>;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>这个快速输入只适合int类型，另外如果参加比赛，最好不要用cin，cout，速度较慢<br>用scanf，printf更好</p>]]></content>
-      
-      
+      <tags>
+        <tag>排序</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>前缀和</title>
+    <url>/2020/01/13/%E5%89%8D%E7%BC%80%E5%92%8C/</url>
+    <content><![CDATA[<h3 id="前缀和概念"><a href="#前缀和概念" class="headerlink" title="前缀和概念"></a>前缀和概念</h3><p>前缀和指的是用另一个数组b[n]来保存a[n]中前n项的和</p>
+<p>例如，b[0]=a[0],b[1]=a[0]+a[1],…</p>
+<h3 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h3><h4 id="求数组某一区间长度数字的和"><a href="#求数组某一区间长度数字的和" class="headerlink" title="求数组某一区间长度数字的和"></a>求数组某一区间长度数字的和</h4><p>如果我给你一串长度为n的数列a1,a2,a3……an,再给出m个询问，每次询问给出L，R两个数，要求给出区间[L,R]里的数的和，一般可能是从L到R遍历一次，但这样很花时间，有了前缀和之后可以直接b[R]-b[L]就得到L到R的和</p>
+<h3 id="差分"><a href="#差分" class="headerlink" title="差分"></a>差分</h3><p>差分就是将数列中的每一项分别与前一项数做差</p>
+<p>一个序列1 2 5 4 7 3，差分后得到1 1 3 -1 3 -4 -3</p>
+<p>这里注意得到的差分序列第一个数和原来的第一个数一样（相当于第一个数减0）<br>差分序列最后比原序列多一个数（相当于0减最后一个数）</p>
+<p>例 给你一串长度为n的数列a1,a2,a3……an，要求对a[L]~a[R]进行m次操作：</p>
+<p>操作一：将a[L]~a[R]内的元素都加上P</p>
+<p>操作二：将a[L]~a[R]内的元素都减去P</p>
+<p>最后再给出一个询问求a[L]-a[R]内的元素之和？</p>
+<p>如果用一般做法就是遍历加减，时间复杂度高，现在可以直接让b[L] 加上P，再让b[R+1]减去P，这样因为b[L+1]=b[L]+a[L+1]，所以L到R上每一项都会加P，而b[R+1]减去P是为了对后面的数不产生影响</p>
+<p>如果有多次修改操作，可以先将每次修改保存到一个数组中，然后求前缀和时再加上<br>    #include&lt;bits/stdc++.h&gt;<br>    using namespace std;<br>    const int maxn=1e5+9;<br>    int a[maxn],b[maxn];<br>    int main(){<br>     int i,j,k,n,m,p;<br>     cin&gt;&gt;n&gt;&gt;m;<br>     for(i=1;i&lt;=n;i++){<br>        cin&gt;&gt;a[i];<br>     }<br>     for(i=1;i&lt;=m;i++){<br>        int L,R,t;<br>        cin&gt;&gt;t&gt;&gt;L&gt;&gt;R&gt;&gt;p;<br>        if(t==1){<br>            b[L]+=p;b[R+1]-=p; //仔细想想为什么b[R+1]要减去p<br>        }<br>        else{<br>            b[L]-=p;b[R+1]+=p;//这是减去p<br>        }<br>    }<br>    int add=0;<br>    for(i=1;i&lt;=n;i++){<br>        add+=b[i];<br>        a[i]+=a[i-1]+add;//这是求前缀和数组，并且add是把需要加p的地方加上<br>    }<br>    int x,y;<br>    cin&gt;&gt;x&gt;&gt;y;<br>    cout&lt;&lt;a[y]-a[x-1]&lt;&lt;endl;<br>}</p>
+<h4 id="性质："><a href="#性质：" class="headerlink" title="性质："></a>性质：</h4><p>1、差分序列求前缀和可得原序列</p>
+<p>2、将原序列区间[L,R]中的元素全部+1，可以转化操作为差分序列L处+1，R+1处-1</p>
+<p>3、按照性质2得到，每次修改原序列一个区间+1，那么每次差分序列修改处增加的和减少的相同</p>
+<h3 id="二维前缀和"><a href="#二维前缀和" class="headerlink" title="二维前缀和"></a>二维前缀和</h3><p>二维前缀和对应的是二维数组</p>
+<p><img src="/images/20180817161822690.png" alt=""></p>
+<p>b[2][4]表示的是b[1][1]+b[1][2]+b[1][3]+b[1][4]+b[2][1]+b[2][2]+b[2][3]</p>
+<p>因此可以先加上b[1][4]+b[2][3]，这时重复了b[1][3]，再减去</p>
+<p>因此公式<br>a[i][j]+=a[i][j-1]+a[i-1][j]-a[i-1][j-1]，因为这样，二维前缀和最好从一开始，0处全赋值为0</p>
+<p>这时想知道从(x1,y1)到(x2,y2)的和要a[x2][y2]-a[x1-1][y2]-a[x2][y1-1]+a[x1-1][y1-1]</p>
+<p>例如，求(3,3)到(4,4)的值，实际上是a[3][3]+a[3][4]+a[4][3]+a[4][4]</p>
+<h3 id="二维差分（不是很清楚）"><a href="#二维差分（不是很清楚）" class="headerlink" title="二维差分（不是很清楚）"></a>二维差分（不是很清楚）</h3><p>和一维差分的第四个问题类似，让（x1,y1)和（x2,y2）矩形内的数都加上x</p>
+<p>b[x1][y1]+=x; b[x2+1][y2+1]+=x;</p>
+<p>b[x1][y2+1]-=x; b[x2+1][y1]-=x;</p>
+<p> 参考博客<a href="https://blog.csdn.net/k_r_forever/article/details/81775899" target="_blank" rel="noopener">https://blog.csdn.net/k_r_forever/article/details/81775899</a></p>
+<p> <a href="https://blog.csdn.net/Healer66/article/details/87201014" target="_blank" rel="noopener">https://blog.csdn.net/Healer66/article/details/87201014</a></p>
+]]></content>
       <categories>
-          
-          <category> 算法 </category>
-          
+        <category>算法</category>
       </categories>
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>qsort</title>
-      <link href="/2020/01/11/qsort/"/>
-      <url>/2020/01/11/qsort/</url>
-      
-        <content type="html"><![CDATA[<p>自带的快排函数</p><p>qsortvoid qsort(void <em>base, size_t nitems, size_t size, int (*compar)(const void *, const void</em>))</p><p>参数</p><p>base– 指向要排序的数组的第一个元素的指针。<br>nitems– 由 base 指向的数组中元素的个数。<br>size– 数组中每个元素的大小，以字节为单位。<br>compar– 用来比较两个元素的函数，即函数指针（回调函数）</p><p>回调函数：</p><p>回调函数就是一个通过函数指针调用的函数。如果把函数的指针（地址）作为参数传递给另一个函数，当这个指针被用来调用其所指向的函数时，就说这是回调函数。 [2]<br>compar参数<br>compar参数指向一个比较两个元素的函数。比较函数的原型应该像下面这样。注意两个形参必须是const void *型，同时在调用compar 函数（compar实质为函数指针，这里称它所指向的函数也为compar）时，传入的实参也必须转换成const void *型。在compar函数内部会将const void *型转换成实际类型。<br>int compar(const void *p1, const void *p2);</p><p>如果compar返回值小于0（&lt; 0），那么p1所指向元素会被排在p2所指向元素的左面；<br>　　如果compar返回值等于0（= 0），那么p1所指向元素与p2所指向元素的顺序不确定；<br>　　如果compar返回值大于0（&gt; 0），那么p1所指向元素会被排在p2所指向元素的右面。</p>]]></content>
-      
-      
+  </entry>
+  <entry>
+    <title>结构体</title>
+    <url>/2020/01/12/%E7%BB%93%E6%9E%84%E4%BD%93/</url>
+    <content><![CDATA[<p>在c++中，结构体与类类似，都有个体域和成员函数，不同是class中默认的成员访问权限是private的，而struct中则是public的。 (2)class继承默认是private继承，而从struct继承默认是public继承。</p>
+<p>定义：</p>
+<pre><code> struct tag 
+{
+  member-list
+}variable-list;</code></pre><p>注：struct为结构体关键字；<br>   tag为结构体的标志；<br>   member-list为结构体成员变量及成员函数列表，其必须列出其所有成员；<br>   variable-list为此结构体声明的变量；</p>
+<p>tag相当于class中的类名，而variable-list相当于class中创建的对象</p>
+<p>另外，如果想多创建几个对象，只需要<code>tag 变量名</code>即可</p>
+<p>在c++中，可以直接用<code>variable-list+变量名</code>创建对象</p>
+]]></content>
       <categories>
-          
-          <category> stl </category>
-          
+        <category>基础</category>
       </categories>
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>pair</title>
-      <link href="/2020/01/11/pair/"/>
-      <url>/2020/01/11/pair/</url>
-      
-        <content type="html"><![CDATA[<p>pair实际上是一个结构体，它可以把两种类型结合起来使用,定义在<code>&lt;utility&gt;</code>中</p><p>定义：pair&lt;类型A,类型B&gt; 标识符</p><p>操作 pa.first 表示类型A pa.second 表示类型B</p><p>注意不能用-> 操作符，虽然我也不知道为什么]]></content>
-      
-      
+  </entry>
+  <entry>
+    <title>memset</title>
+    <url>/2020/01/11/memset/</url>
+    <content><![CDATA[<p>memset(标识符，填充数据,大小)</p>
+<p>memset是一个字节一个字节填充的，所以一般只能填充0或-1因为这个一个字节和四个字节相同</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>快速输入</title>
+    <url>/2020/01/11/%E5%BF%AB%E9%80%9F%E8%BE%93%E5%85%A5/</url>
+    <content><![CDATA[<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">inline int read()</span><br><span class="line">&#123;</span><br><span class="line">    int <span class="attribute">x</span>=0,f=1;</span><br><span class="line">    char <span class="attribute">ch</span>=getchar();</span><br><span class="line">    <span class="keyword">while</span> (ch&lt;<span class="string">'0'</span>||ch&gt;<span class="string">'9'</span>)&#123;<span class="keyword">if</span> (<span class="attribute">ch</span>=='-') <span class="attribute">f</span>=-1;ch=getchar();&#125;</span><br><span class="line">    <span class="keyword">while</span> (ch&gt;=<span class="string">'0'</span>&amp;&amp;ch&lt;=<span class="string">'9'</span>)&#123;<span class="attribute">x</span>=x*10+ch-'0';ch=getchar();&#125;</span><br><span class="line">    return x<span class="number">*f</span>;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个快速输入只适合int类型，另外如果参加比赛，最好不要用cin，cout，速度较慢<br>用scanf，printf更好</p>
+]]></content>
       <categories>
-          
-          <category> stl </category>
-          
+        <category>算法</category>
       </categories>
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>迭代器支持的运算</title>
-      <link href="/2020/01/11/%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%94%AF%E6%8C%81%E7%9A%84%E8%BF%90%E7%AE%97/"/>
-      <url>/2020/01/11/%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%94%AF%E6%8C%81%E7%9A%84%E8%BF%90%E7%AE%97/</url>
-      
-        <content type="html"><![CDATA[<p>之前写搜狗在线测试题目的时候，曾经想遍历一个set遍历。当时是这样写的。</p><p>set<int>::iterator b = a.begin()+1</p><p>后来发现程序报错。究其原因是，set迭代器不支持加减数操作。<br>查看了一下维基百科，下面是有关说明。</p><p>1.所有迭代器都应该实现自增算符：iter++,++iter</p><p>2.Bidirectional迭代器：是在前向迭代器的基础上，多了单步向后遍历的能力。也就是–iter,iter–。</p><p>3.Random Access迭代器：在双向迭代器基础上，具有直接访问各数据元素的能力。随机迭代器增加了“迭代器算术运算”：</p><p>iter+=i 迭代器递增i位</p><p>iter-=i 迭代器递减i位</p><p>iter+i 加i位后的迭代器</p><p>iter-i 减i位后的迭代器</p><p>iter[i] 加i位后的迭代器的解引用</p><p>iter&lt;iter1 如果迭代器iter的位置在iter1前，返回true，否则返回false</p><p>iter&lt;=iter1 如果iter的位置在iter1的前面或同一位置时返回true，否则返回false</p><p>iter&gt;iter1 如果迭代器iter的位置在iter1后，返回true，否则返回false</p><p>iter&gt;=iter1 如果iter的位置在iter1的后面或同一位置时返回true，否则返回false</p><p>4.在STL定义的容器中，string，vector与deque提供了随机访问迭代器，list、set、multiset、map、multimap提供了双向迭代器。</p><p>————————————————</p><p>版权声明：本文为CSDN博主「ShenYounger」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a href="https://blog.csdn.net/wusecaiyun/article/details/49563197" target="_blank" rel="noopener">https://blog.csdn.net/wusecaiyun/article/details/49563197</a></p>]]></content>
-      
-      
+  </entry>
+  <entry>
+    <title>qsort</title>
+    <url>/2020/01/11/qsort/</url>
+    <content><![CDATA[<p>自带的快排函数</p>
+<p>qsortvoid qsort(void <em>base, size_t nitems, size_t size, int (*compar)(const void *, const void</em>))</p>
+<p>参数</p>
+<p>base– 指向要排序的数组的第一个元素的指针。<br>nitems– 由 base 指向的数组中元素的个数。<br>size– 数组中每个元素的大小，以字节为单位。<br>compar– 用来比较两个元素的函数，即函数指针（回调函数）</p>
+<p>回调函数：</p>
+<p>回调函数就是一个通过函数指针调用的函数。如果把函数的指针（地址）作为参数传递给另一个函数，当这个指针被用来调用其所指向的函数时，就说这是回调函数。 [2]<br>compar参数<br>compar参数指向一个比较两个元素的函数。比较函数的原型应该像下面这样。注意两个形参必须是const void *型，同时在调用compar 函数（compar实质为函数指针，这里称它所指向的函数也为compar）时，传入的实参也必须转换成const void *型。在compar函数内部会将const void *型转换成实际类型。<br>int compar(const void *p1, const void *p2);</p>
+<p>如果compar返回值小于0（&lt; 0），那么p1所指向元素会被排在p2所指向元素的左面；<br>　　如果compar返回值等于0（= 0），那么p1所指向元素与p2所指向元素的顺序不确定；<br>　　如果compar返回值大于0（&gt; 0），那么p1所指向元素会被排在p2所指向元素的右面。</p>
+]]></content>
       <categories>
-          
-          <category> stl </category>
-          
+        <category>stl</category>
       </categories>
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>vector</title>
-      <link href="/2020/01/11/vector/"/>
-      <url>/2020/01/11/vector/</url>
-      
-        <content type="html"><![CDATA[<h3 id="vector的定义"><a href="#vector的定义" class="headerlink" title="vector的定义"></a>vector的定义</h3><p>vector&lt;数据类型&gt; 标识符</p><h3 id="vector的函数"><a href="#vector的函数" class="headerlink" title="vector的函数"></a>vector的函数</h3><p>begin()返回开头元素的迭代器</p><p>end()同理</p><p>front() 返回开头元素的引用</p><p>back() 返回末尾元素的引用</p><p>size()返回vector内元素的数量</p><p>erase(迭代器) 删除一个元素</p><p>clear() 清空</p><p>insert(迭代器，a) 把a插入迭代器后</p><p><strong>例</strong>vector中现在有1 2 3 三个元素，vec.insert(vec.begin()+2,4)得到1 2 4 3</p><h3 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h3><p>reverse(vec.begin(),vec.end()) <strong>(头文件<code>&lt;algorithm&gt;</code>)</strong></p><p>实际上不一定是begin到end，也可以begin()+1到、、、，只需要用迭代器就行了<p>sort排序，也要用<code>&lt;algorithm&gt;</code>默认升序</p><figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">bool</span> <span class="constructor">Comp(<span class="params">const</span> <span class="params">int</span> &amp;<span class="params">a</span>,<span class="params">const</span> <span class="params">int</span> &amp;<span class="params">b</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    return a&gt;b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>调用时:sort(vec.begin(),vec.end(),Comp)，这样就降序排序。</p><h3 id="二维数组"><a href="#二维数组" class="headerlink" title="二维数组"></a>二维数组</h3><pre><code>vector&lt;vector&lt;数据类型&gt; &gt; vec[3];//3行vector&lt;数据类型&gt; veci;for(int i=0;i&lt;3;i++){   for(int k=0;k&lt;4;k++)   {      veci.push_back();   }   vec.push_back(veci);}//四列</code></pre>]]></content>
-      
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>prioity_queue</title>
-      <link href="/2020/01/11/prioity-queue/"/>
-      <url>/2020/01/11/prioity-queue/</url>
-      
-        <content type="html"><![CDATA[<h3 id="prioity-queue"><a href="#prioity-queue" class="headerlink" title="prioity_queue"></a>prioity_queue</h3><p>实际上是一个大顶堆，定义在<code>&lt;queue&gt;</code>中</p><p><code>prioity_queue&lt;int&gt; qu</code>为大顶堆</p><p><code>priority_queue&lt;int,vector&lt;int&gt;,greater&lt;int&gt; &gt; qu;</code>为小顶堆</p><p>.push()</p><p>.pop()取出元素，但不返回值</p><p>.top()不取出元素，返回值</p>]]></content>
-      
-      
+  </entry>
+  <entry>
+    <title>pair</title>
+    <url>/2020/01/11/pair/</url>
+    <content><![CDATA[<p>pair实际上是一个结构体，它可以把两种类型结合起来使用,定义在<code>&lt;utility&gt;</code>中</p>
+<p>定义：pair&lt;类型A,类型B&gt; 标识符</p>
+<p>操作 pa.first 表示类型A pa.second 表示类型B</p>
+<p>注意不能用-> 操作符，虽然我也不知道为什么
+
+]]></content>
       <categories>
-          
-          <category> stl </category>
-          
+        <category>stl</category>
       </categories>
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>set</title>
-      <link href="/2020/01/11/set/"/>
-      <url>/2020/01/11/set/</url>
-      
-        <content type="html"><![CDATA[<h3 id="set之iterator"><a href="#set之iterator" class="headerlink" title="set之iterator"></a>set之iterator</h3><p>定义：set::iterator iter</p><p>运用：*iter</p><p>遍历 for(iter=set.begin();iter!=set.end();iter++)</p><p>还可以直接用auto it=set.begin() (auto是自动匹配类型)</p><p><strong>注意</strong><br>iterator只能用++，–运算符。不能*（iter-1），另外还要注意iter++后自身会改变</p><p>例：set中有0,2,4，iter指向2，现在cout&lt;&lt;<em>iter&lt;&lt;” “&lt;&lt;</em>(iter–)&lt;&lt;endl;</p><p>输出0,2，先执行iter–，我也不知道为什么</p><h3 id="set之lower-bound"><a href="#set之lower-bound" class="headerlink" title="set之lower_bound()"></a>set之lower_bound()</h3><p>lower_bound()返回从first开始的第一个大于或等于val的元素的地址。如果所有元素都小于val，则返回last的地址，所以必须要</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt;::iterator iter;</span><br><span class="line">iter=st.lower_bound(一个数字)</span><br></pre></td></tr></table></figure><p>upper_bound()返回最后一个大于等于val的元素的地址</p><h3 id="set基础"><a href="#set基础" class="headerlink" title="set基础"></a>set基础</h3><p>定义：set&lt;数据类型&gt; 标识符 ，set中元素都唯一</p><p>set实际上运用了红黑树。另外，set中元素会自动排序</p><h4 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h4><p>begin()，返回的是开头元素迭代器</p><p>end()</p><p>clear()</p><p>empty()</p><p>size()</p><h4 id="进阶"><a href="#进阶" class="headerlink" title="进阶"></a>进阶</h4><p> count(数据)判断某个值是否在set中</p><ul><li><p>erase(iterator) 删去迭代器所指向的值</p></li><li><p>erase(iteratora,iteratorb)删去a，b之间的值</p></li><li><p>erase(数据)删去该数据</p></li><li><p>set删除是不会检查任何错误的，使用时小心</p></li></ul><p>find(数据)返回指定元素的迭代器，没有则返回最后一个元素的迭代器</p><p>当set中没有元素的时候，*s.end()=0</p><p>insert(某一个值),将一个值插入set中，<strong>注意</strong>这是唯一的将元素弄到set中的方法，并且重复插入无效</p><h6 id="判断insert插入是否成功的方法（具体可看"><a href="#判断insert插入是否成功的方法（具体可看" class="headerlink" title="判断insert插入是否成功的方法（具体可看)"></a>判断insert插入是否成功的方法（<a href="https://blog.csdn.net/liyuqian199695/article/details/49100543" target="_blank" rel="noopener">具体可看</a>)</h6><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//typedef pair&lt;iterator, bool&gt; _Pairib;</span></span><br><span class="line">pair&lt;<span class="built_in">set</span>&lt;Student,FuncStudent&gt;::iterator,<span class="keyword">bool</span>&gt; pair1=set1.insert(s1);</span><br><span class="line"><span class="keyword">if</span>(pair1.second==<span class="literal">true</span>)</span><br><span class="line">&#123;</span><br><span class="line"><span class="built_in">cout</span>&lt;&lt;<span class="string">"插入s1成功"</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="built_in">cout</span>&lt;&lt;<span class="string">"插入s1失败"</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-      
-      
+  </entry>
+  <entry>
+    <title>迭代器支持的运算</title>
+    <url>/2020/01/11/%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%94%AF%E6%8C%81%E7%9A%84%E8%BF%90%E7%AE%97/</url>
+    <content><![CDATA[<p>之前写搜狗在线测试题目的时候，曾经想遍历一个set遍历。当时是这样写的。</p>
+<p>set<int>::iterator b = a.begin()+1</p>
+<p>后来发现程序报错。究其原因是，set迭代器不支持加减数操作。<br>查看了一下维基百科，下面是有关说明。</p>
+<p>1.所有迭代器都应该实现自增算符：iter++,++iter</p>
+<p>2.Bidirectional迭代器：是在前向迭代器的基础上，多了单步向后遍历的能力。也就是–iter,iter–。</p>
+<p>3.Random Access迭代器：在双向迭代器基础上，具有直接访问各数据元素的能力。随机迭代器增加了“迭代器算术运算”：</p>
+<p>iter+=i 迭代器递增i位</p>
+<p>iter-=i 迭代器递减i位</p>
+<p>iter+i 加i位后的迭代器</p>
+<p>iter-i 减i位后的迭代器</p>
+<p>iter[i] 加i位后的迭代器的解引用</p>
+<p>iter&lt;iter1 如果迭代器iter的位置在iter1前，返回true，否则返回false</p>
+<p>iter&lt;=iter1 如果iter的位置在iter1的前面或同一位置时返回true，否则返回false</p>
+<p>iter&gt;iter1 如果迭代器iter的位置在iter1后，返回true，否则返回false</p>
+<p>iter&gt;=iter1 如果iter的位置在iter1的后面或同一位置时返回true，否则返回false</p>
+<p>4.在STL定义的容器中，string，vector与deque提供了随机访问迭代器，list、set、multiset、map、multimap提供了双向迭代器。</p>
+<p>————————————————</p>
+<p>版权声明：本文为CSDN博主「ShenYounger」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a href="https://blog.csdn.net/wusecaiyun/article/details/49563197" target="_blank" rel="noopener">https://blog.csdn.net/wusecaiyun/article/details/49563197</a></p>
+]]></content>
       <categories>
-          
-          <category> stl </category>
-          
+        <category>stl</category>
       </categories>
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>&amp;&amp;与||小提示</title>
-      <link href="/2020/01/07/%E4%B8%8E-%E5%B0%8F%E6%8F%90%E7%A4%BA/"/>
-      <url>/2020/01/07/%E4%B8%8E-%E5%B0%8F%E6%8F%90%E7%A4%BA/</url>
-      
-        <content type="html"><![CDATA[<h4 id="amp-amp"><a href="#amp-amp" class="headerlink" title="&amp;&amp;"></a>&amp;&amp;</h4><p>&amp;&amp;运算符从左自由依次判断 ，如果判断有一个为假则停止判断</p><h4 id=""><a href="#" class="headerlink" title="||"></a>||</h4><p>同理如果判断有一个为真则停止判断</p><h4 id="例"><a href="#例" class="headerlink" title="例"></a>例</h4><pre><code>#include&lt;iostream&gt;using namespace std;int main(){    int a=0,b=1,c;    c = (a != b) || (++a == b++);    cout&lt;&lt;a&lt;&lt;&quot; &quot;&lt;&lt;b&lt;&lt;endl;    return 0;}</code></pre><p>输出为0 1因为前面一个为真，直接退出判断</p>]]></content>
-      
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>字符数组</title>
-      <link href="/2020/01/07/%E5%AD%97%E7%AC%A6%E6%95%B0%E7%BB%84/"/>
-      <url>/2020/01/07/%E5%AD%97%E7%AC%A6%E6%95%B0%E7%BB%84/</url>
-      
-        <content type="html"><![CDATA[<h3 id="前方高能"><a href="#前方高能" class="headerlink" title="前方高能"></a>前方高能</h3><pre><code>char a[4]={&apos;a&apos;,&apos;b&apos;,&apos;c&apos;,&apos;d&apos;};cout&lt;&lt;a&lt;&lt;endl;</code></pre><p>这将输出什么呢，是<code>abcd</code>，实际上是<code>abcdPpB</code></p><p>这就有点神奇</p><h4 id="字符数组"><a href="#字符数组" class="headerlink" title="字符数组"></a>字符数组</h4><p>char +标识符+[]，注意字符数组的最后一定会有’\0’，</p><p>例如<code>char[]=&quot;abcd&quot;,这就是一个合法的赋值，但是char[4]=&quot;abcd&quot;是不合法的因为带双引号的为字符串，赋值给字符数组时编译器会自动加上&#39;\0&#39;这时需要5个空间</code></p><h3 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h3><p>因为本来是要加上’\0’的，但是这时位子不够了，编译器只好帮它扩扩容，也就是说这是字符数组（其实现在已经不是字符数组了）长度已经不是4了，编译器会为后面几个位子附上值（不是随机的，我也有点不清楚，这样解释先），因此后面会多输出一些。但是如果开始就把长度设为5，这时’\0’就有位子放了，也就不会多出后面那些奇奇怪怪的字符</p>]]></content>
-      
-      
+  </entry>
+  <entry>
+    <title>vector</title>
+    <url>/2020/01/11/vector/</url>
+    <content><![CDATA[<h3 id="vector的定义"><a href="#vector的定义" class="headerlink" title="vector的定义"></a>vector的定义</h3><p>vector&lt;数据类型&gt; 标识符</p>
+<h3 id="vector的函数"><a href="#vector的函数" class="headerlink" title="vector的函数"></a>vector的函数</h3><p>begin()返回开头元素的迭代器</p>
+<p>end()同理</p>
+<p>front() 返回开头元素的引用</p>
+<p>back() 返回末尾元素的引用</p>
+<p>size()返回vector内元素的数量</p>
+<p>erase(迭代器) 删除一个元素</p>
+<p>clear() 清空</p>
+<p>insert(迭代器，a) 把a插入迭代器后</p>
+<p><strong>例</strong>vector中现在有1 2 3 三个元素，vec.insert(vec.begin()+2,4)得到1 2 4 3</p>
+<h3 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h3><p>reverse(vec.begin(),vec.end()) <strong>(头文件<code>&lt;algorithm&gt;</code>)</strong></p>
+<p>实际上不一定是begin到end，也可以begin()+1到、、、，只需要用迭代器就行了
+
+<p>sort排序，也要用<code>&lt;algorithm&gt;</code>默认升序</p>
+<figure class="highlight reasonml"><table><tr><td class="code"><pre><span class="line"><span class="built_in">bool</span> <span class="constructor">Comp(<span class="params">const</span> <span class="params">int</span> &amp;<span class="params">a</span>,<span class="params">const</span> <span class="params">int</span> &amp;<span class="params">b</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    return a&gt;b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>调用时:sort(vec.begin(),vec.end(),Comp)，这样就降序排序。</p>
+<h3 id="二维数组"><a href="#二维数组" class="headerlink" title="二维数组"></a>二维数组</h3><pre><code>vector&lt;vector&lt;数据类型&gt; &gt; vec[3];//3行
+vector&lt;数据类型&gt; veci;
+for(int i=0;i&lt;3;i++)
+{
+   for(int k=0;k&lt;4;k++)
+   {
+      veci.push_back();
+   }
+   vec.push_back(veci);
+}//四列</code></pre>]]></content>
+  </entry>
+  <entry>
+    <title>prioity_queue</title>
+    <url>/2020/01/11/prioity-queue/</url>
+    <content><![CDATA[<h3 id="prioity-queue"><a href="#prioity-queue" class="headerlink" title="prioity_queue"></a>prioity_queue</h3><p>实际上是一个大顶堆，定义在<code>&lt;queue&gt;</code>中</p>
+<p><code>prioity_queue&lt;int&gt; qu</code>为大顶堆</p>
+<p><code>priority_queue&lt;int,vector&lt;int&gt;,greater&lt;int&gt; &gt; qu;</code>为小顶堆</p>
+<p>.push()</p>
+<p>.pop()取出元素，但不返回值</p>
+<p>.top()不取出元素，返回值</p>
+]]></content>
       <categories>
-          
-          <category> 基础 </category>
-          
+        <category>stl</category>
       </categories>
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>next主题出现404的一个解决方法</title>
-      <link href="/2020/01/07/next%E4%B8%BB%E9%A2%98%E5%87%BA%E7%8E%B0404%E7%9A%84%E4%B8%80%E4%B8%AA%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/"/>
-      <url>/2020/01/07/next%E4%B8%BB%E9%A2%98%E5%87%BA%E7%8E%B0404%E7%9A%84%E4%B8%80%E4%B8%AA%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</url>
-      
-        <content type="html"><![CDATA[<p>在<code>主题配置文件中</code></p><figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">menu:</span></span><br><span class="line"></span><br><span class="line"><span class="symbol">home:</span> /|| home</span><br><span class="line"></span><br><span class="line"><span class="symbol">about:</span> <span class="meta-keyword">/about/</span>|| user</span><br><span class="line"></span><br><span class="line"><span class="symbol">tags:</span> <span class="meta-keyword">/tags/</span>|| tags</span><br><span class="line"></span><br><span class="line"><span class="symbol">categories:</span> <span class="meta-keyword">/categories/</span>|| th</span><br><span class="line"></span><br><span class="line"><span class="symbol">archives:</span> <span class="meta-keyword">/archives/</span>|| archive</span><br><span class="line"></span><br><span class="line"><span class="meta">#schedule: /schedule/|| calendar</span></span><br><span class="line"><span class="meta">#sitemap: /sitemap.xml || sitemap</span></span><br><span class="line"><span class="meta">#commonweal: /404/|| heartbeat</span></span><br></pre></td></tr></table></figure>  <p>注意/||，原来是/ ||，不要中间那个空格，亲测有效]]></content>
-      
-      
+  </entry>
+  <entry>
+    <title>set</title>
+    <url>/2020/01/11/set/</url>
+    <content><![CDATA[<h3 id="set之iterator"><a href="#set之iterator" class="headerlink" title="set之iterator"></a>set之iterator</h3><p>定义：set::iterator iter</p>
+<p>运用：*iter</p>
+<p>遍历 for(iter=set.begin();iter!=set.end();iter++)</p>
+<p>还可以直接用auto it=set.begin() (auto是自动匹配类型)</p>
+<p><strong>注意</strong><br>iterator只能用++，–运算符。不能*（iter-1），另外还要注意iter++后自身会改变</p>
+<p>例：set中有0,2,4，iter指向2，现在cout&lt;&lt;<em>iter&lt;&lt;” “&lt;&lt;</em>(iter–)&lt;&lt;endl;</p>
+<p>输出0,2，先执行iter–，我也不知道为什么</p>
+<h3 id="set之lower-bound"><a href="#set之lower-bound" class="headerlink" title="set之lower_bound()"></a>set之lower_bound()</h3><p>lower_bound()返回从first开始的第一个大于或等于val的元素的地址。如果所有元素都小于val，则返回last的地址，所以必须要</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt;::iterator iter;</span><br><span class="line">iter=st.lower_bound(一个数字)</span><br></pre></td></tr></table></figure>
+
+<p>upper_bound()返回最后一个大于等于val的元素的地址</p>
+<h3 id="set基础"><a href="#set基础" class="headerlink" title="set基础"></a>set基础</h3><p>定义：set&lt;数据类型&gt; 标识符 ，set中元素都唯一</p>
+<p>set实际上运用了红黑树。另外，set中元素会自动排序</p>
+<h4 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h4><p>begin()，返回的是开头元素迭代器</p>
+<p>end()</p>
+<p>clear()</p>
+<p>empty()</p>
+<p>size()</p>
+<h4 id="进阶"><a href="#进阶" class="headerlink" title="进阶"></a>进阶</h4><p> count(数据)判断某个值是否在set中</p>
+<ul>
+<li><p>erase(iterator) 删去迭代器所指向的值</p>
+</li>
+<li><p>erase(iteratora,iteratorb)删去a，b之间的值</p>
+</li>
+<li><p>erase(数据)删去该数据</p>
+</li>
+<li><p>set删除是不会检查任何错误的，使用时小心</p>
+</li>
+</ul>
+<p>find(数据)返回指定元素的迭代器，没有则返回最后一个元素的迭代器</p>
+<p>当set中没有元素的时候，*s.end()=0</p>
+<p>insert(某一个值),将一个值插入set中，<strong>注意</strong>这是唯一的将元素弄到set中的方法，并且重复插入无效</p>
+<h6 id="判断insert插入是否成功的方法（具体可看"><a href="#判断insert插入是否成功的方法（具体可看" class="headerlink" title="判断insert插入是否成功的方法（具体可看)"></a>判断insert插入是否成功的方法（<a href="https://blog.csdn.net/liyuqian199695/article/details/49100543" target="_blank" rel="noopener">具体可看</a>)</h6><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">//typedef pair&lt;iterator, bool&gt; _Pairib;</span></span><br><span class="line">	pair&lt;<span class="built_in">set</span>&lt;Student,FuncStudent&gt;::iterator,<span class="keyword">bool</span>&gt; pair1=set1.insert(s1);</span><br><span class="line">	<span class="keyword">if</span>(pair1.second==<span class="literal">true</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cout</span>&lt;&lt;<span class="string">"插入s1成功"</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cout</span>&lt;&lt;<span class="string">"插入s1失败"</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
-          
-          <category> next </category>
-          
+        <category>stl</category>
       </categories>
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>文件输入输出</title>
-      <link href="/2020/01/07/%E6%96%87%E4%BB%B6%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA/"/>
-      <url>/2020/01/07/%E6%96%87%E4%BB%B6%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA/</url>
-      
-        <content type="html"><![CDATA[<h4 id="文件输入in"><a href="#文件输入in" class="headerlink" title="文件输入in"></a>文件输入in</h4><p>文件输入指的是从文件_输入_给程序，对应的有in，get，read，seekg等<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">seekg和seekp中有三个定位基址，分别是cur（当前）beg（开始），end（末尾）&lt;p&gt;</span><br><span class="line">例如 seekg（<span class="number">100</span>，ios：：beg）；seekg（<span class="number">2</span>*sizeof(Student)) student是一个类</span><br></pre></td></tr></table></figure><h4 id="文件输出out"><a href="#文件输出out" class="headerlink" title="文件输出out"></a>文件输出out</h4><p>文件输出指的是从程序<code>输出</code>给文件，对应的有out，put，write，seekp等</p>]]></content>
-      
-      
+  </entry>
+  <entry>
+    <title>&amp;&amp;与||小提示</title>
+    <url>/2020/01/07/%E4%B8%8E-%E5%B0%8F%E6%8F%90%E7%A4%BA/</url>
+    <content><![CDATA[<h4 id="amp-amp"><a href="#amp-amp" class="headerlink" title="&amp;&amp;"></a>&amp;&amp;</h4><p>&amp;&amp;运算符从左自由依次判断 ，如果判断有一个为假则停止判断</p>
+<h4 id=""><a href="#" class="headerlink" title="||"></a>||</h4><p>同理如果判断有一个为真则停止判断</p>
+<h4 id="例"><a href="#例" class="headerlink" title="例"></a>例</h4><pre><code>#include&lt;iostream&gt;
+using namespace std;
+int main()
+{
+    int a=0,b=1,c;
+    c = (a != b) || (++a == b++);
+    cout&lt;&lt;a&lt;&lt;&quot; &quot;&lt;&lt;b&lt;&lt;endl;
+    return 0;
+}</code></pre><p>输出为0 1因为前面一个为真，直接退出判断</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>字符数组</title>
+    <url>/2020/01/07/%E5%AD%97%E7%AC%A6%E6%95%B0%E7%BB%84/</url>
+    <content><![CDATA[<h3 id="前方高能"><a href="#前方高能" class="headerlink" title="前方高能"></a>前方高能</h3><pre><code>char a[4]={&apos;a&apos;,&apos;b&apos;,&apos;c&apos;,&apos;d&apos;};
+cout&lt;&lt;a&lt;&lt;endl;</code></pre><p>这将输出什么呢，是<code>abcd</code>，实际上是<code>abcdPpB</code></p>
+<p>这就有点神奇</p>
+<h4 id="字符数组"><a href="#字符数组" class="headerlink" title="字符数组"></a>字符数组</h4><p>char +标识符+[]，注意字符数组的最后一定会有’\0’，</p>
+<p>例如<code>char[]=&quot;abcd&quot;,这就是一个合法的赋值，但是char[4]=&quot;abcd&quot;是不合法的因为带双引号的为字符串，赋值给字符数组时编译器会自动加上&#39;\0&#39;这时需要5个空间</code></p>
+<h3 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h3><p>因为本来是要加上’\0’的，但是这时位子不够了，编译器只好帮它扩扩容，也就是说这是字符数组（其实现在已经不是字符数组了）长度已经不是4了，编译器会为后面几个位子附上值（不是随机的，我也有点不清楚，这样解释先），因此后面会多输出一些。但是如果开始就把长度设为5，这时’\0’就有位子放了，也就不会多出后面那些奇奇怪怪的字符</p>
+]]></content>
       <categories>
-          
-          <category> 基础 </category>
-          
+        <category>基础</category>
       </categories>
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Hello World</title>
-      <link href="/2020/01/07/hello-world/"/>
-      <url>/2020/01/07/hello-world/</url>
-      
-        <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>]]></content>
-      
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>二分搜索</title>
-      <link href="/2020/01/07/%E4%BA%8C%E5%88%86%E6%90%9C%E7%B4%A2/"/>
-      <url>/2020/01/07/%E4%BA%8C%E5%88%86%E6%90%9C%E7%B4%A2/</url>
-      
-        <content type="html"><![CDATA[<h1 id="（主要是怕自己忘记了）"><a href="#（主要是怕自己忘记了）" class="headerlink" title="（主要是怕自己忘记了）"></a>（主要是怕自己忘记了）<p></h1><p>  一个要点，用二分时要先排序<p></p><pre><code>int erfen(int arr[],int key,int n)    {        int low=0,high=n-1;        while(low&lt;=high)        {            int mid=(low+high)/2;            if(arr[mid]&lt;key)            {                low=mid+1;            }            if(arr[mid]==key)            {                return mid;            }            if(arr[mid]&gt;key)            {                high=mid-1;            }        }        return -mid-1;     }</code></pre>]]></content>
-      
-      
+  </entry>
+  <entry>
+    <title>next主题出现404的一个解决方法</title>
+    <url>/2020/01/07/next%E4%B8%BB%E9%A2%98%E5%87%BA%E7%8E%B0404%E7%9A%84%E4%B8%80%E4%B8%AA%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</url>
+    <content><![CDATA[<p>在<code>主题配置文件中</code></p>
+<figure class="highlight dts"><table><tr><td class="code"><pre><span class="line"><span class="symbol">menu:</span></span><br><span class="line"></span><br><span class="line"><span class="symbol">home:</span> /|| home</span><br><span class="line"></span><br><span class="line"><span class="symbol">about:</span> <span class="meta-keyword">/about/</span>|| user</span><br><span class="line"></span><br><span class="line"><span class="symbol">tags:</span> <span class="meta-keyword">/tags/</span>|| tags</span><br><span class="line"></span><br><span class="line"><span class="symbol">categories:</span> <span class="meta-keyword">/categories/</span>|| th</span><br><span class="line"></span><br><span class="line"><span class="symbol">archives:</span> <span class="meta-keyword">/archives/</span>|| archive</span><br><span class="line"></span><br><span class="line"><span class="meta">#schedule: /schedule/|| calendar</span></span><br><span class="line"><span class="meta">#sitemap: /sitemap.xml || sitemap</span></span><br><span class="line"><span class="meta">#commonweal: /404/|| heartbeat</span></span><br></pre></td></tr></table></figure>
+  <p>注意/||，原来是/ ||，不要中间那个空格，亲测有效]]></content>
       <categories>
-          
-          <category> 算法 </category>
-          
+        <category>next</category>
       </categories>
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>合法的字符常量</title>
-      <link href="/2020/01/07/%E5%90%88%E6%B3%95%E7%9A%84%E5%AD%97%E7%AC%A6%E5%B8%B8%E9%87%8F/"/>
-      <url>/2020/01/07/%E5%90%88%E6%B3%95%E7%9A%84%E5%AD%97%E7%AC%A6%E5%B8%B8%E9%87%8F/</url>
-      
-        <content type="html"><![CDATA[<p>用英文单引号括起来的一个字符，例如’a’,’ ‘等等。空格也是一个字符常量</p><p>注意<p>  1.转义字符也属于字符常量，例如'\t','\n'等，但是'\97'不算]]></content>
-      
-      
+  </entry>
+  <entry>
+    <title>文件输入输出</title>
+    <url>/2020/01/07/%E6%96%87%E4%BB%B6%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA/</url>
+    <content><![CDATA[<h4 id="文件输入in"><a href="#文件输入in" class="headerlink" title="文件输入in"></a>文件输入in</h4><p>文件输入指的是从文件_输入_给程序，对应的有in，get，read，seekg等
+
+<figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line">seekg和seekp中有三个定位基址，分别是cur（当前）beg（开始），end（末尾）&lt;p&gt;</span><br><span class="line">例如 seekg（<span class="number">100</span>，ios：：beg）；seekg（<span class="number">2</span>*sizeof(Student)) student是一个类</span><br></pre></td></tr></table></figure>
+
+<h4 id="文件输出out"><a href="#文件输出out" class="headerlink" title="文件输出out"></a>文件输出out</h4><p>文件输出指的是从程序<code>输出</code>给文件，对应的有out，put，write，seekp等</p>
+]]></content>
       <categories>
-          
-          <category> 基础 </category>
-          
+        <category>基础</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> 字符常量 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>快速排序</title>
-      <link href="/2020/01/05/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/"/>
-      <url>/2020/01/05/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/</url>
-      
-        <content type="html"><![CDATA[<p>步骤：<br>1.先从数列中取出一个数作为基准数。</p><p>2．分区过程，将比这个数大的数全放到它的右边，小于或等于它的数全放到它的左边。</p><p>3．再对左右区间重复第二步，直到各区间只有一个数。</p><p>例 6 1 2 7 9 3 4 5 10 8 进行排序<p><br> 1 以6为基准数，先从右边找比6小的数，我们用一个变量j一步步向左移动，好在移动三次后我<br> 们找到了5，j为7。现在再让另一个变量i向右移动去找比6大的数，当i为3时找到了7.现在再让5<br> 和7互换，得到了6 1 2 5 9 3 4 7 10 8,。在让j向左移动，找到了4，i向右找到了9，再让两个数<br> 互换，j再向左到3，此时i向左也到3，两者相遇，便让3和6互换，第一次结束<br> （想想原因）<p><br> 2 现在分为两部分，左边全比6小，右边全比6大，为3 1 2 5 4 6 9 7 10 8<br> 再在3 1 2 5 4 中用同样的方法搜索一次得到2 1 3 5 4,再在2 1 中搜索得到1 2<br> 然后在5 4 中搜索得到4 5，左边排序完成，右边用同样的方法排序就可得到答案</p><p> 不说了，上代码</p><pre><code>void sort(int a[],int l,int r){  if(l&lt;r)//l大于等于r时这一段排序结束  {      int i=l,j=r,x=a[l];      while(i&lt;j)      {          while(i&lt;j&amp;&amp;a[j]&gt;=x)          {              j--;          }          while(i&lt;j&amp;&amp;a[i]&lt;x)          {              i++;          }          swap(a[i],a[j]);      }      swap(a[l],a[i]);      sort(s,l,i-1);      sort(s,i+1,r); }</code></pre><p>  }<br>  引用 转载请标明出处，原文地址：<a href="http://blog.csdn.net/morewindows/article/details/6684558" target="_blank" rel="noopener">http://blog.csdn.net/morewindows/article/details/6684558</a><br>         csdn 我见过最通俗易懂的快速排序过程讲解，转自《坐在马桶上看算法：快速排序》</p>]]></content>
-      
-      
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2020/01/07/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>二分搜索</title>
+    <url>/2020/01/07/%E4%BA%8C%E5%88%86%E6%90%9C%E7%B4%A2/</url>
+    <content><![CDATA[<h1 id="（主要是怕自己忘记了）"><a href="#（主要是怕自己忘记了）" class="headerlink" title="（主要是怕自己忘记了）"></a>（主要是怕自己忘记了）<p></h1><p>  一个要点，用二分时要先排序<p></p>
+<pre><code>int erfen(int arr[],int key,int n)
+    {
+        int low=0,high=n-1;
+        while(low&lt;=high)
+        {
+            int mid=(low+high)/2;
+            if(arr[mid]&lt;key)
+            {
+                low=mid+1;
+            }
+            if(arr[mid]==key)
+            {
+                return mid;
+            }
+            if(arr[mid]&gt;key)
+            {
+                high=mid-1;
+            }
+        }
+        return -mid-1;
+     }</code></pre>]]></content>
       <categories>
-          
-          <category> 算法 </category>
-          
+        <category>算法</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> 快排 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>动态规划背包问题</title>
-      <link href="/2020/01/04/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/"/>
-      <url>/2020/01/04/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/</url>
-      
-        <content type="html"><![CDATA[<h3 id="第一类背包问题"><a href="#第一类背包问题" class="headerlink" title="第一类背包问题"></a>第一类背包问题</h3><p>问题，有N件物品和一个容量为V的背包。第i件物品的大小是c[i]，价值是w[i]。求解将哪些物品装入背包可使价值总和最大。</p><p><strong>思路</strong> 可以用一个二维数组a[i][j]，表示把前i个物体放入一个容量为j的容器中所获得的最大价值，而a[i][j]=max(a[i-1][j],a[i-1][j-c[i]]+w[i])</p><p>这个式子表示到底是不装第i个物品价值大还是花去c[i]的空间装获得w[i]的价值所得的总价值最大，</p><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">n w v    <span class="number">1</span>   <span class="number">2</span>  <span class="number">3</span>  <span class="number">4</span>  <span class="number">5</span>  <span class="number">6</span>  <span class="number">7</span>  <span class="number">8</span>  <span class="number">9</span>  <span class="number">10</span></span><br><span class="line">a<span class="number">2</span><span class="number">6</span><span class="number">0</span><span class="number">6</span><span class="number">6</span><span class="number">9</span><span class="number">9</span><span class="number">12</span><span class="number">12</span><span class="number">15</span><span class="number">15</span><span class="number">15</span></span><br><span class="line">b<span class="number">2</span><span class="number">3</span><span class="number">0</span><span class="number">3</span><span class="number">3</span><span class="number">6</span><span class="number">6</span><span class="number">9</span><span class="number">9</span><span class="number">9</span><span class="number">10</span><span class="number">11</span></span><br><span class="line">c<span class="number">6</span><span class="number">5</span><span class="number">0</span><span class="number">0</span><span class="number">0</span><span class="number">6</span><span class="number">6</span><span class="number">6</span><span class="number">6</span><span class="number">6</span><span class="number">10</span><span class="number">11</span></span><br><span class="line">d<span class="number">5</span><span class="number">4</span><span class="number">0</span><span class="number">0</span><span class="number">0</span><span class="number">6</span><span class="number">6</span><span class="number">6</span><span class="number">6</span><span class="number">6</span><span class="number">10</span><span class="number">10</span></span><br><span class="line">e<span class="number">4</span><span class="number">6</span><span class="number">0</span><span class="number">0</span><span class="number">0</span><span class="number">6</span><span class="number">6</span><span class="number">6</span><span class="number">6</span><span class="number">6</span><span class="number">6</span><span class="number">6</span></span><br></pre></td></tr></table></figure><p>为了叙述方便，用e2单元格表示e行2列的单元格，这个单元格的意义是用来表示只有物品e时，有个承重为2的背包，那么这个背包的最大价值是0，因为e物品的重量是4，背包装不了。</p><p>对于d2单元格，表示只有物品e，d时,承重为2的背包,所能装入的最大价值，仍然是0，因为物品e,d都不是这个背包能装的。</p><p>上代码</p><p>————————————————<br>版权声明：本文为CSDN博主「从杰」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a href="https://blog.csdn.net/mu399/article/details/7722810" target="_blank" rel="noopener">https://blog.csdn.net/mu399/article/details/7722810</a></p>]]></content>
-      
-      
+  </entry>
+  <entry>
+    <title>合法的字符常量</title>
+    <url>/2020/01/07/%E5%90%88%E6%B3%95%E7%9A%84%E5%AD%97%E7%AC%A6%E5%B8%B8%E9%87%8F/</url>
+    <content><![CDATA[<p>用英文单引号括起来的一个字符，例如’a’,’ ‘等等。空格也是一个字符常量</p>
+<p>注意<p>
+  1.转义字符也属于字符常量，例如'\t','\n'等，但是'\97'不算]]></content>
       <categories>
-          
-          <category> 算法 </category>
-          
+        <category>基础</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> 动态规划 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>线性筛</title>
-      <link href="/2020/01/04/%E7%BA%BF%E6%80%A7%E7%AD%9B/"/>
-      <url>/2020/01/04/%E7%BA%BF%E6%80%A7%E7%AD%9B/</url>
-      
-        <content type="html"><![CDATA[<p>埃氏筛中有重复，例如6,2与3都筛了一次，效率低<br>线性筛定理，（口语不准确）一个数i乘以小于等于它的最小素因数的素数所得到的合数之间没有重复</p><pre><code>#define N 10000int flag[N+1],prime[N+1],pnum;/*flag[n] 表示n是否是素数，1是素数，0不是prime   中是所有的素数按从小到大排列、pnum  表示素数的个数*/void CreatePrime(){    pnum=0;//初始化没有素数    //先将所有数看做素数，然后开始筛选    for(int i=0; i&lt;=N; i++){        flag[i]=1;    }    //遍历筛去所有最大因数是i的合数    for(int i=2; i&lt;=N; i++){        if(flag[i]==1){        //把素数记录下来            p[pnum++]=i;        }        //遍历已知素数表中比i的最小素因数小的素数，并筛去合数        for(int j=0; j&lt;pnum &amp;&amp; p[j]*i&lt;=N; j++){        //筛去合数            flag[p[j]*i]=0;            if(i%p[j]==0)            //找到i的最小素因数，找到了就终止                break;        }    }</code></pre><p>————————————————<br>版权声明：本文为CSDN博主「太上绝情」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a href="https://blog.csdn.net/bjrxyz/article/details/8125913" target="_blank" rel="noopener">https://blog.csdn.net/bjrxyz/article/details/8125913</a></p>]]></content>
-      
-      
+      <tags>
+        <tag>字符常量</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>快速排序</title>
+    <url>/2020/01/05/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/</url>
+    <content><![CDATA[<p>步骤：<br>1.先从数列中取出一个数作为基准数。</p>
+<p>2．分区过程，将比这个数大的数全放到它的右边，小于或等于它的数全放到它的左边。</p>
+<p>3．再对左右区间重复第二步，直到各区间只有一个数。</p>
+<p>例 6 1 2 7 9 3 4 5 10 8 进行排序<p><br> 1 以6为基准数，先从右边找比6小的数，我们用一个变量j一步步向左移动，好在移动三次后我<br> 们找到了5，j为7。现在再让另一个变量i向右移动去找比6大的数，当i为3时找到了7.现在再让5<br> 和7互换，得到了6 1 2 5 9 3 4 7 10 8,。在让j向左移动，找到了4，i向右找到了9，再让两个数<br> 互换，j再向左到3，此时i向左也到3，两者相遇，便让3和6互换，第一次结束<br> （想想原因）<p><br> 2 现在分为两部分，左边全比6小，右边全比6大，为3 1 2 5 4 6 9 7 10 8<br> 再在3 1 2 5 4 中用同样的方法搜索一次得到2 1 3 5 4,再在2 1 中搜索得到1 2<br> 然后在5 4 中搜索得到4 5，左边排序完成，右边用同样的方法排序就可得到答案</p>
+<p> 不说了，上代码</p>
+<pre><code>void sort(int a[],int l,int r)
+{
+  if(l&lt;r)//l大于等于r时这一段排序结束
+  {
+      int i=l,j=r,x=a[l];
+      while(i&lt;j)
+      {
+          while(i&lt;j&amp;&amp;a[j]&gt;=x)
+          {
+              j--;
+          }
+          while(i&lt;j&amp;&amp;a[i]&lt;x)
+          {
+              i++;
+          }
+          swap(a[i],a[j]);
+      }
+      swap(a[l],a[i]);
+      sort(s,l,i-1);
+      sort(s,i+1,r);
+ }</code></pre><p>  }<br>  引用 转载请标明出处，原文地址：<a href="http://blog.csdn.net/morewindows/article/details/6684558" target="_blank" rel="noopener">http://blog.csdn.net/morewindows/article/details/6684558</a><br>         csdn 我见过最通俗易懂的快速排序过程讲解，转自《坐在马桶上看算法：快速排序》</p>
+]]></content>
       <categories>
-          
-          <category> 算法 </category>
-          
+        <category>算法</category>
       </categories>
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>埃氏筛</title>
-      <link href="/2020/01/04/%E5%9F%83%E6%B0%8F%E7%AD%9B/"/>
-      <url>/2020/01/04/%E5%9F%83%E6%B0%8F%E7%AD%9B/</url>
-      
-        <content type="html"><![CDATA[<p>在筛质数时，我们会发现，筛去2后，2的倍数4、6、8等一定不是素数;筛去3后，3的倍数6、9、12等一定不是倍数。简单模拟这个过程如下</p><pre><code>const int MAXN = 1000000；  void Prime()  {      for (int i=0; i&lt;MAXN; i++) prime[i]=1;  //先把每个数都定义为质数    prime[0]=prime[1]=0;      for (int i=2; i&lt;MAXN; i++)      {          if (!prime[i]) continue;          for (int j=i*2; j&lt;MAXN; j+=i) prime[j] = 0;  //将i的倍数标记为合数    }  }</code></pre>]]></content>
-      
-      
+      <tags>
+        <tag>快排</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>动态规划背包问题</title>
+    <url>/2020/01/04/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<h3 id="第一类背包问题"><a href="#第一类背包问题" class="headerlink" title="第一类背包问题"></a>第一类背包问题</h3><p>问题，有N件物品和一个容量为V的背包。第i件物品的大小是c[i]，价值是w[i]。求解将哪些物品装入背包可使价值总和最大。</p>
+<p><strong>思路</strong> 可以用一个二维数组a[i][j]，表示把前i个物体放入一个容量为j的容器中所获得的最大价值，而a[i][j]=max(a[i-1][j],a[i-1][j-c[i]]+w[i])</p>
+<p>这个式子表示到底是不装第i个物品价值大还是花去c[i]的空间装获得w[i]的价值所得的总价值最大，</p>
+<figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line">n 	w v    <span class="number">1</span>   <span class="number">2</span>  <span class="number">3</span>	  <span class="number">4</span>	  <span class="number">5</span>	  <span class="number">6</span>	  <span class="number">7</span>	  <span class="number">8</span>	  <span class="number">9</span>	  <span class="number">10</span></span><br><span class="line">a	<span class="number">2</span>	<span class="number">6</span>	<span class="number">0</span>	<span class="number">6</span>	<span class="number">6</span>	<span class="number">9</span>	<span class="number">9</span>	<span class="number">12</span>	<span class="number">12</span>	<span class="number">15</span>	<span class="number">15</span>	<span class="number">15</span></span><br><span class="line">b	<span class="number">2</span>	<span class="number">3</span>	<span class="number">0</span>	<span class="number">3</span>	<span class="number">3</span>	<span class="number">6</span>	<span class="number">6</span>	<span class="number">9</span>	<span class="number">9</span>	<span class="number">9</span>	<span class="number">10</span>	<span class="number">11</span></span><br><span class="line">c	<span class="number">6</span>	<span class="number">5</span>	<span class="number">0</span>	<span class="number">0</span>	<span class="number">0</span>	<span class="number">6</span>	<span class="number">6</span>	<span class="number">6</span>	<span class="number">6</span>	<span class="number">6</span>	<span class="number">10</span>	<span class="number">11</span></span><br><span class="line">d	<span class="number">5</span>	<span class="number">4</span>	<span class="number">0</span>	<span class="number">0</span>	<span class="number">0</span>	<span class="number">6</span>	<span class="number">6</span>	<span class="number">6</span>	<span class="number">6</span>	<span class="number">6</span>	<span class="number">10</span>	<span class="number">10</span></span><br><span class="line">e	<span class="number">4</span>	<span class="number">6</span>	<span class="number">0</span>	<span class="number">0</span>	<span class="number">0</span>	<span class="number">6</span>	<span class="number">6</span>	<span class="number">6</span>	<span class="number">6</span>	<span class="number">6</span>	<span class="number">6</span>	<span class="number">6</span></span><br></pre></td></tr></table></figure>
+<p>为了叙述方便，用e2单元格表示e行2列的单元格，这个单元格的意义是用来表示只有物品e时，有个承重为2的背包，那么这个背包的最大价值是0，因为e物品的重量是4，背包装不了。</p>
+<p>对于d2单元格，表示只有物品e，d时,承重为2的背包,所能装入的最大价值，仍然是0，因为物品e,d都不是这个背包能装的。</p>
+<p>上代码</p>
+<p>————————————————<br>版权声明：本文为CSDN博主「从杰」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a href="https://blog.csdn.net/mu399/article/details/7722810" target="_blank" rel="noopener">https://blog.csdn.net/mu399/article/details/7722810</a></p>
+]]></content>
       <categories>
-          
-          <category> 算法 </category>
-          
+        <category>算法</category>
       </categories>
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>组合</title>
-      <link href="/2020/01/03/%E7%BB%84%E5%90%88/"/>
-      <url>/2020/01/03/%E7%BB%84%E5%90%88/</url>
-      
-        <content type="html"><![CDATA[<p>本程序的思路是开一个数组，其下标表示1到n个数，数组元素的值为1表示其代表的数被选中，为0则没选中。</p><p>首先初始化，将数组前n个元素置1，表示第一个组合为前n个数。</p><p>然后从左到右扫描数组元素值的“10”组合，找到第一个“10”组合后将其变为“01”组合，同时将其左边的所有“1”全部移动到数组的最左端。</p><p>当第一个“1”移动到数组的n-m的位置，即n个“1”全部移动到最右端时，就得到了最后一个组合。</p><p>例如求5中选3的组合：</p><p>1 1 1 0 0 //1,2,3</p><p>1 1 0 1 0 //1,2,4</p><p>1 0 1 1 0 //1,3,4</p><p>0 1 1 1 0 //2,3,4</p><p>1 1 0 0 1 //1,2,5</p><p>1 0 1 0 1 //1,3,5</p><p>0 1 1 0 1 //2,3,5</p><p>1 0 0 1 1 //1,4,5</p><p>0 1 0 1 1 //2,4,5</p><p>0 0 1 1 1 //3,4,5<br>————————————————<br>版权声明：本文为CSDN博主「文如王勃三生慧」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a href="https://blog.csdn.net/hf19931101/article/details/79452799" target="_blank" rel="noopener">https://blog.csdn.net/hf19931101/article/details/79452799</a></p>]]></content>
-      
-      
+      <tags>
+        <tag>动态规划</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>线性筛</title>
+    <url>/2020/01/04/%E7%BA%BF%E6%80%A7%E7%AD%9B/</url>
+    <content><![CDATA[<p>埃氏筛中有重复，例如6,2与3都筛了一次，效率低<br>线性筛定理，（口语不准确）一个数i乘以小于等于它的最小素因数的素数所得到的合数之间没有重复</p>
+<pre><code>#define N 10000
+int flag[N+1],prime[N+1],pnum;
+/*
+flag[n] 表示n是否是素数，1是素数，0不是
+prime   中是所有的素数按从小到大排列、
+pnum  表示素数的个数
+*/
+void CreatePrime(){
+    pnum=0;//初始化没有素数
+    //先将所有数看做素数，然后开始筛选
+    for(int i=0; i&lt;=N; i++){
+        flag[i]=1;
+    }
+    //遍历筛去所有最大因数是i的合数
+    for(int i=2; i&lt;=N; i++){
+        if(flag[i]==1){
+        //把素数记录下来
+            p[pnum++]=i;
+        }
+        //遍历已知素数表中比i的最小素因数小的素数，并筛去合数
+        for(int j=0; j&lt;pnum &amp;&amp; p[j]*i&lt;=N; j++){
+        //筛去合数
+            flag[p[j]*i]=0;
+            if(i%p[j]==0)
+            //找到i的最小素因数，找到了就终止
+                break;
+        }
+    }</code></pre><p>————————————————<br>版权声明：本文为CSDN博主「太上绝情」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a href="https://blog.csdn.net/bjrxyz/article/details/8125913" target="_blank" rel="noopener">https://blog.csdn.net/bjrxyz/article/details/8125913</a></p>
+]]></content>
       <categories>
-          
-          <category> 算法 </category>
-          
+        <category>算法</category>
       </categories>
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>string大小写字母转换</title>
-      <link href="/2020/01/01/%E2%80%9Dstring%E7%B1%BB%E5%AD%97%E7%AC%A6%E5%A4%A7%E5%B0%8F%E5%86%99%E8%BD%AC%E6%8D%A2%E2%80%9C/"/>
-      <url>/2020/01/01/%E2%80%9Dstring%E7%B1%BB%E5%AD%97%E7%AC%A6%E5%A4%A7%E5%B0%8F%E5%86%99%E8%BD%AC%E6%8D%A2%E2%80%9C/</url>
-      
-        <content type="html"><![CDATA[<p>在algorithm库中有transform函数<br>transform(str.begin(),str.end(),str.begin(),::toupper)<br>注意transform有四个输入参数<br>1：str.begin()字符串的起始地址；<br>2：str.end()字符串的终止地址；<br>3：str.begin()是转换之后，输出到原str字符串的起始地址；<br>4：转换操作，可以选择toupper，tolower。</p>]]></content>
-      
-      
+  </entry>
+  <entry>
+    <title>埃氏筛</title>
+    <url>/2020/01/04/%E5%9F%83%E6%B0%8F%E7%AD%9B/</url>
+    <content><![CDATA[<p>在筛质数时，我们会发现，筛去2后，2的倍数4、6、8等一定不是素数;筛去3后，3的倍数6、9、12等一定不是倍数。简单模拟这个过程如下</p>
+<pre><code>const int MAXN = 1000000；  
+void Prime()  
+{  
+    for (int i=0; i&lt;MAXN; i++) prime[i]=1;  //先把每个数都定义为质数
+    prime[0]=prime[1]=0;  
+    for (int i=2; i&lt;MAXN; i++)  
+    {  
+        if (!prime[i]) continue;  
+        for (int j=i*2; j&lt;MAXN; j+=i) prime[j] = 0;  //将i的倍数标记为合数
+    }  
+}</code></pre>]]></content>
       <categories>
-          
-          <category> stl </category>
-          
+        <category>算法</category>
       </categories>
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>“凸包”</title>
-      <link href="/2019/12/31/%E2%80%9C%E5%87%B8%E5%8C%85%E2%80%9D/"/>
-      <url>/2019/12/31/%E2%80%9C%E5%87%B8%E5%8C%85%E2%80%9D/</url>
-      
-        <content type="html"><![CDATA[<p>凸包就是把平面中所有点都包进去的凸多边形，当然多边形上的点也是题目中给出的点</p><p>分治法<br>  1 首先，横坐标最小p1和最大pn的点一定是凸包上的点<br>  2上包，即离p1pn最远的点，记pmax<br>  3再把pmax与p1连接，求左侧的上包，重复上述过程即可求解<img src="/images/20150530094927274" alt=""></p>]]></content>
-      
-      
+  </entry>
+  <entry>
+    <title>组合</title>
+    <url>/2020/01/03/%E7%BB%84%E5%90%88/</url>
+    <content><![CDATA[<p>本程序的思路是开一个数组，其下标表示1到n个数，数组元素的值为1表示其代表的数被选中，为0则没选中。</p>
+<p>首先初始化，将数组前n个元素置1，表示第一个组合为前n个数。</p>
+<p>然后从左到右扫描数组元素值的“10”组合，找到第一个“10”组合后将其变为“01”组合，同时将其左边的所有“1”全部移动到数组的最左端。</p>
+<p>当第一个“1”移动到数组的n-m的位置，即n个“1”全部移动到最右端时，就得到了最后一个组合。</p>
+<p>例如求5中选3的组合：</p>
+<p>1 1 1 0 0 //1,2,3</p>
+<p>1 1 0 1 0 //1,2,4</p>
+<p>1 0 1 1 0 //1,3,4</p>
+<p>0 1 1 1 0 //2,3,4</p>
+<p>1 1 0 0 1 //1,2,5</p>
+<p>1 0 1 0 1 //1,3,5</p>
+<p>0 1 1 0 1 //2,3,5</p>
+<p>1 0 0 1 1 //1,4,5</p>
+<p>0 1 0 1 1 //2,4,5</p>
+<p>0 0 1 1 1 //3,4,5<br>————————————————<br>版权声明：本文为CSDN博主「文如王勃三生慧」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a href="https://blog.csdn.net/hf19931101/article/details/79452799" target="_blank" rel="noopener">https://blog.csdn.net/hf19931101/article/details/79452799</a></p>
+]]></content>
       <categories>
-          
-          <category> 算法 </category>
-          
+        <category>算法</category>
       </categories>
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>神奇的逗号运算符</title>
-      <link href="/2019/12/05/%E7%A5%9E%E5%A5%87%E7%9A%84%E9%80%97%E5%8F%B7%E8%BF%90%E7%AE%97%E7%AC%A6/"/>
-      <url>/2019/12/05/%E7%A5%9E%E5%A5%87%E7%9A%84%E9%80%97%E5%8F%B7%E8%BF%90%E7%AE%97%E7%AC%A6/</url>
-      
-        <content type="html"><![CDATA[<p>   cout&lt;&lt;(a,c),此时只会输出c的内容，但是a中的内容也会被计算，例如a=5,b=6,c=7  cout&lt;&lt;(（d=a+b),c) 输出为7，d=11</p>]]></content>
-      
-      
-      
-    </entry>
-    
-    
-  
-  
+  </entry>
+  <entry>
+    <title>string大小写字母转换</title>
+    <url>/2020/01/01/%E2%80%9Dstring%E7%B1%BB%E5%AD%97%E7%AC%A6%E5%A4%A7%E5%B0%8F%E5%86%99%E8%BD%AC%E6%8D%A2%E2%80%9C/</url>
+    <content><![CDATA[<p>在algorithm库中有transform函数<br>transform(str.begin(),str.end(),str.begin(),::toupper)<br>注意transform有四个输入参数<br>1：str.begin()字符串的起始地址；<br>2：str.end()字符串的终止地址；<br>3：str.begin()是转换之后，输出到原str字符串的起始地址；<br>4：转换操作，可以选择toupper，tolower。</p>
+]]></content>
+      <categories>
+        <category>stl</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>“凸包”</title>
+    <url>/2019/12/31/%E2%80%9C%E5%87%B8%E5%8C%85%E2%80%9D/</url>
+    <content><![CDATA[<p>凸包就是把平面中所有点都包进去的凸多边形，当然多边形上的点也是题目中给出的点</p>
+<p>分治法<br>  1 首先，横坐标最小p1和最大pn的点一定是凸包上的点<br>  2上包，即离p1pn最远的点，记pmax<br>  3再把pmax与p1连接，求左侧的上包，重复上述过程即可求解<img src="/images/20150530094927274" alt=""></p>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>神奇的逗号运算符</title>
+    <url>/2019/12/05/%E7%A5%9E%E5%A5%87%E7%9A%84%E9%80%97%E5%8F%B7%E8%BF%90%E7%AE%97%E7%AC%A6/</url>
+    <content><![CDATA[<p>   cout&lt;&lt;(a,c),此时只会输出c的内容，但是a中的内容也会被计算，例如a=5,b=6,c=7  cout&lt;&lt;(（d=a+b),c) 输出为7，d=11</p>
+]]></content>
+  </entry>
 </search>
