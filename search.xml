@@ -4,6 +4,63 @@
   
     
     <entry>
+      <title>汇编的第一个程序</title>
+      <link href="/2020/01/20/%E6%B1%87%E7%BC%96%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E7%A8%8B%E5%BA%8F/"/>
+      <url>/2020/01/20/%E6%B1%87%E7%BC%96%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E7%A8%8B%E5%BA%8F/</url>
+      
+        <content type="html"><![CDATA[<h3 id="伪指令"><a href="#伪指令" class="headerlink" title="伪指令"></a>伪指令</h3><p>编译器中，包含两种指令，一种是汇编指令，一种是伪指令。伪指令是给编译器看的，最终不会被cpu执行。先了解三个最为基础的伪指令</p><ul><li>XXX segment，XXX ends，这两个是配套使用的。功能是定义一个代码段，一个段必须要有一个名称标识（XXX是也）</li></ul><p>例如codesg segment ，codesg ends</p><ul><li>assume </li></ul><p>这条指令作用是假设某一寄存器和程序中的某一个用segment和ends定义的段相关联，写在最开头。</p><ul><li>end</li></ul><p>没什么特别的，程序的结束标识，不写程序不知道在哪里结束</p><h3 id="一个程序"><a href="#一个程序" class="headerlink" title="一个程序"></a>一个程序</h3><pre><code>assume cs: codesgcodesg segment    mov ax,0123    mov bx,0456    add ax,bx    mov ax,4c00    int 21codesg endsend</code></pre><h4 id="程序返回"><a href="#程序返回" class="headerlink" title="程序返回"></a>程序返回</h4><p>在单任务操作系统上，一次只可以执行一个程序，那么当我们写的这个程序执行完之后，还要把cpu控制权交给dos，而mov ax，4c00 和 int 21 就是做这个工作的</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 汇编 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>栈.                                      </title>
+      <link href="/2020/01/20/%E6%A0%88/"/>
+      <url>/2020/01/20/%E6%A0%88/</url>
+      
+        <content type="html"><![CDATA[<p>栈是一段连续的内存空间，这个空间的特殊性在于，最后进入这个空间的数据，最先出去</p><h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>通过ss sp 两个寄存器确定了一个栈顶指针，然后随着一些操作，这个指针会向上向下移动<br>例如 push ax，这条指令会将ax中的内容运到栈中，然后sp-2。<strong>注意</strong>，栈顶地址为低地址，栈底地址为高地址，因此增加元素会使sp值减小</p><p>在栈为空的时候，偏移地址为栈底地址加2，例如栈底为000F，则此时偏移地址为10，在拉一个元素进栈后，偏移地址为000E，恰好是数据最高位（一个数据一个字，两个字节，栈底为000F，用了两个空间，因此此时元素到了000E，恰好sp也是000E</p><h3 id="超界问题"><a href="#超界问题" class="headerlink" title="超界问题"></a>超界问题</h3><p>8086cpu并没有特定的机制来检查我们是否超界，只能够靠自己小心，超界是一个十分严重的问题，因为既然这一段被分配为栈了，说明其他的内存有其他的用途，如果超界，可能会干扰其他程序的运行。要注意，栈的范围最大是0到ffff即2的16次方字节</p><h3 id="push-pop-命令"><a href="#push-pop-命令" class="headerlink" title="push pop 命令"></a>push pop 命令</h3><p>push 寄存器 pop 寄存器<br>也可以是push内存地址，pop内存地址 </p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 汇编 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>debug</title>
+      <link href="/2020/01/20/debug/"/>
+      <url>/2020/01/20/debug/</url>
+      
+        <content type="html"><![CDATA[<p>这里列举几个debug的基本命令</p><h4 id="r"><a href="#r" class="headerlink" title="r"></a>r</h4><p>用来查看此时寄存器内的数值和下一步将要执行的命令<br>r 还可以接寄存器，用于修改寄存器内的内容<br>例：r ax 这样会出现ax的内容和一个冒号，然后就可以输入数据修改了</p><h3 id="d"><a href="#d" class="headerlink" title="d"></a>d</h3><p>格式：d 段地址：偏移地址<br>作用：列举出该地址下的机器码<br>例 d 1000:0,这样子将会列举从1000:0 到1000:7f的所有内容</p><h3 id="e"><a href="#e" class="headerlink" title="e"></a>e</h3><p>格式：e 段地址：偏移地址<br>作用：修改改地址下的机器码</p><h3 id="t"><a href="#t" class="headerlink" title="t"></a>t</h3><p>执行cs ip所指向内存地址的命令，直接输入t，不需要输入其他东西</p><h3 id="a"><a href="#a" class="headerlink" title="a"></a>a</h3><p>作用：用汇编语言输入指令到内存上<br>写法： a 段地址：偏移地址<br>例： a 1000:0<br>输出1000：0  （input）mov ax，1<br>然后1000:0 到1000:3 就会输入这条指令了，之后将cs ip地址设置一下，然后用t指令运行</p><h3 id="u"><a href="#u" class="headerlink" title="u"></a>u</h3><p>作用：查看某地址下的汇编程序<br>写法： u 段地址：偏移地址<br>例 u 1000:0<br>然后就会输出1000:0 开始有的汇编指令了</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 汇编 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>树状数组和线段树</title>
       <link href="/2020/01/18/%E7%BA%BF%E6%AE%B5%E6%95%B0%E7%BB%84%E5%92%8C%E7%BA%BF%E6%AE%B5%E6%A0%91/"/>
       <url>/2020/01/18/%E7%BA%BF%E6%AE%B5%E6%95%B0%E7%BB%84%E5%92%8C%E7%BA%BF%E6%AE%B5%E6%A0%91/</url>

@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://xinhecuican.github.io/"/>
-  <updated>2020-01-19T06:08:02.273Z</updated>
+  <updated>2020-01-20T09:19:18.720Z</updated>
   <id>http://xinhecuican.github.io/</id>
   
   <author>
@@ -15,6 +15,80 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>汇编的第一个程序</title>
+    <link href="http://xinhecuican.github.io/2020/01/20/%E6%B1%87%E7%BC%96%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E7%A8%8B%E5%BA%8F/"/>
+    <id>http://xinhecuican.github.io/2020/01/20/%E6%B1%87%E7%BC%96%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E7%A8%8B%E5%BA%8F/</id>
+    <published>2020-01-20T07:58:00.000Z</published>
+    <updated>2020-01-20T09:19:18.720Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="伪指令"><a href="#伪指令" class="headerlink" title="伪指令"></a>伪指令</h3><p>编译器中，包含两种指令，一种是汇编指令，一种是伪指令。伪指令是给编译器看的，最终不会被cpu执行。先了解三个最为基础的伪指令</p><ul><li>XXX segment，XXX ends，这两个是配套使用的。功能是定义一个代码段，一个段必须要有一个名称标识（XXX是也）</li></ul><p>例如codesg segment ，codesg ends</p><ul><li>assume </li></ul><p>这条指令作用是假设某一寄存器和程序中的某一个用segment和ends定义的段相关联，写在最开头。</p><ul><li>end</li></ul><p>没什么特别的，程序的结束标识，不写程序不知道在哪里结束</p><h3 id="一个程序"><a href="#一个程序" class="headerlink" title="一个程序"></a>一个程序</h3><pre><code>assume cs: codesgcodesg segment    mov ax,0123    mov bx,0456    add ax,bx    mov ax,4c00    int 21codesg endsend</code></pre><h4 id="程序返回"><a href="#程序返回" class="headerlink" title="程序返回"></a>程序返回</h4><p>在单任务操作系统上，一次只可以执行一个程序，那么当我们写的这个程序执行完之后，还要把cpu控制权交给dos，而mov ax，4c00 和 int 21 就是做这个工作的</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;伪指令&quot;&gt;&lt;a href=&quot;#伪指令&quot; class=&quot;headerlink&quot; title=&quot;伪指令&quot;&gt;&lt;/a&gt;伪指令&lt;/h3&gt;&lt;p&gt;编译器中，包含两种指令，一种是汇编指令，一种是伪指令。伪指令是给编译器看的，最终不会被cpu执行。先了解三个最为基础的伪指令&lt;/p&gt;
+      
+    
+    </summary>
+    
+    
+      <category term="汇编" scheme="http://xinhecuican.github.io/categories/%E6%B1%87%E7%BC%96/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>栈.                                      </title>
+    <link href="http://xinhecuican.github.io/2020/01/20/%E6%A0%88/"/>
+    <id>http://xinhecuican.github.io/2020/01/20/%E6%A0%88/</id>
+    <published>2020-01-20T06:26:00.000Z</published>
+    <updated>2020-01-20T07:58:09.483Z</updated>
+    
+    <content type="html"><![CDATA[<p>栈是一段连续的内存空间，这个空间的特殊性在于，最后进入这个空间的数据，最先出去</p><h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>通过ss sp 两个寄存器确定了一个栈顶指针，然后随着一些操作，这个指针会向上向下移动<br>例如 push ax，这条指令会将ax中的内容运到栈中，然后sp-2。<strong>注意</strong>，栈顶地址为低地址，栈底地址为高地址，因此增加元素会使sp值减小</p><p>在栈为空的时候，偏移地址为栈底地址加2，例如栈底为000F，则此时偏移地址为10，在拉一个元素进栈后，偏移地址为000E，恰好是数据最高位（一个数据一个字，两个字节，栈底为000F，用了两个空间，因此此时元素到了000E，恰好sp也是000E</p><h3 id="超界问题"><a href="#超界问题" class="headerlink" title="超界问题"></a>超界问题</h3><p>8086cpu并没有特定的机制来检查我们是否超界，只能够靠自己小心，超界是一个十分严重的问题，因为既然这一段被分配为栈了，说明其他的内存有其他的用途，如果超界，可能会干扰其他程序的运行。要注意，栈的范围最大是0到ffff即2的16次方字节</p><h3 id="push-pop-命令"><a href="#push-pop-命令" class="headerlink" title="push pop 命令"></a>push pop 命令</h3><p>push 寄存器 pop 寄存器<br>也可以是push内存地址，pop内存地址 </p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;栈是一段连续的内存空间，这个空间的特殊性在于，最后进入这个空间的数据，最先出去&lt;/p&gt;
+&lt;h3 id=&quot;原理&quot;&gt;&lt;a href=&quot;#原理&quot; class=&quot;headerlink&quot; title=&quot;原理&quot;&gt;&lt;/a&gt;原理&lt;/h3&gt;&lt;p&gt;通过ss sp 两个寄存器确定了一个栈顶指针，
+      
+    
+    </summary>
+    
+    
+      <category term="汇编" scheme="http://xinhecuican.github.io/categories/%E6%B1%87%E7%BC%96/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>debug</title>
+    <link href="http://xinhecuican.github.io/2020/01/20/debug/"/>
+    <id>http://xinhecuican.github.io/2020/01/20/debug/</id>
+    <published>2020-01-20T06:15:00.000Z</published>
+    <updated>2020-01-20T06:26:20.756Z</updated>
+    
+    <content type="html"><![CDATA[<p>这里列举几个debug的基本命令</p><h4 id="r"><a href="#r" class="headerlink" title="r"></a>r</h4><p>用来查看此时寄存器内的数值和下一步将要执行的命令<br>r 还可以接寄存器，用于修改寄存器内的内容<br>例：r ax 这样会出现ax的内容和一个冒号，然后就可以输入数据修改了</p><h3 id="d"><a href="#d" class="headerlink" title="d"></a>d</h3><p>格式：d 段地址：偏移地址<br>作用：列举出该地址下的机器码<br>例 d 1000:0,这样子将会列举从1000:0 到1000:7f的所有内容</p><h3 id="e"><a href="#e" class="headerlink" title="e"></a>e</h3><p>格式：e 段地址：偏移地址<br>作用：修改改地址下的机器码</p><h3 id="t"><a href="#t" class="headerlink" title="t"></a>t</h3><p>执行cs ip所指向内存地址的命令，直接输入t，不需要输入其他东西</p><h3 id="a"><a href="#a" class="headerlink" title="a"></a>a</h3><p>作用：用汇编语言输入指令到内存上<br>写法： a 段地址：偏移地址<br>例： a 1000:0<br>输出1000：0  （input）mov ax，1<br>然后1000:0 到1000:3 就会输入这条指令了，之后将cs ip地址设置一下，然后用t指令运行</p><h3 id="u"><a href="#u" class="headerlink" title="u"></a>u</h3><p>作用：查看某地址下的汇编程序<br>写法： u 段地址：偏移地址<br>例 u 1000:0<br>然后就会输出1000:0 开始有的汇编指令了</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;这里列举几个debug的基本命令&lt;/p&gt;
+&lt;h4 id=&quot;r&quot;&gt;&lt;a href=&quot;#r&quot; class=&quot;headerlink&quot; title=&quot;r&quot;&gt;&lt;/a&gt;r&lt;/h4&gt;&lt;p&gt;用来查看此时寄存器内的数值和下一步将要执行的命令&lt;br&gt;r 还可以接寄存器，用于修改寄存器内的内容&lt;
+      
+    
+    </summary>
+    
+    
+      <category term="汇编" scheme="http://xinhecuican.github.io/categories/%E6%B1%87%E7%BC%96/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>树状数组和线段树</title>
@@ -439,78 +513,6 @@
     
     
       <category term="stl" scheme="http://xinhecuican.github.io/categories/stl/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>set</title>
-    <link href="http://xinhecuican.github.io/2020/01/11/set/"/>
-    <id>http://xinhecuican.github.io/2020/01/11/set/</id>
-    <published>2020-01-11T08:08:00.000Z</published>
-    <updated>2020-01-11T11:03:35.064Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="set之iterator"><a href="#set之iterator" class="headerlink" title="set之iterator"></a>set之iterator</h3><p>定义：set::iterator iter</p><p>运用：*iter</p><p>遍历 for(iter=set.begin();iter!=set.end();iter++)</p><p>还可以直接用auto it=set.begin() (auto是自动匹配类型)</p><p><strong>注意</strong><br>iterator只能用++，–运算符。不能*（iter-1），另外还要注意iter++后自身会改变</p><p>例：set中有0,2,4，iter指向2，现在cout&lt;&lt;<em>iter&lt;&lt;” “&lt;&lt;</em>(iter–)&lt;&lt;endl;</p><p>输出0,2，先执行iter–，我也不知道为什么</p><h3 id="set之lower-bound"><a href="#set之lower-bound" class="headerlink" title="set之lower_bound()"></a>set之lower_bound()</h3><p>lower_bound()返回从first开始的第一个大于或等于val的元素的地址。如果所有元素都小于val，则返回last的地址，所以必须要</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt;::iterator iter;</span><br><span class="line">iter=st.lower_bound(一个数字)</span><br></pre></td></tr></table></figure><p>upper_bound()返回最后一个大于等于val的元素的地址</p><h3 id="set基础"><a href="#set基础" class="headerlink" title="set基础"></a>set基础</h3><p>定义：set&lt;数据类型&gt; 标识符 ，set中元素都唯一</p><p>set实际上运用了红黑树。另外，set中元素会自动排序</p><h4 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h4><p>begin()，返回的是开头元素迭代器</p><p>end()</p><p>clear()</p><p>empty()</p><p>size()</p><h4 id="进阶"><a href="#进阶" class="headerlink" title="进阶"></a>进阶</h4><p> count(数据)判断某个值是否在set中</p><ul><li><p>erase(iterator) 删去迭代器所指向的值</p></li><li><p>erase(iteratora,iteratorb)删去a，b之间的值</p></li><li><p>erase(数据)删去该数据</p></li><li><p>set删除是不会检查任何错误的，使用时小心</p></li></ul><p>find(数据)返回指定元素的迭代器，没有则返回最后一个元素的迭代器</p><p>当set中没有元素的时候，*s.end()=0</p><p>insert(某一个值),将一个值插入set中，<strong>注意</strong>这是唯一的将元素弄到set中的方法，并且重复插入无效</p><h6 id="判断insert插入是否成功的方法（具体可看"><a href="#判断insert插入是否成功的方法（具体可看" class="headerlink" title="判断insert插入是否成功的方法（具体可看)"></a>判断insert插入是否成功的方法（<a href="https://blog.csdn.net/liyuqian199695/article/details/49100543" target="_blank" rel="noopener">具体可看</a>)</h6><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//typedef pair&lt;iterator, bool&gt; _Pairib;</span></span><br><span class="line">pair&lt;<span class="built_in">set</span>&lt;Student,FuncStudent&gt;::iterator,<span class="keyword">bool</span>&gt; pair1=set1.insert(s1);</span><br><span class="line"><span class="keyword">if</span>(pair1.second==<span class="literal">true</span>)</span><br><span class="line">&#123;</span><br><span class="line"><span class="built_in">cout</span>&lt;&lt;<span class="string">"插入s1成功"</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="built_in">cout</span>&lt;&lt;<span class="string">"插入s1失败"</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;set之iterator&quot;&gt;&lt;a href=&quot;#set之iterator&quot; class=&quot;headerlink&quot; title=&quot;set之iterator&quot;&gt;&lt;/a&gt;set之iterator&lt;/h3&gt;&lt;p&gt;定义：set::iterator iter&lt;/p&gt;
-&lt;p&gt;运
-      
-    
-    </summary>
-    
-    
-      <category term="stl" scheme="http://xinhecuican.github.io/categories/stl/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>&amp;&amp;与||小提示</title>
-    <link href="http://xinhecuican.github.io/2020/01/07/%E4%B8%8E-%E5%B0%8F%E6%8F%90%E7%A4%BA/"/>
-    <id>http://xinhecuican.github.io/2020/01/07/%E4%B8%8E-%E5%B0%8F%E6%8F%90%E7%A4%BA/</id>
-    <published>2020-01-07T11:05:00.000Z</published>
-    <updated>2020-01-07T11:08:14.084Z</updated>
-    
-    <content type="html"><![CDATA[<h4 id="amp-amp"><a href="#amp-amp" class="headerlink" title="&amp;&amp;"></a>&amp;&amp;</h4><p>&amp;&amp;运算符从左自由依次判断 ，如果判断有一个为假则停止判断</p><h4 id=""><a href="#" class="headerlink" title="||"></a>||</h4><p>同理如果判断有一个为真则停止判断</p><h4 id="例"><a href="#例" class="headerlink" title="例"></a>例</h4><pre><code>#include&lt;iostream&gt;using namespace std;int main(){    int a=0,b=1,c;    c = (a != b) || (++a == b++);    cout&lt;&lt;a&lt;&lt;&quot; &quot;&lt;&lt;b&lt;&lt;endl;    return 0;}</code></pre><p>输出为0 1因为前面一个为真，直接退出判断</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h4 id=&quot;amp-amp&quot;&gt;&lt;a href=&quot;#amp-amp&quot; class=&quot;headerlink&quot; title=&quot;&amp;amp;&amp;amp;&quot;&gt;&lt;/a&gt;&amp;amp;&amp;amp;&lt;/h4&gt;&lt;p&gt;&amp;amp;&amp;amp;运算符从左自由依次判断 ，如果判断有一个为假则停止判断&lt;/p&gt;
-&lt;h
-      
-    
-    </summary>
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>字符数组</title>
-    <link href="http://xinhecuican.github.io/2020/01/07/%E5%AD%97%E7%AC%A6%E6%95%B0%E7%BB%84/"/>
-    <id>http://xinhecuican.github.io/2020/01/07/%E5%AD%97%E7%AC%A6%E6%95%B0%E7%BB%84/</id>
-    <published>2020-01-07T10:23:00.000Z</published>
-    <updated>2020-01-07T10:35:51.731Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="前方高能"><a href="#前方高能" class="headerlink" title="前方高能"></a>前方高能</h3><pre><code>char a[4]={&apos;a&apos;,&apos;b&apos;,&apos;c&apos;,&apos;d&apos;};cout&lt;&lt;a&lt;&lt;endl;</code></pre><p>这将输出什么呢，是<code>abcd</code>，实际上是<code>abcdPpB</code></p><p>这就有点神奇</p><h4 id="字符数组"><a href="#字符数组" class="headerlink" title="字符数组"></a>字符数组</h4><p>char +标识符+[]，注意字符数组的最后一定会有’\0’，</p><p>例如<code>char[]=&quot;abcd&quot;,这就是一个合法的赋值，但是char[4]=&quot;abcd&quot;是不合法的因为带双引号的为字符串，赋值给字符数组时编译器会自动加上&#39;\0&#39;这时需要5个空间</code></p><h3 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h3><p>因为本来是要加上’\0’的，但是这时位子不够了，编译器只好帮它扩扩容，也就是说这是字符数组（其实现在已经不是字符数组了）长度已经不是4了，编译器会为后面几个位子附上值（不是随机的，我也有点不清楚，这样解释先），因此后面会多输出一些。但是如果开始就把长度设为5，这时’\0’就有位子放了，也就不会多出后面那些奇奇怪怪的字符</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;前方高能&quot;&gt;&lt;a href=&quot;#前方高能&quot; class=&quot;headerlink&quot; title=&quot;前方高能&quot;&gt;&lt;/a&gt;前方高能&lt;/h3&gt;&lt;pre&gt;&lt;code&gt;char a[4]={&amp;apos;a&amp;apos;,&amp;apos;b&amp;apos;,&amp;apos;c&amp;apos;,&amp;
-      
-    
-    </summary>
-    
-    
-      <category term="基础" scheme="http://xinhecuican.github.io/categories/%E5%9F%BA%E7%A1%80/"/>
     
     
   </entry>
