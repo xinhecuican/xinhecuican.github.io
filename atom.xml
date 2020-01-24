@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://xinhecuican.github.io/"/>
-  <updated>2020-01-20T09:19:18.720Z</updated>
+  <updated>2020-01-24T01:30:55.173Z</updated>
   <id>http://xinhecuican.github.io/</id>
   
   <author>
@@ -15,6 +15,261 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>汇编中的多层循环</title>
+    <link href="http://xinhecuican.github.io/2020/01/24/%E6%B1%87%E7%BC%96%E4%B8%AD%E7%9A%84%E5%A4%9A%E5%B1%82%E5%BE%AA%E7%8E%AF/"/>
+    <id>http://xinhecuican.github.io/2020/01/24/%E6%B1%87%E7%BC%96%E4%B8%AD%E7%9A%84%E5%A4%9A%E5%B1%82%E5%BE%AA%E7%8E%AF/</id>
+    <published>2020-01-24T01:19:00.000Z</published>
+    <updated>2020-01-24T01:30:55.173Z</updated>
+    
+    <content type="html"><![CDATA[<p>因为唯一的用于统计循环次数的寄存器就是cx，所以有多层循环的时候就会碰到循环次数难以记录的问题，以下是一种解决办法</p><figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">s0:</span><span class="keyword">mov</span> <span class="built_in">dx</span>,<span class="built_in">cx</span>//用另一个寄存器来存<span class="built_in">cx</span>的次数</span><br><span class="line">   <span class="keyword">mov</span> <span class="built_in">si</span>,<span class="number">0</span></span><br><span class="line">   <span class="keyword">mov</span> <span class="built_in">cx</span>,<span class="number">3</span></span><br><span class="line"><span class="symbol"> s:</span><span class="keyword">mov</span> <span class="built_in">al</span>,[<span class="built_in">si</span>+<span class="built_in">bx</span>]</span><br><span class="line">   <span class="keyword">and</span> <span class="built_in">al</span>,<span class="number">11011111b</span></span><br><span class="line">   <span class="keyword">mov</span> [<span class="built_in">si</span>+<span class="built_in">bx</span>],<span class="built_in">al</span></span><br><span class="line">   <span class="keyword">inc</span> <span class="built_in">si</span></span><br><span class="line">   <span class="keyword">loop</span> s</span><br><span class="line">   <span class="keyword">add</span> <span class="built_in">bx</span>,<span class="number">16</span></span><br><span class="line">   <span class="keyword">mov</span> <span class="built_in">cx</span>,<span class="built_in">dx</span>//这里把<span class="built_in">cx</span>次数取出来减一次</span><br><span class="line">   <span class="keyword">loop</span> s0</span><br></pre></td></tr></table></figure><p> 但是寄存器的数量是有限的，如果多次循环可能会导致寄存器不够用，因此可以先在数据段定义一个字型数据，然后直接把循环次数放到里面<br> <figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"> data <span class="meta">segment</span></span><br><span class="line">    <span class="built_in">dw</span> <span class="number">0</span></span><br><span class="line"> data ends</span><br><span class="line"> </span><br><span class="line"> code <span class="meta">segment</span></span><br><span class="line"><span class="symbol">start:</span> <span class="keyword">mov</span> <span class="built_in">ax</span>,data</span><br><span class="line">     <span class="keyword">mov</span> <span class="built_in">ds</span>,<span class="built_in">ax</span></span><br><span class="line">     <span class="keyword">mov</span> <span class="built_in">cx</span>,<span class="number">3</span></span><br><span class="line"><span class="symbol">  s0:</span> <span class="keyword">mov</span> <span class="built_in">ds</span>:[<span class="number">0</span>],<span class="built_in">cx</span></span><br><span class="line">     <span class="keyword">mov</span> <span class="built_in">cx</span>,<span class="number">2</span></span><br><span class="line"><span class="symbol">  s:</span>  </span><br><span class="line">  </span><br><span class="line">     <span class="keyword">loop</span> s</span><br><span class="line">     <span class="keyword">mov</span> <span class="built_in">cx</span>,<span class="built_in">ds</span>:[<span class="number">0</span>]</span><br><span class="line">     <span class="keyword">loop</span> s0</span><br></pre></td></tr></table></figure><br> 此外，还可以定义一个栈，直接用push，pop命令把cx值取出存入</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;因为唯一的用于统计循环次数的寄存器就是cx，所以有多层循环的时候就会碰到循环次数难以记录的问题，以下是一种解决办法&lt;/p&gt;
+&lt;figure class=&quot;highlight x86asm&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span c
+      
+    
+    </summary>
+    
+    
+      <category term="汇编" scheme="http://xinhecuican.github.io/categories/%E6%B1%87%E7%BC%96/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>si和di</title>
+    <link href="http://xinhecuican.github.io/2020/01/24/si%E5%92%8Cdi/"/>
+    <id>http://xinhecuican.github.io/2020/01/24/si%E5%92%8Cdi/</id>
+    <published>2020-01-24T00:32:00.000Z</published>
+    <updated>2020-01-24T00:54:19.957Z</updated>
+    
+    <content type="html"><![CDATA[<p>si和di在8086cpu中的功能与bx类似，si与di不能分为两个8位寄存器来使用</p><p>也就是说  ds：[si]是可以的</p><p>如果不用这些寄存器直接写的话就会出现之前所说的编译器和exe对程序的不同处理</p><p>例   mov ax,[si]在exe中就是 ds：[si]，但是如果是 mov，ax,[1]在exe中就是把ax中的数据放入1中</p><p>甚至可以直接用[bx+si]的方式或[bx+si+idata]的方式来指明内存地址</p><h3 id="不同寻址方式的比较"><a href="#不同寻址方式的比较" class="headerlink" title="不同寻址方式的比较"></a>不同寻址方式的比较</h3><p>[idata]用于一个常量的寻址，直接定位一个内存单元</p><p>[bx]用于一个变量来表示内存地址，间接定位内存单元</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;si和di在8086cpu中的功能与bx类似，si与di不能分为两个8位寄存器来使用&lt;/p&gt;
+&lt;p&gt;也就是说  ds：[si]是可以的&lt;/p&gt;
+&lt;p&gt;如果不用这些寄存器直接写的话就会出现之前所说的编译器和exe对程序的不同处理&lt;/p&gt;
+&lt;p&gt;例   mov ax,[si]在
+      
+    
+    </summary>
+    
+    
+      <category term="汇编" scheme="http://xinhecuican.github.io/categories/%E6%B1%87%E7%BC%96/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>字符形式 的数据</title>
+    <link href="http://xinhecuican.github.io/2020/01/23/%E5%AD%97%E7%AC%A6%E5%BD%A2%E5%BC%8F-%E7%9A%84%E6%95%B0%E6%8D%AE/"/>
+    <id>http://xinhecuican.github.io/2020/01/23/%E5%AD%97%E7%AC%A6%E5%BD%A2%E5%BC%8F-%E7%9A%84%E6%95%B0%E6%8D%AE/</id>
+    <published>2020-01-23T03:44:00.000Z</published>
+    <updated>2020-01-24T00:25:28.844Z</updated>
+    
+    <content type="html"><![CDATA[<p>首先要知道asc11码</p><p>形式： db ‘…’</p><p>无论多少个单词都只需要单引号</p><p>例 db‘unix’</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;首先要知道asc11码&lt;/p&gt;
+&lt;p&gt;形式： db ‘…’&lt;/p&gt;
+&lt;p&gt;无论多少个单词都只需要单引号&lt;/p&gt;
+&lt;p&gt;例 db‘unix’&lt;/p&gt;
+
+      
+    
+    </summary>
+    
+    
+      <category term="汇编" scheme="http://xinhecuican.github.io/categories/%E6%B1%87%E7%BC%96/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>将不同代码放入不同段中</title>
+    <link href="http://xinhecuican.github.io/2020/01/23/%E5%B0%86%E4%B8%8D%E5%90%8C%E4%BB%A3%E7%A0%81%E6%94%BE%E5%85%A5%E4%B8%8D%E5%90%8C%E6%AE%B5%E4%B8%AD/"/>
+    <id>http://xinhecuican.github.io/2020/01/23/%E5%B0%86%E4%B8%8D%E5%90%8C%E4%BB%A3%E7%A0%81%E6%94%BE%E5%85%A5%E4%B8%8D%E5%90%8C%E6%AE%B5%E4%B8%AD/</id>
+    <published>2020-01-23T01:42:00.000Z</published>
+    <updated>2020-01-23T01:59:49.183Z</updated>
+    
+    <content type="html"><![CDATA[<p>举个栗子</p><figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">assume</span> <span class="built_in">cs</span>:code <span class="built_in">ds</span>:data <span class="built_in">ss</span>:stack</span><br><span class="line">data <span class="meta">segment</span></span><br><span class="line">    <span class="built_in">dw</span> <span class="number">0123h</span>,<span class="number">0345h</span></span><br><span class="line">data ends</span><br><span class="line"></span><br><span class="line">stack <span class="meta">segment</span></span><br><span class="line">    <span class="built_in">dw</span> <span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span></span><br><span class="line">stack ends</span><br><span class="line"></span><br><span class="line">code <span class="meta">segment</span></span><br><span class="line"><span class="symbol"> start:</span>  <span class="keyword">mov</span> <span class="built_in">ax</span>,stack</span><br><span class="line">      <span class="keyword">mov</span> <span class="built_in">ss</span>,<span class="built_in">ax</span></span><br><span class="line">      <span class="keyword">mov</span> <span class="built_in">sp</span>,<span class="number">20h</span></span><br><span class="line">      </span><br><span class="line">      <span class="keyword">mov</span> <span class="built_in">ax</span>,data</span><br><span class="line">      <span class="keyword">mov</span> <span class="built_in">ds</span>,<span class="built_in">ax</span></span><br><span class="line">      <span class="keyword">mov</span> <span class="built_in">bx</span>,<span class="number">0</span> //<span class="built_in">ds</span>:<span class="built_in">bx</span>指向data中第一个内存单元</span><br><span class="line">      </span><br><span class="line">      <span class="keyword">mov</span> <span class="built_in">cx</span>,<span class="number">8</span></span><br><span class="line"><span class="symbol">    s:</span> <span class="keyword">push</span> [<span class="built_in">bx</span>]</span><br><span class="line">      <span class="keyword">add</span> <span class="built_in">bx</span>,<span class="number">2</span></span><br><span class="line">      <span class="keyword">loop</span> s</span><br><span class="line">      <span class="keyword">mov</span> <span class="built_in">bx</span>,<span class="number">0</span></span><br><span class="line">      </span><br><span class="line">      <span class="keyword">mov</span> <span class="built_in">cx</span>,<span class="number">8</span></span><br><span class="line"><span class="symbol">    s0:</span><span class="keyword">pop</span> [<span class="built_in">bx</span>]</span><br><span class="line">      <span class="keyword">add</span> <span class="built_in">bx</span>,<span class="number">2</span></span><br><span class="line">      <span class="keyword">loop</span> s0</span><br><span class="line">      </span><br><span class="line">      <span class="keyword">mov</span> <span class="built_in">ax</span>,<span class="number">4c00h</span></span><br><span class="line">      <span class="keyword">int</span> <span class="number">21h</span></span><br><span class="line"> code ends</span><br><span class="line">end start</span><br></pre></td></tr></table></figure><p>看了这个就差不多了，前面定义的时候要注意不同段对应不同的寄存器，而后面要注意各个段有独自的segment与ends，而且从start开始要把各个段寄存器赋值，以备后面使用（mov ax，data）<strong>注意</strong> mov ds，data是错误的，8086cpu不允许直接把一个数值送入段寄存器中</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;举个栗子&lt;/p&gt;
+&lt;figure class=&quot;highlight x86asm&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;b
+      
+    
+    </summary>
+    
+    
+      <category term="汇编" scheme="http://xinhecuican.github.io/categories/%E6%B1%87%E7%BC%96/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>在代码段中使用栈</title>
+    <link href="http://xinhecuican.github.io/2020/01/23/%E5%9C%A8%E4%BB%A3%E7%A0%81%E6%AE%B5%E4%B8%AD%E4%BD%BF%E7%94%A8%E6%A0%88/"/>
+    <id>http://xinhecuican.github.io/2020/01/23/%E5%9C%A8%E4%BB%A3%E7%A0%81%E6%AE%B5%E4%B8%AD%E4%BD%BF%E7%94%A8%E6%A0%88/</id>
+    <published>2020-01-23T01:03:00.000Z</published>
+    <updated>2020-01-23T01:33:37.472Z</updated>
+    
+    <content type="html"><![CDATA[<p>实际上栈是我们人为定义的一段内存空间，所以先要用dw来申请</p><figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">dw</span> <span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>  //申请<span class="number">6</span>个字的内存空间，栈是由高内存地址到低内存地址，所以栈顶为<span class="built_in">cs</span>：<span class="number">Ch</span></span><br><span class="line"><span class="symbol">start:</span> <span class="keyword">mov</span> <span class="built_in">ss</span>,<span class="built_in">cs</span></span><br><span class="line"><span class="keyword">mov</span> <span class="built_in">ss</span>,<span class="built_in">ax</span></span><br><span class="line"><span class="keyword">mov</span> <span class="built_in">sp</span>,<span class="number">Ch</span></span><br></pre></td></tr></table></figure><p>ss，sp就是前面所说的栈的指针</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;实际上栈是我们人为定义的一段内存空间，所以先要用dw来申请&lt;/p&gt;
+&lt;figure class=&quot;highlight x86asm&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;spa
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>dw</title>
+    <link href="http://xinhecuican.github.io/2020/01/23/dw/"/>
+    <id>http://xinhecuican.github.io/2020/01/23/dw/</id>
+    <published>2020-01-23T00:48:00.000Z</published>
+    <updated>2020-01-23T01:19:10.873Z</updated>
+    
+    <content type="html"><![CDATA[<p>dw即define word，定义字型数据。例如，dw 0123h,0456h,0789h.这样就定义了几个字型数据，那这些数据都在哪里呢，他们的段地址都是从cs开始的，而偏移地址从0开始，也就是说，0123h的偏移地址是0,0456h的偏移地址是2,0789h的偏移地址是6。</p><p>但是这样会带来一个问题，因为前十六个字节是dw所定义的字型数据，所以这样可能使程序的入口出现问题，所以可以</p><pre><code>assume cs:codesgcodesg segmentdw 0123h,0456h,0789hstart: mov bx,0mov ax,0mov cx,8s: add ax,cs:[bx]add bx,2loop smov ax,4c00hint 21hcodesg endsend start</code></pre><p>这里就是加上了一个标号start，这个标号的意思就是确定程序的入口，而最后在end这里还要来一个start，因为end的作用除了确定程序在哪里终止之外，还有一个作用是告诉编译器程序在哪里开始（因为这时一个伪指令）</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;dw即define word，定义字型数据。例如，dw 0123h,0456h,0789h.这样就定义了几个字型数据，那这些数据都在哪里呢，他们的段地址都是从cs开始的，而偏移地址从0开始，也就是说，0123h的偏移地址是0,0456h的偏移地址是2,0789h的偏移地址是
+      
+    
+    </summary>
+    
+    
+      <category term="汇编" scheme="http://xinhecuican.github.io/categories/%E6%B1%87%E7%BC%96/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>debug和源程序对指令的不同处理</title>
+    <link href="http://xinhecuican.github.io/2020/01/22/debug%E5%92%8C%E6%BA%90%E7%A8%8B%E5%BA%8F%E5%AF%B9%E6%8C%87%E4%BB%A4%E7%9A%84%E4%B8%8D%E5%90%8C%E5%A4%84%E7%90%86/"/>
+    <id>http://xinhecuican.github.io/2020/01/22/debug%E5%92%8C%E6%BA%90%E7%A8%8B%E5%BA%8F%E5%AF%B9%E6%8C%87%E4%BB%A4%E7%9A%84%E4%B8%8D%E5%90%8C%E5%A4%84%E7%90%86/</id>
+    <published>2020-01-22T08:57:00.000Z</published>
+    <updated>2020-01-22T09:40:10.136Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id=""><a href="#" class="headerlink" title="[]"></a>[]</h3><p>debug程序中[0]表示 ds：0处的数据进行处理</p><p>而源程序中表示把0这个数据给要处理的数据</p><p>例 mov ax,[0]在debug中表示把ds：0处元素给ax，而在源程序中表示把0给ax</p><p>在程序中，可以直接使用段寄存器加偏移地址来确定访问的元素，例如：ds：[bx],cs:[bx],ss:[bx]等</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;&quot;&gt;&lt;a href=&quot;#&quot; class=&quot;headerlink&quot; title=&quot;[]&quot;&gt;&lt;/a&gt;[]&lt;/h3&gt;&lt;p&gt;debug程序中[0]表示 ds：0处的数据进行处理&lt;/p&gt;
+&lt;p&gt;而源程序中表示把0这个数据给要处理的数据&lt;/p&gt;
+&lt;p&gt;例 mov ax,[0]
+      
+    
+    </summary>
+    
+    
+      <category term="汇编" scheme="http://xinhecuican.github.io/categories/%E6%B1%87%E7%BC%96/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>[bx]和loop</title>
+    <link href="http://xinhecuican.github.io/2020/01/21/bx-%E5%92%8Cloop/"/>
+    <id>http://xinhecuican.github.io/2020/01/21/bx-%E5%92%8Cloop/</id>
+    <published>2020-01-21T02:08:00.000Z</published>
+    <updated>2020-01-24T00:31:36.743Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="bx"><a href="#bx" class="headerlink" title="[bx]"></a>[bx]</h3><p>mov ax,[bx]</p><p>这个的意思是把ds：bx处的内容放入ax中</p><p>mov [bx],ax</p><p>这个的意思是把ax中的内容放入 地址ds：bx处</p><h3 id="bx-idata"><a href="#bx-idata" class="headerlink" title="[bx+idata]"></a>[bx+idata]</h3><p>实际上还有更加灵活的方式指明内存地址，就是bx后加一个数据，这个数据可以是常数，也可以是变量</p><p>例 mov ax,ds:[bx+200]，也可以直接写为ds：200[bx]</p><p>这种处理方式可以方便的处理数组</p><h3 id="loop"><a href="#loop" class="headerlink" title="loop"></a>loop</h3><p>格式：loop+标识符</p><p>执行过程：执行到loop时，先让cx-=1,再判断cx中的值，不为0则转至标号处继续执行，为0则进行下一步操作，寄存器cx用来储存循环次数</p><p>例</p><pre><code>mov cx,3mov ax,2s: add ax,ax  loop s</code></pre><p>这段程序的作用是计算2的三次方，首先让循环次数为3，ax=2，再从s处开始循环，当cx=0时退出，即进行3次</p><h3 id="用debug跟踪loop指令"><a href="#用debug跟踪loop指令" class="headerlink" title="用debug跟踪loop指令"></a>用debug跟踪loop指令</h3><p> tip：汇编程序中，数据不能以字母开头，所以如A231h等等前面都要加一个零</p><p> 如果想直接结束循环可以用p命令，如果用t命令的话，只会结束这一次循环</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;bx&quot;&gt;&lt;a href=&quot;#bx&quot; class=&quot;headerlink&quot; title=&quot;[bx]&quot;&gt;&lt;/a&gt;[bx]&lt;/h3&gt;&lt;p&gt;mov ax,[bx]&lt;/p&gt;
+&lt;p&gt;这个的意思是把ds：bx处的内容放入ax中&lt;/p&gt;
+&lt;p&gt;mov [bx],ax&lt;/p&gt;
+&lt;p
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>程序执行过程的跟踪</title>
+    <link href="http://xinhecuican.github.io/2020/01/21/%E7%A8%8B%E5%BA%8F%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B%E7%9A%84%E8%B7%9F%E8%B8%AA/"/>
+    <id>http://xinhecuican.github.io/2020/01/21/%E7%A8%8B%E5%BA%8F%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B%E7%9A%84%E8%B7%9F%E8%B8%AA/</id>
+    <published>2020-01-21T01:54:00.000Z</published>
+    <updated>2020-01-21T02:00:15.897Z</updated>
+    
+    <content type="html"><![CDATA[<p>运用debug +程序名进入debug过程</p><p>例如 debug 1.exe</p><p>程序开始都是从0000的偏移地址开始的，设段地址为A，而程序开始有一段不做该程序内容，而有其他用途。这段程序占256个字节，叫psp，之后段地址偏移10h，所以真正的程序是从A+10:0 开始的（256个字节在16进制中是10，而A也是用16进制表示的）</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;运用debug +程序名进入debug过程&lt;/p&gt;
+&lt;p&gt;例如 debug 1.exe&lt;/p&gt;
+&lt;p&gt;程序开始都是从0000的偏移地址开始的，设段地址为A，而程序开始有一段不做该程序内容，而有其他用途。这段程序占256个字节，叫psp，之后段地址偏移10h，所以真正的程序是
+      
+    
+    </summary>
+    
+    
+      <category term="汇编" scheme="http://xinhecuican.github.io/categories/%E6%B1%87%E7%BC%96/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>从asm到exe</title>
+    <link href="http://xinhecuican.github.io/2020/01/21/%E4%BB%8Easm%E5%88%B0exe/"/>
+    <id>http://xinhecuican.github.io/2020/01/21/%E4%BB%8Easm%E5%88%B0exe/</id>
+    <published>2020-01-21T01:40:00.000Z</published>
+    <updated>2020-01-21T01:53:04.623Z</updated>
+    
+    <content type="html"><![CDATA[<p>先要有masm.exe和link.exe，然后输入masm+程序名和link+程序名</p><p>或者masm+盘符+程序名，可以省略中间过程，节省时间<br>例：masm c:\1.asm</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;先要有masm.exe和link.exe，然后输入masm+程序名和link+程序名&lt;/p&gt;
+&lt;p&gt;或者masm+盘符+程序名，可以省略中间过程，节省时间&lt;br&gt;例：masm c:\1.asm&lt;/p&gt;
+
+      
+    
+    </summary>
+    
+    
+      <category term="汇编" scheme="http://xinhecuican.github.io/categories/%E6%B1%87%E7%BC%96/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>汇编的第一个程序</title>
@@ -95,9 +350,9 @@
     <link href="http://xinhecuican.github.io/2020/01/18/%E7%BA%BF%E6%AE%B5%E6%95%B0%E7%BB%84%E5%92%8C%E7%BA%BF%E6%AE%B5%E6%A0%91/"/>
     <id>http://xinhecuican.github.io/2020/01/18/%E7%BA%BF%E6%AE%B5%E6%95%B0%E7%BB%84%E5%92%8C%E7%BA%BF%E6%AE%B5%E6%A0%91/</id>
     <published>2020-01-18T07:23:00.000Z</published>
-    <updated>2020-01-19T06:08:02.273Z</updated>
+    <updated>2020-01-21T11:44:25.997Z</updated>
     
-    <content type="html"><![CDATA[<h3 id="lowbit函数"><a href="#lowbit函数" class="headerlink" title="lowbit函数"></a>lowbit函数</h3><p>lowbit函数指的是将元素与元素的补码按位与，即a&amp;-a，这个值返回的是从右数第一个1开始的值</p><p>例如 6&amp;-6， 6二进制位为110，所以6的lowbit函数值为10，即十进制下的二</p><pre><code>ll lowbit(ll num){    return num&amp;-num;}</code></pre><h3 id="树状数组"><a href="#树状数组" class="headerlink" title="树状数组"></a>树状数组</h3><p>首先我们可以把一整个数组分为若干小部分，然后让这几个小部分叠加就可以得到数组总的和。例如，我想求a[91],我可以先求c[88],发现c[88]管理2个数，再找c[86]，这样一直进行下去就可以了。</p><p>c又是什么呢？例如c[6]，它的lowbit函数为2，因此它管理两位数，所以c[6]=a[5]+a[6]</p><p>奇数位的c[i]只有他自己，而偶数位c[i]为2的k次方</p><h4 id="单点修改"><a href="#单点修改" class="headerlink" title="单点修改"></a>单点修改</h4><figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">void <span class="keyword">add</span>(int <span class="keyword">x</span>, int k) &#123;</span><br><span class="line">  while (<span class="keyword">x</span> &lt;= n) &#123;  //不能越界</span><br><span class="line">    <span class="keyword">c</span>[<span class="keyword">x</span>] = <span class="keyword">c</span>[<span class="keyword">x</span>] + k<span class="comment">;</span></span><br><span class="line"><span class="comment">    x = x + lowbit(x);</span></span><br><span class="line"><span class="comment">  &#125;</span></span><br><span class="line"><span class="comment">&#125;</span></span><br></pre></td></tr></table></figure><p>这个函数是把a[x]加上k，小于x的c不用修改</p><p>关键是x=x+lowbit(x)<br><img src="/images/1103198-20180725163149813-311841231.png" alt=""><br>从此图中我们可以看出，要想求偶数位节点大小，需要将所有子节点加起来，先要加自己和比自己小一位的奇数，再加上所有i+lowbit(i)=8的偶数</p><h4 id="求和"><a href="#求和" class="headerlink" title="求和"></a>求和</h4><figure class="highlight gml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">int getsum(int <span class="symbol">x</span>) &#123;  <span class="comment">// a[1]……a[x]的和</span></span><br><span class="line">  int ans = <span class="number">0</span>;</span><br><span class="line">  <span class="keywords">while</span> (<span class="symbol">x</span> &gt;= <span class="number">1</span>) &#123;</span><br><span class="line">    ans = ans + c[<span class="symbol">x</span>];</span><br><span class="line">    <span class="symbol">x</span> = <span class="symbol">x</span> - lowbit(<span class="symbol">x</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keywords">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h4 id="建立"><a href="#建立" class="headerlink" title="建立"></a>建立</h4><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">void init() &#123;</span><br><span class="line">  <span class="keyword">for</span> (int <span class="built_in">i</span> = <span class="number">1</span>; <span class="built_in">i</span> &lt;= n; ++<span class="built_in">i</span>) &#123;</span><br><span class="line">    t[<span class="built_in">i</span>] += a[<span class="built_in">i</span>];</span><br><span class="line">    int <span class="built_in">j</span> = <span class="built_in">i</span> + lowbit(<span class="built_in">i</span>);</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">j</span> &lt;= n) t[<span class="built_in">j</span>] += t[<span class="built_in">i</span>];</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">int</span> kth(<span class="built_in">int</span> k) &#123;  <span class="comment">//权值树状数组查询第k小</span></span><br><span class="line">  <span class="built_in">int</span> cnt = <span class="number">0</span>, ret = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="built_in">int</span> i = log2(n); ~i; --i) &#123;</span><br><span class="line">    ret += <span class="number">1</span> &lt;&lt; i;</span><br><span class="line">    <span class="keyword">if</span> (ret &gt;= n || cnt + t[ret] &gt;= k)</span><br><span class="line">      ret -= <span class="number">1</span> &lt;&lt; i;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">      cnt += t[ret];</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> ret + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="线段树"><a href="#线段树" class="headerlink" title="线段树"></a>线段树</h3><p>含义：线段树指的是将一个区间不断二分所形成的一个二叉树，根结点代表arr[0:N]区间所对应的信息，接着根结点被分为两个子树，分别存储arr[0:(N-1)/2]及arr[(N-1)/2+1:N]两个子区间对应的信息</p><p>初始化：注意此处我们对于segmentTree]数组的索引从1开始算起。则对于数组中的任意结点i，其左子结点为<code>2*i</code>，右子结点为<code>2*i + 1</code>，其母结点为i/2。<br><img src="/images/%E5%9B%BE%E7%89%879.png" alt=""><br><img src="/images/%E5%9B%BE%E7%89%8710.png" alt=""><br><img src="/images/%E5%9B%BE%E7%89%878.png" alt=""><br>递归实际意义是先向底层递归，然后从底层向上回溯</p><h4 id="区间修改"><a href="#区间修改" class="headerlink" title="区间修改"></a>区间修改</h4><p><img src="/images/%E5%9B%BE%E7%89%8711.png" alt="">标记的作用是记录每次、每个节点要更新的值</p><h4 id="区间查询"><a href="#区间查询" class="headerlink" title="区间查询"></a>区间查询</h4><p><img src="/images/%E5%9B%BE%E7%89%8712.png" alt=""></p>]]></content>
+    <content type="html"><![CDATA[<h3 id="lowbit函数"><a href="#lowbit函数" class="headerlink" title="lowbit函数"></a>lowbit函数</h3><p>lowbit函数指的是将元素与元素的补码按位与，即a&amp;-a，这个值返回的是从右数第一个1开始的值</p><p>例如 6&amp;-6， 6二进制位为110，所以6的lowbit函数值为10，即十进制下的二</p><pre><code>ll lowbit(ll num){    return num&amp;-num;}</code></pre><h3 id="树状数组"><a href="#树状数组" class="headerlink" title="树状数组"></a>树状数组</h3><p>首先我们可以把一整个数组分为若干小部分，然后让这几个小部分叠加就可以得到数组总的和。例如，我想求a[91],我可以先求c[88],发现c[88]管理2个数，再找c[86]，这样一直进行下去就可以了。</p><p>c又是什么呢？例如c[6]，它的lowbit函数为2，因此它管理两位数，所以c[6]=a[5]+a[6]</p><p>奇数位的c[i]只有他自己，而偶数位c[i]为2的k次方</p><h4 id="单点修改"><a href="#单点修改" class="headerlink" title="单点修改"></a>单点修改</h4><figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">void <span class="keyword">add</span>(int <span class="keyword">x</span>, int k) &#123;</span><br><span class="line">  while (<span class="keyword">x</span> &lt;= n) &#123;  //不能越界</span><br><span class="line">    <span class="keyword">c</span>[<span class="keyword">x</span>] = <span class="keyword">c</span>[<span class="keyword">x</span>] + k<span class="comment">;</span></span><br><span class="line"><span class="comment">    x = x + lowbit(x);</span></span><br><span class="line"><span class="comment">  &#125;</span></span><br><span class="line"><span class="comment">&#125;</span></span><br></pre></td></tr></table></figure><p>这个函数是把a[x]加上k，小于x的c不用修改</p><p>关键是x=x+lowbit(x)<br><img src="/images/1103198-20180725163149813-311841231.png" alt=""><br>从此图中我们可以看出，要想求偶数位节点大小，需要将所有子节点加起来，先要加自己和比自己小一位的奇数，再加上所有i+lowbit(i)=8的偶数</p><h4 id="求和"><a href="#求和" class="headerlink" title="求和"></a>求和</h4><figure class="highlight gml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">int getsum(int <span class="symbol">x</span>) &#123;  <span class="comment">// a[1]……a[x]的和</span></span><br><span class="line">  int ans = <span class="number">0</span>;</span><br><span class="line">  <span class="keywords">while</span> (<span class="symbol">x</span> &gt;= <span class="number">1</span>) &#123;</span><br><span class="line">    ans = ans + c[<span class="symbol">x</span>];</span><br><span class="line">    <span class="symbol">x</span> = <span class="symbol">x</span> - lowbit(<span class="symbol">x</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keywords">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h4 id="建立"><a href="#建立" class="headerlink" title="建立"></a>建立</h4><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">void init() &#123;</span><br><span class="line">  <span class="keyword">for</span> (int <span class="built_in">i</span> = <span class="number">1</span>; <span class="built_in">i</span> &lt;= n; ++<span class="built_in">i</span>) &#123;</span><br><span class="line">    t[<span class="built_in">i</span>] += a[<span class="built_in">i</span>];</span><br><span class="line">    int <span class="built_in">j</span> = <span class="built_in">i</span> + lowbit(<span class="built_in">i</span>);</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">j</span> &lt;= n) t[<span class="built_in">j</span>] += t[<span class="built_in">i</span>];</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">int</span> kth(<span class="built_in">int</span> k) &#123;  <span class="comment">//权值树状数组查询第k小</span></span><br><span class="line">  <span class="built_in">int</span> cnt = <span class="number">0</span>, ret = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="built_in">int</span> i = log2(n); ~i; --i) &#123;</span><br><span class="line">    ret += <span class="number">1</span> &lt;&lt; i;</span><br><span class="line">    <span class="keyword">if</span> (ret &gt;= n || cnt + t[ret] &gt;= k)</span><br><span class="line">      ret -= <span class="number">1</span> &lt;&lt; i;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">      cnt += t[ret];</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> ret + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="线段树"><a href="#线段树" class="headerlink" title="线段树"></a>线段树</h3><p>含义：线段树指的是将一个区间不断二分所形成的一个二叉树，根结点代表arr[0:N]区间所对应的信息，接着根结点被分为两个子树，分别存储arr[0:(N-1)/2]及arr[(N-1)/2+1:N]两个子区间对应的信息</p><p>初始化：注意此处我们对于segmentTree]数组的索引从1开始算起。则对于数组中的任意结点i，其左子结点为<code>2*i</code>，右子结点为<code>2*i + 1</code>，其母结点为i/2。<br><img src="/images/%E5%9B%BE%E7%89%879.png" alt=""><br><img src="/images/%E5%9B%BE%E7%89%8710.png" alt=""><br><img src="/images/%E5%9B%BE%E7%89%878.png" alt=""><br>递归实际意义是先向底层递归，然后从底层向上回溯，p的意思是节点的编号</p><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">void</span> build(<span class="built_in">int</span> s, <span class="built_in">int</span> t, <span class="built_in">int</span> p) &#123;</span><br><span class="line">  <span class="comment">// 对 [s,t] 区间建立线段树,当前根的编号为 p</span></span><br><span class="line">  <span class="keyword">if</span> (s == t) &#123;</span><br><span class="line">    d[p] = a[s];</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">int</span> m = (s + t) / <span class="number">2</span>;</span><br><span class="line">  build(s, m, p * <span class="number">2</span>), build(m + <span class="number">1</span>, t, p * <span class="number">2</span> + <span class="number">1</span>);</span><br><span class="line">  <span class="comment">// 递归对左右区间建树</span></span><br><span class="line">  d[p] = d[p * <span class="number">2</span>] + d[(p * <span class="number">2</span>) + <span class="number">1</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h4 id="区间修改"><a href="#区间修改" class="headerlink" title="区间修改"></a>区间修改</h4><p><img src="/images/%E5%9B%BE%E7%89%8711.png" alt="">标记的作用是记录每次、每个节点要更新的值</p><h4 id="区间查询"><a href="#区间查询" class="headerlink" title="区间查询"></a>区间查询</h4><p><img src="/images/%E5%9B%BE%E7%89%8712.png" alt=""></p>]]></content>
     
     <summary type="html">
     
@@ -256,257 +511,6 @@
       
       
         &lt;h3 id=&quot;队列基础&quot;&gt;&lt;a href=&quot;#队列基础&quot; class=&quot;headerlink&quot; title=&quot;队列基础&quot;&gt;&lt;/a&gt;队列基础&lt;/h3&gt;&lt;p&gt;队列是一种线性结构，有队头（front）队尾（rear）两个指针，每次拉进来一个元素会让队尾加一，而每次删除一个元素会让队头
-      
-    
-    </summary>
-    
-    
-      <category term="stl" scheme="http://xinhecuican.github.io/categories/stl/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>归并排序</title>
-    <link href="http://xinhecuican.github.io/2020/01/13/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/"/>
-    <id>http://xinhecuican.github.io/2020/01/13/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/</id>
-    <published>2020-01-13T06:31:00.000Z</published>
-    <updated>2020-01-13T07:12:13.018Z</updated>
-    
-    <content type="html"><![CDATA[<h4 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h4><p>归并排序运用了分治的思想，先将数组二分成一个元素（一个元素时看为有序），然后将这些元素不断合并，每合并一次排一次序，最后就可以得到有序的数组。</p><p>比如说一个序列:12 ,23,1,44,233,10,9,8。我们先分成两段：12 ,23,1,44 和 233,10,9,8，<br>发现还能再分成4段：12 ,23 和 1,44——233,10 和 9,8。<br>再分成8段：12–23–1–44 和233–10–9–8。<br>这时候开始把子序列进行排序合并，一个元素就是有序的。所以不用排序。<br>合并成2个一组排序得到：12，23—-1，44—10，233—8，9。<br>再合并成4个一组排序得到：1，12，23，44—8，9，10，233。<br>最后合并得到最终结果：1，8，9，10，12，23，44，233。</p><p>合并过程看代码</p><p>链接：<a href="https://www.jianshu.com/p/b50a6034eb90" target="_blank" rel="noopener">https://www.jianshu.com/p/b50a6034eb90</a></p><h4 id="图解"><a href="#图解" class="headerlink" title="图解"></a>图解</h4><p><img src="/images/1024555-20161218163120151-452283750.png" alt=""></p><p>这个图片蓝色部分就是拆的过程，而绿的部分为并的过程</p><h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">paixu</span><span class="params">(<span class="keyword">int</span> first,<span class="keyword">int</span> mid,<span class="keyword">int</span> last,<span class="keyword">int</span> a[],<span class="keyword">int</span> temp[])</span><span class="comment">//这是合并过程</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> l1=first,l2=mid+<span class="number">1</span>,r1=mid,r2=last;</span><br><span class="line">    <span class="keyword">int</span> k=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(l1&lt;=r1&amp;&amp;l2&lt;=r2)<span class="comment">//两部分都存在时看哪个小就加上哪个</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(a[l1]&lt;=a[l2])</span><br><span class="line">        &#123;</span><br><span class="line">            temp[k++]=a[l1++];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            temp[k++]=a[l2++];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(l1&lt;=r1)<span class="comment">//第一部分有剩余就把第一部分剩下的全加上</span></span><br><span class="line">    &#123;</span><br><span class="line">        temp[k++]=a[l1++];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(l2&lt;=r2)</span><br><span class="line">    &#123;</span><br><span class="line">        temp[k++]=a[l2++];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;k;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        a[i+first]=temp[i];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">xunhuan</span><span class="params">(<span class="keyword">int</span> first,<span class="keyword">int</span> last,<span class="keyword">int</span> a[],<span class="keyword">int</span> temp[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(first&lt;last)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> mid=(first+last)/<span class="number">2</span>;</span><br><span class="line">        xunhuan(first,mid,a,temp);<span class="comment">//拆左边</span></span><br><span class="line">        xunhuan(mid+<span class="number">1</span>,last,a,temp);<span class="comment">//拆右边</span></span><br><span class="line">        paixu(first,mid,last,a,temp);<span class="comment">//合并</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">mergesort</span><span class="params">(<span class="keyword">int</span> a[],<span class="keyword">int</span> first,<span class="keyword">int</span> last)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span>* p=<span class="keyword">new</span> <span class="keyword">int</span>[last-first];<span class="comment">//建一个临时数组，合并时用</span></span><br><span class="line">    <span class="keyword">if</span>(p==<span class="literal">NULL</span>)<span class="comment">//判断是否传入空数组</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    xunhuan(first,last,a,p);</span><br><span class="line">    <span class="keyword">delete</span> [] p;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h4 id=&quot;基本原理&quot;&gt;&lt;a href=&quot;#基本原理&quot; class=&quot;headerlink&quot; title=&quot;基本原理&quot;&gt;&lt;/a&gt;基本原理&lt;/h4&gt;&lt;p&gt;归并排序运用了分治的思想，先将数组二分成一个元素（一个元素时看为有序），然后将这些元素不断合并，每合并一次排一次序，最后就可
-      
-    
-    </summary>
-    
-    
-      <category term="算法" scheme="http://xinhecuican.github.io/categories/%E7%AE%97%E6%B3%95/"/>
-    
-    
-      <category term="排序" scheme="http://xinhecuican.github.io/tags/%E6%8E%92%E5%BA%8F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>前缀和</title>
-    <link href="http://xinhecuican.github.io/2020/01/13/%E5%89%8D%E7%BC%80%E5%92%8C/"/>
-    <id>http://xinhecuican.github.io/2020/01/13/%E5%89%8D%E7%BC%80%E5%92%8C/</id>
-    <published>2020-01-13T01:16:00.000Z</published>
-    <updated>2020-01-13T02:08:35.898Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="前缀和概念"><a href="#前缀和概念" class="headerlink" title="前缀和概念"></a>前缀和概念</h3><p>前缀和指的是用另一个数组b[n]来保存a[n]中前n项的和</p><p>例如，b[0]=a[0],b[1]=a[0]+a[1],…</p><h3 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h3><h4 id="求数组某一区间长度数字的和"><a href="#求数组某一区间长度数字的和" class="headerlink" title="求数组某一区间长度数字的和"></a>求数组某一区间长度数字的和</h4><p>如果我给你一串长度为n的数列a1,a2,a3……an,再给出m个询问，每次询问给出L，R两个数，要求给出区间[L,R]里的数的和，一般可能是从L到R遍历一次，但这样很花时间，有了前缀和之后可以直接b[R]-b[L]就得到L到R的和</p><h3 id="差分"><a href="#差分" class="headerlink" title="差分"></a>差分</h3><p>差分就是将数列中的每一项分别与前一项数做差</p><p>一个序列1 2 5 4 7 3，差分后得到1 1 3 -1 3 -4 -3</p><p>这里注意得到的差分序列第一个数和原来的第一个数一样（相当于第一个数减0）<br>差分序列最后比原序列多一个数（相当于0减最后一个数）</p><p>例 给你一串长度为n的数列a1,a2,a3……an，要求对a[L]~a[R]进行m次操作：</p><p>操作一：将a[L]~a[R]内的元素都加上P</p><p>操作二：将a[L]~a[R]内的元素都减去P</p><p>最后再给出一个询问求a[L]-a[R]内的元素之和？</p><p>如果用一般做法就是遍历加减，时间复杂度高，现在可以直接让b[L] 加上P，再让b[R+1]减去P，这样因为b[L+1]=b[L]+a[L+1]，所以L到R上每一项都会加P，而b[R+1]减去P是为了对后面的数不产生影响</p><p>如果有多次修改操作，可以先将每次修改保存到一个数组中，然后求前缀和时再加上<br>    #include&lt;bits/stdc++.h&gt;<br>    using namespace std;<br>    const int maxn=1e5+9;<br>    int a[maxn],b[maxn];<br>    int main(){<br>     int i,j,k,n,m,p;<br>     cin&gt;&gt;n&gt;&gt;m;<br>     for(i=1;i&lt;=n;i++){<br>        cin&gt;&gt;a[i];<br>     }<br>     for(i=1;i&lt;=m;i++){<br>        int L,R,t;<br>        cin&gt;&gt;t&gt;&gt;L&gt;&gt;R&gt;&gt;p;<br>        if(t==1){<br>            b[L]+=p;b[R+1]-=p; //仔细想想为什么b[R+1]要减去p<br>        }<br>        else{<br>            b[L]-=p;b[R+1]+=p;//这是减去p<br>        }<br>    }<br>    int add=0;<br>    for(i=1;i&lt;=n;i++){<br>        add+=b[i];<br>        a[i]+=a[i-1]+add;//这是求前缀和数组，并且add是把需要加p的地方加上<br>    }<br>    int x,y;<br>    cin&gt;&gt;x&gt;&gt;y;<br>    cout&lt;&lt;a[y]-a[x-1]&lt;&lt;endl;<br>}</p><h4 id="性质："><a href="#性质：" class="headerlink" title="性质："></a>性质：</h4><p>1、差分序列求前缀和可得原序列</p><p>2、将原序列区间[L,R]中的元素全部+1，可以转化操作为差分序列L处+1，R+1处-1</p><p>3、按照性质2得到，每次修改原序列一个区间+1，那么每次差分序列修改处增加的和减少的相同</p><h3 id="二维前缀和"><a href="#二维前缀和" class="headerlink" title="二维前缀和"></a>二维前缀和</h3><p>二维前缀和对应的是二维数组</p><p><img src="/images/20180817161822690.png" alt=""></p><p>b[2][4]表示的是b[1][1]+b[1][2]+b[1][3]+b[1][4]+b[2][1]+b[2][2]+b[2][3]</p><p>因此可以先加上b[1][4]+b[2][3]，这时重复了b[1][3]，再减去</p><p>因此公式<br>a[i][j]+=a[i][j-1]+a[i-1][j]-a[i-1][j-1]，因为这样，二维前缀和最好从一开始，0处全赋值为0</p><p>这时想知道从(x1,y1)到(x2,y2)的和要a[x2][y2]-a[x1-1][y2]-a[x2][y1-1]+a[x1-1][y1-1]</p><p>例如，求(3,3)到(4,4)的值，实际上是a[3][3]+a[3][4]+a[4][3]+a[4][4]</p><h3 id="二维差分（不是很清楚）"><a href="#二维差分（不是很清楚）" class="headerlink" title="二维差分（不是很清楚）"></a>二维差分（不是很清楚）</h3><p>和一维差分的第四个问题类似，让（x1,y1)和（x2,y2）矩形内的数都加上x</p><p>b[x1][y1]+=x; b[x2+1][y2+1]+=x;</p><p>b[x1][y2+1]-=x; b[x2+1][y1]-=x;</p><p> 参考博客<a href="https://blog.csdn.net/k_r_forever/article/details/81775899" target="_blank" rel="noopener">https://blog.csdn.net/k_r_forever/article/details/81775899</a></p><p> <a href="https://blog.csdn.net/Healer66/article/details/87201014" target="_blank" rel="noopener">https://blog.csdn.net/Healer66/article/details/87201014</a></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;前缀和概念&quot;&gt;&lt;a href=&quot;#前缀和概念&quot; class=&quot;headerlink&quot; title=&quot;前缀和概念&quot;&gt;&lt;/a&gt;前缀和概念&lt;/h3&gt;&lt;p&gt;前缀和指的是用另一个数组b[n]来保存a[n]中前n项的和&lt;/p&gt;
-&lt;p&gt;例如，b[0]=a[0],b[1]=a[0
-      
-    
-    </summary>
-    
-    
-      <category term="算法" scheme="http://xinhecuican.github.io/categories/%E7%AE%97%E6%B3%95/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>结构体</title>
-    <link href="http://xinhecuican.github.io/2020/01/12/%E7%BB%93%E6%9E%84%E4%BD%93/"/>
-    <id>http://xinhecuican.github.io/2020/01/12/%E7%BB%93%E6%9E%84%E4%BD%93/</id>
-    <published>2020-01-12T03:55:00.000Z</published>
-    <updated>2020-01-12T04:06:14.247Z</updated>
-    
-    <content type="html"><![CDATA[<p>在c++中，结构体与类类似，都有个体域和成员函数，不同是class中默认的成员访问权限是private的，而struct中则是public的。 (2)class继承默认是private继承，而从struct继承默认是public继承。</p><p>定义：</p><pre><code> struct tag {  member-list}variable-list;</code></pre><p>注：struct为结构体关键字；<br>   tag为结构体的标志；<br>   member-list为结构体成员变量及成员函数列表，其必须列出其所有成员；<br>   variable-list为此结构体声明的变量；</p><p>tag相当于class中的类名，而variable-list相当于class中创建的对象</p><p>另外，如果想多创建几个对象，只需要<code>tag 变量名</code>即可</p><p>在c++中，可以直接用<code>variable-list+变量名</code>创建对象</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;在c++中，结构体与类类似，都有个体域和成员函数，不同是class中默认的成员访问权限是private的，而struct中则是public的。 (2)class继承默认是private继承，而从struct继承默认是public继承。&lt;/p&gt;
-&lt;p&gt;定义：&lt;/p&gt;
-&lt;pre
-      
-    
-    </summary>
-    
-    
-      <category term="基础" scheme="http://xinhecuican.github.io/categories/%E5%9F%BA%E7%A1%80/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>memset</title>
-    <link href="http://xinhecuican.github.io/2020/01/11/memset/"/>
-    <id>http://xinhecuican.github.io/2020/01/11/memset/</id>
-    <published>2020-01-11T10:52:00.000Z</published>
-    <updated>2020-01-11T10:54:16.063Z</updated>
-    
-    <content type="html"><![CDATA[<p>memset(标识符，填充数据,大小)</p><p>memset是一个字节一个字节填充的，所以一般只能填充0或-1因为这个一个字节和四个字节相同</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;memset(标识符，填充数据,大小)&lt;/p&gt;
-&lt;p&gt;memset是一个字节一个字节填充的，所以一般只能填充0或-1因为这个一个字节和四个字节相同&lt;/p&gt;
-
-      
-    
-    </summary>
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>快速输入</title>
-    <link href="http://xinhecuican.github.io/2020/01/11/%E5%BF%AB%E9%80%9F%E8%BE%93%E5%85%A5/"/>
-    <id>http://xinhecuican.github.io/2020/01/11/%E5%BF%AB%E9%80%9F%E8%BE%93%E5%85%A5/</id>
-    <published>2020-01-11T10:47:00.000Z</published>
-    <updated>2020-01-11T10:51:31.455Z</updated>
-    
-    <content type="html"><![CDATA[<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">inline int read()</span><br><span class="line">&#123;</span><br><span class="line">    int <span class="attribute">x</span>=0,f=1;</span><br><span class="line">    char <span class="attribute">ch</span>=getchar();</span><br><span class="line">    <span class="keyword">while</span> (ch&lt;<span class="string">'0'</span>||ch&gt;<span class="string">'9'</span>)&#123;<span class="keyword">if</span> (<span class="attribute">ch</span>=='-') <span class="attribute">f</span>=-1;ch=getchar();&#125;</span><br><span class="line">    <span class="keyword">while</span> (ch&gt;=<span class="string">'0'</span>&amp;&amp;ch&lt;=<span class="string">'9'</span>)&#123;<span class="attribute">x</span>=x*10+ch-'0';ch=getchar();&#125;</span><br><span class="line">    return x<span class="number">*f</span>;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>这个快速输入只适合int类型，另外如果参加比赛，最好不要用cin，cout，速度较慢<br>用scanf，printf更好</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;figure class=&quot;highlight routeros&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span cl
-      
-    
-    </summary>
-    
-    
-      <category term="算法" scheme="http://xinhecuican.github.io/categories/%E7%AE%97%E6%B3%95/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>qsort</title>
-    <link href="http://xinhecuican.github.io/2020/01/11/qsort/"/>
-    <id>http://xinhecuican.github.io/2020/01/11/qsort/</id>
-    <published>2020-01-11T10:46:00.000Z</published>
-    <updated>2020-01-11T10:47:30.678Z</updated>
-    
-    <content type="html"><![CDATA[<p>自带的快排函数</p><p>qsortvoid qsort(void <em>base, size_t nitems, size_t size, int (*compar)(const void *, const void</em>))</p><p>参数</p><p>base– 指向要排序的数组的第一个元素的指针。<br>nitems– 由 base 指向的数组中元素的个数。<br>size– 数组中每个元素的大小，以字节为单位。<br>compar– 用来比较两个元素的函数，即函数指针（回调函数）</p><p>回调函数：</p><p>回调函数就是一个通过函数指针调用的函数。如果把函数的指针（地址）作为参数传递给另一个函数，当这个指针被用来调用其所指向的函数时，就说这是回调函数。 [2]<br>compar参数<br>compar参数指向一个比较两个元素的函数。比较函数的原型应该像下面这样。注意两个形参必须是const void *型，同时在调用compar 函数（compar实质为函数指针，这里称它所指向的函数也为compar）时，传入的实参也必须转换成const void *型。在compar函数内部会将const void *型转换成实际类型。<br>int compar(const void *p1, const void *p2);</p><p>如果compar返回值小于0（&lt; 0），那么p1所指向元素会被排在p2所指向元素的左面；<br>　　如果compar返回值等于0（= 0），那么p1所指向元素与p2所指向元素的顺序不确定；<br>　　如果compar返回值大于0（&gt; 0），那么p1所指向元素会被排在p2所指向元素的右面。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;自带的快排函数&lt;/p&gt;
-&lt;p&gt;qsortvoid qsort(void &lt;em&gt;base, size_t nitems, size_t size, int (*compar)(const void *, const void&lt;/em&gt;))&lt;/p&gt;
-&lt;p&gt;参数&lt;/p&gt;
-&lt;p&gt;
-      
-    
-    </summary>
-    
-    
-      <category term="stl" scheme="http://xinhecuican.github.io/categories/stl/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>pair</title>
-    <link href="http://xinhecuican.github.io/2020/01/11/pair/"/>
-    <id>http://xinhecuican.github.io/2020/01/11/pair/</id>
-    <published>2020-01-11T10:28:00.000Z</published>
-    <updated>2020-01-11T10:39:01.783Z</updated>
-    
-    <content type="html"><![CDATA[<p>pair实际上是一个结构体，它可以把两种类型结合起来使用,定义在<code>&lt;utility&gt;</code>中</p><p>定义：pair&lt;类型A,类型B&gt; 标识符</p><p>操作 pa.first 表示类型A pa.second 表示类型B</p><p>注意不能用-> 操作符，虽然我也不知道为什么]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;pair实际上是一个结构体，它可以把两种类型结合起来使用,定义在&lt;code&gt;&amp;lt;utility&amp;gt;&lt;/code&gt;中&lt;/p&gt;
-&lt;p&gt;定义：pair&amp;lt;类型A,类型B&amp;gt; 标识符&lt;/p&gt;
-&lt;p&gt;操作 pa.first 表示类型A pa.second 表示类型B&lt;
-      
-    
-    </summary>
-    
-    
-      <category term="stl" scheme="http://xinhecuican.github.io/categories/stl/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>迭代器支持的运算</title>
-    <link href="http://xinhecuican.github.io/2020/01/11/%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%94%AF%E6%8C%81%E7%9A%84%E8%BF%90%E7%AE%97/"/>
-    <id>http://xinhecuican.github.io/2020/01/11/%E8%BF%AD%E4%BB%A3%E5%99%A8%E6%94%AF%E6%8C%81%E7%9A%84%E8%BF%90%E7%AE%97/</id>
-    <published>2020-01-11T10:12:00.000Z</published>
-    <updated>2020-01-11T10:13:03.292Z</updated>
-    
-    <content type="html"><![CDATA[<p>之前写搜狗在线测试题目的时候，曾经想遍历一个set遍历。当时是这样写的。</p><p>set<int>::iterator b = a.begin()+1</p><p>后来发现程序报错。究其原因是，set迭代器不支持加减数操作。<br>查看了一下维基百科，下面是有关说明。</p><p>1.所有迭代器都应该实现自增算符：iter++,++iter</p><p>2.Bidirectional迭代器：是在前向迭代器的基础上，多了单步向后遍历的能力。也就是–iter,iter–。</p><p>3.Random Access迭代器：在双向迭代器基础上，具有直接访问各数据元素的能力。随机迭代器增加了“迭代器算术运算”：</p><p>iter+=i 迭代器递增i位</p><p>iter-=i 迭代器递减i位</p><p>iter+i 加i位后的迭代器</p><p>iter-i 减i位后的迭代器</p><p>iter[i] 加i位后的迭代器的解引用</p><p>iter&lt;iter1 如果迭代器iter的位置在iter1前，返回true，否则返回false</p><p>iter&lt;=iter1 如果iter的位置在iter1的前面或同一位置时返回true，否则返回false</p><p>iter&gt;iter1 如果迭代器iter的位置在iter1后，返回true，否则返回false</p><p>iter&gt;=iter1 如果iter的位置在iter1的后面或同一位置时返回true，否则返回false</p><p>4.在STL定义的容器中，string，vector与deque提供了随机访问迭代器，list、set、multiset、map、multimap提供了双向迭代器。</p><p>————————————————</p><p>版权声明：本文为CSDN博主「ShenYounger」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a href="https://blog.csdn.net/wusecaiyun/article/details/49563197" target="_blank" rel="noopener">https://blog.csdn.net/wusecaiyun/article/details/49563197</a></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;之前写搜狗在线测试题目的时候，曾经想遍历一个set遍历。当时是这样写的。&lt;/p&gt;
-&lt;p&gt;set&lt;int&gt;::iterator b = a.begin()+1&lt;/p&gt;
-&lt;p&gt;后来发现程序报错。究其原因是，set迭代器不支持加减数操作。&lt;br&gt;查看了一下维基百科，下面是有关说明
-      
-    
-    </summary>
-    
-    
-      <category term="stl" scheme="http://xinhecuican.github.io/categories/stl/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>vector</title>
-    <link href="http://xinhecuican.github.io/2020/01/11/vector/"/>
-    <id>http://xinhecuican.github.io/2020/01/11/vector/</id>
-    <published>2020-01-11T08:21:00.000Z</published>
-    <updated>2020-01-11T09:49:59.907Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="vector的定义"><a href="#vector的定义" class="headerlink" title="vector的定义"></a>vector的定义</h3><p>vector&lt;数据类型&gt; 标识符</p><h3 id="vector的函数"><a href="#vector的函数" class="headerlink" title="vector的函数"></a>vector的函数</h3><p>begin()返回开头元素的迭代器</p><p>end()同理</p><p>front() 返回开头元素的引用</p><p>back() 返回末尾元素的引用</p><p>size()返回vector内元素的数量</p><p>erase(迭代器) 删除一个元素</p><p>clear() 清空</p><p>insert(迭代器，a) 把a插入迭代器后</p><p><strong>例</strong>vector中现在有1 2 3 三个元素，vec.insert(vec.begin()+2,4)得到1 2 4 3</p><h3 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h3><p>reverse(vec.begin(),vec.end()) <strong>(头文件<code>&lt;algorithm&gt;</code>)</strong></p><p>实际上不一定是begin到end，也可以begin()+1到、、、，只需要用迭代器就行了<p>sort排序，也要用<code>&lt;algorithm&gt;</code>默认升序</p><figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">bool</span> <span class="constructor">Comp(<span class="params">const</span> <span class="params">int</span> &amp;<span class="params">a</span>,<span class="params">const</span> <span class="params">int</span> &amp;<span class="params">b</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    return a&gt;b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>调用时:sort(vec.begin(),vec.end(),Comp)，这样就降序排序。</p><h3 id="二维数组"><a href="#二维数组" class="headerlink" title="二维数组"></a>二维数组</h3><pre><code>vector&lt;vector&lt;数据类型&gt; &gt; vec[3];//3行vector&lt;数据类型&gt; veci;for(int i=0;i&lt;3;i++){   for(int k=0;k&lt;4;k++)   {      veci.push_back();   }   vec.push_back(veci);}//四列</code></pre>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;vector的定义&quot;&gt;&lt;a href=&quot;#vector的定义&quot; class=&quot;headerlink&quot; title=&quot;vector的定义&quot;&gt;&lt;/a&gt;vector的定义&lt;/h3&gt;&lt;p&gt;vector&amp;lt;数据类型&amp;gt; 标识符&lt;/p&gt;
-&lt;h3 id=&quot;vector的
-      
-    
-    </summary>
-    
-    
-    
-  </entry>
-  
-  <entry>
-    <title>prioity_queue</title>
-    <link href="http://xinhecuican.github.io/2020/01/11/prioity-queue/"/>
-    <id>http://xinhecuican.github.io/2020/01/11/prioity-queue/</id>
-    <published>2020-01-11T08:13:00.000Z</published>
-    <updated>2020-01-11T08:18:01.763Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="prioity-queue"><a href="#prioity-queue" class="headerlink" title="prioity_queue"></a>prioity_queue</h3><p>实际上是一个大顶堆，定义在<code>&lt;queue&gt;</code>中</p><p><code>prioity_queue&lt;int&gt; qu</code>为大顶堆</p><p><code>priority_queue&lt;int,vector&lt;int&gt;,greater&lt;int&gt; &gt; qu;</code>为小顶堆</p><p>.push()</p><p>.pop()取出元素，但不返回值</p><p>.top()不取出元素，返回值</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;prioity-queue&quot;&gt;&lt;a href=&quot;#prioity-queue&quot; class=&quot;headerlink&quot; title=&quot;prioity_queue&quot;&gt;&lt;/a&gt;prioity_queue&lt;/h3&gt;&lt;p&gt;实际上是一个大顶堆，定义在&lt;code&gt;&amp;lt;que
       
     
     </summary>

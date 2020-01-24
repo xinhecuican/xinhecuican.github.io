@@ -295,7 +295,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://xinhecuican.github.io/2020/01/20/%E6%B1%87%E7%BC%96%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E7%A8%8B%E5%BA%8F/">
+    <link itemprop="mainEntityOfPage" href="http://xinhecuican.github.io/2020/01/24/%E6%B1%87%E7%BC%96%E4%B8%AD%E7%9A%84%E5%A4%9A%E5%B1%82%E5%BE%AA%E7%8E%AF/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -314,7 +314,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/01/20/%E6%B1%87%E7%BC%96%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E7%A8%8B%E5%BA%8F/" itemprop="url">汇编的第一个程序</a></h1>
+                <a class="post-title-link" href="/2020/01/24/%E6%B1%87%E7%BC%96%E4%B8%AD%E7%9A%84%E5%A4%9A%E5%B1%82%E5%BE%AA%E7%8E%AF/" itemprop="url">汇编中的多层循环</a></h1>
         
 
         <div class="post-meta">
@@ -326,8 +326,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-20T15:58:00+08:00">
-                2020-01-20
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-24T09:19:00+08:00">
+                2020-01-24
               </time>
             
 
@@ -388,15 +388,12 @@
       
         
           
-          伪指令编译器中，包含两种指令，一种是汇编指令，一种是伪指令。伪指令是给编译器看的，最终不会被cpu执行。先了解三个最为基础的伪指令
-
-XXX segment，XXX ends，这两个是配套使用的。功能是定义一个代码段，一个段必须要有一个名称标识（XXX是也）
-
-例如codesg segment ，c
+          因为唯一的用于统计循环次数的寄存器就是cx，所以有多层循环的时候就会碰到循环次数难以记录的问题，以下是一种解决办法
+1234567891011s0:mov dx,cx//用另一个寄存器来存cx的次数   mov si,0   mov cx,3 s:mov al,[si+bx]   and al,11
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2020/01/20/%E6%B1%87%E7%BC%96%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E7%A8%8B%E5%BA%8F/#more" rel="contents">
+            <a class="btn" href="/2020/01/24/%E6%B1%87%E7%BC%96%E4%B8%AD%E7%9A%84%E5%A4%9A%E5%B1%82%E5%BE%AA%E7%8E%AF/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -450,7 +447,7 @@ XXX segment，XXX ends，这两个是配套使用的。功能是定义一个代�
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://xinhecuican.github.io/2020/01/20/%E6%A0%88/">
+    <link itemprop="mainEntityOfPage" href="http://xinhecuican.github.io/2020/01/24/si%E5%92%8Cdi/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -469,7 +466,7 @@ XXX segment，XXX ends，这两个是配套使用的。功能是定义一个代�
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/01/20/%E6%A0%88/" itemprop="url">栈.                                      </a></h1>
+                <a class="post-title-link" href="/2020/01/24/si%E5%92%8Cdi/" itemprop="url">si和di</a></h1>
         
 
         <div class="post-meta">
@@ -481,8 +478,8 @@ XXX segment，XXX ends，这两个是配套使用的。功能是定义一个代�
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-20T14:26:00+08:00">
-                2020-01-20
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-24T08:32:00+08:00">
+                2020-01-24
               </time>
             
 
@@ -543,12 +540,14 @@ XXX segment，XXX ends，这两个是配套使用的。功能是定义一个代�
       
         
           
-          栈是一段连续的内存空间，这个空间的特殊性在于，最后进入这个空间的数据，最先出去
-原理通过ss sp 两个寄存器确定了一个栈顶指针，然后随着一些操作，这个指针会向上向下移动例如 push ax，这条指令会将ax中的内容运到栈中，然后sp-2。注意，栈顶地址为低地址，栈底地址为高地址，因此增加元素会使s
+          si和di在8086cpu中的功能与bx类似，si与di不能分为两个8位寄存器来使用
+也就是说  ds：[si]是可以的
+如果不用这些寄存器直接写的话就会出现之前所说的编译器和exe对程序的不同处理
+例   mov ax,[si]在exe中就是 ds：[si]，但是如果是 mov，ax,[1]在ex
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2020/01/20/%E6%A0%88/#more" rel="contents">
+            <a class="btn" href="/2020/01/24/si%E5%92%8Cdi/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -602,7 +601,7 @@ XXX segment，XXX ends，这两个是配套使用的。功能是定义一个代�
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://xinhecuican.github.io/2020/01/20/debug/">
+    <link itemprop="mainEntityOfPage" href="http://xinhecuican.github.io/2020/01/23/%E5%AD%97%E7%AC%A6%E5%BD%A2%E5%BC%8F-%E7%9A%84%E6%95%B0%E6%8D%AE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -621,7 +620,7 @@ XXX segment，XXX ends，这两个是配套使用的。功能是定义一个代�
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/01/20/debug/" itemprop="url">debug</a></h1>
+                <a class="post-title-link" href="/2020/01/23/%E5%AD%97%E7%AC%A6%E5%BD%A2%E5%BC%8F-%E7%9A%84%E6%95%B0%E6%8D%AE/" itemprop="url">字符形式 的数据</a></h1>
         
 
         <div class="post-meta">
@@ -633,8 +632,8 @@ XXX segment，XXX ends，这两个是配套使用的。功能是定义一个代�
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-20T14:15:00+08:00">
-                2020-01-20
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-23T11:44:00+08:00">
+                2020-01-23
               </time>
             
 
@@ -695,13 +694,15 @@ XXX segment，XXX ends，这两个是配套使用的。功能是定义一个代�
       
         
           
-          这里列举几个debug的基本命令
-r用来查看此时寄存器内的数值和下一步将要执行的命令r 还可以接寄存器，用于修改寄存器内的内容例：r ax 这样会出现ax的内容和一个冒号，然后就可以输入数据修改了
-d格式：d 段地址：偏移地址作用：列举出该地址下的机器码例 d 1000:0,这样子将会列举从1000
-          ...
+          首先要知道asc11码
+形式： db ‘…’
+无论多少个单词都只需要单引号
+例 db‘unix’
+
+          
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2020/01/20/debug/#more" rel="contents">
+            <a class="btn" href="/2020/01/23/%E5%AD%97%E7%AC%A6%E5%BD%A2%E5%BC%8F-%E7%9A%84%E6%95%B0%E6%8D%AE/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -755,7 +756,7 @@ d格式：d 段地址：偏移地址作用：列举出该地址下的机器码�
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://xinhecuican.github.io/2020/01/18/%E7%BA%BF%E6%AE%B5%E6%95%B0%E7%BB%84%E5%92%8C%E7%BA%BF%E6%AE%B5%E6%A0%91/">
+    <link itemprop="mainEntityOfPage" href="http://xinhecuican.github.io/2020/01/23/%E5%B0%86%E4%B8%8D%E5%90%8C%E4%BB%A3%E7%A0%81%E6%94%BE%E5%85%A5%E4%B8%8D%E5%90%8C%E6%AE%B5%E4%B8%AD/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -774,7 +775,7 @@ d格式：d 段地址：偏移地址作用：列举出该地址下的机器码�
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/01/18/%E7%BA%BF%E6%AE%B5%E6%95%B0%E7%BB%84%E5%92%8C%E7%BA%BF%E6%AE%B5%E6%A0%91/" itemprop="url">树状数组和线段树</a></h1>
+                <a class="post-title-link" href="/2020/01/23/%E5%B0%86%E4%B8%8D%E5%90%8C%E4%BB%A3%E7%A0%81%E6%94%BE%E5%85%A5%E4%B8%8D%E5%90%8C%E6%AE%B5%E4%B8%AD/" itemprop="url">将不同代码放入不同段中</a></h1>
         
 
         <div class="post-meta">
@@ -786,8 +787,8 @@ d格式：d 段地址：偏移地址作用：列举出该地址下的机器码�
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-18T15:23:00+08:00">
-                2020-01-18
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-23T09:42:00+08:00">
+                2020-01-23
               </time>
             
 
@@ -809,8 +810,8 @@ d格式：d 段地址：偏移地址作用：列举出该地址下的机器码�
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
+                  <a href="/categories/%E6%B1%87%E7%BC%96/" itemprop="url" rel="index">
+                    <span itemprop="name">汇编</span>
                   </a>
                 </span>
 
@@ -848,15 +849,12 @@ d格式：d 段地址：偏移地址作用：列举出该地址下的机器码�
       
         
           
-          lowbit函数lowbit函数指的是将元素与元素的补码按位与，即a&amp;-a，这个值返回的是从右数第一个1开始的值
-例如 6&amp;-6， 6二进制位为110，所以6的lowbit函数值为10，即十进制下的二
-ll lowbit(ll num)
-{
-    return num&amp;-n
+          举个栗子
+123456789101112131415161718192021222324252627282930313233assume cs:code ds:data ss:stackdata segment    dw 0123h,0345hdata endsstack segment    d
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2020/01/18/%E7%BA%BF%E6%AE%B5%E6%95%B0%E7%BB%84%E5%92%8C%E7%BA%BF%E6%AE%B5%E6%A0%91/#more" rel="contents">
+            <a class="btn" href="/2020/01/23/%E5%B0%86%E4%B8%8D%E5%90%8C%E4%BB%A3%E7%A0%81%E6%94%BE%E5%85%A5%E4%B8%8D%E5%90%8C%E6%AE%B5%E4%B8%AD/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -910,7 +908,7 @@ ll lowbit(ll num)
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://xinhecuican.github.io/2020/01/16/%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B9%8BKMP%E7%AE%97%E6%B3%95/">
+    <link itemprop="mainEntityOfPage" href="http://xinhecuican.github.io/2020/01/23/%E5%9C%A8%E4%BB%A3%E7%A0%81%E6%AE%B5%E4%B8%AD%E4%BD%BF%E7%94%A8%E6%A0%88/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -929,7 +927,7 @@ ll lowbit(ll num)
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/01/16/%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B9%8BKMP%E7%AE%97%E6%B3%95/" itemprop="url">字符串之KMP算法</a></h1>
+                <a class="post-title-link" href="/2020/01/23/%E5%9C%A8%E4%BB%A3%E7%A0%81%E6%AE%B5%E4%B8%AD%E4%BD%BF%E7%94%A8%E6%A0%88/" itemprop="url">在代码段中使用栈</a></h1>
         
 
         <div class="post-meta">
@@ -941,8 +939,8 @@ ll lowbit(ll num)
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-16T13:04:00+08:00">
-                2020-01-16
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-23T09:03:00+08:00">
+                2020-01-23
               </time>
             
 
@@ -951,28 +949,6 @@ ll lowbit(ll num)
             
           </span>
 
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -1003,11 +979,14 @@ ll lowbit(ll num)
       
         
           
-          由（扯）来（蛋）Knuth-Morris-Pratt 字符串查找算法，简称为 “KMP 算法”，常用于在一个文本串 S 内查找一个模式串 P 的出现位置，这个算法由 Donald Knuth、Vaughan Pratt、James H. Morris 三人于 1977 年联合发表，故取这三人的姓氏命
-          ...
+          实际上栈是我们人为定义的一段内存空间，所以先要用dw来申请
+1234dw 0,0,0,0,0,0  //申请6个字的内存空间，栈是由高内存地址到低内存地址，所以栈顶为cs：Chstart: mov ss,csmov ss,axmov sp,Ch
+ss，sp就是前面所说的栈的指针
+
+          
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2020/01/16/%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B9%8BKMP%E7%AE%97%E6%B3%95/#more" rel="contents">
+            <a class="btn" href="/2020/01/23/%E5%9C%A8%E4%BB%A3%E7%A0%81%E6%AE%B5%E4%B8%AD%E4%BD%BF%E7%94%A8%E6%A0%88/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1061,7 +1040,7 @@ ll lowbit(ll num)
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://xinhecuican.github.io/2020/01/16/%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B9%8Bhash%E7%AE%97%E6%B3%95/">
+    <link itemprop="mainEntityOfPage" href="http://xinhecuican.github.io/2020/01/23/dw/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -1080,7 +1059,7 @@ ll lowbit(ll num)
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/01/16/%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B9%8Bhash%E7%AE%97%E6%B3%95/" itemprop="url">字符串之hash算法</a></h1>
+                <a class="post-title-link" href="/2020/01/23/dw/" itemprop="url">dw</a></h1>
         
 
         <div class="post-meta">
@@ -1092,8 +1071,8 @@ ll lowbit(ll num)
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-16T12:14:00+08:00">
-                2020-01-16
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-23T08:48:00+08:00">
+                2020-01-23
               </time>
             
 
@@ -1115,8 +1094,8 @@ ll lowbit(ll num)
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
+                  <a href="/categories/%E6%B1%87%E7%BC%96/" itemprop="url" rel="index">
+                    <span itemprop="name">汇编</span>
                   </a>
                 </span>
 
@@ -1154,12 +1133,12 @@ ll lowbit(ll num)
       
         
           
-          hash基础概念但在工程实践中，要查找的关键字往往都不是自然数，即使是自然数也有可能是很大的值。因此，只要我们提前把关键字转换为在固定较小范围内的自然数，就可以实现常数时间的查找。那么问题来了，如何实现该转换关系呢？这就是哈希函数所要完成的工作。
-哈希函数：又称散列函数，是把一段有限二进制串（字符串
+          dw即define word，定义字型数据。例如，dw 0123h,0456h,0789h.这样就定义了几个字型数据，那这些数据都在哪里呢，他们的段地址都是从cs开始的，而偏移地址从0开始，也就是说，0123h的偏移地址是0,0456h的偏移地址是2,0789h的偏移地址是6。
+但是这样会带来一个问
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2020/01/16/%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B9%8Bhash%E7%AE%97%E6%B3%95/#more" rel="contents">
+            <a class="btn" href="/2020/01/23/dw/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1213,7 +1192,7 @@ ll lowbit(ll num)
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://xinhecuican.github.io/2020/01/15/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">
+    <link itemprop="mainEntityOfPage" href="http://xinhecuican.github.io/2020/01/22/debug%E5%92%8C%E6%BA%90%E7%A8%8B%E5%BA%8F%E5%AF%B9%E6%8C%87%E4%BB%A4%E7%9A%84%E4%B8%8D%E5%90%8C%E5%A4%84%E7%90%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -1232,7 +1211,7 @@ ll lowbit(ll num)
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/01/15/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" itemprop="url">动态规划</a></h1>
+                <a class="post-title-link" href="/2020/01/22/debug%E5%92%8C%E6%BA%90%E7%A8%8B%E5%BA%8F%E5%AF%B9%E6%8C%87%E4%BB%A4%E7%9A%84%E4%B8%8D%E5%90%8C%E5%A4%84%E7%90%86/" itemprop="url">debug和源程序对指令的不同处理</a></h1>
         
 
         <div class="post-meta">
@@ -1244,8 +1223,8 @@ ll lowbit(ll num)
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-15T12:27:00+08:00">
-                2020-01-15
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-22T16:57:00+08:00">
+                2020-01-22
               </time>
             
 
@@ -1267,8 +1246,8 @@ ll lowbit(ll num)
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
+                  <a href="/categories/%E6%B1%87%E7%BC%96/" itemprop="url" rel="index">
+                    <span itemprop="name">汇编</span>
                   </a>
                 </span>
 
@@ -1306,13 +1285,14 @@ ll lowbit(ll num)
       
         
           
-          无后效性无后效性是一个问题可以用动态规划求解的标志之一，理解无后效性对求解动态规划类题目非常重要
-概念：某阶段的状态一旦确定，则此后过程的演变不再受此前各种状态及决策的影响（某度上找的定义）
-理解：无后效性指的是之前做过的事现在还可以继续去做，这便是前一阶段做的事对后一阶段无影响。如果前面做过了后面
+          []debug程序中[0]表示 ds：0处的数据进行处理
+而源程序中表示把0这个数据给要处理的数据
+例 mov ax,[0]在debug中表示把ds：0处元素给ax，而在源程序中表示把0给ax
+在程序中，可以直接使用段寄存器加偏移地址来确定访问的元素，例如：ds：[bx],cs:[bx],ss:[b
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2020/01/15/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/#more" rel="contents">
+            <a class="btn" href="/2020/01/22/debug%E5%92%8C%E6%BA%90%E7%A8%8B%E5%BA%8F%E5%AF%B9%E6%8C%87%E4%BB%A4%E7%9A%84%E4%B8%8D%E5%90%8C%E5%A4%84%E7%90%86/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1366,7 +1346,7 @@ ll lowbit(ll num)
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://xinhecuican.github.io/2020/01/14/%E6%B7%B1%E5%BA%A6%E6%90%9C%E7%B4%A2%E5%92%8C%E5%B9%BF%E5%BA%A6%E6%90%9C%E7%B4%A2/">
+    <link itemprop="mainEntityOfPage" href="http://xinhecuican.github.io/2020/01/21/bx-%E5%92%8Cloop/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -1385,7 +1365,7 @@ ll lowbit(ll num)
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/01/14/%E6%B7%B1%E5%BA%A6%E6%90%9C%E7%B4%A2%E5%92%8C%E5%B9%BF%E5%BA%A6%E6%90%9C%E7%B4%A2/" itemprop="url">深度优先搜索和广度优先搜索</a></h1>
+                <a class="post-title-link" href="/2020/01/21/bx-%E5%92%8Cloop/" itemprop="url">[bx]和loop</a></h1>
         
 
         <div class="post-meta">
@@ -1397,8 +1377,8 @@ ll lowbit(ll num)
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-14T09:04:00+08:00">
-                2020-01-14
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-21T10:08:00+08:00">
+                2020-01-21
               </time>
             
 
@@ -1407,28 +1387,6 @@ ll lowbit(ll num)
             
           </span>
 
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -1459,13 +1417,16 @@ ll lowbit(ll num)
       
         
           
-          深度优先搜索基本思想：它的思想是从一个顶点V0开始，沿着一条路一直走到底，如果发现不能到达目标解，那就返回到上一个节点，然后从另一条路开始走到底，这种尽量往深处走的概念即是深度优先的概念
-例
-V0-&gt;V1-&gt;V4-&gt;V3-&gt;V5-&gt;V6,先从v0到V1，再从V1到V4，
+          [bx]mov ax,[bx]
+这个的意思是把ds：bx处的内容放入ax中
+mov [bx],ax
+这个的意思是把ax中的内容放入 地址ds：bx处
+[bx+idata]实际上还有更加灵活的方式指明内存地址，就是bx后加一个数据，这个数据可以是常数，也可以是变量
+例 mov ax,ds:[bx+20
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2020/01/14/%E6%B7%B1%E5%BA%A6%E6%90%9C%E7%B4%A2%E5%92%8C%E5%B9%BF%E5%BA%A6%E6%90%9C%E7%B4%A2/#more" rel="contents">
+            <a class="btn" href="/2020/01/21/bx-%E5%92%8Cloop/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1519,7 +1480,7 @@ V0-&gt;V1-&gt;V4-&gt;V3-&gt;V5-&gt;V6,先从v0到V1，再从V1到V4，
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://xinhecuican.github.io/2020/01/13/scanf-printf/">
+    <link itemprop="mainEntityOfPage" href="http://xinhecuican.github.io/2020/01/21/%E7%A8%8B%E5%BA%8F%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B%E7%9A%84%E8%B7%9F%E8%B8%AA/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -1538,7 +1499,7 @@ V0-&gt;V1-&gt;V4-&gt;V3-&gt;V5-&gt;V6,先从v0到V1，再从V1到V4，
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/01/13/scanf-printf/" itemprop="url">scanf printf</a></h1>
+                <a class="post-title-link" href="/2020/01/21/%E7%A8%8B%E5%BA%8F%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B%E7%9A%84%E8%B7%9F%E8%B8%AA/" itemprop="url">程序执行过程的跟踪</a></h1>
         
 
         <div class="post-meta">
@@ -1550,8 +1511,8 @@ V0-&gt;V1-&gt;V4-&gt;V3-&gt;V5-&gt;V6,先从v0到V1，再从V1到V4，
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-13T20:18:00+08:00">
-                2020-01-13
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-21T09:54:00+08:00">
+                2020-01-21
               </time>
             
 
@@ -1573,8 +1534,8 @@ V0-&gt;V1-&gt;V4-&gt;V3-&gt;V5-&gt;V6,先从v0到V1，再从V1到V4，
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index">
-                    <span itemprop="name">基础</span>
+                  <a href="/categories/%E6%B1%87%E7%BC%96/" itemprop="url" rel="index">
+                    <span itemprop="name">汇编</span>
                   </a>
                 </span>
 
@@ -1612,15 +1573,13 @@ V0-&gt;V1-&gt;V4-&gt;V3-&gt;V5-&gt;V6,先从v0到V1，再从V1到V4，
       
         
           
-          scanf格式：scanf(const char *format, …)
-format – 这是 C 字符串，包含了以下各项中的一个或多个：空格字符、非空格字符 和 format 说明符。
-format 说明符形式为:
-[=%[*][width][modifiers]type=]
-*这是一个可选的星
+          运用debug +程序名进入debug过程
+例如 debug 1.exe
+程序开始都是从0000的偏移地址开始的，设段地址为A，而程序开始有一段不做该程序内容，而有其他用途。这段程序占256个字节，叫psp，之后段地址偏移10h，所以真正的程序是从A+10:0 开始的（256个字节在16进制中是10
           ...
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2020/01/13/scanf-printf/#more" rel="contents">
+            <a class="btn" href="/2020/01/21/%E7%A8%8B%E5%BA%8F%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B%E7%9A%84%E8%B7%9F%E8%B8%AA/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1674,7 +1633,7 @@ format 说明符形式为:
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://xinhecuican.github.io/2020/01/13/%E9%98%9F%E5%88%97/">
+    <link itemprop="mainEntityOfPage" href="http://xinhecuican.github.io/2020/01/21/%E4%BB%8Easm%E5%88%B0exe/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -1693,7 +1652,7 @@ format 说明符形式为:
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2020/01/13/%E9%98%9F%E5%88%97/" itemprop="url">队列</a></h1>
+                <a class="post-title-link" href="/2020/01/21/%E4%BB%8Easm%E5%88%B0exe/" itemprop="url">从asm到exe</a></h1>
         
 
         <div class="post-meta">
@@ -1705,8 +1664,8 @@ format 说明符形式为:
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-13T16:05:00+08:00">
-                2020-01-13
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-21T09:40:00+08:00">
+                2020-01-21
               </time>
             
 
@@ -1728,8 +1687,8 @@ format 说明符形式为:
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/stl/" itemprop="url" rel="index">
-                    <span itemprop="name">stl</span>
+                  <a href="/categories/%E6%B1%87%E7%BC%96/" itemprop="url" rel="index">
+                    <span itemprop="name">汇编</span>
                   </a>
                 </span>
 
@@ -1767,16 +1726,13 @@ format 说明符形式为:
       
         
           
-          队列基础队列是一种线性结构，有队头（front）队尾（rear）两个指针，每次拉进来一个元素会让队尾加一，而每次删除一个元素会让队头加一，这是一种先进先出的结构。
-队列特殊情况判断
-空队列 front=rear
-满队列 rear-front=N（N指的是开的数组的大小）
-POP 从队头删元素
-pus
-          ...
+          先要有masm.exe和link.exe，然后输入masm+程序名和link+程序名
+或者masm+盘符+程序名，可以省略中间过程，节省时间例：masm c:\1.asm
+
+          
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2020/01/13/%E9%98%9F%E5%88%97/#more" rel="contents">
+            <a class="btn" href="/2020/01/21/%E4%BB%8Easm%E5%88%B0exe/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1821,7 +1777,7 @@ pus
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">&lt;i class&#x3D;&quot;fa fa-angle-right&quot;&gt;&lt;&#x2F;i&gt;</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/">&lt;i class&#x3D;&quot;fa fa-angle-right&quot;&gt;&lt;&#x2F;i&gt;</a>
   </nav>
 
 
@@ -1867,7 +1823,7 @@ pus
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-count">46</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
