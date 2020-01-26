@@ -88,7 +88,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="si和di在8086cpu中的功能与bx类似，si与di不能分为两个8位寄存器来使用 也就是说  ds：[si]是可以的 如果不用这些寄存器直接写的话就会出现之前所说的编译器和exe对程序的不同处理 例   mov ax,[si]在exe中就是 ds：[si]，但是如果是 mov，ax,[1]在exe中就是把ax中的数据放入1中 甚至可以直接用[bx+si]的方式或[bx+si+idata]的方式">
 <meta property="article:published_time" content="2020-01-24T00:32:00.000Z">
-<meta property="article:modified_time" content="2020-01-24T00:54:19.957Z">
+<meta property="article:modified_time" content="2020-01-24T02:07:08.985Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 
@@ -394,6 +394,9 @@
 <p>甚至可以直接用[bx+si]的方式或[bx+si+idata]的方式来指明内存地址</p>
 <h3 id="不同寻址方式的比较"><a href="#不同寻址方式的比较" class="headerlink" title="不同寻址方式的比较"></a>不同寻址方式的比较</h3><p>[idata]用于一个常量的寻址，直接定位一个内存单元</p>
 <p>[bx]用于一个变量来表示内存地址，间接定位内存单元</p>
+<p>只有bx,bp,di,si具有寻址能力，例如ds:[dx]等都是错误的</p>
+<p>并且这几个寄存器间组合还有要求，只有bx+si,bx+di,bp+si,bp+di这四种情况是正确的</p>
+<p>只要使用bp，它的段寄存器默认为ss</p>
 
       
     </div>
@@ -517,7 +520,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">46</span>
+                  <span class="site-state-item-count">51</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
