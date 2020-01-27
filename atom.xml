@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://xinhecuican.github.io/"/>
-  <updated>2020-01-26T05:56:20.591Z</updated>
+  <updated>2020-01-27T05:08:54.404Z</updated>
   <id>http://xinhecuican.github.io/</id>
   
   <author>
@@ -15,6 +15,88 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>mul指令</title>
+    <link href="http://xinhecuican.github.io/2020/01/27/mul%E6%8C%87%E4%BB%A4/"/>
+    <id>http://xinhecuican.github.io/2020/01/27/mul%E6%8C%87%E4%BB%A4/</id>
+    <published>2020-01-27T03:34:00.000Z</published>
+    <updated>2020-01-27T05:08:54.404Z</updated>
+    
+    <content type="html"><![CDATA[<p>两个相乘的数：</p><p>如果是8位，那么一个默认在al中，另一个在8位寄存器或内存字节单元中，如果是16位，一个在ax中，另一个在16位寄存器或内存字单元中</p><p>结果： 如果是8位，结果默认在ax中，如果是16位，高位默认在dx中，低位在ax中</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;两个相乘的数：&lt;/p&gt;
+&lt;p&gt;如果是8位，那么一个默认在al中，另一个在8位寄存器或内存字节单元中，如果是16位，一个在ax中，另一个在16位寄存器或内存字单元中&lt;/p&gt;
+&lt;p&gt;结果： 如果是8位，结果默认在ax中，如果是16位，高位默认在dx中，低位在ax中&lt;/p&gt;
+
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>call指令</title>
+    <link href="http://xinhecuican.github.io/2020/01/27/call%E6%8C%87%E4%BB%A4/"/>
+    <id>http://xinhecuican.github.io/2020/01/27/call%E6%8C%87%E4%BB%A4/</id>
+    <published>2020-01-27T02:10:00.000Z</published>
+    <updated>2020-01-27T02:37:16.077Z</updated>
+    
+    <content type="html"><![CDATA[<p>操作</p><ol><li>将当前的ip或cs压入栈中</li><li>转移</li></ol><p>这里的转移与jmp相同，也有位移和内存两种方式</p><h3 id="根据位移"><a href="#根据位移" class="headerlink" title="根据位移"></a>根据位移</h3><p>call 标号（将ip压入栈中后，转移到标号处进行指令）<br>过程：</p><ol><li>sp+=2，ss*16+sp=ip</li><li>ip=ip+16位位移</li></ol><p>16位位移=标号处地址-call指令后第一个字节的地址</p><p>相当于 push ip，jmp near ptr 标号</p><h3 id="根据目的地址"><a href="#根据目的地址" class="headerlink" title="根据目的地址"></a>根据目的地址</h3><p>call far ptr 实现段间转移</p><p>操作： </p><ol><li>sp-=2</li><li>ss*16+sp=cs</li><li>sp-=2</li><li>ss*16+sp=ip</li><li>cs=标号所在段地址，ip=；标号所在偏移地址</li></ol><p>段内转移一般是根据位移，段间转移一般是根据地址</p><p>如果地址在寄存器中， call reg，ip被修改</p><p>如果地址在内存中</p><p>1 call word ptr 内存地址</p><p>这种是段内转移，相当于 push ip，jmp word ptr</p><p>2 call dword ptr 内存地址</p><p>段间转移 例</p><p>call dword ptr ds：[0] ，这样ds:[0]和ds:[1]是ip ，ds:[2]和ds:[3]是cs</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;操作&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;将当前的ip或cs压入栈中&lt;/li&gt;
+&lt;li&gt;转移&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;这里的转移与jmp相同，也有位移和内存两种方式&lt;/p&gt;
+&lt;h3 id=&quot;根据位移&quot;&gt;&lt;a href=&quot;#根据位移&quot; class=&quot;headerlink&quot; titl
+      
+    
+    </summary>
+    
+    
+      <category term="汇编" scheme="http://xinhecuican.github.io/categories/%E6%B1%87%E7%BC%96/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>ret 和 retf</title>
+    <link href="http://xinhecuican.github.io/2020/01/27/ret-%E5%92%8C-retf/"/>
+    <id>http://xinhecuican.github.io/2020/01/27/ret-%E5%92%8C-retf/</id>
+    <published>2020-01-27T01:59:00.000Z</published>
+    <updated>2020-01-27T02:08:25.218Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="ret"><a href="#ret" class="headerlink" title="ret"></a>ret</h3><p>ret指令用栈中的数据，修改ip中的内容，从而实现近转移</p><p>过程：</p><ol><li><p>ip=ss*16+sp</p></li><li><p>sp+=2</p></li></ol><p>相当于 pop ip</p><h3 id="retf"><a href="#retf" class="headerlink" title="retf"></a>retf</h3><p>修改cs和ip 的内容，实现远转移<br>过程</p><ol><li>ip=ss*16+sp</li><li>sp+=2</li><li>cs=ss*16+sp</li><li>sp+=2</li></ol><p>相当于 pop ip ，pop cs</p><p>例</p><figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">assume</span> <span class="built_in">cs</span>:code,<span class="built_in">ss</span>:stack</span><br><span class="line">stack <span class="meta">segment</span></span><br><span class="line">    <span class="built_in">db</span> <span class="number">16</span> dup (<span class="number">0</span>)</span><br><span class="line">stack ends</span><br><span class="line"></span><br><span class="line">code <span class="meta">segment</span></span><br><span class="line">    <span class="keyword">mov</span> <span class="built_in">ax</span>,<span class="number">4c00h</span></span><br><span class="line">    <span class="keyword">int</span> <span class="number">21h</span></span><br><span class="line"><span class="symbol">start:</span><span class="keyword">mov</span> <span class="built_in">ax</span>,stack</span><br><span class="line">    <span class="keyword">mov</span> <span class="built_in">ss</span>,<span class="built_in">ax</span></span><br><span class="line">    <span class="keyword">mov</span> <span class="built_in">sp</span>,<span class="number">16</span></span><br><span class="line">    <span class="keyword">mov</span> <span class="built_in">ax</span>,<span class="number">0</span></span><br><span class="line">    <span class="keyword">push</span> <span class="built_in">ax</span></span><br><span class="line">    <span class="keyword">mov</span> <span class="built_in">bx</span>,<span class="number">0</span></span><br><span class="line">    <span class="keyword">ret</span></span><br><span class="line">code ends</span><br><span class="line">end start</span><br></pre></td></tr></table></figure><p>这条指令相当于把ip变为0，指向第一条指令</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;ret&quot;&gt;&lt;a href=&quot;#ret&quot; class=&quot;headerlink&quot; title=&quot;ret&quot;&gt;&lt;/a&gt;ret&lt;/h3&gt;&lt;p&gt;ret指令用栈中的数据，修改ip中的内容，从而实现近转移&lt;/p&gt;
+&lt;p&gt;过程：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;ip=ss*16+s
+      
+    
+    </summary>
+    
+    
+      <category term="汇编" scheme="http://xinhecuican.github.io/categories/%E6%B1%87%E7%BC%96/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>jmp进行跳转</title>
@@ -445,81 +527,6 @@
     
       <category term="汇编" scheme="http://xinhecuican.github.io/categories/%E6%B1%87%E7%BC%96/"/>
     
-    
-  </entry>
-  
-  <entry>
-    <title>debug</title>
-    <link href="http://xinhecuican.github.io/2020/01/20/debug/"/>
-    <id>http://xinhecuican.github.io/2020/01/20/debug/</id>
-    <published>2020-01-20T06:15:00.000Z</published>
-    <updated>2020-01-20T06:26:20.756Z</updated>
-    
-    <content type="html"><![CDATA[<p>这里列举几个debug的基本命令</p><h4 id="r"><a href="#r" class="headerlink" title="r"></a>r</h4><p>用来查看此时寄存器内的数值和下一步将要执行的命令<br>r 还可以接寄存器，用于修改寄存器内的内容<br>例：r ax 这样会出现ax的内容和一个冒号，然后就可以输入数据修改了</p><h3 id="d"><a href="#d" class="headerlink" title="d"></a>d</h3><p>格式：d 段地址：偏移地址<br>作用：列举出该地址下的机器码<br>例 d 1000:0,这样子将会列举从1000:0 到1000:7f的所有内容</p><h3 id="e"><a href="#e" class="headerlink" title="e"></a>e</h3><p>格式：e 段地址：偏移地址<br>作用：修改改地址下的机器码</p><h3 id="t"><a href="#t" class="headerlink" title="t"></a>t</h3><p>执行cs ip所指向内存地址的命令，直接输入t，不需要输入其他东西</p><h3 id="a"><a href="#a" class="headerlink" title="a"></a>a</h3><p>作用：用汇编语言输入指令到内存上<br>写法： a 段地址：偏移地址<br>例： a 1000:0<br>输出1000：0  （input）mov ax，1<br>然后1000:0 到1000:3 就会输入这条指令了，之后将cs ip地址设置一下，然后用t指令运行</p><h3 id="u"><a href="#u" class="headerlink" title="u"></a>u</h3><p>作用：查看某地址下的汇编程序<br>写法： u 段地址：偏移地址<br>例 u 1000:0<br>然后就会输出1000:0 开始有的汇编指令了</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;这里列举几个debug的基本命令&lt;/p&gt;
-&lt;h4 id=&quot;r&quot;&gt;&lt;a href=&quot;#r&quot; class=&quot;headerlink&quot; title=&quot;r&quot;&gt;&lt;/a&gt;r&lt;/h4&gt;&lt;p&gt;用来查看此时寄存器内的数值和下一步将要执行的命令&lt;br&gt;r 还可以接寄存器，用于修改寄存器内的内容&lt;
-      
-    
-    </summary>
-    
-    
-      <category term="汇编" scheme="http://xinhecuican.github.io/categories/%E6%B1%87%E7%BC%96/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>树状数组和线段树</title>
-    <link href="http://xinhecuican.github.io/2020/01/18/%E7%BA%BF%E6%AE%B5%E6%95%B0%E7%BB%84%E5%92%8C%E7%BA%BF%E6%AE%B5%E6%A0%91/"/>
-    <id>http://xinhecuican.github.io/2020/01/18/%E7%BA%BF%E6%AE%B5%E6%95%B0%E7%BB%84%E5%92%8C%E7%BA%BF%E6%AE%B5%E6%A0%91/</id>
-    <published>2020-01-18T07:23:00.000Z</published>
-    <updated>2020-01-21T11:44:25.997Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="lowbit函数"><a href="#lowbit函数" class="headerlink" title="lowbit函数"></a>lowbit函数</h3><p>lowbit函数指的是将元素与元素的补码按位与，即a&amp;-a，这个值返回的是从右数第一个1开始的值</p><p>例如 6&amp;-6， 6二进制位为110，所以6的lowbit函数值为10，即十进制下的二</p><pre><code>ll lowbit(ll num){    return num&amp;-num;}</code></pre><h3 id="树状数组"><a href="#树状数组" class="headerlink" title="树状数组"></a>树状数组</h3><p>首先我们可以把一整个数组分为若干小部分，然后让这几个小部分叠加就可以得到数组总的和。例如，我想求a[91],我可以先求c[88],发现c[88]管理2个数，再找c[86]，这样一直进行下去就可以了。</p><p>c又是什么呢？例如c[6]，它的lowbit函数为2，因此它管理两位数，所以c[6]=a[5]+a[6]</p><p>奇数位的c[i]只有他自己，而偶数位c[i]为2的k次方</p><h4 id="单点修改"><a href="#单点修改" class="headerlink" title="单点修改"></a>单点修改</h4><figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">void <span class="keyword">add</span>(int <span class="keyword">x</span>, int k) &#123;</span><br><span class="line">  while (<span class="keyword">x</span> &lt;= n) &#123;  //不能越界</span><br><span class="line">    <span class="keyword">c</span>[<span class="keyword">x</span>] = <span class="keyword">c</span>[<span class="keyword">x</span>] + k<span class="comment">;</span></span><br><span class="line"><span class="comment">    x = x + lowbit(x);</span></span><br><span class="line"><span class="comment">  &#125;</span></span><br><span class="line"><span class="comment">&#125;</span></span><br></pre></td></tr></table></figure><p>这个函数是把a[x]加上k，小于x的c不用修改</p><p>关键是x=x+lowbit(x)<br><img src="/images/1103198-20180725163149813-311841231.png" alt=""><br>从此图中我们可以看出，要想求偶数位节点大小，需要将所有子节点加起来，先要加自己和比自己小一位的奇数，再加上所有i+lowbit(i)=8的偶数</p><h4 id="求和"><a href="#求和" class="headerlink" title="求和"></a>求和</h4><figure class="highlight gml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">int getsum(int <span class="symbol">x</span>) &#123;  <span class="comment">// a[1]……a[x]的和</span></span><br><span class="line">  int ans = <span class="number">0</span>;</span><br><span class="line">  <span class="keywords">while</span> (<span class="symbol">x</span> &gt;= <span class="number">1</span>) &#123;</span><br><span class="line">    ans = ans + c[<span class="symbol">x</span>];</span><br><span class="line">    <span class="symbol">x</span> = <span class="symbol">x</span> - lowbit(<span class="symbol">x</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keywords">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h4 id="建立"><a href="#建立" class="headerlink" title="建立"></a>建立</h4><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">void init() &#123;</span><br><span class="line">  <span class="keyword">for</span> (int <span class="built_in">i</span> = <span class="number">1</span>; <span class="built_in">i</span> &lt;= n; ++<span class="built_in">i</span>) &#123;</span><br><span class="line">    t[<span class="built_in">i</span>] += a[<span class="built_in">i</span>];</span><br><span class="line">    int <span class="built_in">j</span> = <span class="built_in">i</span> + lowbit(<span class="built_in">i</span>);</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">j</span> &lt;= n) t[<span class="built_in">j</span>] += t[<span class="built_in">i</span>];</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">int</span> kth(<span class="built_in">int</span> k) &#123;  <span class="comment">//权值树状数组查询第k小</span></span><br><span class="line">  <span class="built_in">int</span> cnt = <span class="number">0</span>, ret = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="built_in">int</span> i = log2(n); ~i; --i) &#123;</span><br><span class="line">    ret += <span class="number">1</span> &lt;&lt; i;</span><br><span class="line">    <span class="keyword">if</span> (ret &gt;= n || cnt + t[ret] &gt;= k)</span><br><span class="line">      ret -= <span class="number">1</span> &lt;&lt; i;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">      cnt += t[ret];</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> ret + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="线段树"><a href="#线段树" class="headerlink" title="线段树"></a>线段树</h3><p>含义：线段树指的是将一个区间不断二分所形成的一个二叉树，根结点代表arr[0:N]区间所对应的信息，接着根结点被分为两个子树，分别存储arr[0:(N-1)/2]及arr[(N-1)/2+1:N]两个子区间对应的信息</p><p>初始化：注意此处我们对于segmentTree]数组的索引从1开始算起。则对于数组中的任意结点i，其左子结点为<code>2*i</code>，右子结点为<code>2*i + 1</code>，其母结点为i/2。<br><img src="/images/%E5%9B%BE%E7%89%879.png" alt=""><br><img src="/images/%E5%9B%BE%E7%89%8710.png" alt=""><br><img src="/images/%E5%9B%BE%E7%89%878.png" alt=""><br>递归实际意义是先向底层递归，然后从底层向上回溯，p的意思是节点的编号</p><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">void</span> build(<span class="built_in">int</span> s, <span class="built_in">int</span> t, <span class="built_in">int</span> p) &#123;</span><br><span class="line">  <span class="comment">// 对 [s,t] 区间建立线段树,当前根的编号为 p</span></span><br><span class="line">  <span class="keyword">if</span> (s == t) &#123;</span><br><span class="line">    d[p] = a[s];</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">int</span> m = (s + t) / <span class="number">2</span>;</span><br><span class="line">  build(s, m, p * <span class="number">2</span>), build(m + <span class="number">1</span>, t, p * <span class="number">2</span> + <span class="number">1</span>);</span><br><span class="line">  <span class="comment">// 递归对左右区间建树</span></span><br><span class="line">  d[p] = d[p * <span class="number">2</span>] + d[(p * <span class="number">2</span>) + <span class="number">1</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h4 id="区间修改"><a href="#区间修改" class="headerlink" title="区间修改"></a>区间修改</h4><p><img src="/images/%E5%9B%BE%E7%89%8711.png" alt="">标记的作用是记录每次、每个节点要更新的值</p><h4 id="区间查询"><a href="#区间查询" class="headerlink" title="区间查询"></a>区间查询</h4><p><img src="/images/%E5%9B%BE%E7%89%8712.png" alt=""></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;lowbit函数&quot;&gt;&lt;a href=&quot;#lowbit函数&quot; class=&quot;headerlink&quot; title=&quot;lowbit函数&quot;&gt;&lt;/a&gt;lowbit函数&lt;/h3&gt;&lt;p&gt;lowbit函数指的是将元素与元素的补码按位与，即a&amp;amp;-a，这个值返回的是从右数第一
-      
-    
-    </summary>
-    
-    
-      <category term="算法" scheme="http://xinhecuican.github.io/categories/%E7%AE%97%E6%B3%95/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>字符串之KMP算法</title>
-    <link href="http://xinhecuican.github.io/2020/01/16/%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B9%8BKMP%E7%AE%97%E6%B3%95/"/>
-    <id>http://xinhecuican.github.io/2020/01/16/%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B9%8BKMP%E7%AE%97%E6%B3%95/</id>
-    <published>2020-01-16T05:04:00.000Z</published>
-    <updated>2020-01-16T06:55:17.342Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="由（扯）来（蛋）"><a href="#由（扯）来（蛋）" class="headerlink" title="由（扯）来（蛋）"></a>由（扯）来（蛋）</h3><p>Knuth-Morris-Pratt 字符串查找算法，简称为 “KMP 算法”，常用于在一个文本串 S 内查找一个模式串 P 的出现位置，这个算法由 Donald Knuth、Vaughan Pratt、James H. Morris 三人于 1977 年联合发表，故取这三人的姓氏命名此算法。</p><h3 id="最长前缀和与后缀和"><a href="#最长前缀和与后缀和" class="headerlink" title="最长前缀和与后缀和"></a>最长前缀和与后缀和</h3><p>例如给出一个字符串ABCDABD<br><img src="/images/331.jpg" alt=""><br>前缀和就是从前往后数i个，后缀和是从第n-i个数到最后一个，首先我们便要找到每一个字母的最长相同前缀后缀和，然后求next数组，注意，只有一个元素时是不计算前缀后缀的，直接看为0</p><h4 id="next数组"><a href="#next数组" class="headerlink" title="next数组"></a>next数组</h4><p>next数组考虑的是除当前字符外的最长相同前缀后缀，实际上就是前一个前缀后缀和，因为把最后一个字母上去之后必定会使后缀和少一个，因此前缀后缀和也会-1，注意next数组中会出现-1，<strong>实际上这个数组就是将原数组整体右移一位，然后在第0位补上-1</strong></p><p><img src="/images/3331.jpg" alt=""></p><p><img src="/images/3332.jpg" alt=""></p><h3 id="用next数组进行匹配"><a href="#用next数组进行匹配" class="headerlink" title="用next数组进行匹配"></a>用next数组进行匹配</h3><p>匹配失配，j = next [j]，模式串向右移动的位数为：j - next[j]。换言之，当模式串的后缀 pj-k pj-k+1, …, pj-1 跟文本串 si-k si-k+1, …, si-1 匹配成功，但 pj 跟 si 匹配失败时，因为 next[j] = k，相当于在不包含 pj 的模式串中有最大长度为 k 的相同前缀后缀，即 p0 p1 …pk-1 = pj-k pj-k+1…pj-1，故令 j = next[j]，从而让模式串右移 j - next[j] 位，使得模式串的前缀 p0 p1, …, pk-1 对应着文本串 si-k si-k+1, …, si-1，而后让 pk 跟 si 继续匹配。如下图所示：<br><img src="/images/323.jpg" alt=""></p><p><strong>解释</strong>：因为前缀和后缀和相等，当最后一个匹配失误的时候就可以直接跳到后缀和开始的地方，这样就一下子匹配到了几位数，加快速度，至于合理性 ，K M P 这三个人已经证明过，而具体要跳几位呢？</p><p>比如说你有7个数，前面6个数已经匹配好了，结果第七位出了问题，这时一找next数组，发现第6位前缀和为2，那我们就要跳到第五位上去，找找规律，就是j-next[j]呀，没错，就是要跳这么多位，忘了自己推一下就好了，挺好推的</p><p><strong><em>失配时，模式串向右移动的位数为：失配字符所在位置 - 失配字符对应的next 值</em></strong></p><h3 id="next数组求法"><a href="#next数组求法" class="headerlink" title="next数组求法"></a>next数组求法</h3><p>这里运用了递归的思想，首先对于前一两个可以直接写出来，然后对于后面的，假如第j个next值我们已经求出来了，那么对于第j+1个，</p><ol><li>如果p[k]=p[j]，则next[j+1]=k+1</li></ol><p>例如<img src="/images/3343.jpg" alt=""><br>C为p[j]，E为p[j+1]，next[j]=2,则第一，第二个与第五，第六个相同，如果第三个和3七个相同，则最大相同长度就为3，即p[k]=p[j]</p><p>2.如果p[k]!=p[j],则递归找p[next[k]]是否等于p[j]，p[next[next[k]]]是否等于p[j],直到找到或到了开头</p><p>对于第二种情况，也可以通过图来展示<br><img src="/images/3344.jpg" alt=""><br>现在p[j]!=p[k]，那么肯定要缩小范围，我么已经知道第一个与第二个是匹配的了，那么第五个第六个对应与第一个第二个匹配，但如果那里面没有前后缀的话，你减去一个就相当于破坏了结构（前缀从前往后，后缀也是从前往后，减去一个便要求这这个前缀串里面前几个要和后缀串里面后面几个匹配，因此要求next[k]就是为了里面要匹配，这样只需比较p[next[k]]和p[j]即可），假如中间就碰到了，那么next[j+1]=next[next[k]]+1,如果没碰到，那么next[j+1]=0（一朝回到解放前）</p><p>代码实现：</p><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">void</span> GetNext(char* p,<span class="built_in">int</span> next[])  </span><br><span class="line">&#123;  </span><br><span class="line">    <span class="built_in">int</span> pLen = strlen(p);  </span><br><span class="line">    next[<span class="number">0</span>] = <span class="number">-1</span>;  </span><br><span class="line">    <span class="built_in">int</span> k = <span class="number">-1</span>;  </span><br><span class="line">    <span class="built_in">int</span> j = <span class="number">0</span>;  </span><br><span class="line">    <span class="keyword">while</span> (j &lt; pLen - <span class="number">1</span>)  </span><br><span class="line">    &#123;  </span><br><span class="line">        <span class="comment">//p[k]表示前缀，p[j]表示后缀  </span></span><br><span class="line">        <span class="keyword">if</span> (k == <span class="number">-1</span> || p[j] == p[k])   </span><br><span class="line">        &#123;  </span><br><span class="line">            ++k;  </span><br><span class="line">            ++j;  </span><br><span class="line">            next[j] = k;  </span><br><span class="line">        &#125;  </span><br><span class="line">        <span class="keyword">else</span>   </span><br><span class="line">        &#123;  </span><br><span class="line">            k = next[k];  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="匹配（最终代码）"><a href="#匹配（最终代码）" class="headerlink" title="匹配（最终代码）"></a>匹配（最终代码）</h3><p>匹配过程：</p><p>“假设现在文本串S匹配到 i 位置，模式串 P 匹配到 j 位置</p><p>如果 j = -1，或者当前字符匹配成功（即 S[i] == P[j]），都令 i++，j++，继续匹配下一个字符；</p><p>如果 j != -1，且当前字符匹配失败（即 S[i] != P[j]），则令 i 不变，j = next[j]。此举意味着失配时，模式串 P 相对于文本串 S 向右移动了 j - next [j] 位。</p><p>换言之，当匹配失败时，模式串向右移动的位数为：失配字符所在位置 - 失配字符对应的 next 值，即移动的实际位数为：j - next[j]，且此值大于等于1。”</p><p>例 <img src="/images/3353.png" alt=""></p><p>例如此时i=10,j=6,此时文本串该位为空格，而匹配串为D，这时不匹配，就要让匹配串移动6-next[6]=4位，我令i=10,j=2,即匹配串为C,这就相当于让匹配位左移4位，而文本对应位不变，于是相当于匹配串右移4位（有种物理相对运动的既视感）</p><p>代码：</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">KmpSearch</span><span class="params">(<span class="keyword">char</span>* s, <span class="keyword">char</span>* p)</span>  </span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>;  </span><br><span class="line">    <span class="keyword">int</span> j = <span class="number">0</span>;  </span><br><span class="line">    <span class="keyword">int</span> sLen = <span class="built_in">strlen</span>(s);  </span><br><span class="line">    <span class="keyword">int</span> pLen = <span class="built_in">strlen</span>(p);  </span><br><span class="line">    <span class="keyword">while</span> (i &lt; sLen &amp;&amp; j &lt; pLen)  </span><br><span class="line">    &#123;  </span><br><span class="line">        <span class="comment">//①如果j = -1，或者当前字符匹配成功（即S[i] == P[j]），都令i++，j++      </span></span><br><span class="line">        <span class="keyword">if</span> (j == <span class="number">-1</span> || s[i] == p[j])  </span><br><span class="line">        &#123;  </span><br><span class="line">            i++;  </span><br><span class="line">            j++;  </span><br><span class="line">        &#125;  </span><br><span class="line">        <span class="keyword">else</span>  </span><br><span class="line">        &#123;  </span><br><span class="line">            <span class="comment">//②如果j != -1，且当前字符匹配失败（即S[i] != P[j]），则令 i 不变，j = next[j]      </span></span><br><span class="line">            <span class="comment">//next[j]即为j所对应的next值        </span></span><br><span class="line">            j = next[j];  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="keyword">if</span> (j == pLen)  </span><br><span class="line">        <span class="keyword">return</span> i - j;  </span><br><span class="line">    <span class="keyword">else</span>  </span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>感到了代码的优美感有没有！</p><p>但是这样还可以优化</p><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">//</span>优化过后的<span class="keyword">next</span> 数组求法  </span><br><span class="line">void GetNextval(char* p, int <span class="keyword">next</span>[])  </span><br><span class="line">&#123;  </span><br><span class="line">    int pLen = strlen(p);  </span><br><span class="line">    <span class="keyword">next</span>[<span class="number">0</span>] = -<span class="number">1</span>;  </span><br><span class="line">    int k = -<span class="number">1</span>;  </span><br><span class="line">    int j = <span class="number">0</span>;  </span><br><span class="line">    <span class="keyword">while</span> (j &lt; pLen - <span class="number">1</span>)  </span><br><span class="line">    &#123;  </span><br><span class="line">        <span class="regexp">//</span>p[k]表示前缀，p[j]表示后缀    </span><br><span class="line">        <span class="keyword">if</span> (k == -<span class="number">1</span> || p[j] == p[k])  </span><br><span class="line">        &#123;  </span><br><span class="line">            ++j;  </span><br><span class="line">            ++k;  </span><br><span class="line">            <span class="regexp">//</span>较之前<span class="keyword">next</span>数组求法，改动在下面<span class="number">4</span>行  </span><br><span class="line">            <span class="keyword">if</span> (p[j] != p[k])  </span><br><span class="line">                <span class="keyword">next</span>[j] = k;   <span class="regexp">//</span>之前只有这一行  </span><br><span class="line">            <span class="keyword">else</span>  </span><br><span class="line">                <span class="regexp">//</span>因为不能出现p[j] = p[ <span class="keyword">next</span>[j ]]，所以当出现时需要继续递归，k = <span class="keyword">next</span>[k] = <span class="keyword">next</span>[<span class="keyword">next</span>[k]]  </span><br><span class="line">                <span class="keyword">next</span>[j] = <span class="keyword">next</span>[k];  </span><br><span class="line">        &#125;  </span><br><span class="line">        <span class="keyword">else</span>  </span><br><span class="line">        &#123;  </span><br><span class="line">            k = <span class="keyword">next</span>[k];  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>这里有点蒙，就先这样吧</p><p><a href="https://wiki.jikexueyuan.com/project/kmp-algorithm/define.html" target="_blank" rel="noopener">参考文章（这篇文章真的太好了，生怕你不会）</a></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;由（扯）来（蛋）&quot;&gt;&lt;a href=&quot;#由（扯）来（蛋）&quot; class=&quot;headerlink&quot; title=&quot;由（扯）来（蛋）&quot;&gt;&lt;/a&gt;由（扯）来（蛋）&lt;/h3&gt;&lt;p&gt;Knuth-Morris-Pratt 字符串查找算法，简称为 “KMP 算法”，常用于在一个
-      
-    
-    </summary>
-    
-    
-      <category term="算法" scheme="http://xinhecuican.github.io/categories/%E7%AE%97%E6%B3%95/"/>
-    
-    
-      <category term="字符串" scheme="http://xinhecuican.github.io/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/"/>
     
   </entry>
   
