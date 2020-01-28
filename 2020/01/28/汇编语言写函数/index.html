@@ -81,14 +81,14 @@
 
 
 
-<meta name="description" content="操作  将当前的ip或cs压入栈中 转移  这里的转移与jmp相同，也有位移和内存两种方式 根据位移call 标号（将ip压入栈中后，转移到标号处进行指令）过程：  sp+&#x3D;2，ss*16+sp&#x3D;ip ip&#x3D;ip+16位位移  16位位移&#x3D;标号处地址-call指令后第一个字节的地址 相当于 push ip，jmp near ptr 标号 根据目的地址call far ptr 实现段间转移 操作：">
+<meta name="description" content="例,计算data段第一行的三次方，并储存到第二行上 1234567891011121314151617181920212223242526assume cs:code,ds:datadata segment    dw 1,2,3,4,5,6,7,8    dd 8 dup (0)data endscode segmentstart: mov ax,data     mov ds,ax     m">
 <meta property="og:type" content="article">
-<meta property="og:title" content="call指令">
-<meta property="og:url" content="http://xinhecuican.github.io/2020/01/27/call%E6%8C%87%E4%BB%A4/index.html">
+<meta property="og:title" content="汇编语言写函数">
+<meta property="og:url" content="http://xinhecuican.github.io/2020/01/28/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%86%99%E5%87%BD%E6%95%B0/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="操作  将当前的ip或cs压入栈中 转移  这里的转移与jmp相同，也有位移和内存两种方式 根据位移call 标号（将ip压入栈中后，转移到标号处进行指令）过程：  sp+&#x3D;2，ss*16+sp&#x3D;ip ip&#x3D;ip+16位位移  16位位移&#x3D;标号处地址-call指令后第一个字节的地址 相当于 push ip，jmp near ptr 标号 根据目的地址call far ptr 实现段间转移 操作：">
-<meta property="article:published_time" content="2020-01-27T02:10:00.000Z">
-<meta property="article:modified_time" content="2020-01-27T02:37:16.077Z">
+<meta property="og:description" content="例,计算data段第一行的三次方，并储存到第二行上 1234567891011121314151617181920212223242526assume cs:code,ds:datadata segment    dw 1,2,3,4,5,6,7,8    dd 8 dup (0)data endscode segmentstart: mov ax,data     mov ds,ax     m">
+<meta property="article:published_time" content="2020-01-28T01:10:00.000Z">
+<meta property="article:modified_time" content="2020-01-28T02:40:56.293Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://xinhecuican.github.io/2020/01/27/call指令/"/>
+  <link rel="canonical" href="http://xinhecuican.github.io/2020/01/28/汇编语言写函数/"/>
 
 
 
 
 
-  <title>call指令 | Hexo</title>
+  <title>汇编语言写函数 | Hexo</title>
   
 
 
@@ -298,7 +298,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://xinhecuican.github.io/2020/01/27/call%E6%8C%87%E4%BB%A4/">
+    <link itemprop="mainEntityOfPage" href="http://xinhecuican.github.io/2020/01/28/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%86%99%E5%87%BD%E6%95%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -315,7 +315,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">call指令</h1>
+          <h1 class="post-title" itemprop="name headline">汇编语言写函数</h1>
         
 
         <div class="post-meta">
@@ -327,8 +327,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-27T10:10:00+08:00">
-                2020-01-27
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-28T09:10:00+08:00">
+                2020-01-28
               </time>
             
 
@@ -387,36 +387,23 @@
       
 
       
-        <p>操作</p>
+        <p>例,计算data段第一行的三次方，并储存到第二行上</p>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">assume</span> <span class="built_in">cs</span>:code,<span class="built_in">ds</span>:data</span><br><span class="line">data <span class="meta">segment</span></span><br><span class="line">    <span class="built_in">dw</span> <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span></span><br><span class="line">    <span class="built_in">dd</span> <span class="number">8</span> dup (<span class="number">0</span>)</span><br><span class="line">data ends</span><br><span class="line">code <span class="meta">segment</span></span><br><span class="line"><span class="symbol">start:</span> <span class="keyword">mov</span> <span class="built_in">ax</span>,data</span><br><span class="line">     <span class="keyword">mov</span> <span class="built_in">ds</span>,<span class="built_in">ax</span></span><br><span class="line">     <span class="keyword">mov</span> <span class="built_in">si</span>,<span class="number">0</span></span><br><span class="line">     <span class="keyword">mov</span> <span class="built_in">di</span>,<span class="number">16</span></span><br><span class="line"><span class="symbol">  s:</span> <span class="keyword">mov</span> <span class="built_in">bx</span>,[<span class="built_in">si</span>]</span><br><span class="line">    <span class="keyword">call</span> cube</span><br><span class="line">    <span class="keyword">mov</span> [<span class="built_in">di</span>],<span class="built_in">ax</span></span><br><span class="line">    <span class="keyword">mov</span> [<span class="built_in">di</span>].<span class="number">2</span>,<span class="built_in">dx</span> ；这个的含义是[<span class="built_in">di</span>]的第二个字节</span><br><span class="line">    <span class="keyword">add</span> <span class="built_in">si</span>,<span class="number">2</span></span><br><span class="line">    <span class="keyword">add</span> <span class="built_in">di</span>,<span class="number">4</span></span><br><span class="line">    <span class="keyword">loop</span> s</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">mov</span> <span class="built_in">ax</span>,<span class="number">4c00h</span></span><br><span class="line">    <span class="keyword">int</span> <span class="number">21h</span></span><br><span class="line"><span class="symbol">cube:</span> <span class="keyword">mov</span> <span class="built_in">ax</span>,<span class="built_in">bx</span></span><br><span class="line">    <span class="keyword">mul</span> <span class="built_in">bx</span></span><br><span class="line">    <span class="keyword">mul</span> <span class="built_in">bx</span></span><br><span class="line">    <span class="keyword">ret</span></span><br><span class="line"> code ends</span><br><span class="line"> end start</span><br></pre></td></tr></table></figure>
+<p> 这个程序函数是cube，注意想要跳转就用call，想要返回就用ret。这时返回值存在ax和dx中，参数在bx中，可如果有多个参数，寄存器不够时，可以用栈来传递参数</p>
+<h3 id="用栈传递参数"><a href="#用栈传递参数" class="headerlink" title="用栈传递参数"></a>用栈传递参数</h3><p> 例：计算（a-b）^3，a，b为字型数据<br> 参数 进入子程序时，栈顶存放ip，后面依次存放a，b<br> 结果：（dx：ax）=(a-b)^3<br> <figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">difcube:</span> <span class="keyword">push</span> <span class="built_in">bp</span></span><br><span class="line">      <span class="keyword">mov</span> <span class="built_in">bp</span>,<span class="built_in">sp</span></span><br><span class="line">      <span class="keyword">mov</span> <span class="built_in">ax</span>,[<span class="built_in">bp</span>+<span class="number">4</span>] <span class="comment">;将a的值送入栈中</span></span><br><span class="line">      <span class="keyword">sub</span> <span class="built_in">ax</span>,[<span class="built_in">bp</span>+<span class="number">6</span>] ；减去b的值</span><br><span class="line">      <span class="keyword">mov</span> <span class="built_in">bp</span>,<span class="built_in">ax</span></span><br><span class="line">      <span class="keyword">mul</span> <span class="built_in">bp</span></span><br><span class="line">      <span class="keyword">mul</span> <span class="built_in">bp</span></span><br><span class="line">      <span class="keyword">pop</span> <span class="built_in">bp</span></span><br><span class="line">      <span class="keyword">ret</span> <span class="number">4</span></span><br></pre></td></tr></table></figure><br> ret n的含义为，pop ip add sp，n</p>
+<p> 而ret 4 的原因是此时栈中有2个数据，要想把栈清空，要移动四个单位（字型）。而push bp ，pop bp 是为了保证bp中的数据没有改变</p>
+<h3 id="寄存器冲突问题"><a href="#寄存器冲突问题" class="headerlink" title="寄存器冲突问题"></a>寄存器冲突问题</h3><p> 例 将data段中的字母变为大写，以0结尾<br> <figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"> data <span class="meta">segment</span></span><br><span class="line">   <span class="built_in">db</span> <span class="string">'fafdsfs'</span>,<span class="number">0</span></span><br><span class="line"> data ends</span><br><span class="line"> code <span class="meta">segment</span></span><br><span class="line"><span class="symbol"> start:</span> <span class="keyword">mov</span> <span class="built_in">ax</span>,data</span><br><span class="line">      <span class="keyword">mov</span> <span class="built_in">ds</span>,<span class="built_in">ax</span></span><br><span class="line">      <span class="keyword">mov</span> <span class="built_in">bx</span>,<span class="number">0</span></span><br><span class="line">      <span class="keyword">mov</span> <span class="built_in">cx</span>,<span class="number">4</span></span><br><span class="line">      </span><br><span class="line"><span class="symbol">    s:</span> <span class="keyword">mov</span> <span class="built_in">si</span>,<span class="built_in">bx</span></span><br><span class="line">      <span class="keyword">call</span> capital</span><br><span class="line">      <span class="keyword">add</span> <span class="built_in">bx</span>,<span class="number">5</span></span><br><span class="line">      <span class="keyword">loop</span> s</span><br><span class="line">      </span><br><span class="line">      <span class="keyword">mov</span> <span class="built_in">ax</span>,<span class="number">4c00h</span></span><br><span class="line">      <span class="keyword">int</span> <span class="number">21h</span></span><br><span class="line"><span class="symbol">capital:</span> <span class="keyword">mov</span> <span class="built_in">cl</span>,,[<span class="built_in">si</span>]</span><br><span class="line">      <span class="keyword">mov</span> <span class="number">ch</span>,<span class="number">0</span></span><br><span class="line">      <span class="keyword">jcxz</span> ok</span><br><span class="line">      <span class="keyword">and</span> <span class="built_in">byte</span> <span class="built_in">ptr</span> [<span class="built_in">si</span>],<span class="number">11011111b</span></span><br><span class="line">      <span class="keyword">inc</span> <span class="built_in">si</span></span><br><span class="line">      <span class="keyword">jmp</span> short capital</span><br><span class="line"><span class="symbol">    ok:</span><span class="keyword">ret</span></span><br><span class="line">code ends</span><br><span class="line">end start</span><br></pre></td></tr></table></figure><br>这个程序实际上是有问题的，因为进行一次capital后，cx的值一定为0，直接退出主程序的循环</p>
+<p>要解决这个问题，有两种方案</p>
 <ol>
-<li>将当前的ip或cs压入栈中</li>
-<li>转移</li>
+<li>找另一个没有使用的寄存器</li>
+<li>不要使用会发生冲突的寄存器</li>
 </ol>
-<p>这里的转移与jmp相同，也有位移和内存两种方式</p>
-<h3 id="根据位移"><a href="#根据位移" class="headerlink" title="根据位移"></a>根据位移</h3><p>call 标号（将ip压入栈中后，转移到标号处进行指令）<br>过程：</p>
-<ol>
-<li>sp+=2，ss*16+sp=ip</li>
-<li>ip=ip+16位位移</li>
-</ol>
-<p>16位位移=标号处地址-call指令后第一个字节的地址</p>
-<p>相当于 push ip，jmp near ptr 标号</p>
-<h3 id="根据目的地址"><a href="#根据目的地址" class="headerlink" title="根据目的地址"></a>根据目的地址</h3><p>call far ptr 实现段间转移</p>
-<p>操作： </p>
-<ol>
-<li>sp-=2</li>
-<li>ss*16+sp=cs</li>
-<li>sp-=2</li>
-<li>ss*16+sp=ip</li>
-<li>cs=标号所在段地址，ip=；标号所在偏移地址</li>
-</ol>
-<p>段内转移一般是根据位移，段间转移一般是根据地址</p>
-<p>如果地址在寄存器中， call reg，ip被修改</p>
-<p>如果地址在内存中</p>
-<p>1 call word ptr 内存地址</p>
-<p>这种是段内转移，相当于 push ip，jmp word ptr</p>
-<p>2 call dword ptr 内存地址</p>
-<p>段间转移 例</p>
-<p>call dword ptr ds：[0] ，这样ds:[0]和ds:[1]是ip ，ds:[2]和ds:[3]是cs</p>
+<p>这样实际上是不可能的，例如cx，循环便一定会冲突</p>
+<p>解决方案就是，在进入函数前把所用到寄存器的内容保存起来，结束函数在进行使用</p>
+<p>由此我们可以得到子程序设计的标准</p>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">子程序开始： 子程序中使用的寄存器入栈</span><br><span class="line">         子程序内容</span><br><span class="line">         子程序所使用寄存器出栈</span><br><span class="line">         返回 （<span class="keyword">ret</span> ，<span class="keyword">retf</span>）</span><br></pre></td></tr></table></figure>
+<p> 这里要注意一个问题，当把寄存器内容入栈后，sp会发生改变，如果子程序中也要使用栈要注意地址的变化</p>
+<p> 同时还要注意入账和出栈的顺序<br> 例<br> <figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">capital:</span> <span class="keyword">push</span> <span class="built_in">cx</span></span><br><span class="line">      <span class="keyword">push</span> <span class="built_in">si</span></span><br><span class="line">      ...</span><br><span class="line">      <span class="keyword">pop</span> <span class="built_in">si</span></span><br><span class="line">      <span class="keyword">pop</span> <span class="built_in">cx</span></span><br></pre></td></tr></table></figure><br> 后进先出</p>
 
       
     </div>
@@ -446,8 +433,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/01/27/ret-%E5%92%8C-retf/" rel="next" title="ret 和 retf">
-                <i class="fa fa-chevron-left"></i> ret 和 retf
+              <a href="/2020/01/27/mul%E6%8C%87%E4%BB%A4/" rel="next" title="mul指令">
+                <i class="fa fa-chevron-left"></i> mul指令
               </a>
             
           </div>
@@ -455,10 +442,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/01/27/mul%E6%8C%87%E4%BB%A4/" rel="prev" title="mul指令">
-                mul指令 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -602,7 +585,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#根据位移"><span class="nav-number">1.</span> <span class="nav-text">根据位移</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#根据目的地址"><span class="nav-number">2.</span> <span class="nav-text">根据目的地址</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#用栈传递参数"><span class="nav-number">1.</span> <span class="nav-text">用栈传递参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#寄存器冲突问题"><span class="nav-number">2.</span> <span class="nav-text">寄存器冲突问题</span></a></li></ol></div>
             
 
           </div>
