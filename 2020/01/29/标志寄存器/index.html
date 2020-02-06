@@ -85,14 +85,14 @@
 
 
 
-<meta name="description" content="标志寄存器16位中只有9位有特殊作用 |0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15||———————————-||CF|0 |PF|0 |AF| 0|ZF|SF|IF|DF|OF|0 | 0|0 | 0| 0| ZFZF含义是执行完指令后结果是否为0，为0,ZF&#x3D;1，不为0,ZF&#x3D;0 例如  12mov ax,1 ;ZF&#x3D;0sub ax,1 ;ZF&#x3D;1  PF奇偶标">
+<meta name="description" content="标志寄存器16位中只有9位有特殊作用    0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15    CF 0 PF 0 AF 0 ZF SF IF DF OF 0 0 0 0 0   ZFZF含义是执行完指令后结果是否为0，为0,ZF&#x3D;1，不为0,ZF&#x3D;0 例如  12mov ax,1 ;ZF&#x3D;0sub ax,1 ;ZF&#x3D;1  PF奇偶标志位，它记录相关指令执行后，其结果">
 <meta property="og:type" content="article">
 <meta property="og:title" content="标志寄存器">
 <meta property="og:url" content="http://xinhecuican.github.io/2020/01/29/%E6%A0%87%E5%BF%97%E5%AF%84%E5%AD%98%E5%99%A8/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="标志寄存器16位中只有9位有特殊作用 |0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15||———————————-||CF|0 |PF|0 |AF| 0|ZF|SF|IF|DF|OF|0 | 0|0 | 0| 0| ZFZF含义是执行完指令后结果是否为0，为0,ZF&#x3D;1，不为0,ZF&#x3D;0 例如  12mov ax,1 ;ZF&#x3D;0sub ax,1 ;ZF&#x3D;1  PF奇偶标">
+<meta property="og:description" content="标志寄存器16位中只有9位有特殊作用    0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15    CF 0 PF 0 AF 0 ZF SF IF DF OF 0 0 0 0 0   ZFZF含义是执行完指令后结果是否为0，为0,ZF&#x3D;1，不为0,ZF&#x3D;0 例如  12mov ax,1 ;ZF&#x3D;0sub ax,1 ;ZF&#x3D;1  PF奇偶标志位，它记录相关指令执行后，其结果">
 <meta property="article:published_time" content="2020-01-29T02:48:00.000Z">
-<meta property="article:modified_time" content="2020-01-31T02:51:47.480Z">
+<meta property="article:modified_time" content="2020-02-05T03:12:32.051Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 
@@ -392,7 +392,46 @@
 
       
         <p>标志寄存器16位中只有9位有特殊作用</p>
-<p>|0|1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|<br>|———————————-|<br>|CF|0 |PF|0 |AF| 0|ZF|SF|IF|DF|OF|0 | 0|0 | 0| 0|</p>
+<table>
+<thead>
+<tr>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+<th>8</th>
+<th>9</th>
+<th>10</th>
+<th>11</th>
+<th>12</th>
+<th>13</th>
+<th>14</th>
+<th>15</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>CF</td>
+<td>0</td>
+<td>PF</td>
+<td>0</td>
+<td>AF</td>
+<td>0</td>
+<td>ZF</td>
+<td>SF</td>
+<td>IF</td>
+<td>DF</td>
+<td>OF</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+</tbody></table>
 <h4 id="ZF"><a href="#ZF" class="headerlink" title="ZF"></a>ZF</h4><p>ZF含义是执行完指令后结果是否为0，为0,ZF=1，不为0,ZF=0</p>
 <p>例如 </p>
 <figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mov ax,<span class="number">1</span> ;ZF=<span class="number">0</span></span><br><span class="line"><span class="function"><span class="keyword">sub</span> <span class="title">ax</span>,1 </span>;ZF=<span class="number">1</span></span><br></pre></td></tr></table></figure>
@@ -452,7 +491,45 @@
 <p>例： sf=1，of=0. of=0，说明没有溢出，直接用sf判断即可，sf=1说明ax&lt;bx</p>
 <p>sf=1,of=1.这样就说明有溢出，<strong>因此说明是由于溢出导致结果为负，所以真正的结果必然为正</strong>，所以ax&gt;bx</p>
 <p>sf=0,,of=1. 有溢出，ah&lt;bh</p>
-<h4 id="标志寄存器在debug中的表示"><a href="#标志寄存器在debug中的表示" class="headerlink" title="标志寄存器在debug中的表示"></a>标志寄存器在debug中的表示</h4><p>|标志| 值为1的标记| 值为0的标记|<br>|—————-|<br>|of|ov|nv|<br>|sf|ng|pl|<br>|zf|zr|nz|<br>|pf|pe|po|<br>|cf|cy|nc|<br>|df|dn|up|</p>
+<h4 id="标志寄存器在debug中的表示"><a href="#标志寄存器在debug中的表示" class="headerlink" title="标志寄存器在debug中的表示"></a>标志寄存器在debug中的表示</h4><table>
+<thead>
+<tr>
+<th>标志</th>
+<th>值为1的标记</th>
+<th>值为0的标记</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>of</td>
+<td>ov</td>
+<td>nv</td>
+</tr>
+<tr>
+<td>sf</td>
+<td>ng</td>
+<td>pl</td>
+</tr>
+<tr>
+<td>zf</td>
+<td>zr</td>
+<td>nz</td>
+</tr>
+<tr>
+<td>pf</td>
+<td>pe</td>
+<td>po</td>
+</tr>
+<tr>
+<td>cf</td>
+<td>cy</td>
+<td>nc</td>
+</tr>
+<tr>
+<td>df</td>
+<td>dn</td>
+<td>up</td>
+</tr>
+</tbody></table>
 
       
     </div>
@@ -574,7 +651,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">60</span>
+                  <span class="site-state-item-count">64</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -585,7 +662,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
