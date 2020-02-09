@@ -92,7 +92,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="整除如果a能被b整除，a&#x3D;b*q，q为一整数记作b|a,a是被除的那个 同余如果a和bmod m 是同一个值，则称a和b同余，记作a (三横线） b(mod m) 例如： 3 和 8 关于5 同余  因为 3%5&#x3D;3,8%5&#x3D;3 重要性质：   （a+b)%c&#x3D;a%c+b%c (a*b)%c&#x3D;(a%c*b%c)%c (a^b)%c&#x3D;(a%c^b)%c唯一分解定理任何大于1的正整数n都可以被分解为若">
 <meta property="article:published_time" content="2020-02-05T23:48:00.000Z">
-<meta property="article:modified_time" content="2020-02-06T08:46:45.306Z">
+<meta property="article:modified_time" content="2020-02-09T06:24:55.600Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 
@@ -400,7 +400,7 @@
 <p>逆元的求法</p>
 <p>1 费马小定理</p>
 <p>a*a^-1%p=1,a^p-1%p=1</p>
-<p>可得 a^-1%p=a^p-2%p，但是费马小定理要求必须要是素数</p>
+<p>可得 a^-1%p=a^p-2%p，然后用快速幂。但是费马小定理要求必须要是素数</p>
 <p>2 线性求逆元（不理解）</p>
 <p>公式：inv(a)=-p/a*inv(p%a)%p;</p>
 <figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">inv[<span class="number">1</span>]=<span class="number">1</span>;</span><br><span class="line"><span class="keyword">for</span>(int <span class="built_in">i</span>=<span class="number">2</span>;<span class="built_in">i</span>&lt;=n;++<span class="built_in">i</span>)&#123;</span><br><span class="line">inv[<span class="built_in">i</span>]=((<span class="number">1</span>ll*(-p/<span class="built_in">i</span>)*inv[p<span class="comment">%i]%p)+p)%p;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -410,16 +410,19 @@
 <p>裴蜀定理</p>
 <p>不定方程 ax+by=c存在整数解当且仅当gcd(a,b)|c ，当存在一组整数解时，必存在无限组解<br>ax+by=gcd(a,b)=&gt;bx1+a%by1=gcd(b,a%b)=&gt;x=x1,y=x1-(a/b)y1</p>
 <p>x=x1+k<em>b/gcd(a,b) , y= y1-k</em>a/gcd(a,b)</p>
+<p>之后一直求解直到x=1,y=0,这时b=0,所以gcd(a,b)=a,方程一定成立</p>
+<p>在这里我们可以用递归反推，把x=1,y=0带入方程，一步步向上推</p>
 <figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">void</span> exgcd(<span class="built_in">int</span> a,<span class="built_in">int</span> b,<span class="built_in">int</span> &amp;x,<span class="built_in">int</span> &amp;y)&#123;</span><br><span class="line"><span class="keyword">if</span>(b==<span class="number">0</span>)&#123;</span><br><span class="line">x=<span class="number">1</span>;</span><br><span class="line">y=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">return</span> ;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">int</span> x1,y1;</span><br><span class="line">exgcd(b,a%b,x1,y1);</span><br><span class="line">x=y1;</span><br><span class="line">y=x1-(a/b)*y1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>这里我们就可以得到第三种方法</p>
 <p>求逆元可以转化为：求关于x的同余方程ax（三横）1 mod b的最小正整数解</p>
+<p>ax%b=1  ax=kb+1</p>
 <p>即 ax-by=1</p>
 <p>最后 x1%b+b即是答案</p>
+<p><a href="https://big-news.cn/2019/05/19/%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E4%B8%8E%E6%89%A9%E5%B1%95%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E5%AE%9A%E7%90%86/" target="_blank" rel="noopener">可以看这篇博客</a></p>
 <h3 id="排列组合"><a href="#排列组合" class="headerlink" title="排列组合"></a>排列组合</h3><p>求C(m,n)%p的值</p>
 <p>可变成  (n!/m!(n-m)!)%p</p>
 <p>之后就用费马小定理求逆元</p>
 <figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">int</span> ksm(<span class="built_in">int</span> a,<span class="built_in">int</span> b,<span class="built_in">int</span> p)&#123;</span><br><span class="line"><span class="built_in">int</span> ret=<span class="number">1</span>;</span><br><span class="line"><span class="keyword">while</span>(b)&#123;</span><br><span class="line"><span class="keyword">if</span>(b&amp;<span class="number">1</span>) ret=<span class="number">1</span>ll*ret*a%p;</span><br><span class="line">a=<span class="number">1</span>ll*a*a%p;</span><br><span class="line">b&gt;&gt;=<span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> ret%p;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">int</span> fac[maxn];</span><br><span class="line"><span class="built_in">int</span> inv(<span class="built_in">int</span> x)&#123;</span><br><span class="line"><span class="keyword">return</span> ksm(x,p<span class="number">-2</span>,p);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">int</span> C(<span class="built_in">int</span> n,<span class="built_in">int</span> m)&#123;</span><br><span class="line"><span class="built_in">int</span> qwq=<span class="number">1</span>ll*fac[n]*inv(fac[n-m])%p;</span><br><span class="line"><span class="keyword">return</span> <span class="number">1</span>ll*qwq*inv(fac[m])%p;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">int</span> main()&#123;</span><br><span class="line">fac[<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line"><span class="built_in">int</span> n,m;</span><br><span class="line">scanf(<span class="string">"%d%d"</span>,&amp;n,&amp;m);</span><br><span class="line"><span class="keyword">for</span>(<span class="built_in">int</span> i=<span class="number">1</span>;i&lt;=n;++i)&#123;</span><br><span class="line">fac[i]=<span class="number">1</span>ll*fac[i<span class="number">-1</span>]*i%p;</span><br><span class="line">&#125;</span><br><span class="line">printf(<span class="string">"%d"</span>,C(n,m));</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
       
     </div>
     
@@ -448,8 +451,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/02/04/%E9%93%BE%E8%A1%A8-%E9%93%BE%E5%BC%8F%E5%89%8D%E5%90%91%E6%98%9F/" rel="next" title=" 链式前向星">
-                <i class="fa fa-chevron-left"></i>  链式前向星
+              <a href="/2020/02/04/%E5%9B%BE%E8%AE%BA%E5%9F%BA%E7%A1%80/" rel="next" title="图论基础">
+                <i class="fa fa-chevron-left"></i> 图论基础
               </a>
             
           </div>
@@ -540,7 +543,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">64</span>
+                  <span class="site-state-item-count">66</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
