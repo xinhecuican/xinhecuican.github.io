@@ -85,14 +85,14 @@
 
 
 
-<meta name="description" content="根据位移进行的转移用jmp进行跳转时，会发现一个奇怪的问题，无论它要跳转到哪里，它的机器码始终不变，为EB03，那么它到底是怎么告诉cpu修改ip地址的呢？ 先回忆一下cpu读取指令的过程  cs&#x3D;076a ip&#x3D;0006，cs：ip指向eb03 读取指令码eb03到指令缓冲器 ip&#x3D;ip+指令长度&#x3D;0008h，cs：ip指向下一条指令 cpu执行指令缓冲器中的指令eb03 执行完缓冲器中的指令后">
+<meta name="description" content="也就是有一个数列a，要求你求数列b和c，b[i]是a[i]…a[i+w-1]中的最小值，c[i]是最大值。如果a是1,3,-1,-3,5,3,6,7，则b为-1,-3,-3,-3,3,3，c为3,3,5,5,6,7。 这个问题相当于一个数据流（数列a）在不断地到来，而数据是不断过期的，相当于我们只能保存有限的数据（sliding window中的数据，此题中就是窗口的宽度w），对于到来的查询（此题">
 <meta property="og:type" content="article">
-<meta property="og:title" content="jmp进行跳转">
-<meta property="og:url" content="http://xinhecuican.github.io/2020/01/26/jmp%E8%BF%9B%E8%A1%8C%E8%B7%B3%E8%BD%AC/index.html">
+<meta property="og:title" content="单调队列">
+<meta property="og:url" content="http://xinhecuican.github.io/2020/02/11/%E5%8D%95%E8%B0%83%E9%98%9F%E5%88%97/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="根据位移进行的转移用jmp进行跳转时，会发现一个奇怪的问题，无论它要跳转到哪里，它的机器码始终不变，为EB03，那么它到底是怎么告诉cpu修改ip地址的呢？ 先回忆一下cpu读取指令的过程  cs&#x3D;076a ip&#x3D;0006，cs：ip指向eb03 读取指令码eb03到指令缓冲器 ip&#x3D;ip+指令长度&#x3D;0008h，cs：ip指向下一条指令 cpu执行指令缓冲器中的指令eb03 执行完缓冲器中的指令后">
-<meta property="article:published_time" content="2020-01-26T01:52:00.000Z">
-<meta property="article:modified_time" content="2020-01-26T05:56:20.591Z">
+<meta property="og:description" content="也就是有一个数列a，要求你求数列b和c，b[i]是a[i]…a[i+w-1]中的最小值，c[i]是最大值。如果a是1,3,-1,-3,5,3,6,7，则b为-1,-3,-3,-3,3,3，c为3,3,5,5,6,7。 这个问题相当于一个数据流（数列a）在不断地到来，而数据是不断过期的，相当于我们只能保存有限的数据（sliding window中的数据，此题中就是窗口的宽度w），对于到来的查询（此题">
+<meta property="article:published_time" content="2020-02-11T10:45:00.000Z">
+<meta property="article:modified_time" content="2020-02-11T10:47:47.412Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 
@@ -124,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="http://xinhecuican.github.io/2020/01/26/jmp进行跳转/"/>
+  <link rel="canonical" href="http://xinhecuican.github.io/2020/02/11/单调队列/"/>
 
 
 
 
 
-  <title>jmp进行跳转 | Hexo</title>
+  <title>单调队列 | Hexo</title>
   
 
 
@@ -302,7 +302,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://xinhecuican.github.io/2020/01/26/jmp%E8%BF%9B%E8%A1%8C%E8%B7%B3%E8%BD%AC/">
+    <link itemprop="mainEntityOfPage" href="http://xinhecuican.github.io/2020/02/11/%E5%8D%95%E8%B0%83%E9%98%9F%E5%88%97/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -319,7 +319,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">jmp进行跳转</h1>
+          <h1 class="post-title" itemprop="name headline">单调队列</h1>
         
 
         <div class="post-meta">
@@ -331,8 +331,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-26T09:52:00+08:00">
-                2020-01-26
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-11T18:45:00+08:00">
+                2020-02-11
               </time>
             
 
@@ -354,8 +354,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%B1%87%E7%BC%96/" itemprop="url" rel="index">
-                    <span itemprop="name">汇编</span>
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
                   </a>
                 </span>
 
@@ -391,31 +391,17 @@
       
 
       
-        <h3 id="根据位移进行的转移"><a href="#根据位移进行的转移" class="headerlink" title="根据位移进行的转移"></a>根据位移进行的转移</h3><p>用jmp进行跳转时，会发现一个奇怪的问题，无论它要跳转到哪里，它的机器码始终不变，为EB03，那么它到底是怎么告诉cpu修改ip地址的呢？</p>
-<p>先回忆一下cpu读取指令的过程</p>
-<ol>
-<li>cs=076a ip=0006，cs：ip指向eb03</li>
-<li>读取指令码eb03到指令缓冲器</li>
-<li>ip=ip+指令长度=0008h，cs：ip指向下一条指令</li>
-<li>cpu执行指令缓冲器中的指令eb03</li>
-<li>执行完缓冲器中的指令后，ip被修改+</li>
-</ol>
-<p>jmp指令并不需要转移的目的地址，但是它是凭借什么转移的呢？这里有个03，正好跳过三个字节之后就是要转移的地址。原来jmp指令只需知道当前指令的下一个指令（因为执行完这条指令后ip会增加）与要跳转的指令的位移就可以了</p>
-<p>jmp short 标号 功能是 ip=ip+8位位移（一字节）</p>
-<p>jmp near ptr 标号 是16位</p>
-<p>jmp far ptr 标号 是段间转移，可以修改cs</p>
-<p>还可以直接 jmp 寄存器1：寄存器2</p>
-<h3 id="根据内存进行的转移"><a href="#根据内存进行的转移" class="headerlink" title="根据内存进行的转移"></a>根据内存进行的转移</h3><p>转移地址再内存中的转移有两种格式</p>
-<ol>
-<li>jmp word  ptr（段内转移）</li>
-</ol>
-<p>例 jmp word ptr ds：[0]</p>
-<p>jmp word ptr [bx]</p>
-<p>2.jmp dword ptr (段间转移）后面接两个字，第一个是偏移地址，第二个是段地址</p>
-<p>例 jmp dword ptr ds：[0],0 完成后段地址为0</p>
-<p>注意</p>
-<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">assume</span> <span class="built_in">cs</span>:code</span><br><span class="line"></span><br><span class="line">code <span class="meta">segment</span></span><br><span class="line">    <span class="keyword">mov</span> <span class="built_in">ax</span>,<span class="number">4c00h</span></span><br><span class="line">    <span class="keyword">int</span> <span class="number">21h</span></span><br><span class="line"><span class="symbol">start:</span></span><br><span class="line">       <span class="keyword">mov</span> <span class="built_in">ax</span>,<span class="number">0</span></span><br><span class="line"><span class="symbol">    s:</span> <span class="keyword">nop</span></span><br><span class="line">       <span class="keyword">nop</span></span><br><span class="line"></span><br><span class="line">       <span class="keyword">mov</span> <span class="built_in">di</span>,offset s</span><br><span class="line">       <span class="keyword">mov</span> <span class="built_in">si</span>,offset s2</span><br><span class="line">       <span class="keyword">mov</span> <span class="built_in">ax</span>,<span class="built_in">cs</span>:[<span class="built_in">si</span>]</span><br><span class="line">       <span class="keyword">mov</span> <span class="built_in">cs</span>:[<span class="built_in">di</span>],<span class="built_in">ax</span></span><br><span class="line"><span class="symbol">   s0:</span> <span class="keyword">jmp</span> short s</span><br><span class="line"><span class="symbol">   s1:</span> <span class="keyword">mov</span> <span class="built_in">ax</span>,<span class="number">0</span></span><br><span class="line">       <span class="keyword">int</span> <span class="number">21h</span></span><br><span class="line">       <span class="keyword">mov</span> <span class="built_in">ax</span>,<span class="number">0</span></span><br><span class="line"><span class="symbol">   s2:</span> <span class="keyword">jmp</span> short s1</span><br><span class="line">       <span class="keyword">nop</span></span><br><span class="line">code ends</span><br><span class="line">end start</span><br></pre></td></tr></table></figure>
-<p>这个程序奇怪之处在于运行到mov cs：[di],ax后 s处会变为jmp 0000，这里就要记住jmp传递的是偏移地址，也就是说，jmp short s1这个指令并不是真的跳到s1处，而是往前跳8个字节</p>
+        <p>也就是有一个数列a，要求你求数列b和c，b[i]是a[i]…a[i+w-1]中的最小值，c[i]是最大值。如果a是1,3,-1,-3,5,3,6,7，则b为-1,-3,-3,-3,3,3，c为3,3,5,5,6,7。</p>
+<p>这个问题相当于一个数据流（数列a）在不断地到来，而数据是不断过期的，相当于我们只能保存有限的数据（sliding window中的数据，此题中就是窗口的宽度w），对于到来的查询（此题中查询是每时刻都有的），我们要返回当前滑动窗口中的最大值\最小值。注意，元素是不断过期的。</p>
+<p>解决这个问题可以使用一种叫做单调队列的数据结构，它维护这样一种队列：</p>
+<p>a)从队头到队尾，元素在我们所关注的指标下是递减的（严格递减，而不是非递增），比如查询如果每次问的是窗口内的最小值，那么队列中元素从左至右就应该递增，如果每次问的是窗口内的最大值，则应该递减，依此类推。这是为了保证每次查询只需要取队头元素。</p>
+<p>b)从队头到队尾，元素对应的时刻（此题中是该元素在数列a中的下标）是递增的，但不要求连续，这是为了保证最左面的元素总是最先过期，且每当有新元素来临的时候一定是插入队尾。</p>
+<p>满足以上两点的队列就是单调队列，首先，只有第一个元素的序列一定是单调队列。</p>
+<p>那么怎么维护这个单调队列呢？无非是处理插入和查询两个操作。</p>
+<p>对于插入，由于性质b，因此来的新元素插入到队列的最后就能维持b)继续成立。但是为了维护a)的成立，即元素在我们关注的指标下递减，从队尾插入新元素的时候可能要删除队尾的一些元素，具体说来就是，找到第一个大于（在所关注指标下）新元素的元素，删除其后所有元素，并将新元素插于其后。因为所有被删除的元素都比新元素要小，而且比新元素要旧，因此在以后的任何查询中都不可能成为答案，所以可以放心删除。</p>
+<p>对于查询，由于性质b，因此所有该时刻过期的元素一定都集中在队头，因此利用查询的时机删除队头所有过期的元素，在不含过期元素后，队头得元素就是查询的答案（性质a），将其返回即可。</p>
+<p>由于每个元素都进队出队一次，因此摊销复杂度为O(n)。</p>
+<p>这个讲的十分清楚，我只是<a href="https://blog.csdn.net/Baoli1008/article/details/47001513" target="_blank" rel="noopener">搬运</a></p>
 
       
     </div>
@@ -445,8 +431,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/01/26/%E6%93%8D%E4%BD%9C%E7%AC%A6offset/" rel="next" title="操作符offset">
-                <i class="fa fa-chevron-left"></i> 操作符offset
+              <a href="/2020/02/09/%E5%8F%8C%E7%AB%AF%E9%98%9F%E5%88%97deque/" rel="next" title="双端队列deque">
+                <i class="fa fa-chevron-left"></i> 双端队列deque
               </a>
             
           </div>
@@ -454,10 +440,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/01/27/ret-%E5%92%8C-retf/" rel="prev" title="ret 和 retf">
-                ret 和 retf <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -487,7 +469,7 @@
           
 
   
-<iframe title="livere"   src="https://was.livere.me/comment/city?id=city&refer=http://xinhecuican.github.io/2020/01/26/jmp%E8%BF%9B%E8%A1%8C%E8%B7%B3%E8%BD%AC/&uid=MTAyMC80ODE3Mi8yNDY2OA==&site=http://xinhecuican.github.io/2020/01/26/jmp%E8%BF%9B%E8%A1%8C%E8%B7%B3%E8%BD%AC/&title=jmp进行跳转" scrolling="" frameborder="0" id="lv-comment-399" style="min-width: 100%; width: 100px; min-height: 400px; overflow: auto; border: 0px; z-index: 124212; height: 800px;" ></iframe>
+<iframe title="livere"   src="https://was.livere.me/comment/city?id=city&refer=http://xinhecuican.github.io/2020/02/11/%E5%8D%95%E8%B0%83%E9%98%9F%E5%88%97/&uid=MTAyMC80ODE3Mi8yNDY2OA==&site=http://xinhecuican.github.io/2020/02/11/%E5%8D%95%E8%B0%83%E9%98%9F%E5%88%97/&title=单调队列" scrolling="" frameborder="0" id="lv-comment-399" style="min-width: 100%; width: 100px; min-height: 400px; overflow: auto; border: 0px; z-index: 124212; height: 800px;" ></iframe>
 
   
 
@@ -512,17 +494,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -589,22 +562,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#根据位移进行的转移"><span class="nav-number">1.</span> <span class="nav-text">根据位移进行的转移</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#根据内存进行的转移"><span class="nav-number">2.</span> <span class="nav-text">根据内存进行的转移</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       

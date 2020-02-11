@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://xinhecuican.github.io/"/>
-  <updated>2020-02-09T07:37:09.641Z</updated>
+  <updated>2020-02-11T10:47:47.412Z</updated>
   <id>http://xinhecuican.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>单调队列</title>
+    <link href="http://xinhecuican.github.io/2020/02/11/%E5%8D%95%E8%B0%83%E9%98%9F%E5%88%97/"/>
+    <id>http://xinhecuican.github.io/2020/02/11/%E5%8D%95%E8%B0%83%E9%98%9F%E5%88%97/</id>
+    <published>2020-02-11T10:45:00.000Z</published>
+    <updated>2020-02-11T10:47:47.412Z</updated>
+    
+    <content type="html"><![CDATA[<p>也就是有一个数列a，要求你求数列b和c，b[i]是a[i]…a[i+w-1]中的最小值，c[i]是最大值。如果a是1,3,-1,-3,5,3,6,7，则b为-1,-3,-3,-3,3,3，c为3,3,5,5,6,7。</p><p>这个问题相当于一个数据流（数列a）在不断地到来，而数据是不断过期的，相当于我们只能保存有限的数据（sliding window中的数据，此题中就是窗口的宽度w），对于到来的查询（此题中查询是每时刻都有的），我们要返回当前滑动窗口中的最大值\最小值。注意，元素是不断过期的。</p><p>解决这个问题可以使用一种叫做单调队列的数据结构，它维护这样一种队列：</p><p>a)从队头到队尾，元素在我们所关注的指标下是递减的（严格递减，而不是非递增），比如查询如果每次问的是窗口内的最小值，那么队列中元素从左至右就应该递增，如果每次问的是窗口内的最大值，则应该递减，依此类推。这是为了保证每次查询只需要取队头元素。</p><p>b)从队头到队尾，元素对应的时刻（此题中是该元素在数列a中的下标）是递增的，但不要求连续，这是为了保证最左面的元素总是最先过期，且每当有新元素来临的时候一定是插入队尾。</p><p>满足以上两点的队列就是单调队列，首先，只有第一个元素的序列一定是单调队列。</p><p>那么怎么维护这个单调队列呢？无非是处理插入和查询两个操作。</p><p>对于插入，由于性质b，因此来的新元素插入到队列的最后就能维持b)继续成立。但是为了维护a)的成立，即元素在我们关注的指标下递减，从队尾插入新元素的时候可能要删除队尾的一些元素，具体说来就是，找到第一个大于（在所关注指标下）新元素的元素，删除其后所有元素，并将新元素插于其后。因为所有被删除的元素都比新元素要小，而且比新元素要旧，因此在以后的任何查询中都不可能成为答案，所以可以放心删除。</p><p>对于查询，由于性质b，因此所有该时刻过期的元素一定都集中在队头，因此利用查询的时机删除队头所有过期的元素，在不含过期元素后，队头得元素就是查询的答案（性质a），将其返回即可。</p><p>由于每个元素都进队出队一次，因此摊销复杂度为O(n)。</p><p>这个讲的十分清楚，我只是<a href="https://blog.csdn.net/Baoli1008/article/details/47001513" target="_blank" rel="noopener">搬运</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;也就是有一个数列a，要求你求数列b和c，b[i]是a[i]…a[i+w-1]中的最小值，c[i]是最大值。如果a是1,3,-1,-3,5,3,6,7，则b为-1,-3,-3,-3,3,3，c为3,3,5,5,6,7。&lt;/p&gt;
+&lt;p&gt;这个问题相当于一个数据流（数列a）在不断地
+      
+    
+    </summary>
+    
+    
+      <category term="算法" scheme="http://xinhecuican.github.io/categories/%E7%AE%97%E6%B3%95/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>双端队列deque</title>
@@ -505,31 +530,6 @@
       
         &lt;p&gt;dd是用来定义双字型&lt;/p&gt;
 &lt;figure class=&quot;highlight haskell&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/
-      
-    
-    </summary>
-    
-    
-      <category term="汇编" scheme="http://xinhecuican.github.io/categories/%E6%B1%87%E7%BC%96/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>汇编语言数据位置的表达</title>
-    <link href="http://xinhecuican.github.io/2020/01/24/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E6%95%B0%E6%8D%AE%E4%BD%8D%E7%BD%AE%E7%9A%84%E8%A1%A8%E8%BE%BE/"/>
-    <id>http://xinhecuican.github.io/2020/01/24/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E6%95%B0%E6%8D%AE%E4%BD%8D%E7%BD%AE%E7%9A%84%E8%A1%A8%E8%BE%BE/</id>
-    <published>2020-01-24T02:08:00.000Z</published>
-    <updated>2020-01-24T02:34:56.319Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="立即数"><a href="#立即数" class="headerlink" title="立即数"></a>立即数</h3><p>其实就是idata，这种数据执行前在cpu的指令缓冲器中，在汇编指令中直接给出</p><h3 id="寄存器"><a href="#寄存器" class="headerlink" title="寄存器"></a>寄存器</h3><p>指令要处理的数据在寄存器中，在汇编指令中给出相应寄存器名</p><h3 id="段地址（SA）和偏移地址（EA"><a href="#段地址（SA）和偏移地址（EA" class="headerlink" title="段地址（SA）和偏移地址（EA)"></a>段地址（SA）和偏移地址（EA)</h3><p>这些数据在内存中，在汇编指令中可以用[x]的方式给出</p><h2 id="指令要处理数据有多长"><a href="#指令要处理数据有多长" class="headerlink" title="指令要处理数据有多长"></a>指令要处理数据有多长</h2><p>用寄存器的ax或al可以很方便的说明数据长度，但是如果是内存之间的传递可以用<br>x ptr 的方式确定是字型传递还是字节性传递</p><p>例： mov word ptr ds:[0],1</p><p>mov byte ptr ds:[0],1</p><p>另外，push操作无需指明，因为push只对字进行操作</p><h2 id="结构体的汇编表达"><a href="#结构体的汇编表达" class="headerlink" title="结构体的汇编表达"></a>结构体的汇编表达</h2><p>一般来说，我们可以用[bx+idata+si]的方式来表达结构体中的数据，用bx定位整个结构体，用idata定义某一个数据项，用si确定数据项中的一个元素</p><p>可以简写为 [bx].idata,[bx].idata[si]</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;立即数&quot;&gt;&lt;a href=&quot;#立即数&quot; class=&quot;headerlink&quot; title=&quot;立即数&quot;&gt;&lt;/a&gt;立即数&lt;/h3&gt;&lt;p&gt;其实就是idata，这种数据执行前在cpu的指令缓冲器中，在汇编指令中直接给出&lt;/p&gt;
-&lt;h3 id=&quot;寄存器&quot;&gt;&lt;a href=&quot;
       
     
     </summary>
