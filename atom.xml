@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://xinhecuican.github.io/"/>
-  <updated>2020-02-11T10:47:47.412Z</updated>
+  <updated>2020-02-16T03:40:55.492Z</updated>
   <id>http://xinhecuican.github.io/</id>
   
   <author>
@@ -15,6 +15,87 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>linux指令学习</title>
+    <link href="http://xinhecuican.github.io/2020/02/16/linux%E6%8C%87%E4%BB%A4%E5%AD%A6%E4%B9%A0/"/>
+    <id>http://xinhecuican.github.io/2020/02/16/linux%E6%8C%87%E4%BB%A4%E5%AD%A6%E4%B9%A0/</id>
+    <published>2020-02-16T02:20:00.000Z</published>
+    <updated>2020-02-16T03:40:55.492Z</updated>
+    
+    <content type="html"><![CDATA[<ul><li>who 用来显示用这个计算机的用户</li><li>id 用来显示你的基本信息</li><li>date 时间</li><li>su（substitute user） 这个指令是用来切换用户的，如果你知道一个用户的口令，那么就可以采用su+用户名的方式切换，这个时候用户标识改变了，但是你仍位于旧的环境之中。就像你让别人来你家做事，如果你想让别人在自己家做事，就要用su+’-‘+用户名</li></ul><p>特别的，如果你想拥有root权限，你需要 su - root ，这时你输入的是你自己的口令而不是root口令，因为在计算机中有特殊的配置文件，这个文件只有管理员能操作，他可以修改那些人可以通过su口令获得root权限</p><ul><li>exit 退出当前用户，例如想从root模式退出用exit</li><li>sudo 以超级用户模式运行一条指令。如果你经常使用超级用户，可能在无意间删去一些重要文件导致系统出现故障，因此超级用户需慎用。因此要用可以用sudo命令。</li><li>less 浏览配置文件。例如我想浏览passwd文件，只需 less /etc/passwd</li></ul><p>配置文件就像windows系统下的注册表和ini文件</p><ul><li>dmesg 显示启动信息，但是这种显示太快，看不清</li><li>dmesg | less 显示启动信息</li><li>init 设置运行级别，1为单用户，2为多用户，等等，0是关机，6是重启</li></ul><p>如果想重启，可以用 sudo init 6</p><ul><li>reboot 重启 sudo reboot</li><li>shutdown 关机，这个要说关机时间，经常用的是sudo shutdown now</li><li>erase 删除最好一个键入的字符，Ctrl+H</li><li>werase 删除最后一个单词 Ctrl+W</li><li>kill 删除一行 Ctrl+U</li><li>intr 停止程序 有些系统是Ctrl+C，有些是delete</li><li>quit 停止程序 Ctrl+\ 它不仅会停止程序，还会生成一个副本保存在core的文件中</li><li>stop 停止屏幕显示，Ctrl+S</li><li>start 开始屏幕显示 Ctrl+Q</li><li>eof 文件终止信号 Ctrl+D<br>可以通过Ctrl+D终止shell，但是有时候会不小心按到。为了让shell忽略eof，需要使用一个叫IGNOREEOF的环境变量，这个变量表示注销前BASH会忽略多少次eof，设置这个变量时，要 IGNOREEOF = 数字<ul><li>stty -a 显示键盘映射，这个命令是表示各个快捷方式如erase的快捷键。stty是set terminal(设置终端）-a表示显示所有设置</li><li>stty 修改键映射。例如想修改kill命令 ，可以 stty kill Ctrl a</li><li>echo 简单显示赋予它的内容</li><li>返回字符 ^M，指的是返回到这一行的开头</li><li>换行字符 ^J<br>文件每一行最后一定是一个返回加换行</li><li>stty sane，reset 候终端的设置被弄乱，可以采用这个命令是终端恢复到初始值</li></ul></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;ul&gt;
+&lt;li&gt;who 用来显示用这个计算机的用户&lt;/li&gt;
+&lt;li&gt;id 用来显示你的基本信息&lt;/li&gt;
+&lt;li&gt;date 时间&lt;/li&gt;
+&lt;li&gt;su（substitute user） 这个指令是用来切换用户的，如果你知道一个用户的口令，那么就可以采用su+用户名的方式切换
+      
+    
+    </summary>
+    
+    
+      <category term="Linux" scheme="http://xinhecuican.github.io/categories/Linux/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>开始使用unix</title>
+    <link href="http://xinhecuican.github.io/2020/02/13/%E5%BC%80%E5%A7%8B%E4%BD%BF%E7%94%A8unix/"/>
+    <id>http://xinhecuican.github.io/2020/02/13/%E5%BC%80%E5%A7%8B%E4%BD%BF%E7%94%A8unix/</id>
+    <published>2020-02-13T11:10:00.000Z</published>
+    <updated>2020-02-16T02:19:49.105Z</updated>
+    
+    <content type="html"><![CDATA[<p>当你使用Unix系统的时候，第一件要你做的事便是输入用户标识和口令（账号密码），注意，在Unix中，密码是完全不可见的，甚至连*号都不会出现。</p><p>登陆之后出现的欢迎界面，这一部分源于一个特殊的初始化文档，这就意味着你可以对文档内容进行修改从而定制化你的初始化界面。</p><p>一旦初始化命令结束执行，Unix将启动shell，并将控制权交给他。这时shell会出现一个提示-称为shell提示，并等待命令。接下来就可以输入各种命令了。</p><p>最终，没有命令时，你可以通过注销结束工作会话，此时shell将停止运行。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;当你使用Unix系统的时候，第一件要你做的事便是输入用户标识和口令（账号密码），注意，在Unix中，密码是完全不可见的，甚至连*号都不会出现。&lt;/p&gt;
+&lt;p&gt;登陆之后出现的欢迎界面，这一部分源于一个特殊的初始化文档，这就意味着你可以对文档内容进行修改从而定制化你的初始化界面
+      
+    
+    </summary>
+    
+    
+      <category term="Linux" scheme="http://xinhecuican.github.io/categories/Linux/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>unix基础</title>
+    <link href="http://xinhecuican.github.io/2020/02/13/unix%E5%9F%BA%E7%A1%80/"/>
+    <id>http://xinhecuican.github.io/2020/02/13/unix%E5%9F%BA%E7%A1%80/</id>
+    <published>2020-02-13T03:25:00.000Z</published>
+    <updated>2020-02-13T11:10:21.676Z</updated>
+    
+    <content type="html"><![CDATA[<ol><li>操作系统有初始化功能，初始化过程只是引导过程的一部分</li></ol><p>引导过程是计算机启动时会运行一个小程序，然后再运行另一个程序，逐层运行，最后运行一个十分复杂的程序，这个程序名字是内核。</p><p>内核是操作系统的核心，因此只要计算机开启，内核边一直运行。</p><p>内核可以分为微内核和单内核两种。单内核较大，运行速度较快，但是由于没有采用模块化设计，维护修改比较困难。而微内核自己只能运行最基本的功能，其他功能要交给服务器去运行（微内核调用的其他程序），微内核速度慢，但适用于定制化的任务，如移动电话。</p><h3 id="unix-内核-使用工具"><a href="#unix-内核-使用工具" class="headerlink" title="unix=内核+使用工具"></a>unix=内核+使用工具</h3><p>只有内核并不能带来很好的用户体验，因此还有许多其他的程序。最重要的是为用户提供计算机界面的程序，shell 和 GUI。</p><p>shell 是一种提供基于文本的界面的程序，也就是平时所说的命令提示符。</p><p>而 GUI（graphical user interface）是使用窗口，鼠标指针，图标等提供图形界面.</p><p>这些工具称为Unix实用工具，有几百个。</p><h3 id="服务器和客户端"><a href="#服务器和客户端" class="headerlink" title="服务器和客户端"></a>服务器和客户端</h3><p>早期由于主机昂贵而终端便宜，所以经常是多个主机连接一个终端。因此服务器和客户端的概念也因此产生。</p><p>提供某种类型的服务的程序叫做服务器，使用服务的程序叫做客户端。例如，但你用键盘键入字符时，是主机而不是终端把字符显示出来，终端只是向主机发出了一个输出字符的请求，然后主机进行解析然后把字符输出</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;ol&gt;
+&lt;li&gt;操作系统有初始化功能，初始化过程只是引导过程的一部分&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;引导过程是计算机启动时会运行一个小程序，然后再运行另一个程序，逐层运行，最后运行一个十分复杂的程序，这个程序名字是内核。&lt;/p&gt;
+&lt;p&gt;内核是操作系统的核心，因此只要计算机开启，内
+      
+    
+    </summary>
+    
+    
+      <category term="Linux" scheme="http://xinhecuican.github.io/categories/Linux/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>单调队列</title>
@@ -451,85 +532,6 @@
       
       
         &lt;h3 id=&quot;根据位移进行的转移&quot;&gt;&lt;a href=&quot;#根据位移进行的转移&quot; class=&quot;headerlink&quot; title=&quot;根据位移进行的转移&quot;&gt;&lt;/a&gt;根据位移进行的转移&lt;/h3&gt;&lt;p&gt;用jmp进行跳转时，会发现一个奇怪的问题，无论它要跳转到哪里，它的机器码始终不变，为
-      
-    
-    </summary>
-    
-    
-      <category term="汇编" scheme="http://xinhecuican.github.io/categories/%E6%B1%87%E7%BC%96/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>操作符offset</title>
-    <link href="http://xinhecuican.github.io/2020/01/26/%E6%93%8D%E4%BD%9C%E7%AC%A6offset/"/>
-    <id>http://xinhecuican.github.io/2020/01/26/%E6%93%8D%E4%BD%9C%E7%AC%A6offset/</id>
-    <published>2020-01-26T01:15:00.000Z</published>
-    <updated>2020-01-26T01:50:28.925Z</updated>
-    
-    <content type="html"><![CDATA[<p>offset是由编译器处理的符号，它的功能是获得标号的偏移地址</p><p>例</p><figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">code <span class="meta">segment</span></span><br><span class="line"><span class="symbol">start:</span> <span class="keyword">mov</span> <span class="built_in">ax</span>,offset start//相当于<span class="keyword">mov</span> <span class="built_in">ax</span>，<span class="number">0</span></span><br><span class="line"><span class="symbol">   s:</span> <span class="keyword">mov</span> <span class="built_in">ax</span>,offset s//相当于<span class="keyword">mov</span> <span class="built_in">ax</span>，<span class="number">3</span></span><br><span class="line">code ends</span><br></pre></td></tr></table></figure><p>上面的程序中offset获得了start和s的偏移地址0和3</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;offset是由编译器处理的符号，它的功能是获得标号的偏移地址&lt;/p&gt;
-&lt;p&gt;例&lt;/p&gt;
-&lt;figure class=&quot;highlight x86asm&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/sp
-      
-    
-    </summary>
-    
-    
-      <category term="汇编" scheme="http://xinhecuican.github.io/categories/%E6%B1%87%E7%BC%96/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>dup</title>
-    <link href="http://xinhecuican.github.io/2020/01/24/dup/"/>
-    <id>http://xinhecuican.github.io/2020/01/24/dup/</id>
-    <published>2020-01-24T02:51:00.000Z</published>
-    <updated>2020-01-24T02:54:30.430Z</updated>
-    
-    <content type="html"><![CDATA[<p>dup用来处理重复数据</p><p>例：db 3 dup (0) 这个意思是定义了三个0的字节型数据</p><p>db 3 dup （0,1,2) 定义了九个数据</p><p>db 3 dup (‘abc’,’ABC’)定义18个数据</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;dup用来处理重复数据&lt;/p&gt;
-&lt;p&gt;例：db 3 dup (0) 这个意思是定义了三个0的字节型数据&lt;/p&gt;
-&lt;p&gt;db 3 dup （0,1,2) 定义了九个数据&lt;/p&gt;
-&lt;p&gt;db 3 dup (‘abc’,’ABC’)定义18个数据&lt;/p&gt;
-
-      
-    
-    </summary>
-    
-    
-      <category term="汇编" scheme="http://xinhecuican.github.io/categories/%E6%B1%87%E7%BC%96/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>dd</title>
-    <link href="http://xinhecuican.github.io/2020/01/24/dd/"/>
-    <id>http://xinhecuican.github.io/2020/01/24/dd/</id>
-    <published>2020-01-24T02:48:00.000Z</published>
-    <updated>2020-01-24T02:51:23.831Z</updated>
-    
-    <content type="html"><![CDATA[<p>dd是用来定义双字型</p><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">data</span> segment</span></span><br><span class="line">    dd <span class="number">1</span></span><br><span class="line"><span class="class"><span class="keyword">data</span> ends</span></span><br></pre></td></tr></table></figure><p>要注意dd要占两个字，db一个字节，dw一个字</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;dd是用来定义双字型&lt;/p&gt;
-&lt;figure class=&quot;highlight haskell&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/
       
     
     </summary>
