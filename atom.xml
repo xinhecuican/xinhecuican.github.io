@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://xinhecuican.github.io/"/>
-  <updated>2020-02-16T03:40:55.492Z</updated>
+  <updated>2020-02-17T08:51:30.974Z</updated>
   <id>http://xinhecuican.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>顺序表</title>
+    <link href="http://xinhecuican.github.io/2020/02/17/%E9%A1%BA%E5%BA%8F%E8%A1%A8/"/>
+    <id>http://xinhecuican.github.io/2020/02/17/%E9%A1%BA%E5%BA%8F%E8%A1%A8/</id>
+    <published>2020-02-17T08:20:00.000Z</published>
+    <updated>2020-02-17T08:51:30.974Z</updated>
+    
+    <content type="html"><![CDATA[<p>顺序表就是将元素放入一个连续的内存空间里，它的优点是可以快速访问，缺点是插入和删除操作时间复杂度高</p><h3 id="建立"><a href="#建立" class="headerlink" title="建立"></a>建立</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> datasize 100</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span>* p;<span class="comment">//存储空间的基址</span></span><br><span class="line">    <span class="keyword">int</span> length;<span class="comment">//现在有的元素数量</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><h3 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">(node&amp; a)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    a.p=<span class="keyword">new</span> <span class="keyword">int</span>[datasize];</span><br><span class="line">    <span class="keyword">if</span>(a.p==<span class="literal">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"储存分配失败"</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="keyword">delete</span> [] a.p;</span><br><span class="line">    &#125;</span><br><span class="line">    a.length=<span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>初始化有两点要注意的地方，第一点是用了传引用，第二点是动态分配内存，这就表示如果使用完了要delete</p><h3 id="查找"><a href="#查找" class="headerlink" title="查找"></a>查找</h3><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">int <span class="built_in">find</span>(node&amp; a,int x)</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">for</span>(int <span class="built_in">i</span>=<span class="number">0</span>;<span class="built_in">i</span>&lt;a.<span class="built_in">length</span>;<span class="built_in">i</span>++)</span><br><span class="line">   &#123;</span><br><span class="line">   <span class="keyword">if</span>(a.p[<span class="built_in">i</span>]==x)</span><br><span class="line">      &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="built_in">i</span>;</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="插入"><a href="#插入" class="headerlink" title="插入"></a>插入</h3><p>插入操作是把一个数插入第i位，其他位顺序后移</p><p>如果插入某一位概率相同，那么在第0位插入需要移动n个数，第一位插入需要移动n-1个数……在第n位插入需要移动0个数，总共有n-1中可能，总共需要移动的次数为n(n+1)/2,所以平均需要移动次数为n/2</p><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">int insert(node&amp; a,int x,int <span class="built_in">i</span>)</span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">if</span>(<span class="built_in">i</span>&lt;<span class="number">0</span>||<span class="built_in">i</span>&gt;a.<span class="built_in">length</span>||a.<span class="built_in">length</span>==datasize)</span><br><span class="line">    &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(int <span class="built_in">j</span>=a.<span class="built_in">length</span>;<span class="built_in">j</span>&gt;<span class="built_in">i</span>;<span class="built_in">j</span>--)</span><br><span class="line">    &#123;</span><br><span class="line">        a[<span class="built_in">j</span>]=a[<span class="built_in">j</span><span class="number">-1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    a[<span class="built_in">i</span>]=x;</span><br><span class="line">    a.<span class="built_in">length</span>++;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h3><p>与上面操作类似，这里需要前移，并且平均操作次数为(n-1)/2</p><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">int</span> Delete(node&amp; a,<span class="built_in">int</span> i)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(i&lt;<span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="built_in">int</span> k=i;k&lt;a.length<span class="number">-1</span>;k++)</span><br><span class="line">        &#123;</span><br><span class="line">            a.p[k]=a.p[k+<span class="number">1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        a.length--;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;顺序表就是将元素放入一个连续的内存空间里，它的优点是可以快速访问，缺点是插入和删除操作时间复杂度高&lt;/p&gt;
+&lt;h3 id=&quot;建立&quot;&gt;&lt;a href=&quot;#建立&quot; class=&quot;headerlink&quot; title=&quot;建立&quot;&gt;&lt;/a&gt;建立&lt;/h3&gt;&lt;figure class=&quot;h
+      
+    
+    </summary>
+    
+    
+      <category term="数据结构" scheme="http://xinhecuican.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>linux指令学习</title>
@@ -508,30 +533,6 @@
 &lt;p&gt;过程：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;p&gt;ip=ss*16+s
-      
-    
-    </summary>
-    
-    
-      <category term="汇编" scheme="http://xinhecuican.github.io/categories/%E6%B1%87%E7%BC%96/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>jmp进行跳转</title>
-    <link href="http://xinhecuican.github.io/2020/01/26/jmp%E8%BF%9B%E8%A1%8C%E8%B7%B3%E8%BD%AC/"/>
-    <id>http://xinhecuican.github.io/2020/01/26/jmp%E8%BF%9B%E8%A1%8C%E8%B7%B3%E8%BD%AC/</id>
-    <published>2020-01-26T01:52:00.000Z</published>
-    <updated>2020-01-26T05:56:20.591Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="根据位移进行的转移"><a href="#根据位移进行的转移" class="headerlink" title="根据位移进行的转移"></a>根据位移进行的转移</h3><p>用jmp进行跳转时，会发现一个奇怪的问题，无论它要跳转到哪里，它的机器码始终不变，为EB03，那么它到底是怎么告诉cpu修改ip地址的呢？</p><p>先回忆一下cpu读取指令的过程</p><ol><li>cs=076a ip=0006，cs：ip指向eb03</li><li>读取指令码eb03到指令缓冲器</li><li>ip=ip+指令长度=0008h，cs：ip指向下一条指令</li><li>cpu执行指令缓冲器中的指令eb03</li><li>执行完缓冲器中的指令后，ip被修改+</li></ol><p>jmp指令并不需要转移的目的地址，但是它是凭借什么转移的呢？这里有个03，正好跳过三个字节之后就是要转移的地址。原来jmp指令只需知道当前指令的下一个指令（因为执行完这条指令后ip会增加）与要跳转的指令的位移就可以了</p><p>jmp short 标号 功能是 ip=ip+8位位移（一字节）</p><p>jmp near ptr 标号 是16位</p><p>jmp far ptr 标号 是段间转移，可以修改cs</p><p>还可以直接 jmp 寄存器1：寄存器2</p><h3 id="根据内存进行的转移"><a href="#根据内存进行的转移" class="headerlink" title="根据内存进行的转移"></a>根据内存进行的转移</h3><p>转移地址再内存中的转移有两种格式</p><ol><li>jmp word  ptr（段内转移）</li></ol><p>例 jmp word ptr ds：[0]</p><p>jmp word ptr [bx]</p><p>2.jmp dword ptr (段间转移）后面接两个字，第一个是偏移地址，第二个是段地址</p><p>例 jmp dword ptr ds：[0],0 完成后段地址为0</p><p>注意</p><figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">assume</span> <span class="built_in">cs</span>:code</span><br><span class="line"></span><br><span class="line">code <span class="meta">segment</span></span><br><span class="line">    <span class="keyword">mov</span> <span class="built_in">ax</span>,<span class="number">4c00h</span></span><br><span class="line">    <span class="keyword">int</span> <span class="number">21h</span></span><br><span class="line"><span class="symbol">start:</span></span><br><span class="line">       <span class="keyword">mov</span> <span class="built_in">ax</span>,<span class="number">0</span></span><br><span class="line"><span class="symbol">    s:</span> <span class="keyword">nop</span></span><br><span class="line">       <span class="keyword">nop</span></span><br><span class="line"></span><br><span class="line">       <span class="keyword">mov</span> <span class="built_in">di</span>,offset s</span><br><span class="line">       <span class="keyword">mov</span> <span class="built_in">si</span>,offset s2</span><br><span class="line">       <span class="keyword">mov</span> <span class="built_in">ax</span>,<span class="built_in">cs</span>:[<span class="built_in">si</span>]</span><br><span class="line">       <span class="keyword">mov</span> <span class="built_in">cs</span>:[<span class="built_in">di</span>],<span class="built_in">ax</span></span><br><span class="line"><span class="symbol">   s0:</span> <span class="keyword">jmp</span> short s</span><br><span class="line"><span class="symbol">   s1:</span> <span class="keyword">mov</span> <span class="built_in">ax</span>,<span class="number">0</span></span><br><span class="line">       <span class="keyword">int</span> <span class="number">21h</span></span><br><span class="line">       <span class="keyword">mov</span> <span class="built_in">ax</span>,<span class="number">0</span></span><br><span class="line"><span class="symbol">   s2:</span> <span class="keyword">jmp</span> short s1</span><br><span class="line">       <span class="keyword">nop</span></span><br><span class="line">code ends</span><br><span class="line">end start</span><br></pre></td></tr></table></figure><p>这个程序奇怪之处在于运行到mov cs：[di],ax后 s处会变为jmp 0000，这里就要记住jmp传递的是偏移地址，也就是说，jmp short s1这个指令并不是真的跳到s1处，而是往前跳8个字节</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;根据位移进行的转移&quot;&gt;&lt;a href=&quot;#根据位移进行的转移&quot; class=&quot;headerlink&quot; title=&quot;根据位移进行的转移&quot;&gt;&lt;/a&gt;根据位移进行的转移&lt;/h3&gt;&lt;p&gt;用jmp进行跳转时，会发现一个奇怪的问题，无论它要跳转到哪里，它的机器码始终不变，为
       
     
     </summary>
