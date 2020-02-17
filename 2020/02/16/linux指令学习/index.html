@@ -85,14 +85,14 @@
 
 
 
-<meta name="description" content="who 用来显示用这个计算机的用户 id 用来显示你的基本信息 date 时间 su（substitute user） 这个指令是用来切换用户的，如果你知道一个用户的口令，那么就可以采用su+用户名的方式切换，这个时候用户标识改变了，但是你仍位于旧的环境之中。就像你让别人来你家做事，如果你想让别人在自己家做事，就要用su+’-‘+用户名  特别的，如果你想拥有root权限，你需要 su - ro">
+<meta name="description" content="用户提醒命令 who 用来显示用这个计算机的用户 whoami 用来显示当前用户标识 quota 用来看自己拥有多少空间 lock 临时上锁 lock -5 锁5分钟 leave leave +15 十五分钟后离开 leave 1344 13点44分离开，到了时间它会不停的提醒你，相当于一个闹钟 id 用来显示你的基本信息 date 时间 date -u 协调世界时间（UTC时间） cal 显示日">
 <meta property="og:type" content="article">
 <meta property="og:title" content="linux指令学习">
 <meta property="og:url" content="http://xinhecuican.github.io/2020/02/16/linux%E6%8C%87%E4%BB%A4%E5%AD%A6%E4%B9%A0/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="who 用来显示用这个计算机的用户 id 用来显示你的基本信息 date 时间 su（substitute user） 这个指令是用来切换用户的，如果你知道一个用户的口令，那么就可以采用su+用户名的方式切换，这个时候用户标识改变了，但是你仍位于旧的环境之中。就像你让别人来你家做事，如果你想让别人在自己家做事，就要用su+’-‘+用户名  特别的，如果你想拥有root权限，你需要 su - ro">
+<meta property="og:description" content="用户提醒命令 who 用来显示用这个计算机的用户 whoami 用来显示当前用户标识 quota 用来看自己拥有多少空间 lock 临时上锁 lock -5 锁5分钟 leave leave +15 十五分钟后离开 leave 1344 13点44分离开，到了时间它会不停的提醒你，相当于一个闹钟 id 用来显示你的基本信息 date 时间 date -u 协调世界时间（UTC时间） cal 显示日">
 <meta property="article:published_time" content="2020-02-16T02:20:00.000Z">
-<meta property="article:modified_time" content="2020-02-16T03:40:55.492Z">
+<meta property="article:modified_time" content="2020-02-17T10:47:22.315Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 
@@ -391,14 +391,19 @@
       
 
       
-        <ul>
+        <h5 id="用户提醒命令"><a href="#用户提醒命令" class="headerlink" title="用户提醒命令"></a>用户提醒命令</h5><ul>
 <li>who 用来显示用这个计算机的用户</li>
+<li>whoami 用来显示当前用户标识</li>
+<li>quota 用来看自己拥有多少空间</li>
+<li>lock 临时上锁 lock -5 锁5分钟</li>
+<li>leave leave +15 十五分钟后离开 leave 1344 13点44分离开，到了时间它会不停的提醒你，相当于一个闹钟</li>
 <li>id 用来显示你的基本信息</li>
-<li>date 时间</li>
+<li>date 时间 date -u 协调世界时间（UTC时间）</li>
+<li>cal 显示日历 cal+某一年份可以显示某一年份的日历 cal 7 2019 显示2019年7月的日历 cal -j +… 会显示第几天，所以想要知道这一年是不是闰年只需 cal -j 12 + 年份，看看12月最后一天是不是366天就可以了</li>
 <li>su（substitute user） 这个指令是用来切换用户的，如果你知道一个用户的口令，那么就可以采用su+用户名的方式切换，这个时候用户标识改变了，但是你仍位于旧的环境之中。就像你让别人来你家做事，如果你想让别人在自己家做事，就要用su+’-‘+用户名</li>
 </ul>
 <p>特别的，如果你想拥有root权限，你需要 su - root ，这时你输入的是你自己的口令而不是root口令，因为在计算机中有特殊的配置文件，这个文件只有管理员能操作，他可以修改那些人可以通过su口令获得root权限</p>
-<ul>
+<h5 id="登入登出命令"><a href="#登入登出命令" class="headerlink" title="登入登出命令"></a>登入登出命令</h5><ul>
 <li>exit 退出当前用户，例如想从root模式退出用exit</li>
 <li>sudo 以超级用户模式运行一条指令。如果你经常使用超级用户，可能在无意间删去一些重要文件导致系统出现故障，因此超级用户需慎用。因此要用可以用sudo命令。</li>
 <li>less 浏览配置文件。例如我想浏览passwd文件，只需 less /etc/passwd</li>
@@ -413,6 +418,8 @@
 <ul>
 <li>reboot 重启 sudo reboot</li>
 <li>shutdown 关机，这个要说关机时间，经常用的是sudo shutdown now</li>
+</ul>
+<h5 id="快捷键命令"><a href="#快捷键命令" class="headerlink" title="快捷键命令"></a>快捷键命令</h5><ul>
 <li>erase 删除最好一个键入的字符，Ctrl+H</li>
 <li>werase 删除最后一个单词 Ctrl+W</li>
 <li>kill 删除一行 Ctrl+U</li>
@@ -420,7 +427,7 @@
 <li>quit 停止程序 Ctrl+\ 它不仅会停止程序，还会生成一个副本保存在core的文件中</li>
 <li>stop 停止屏幕显示，Ctrl+S</li>
 <li>start 开始屏幕显示 Ctrl+Q</li>
-<li>eof 文件终止信号 Ctrl+D<br>可以通过Ctrl+D终止shell，但是有时候会不小心按到。为了让shell忽略eof，需要使用一个叫IGNOREEOF的环境变量，这个变量表示注销前BASH会忽略多少次eof，设置这个变量时，要 IGNOREEOF = 数字<ul>
+<li>eof 文件终止信号 Ctrl+D<br>可以通过Ctrl+D终止shell，但是有时候会不小心按到。为了让shell忽略eof，需要使用一个叫IGNOREEOF的环境变量，这个变量表示注销前BASH会忽略多少次eof，设置这个变量时，要 IGNOREEOF = 数字</li>
 <li>stty -a 显示键盘映射，这个命令是表示各个快捷方式如erase的快捷键。stty是set terminal(设置终端）-a表示显示所有设置</li>
 <li>stty 修改键映射。例如想修改kill命令 ，可以 stty kill Ctrl a</li>
 <li>echo 简单显示赋予它的内容</li>
@@ -428,8 +435,16 @@
 <li>换行字符 ^J<br>文件每一行最后一定是一个返回加换行</li>
 <li>stty sane，reset 候终端的设置被弄乱，可以采用这个命令是终端恢复到初始值</li>
 </ul>
-</li>
+<h5 id="立即使用的程序"><a href="#立即使用的程序" class="headerlink" title="立即使用的程序"></a>立即使用的程序</h5><ul>
+<li>which 看某个命令会使用那些程序，如果显示地址，则说明有这些程序，如果没有输出，或者输出错误信息，则说明这个命令无法使用</li>
+<li>quit 终止程序命令，但是也可以输入eof使程序终止</li>
+<li>bc 计算器 如果想用bc内部的函数，要用bc -l命令（library)。如果是多个算式，中间要用”;”号隔开</li>
 </ul>
+<p>常用函数</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">s</span><span class="params">(x)</span></span> sinx  弧度制</span><br><span class="line"><span class="function"><span class="title">c</span><span class="params">(x)</span></span> cosx</span><br><span class="line"><span class="function"><span class="title">a</span><span class="params">(x)</span></span> arctanx</span><br><span class="line"><span class="function"><span class="title">ln</span><span class="params">(x)</span></span></span><br><span class="line"><span class="function"><span class="title">j</span><span class="params">(n,x)</span></span>  x的n次整阶贝塞尔函数</span><br></pre></td></tr></table></figure>
+<p>如果想用小数运算，先要设置标度因子 scale 来确定精确到小数点后多少位。如果输入scale 则会返回scale的当前值 scale=3，则设置小数点后三位</p>
+<p>有一点需要注意，当你用来 bc -l时，scale会自动设置为20</p>
+<p>bc实际上是一套功能完整的数学编程语言，可以使用的变量有26个字母<br>例如 x=100 就是将x变量设为100</p>
 
       
     </div>
@@ -526,8 +541,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -594,6 +618,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#用户提醒命令"><span class="nav-number">1.</span> <span class="nav-text">用户提醒命令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#登入登出命令"><span class="nav-number">2.</span> <span class="nav-text">登入登出命令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#快捷键命令"><span class="nav-number">3.</span> <span class="nav-text">快捷键命令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#立即使用的程序"><span class="nav-number">4.</span> <span class="nav-text">立即使用的程序</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
