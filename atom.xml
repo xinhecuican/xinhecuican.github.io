@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://xinhecuican.github.io/"/>
-  <updated>2020-02-17T08:51:30.974Z</updated>
+  <updated>2020-02-22T06:29:45.858Z</updated>
   <id>http://xinhecuican.github.io/</id>
   
   <author>
@@ -15,6 +15,58 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>c++输出16进制，10进制和2进制</title>
+    <link href="http://xinhecuican.github.io/2020/02/22/c-%E8%BE%93%E5%87%BA16%E8%BF%9B%E5%88%B6%EF%BC%8C10%E8%BF%9B%E5%88%B6%E5%92%8C2%E8%BF%9B%E5%88%B6/"/>
+    <id>http://xinhecuican.github.io/2020/02/22/c-%E8%BE%93%E5%87%BA16%E8%BF%9B%E5%88%B6%EF%BC%8C10%E8%BF%9B%E5%88%B6%E5%92%8C2%E8%BF%9B%E5%88%B6/</id>
+    <published>2020-02-22T06:17:00.000Z</published>
+    <updated>2020-02-22T06:29:45.858Z</updated>
+    
+    <content type="html"><![CDATA[<p>hex是输出16进制，例如<br><code>cout&lt;&lt;hex&lt;&lt;18&lt;&lt;endl;</code></p><p>dec十进制</p><p>另外这两种用了之后后面输出一直是这种进制，如果用了hex之后想要用十进制要写dec</p><p>二进制bitset</p><p>bitset有头文件 <code>&lt;bitset&gt;</code></p><p>  使用方法 bitset&lt;8&gt;(数字），其中8的含义是要输处几位二进制数，所以如果用int型是32，如果想把字符型转换就直接写8</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;hex是输出16进制，例如&lt;br&gt;&lt;code&gt;cout&amp;lt;&amp;lt;hex&amp;lt;&amp;lt;18&amp;lt;&amp;lt;endl;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;dec十进制&lt;/p&gt;
+&lt;p&gt;另外这两种用了之后后面输出一直是这种进制，如果用了hex之后想要用十进制要写dec&lt;/p&gt;
+&lt;
+      
+    
+    </summary>
+    
+    
+      <category term="基础" scheme="http://xinhecuican.github.io/categories/%E5%9F%BA%E7%A1%80/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>元字符的使用</title>
+    <link href="http://xinhecuican.github.io/2020/02/22/%E4%BA%91%E5%AD%97%E7%AC%A6%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
+    <id>http://xinhecuican.github.io/2020/02/22/%E4%BA%91%E5%AD%97%E7%AC%A6%E7%9A%84%E4%BD%BF%E7%94%A8/</id>
+    <published>2020-02-22T00:39:00.000Z</published>
+    <updated>2020-02-22T01:07:20.277Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="元字符"><a href="#元字符" class="headerlink" title="元字符"></a>元字符</h3><p>元字符指的是Linux中有特殊含义的字符，例如 ； 换行符等。</p><h3 id="字符引用和转义"><a href="#字符引用和转义" class="headerlink" title="字符引用和转义"></a>字符引用和转义</h3><p>如果不想用元字符内在含义，只想打出这个字符，那么就需要用到引用字符。</p><p>字符引用的方法有三种，使用反斜线，使用一对单引号或者使用一对双引号</p><p>例如 echo a ; b 这样就会把他们当成不同的指令，但是如果 echo a; b,这样就会当成同一个指令，实际上\是转义字符，转义字符指的是把一个字符从一中状态转移到另一种状态</p><p>单引号会将一切字符引用，这样有时例如我需要引用其中一个变量的值的时候就会出现问题</p><p>这时我们就可以用到双引号，双引号不会引用 $ , \ , `(反引号），</p><p>引用能力强弱 ，&gt;‘’&gt;””</p><p>如果输入换行字符，单引号并不会转义它，但是\会转义它</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;元字符&quot;&gt;&lt;a href=&quot;#元字符&quot; class=&quot;headerlink&quot; title=&quot;元字符&quot;&gt;&lt;/a&gt;元字符&lt;/h3&gt;&lt;p&gt;元字符指的是Linux中有特殊含义的字符，例如 ； 换行符等。&lt;/p&gt;
+&lt;h3 id=&quot;字符引用和转义&quot;&gt;&lt;a href=&quot;#字符引
+      
+    
+    </summary>
+    
+    
+      <category term="Linux" scheme="http://xinhecuican.github.io/categories/Linux/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>顺序表</title>
@@ -46,9 +98,9 @@
     <link href="http://xinhecuican.github.io/2020/02/16/linux%E6%8C%87%E4%BB%A4%E5%AD%A6%E4%B9%A0/"/>
     <id>http://xinhecuican.github.io/2020/02/16/linux%E6%8C%87%E4%BB%A4%E5%AD%A6%E4%B9%A0/</id>
     <published>2020-02-16T02:20:00.000Z</published>
-    <updated>2020-02-21T09:14:57.735Z</updated>
+    <updated>2020-02-22T03:51:22.500Z</updated>
     
-    <content type="html"><![CDATA[<h5 id="命令语法"><a href="#命令语法" class="headerlink" title="命令语法"></a>命令语法</h5><p>一次输入多条命令，可以在命令之间用 <code>;</code>分割开来</p><p>语法： 命令名称 选项 参数</p><p><strong>选项</strong>有时被称为开关（switches）或标志（flags），选项通常是由一个连字符后面接着一些字母，或者两个连字符后接着一个单词构成。例如 –help，–version（显示版本信息）</p><p>使用多个单字符选项时，可以把他们连接在一起，用一个连字符来表示。例如 ls -lF<br>。注意，unix的选项区分大小写</p><p>实际上许多长参数有着对应的短参数，但是长参数是一个完整的单词，为了便于记忆，有时也是用长参数，这时就要用两个连字符</p><p>输入命令时，必须要把每个选项和参数用空格分隔开</p><p>有些命令有默认值，有些命令没有默认值，例如 ls 如果只输入ls的话他会返回当前工作目录下所有文件</p><p>手册中提示的语法</p><ol><li>方括号中的项是可选的</li><li>不再方括号中的项是必选项</li><li>黑体字必须原样输入</li><li>斜体字可以用适当的值代替</li><li>有省略号代表可以重复多次</li><li>如果一个单独的选项和参数组合在一起，这二者必须同时出现</li><li>由竖线（|）字符分开的两个或者多个项，宝石可以从这个列表中选择任意一项</li></ol><h5 id="用户提醒命令"><a href="#用户提醒命令" class="headerlink" title="用户提醒命令"></a>用户提醒命令</h5><ul><li>who 用来显示用这个计算机的用户</li><li>whoami 用来显示当前用户标识</li><li>quota 用来看自己拥有多少空间</li><li>lock 临时上锁 lock -5 锁5分钟</li><li>leave leave +15 十五分钟后离开 leave 1344 13点44分离开，到了时间它会不停的提醒你，相当于一个闹钟</li><li>id 用来显示你的基本信息</li><li>date 时间 date -u 协调世界时间（UTC时间）</li><li>cal 显示日历 cal+某一年份可以显示某一年份的日历 cal 7 2019 显示2019年7月的日历 cal -j +… 会显示第几天，所以想要知道这一年是不是闰年只需 cal -j 12 + 年份，看看12月最后一天是不是366天就可以了</li><li>su（substitute user） 这个指令是用来切换用户的，如果你知道一个用户的口令，那么就可以采用su+用户名的方式切换，这个时候用户标识改变了，但是你仍位于旧的环境之中。就像你让别人来你家做事，如果你想让别人在自己家做事，就要用su+’-‘+用户名</li></ul><p>特别的，如果你想拥有root权限，你需要 su - root ，这时你输入的是你自己的口令而不是root口令，因为在计算机中有特殊的配置文件，这个文件只有管理员能操作，他可以修改那些人可以通过su口令获得root权限</p><ul><li>man 联机文档帮助 当你查看联机文档时，可以用/符加上你想搜索的内容进行搜索，用n来显示下一个，用N来显示上一个。？符是向下搜索。<br>如果想在查看man文档时执行指令，只需输入！在输入命令，之后按enter键又能回到man文档中</li><li>foo bar 可以指代任意标识<br>man文档显示的内容</li></ul><ol><li>命令</li><li>系统调用</li><li>库函数</li><li>特殊文件</li><li>文件格式</li><li>游戏</li><li>杂项</li><li>系统管理</li></ol><ul><li><p>whatis 显示说明书页的第一行（名字和用途）例如 whatis time date，这样同时显示两条指令的信息。这种指令可以用 man -f 替换</p></li><li><p>apropos 搜索命令 他将显示所有带有该字符的命令。这种命令可以用man -k代替</p></li><li><p>info 另一种搜索命令，这种命令的特点是它有到其他命令的连接，就好像网页一样。这时一种树形结构，n跳转到下一个节点，p跳转到上一个节点，t跳转到当前文件的顶节点</p><h5 id="登入登出命令"><a href="#登入登出命令" class="headerlink" title="登入登出命令"></a>登入登出命令</h5></li><li><p>exit 退出当前用户，例如想从root模式退出用exit</p></li><li><p>sudo 以超级用户模式运行一条指令。如果你经常使用超级用户，可能在无意间删去一些重要文件导致系统出现故障，因此超级用户需慎用。因此要用可以用sudo命令。</p></li><li><p>less 浏览配置文件。例如我想浏览passwd文件，只需 less /etc/passwd</p></li></ul><p>配置文件就像windows系统下的注册表和ini文件</p><ul><li>dmesg 显示启动信息，但是这种显示太快，看不清</li><li>dmesg | less 显示启动信息</li><li>init 设置运行级别，1为单用户，2为多用户，等等，0是关机，6是重启</li></ul><p>如果想重启，可以用 sudo init 6</p><ul><li>reboot 重启 sudo reboot</li><li>shutdown 关机，这个要说关机时间，经常用的是sudo shutdown now</li></ul><h5 id="快捷键命令"><a href="#快捷键命令" class="headerlink" title="快捷键命令"></a>快捷键命令</h5><ul><li>erase 删除最好一个键入的字符，Ctrl+H</li><li>werase 删除最后一个单词 Ctrl+W</li><li>kill 删除一行 Ctrl+U</li><li>intr 停止程序 有些系统是Ctrl+C，有些是delete</li><li>quit 停止程序 Ctrl+\ 它不仅会停止程序，还会生成一个副本保存在core的文件中</li><li>stop 停止屏幕显示，Ctrl+S</li><li>start 开始屏幕显示 Ctrl+Q</li><li>eof 文件终止信号 Ctrl+D<br>可以通过Ctrl+D终止shell，但是有时候会不小心按到。为了让shell忽略eof，需要使用一个叫IGNOREEOF的环境变量，这个变量表示注销前BASH会忽略多少次eof，设置这个变量时，要 IGNOREEOF = 数字</li><li>stty -a 显示键盘映射，这个命令是表示各个快捷方式如erase的快捷键。stty是set terminal(设置终端）-a表示显示所有设置</li><li>stty 修改键映射。例如想修改kill命令 ，可以 stty kill Ctrl a</li><li>echo 简单显示赋予它的内容</li><li>返回字符 ^M，指的是返回到这一行的开头</li><li>换行字符 ^J<br>文件每一行最后一定是一个返回加换行</li><li>stty sane，reset 候终端的设置被弄乱，可以采用这个命令是终端恢复到初始值</li></ul><h5 id="立即使用的程序"><a href="#立即使用的程序" class="headerlink" title="立即使用的程序"></a>立即使用的程序</h5><ul><li>which 看某个命令会使用那些程序，如果显示地址，则说明有这些程序，如果没有输出，或者输出错误信息，则说明这个命令无法使用</li><li>quit 终止程序命令，但是也可以输入eof使程序终止</li><li>bc 计算器 如果想用bc内部的函数，要用bc -l命令（library)。如果是多个算式，中间要用”;”号隔开</li></ul><p>常用函数</p><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">s</span><span class="params">(x)</span></span> sinx  弧度制</span><br><span class="line"><span class="function"><span class="title">c</span><span class="params">(x)</span></span> cosx</span><br><span class="line"><span class="function"><span class="title">a</span><span class="params">(x)</span></span> arctanx</span><br><span class="line"><span class="function"><span class="title">ln</span><span class="params">(x)</span></span></span><br><span class="line"><span class="function"><span class="title">j</span><span class="params">(n,x)</span></span>  x的n次整阶贝塞尔函数</span><br></pre></td></tr></table></figure><p>如果想用小数运算，先要设置标度因子 scale 来确定精确到小数点后多少位。如果输入scale 则会返回scale的当前值 scale=3，则设置小数点后三位</p><p>有一点需要注意，当你用来 bc -l时，scale会自动设置为20</p><p>bc实际上是一套功能完整的数学编程语言，可以使用的变量有26个字母<br>例如 x=100 就是将x变量设为100</p><h5 id="变量显示命令"><a href="#变量显示命令" class="headerlink" title="变量显示命令"></a>变量显示命令</h5><p>环境变量实际上就是全局变量，用env显示环境变量，如果想让输出按字母表排序，可以用 env | sort | less</p><ul><li><p>set 显示shell变量</p></li><li><p>echo 显示富裕它对象的值，例如 echo I 将会输出I</p></li></ul><p>如果要显示一个变量的值，可以用$(美元符号），后面的变量最好加花括号（{}）</p><p>例如 echo ${TERM}</p><p>实际上，很多标点符号都有特殊的用途，为了能正确显示他们，要在最外面用双引号</p><ul><li><p>变量创建只需要一边写变量名，另一边写值即可。例如，HARLEY=cool，如果希望变量中有空格，则需使用双引号</p></li><li><p>export 将变量导出环境中（即变成全局变量）。还可以在创建同时导出。用 export 变量名=值即可</p></li><li><p>unset 删除变量。实际上没有办法简单的从环境中移除变量，因此最简单的办法是直接删除它。</p></li><li><p>set 显示shell所有选项的当前值，如果用 -o 则会简要的显示 +o是详细的显示。例如，set -o ignoreeof 这样在按 Ctrl+D的时候就不会突出shell了，如果想复位，只要+o</p></li></ul>]]></content>
+    <content type="html"><![CDATA[<h5 id="命令语法"><a href="#命令语法" class="headerlink" title="命令语法"></a>命令语法</h5><p>一次输入多条命令，可以在命令之间用 <code>;</code>分割开来</p><p>语法： 命令名称 选项 参数</p><p><strong>选项</strong>有时被称为开关（switches）或标志（flags），选项通常是由一个连字符后面接着一些字母，或者两个连字符后接着一个单词构成。例如 –help，–version（显示版本信息）</p><p>使用多个单字符选项时，可以把他们连接在一起，用一个连字符来表示。例如 ls -lF<br>。注意，unix的选项区分大小写</p><p>实际上许多长参数有着对应的短参数，但是长参数是一个完整的单词，为了便于记忆，有时也是用长参数，这时就要用两个连字符</p><p>输入命令时，必须要把每个选项和参数用空格分隔开</p><p>有些命令有默认值，有些命令没有默认值，例如 ls 如果只输入ls的话他会返回当前工作目录下所有文件</p><p>手册中提示的语法</p><ol><li>方括号中的项是可选的</li><li>不再方括号中的项是必选项</li><li>黑体字必须原样输入</li><li>斜体字可以用适当的值代替</li><li>有省略号代表可以重复多次</li><li>如果一个单独的选项和参数组合在一起，这二者必须同时出现</li><li>由竖线（|）字符分开的两个或者多个项，宝石可以从这个列表中选择任意一项</li></ol><h5 id="用户提醒命令"><a href="#用户提醒命令" class="headerlink" title="用户提醒命令"></a>用户提醒命令</h5><ul><li>who 用来显示用这个计算机的用户</li><li>whoami 用来显示当前用户标识</li><li>quota 用来看自己拥有多少空间</li><li>lock 临时上锁 lock -5 锁5分钟</li><li>leave leave +15 十五分钟后离开 leave 1344 13点44分离开，到了时间它会不停的提醒你，相当于一个闹钟</li><li>id 用来显示你的基本信息</li><li>date 时间 date -u 协调世界时间（UTC时间）</li><li>cal 显示日历 cal+某一年份可以显示某一年份的日历 cal 7 2019 显示2019年7月的日历 cal -j +… 会显示第几天，所以想要知道这一年是不是闰年只需 cal -j 12 + 年份，看看12月最后一天是不是366天就可以了</li><li>su（substitute user） 这个指令是用来切换用户的，如果你知道一个用户的口令，那么就可以采用su+用户名的方式切换，这个时候用户标识改变了，但是你仍位于旧的环境之中。就像你让别人来你家做事，如果你想让别人在自己家做事，就要用su+’-‘+用户名</li></ul><p>特别的，如果你想拥有root权限，你需要 su - root ，这时你输入的是你自己的口令而不是root口令，因为在计算机中有特殊的配置文件，这个文件只有管理员能操作，他可以修改那些人可以通过su口令获得root权限</p><ul><li>man 联机文档帮助 当你查看联机文档时，可以用/符加上你想搜索的内容进行搜索，用n来显示下一个，用N来显示上一个。？符是向下搜索。<br>如果想在查看man文档时执行指令，只需输入！在输入命令，之后按enter键又能回到man文档中</li><li>foo bar 可以指代任意标识<br>man文档显示的内容</li></ul><ol><li>命令</li><li>系统调用</li><li>库函数</li><li>特殊文件</li><li>文件格式</li><li>游戏</li><li>杂项</li><li>系统管理</li></ol><ul><li><p>whatis 显示说明书页的第一行（名字和用途）例如 whatis time date，这样同时显示两条指令的信息。这种指令可以用 man -f 替换</p></li><li><p>apropos 搜索命令 他将显示所有带有该字符的命令。这种命令可以用man -k代替</p></li><li><p>info 另一种搜索命令，这种命令的特点是它有到其他命令的连接，就好像网页一样。这时一种树形结构，n跳转到下一个节点，p跳转到上一个节点，t跳转到当前文件的顶节点</p><h5 id="登入登出命令"><a href="#登入登出命令" class="headerlink" title="登入登出命令"></a>登入登出命令</h5></li><li><p>exit 退出当前用户，例如想从root模式退出用exit</p></li><li><p>sudo 以超级用户模式运行一条指令。如果你经常使用超级用户，可能在无意间删去一些重要文件导致系统出现故障，因此超级用户需慎用。因此要用可以用sudo命令。</p></li><li><p>less 浏览配置文件。例如我想浏览passwd文件，只需 less /etc/passwd</p></li></ul><p>配置文件就像windows系统下的注册表和ini文件</p><ul><li>dmesg 显示启动信息，但是这种显示太快，看不清</li><li>dmesg | less 显示启动信息</li><li>init 设置运行级别，1为单用户，2为多用户，等等，0是关机，6是重启</li></ul><p>如果想重启，可以用 sudo init 6</p><ul><li>reboot 重启 sudo reboot</li><li>shutdown 关机，这个要说关机时间，经常用的是sudo shutdown now</li></ul><h5 id="快捷键和便捷输入命令"><a href="#快捷键和便捷输入命令" class="headerlink" title="快捷键和便捷输入命令"></a>快捷键和便捷输入命令</h5><ul><li>erase 删除最好一个键入的字符，Ctrl+H</li><li>werase 删除最后一个单词 Ctrl+W</li><li>kill 删除一行 Ctrl+U</li><li>intr 停止程序 有些系统是Ctrl+C，有些是delete</li><li>quit 停止程序 Ctrl+\ 它不仅会停止程序，还会生成一个副本保存在core的文件中</li><li>stop 停止屏幕显示，Ctrl+S</li><li>start 开始屏幕显示 Ctrl+Q</li><li>eof 文件终止信号 Ctrl+D<br>可以通过Ctrl+D终止shell，但是有时候会不小心按到。为了让shell忽略eof，需要使用一个叫IGNOREEOF的环境变量，这个变量表示注销前BASH会忽略多少次eof，设置这个变量时，要 IGNOREEOF = 数字</li><li>stty -a 显示键盘映射，这个命令是表示各个快捷方式如erase的快捷键。stty是set terminal(设置终端）-a表示显示所有设置</li><li>stty 修改键映射。例如想修改kill命令 ，可以 stty kill Ctrl a</li><li>返回字符 ^M，指的是返回到这一行的开头</li><li>换行字符 ^J<br>文件每一行最后一定是一个返回加换行</li><li>stty sane，reset 候终端的设置被弄乱，可以采用这个命令是终端恢复到初始值</li><li>up 向上键，会转到上一条指令</li><li>down 转到下一条指令</li><li>fc 查看历史命令列表，用fc -l来查看，前面都有一个编号。如果想转到某一条指令，可以 fc -s(substitute) 编号。如果后面不接编号，则默认为上一条指令。但是用fc -s会立刻执行这条指令</li></ul><p>可以对这条命令进行小范围修改，格式为 fc -s pattern=replacement number<br>。pattern和replacement 都是字符串，而number是要修改时间的编号</p><ul><li>tab 自动补全命令，按一下如果有歧义，会发出提示声<h5 id="立即使用的程序"><a href="#立即使用的程序" class="headerlink" title="立即使用的程序"></a>立即使用的程序</h5></li><li>which 看某个命令会使用那些程序，如果显示地址，则说明有这些程序，如果没有输出，或者输出错误信息，则说明这个命令无法使用</li><li>quit 终止程序命令，但是也可以输入eof使程序终止</li><li>bc 计算器 如果想用bc内部的函数，要用bc -l命令（library)。如果是多个算式，中间要用”;”号隔开</li></ul><p>常用函数</p><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">s</span><span class="params">(x)</span></span> sinx  弧度制</span><br><span class="line"><span class="function"><span class="title">c</span><span class="params">(x)</span></span> cosx</span><br><span class="line"><span class="function"><span class="title">a</span><span class="params">(x)</span></span> arctanx</span><br><span class="line"><span class="function"><span class="title">ln</span><span class="params">(x)</span></span></span><br><span class="line"><span class="function"><span class="title">j</span><span class="params">(n,x)</span></span>  x的n次整阶贝塞尔函数</span><br></pre></td></tr></table></figure><p>如果想用小数运算，先要设置标度因子 scale 来确定精确到小数点后多少位。如果输入scale 则会返回scale的当前值 scale=3，则设置小数点后三位</p><p>有一点需要注意，当你用来 bc -l时，scale会自动设置为20</p><p>bc实际上是一套功能完整的数学编程语言，可以使用的变量有26个字母<br>例如 x=100 就是将x变量设为100</p><h5 id="变量显示命令"><a href="#变量显示命令" class="headerlink" title="变量显示命令"></a>变量显示命令</h5><p>环境变量实际上就是全局变量，用env显示环境变量，如果想让输出按字母表排序，可以用 env | sort | less</p><ul><li><p>set 显示shell变量</p></li><li><p>echo 显示赋予它对象的值，例如 echo I 将会输出I</p></li></ul><p>如果要显示一个变量的值，可以用$(美元符号），后面的变量最好加花括号（{}）</p><p>例如 echo ${TERM}</p><p>实际上，很多标点符号都有特殊的用途，为了能正确显示他们，要在最外面用双引号</p><ul><li><p>变量创建只需要一边写变量名，另一边写值即可。例如，HARLEY=cool，如果希望变量中有空格，则需使用双引号</p></li><li><p>export 将变量导出环境中（即变成全局变量）。还可以在创建同时导出。用 export 变量名=值即可</p></li><li><p>unset 删除变量。实际上没有办法简单的从环境中移除变量，因此最简单的办法是直接删除它。</p></li><li><p>set 显示shell所有选项的当前值，如果用 -o 则会简要的显示 +o是详细的显示。例如，set -o ignoreeof 这样在按 Ctrl+D的时候就不会突出shell了，如果想复位，只要+o</p><h5 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h5></li></ul><table><thead><tr><th>变量名</th><th>作用</th></tr></thead><tbody><tr><td>PATH</td><td>设置shell搜索路径</td></tr><tr><td>PS1</td><td>设置标识符</td></tr><tr><td>SHELL</td><td>shell路径</td></tr><tr><td>HISTSIZE</td><td>fc中最大保存的指令数</td></tr></tbody></table>]]></content>
     
     <summary type="html">
     
@@ -479,63 +531,6 @@
     
     </summary>
     
-    
-    
-  </entry>
-  
-  <entry>
-    <title>call指令</title>
-    <link href="http://xinhecuican.github.io/2020/01/27/call%E6%8C%87%E4%BB%A4/"/>
-    <id>http://xinhecuican.github.io/2020/01/27/call%E6%8C%87%E4%BB%A4/</id>
-    <published>2020-01-27T02:10:00.000Z</published>
-    <updated>2020-01-27T02:37:16.077Z</updated>
-    
-    <content type="html"><![CDATA[<p>操作</p><ol><li>将当前的ip或cs压入栈中</li><li>转移</li></ol><p>这里的转移与jmp相同，也有位移和内存两种方式</p><h3 id="根据位移"><a href="#根据位移" class="headerlink" title="根据位移"></a>根据位移</h3><p>call 标号（将ip压入栈中后，转移到标号处进行指令）<br>过程：</p><ol><li>sp+=2，ss*16+sp=ip</li><li>ip=ip+16位位移</li></ol><p>16位位移=标号处地址-call指令后第一个字节的地址</p><p>相当于 push ip，jmp near ptr 标号</p><h3 id="根据目的地址"><a href="#根据目的地址" class="headerlink" title="根据目的地址"></a>根据目的地址</h3><p>call far ptr 实现段间转移</p><p>操作： </p><ol><li>sp-=2</li><li>ss*16+sp=cs</li><li>sp-=2</li><li>ss*16+sp=ip</li><li>cs=标号所在段地址，ip=；标号所在偏移地址</li></ol><p>段内转移一般是根据位移，段间转移一般是根据地址</p><p>如果地址在寄存器中， call reg，ip被修改</p><p>如果地址在内存中</p><p>1 call word ptr 内存地址</p><p>这种是段内转移，相当于 push ip，jmp word ptr</p><p>2 call dword ptr 内存地址</p><p>段间转移 例</p><p>call dword ptr ds：[0] ，这样ds:[0]和ds:[1]是ip ，ds:[2]和ds:[3]是cs</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;操作&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;将当前的ip或cs压入栈中&lt;/li&gt;
-&lt;li&gt;转移&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;这里的转移与jmp相同，也有位移和内存两种方式&lt;/p&gt;
-&lt;h3 id=&quot;根据位移&quot;&gt;&lt;a href=&quot;#根据位移&quot; class=&quot;headerlink&quot; titl
-      
-    
-    </summary>
-    
-    
-      <category term="汇编" scheme="http://xinhecuican.github.io/categories/%E6%B1%87%E7%BC%96/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>ret 和 retf</title>
-    <link href="http://xinhecuican.github.io/2020/01/27/ret-%E5%92%8C-retf/"/>
-    <id>http://xinhecuican.github.io/2020/01/27/ret-%E5%92%8C-retf/</id>
-    <published>2020-01-27T01:59:00.000Z</published>
-    <updated>2020-01-27T02:08:25.218Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="ret"><a href="#ret" class="headerlink" title="ret"></a>ret</h3><p>ret指令用栈中的数据，修改ip中的内容，从而实现近转移</p><p>过程：</p><ol><li><p>ip=ss*16+sp</p></li><li><p>sp+=2</p></li></ol><p>相当于 pop ip</p><h3 id="retf"><a href="#retf" class="headerlink" title="retf"></a>retf</h3><p>修改cs和ip 的内容，实现远转移<br>过程</p><ol><li>ip=ss*16+sp</li><li>sp+=2</li><li>cs=ss*16+sp</li><li>sp+=2</li></ol><p>相当于 pop ip ，pop cs</p><p>例</p><figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">assume</span> <span class="built_in">cs</span>:code,<span class="built_in">ss</span>:stack</span><br><span class="line">stack <span class="meta">segment</span></span><br><span class="line">    <span class="built_in">db</span> <span class="number">16</span> dup (<span class="number">0</span>)</span><br><span class="line">stack ends</span><br><span class="line"></span><br><span class="line">code <span class="meta">segment</span></span><br><span class="line">    <span class="keyword">mov</span> <span class="built_in">ax</span>,<span class="number">4c00h</span></span><br><span class="line">    <span class="keyword">int</span> <span class="number">21h</span></span><br><span class="line"><span class="symbol">start:</span><span class="keyword">mov</span> <span class="built_in">ax</span>,stack</span><br><span class="line">    <span class="keyword">mov</span> <span class="built_in">ss</span>,<span class="built_in">ax</span></span><br><span class="line">    <span class="keyword">mov</span> <span class="built_in">sp</span>,<span class="number">16</span></span><br><span class="line">    <span class="keyword">mov</span> <span class="built_in">ax</span>,<span class="number">0</span></span><br><span class="line">    <span class="keyword">push</span> <span class="built_in">ax</span></span><br><span class="line">    <span class="keyword">mov</span> <span class="built_in">bx</span>,<span class="number">0</span></span><br><span class="line">    <span class="keyword">ret</span></span><br><span class="line">code ends</span><br><span class="line">end start</span><br></pre></td></tr></table></figure><p>这条指令相当于把ip变为0，指向第一条指令</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;ret&quot;&gt;&lt;a href=&quot;#ret&quot; class=&quot;headerlink&quot; title=&quot;ret&quot;&gt;&lt;/a&gt;ret&lt;/h3&gt;&lt;p&gt;ret指令用栈中的数据，修改ip中的内容，从而实现近转移&lt;/p&gt;
-&lt;p&gt;过程：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;ip=ss*16+s
-      
-    
-    </summary>
-    
-    
-      <category term="汇编" scheme="http://xinhecuican.github.io/categories/%E6%B1%87%E7%BC%96/"/>
     
     
   </entry>
