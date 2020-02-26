@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://xinhecuican.github.io/"/>
-  <updated>2020-02-22T06:29:45.858Z</updated>
+  <updated>2020-02-26T08:10:04.183Z</updated>
   <id>http://xinhecuican.github.io/</id>
   
   <author>
@@ -15,6 +15,57 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>delete的一个注意事项</title>
+    <link href="http://xinhecuican.github.io/2020/02/26/delete%E7%9A%84%E4%B8%80%E4%B8%AA%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/"/>
+    <id>http://xinhecuican.github.io/2020/02/26/delete%E7%9A%84%E4%B8%80%E4%B8%AA%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/</id>
+    <published>2020-02-26T07:34:00.000Z</published>
+    <updated>2020-02-26T08:10:04.183Z</updated>
+    
+    <content type="html"><![CDATA[<p>实际上delete后的指针并不会变成空指针，仍指向堆里的地址。但是这个时候这块空间已经可以被其他的new申请了，如果你没有把原指针更改的话，有可能对原指针进行的修改会影响到新指针。因此每次delete完之后最好把这个指针变成空指针</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;实际上delete后的指针并不会变成空指针，仍指向堆里的地址。但是这个时候这块空间已经可以被其他的new申请了，如果你没有把原指针更改的话，有可能对原指针进行的修改会影响到新指针。因此每次delete完之后最好把这个指针变成空指针&lt;/p&gt;
+
+      
+    
+    </summary>
+    
+    
+      <category term="c++" scheme="http://xinhecuican.github.io/categories/c/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>位运算和移位运算</title>
+    <link href="http://xinhecuican.github.io/2020/02/25/%E4%BD%8D%E8%BF%90%E7%AE%97%E5%92%8C%E4%B8%80%E4%BD%8D%E5%8E%9F%E9%85%B8/"/>
+    <id>http://xinhecuican.github.io/2020/02/25/%E4%BD%8D%E8%BF%90%E7%AE%97%E5%92%8C%E4%B8%80%E4%BD%8D%E5%8E%9F%E9%85%B8/</id>
+    <published>2020-02-25T07:56:00.000Z</published>
+    <updated>2020-02-25T14:10:31.232Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="与运算"><a href="#与运算" class="headerlink" title="与运算"></a>与运算</h3><p>这里的与运算并不是平常的bool运算，而是按位与。这种运算比加减法快</p><p>符号： &amp;</p><p>例： 1010&amp;1000=1000 1001&amp;0110=0000</p><p>含义： 1&amp;1=1,1&amp;0=0,0&amp;1=0,0&amp;0=0，只要不是两个都是,1，那么结果就是0</p><p>应用：</p><ul><li>替换指定位的值</li></ul><p>一个典型应用就是大小写转换，如果平常转换我们可能要写一大堆，但是经过仔细观察后发现大写字母和小写字母之间差距只有第5位，如果第五位为0，就是小写字母，为1就是大写字母，所以只要<code>a&amp;0b11011111</code>这一段代码就可以完成小写到大写的转换</p><ul><li>清零</li></ul><p>通过 a&amp;0b00000000 ,可以快速的把某个数变成零</p><h3 id="或运算"><a href="#或运算" class="headerlink" title="或运算"></a>或运算</h3><p>符号： |</p><p>例： 1010|1000=1010 1001|0110=1111</p><p>含义： 1|1=1,1|0=1，0|1=1，0|0=0</p><p>应用：</p><ul><li>设定某一个数据位为1，例如想把第五位设为1，只要 a|0b00100000</li></ul><h3 id="异或"><a href="#异或" class="headerlink" title="异或"></a>异或</h3><p>符号： ^</p><p>例： 1010^1000=0010, 1001^0110=1111</p><p>含义： 1^1=0,1^0=1,0^1=1,0^0=0，同为假，异为真</p><p>应用：</p><ul><li><p>异或满足交换率，结合率</p></li><li><p>x^x=0,x^0=x,自己是自己的逆元，0是幺元</p></li><li><p>a^b^a=b,因此可以用这种性质做许多应用，一个应用就是交换两个变量的值</p></li></ul><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span>*&amp; a,<span class="keyword">int</span>*&amp; b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    *a=*a ^ *b;  <span class="comment">//a=a^b</span></span><br><span class="line">    *b=*a ^ *b; <span class="comment">//b=a^b^b=a</span></span><br><span class="line">    *a=*a ^ *b; <span class="comment">//a=a^b^a=b</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>另外还可以用来检查重复数或者在其余都是偶数个重复数字中找到一个奇数</p><p>例：1-1000放在含有1001个元素的数组中，只有唯一的一个元素值重复，其它均只出现<br>一次。每个数组元素只能访问一次</p><p>将所有的数全部异或，得到的结果与1^2^3^…^1000的结果进行异或，得到的结果就是重复数。</p><h3 id="按位非"><a href="#按位非" class="headerlink" title="按位非"></a>按位非</h3><p>符号： ~</p><p>例： ~1001=0110， ~1010=0101</p><p>含义： <del>1=0，</del>0=1 ,取反</p><p>应用：</p><ul><li><p>对于有符号数 <del>a=-(a+1),因为一般采用补码，而补码的负数就是正数-1再取反得到，所以</del>(a-1)=-a，可得~a=-(a+1)</p></li><li><p>把最低位变成0，a&amp;~1</p><h3 id="左移"><a href="#左移" class="headerlink" title="左移"></a>左移</h3></li></ul><p>符号： &lt;&lt;</p><p>例 00001010&lt;&lt;1 =&gt; 00010100</p><p>含义： 把所有的位向左移位，高位删去，低位补零，相当于乘上2的n次方</p><p>注意：如果移动次数超过了最高位，那么这是一个未定义行为。所以不同编译器，不同cpu对其有不同解释。gcc会将其自动变成0，而微软的编译器会先将移动位数模上最大位数然后再左移相应位数。cpu中也是取模的方式。</p><p>例如</p><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">int</span> a=<span class="number">1</span>;</span><br><span class="line">b=a&lt;&lt;<span class="number">40</span>;<span class="comment">//此时b=0，因为这个命令是在编译器中完成的</span></span><br><span class="line">a&lt;&lt;=<span class="number">40</span>;<span class="comment">//此时a！=0，因为这个命令是在cpu中完成的</span></span><br></pre></td></tr></table></figure><h3 id="右移"><a href="#右移" class="headerlink" title="右移"></a>右移</h3><p>符号： &gt;&gt;</p><p>含义 将所有位向右移位，高位视情况而定，低位舍弃</p><p>视情况而定是因为实际上有两种右移，第一种是逻辑右移，第二种是算术右移</p><ul><li>逻辑右移，高位直接取0</li><li>算术右移，高位要看情况，如果原来最高位是0，则取0。如果最高位是1，则后面加的都是1.</li></ul><p>那什么时候用逻辑右移还是算术右移呢？一般来说，有符号数算术右移，无符号数逻辑右移。因为有符号数用的是补码，如果是负数右移最高位补1才能让这个数还是负数</p><p>应用：</p><ul><li>不用-号把1变成-1<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">int</span> a=<span class="number">1</span>;</span><br><span class="line">a&gt;&gt;=<span class="number">31</span>;<span class="comment">//最高位为1，其余都为0</span></span><br><span class="line">a&lt;&lt;=<span class="number">31</span>;<span class="comment">//都为1</span></span><br></pre></td></tr></table></figure></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;与运算&quot;&gt;&lt;a href=&quot;#与运算&quot; class=&quot;headerlink&quot; title=&quot;与运算&quot;&gt;&lt;/a&gt;与运算&lt;/h3&gt;&lt;p&gt;这里的与运算并不是平常的bool运算，而是按位与。这种运算比加减法快&lt;/p&gt;
+&lt;p&gt;符号： &amp;amp;&lt;/p&gt;
+&lt;p&gt;例： 1010
+      
+    
+    </summary>
+    
+    
+      <category term="基础" scheme="http://xinhecuican.github.io/categories/%E5%9F%BA%E7%A1%80/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>c++输出16进制，10进制和2进制</title>
@@ -39,6 +90,32 @@
     
     
       <category term="基础" scheme="http://xinhecuican.github.io/categories/%E5%9F%BA%E7%A1%80/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>shell内部命令与外部命令与搜索路径</title>
+    <link href="http://xinhecuican.github.io/2020/02/22/shell%E5%86%85%E9%83%A8%E5%91%BD%E4%BB%A4/"/>
+    <id>http://xinhecuican.github.io/2020/02/22/shell%E5%86%85%E9%83%A8%E5%91%BD%E4%BB%A4/</id>
+    <published>2020-02-22T01:09:00.000Z</published>
+    <updated>2020-02-24T12:50:25.583Z</updated>
+    
+    <content type="html"><![CDATA[<p>有些命令是shell外部的，shell会解析参数然后调用外部的程序去处理它，另外还有一些是对shell起作用的，叫shell内置命令</p><p>如果先查看内部命令，需要 man + shell名称 ，例如，man bash</p><h3 id="外部命令和搜索路径"><a href="#外部命令和搜索路径" class="headerlink" title="外部命令和搜索路径"></a>外部命令和搜索路径</h3><p>shell是如何知道那些程序都在哪呢？ 实际上shell是检查PATH环境变量，PATH包含一串字符，这串字符就是一系列目录名称，称作搜索路径。如果输入一个命令，shell会依次按这些目录去搜索命令</p><p>先要看PATH 直接 echo $PATH即可</p><h3 id="修改搜索路径"><a href="#修改搜索路径" class="headerlink" title="修改搜索路径"></a>修改搜索路径</h3><p>可以用export命令，export命令可以使PATH变量变成环境变量，这就意味着shell和随后所有进程都可以使用它，例如<code>export PATH=&quot;/bin:/usr/bin:/usr/ucb:/usr/local/bin&quot;</code></p><p>如果希望在搜索路径的末尾加上一条路径，可以 <code>export PATH=&quot;$PATH:$HOME/bin&quot;</code><br>如果想在最后加上一条指令，可以<code>export PATH=&quot;$HOME/bin:$PATH&quot;</code></p><p>如果把自己写的date命令放在开头，系统将会执行自己写的date命令，而不会执行系统本身的命令</p><p>实际上用export设置的环境变量在下次启动时就会失效，如果想一直保存需要修改一些特定的文件</p><h3 id="修改命令行提示"><a href="#修改命令行提示" class="headerlink" title="修改命令行提示"></a>修改命令行提示</h3><p>命令行提示的路径在PS1的环境变量当中,因此要修改的话只需要export PS1=”$ “就可以了</p><h3 id="命令替换"><a href="#命令替换" class="headerlink" title="命令替换"></a>命令替换</h3><p>用反引号<code></code> `,用了这种符号会先执行反引号你饿不的命令然后再执行外部命令，</p><p>例如 <code>echo &quot;Date is</code>date` “</p><p>这个命令会显示Date is + 具体时间，注意要用双引号，单引号会把反引号引用掉</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;有些命令是shell外部的，shell会解析参数然后调用外部的程序去处理它，另外还有一些是对shell起作用的，叫shell内置命令&lt;/p&gt;
+&lt;p&gt;如果先查看内部命令，需要 man + shell名称 ，例如，man bash&lt;/p&gt;
+&lt;h3 id=&quot;外部命令和搜索路径&quot;&gt;
+      
+    
+    </summary>
+    
+    
+      <category term="Linux" scheme="http://xinhecuican.github.io/categories/Linux/"/>
     
     
   </entry>
@@ -98,9 +175,9 @@
     <link href="http://xinhecuican.github.io/2020/02/16/linux%E6%8C%87%E4%BB%A4%E5%AD%A6%E4%B9%A0/"/>
     <id>http://xinhecuican.github.io/2020/02/16/linux%E6%8C%87%E4%BB%A4%E5%AD%A6%E4%B9%A0/</id>
     <published>2020-02-16T02:20:00.000Z</published>
-    <updated>2020-02-22T03:51:22.500Z</updated>
+    <updated>2020-02-24T13:02:09.638Z</updated>
     
-    <content type="html"><![CDATA[<h5 id="命令语法"><a href="#命令语法" class="headerlink" title="命令语法"></a>命令语法</h5><p>一次输入多条命令，可以在命令之间用 <code>;</code>分割开来</p><p>语法： 命令名称 选项 参数</p><p><strong>选项</strong>有时被称为开关（switches）或标志（flags），选项通常是由一个连字符后面接着一些字母，或者两个连字符后接着一个单词构成。例如 –help，–version（显示版本信息）</p><p>使用多个单字符选项时，可以把他们连接在一起，用一个连字符来表示。例如 ls -lF<br>。注意，unix的选项区分大小写</p><p>实际上许多长参数有着对应的短参数，但是长参数是一个完整的单词，为了便于记忆，有时也是用长参数，这时就要用两个连字符</p><p>输入命令时，必须要把每个选项和参数用空格分隔开</p><p>有些命令有默认值，有些命令没有默认值，例如 ls 如果只输入ls的话他会返回当前工作目录下所有文件</p><p>手册中提示的语法</p><ol><li>方括号中的项是可选的</li><li>不再方括号中的项是必选项</li><li>黑体字必须原样输入</li><li>斜体字可以用适当的值代替</li><li>有省略号代表可以重复多次</li><li>如果一个单独的选项和参数组合在一起，这二者必须同时出现</li><li>由竖线（|）字符分开的两个或者多个项，宝石可以从这个列表中选择任意一项</li></ol><h5 id="用户提醒命令"><a href="#用户提醒命令" class="headerlink" title="用户提醒命令"></a>用户提醒命令</h5><ul><li>who 用来显示用这个计算机的用户</li><li>whoami 用来显示当前用户标识</li><li>quota 用来看自己拥有多少空间</li><li>lock 临时上锁 lock -5 锁5分钟</li><li>leave leave +15 十五分钟后离开 leave 1344 13点44分离开，到了时间它会不停的提醒你，相当于一个闹钟</li><li>id 用来显示你的基本信息</li><li>date 时间 date -u 协调世界时间（UTC时间）</li><li>cal 显示日历 cal+某一年份可以显示某一年份的日历 cal 7 2019 显示2019年7月的日历 cal -j +… 会显示第几天，所以想要知道这一年是不是闰年只需 cal -j 12 + 年份，看看12月最后一天是不是366天就可以了</li><li>su（substitute user） 这个指令是用来切换用户的，如果你知道一个用户的口令，那么就可以采用su+用户名的方式切换，这个时候用户标识改变了，但是你仍位于旧的环境之中。就像你让别人来你家做事，如果你想让别人在自己家做事，就要用su+’-‘+用户名</li></ul><p>特别的，如果你想拥有root权限，你需要 su - root ，这时你输入的是你自己的口令而不是root口令，因为在计算机中有特殊的配置文件，这个文件只有管理员能操作，他可以修改那些人可以通过su口令获得root权限</p><ul><li>man 联机文档帮助 当你查看联机文档时，可以用/符加上你想搜索的内容进行搜索，用n来显示下一个，用N来显示上一个。？符是向下搜索。<br>如果想在查看man文档时执行指令，只需输入！在输入命令，之后按enter键又能回到man文档中</li><li>foo bar 可以指代任意标识<br>man文档显示的内容</li></ul><ol><li>命令</li><li>系统调用</li><li>库函数</li><li>特殊文件</li><li>文件格式</li><li>游戏</li><li>杂项</li><li>系统管理</li></ol><ul><li><p>whatis 显示说明书页的第一行（名字和用途）例如 whatis time date，这样同时显示两条指令的信息。这种指令可以用 man -f 替换</p></li><li><p>apropos 搜索命令 他将显示所有带有该字符的命令。这种命令可以用man -k代替</p></li><li><p>info 另一种搜索命令，这种命令的特点是它有到其他命令的连接，就好像网页一样。这时一种树形结构，n跳转到下一个节点，p跳转到上一个节点，t跳转到当前文件的顶节点</p><h5 id="登入登出命令"><a href="#登入登出命令" class="headerlink" title="登入登出命令"></a>登入登出命令</h5></li><li><p>exit 退出当前用户，例如想从root模式退出用exit</p></li><li><p>sudo 以超级用户模式运行一条指令。如果你经常使用超级用户，可能在无意间删去一些重要文件导致系统出现故障，因此超级用户需慎用。因此要用可以用sudo命令。</p></li><li><p>less 浏览配置文件。例如我想浏览passwd文件，只需 less /etc/passwd</p></li></ul><p>配置文件就像windows系统下的注册表和ini文件</p><ul><li>dmesg 显示启动信息，但是这种显示太快，看不清</li><li>dmesg | less 显示启动信息</li><li>init 设置运行级别，1为单用户，2为多用户，等等，0是关机，6是重启</li></ul><p>如果想重启，可以用 sudo init 6</p><ul><li>reboot 重启 sudo reboot</li><li>shutdown 关机，这个要说关机时间，经常用的是sudo shutdown now</li></ul><h5 id="快捷键和便捷输入命令"><a href="#快捷键和便捷输入命令" class="headerlink" title="快捷键和便捷输入命令"></a>快捷键和便捷输入命令</h5><ul><li>erase 删除最好一个键入的字符，Ctrl+H</li><li>werase 删除最后一个单词 Ctrl+W</li><li>kill 删除一行 Ctrl+U</li><li>intr 停止程序 有些系统是Ctrl+C，有些是delete</li><li>quit 停止程序 Ctrl+\ 它不仅会停止程序，还会生成一个副本保存在core的文件中</li><li>stop 停止屏幕显示，Ctrl+S</li><li>start 开始屏幕显示 Ctrl+Q</li><li>eof 文件终止信号 Ctrl+D<br>可以通过Ctrl+D终止shell，但是有时候会不小心按到。为了让shell忽略eof，需要使用一个叫IGNOREEOF的环境变量，这个变量表示注销前BASH会忽略多少次eof，设置这个变量时，要 IGNOREEOF = 数字</li><li>stty -a 显示键盘映射，这个命令是表示各个快捷方式如erase的快捷键。stty是set terminal(设置终端）-a表示显示所有设置</li><li>stty 修改键映射。例如想修改kill命令 ，可以 stty kill Ctrl a</li><li>返回字符 ^M，指的是返回到这一行的开头</li><li>换行字符 ^J<br>文件每一行最后一定是一个返回加换行</li><li>stty sane，reset 候终端的设置被弄乱，可以采用这个命令是终端恢复到初始值</li><li>up 向上键，会转到上一条指令</li><li>down 转到下一条指令</li><li>fc 查看历史命令列表，用fc -l来查看，前面都有一个编号。如果想转到某一条指令，可以 fc -s(substitute) 编号。如果后面不接编号，则默认为上一条指令。但是用fc -s会立刻执行这条指令</li></ul><p>可以对这条命令进行小范围修改，格式为 fc -s pattern=replacement number<br>。pattern和replacement 都是字符串，而number是要修改时间的编号</p><ul><li>tab 自动补全命令，按一下如果有歧义，会发出提示声<h5 id="立即使用的程序"><a href="#立即使用的程序" class="headerlink" title="立即使用的程序"></a>立即使用的程序</h5></li><li>which 看某个命令会使用那些程序，如果显示地址，则说明有这些程序，如果没有输出，或者输出错误信息，则说明这个命令无法使用</li><li>quit 终止程序命令，但是也可以输入eof使程序终止</li><li>bc 计算器 如果想用bc内部的函数，要用bc -l命令（library)。如果是多个算式，中间要用”;”号隔开</li></ul><p>常用函数</p><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">s</span><span class="params">(x)</span></span> sinx  弧度制</span><br><span class="line"><span class="function"><span class="title">c</span><span class="params">(x)</span></span> cosx</span><br><span class="line"><span class="function"><span class="title">a</span><span class="params">(x)</span></span> arctanx</span><br><span class="line"><span class="function"><span class="title">ln</span><span class="params">(x)</span></span></span><br><span class="line"><span class="function"><span class="title">j</span><span class="params">(n,x)</span></span>  x的n次整阶贝塞尔函数</span><br></pre></td></tr></table></figure><p>如果想用小数运算，先要设置标度因子 scale 来确定精确到小数点后多少位。如果输入scale 则会返回scale的当前值 scale=3，则设置小数点后三位</p><p>有一点需要注意，当你用来 bc -l时，scale会自动设置为20</p><p>bc实际上是一套功能完整的数学编程语言，可以使用的变量有26个字母<br>例如 x=100 就是将x变量设为100</p><h5 id="变量显示命令"><a href="#变量显示命令" class="headerlink" title="变量显示命令"></a>变量显示命令</h5><p>环境变量实际上就是全局变量，用env显示环境变量，如果想让输出按字母表排序，可以用 env | sort | less</p><ul><li><p>set 显示shell变量</p></li><li><p>echo 显示赋予它对象的值，例如 echo I 将会输出I</p></li></ul><p>如果要显示一个变量的值，可以用$(美元符号），后面的变量最好加花括号（{}）</p><p>例如 echo ${TERM}</p><p>实际上，很多标点符号都有特殊的用途，为了能正确显示他们，要在最外面用双引号</p><ul><li><p>变量创建只需要一边写变量名，另一边写值即可。例如，HARLEY=cool，如果希望变量中有空格，则需使用双引号</p></li><li><p>export 将变量导出环境中（即变成全局变量）。还可以在创建同时导出。用 export 变量名=值即可</p></li><li><p>unset 删除变量。实际上没有办法简单的从环境中移除变量，因此最简单的办法是直接删除它。</p></li><li><p>set 显示shell所有选项的当前值，如果用 -o 则会简要的显示 +o是详细的显示。例如，set -o ignoreeof 这样在按 Ctrl+D的时候就不会突出shell了，如果想复位，只要+o</p><h5 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h5></li></ul><table><thead><tr><th>变量名</th><th>作用</th></tr></thead><tbody><tr><td>PATH</td><td>设置shell搜索路径</td></tr><tr><td>PS1</td><td>设置标识符</td></tr><tr><td>SHELL</td><td>shell路径</td></tr><tr><td>HISTSIZE</td><td>fc中最大保存的指令数</td></tr></tbody></table>]]></content>
+    <content type="html"><![CDATA[<h5 id="命令语法"><a href="#命令语法" class="headerlink" title="命令语法"></a>命令语法</h5><p>一次输入多条命令，可以在命令之间用 <code>;</code>分割开来</p><p>语法： 命令名称 选项 参数</p><p><strong>选项</strong>有时被称为开关（switches）或标志（flags），选项通常是由一个连字符后面接着一些字母，或者两个连字符后接着一个单词构成。例如 –help，–version（显示版本信息）</p><p>使用多个单字符选项时，可以把他们连接在一起，用一个连字符来表示。例如 ls -lF<br>。注意，unix的选项区分大小写</p><p>实际上许多长参数有着对应的短参数，但是长参数是一个完整的单词，为了便于记忆，有时也是用长参数，这时就要用两个连字符</p><p>输入命令时，必须要把每个选项和参数用空格分隔开</p><p>有些命令有默认值，有些命令没有默认值，例如 ls 如果只输入ls的话他会返回当前工作目录下所有文件</p><p>手册中提示的语法</p><ol><li>方括号中的项是可选的</li><li>不再方括号中的项是必选项</li><li>黑体字必须原样输入</li><li>斜体字可以用适当的值代替</li><li>有省略号代表可以重复多次</li><li>如果一个单独的选项和参数组合在一起，这二者必须同时出现</li><li>由竖线（|）字符分开的两个或者多个项，宝石可以从这个列表中选择任意一项</li></ol><h5 id="用户提醒命令"><a href="#用户提醒命令" class="headerlink" title="用户提醒命令"></a>用户提醒命令</h5><ul><li>who 用来显示用这个计算机的用户</li><li>whoami 用来显示当前用户标识</li><li>quota 用来看自己拥有多少空间</li><li>lock 临时上锁 lock -5 锁5分钟</li><li>leave leave +15 十五分钟后离开 leave 1344 13点44分离开，到了时间它会不停的提醒你，相当于一个闹钟</li><li>id 用来显示你的基本信息</li><li>date 时间 date -u 协调世界时间（UTC时间）</li><li>cal 显示日历 cal+某一年份可以显示某一年份的日历 cal 7 2019 显示2019年7月的日历 cal -j +… 会显示第几天，所以想要知道这一年是不是闰年只需 cal -j 12 + 年份，看看12月最后一天是不是366天就可以了</li><li>su（substitute user） 这个指令是用来切换用户的，如果你知道一个用户的口令，那么就可以采用su+用户名的方式切换，这个时候用户标识改变了，但是你仍位于旧的环境之中。就像你让别人来你家做事，如果你想让别人在自己家做事，就要用su+’-‘+用户名</li></ul><p>特别的，如果你想拥有root权限，你需要 su - root ，这时你输入的是你自己的口令而不是root口令，因为在计算机中有特殊的配置文件，这个文件只有管理员能操作，他可以修改那些人可以通过su口令获得root权限</p><ul><li>man 联机文档帮助 当你查看联机文档时，可以用/符加上你想搜索的内容进行搜索，用n来显示下一个，用N来显示上一个。？符是向下搜索。<br>如果想在查看man文档时执行指令，只需输入！在输入命令，之后按enter键又能回到man文档中</li><li>foo bar 可以指代任意标识<br>man文档显示的内容</li></ul><ol><li>命令</li><li>系统调用</li><li>库函数</li><li>特殊文件</li><li>文件格式</li><li>游戏</li><li>杂项</li><li>系统管理</li></ol><ul><li><p>whatis 显示说明书页的第一行（名字和用途）例如 whatis time date，这样同时显示两条指令的信息。这种指令可以用 man -f 替换</p></li><li><p>apropos 搜索命令 他将显示所有带有该字符的命令。这种命令可以用man -k代替</p></li><li><p>info 另一种搜索命令，这种命令的特点是它有到其他命令的连接，就好像网页一样。这时一种树形结构，n跳转到下一个节点，p跳转到上一个节点，t跳转到当前文件的顶节点</p><h5 id="登入登出命令"><a href="#登入登出命令" class="headerlink" title="登入登出命令"></a>登入登出命令</h5></li><li><p>exit 退出当前用户，例如想从root模式退出用exit</p></li><li><p>sudo 以超级用户模式运行一条指令。如果你经常使用超级用户，可能在无意间删去一些重要文件导致系统出现故障，因此超级用户需慎用。因此要用可以用sudo命令。</p></li><li><p>less 浏览配置文件。例如我想浏览passwd文件，只需 less /etc/passwd</p></li></ul><p>配置文件就像windows系统下的注册表和ini文件</p><ul><li>dmesg 显示启动信息，但是这种显示太快，看不清</li><li>dmesg | less 显示启动信息</li><li>init 设置运行级别，1为单用户，2为多用户，等等，0是关机，6是重启</li></ul><p>如果想重启，可以用 sudo init 6</p><ul><li>reboot 重启 sudo reboot</li><li>shutdown 关机，这个要说关机时间，经常用的是sudo shutdown now</li></ul><h5 id="快捷键和便捷输入命令"><a href="#快捷键和便捷输入命令" class="headerlink" title="快捷键和便捷输入命令"></a>快捷键和便捷输入命令</h5><ul><li>erase 删除最好一个键入的字符，Ctrl+H</li><li>werase 删除最后一个单词 Ctrl+W</li><li>kill 删除一行 Ctrl+U</li><li>intr 停止程序 有些系统是Ctrl+C，有些是delete</li><li>quit 停止程序 Ctrl+\ 它不仅会停止程序，还会生成一个副本保存在core的文件中</li><li>stop 停止屏幕显示，Ctrl+S</li><li>start 开始屏幕显示 Ctrl+Q</li><li>eof 文件终止信号 Ctrl+D<br>可以通过Ctrl+D终止shell，但是有时候会不小心按到。为了让shell忽略eof，需要使用一个叫IGNOREEOF的环境变量，这个变量表示注销前BASH会忽略多少次eof，设置这个变量时，要 IGNOREEOF = 数字</li><li>stty -a 显示键盘映射，这个命令是表示各个快捷方式如erase的快捷键。stty是set terminal(设置终端）-a表示显示所有设置</li><li>stty 修改键映射。例如想修改kill命令 ，可以 stty kill Ctrl a</li><li>返回字符 ^M，指的是返回到这一行的开头</li><li>换行字符 ^J<br>文件每一行最后一定是一个返回加换行</li><li>stty sane，reset 候终端的设置被弄乱，可以采用这个命令是终端恢复到初始值</li><li>up 向上键，会转到上一条指令</li><li>down 转到下一条指令</li><li>fc 查看历史命令列表，用fc -l来查看，前面都有一个编号。如果想转到某一条指令，可以 fc -s(substitute) 编号。如果后面不接编号，则默认为上一条指令。但是用fc -s会立刻执行这条指令</li></ul><p>可以对这条命令进行小范围修改，格式为 fc -s pattern=replacement number<br>。pattern和replacement 都是字符串，而number是要修改时间的编号</p><ul><li>tab 自动补全命令，按一下如果有歧义，会发出提示声<h5 id="立即使用的程序"><a href="#立即使用的程序" class="headerlink" title="立即使用的程序"></a>立即使用的程序</h5></li><li>which 看某个命令会使用那些程序，如果显示地址，则说明有这些程序，如果没有输出，或者输出错误信息，则说明这个命令无法使用</li><li>quit 终止程序命令，但是也可以输入eof使程序终止</li><li>bc 计算器 如果想用bc内部的函数，要用bc -l命令（library)。如果是多个算式，中间要用”;”号隔开</li></ul><p>常用函数</p><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">s</span><span class="params">(x)</span></span> sinx  弧度制</span><br><span class="line"><span class="function"><span class="title">c</span><span class="params">(x)</span></span> cosx</span><br><span class="line"><span class="function"><span class="title">a</span><span class="params">(x)</span></span> arctanx</span><br><span class="line"><span class="function"><span class="title">ln</span><span class="params">(x)</span></span></span><br><span class="line"><span class="function"><span class="title">j</span><span class="params">(n,x)</span></span>  x的n次整阶贝塞尔函数</span><br></pre></td></tr></table></figure><p>如果想用小数运算，先要设置标度因子 scale 来确定精确到小数点后多少位。如果输入scale 则会返回scale的当前值 scale=3，则设置小数点后三位</p><p>有一点需要注意，当你用来 bc -l时，scale会自动设置为20</p><p>bc实际上是一套功能完整的数学编程语言，可以使用的变量有26个字母<br>例如 x=100 就是将x变量设为100</p><h5 id="变量显示命令"><a href="#变量显示命令" class="headerlink" title="变量显示命令"></a>变量显示命令</h5><p>环境变量实际上就是全局变量，用env显示环境变量，如果想让输出按字母表排序，可以用 env | sort | less</p><ul><li><p>set 显示shell变量</p></li><li><p>echo 显示赋予它对象的值，例如 echo I 将会输出I</p></li></ul><p>如果要显示一个变量的值，可以用$(美元符号），后面的变量最好加花括号（{}）</p><p>例如 echo ${TERM}</p><p>实际上，很多标点符号都有特殊的用途，为了能正确显示他们，要在最外面用双引号</p><ul><li><p>变量创建只需要一边写变量名，另一边写值即可。例如，HARLEY=cool，如果希望变量中有空格，则需使用双引号</p></li><li><p>export 将变量导出环境中（即变成全局变量）。还可以在创建同时导出。用 export 变量名=值即可</p></li><li><p>unset 删除变量。实际上没有办法简单的从环境中移除变量，因此最简单的办法是直接删除它。</p></li><li><p>set 显示shell所有选项的当前值，如果用 -o 则会简要的显示 +o是详细的显示。例如，set -o ignoreeof 这样在按 Ctrl+D的时候就不会突出shell了，如果想复位，只要+o</p></li><li><p>alias 建立别名，语法为alias name=command 例如 <code>alias It=&#39;-l temp*&#39;</code>。这种时候，单引号就比双引号要好，因为这样可以防止一些特殊字符被转义。此外，可以通过alias name 知道这个别名的当前值。可以只输入alias得知所有别名，通过unalias删去别名。如果想暂时不用别名，可以在命令之前输入” \ “</p><h5 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h5></li></ul><table><thead><tr><th>变量名</th><th>作用</th></tr></thead><tbody><tr><td>PATH</td><td>设置shell搜索路径</td></tr><tr><td>PS1</td><td>设置标识符</td></tr><tr><td>SHELL</td><td>shell路径</td></tr><tr><td>HISTSIZE</td><td>fc中最大保存的指令数</td></tr></tbody></table>]]></content>
     
     <summary type="html">
     
@@ -445,92 +522,6 @@
     
     
       <category term="汇编" scheme="http://xinhecuican.github.io/categories/%E6%B1%87%E7%BC%96/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>标志寄存器</title>
-    <link href="http://xinhecuican.github.io/2020/01/29/%E6%A0%87%E5%BF%97%E5%AF%84%E5%AD%98%E5%99%A8/"/>
-    <id>http://xinhecuican.github.io/2020/01/29/%E6%A0%87%E5%BF%97%E5%AF%84%E5%AD%98%E5%99%A8/</id>
-    <published>2020-01-29T02:48:00.000Z</published>
-    <updated>2020-02-05T03:12:32.051Z</updated>
-    
-    <content type="html"><![CDATA[<p>标志寄存器16位中只有9位有特殊作用</p><table><thead><tr><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th><th>11</th><th>12</th><th>13</th><th>14</th><th>15</th></tr></thead><tbody><tr><td>CF</td><td>0</td><td>PF</td><td>0</td><td>AF</td><td>0</td><td>ZF</td><td>SF</td><td>IF</td><td>DF</td><td>OF</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr></tbody></table><h4 id="ZF"><a href="#ZF" class="headerlink" title="ZF"></a>ZF</h4><p>ZF含义是执行完指令后结果是否为0，为0,ZF=1，不为0,ZF=0</p><p>例如 </p><figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mov ax,<span class="number">1</span> ;ZF=<span class="number">0</span></span><br><span class="line"><span class="function"><span class="keyword">sub</span> <span class="title">ax</span>,1 </span>;ZF=<span class="number">1</span></span><br></pre></td></tr></table></figure><h4 id="PF"><a href="#PF" class="headerlink" title="PF"></a>PF</h4><p>奇偶标志位，它记录相关指令执行后，其结果的所有bit为中1的个数是否为偶数，如果1的个数为偶数，pf=1,反之则为0</p><h4 id="SF"><a href="#SF" class="headerlink" title="SF"></a>SF</h4><p>符号标志位，看结果是否为负，如果为负，则SF=1</p><h4 id="CF"><a href="#CF" class="headerlink" title="CF"></a>CF</h4><p>进位标志位，一般情况下，对无符号数运算时，它记录了超过最高位的值</p><p>例如 ，add 255,255 这时已经超过最高位了，我们已经知道，超过最高位的数据都会被丢失，实际上它被保存在CF中，但只会保存一位</p><p>做减法时，还有可能发生错位，例如，两个8位数据，-4+5，将产生错位。错位后，相当于计算 252+5，超过255，因此会记录，因为无符号数中负数就是255-该值。<strong>小的减大的时会产生借位</strong></p><h4 id="OF"><a href="#OF" class="headerlink" title="OF"></a>OF</h4><p>溢出标志位，在有符号数运算时，可能会产生溢出，即小于最小值或大于最大值，如果超出，就会让OF=1</p><h4 id="adc指令"><a href="#adc指令" class="headerlink" title="adc指令"></a>adc指令</h4><p>adc是带进位加法指令，它利用了CF位上记录的进位值</p><p>格式 adc 对象1，对象2</p><p>功能 对象1=对象1+对象2+CF</p><p>例</p><figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">mov</span> <span class="built_in">ax</span>,<span class="number">2</span></span><br><span class="line"><span class="keyword">mov</span> <span class="built_in">bx</span>,<span class="number">1</span></span><br><span class="line"><span class="keyword">sub</span> <span class="built_in">bx</span>,<span class="built_in">ax</span></span><br><span class="line"><span class="keyword">adc</span> <span class="built_in">ax</span>,<span class="number">1</span></span><br></pre></td></tr></table></figure><p>执行后ax=4，adc执行时，相当于计算 ax+1+CF=2+1+1=4</p><p>这个指令有什么意义呢？实际上加法都可以分为两步操作，第一步是低位相加，第二步是高位相加再加上低位的进位，用汇编语言可以表示为</p><figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">add</span> <span class="built_in">al</span>,<span class="built_in">bl</span></span><br><span class="line"><span class="keyword">adc</span> <span class="number">ah</span>,<span class="number">bh</span></span><br></pre></td></tr></table></figure><p>这样我们就可以对更大的数据进行运算</p><p>例：计算1EF0001000H+2010001EF0H,结果放在ax（最高16位），bx，cx中<br>计算分三步</p><ol><li>先将低16位相加，完成后，CF记录本次进位值</li><li>再将中16位与CF相加，完成后，CF记录本次相加进位值</li><li>最后将高16位与CF相加<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">mov</span> <span class="built_in">ax</span>,<span class="number">001eh</span></span><br><span class="line"><span class="keyword">mov</span> <span class="built_in">bx</span>,<span class="number">0f000h</span></span><br><span class="line"><span class="keyword">mov</span> <span class="built_in">cx</span>,<span class="number">1000h</span></span><br><span class="line"><span class="keyword">add</span> <span class="built_in">cx</span>,<span class="number">1ef0h</span></span><br><span class="line"><span class="keyword">add</span> <span class="built_in">bx</span>,<span class="number">1000h</span></span><br><span class="line"><span class="keyword">adc</span> <span class="built_in">ax</span>,<span class="number">0020h</span></span><br></pre></td></tr></table></figure></li></ol><h4 id="sbb指令"><a href="#sbb指令" class="headerlink" title="sbb指令"></a>sbb指令</h4><p>带借位减法指令</p><p>格式 sbb 对象1，对象2</p><p>功能： 对象1=对象1-对象2-CF</p><h4 id="cmp指令"><a href="#cmp指令" class="headerlink" title="cmp指令"></a>cmp指令</h4><p>比较指令，相当于减法指令，但是不保存结果，只对标志寄存器产生影响</p><p>格式： cmp 对象1，对象2</p><p>功能： 对象1-对象2，但并不保存结果，对寄存器产生影响</p><p>例：</p><p>cmp ax，bx</p><ol><li><p>ax=bx，则ax-bx=0，zf=1</p></li><li><p>ax！=bx，则zf=0</p></li><li><p>ax&lt;bx, 将产生借位，cf=1</p></li><li><p>ax&gt;=bx, cf=0</p></li><li><p>ax&gt;bx  ,不产生借位结果又不为0，所以zf=0，cf=0</p></li><li><p>ax&lt;=bx,可能产生借位结果也可能为0，所以zf=1或cf=1</p></li></ol><p>这是无符号位的，还有有符号位的</p><p>同理 </p><ol><li>ax=bx，则zf=1</li><li>ax！=bx，zf=0</li></ol><p>但是这时就不能简单的用sf来判断了，因为sf只是符号标志位，它记录了计算结果的正负，但它并不能判断溢出。所以我们同时还要运用寄存器of来判断溢出</p><p>例： sf=1，of=0. of=0，说明没有溢出，直接用sf判断即可，sf=1说明ax&lt;bx</p><p>sf=1,of=1.这样就说明有溢出，<strong>因此说明是由于溢出导致结果为负，所以真正的结果必然为正</strong>，所以ax&gt;bx</p><p>sf=0,,of=1. 有溢出，ah&lt;bh</p><h4 id="标志寄存器在debug中的表示"><a href="#标志寄存器在debug中的表示" class="headerlink" title="标志寄存器在debug中的表示"></a>标志寄存器在debug中的表示</h4><table><thead><tr><th>标志</th><th>值为1的标记</th><th>值为0的标记</th></tr></thead><tbody><tr><td>of</td><td>ov</td><td>nv</td></tr><tr><td>sf</td><td>ng</td><td>pl</td></tr><tr><td>zf</td><td>zr</td><td>nz</td></tr><tr><td>pf</td><td>pe</td><td>po</td></tr><tr><td>cf</td><td>cy</td><td>nc</td></tr><tr><td>df</td><td>dn</td><td>up</td></tr></tbody></table>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;标志寄存器16位中只有9位有特殊作用&lt;/p&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;0&lt;/th&gt;
-&lt;th&gt;1&lt;/th&gt;
-&lt;th&gt;2&lt;/th&gt;
-&lt;th&gt;3&lt;/th&gt;
-&lt;th&gt;4&lt;/th&gt;
-&lt;th&gt;5&lt;/th&gt;
-&lt;th&gt;6&lt;/th&gt;
-&lt;th&gt;7&lt;/th&gt;
-&lt;th&gt;8
-      
-    
-    </summary>
-    
-    
-      <category term="汇编" scheme="http://xinhecuican.github.io/categories/%E6%B1%87%E7%BC%96/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>汇编语言写函数</title>
-    <link href="http://xinhecuican.github.io/2020/01/28/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%86%99%E5%87%BD%E6%95%B0/"/>
-    <id>http://xinhecuican.github.io/2020/01/28/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80%E5%86%99%E5%87%BD%E6%95%B0/</id>
-    <published>2020-01-28T01:10:00.000Z</published>
-    <updated>2020-01-28T02:40:56.293Z</updated>
-    
-    <content type="html"><![CDATA[<p>例,计算data段第一行的三次方，并储存到第二行上</p><figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">assume</span> <span class="built_in">cs</span>:code,<span class="built_in">ds</span>:data</span><br><span class="line">data <span class="meta">segment</span></span><br><span class="line">    <span class="built_in">dw</span> <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span></span><br><span class="line">    <span class="built_in">dd</span> <span class="number">8</span> dup (<span class="number">0</span>)</span><br><span class="line">data ends</span><br><span class="line">code <span class="meta">segment</span></span><br><span class="line"><span class="symbol">start:</span> <span class="keyword">mov</span> <span class="built_in">ax</span>,data</span><br><span class="line">     <span class="keyword">mov</span> <span class="built_in">ds</span>,<span class="built_in">ax</span></span><br><span class="line">     <span class="keyword">mov</span> <span class="built_in">si</span>,<span class="number">0</span></span><br><span class="line">     <span class="keyword">mov</span> <span class="built_in">di</span>,<span class="number">16</span></span><br><span class="line"><span class="symbol">  s:</span> <span class="keyword">mov</span> <span class="built_in">bx</span>,[<span class="built_in">si</span>]</span><br><span class="line">    <span class="keyword">call</span> cube</span><br><span class="line">    <span class="keyword">mov</span> [<span class="built_in">di</span>],<span class="built_in">ax</span></span><br><span class="line">    <span class="keyword">mov</span> [<span class="built_in">di</span>].<span class="number">2</span>,<span class="built_in">dx</span> ；这个的含义是[<span class="built_in">di</span>]的第二个字节</span><br><span class="line">    <span class="keyword">add</span> <span class="built_in">si</span>,<span class="number">2</span></span><br><span class="line">    <span class="keyword">add</span> <span class="built_in">di</span>,<span class="number">4</span></span><br><span class="line">    <span class="keyword">loop</span> s</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">mov</span> <span class="built_in">ax</span>,<span class="number">4c00h</span></span><br><span class="line">    <span class="keyword">int</span> <span class="number">21h</span></span><br><span class="line"><span class="symbol">cube:</span> <span class="keyword">mov</span> <span class="built_in">ax</span>,<span class="built_in">bx</span></span><br><span class="line">    <span class="keyword">mul</span> <span class="built_in">bx</span></span><br><span class="line">    <span class="keyword">mul</span> <span class="built_in">bx</span></span><br><span class="line">    <span class="keyword">ret</span></span><br><span class="line"> code ends</span><br><span class="line"> end start</span><br></pre></td></tr></table></figure><p> 这个程序函数是cube，注意想要跳转就用call，想要返回就用ret。这时返回值存在ax和dx中，参数在bx中，可如果有多个参数，寄存器不够时，可以用栈来传递参数</p><h3 id="用栈传递参数"><a href="#用栈传递参数" class="headerlink" title="用栈传递参数"></a>用栈传递参数</h3><p> 例：计算（a-b）^3，a，b为字型数据<br> 参数 进入子程序时，栈顶存放ip，后面依次存放a，b<br> 结果：（dx：ax）=(a-b)^3<br> <figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">difcube:</span> <span class="keyword">push</span> <span class="built_in">bp</span></span><br><span class="line">      <span class="keyword">mov</span> <span class="built_in">bp</span>,<span class="built_in">sp</span></span><br><span class="line">      <span class="keyword">mov</span> <span class="built_in">ax</span>,[<span class="built_in">bp</span>+<span class="number">4</span>] <span class="comment">;将a的值送入栈中</span></span><br><span class="line">      <span class="keyword">sub</span> <span class="built_in">ax</span>,[<span class="built_in">bp</span>+<span class="number">6</span>] ；减去b的值</span><br><span class="line">      <span class="keyword">mov</span> <span class="built_in">bp</span>,<span class="built_in">ax</span></span><br><span class="line">      <span class="keyword">mul</span> <span class="built_in">bp</span></span><br><span class="line">      <span class="keyword">mul</span> <span class="built_in">bp</span></span><br><span class="line">      <span class="keyword">pop</span> <span class="built_in">bp</span></span><br><span class="line">      <span class="keyword">ret</span> <span class="number">4</span></span><br></pre></td></tr></table></figure><br> ret n的含义为，pop ip add sp，n</p><p> 而ret 4 的原因是此时栈中有2个数据，要想把栈清空，要移动四个单位（字型）。而push bp ，pop bp 是为了保证bp中的数据没有改变</p><h3 id="寄存器冲突问题"><a href="#寄存器冲突问题" class="headerlink" title="寄存器冲突问题"></a>寄存器冲突问题</h3><p> 例 将data段中的字母变为大写，以0结尾<br> <figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"> data <span class="meta">segment</span></span><br><span class="line">   <span class="built_in">db</span> <span class="string">'fafdsfs'</span>,<span class="number">0</span></span><br><span class="line"> data ends</span><br><span class="line"> code <span class="meta">segment</span></span><br><span class="line"><span class="symbol"> start:</span> <span class="keyword">mov</span> <span class="built_in">ax</span>,data</span><br><span class="line">      <span class="keyword">mov</span> <span class="built_in">ds</span>,<span class="built_in">ax</span></span><br><span class="line">      <span class="keyword">mov</span> <span class="built_in">bx</span>,<span class="number">0</span></span><br><span class="line">      <span class="keyword">mov</span> <span class="built_in">cx</span>,<span class="number">4</span></span><br><span class="line">      </span><br><span class="line"><span class="symbol">    s:</span> <span class="keyword">mov</span> <span class="built_in">si</span>,<span class="built_in">bx</span></span><br><span class="line">      <span class="keyword">call</span> capital</span><br><span class="line">      <span class="keyword">add</span> <span class="built_in">bx</span>,<span class="number">5</span></span><br><span class="line">      <span class="keyword">loop</span> s</span><br><span class="line">      </span><br><span class="line">      <span class="keyword">mov</span> <span class="built_in">ax</span>,<span class="number">4c00h</span></span><br><span class="line">      <span class="keyword">int</span> <span class="number">21h</span></span><br><span class="line"><span class="symbol">capital:</span> <span class="keyword">mov</span> <span class="built_in">cl</span>,,[<span class="built_in">si</span>]</span><br><span class="line">      <span class="keyword">mov</span> <span class="number">ch</span>,<span class="number">0</span></span><br><span class="line">      <span class="keyword">jcxz</span> ok</span><br><span class="line">      <span class="keyword">and</span> <span class="built_in">byte</span> <span class="built_in">ptr</span> [<span class="built_in">si</span>],<span class="number">11011111b</span></span><br><span class="line">      <span class="keyword">inc</span> <span class="built_in">si</span></span><br><span class="line">      <span class="keyword">jmp</span> short capital</span><br><span class="line"><span class="symbol">    ok:</span><span class="keyword">ret</span></span><br><span class="line">code ends</span><br><span class="line">end start</span><br></pre></td></tr></table></figure><br>这个程序实际上是有问题的，因为进行一次capital后，cx的值一定为0，直接退出主程序的循环</p><p>要解决这个问题，有两种方案</p><ol><li>找另一个没有使用的寄存器</li><li>不要使用会发生冲突的寄存器</li></ol><p>这样实际上是不可能的，例如cx，循环便一定会冲突</p><p>解决方案就是，在进入函数前把所用到寄存器的内容保存起来，结束函数在进行使用</p><p>由此我们可以得到子程序设计的标准</p><figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">子程序开始： 子程序中使用的寄存器入栈</span><br><span class="line">         子程序内容</span><br><span class="line">         子程序所使用寄存器出栈</span><br><span class="line">         返回 （<span class="keyword">ret</span> ，<span class="keyword">retf</span>）</span><br></pre></td></tr></table></figure><p> 这里要注意一个问题，当把寄存器内容入栈后，sp会发生改变，如果子程序中也要使用栈要注意地址的变化</p><p> 同时还要注意入账和出栈的顺序<br> 例<br> <figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">capital:</span> <span class="keyword">push</span> <span class="built_in">cx</span></span><br><span class="line">      <span class="keyword">push</span> <span class="built_in">si</span></span><br><span class="line">      ...</span><br><span class="line">      <span class="keyword">pop</span> <span class="built_in">si</span></span><br><span class="line">      <span class="keyword">pop</span> <span class="built_in">cx</span></span><br></pre></td></tr></table></figure><br> 后进先出</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;例,计算data段第一行的三次方，并储存到第二行上&lt;/p&gt;
-&lt;figure class=&quot;highlight x86asm&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span cl
-      
-    
-    </summary>
-    
-    
-      <category term="汇编" scheme="http://xinhecuican.github.io/categories/%E6%B1%87%E7%BC%96/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>mul指令</title>
-    <link href="http://xinhecuican.github.io/2020/01/27/mul%E6%8C%87%E4%BB%A4/"/>
-    <id>http://xinhecuican.github.io/2020/01/27/mul%E6%8C%87%E4%BB%A4/</id>
-    <published>2020-01-27T03:34:00.000Z</published>
-    <updated>2020-01-27T05:08:54.404Z</updated>
-    
-    <content type="html"><![CDATA[<p>两个相乘的数：</p><p>如果是8位，那么一个默认在al中，另一个在8位寄存器或内存字节单元中，如果是16位，一个在ax中，另一个在16位寄存器或内存字单元中</p><p>结果： 如果是8位，结果默认在ax中，如果是16位，高位默认在dx中，低位在ax中</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;两个相乘的数：&lt;/p&gt;
-&lt;p&gt;如果是8位，那么一个默认在al中，另一个在8位寄存器或内存字节单元中，如果是16位，一个在ax中，另一个在16位寄存器或内存字单元中&lt;/p&gt;
-&lt;p&gt;结果： 如果是8位，结果默认在ax中，如果是16位，高位默认在dx中，低位在ax中&lt;/p&gt;
-
-      
-    
-    </summary>
-    
     
     
   </entry>
