@@ -72,7 +72,7 @@
 
 
 
-  <meta name="keywords" content="快排," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -85,16 +85,15 @@
 
 
 
-<meta name="description" content="步骤：1.先从数列中取出一个数作为基准数。 2．分区过程，将比这个数大的数全放到它的右边，小于或等于它的数全放到它的左边。 3．再对左右区间重复第二步，直到各区间只有一个数。 例 6 1 2 7 9 3 4 5 10 8 进行排序 1 以6为基准数，先从右边找比6小的数，我们用一个变量j一步步向左移动，好在移动三次后我 们找到了5，j为7。现在再让另一个变量i向右移动去找比6大的数，当i为3时找到">
+<meta name="description" content="宏定义就是在开始用井号（#）定义一个函数或者是常量，这种定义在编译器中被处理，运算速度快，但使用宏定义时可能会出现一些隐蔽的问题 例如： 123#define DATA sizeof(int)for(int i&#x3D;cnt;i-DATA&gt;&#x3D;0;i-&#x3D;DATA) 乍一看这样做似乎没什么问题，要注意sizeof返回的是一个无符号数，有符号数和无符号数做比较的时候会先把有符号数变成无符号数。而负数的有">
 <meta property="og:type" content="article">
-<meta property="og:title" content="快速排序">
-<meta property="og:url" content="http://xinhecuican.github.io/2020/01/05/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/index.html">
+<meta property="og:title" content="宏定义">
+<meta property="og:url" content="http://xinhecuican.github.io/2020/02/27/%E5%AE%8F%E5%AE%9A%E4%B9%89/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="步骤：1.先从数列中取出一个数作为基准数。 2．分区过程，将比这个数大的数全放到它的右边，小于或等于它的数全放到它的左边。 3．再对左右区间重复第二步，直到各区间只有一个数。 例 6 1 2 7 9 3 4 5 10 8 进行排序 1 以6为基准数，先从右边找比6小的数，我们用一个变量j一步步向左移动，好在移动三次后我 们找到了5，j为7。现在再让另一个变量i向右移动去找比6大的数，当i为3时找到">
-<meta property="article:published_time" content="2020-01-05T05:42:00.000Z">
-<meta property="article:modified_time" content="2020-01-23T07:31:21.889Z">
+<meta property="og:description" content="宏定义就是在开始用井号（#）定义一个函数或者是常量，这种定义在编译器中被处理，运算速度快，但使用宏定义时可能会出现一些隐蔽的问题 例如： 123#define DATA sizeof(int)for(int i&#x3D;cnt;i-DATA&gt;&#x3D;0;i-&#x3D;DATA) 乍一看这样做似乎没什么问题，要注意sizeof返回的是一个无符号数，有符号数和无符号数做比较的时候会先把有符号数变成无符号数。而负数的有">
+<meta property="article:published_time" content="2020-02-27T01:53:00.000Z">
+<meta property="article:modified_time" content="2020-02-27T02:02:14.262Z">
 <meta property="article:author" content="John Doe">
-<meta property="article:tag" content="快排">
 <meta name="twitter:card" content="summary">
 
 
@@ -125,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="http://xinhecuican.github.io/2020/01/05/快速排序/"/>
+  <link rel="canonical" href="http://xinhecuican.github.io/2020/02/27/宏定义/"/>
 
 
 
 
 
-  <title>快速排序 | Hexo</title>
+  <title>宏定义 | Hexo</title>
   
 
 
@@ -303,7 +302,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://xinhecuican.github.io/2020/01/05/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/">
+    <link itemprop="mainEntityOfPage" href="http://xinhecuican.github.io/2020/02/27/%E5%AE%8F%E5%AE%9A%E4%B9%89/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -320,7 +319,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">快速排序</h1>
+          <h1 class="post-title" itemprop="name headline">宏定义</h1>
         
 
         <div class="post-meta">
@@ -332,8 +331,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-05T13:42:00+08:00">
-                2020-01-05
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-27T09:53:00+08:00">
+                2020-02-27
               </time>
             
 
@@ -355,8 +354,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
+                  <a href="/categories/%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index">
+                    <span itemprop="name">基础</span>
                   </a>
                 </span>
 
@@ -392,33 +391,10 @@
       
 
       
-        <p>步骤：<br>1.先从数列中取出一个数作为基准数。</p>
-<p>2．分区过程，将比这个数大的数全放到它的右边，小于或等于它的数全放到它的左边。</p>
-<p>3．再对左右区间重复第二步，直到各区间只有一个数。</p>
-<p>例 6 1 2 7 9 3 4 5 10 8 进行排序<p><br> 1 以6为基准数，先从右边找比6小的数，我们用一个变量j一步步向左移动，好在移动三次后我<br> 们找到了5，j为7。现在再让另一个变量i向右移动去找比6大的数，当i为3时找到了7.现在再让5<br> 和7互换，得到了6 1 2 5 9 3 4 7 10 8,。在让j向左移动，找到了4，i向右找到了9，再让两个数<br> 互换，j再向左到3，此时i向左也到3，两者相遇，便让3和6互换，第一次结束<br> （想想原因）<p><br> 2 现在分为两部分，左边全比6小，右边全比6大，为3 1 2 5 4 6 9 7 10 8<br> 再在3 1 2 5 4 中用同样的方法搜索一次得到2 1 3 5 4,再在2 1 中搜索得到1 2<br> 然后在5 4 中搜索得到4 5，左边排序完成，右边用同样的方法排序就可得到答案</p>
-<p> 不说了，上代码</p>
-<pre><code>void sort(int a[],int l,int r)
-{
-  if(l&lt;r)//l大于等于r时这一段排序结束
-  {
-      int i=l,j=r,x=a[l];
-      while(i&lt;j)
-      {
-          while(i&lt;j&amp;&amp;a[j]&gt;=x)
-          {
-              j--;
-          }
-          while(i&lt;j&amp;&amp;a[i]&lt;=x)
-          {
-              i++;
-          }
-          swap(a[i],a[j]);
-      }
-      swap(a[l],a[i]);
-      sort(a,l,i-1);
-      sort(a,i+1,r);
- }
-}</code></pre><p>  引用 转载请标明出处，原文地址：<a href="http://blog.csdn.net/morewindows/article/details/6684558" target="_blank" rel="noopener">http://blog.csdn.net/morewindows/article/details/6684558</a><br>         csdn 我见过最通俗易懂的快速排序过程讲解，转自《坐在马桶上看算法：快速排序》</p>
+        <p>宏定义就是在开始用井号（#）定义一个函数或者是常量，这种定义在编译器中被处理，运算速度快，但使用宏定义时可能会出现一些隐蔽的问题</p>
+<p>例如：</p>
+<figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#define <span class="keyword">DATA</span> sizeof(<span class="built_in">int</span>)</span><br><span class="line"></span><br><span class="line">for(<span class="built_in">int</span> i=cnt;i-<span class="keyword">DATA</span>&gt;=<span class="number">0</span>;i-=<span class="keyword">DATA</span>)</span><br></pre></td></tr></table></figure>
+<p>乍一看这样做似乎没什么问题，要注意sizeof返回的是一个无符号数，有符号数和无符号数做比较的时候会先把有符号数变成无符号数。而负数的有符号数最高位一定为1，这样就可能会导致数据异常。</p>
 
       
     </div>
@@ -439,12 +415,6 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/%E5%BF%AB%E6%8E%92/" rel="tag"><i class="fa fa-tag"></i> 快排</a>
-          
-        </div>
-      
 
       
       
@@ -454,8 +424,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/01/04/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98/" rel="next" title="动态规划背包问题">
-                <i class="fa fa-chevron-left"></i> 动态规划背包问题
+              <a href="/2020/02/26/delete%E7%9A%84%E4%B8%80%E4%B8%AA%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" rel="next" title="delete的一个注意事项">
+                <i class="fa fa-chevron-left"></i> delete的一个注意事项
               </a>
             
           </div>
@@ -463,10 +433,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/01/07/%E5%90%88%E6%B3%95%E7%9A%84%E5%AD%97%E7%AC%A6%E5%B8%B8%E9%87%8F/" rel="prev" title="合法的字符常量">
-                合法的字符常量 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -496,7 +462,7 @@
           
 
   
-<iframe title="livere"   src="https://was.livere.me/comment/city?id=city&refer=http://xinhecuican.github.io/2020/01/05/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/&uid=MTAyMC80ODE3Mi8yNDY2OA==&site=http://xinhecuican.github.io/2020/01/05/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/&title=快速排序" scrolling="" frameborder="0" id="lv-comment-399" style="min-width: 100%; width: 100px; min-height: 400px; overflow: auto; border: 0px; z-index: 124212; height: 800px;" ></iframe>
+<iframe title="livere"   src="https://was.livere.me/comment/city?id=city&refer=http://xinhecuican.github.io/2020/02/27/%E5%AE%8F%E5%AE%9A%E4%B9%89/&uid=MTAyMC80ODE3Mi8yNDY2OA==&site=http://xinhecuican.github.io/2020/02/27/%E5%AE%8F%E5%AE%9A%E4%B9%89/&title=宏定义" scrolling="" frameborder="0" id="lv-comment-399" style="min-width: 100%; width: 100px; min-height: 400px; overflow: auto; border: 0px; z-index: 124212; height: 800px;" ></iframe>
 
   
 

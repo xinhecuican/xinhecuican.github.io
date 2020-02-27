@@ -92,7 +92,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="与运算这里的与运算并不是平常的bool运算，而是按位与。这种运算比加减法快 符号： &amp; 例： 1010&amp;1000&#x3D;1000 1001&amp;0110&#x3D;0000 含义： 1&amp;1&#x3D;1,1&amp;0&#x3D;0,0&amp;1&#x3D;0,0&amp;0&#x3D;0，只要不是两个都是,1，那么结果就是0 应用：  替换指定位的值  一个典型应用就是大小写转换，如果平常转换我们可能要写一大堆，但是经过">
 <meta property="article:published_time" content="2020-02-25T07:56:00.000Z">
-<meta property="article:modified_time" content="2020-02-25T14:10:31.232Z">
+<meta property="article:modified_time" content="2020-02-27T10:28:00.592Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 
@@ -453,8 +453,18 @@
 <p>那什么时候用逻辑右移还是算术右移呢？一般来说，有符号数算术右移，无符号数逻辑右移。因为有符号数用的是补码，如果是负数右移最高位补1才能让这个数还是负数</p>
 <p>应用：</p>
 <ul>
-<li>不用-号把1变成-1<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">int</span> a=<span class="number">1</span>;</span><br><span class="line">a&gt;&gt;=<span class="number">31</span>;<span class="comment">//最高位为1，其余都为0</span></span><br><span class="line">a&lt;&lt;=<span class="number">31</span>;<span class="comment">//都为1</span></span><br></pre></td></tr></table></figure></li>
+<li>不用-号把1变成-1<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">int</span> a=<span class="number">1</span>;</span><br><span class="line">a&gt;&gt;=<span class="number">31</span>;<span class="comment">//最高位为1，其余都为0</span></span><br><span class="line">a&lt;&lt;=<span class="number">31</span>;<span class="comment">//都为1</span></span><br></pre></td></tr></table></figure>
+
+</li>
 </ul>
+<h4 id="右移运算对整数的影响"><a href="#右移运算对整数的影响" class="headerlink" title="右移运算对整数的影响"></a>右移运算对整数的影响</h4><p>右移运算相当于除2，之后低位相当于小数点后面的数字。这时我们把它截断相当于取整，对于无符号数和有符号数中的非负数，这个取整是没什么影响的，但对于有符号数中的负数，取整却与除法取整有所偏差。</p>
+<p>除法取整是趋向于零。也就是说，非负数向下取整，负数向上取整。而右移确是把小数后面的数全部舍弃，就相当于让这个数更小了。</p>
+<p>例如： 假如右移后是 -1234.32423，结果是-1235.因为把小数点舍弃会使这个数更小。</p>
+<p>有一种情况除外。就是右移产生的小数点位中全是0，这时舍弃它并不会产生影响，所以不会发生向下取整。</p>
+<p>为了解决这个问题，一种办法就是 <code>(x+2^k-1)&gt;&gt;k</code>，为了加快速度，可以写成<code>(x+1&lt;&lt;k-1)&gt;&gt;k</code></p>
+<p>现在来看这个式子的正确性，当最后几位全为0时，例如1000000右移三位，那么2^3-1=0b111,因为本来这个结果就是正确答案，现在加上111并没有改变它的值，0b1111000.111后面三位舍弃与原来相同，因此这个时候结论正确</p>
+<p>如果后面不是全为0，那么这时必定产生进位，例如1101右移三位那么加上之后必定会使第四位进一位，这时我们再右移三位，便相当于让原来的答案加一，达到了向上取整的效果</p>
+<p>最后，只有在有符号数中的负数中才要采用这种算法，在非负数中直接右移即可</p>
 
       
     </div>
@@ -576,7 +586,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">77</span>
+                  <span class="site-state-item-count">78</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -638,7 +648,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#与运算"><span class="nav-number">1.</span> <span class="nav-text">与运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#或运算"><span class="nav-number">2.</span> <span class="nav-text">或运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#异或"><span class="nav-number">3.</span> <span class="nav-text">异或</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#按位非"><span class="nav-number">4.</span> <span class="nav-text">按位非</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#左移"><span class="nav-number">5.</span> <span class="nav-text">左移</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#右移"><span class="nav-number">6.</span> <span class="nav-text">右移</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#与运算"><span class="nav-number">1.</span> <span class="nav-text">与运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#或运算"><span class="nav-number">2.</span> <span class="nav-text">或运算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#异或"><span class="nav-number">3.</span> <span class="nav-text">异或</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#按位非"><span class="nav-number">4.</span> <span class="nav-text">按位非</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#左移"><span class="nav-number">5.</span> <span class="nav-text">左移</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#右移"><span class="nav-number">6.</span> <span class="nav-text">右移</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#右移运算对整数的影响"><span class="nav-number">6.1.</span> <span class="nav-text">右移运算对整数的影响</span></a></li></ol></li></ol></div>
             
 
           </div>

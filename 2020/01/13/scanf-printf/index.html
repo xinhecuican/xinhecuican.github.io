@@ -92,7 +92,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="scanf格式：scanf(const char *format, …) format – 这是 C 字符串，包含了以下各项中的一个或多个：空格字符、非空格字符 和 format 说明符。 format 说明符形式为: [&#x3D;%[*][width][modifiers]type&#x3D;] *这是一个可选的星号，表示数据是从流 stream 中读取的，但是可以被忽视，即它不存储在对应的参数中。 width">
 <meta property="article:published_time" content="2020-01-13T12:18:00.000Z">
-<meta property="article:modified_time" content="2020-01-13T12:45:34.898Z">
+<meta property="article:modified_time" content="2020-02-26T11:52:25.731Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 
@@ -399,11 +399,84 @@
 <p>width    这指定了在当前读取操作中读取的最大字符数。</p>
 <p>modifiers    为对应的附加参数所指向的数据指定一个不同于整型（针对 d、i 和 n）、无符号整型（针对 o、u 和 x）或浮点型（针对 e、f 和 g）的大小： h ：短整型（针对 d、i 和 n），或无符号短整型（针对 o、u 和 x） l ：长整型（针对 d、i 和 n），或无符号长整型（针对 o、u 和 x），或双精度型（针对 e、f 和 g） L ：长双精度型（针对 e、f 和 g）</p>
 <p>type    一个字符，指定了要被读取的数据类型以及数据读取方式。具体参见下一个表格</p>
-<p>| %a、%A|读入一个浮点值(仅 C99 有效)|float*|<br>| :——————————————-|<br>| %c     | 单个字符：读取下一个字符。如果指定了一个不为 1 的宽度 width，函数会读取 width 个字符，并通过参数传递，把它们存储在数组中连续位置。在末尾不会追加空字符。|    char *<br>|%d    |十进制整数：数字前面的 + 或 - 号是可选的。|    int *<br>|%e、%E、%f、%F、%g、%G    |浮点数：包含了一个小数点、一个可选的前置符号 + 或 -、一个可选的后置字符 e 或 E，以及一个十进制数字。两个有效的实例 -732.103 和 7.12e4    |float *<br>|%i|    读入十进制，八进制，十六进制整数 。|    int *<br>|%o    |八进制整数。|    int *<br>|%s    |字符串。这将读取连续字符，直到遇到一个空格字符（空格字符可以是空白、换行和制表符）。|    char *<br>|%u    |无符号的十进制整数。|    unsigned int *</p>
-<h4 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h4><p>用%c 读数组时注意它不会读入换行符，因此每次用完之后要用getchar()<br>，而%s就不用担心这个问题</p>
+<table>
+<thead>
+<tr>
+<th>符号</th>
+<th>作用</th>
+<th>具体含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>%a、%A</td>
+<td>读入一个浮点值(仅 C99 有效)</td>
+<td>float*</td>
+</tr>
+<tr>
+<td>%c</td>
+<td>单个字符：读取下一个字符。如果指定了一个不为 1 的宽度 width，函数会读取 width 个字符，并通过参数传递，把它们存储在数组中连续位置。在末尾不会追加空字符。</td>
+<td>char *</td>
+</tr>
+<tr>
+<td>%d</td>
+<td>十进制整数：数字前面的 + 或 - 号是可选的。</td>
+<td>int *</td>
+</tr>
+<tr>
+<td>%e、%E、%f、%F、%g、%G</td>
+<td>浮点数：包含了一个小数点、一个可选的前置符号 + 或 -、一个可选的后置字符 e 或 E，以及一个十进制数字。两个有效的实例 -732.103 和 7.12e4</td>
+<td>float *</td>
+</tr>
+<tr>
+<td>%i</td>
+<td>读入十进制，八进制，十六进制整数 。</td>
+<td>int *</td>
+</tr>
+<tr>
+<td>%o</td>
+<td>八进制整数。</td>
+<td>int *</td>
+</tr>
+<tr>
+<td>%s</td>
+<td>字符串。这将读取连续字符，直到遇到一个空格字符（空格字符可以是空白、换行和制表符）。</td>
+<td>char *</td>
+</tr>
+<tr>
+<td>%u</td>
+<td>无符号的十进制整数。</td>
+<td>unsigned int *</td>
+</tr>
+</tbody></table>
+<h4 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h4><p>scanf读入数据时碰到空白符（空白符：指空格符、制表符、回车符）就会停止函数，例如 你输入 1\n ，这个时候scanf只会读入1，\n留在了缓冲区，但是这样会导致十分严重的问题，所以scanf还有一个特性，<strong>忽略在数据之前的空白符</strong>，而这样当你读取完之后，缓冲区中一般还有一个空白符，如果这个时候你用了”%c”，那么%c会毫不犹豫的把这个空白字符读入，%c是读入一个字符，无论这个字符是什么。%s就会忽略前面的空白符</p>
+<p>这里有一个相对有用的方法 scanf（”%d\n”,…)这样就会在读入一个整数的同时把后面的\n也读入，但是如果不是换行符而是空格那就熟手无策了。</p>
+<p>另外还有一种函数gets()，这个函数除了换行符其它一概不管，并且他会把换行符吃掉（变成NULL）</p>
 <h3 id="printf"><a href="#printf" class="headerlink" title="printf"></a>printf</h3><p>格式 printf(“&lt;格式化字符串&gt;”, &lt;参量表&gt;);</p>
 <p>声明 printf(const char *format, …)</p>
-<p>|格式字符|    意义<br>|————————-|<br>|d|    以十进制形式输出带符号整数(正数不输出符号)<br>|o    |以八进制形式输出无符号整数(不输出前缀0)<br>|x,X    |以十六进制形式输出无符号整数(不输出前缀Ox)<br>|u    |以十进制形式输出无符号整数<br>|f|    以小数形式输出单、双精度实数<br>|e,E    |以指数形式输出单、双精度实数<br>|g,G    |以%f或%e中较短的输出宽度输出单、双精度实数<br>|c|    输出单个字符<br>|s    |输出字符串<br>|p|    输出指针地址<br>|lu    |32位无符号整数<br>|llu|    64位无符号整数</p>
+<p>format中有这几种：%[标志][最小宽度][.精度][类型长度]类型</p>
+<h5 id=""><a href="#" class="headerlink" title="%"></a>%</h5><p>|格式字符|    意义<br>|————————-|<br>|d|    以十进制形式输出带符号整数(正数不输出符号)<br>|o    |以八进制形式输出无符号整数(不输出前缀0)<br>|x,X    |以十六进制形式输出无符号整数(不输出前缀Ox)<br>|u    |以十进制形式输出无符号整数<br>|f|    以小数形式输出单、双精度实数<br>|e,E    |以指数形式输出单、双精度实数<br>|g,G    |以%f或%e中较短的输出宽度输出单、双精度实数<br>|c|    输出单个字符<br>|s    |输出字符串<br>|p|    输出指针地址<br>|lu    |32位无符号整数<br>|llu|    64位无符号整数</p>
+<h5 id="标志"><a href="#标志" class="headerlink" title="标志"></a>标志</h5><p>|字符|    名称|    说明|<br>|–|<br>|-|    减号|    结果左对齐，右边填空格。默认是右对齐，左边填空格。<br>|+    |加号|    输出符号(正号或负号)<br>|space|    空格|    输出值为正时加上空格，为负时加上负号<br>|#    |井号|    type是o、x、X时，增加前缀0、0x、0X。type是a、A、e、E、f、g、G时，一定使用小数点。默认的，如果使用.0控制不输出小数部分，则不输出小数点。type是g、G时，尾部的0保留。<br>|0|    数字零|    将输出的前面补上0，直到占满指定列宽为止（不可以搭配使用“-”）</p>
+<p>示例：</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">printf(<span class="string">"%5d<span class="subst">\n</span>"</span>,<span class="number">1000</span>); 				<span class="comment">//默认右对齐,左边补空格</span></span><br><span class="line">printf(<span class="string">"%-5d<span class="subst">\n</span>"</span>,<span class="number">1000</span>); 				<span class="comment">//左对齐,右边补空格</span></span><br><span class="line"></span><br><span class="line">printf(<span class="string">"%+d %+d<span class="subst">\n</span>"</span>,<span class="number">1000</span>,<span class="number">-1000</span>);		<span class="comment">//输出正负号</span></span><br><span class="line"></span><br><span class="line">printf(<span class="string">"% d % d<span class="subst">\n</span>"</span>,<span class="number">1000</span>,<span class="number">-1000</span>);		<span class="comment">//正号用空格替代，负号输出</span></span><br><span class="line"></span><br><span class="line">printf(<span class="string">"%x %#x<span class="subst">\n</span>"</span>,<span class="number">1000</span>,<span class="number">1000</span>);		<span class="comment">//输出0x</span></span><br><span class="line"></span><br><span class="line">printf(<span class="string">"%.0f %#.0f<span class="subst">\n</span>"</span>,<span class="number">1000.0</span>,<span class="number">1000.0</span>)<span class="comment">//当小数点后不输出值时依然输出小数点</span></span><br><span class="line"></span><br><span class="line">printf(<span class="string">"%g %#g<span class="subst">\n</span>"</span>,<span class="number">1000.0</span>,<span class="number">1000.0</span>);	<span class="comment">//保留小数点后后的0</span></span><br><span class="line"></span><br><span class="line">printf(<span class="string">"%05d<span class="subst">\n</span>"</span>,<span class="number">1000</span>);				<span class="comment">//前面补0</span></span><br></pre></td></tr></table></figure>
+<h3 id="输出最小宽度"><a href="#输出最小宽度" class="headerlink" title="输出最小宽度"></a>输出最小宽度</h3><p>这是指的小数点前的宽度，如果小于最小宽度，前面补空格，如果大于，那么直接输出。另外如果用了flag中的0，那么前面将会补零</p>
+<p>|width    |描述|    示例<br>|—|<br>|数值|    十进制整数    |printf(“%06d”,1000);输出:001000<br>|*    |星号。不显示指明输出最小宽度，而是以星号代替，在printf的输出参数列表中给出    |printf(“%0*d”,6,1000);输出:001000</p>
+<h3 id="精度"><a href="#精度" class="headerlink" title="精度"></a>精度</h3><p>精度以点<code>.</code>开头，后面再接</p>
+<p>|.precision    |描述<br>|—|<br>|.数值    |十进制整数。(1)对于整型（d,i,o,u,x,X）,precision表示输出的最小的数字个数，不足补前导零，超过不截断。(2)对于浮点型（a, A, e, E, f ），precision表示小数点后数值位数，默认为六位，不足补后置0，超过则截断。(3)对于类型说明符g或G，表示可输出的最大有效数字。(4)对于字符串（s），precision表示最大可输出字符数，不足正常输出，超过则截断。precision不显示指定，则默认为0<br>|.*    |以星号代替数值，类似于width中的*，在输出参数列表中指定精度。</p>
+<p>对于整数型，这个作用与最小宽度作用类似，例如，”%08d” 与 “%.8d”作用是一样的</p>
+<h3 id="类型长度"><a href="#类型长度" class="headerlink" title="类型长度"></a>类型长度</h3><p>printf(“%hhd\n”,’A’);                //输出有符号char<br>printf(“%hhu\n”,’A’+128);            //输出无符号char<br>printf(“%hd\n”,32767);                //输出有符号短整型short int<br>printf(“%hu\n”,65535);                //输出无符号短整型unsigned short int<br>printf(“%ld\n”,0x7fffffffffffffff);    //输出有符号长整型long int<br>printf(“%lu\n”,0xffffffffffffffff);    //输出有符号长整型unsigned long int</p>
+<h3 id="缓冲"><a href="#缓冲" class="headerlink" title="缓冲"></a>缓冲</h3><p>用户在输入字符时，其实并不是直接显示到屏幕上，而是放在缓冲区中，在一些条件之下才会输出</p>
+<p>printf在glibc中默认为行缓冲，在下列情况中会刷新缓冲区</p>
+<ol>
+<li>缓冲区填满</li>
+<li>写入字符中有换行符（’\n’)或回车符（’\r’)</li>
+<li>调用fflush手动刷新缓冲区</li>
+<li>调用scanf读取数据时</li>
+</ol>
+<p>可使用setbuf(stdout,NULL)关闭行缓冲，或者setbuf(stdout,uBuff)设置新的缓冲区，uBuff为自己指定的缓冲区。也可以使用setvbuf(stdout,NULL,_IOFBF,0);来改变标准输出为全缓冲。全缓冲与行缓冲的区别在于遇到换行符不刷新缓冲区。</p>
+<h3 id="注意-1"><a href="#注意-1" class="headerlink" title="注意"></a>注意</h3><p>在运用printf和scanf中，前面的format是一个字符串，所以可以作为参数传入</p>
+<p>例如：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">putout</span><span class="params">(<span class="keyword">char</span>* s)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   <span class="built_in">printf</span>(s,...);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样可以用一个函数实现重复输出不同类型的进制数</p>
 
       
     </div>
@@ -525,7 +598,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">77</span>
+                  <span class="site-state-item-count">78</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -587,7 +660,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#scanf"><span class="nav-number">1.</span> <span class="nav-text">scanf</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#注意"><span class="nav-number">1.1.</span> <span class="nav-text">注意</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#printf"><span class="nav-number">2.</span> <span class="nav-text">printf</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#scanf"><span class="nav-number">1.</span> <span class="nav-text">scanf</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#注意"><span class="nav-number">1.1.</span> <span class="nav-text">注意</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#printf"><span class="nav-number">2.</span> <span class="nav-text">printf</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#null"><span class="nav-number">2.0.1.</span> <span class="nav-text">%</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#标志"><span class="nav-number">2.0.2.</span> <span class="nav-text">标志</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输出最小宽度"><span class="nav-number">3.</span> <span class="nav-text">输出最小宽度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#精度"><span class="nav-number">4.</span> <span class="nav-text">精度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类型长度"><span class="nav-number">5.</span> <span class="nav-text">类型长度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缓冲"><span class="nav-number">6.</span> <span class="nav-text">缓冲</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注意-1"><span class="nav-number">7.</span> <span class="nav-text">注意</span></a></li></ol></div>
             
 
           </div>
