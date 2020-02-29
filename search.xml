@@ -1,6 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>初始化文件</title>
+    <url>/2020/02/27/%E5%88%9D%E5%A7%8B%E5%8C%96%E6%96%87%E4%BB%B6/</url>
+    <content><![CDATA[<p>有两个初始化文件，第一个文件是在启动时执行的，叫做登录文件（login file).第二个文件是在启动shell时执行的，叫做环境文件(environment file)。<br>有的shell还有注销文件，注销文件指的是在shell关闭时执行的文件</p>
+<p>bash shell中登录文件文件名（.Bash_profile .bash_login)，环境文件（.bashrc),注销文件（.bash_logout)</p>
+<p>这些文件名都是以点开头，点文件的别名是隐藏文件，意义是除非你用ls指令去查看，通常状况你无法看到这个文件</p>
+<p>登录shell指的是登录时默认启动的shell，非登录shel则需要在登录shell中执行命令才可以启动</p>
+<p>登录shell执行登录文件和环境文件，非登录shell只执行环境文件</p>
+<h4 id="初始化文件中放什么内容"><a href="#初始化文件中放什么内容" class="headerlink" title="初始化文件中放什么内容"></a>初始化文件中放什么内容</h4><p>登录文件有两项任务，设置环境和初始化工作对话（不知道什么意思）</p>
+<p>所以登录文件有两项任务</p>
+<ol>
+<li>创建或修改环境变量的命令（PATH,PAGER等）</li>
+<li>执行所有一次性操作的命令</li>
+</ol>
+]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+  </entry>
+  <entry>
     <title>宏定义</title>
     <url>/2020/02/27/%E5%AE%8F%E5%AE%9A%E4%B9%89/</url>
     <content><![CDATA[<p>宏定义就是在开始用井号（#）定义一个函数或者是常量，这种定义在编译器中被处理，运算速度快，但使用宏定义时可能会出现一些隐蔽的问题</p>
@@ -32,7 +51,7 @@
 <ul>
 <li>替换指定位的值</li>
 </ul>
-<p>一个典型应用就是大小写转换，如果平常转换我们可能要写一大堆，但是经过仔细观察后发现大写字母和小写字母之间差距只有第5位，如果第五位为0，就是小写字母，为1就是大写字母，所以只要<code>a&amp;0b11011111</code>这一段代码就可以完成小写到大写的转换</p>
+<p>一个典型应用就是大小写转换，如果平常转换我们可能要写一大堆，但是经过仔细观察后发现大写字母和小写字母之间差距只有第5位，如果第五位为0，就是大写字母，为1就是小写字母，所以只要<code>a&amp;0b11011111</code>这一段代码就可以完成小写到大写的转换</p>
 <ul>
 <li>清零</li>
 </ul>
@@ -293,9 +312,17 @@
 <li><p>set 显示shell所有选项的当前值，如果用 -o 则会简要的显示 +o是详细的显示。例如，set -o ignoreeof 这样在按 Ctrl+D的时候就不会突出shell了，如果想复位，只要+o</p>
 </li>
 <li><p>alias 建立别名，语法为alias name=command 例如 <code>alias It=&#39;-l temp*&#39;</code>。这种时候，单引号就比双引号要好，因为这样可以防止一些特殊字符被转义。此外，可以通过alias name 知道这个别名的当前值。可以只输入alias得知所有别名，通过unalias删去别名。如果想暂时不用别名，可以在命令之前输入” \ “</p>
-<h5 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h5></li>
+</li>
 </ul>
-<table>
+<h5 id="编辑命令"><a href="#编辑命令" class="headerlink" title="编辑命令"></a>编辑命令</h5><ul>
+<li>gedit 文本编辑器，相当于windows下的记事本</li>
+<li>#注释</li>
+</ul>
+<h5 id="条件执行指令"><a href="#条件执行指令" class="headerlink" title="条件执行指令"></a>条件执行指令</h5><p>command1 &amp;&amp; command2</p>
+<p>在条件1满足的情况下执行command2</p>
+<p>command1|| command2</p>
+<p>在条件1不满足的情况下也执行command2</p>
+<h5 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h5><table>
 <thead>
 <tr>
 <th>变量名</th>

@@ -92,7 +92,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="命令语法一次输入多条命令，可以在命令之间用 ;分割开来 语法： 命令名称 选项 参数 选项有时被称为开关（switches）或标志（flags），选项通常是由一个连字符后面接着一些字母，或者两个连字符后接着一个单词构成。例如 –help，–version（显示版本信息） 使用多个单字符选项时，可以把他们连接在一起，用一个连字符来表示。例如 ls -lF。注意，unix的选项区分大小写 实际上许多长">
 <meta property="article:published_time" content="2020-02-16T02:20:00.000Z">
-<meta property="article:modified_time" content="2020-02-24T13:02:09.638Z">
+<meta property="article:modified_time" content="2020-02-29T02:20:14.872Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 
@@ -509,9 +509,17 @@
 <li><p>set 显示shell所有选项的当前值，如果用 -o 则会简要的显示 +o是详细的显示。例如，set -o ignoreeof 这样在按 Ctrl+D的时候就不会突出shell了，如果想复位，只要+o</p>
 </li>
 <li><p>alias 建立别名，语法为alias name=command 例如 <code>alias It=&#39;-l temp*&#39;</code>。这种时候，单引号就比双引号要好，因为这样可以防止一些特殊字符被转义。此外，可以通过alias name 知道这个别名的当前值。可以只输入alias得知所有别名，通过unalias删去别名。如果想暂时不用别名，可以在命令之前输入” \ “</p>
-<h5 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h5></li>
+</li>
 </ul>
-<table>
+<h5 id="编辑命令"><a href="#编辑命令" class="headerlink" title="编辑命令"></a>编辑命令</h5><ul>
+<li>gedit 文本编辑器，相当于windows下的记事本</li>
+<li>#注释</li>
+</ul>
+<h5 id="条件执行指令"><a href="#条件执行指令" class="headerlink" title="条件执行指令"></a>条件执行指令</h5><p>command1 &amp;&amp; command2</p>
+<p>在条件1满足的情况下执行command2</p>
+<p>command1|| command2</p>
+<p>在条件1不满足的情况下也执行command2</p>
+<h5 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h5><table>
 <thead>
 <tr>
 <th>变量名</th>
@@ -656,7 +664,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">78</span>
+                  <span class="site-state-item-count">79</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -718,7 +726,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#命令语法"><span class="nav-number">1.</span> <span class="nav-text">命令语法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#用户提醒命令"><span class="nav-number">2.</span> <span class="nav-text">用户提醒命令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#登入登出命令"><span class="nav-number">3.</span> <span class="nav-text">登入登出命令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#快捷键和便捷输入命令"><span class="nav-number">4.</span> <span class="nav-text">快捷键和便捷输入命令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#立即使用的程序"><span class="nav-number">5.</span> <span class="nav-text">立即使用的程序</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#变量显示命令"><span class="nav-number">6.</span> <span class="nav-text">变量显示命令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#环境变量"><span class="nav-number">7.</span> <span class="nav-text">环境变量</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#命令语法"><span class="nav-number">1.</span> <span class="nav-text">命令语法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#用户提醒命令"><span class="nav-number">2.</span> <span class="nav-text">用户提醒命令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#登入登出命令"><span class="nav-number">3.</span> <span class="nav-text">登入登出命令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#快捷键和便捷输入命令"><span class="nav-number">4.</span> <span class="nav-text">快捷键和便捷输入命令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#立即使用的程序"><span class="nav-number">5.</span> <span class="nav-text">立即使用的程序</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#变量显示命令"><span class="nav-number">6.</span> <span class="nav-text">变量显示命令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#编辑命令"><span class="nav-number">7.</span> <span class="nav-text">编辑命令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#条件执行指令"><span class="nav-number">8.</span> <span class="nav-text">条件执行指令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#环境变量"><span class="nav-number">9.</span> <span class="nav-text">环境变量</span></a></li></ol></div>
             
 
           </div>
