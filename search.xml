@@ -1,6 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>过滤器</title>
+    <url>/2020/03/01/%E8%BF%87%E6%BB%A4%E5%99%A8/</url>
+    <content><![CDATA[<p>管道线中一个个的命令就是过滤器（从标准输入中接受数据，然后再传到标准输出中），但是在最前面的和在最后面的不一定是过滤器。</p>
+<h3 id="cat-复制"><a href="#cat-复制" class="headerlink" title="cat 复制"></a>cat 复制</h3><p>cat的用途就是把标准输入中的数据复制到标准输出中</p>
+<p>应用：可以与重定向结合。cat &gt; data，这样从键盘中输入的数据将直接传到data文件中</p>
+<p>此外还可以让文件内容显示在控制台上，有 cat &lt; data，标准输入变成了data文件，标准输出是屏幕。为了方便，直接cat 文件名也是可以的</p>
+<p>此外，tail也有类似的功能，但是它只能显示最后的十行</p>
+<p>另外一个应用就是把一个文件复制到另一个文件。例如，cat &lt; data &gt; newdata</p>
+<h4 id="增强cat功能"><a href="#增强cat功能" class="headerlink" title="增强cat功能"></a>增强cat功能</h4><p>cat &lt; file…= cat file …</p>
+<p>有三个点说明了可以同时输入多个文件，这样就为组合多个文件提供了途径</p>
+<p>cat data1 data2 data3 &gt;file</p>
+<p>后缀： </p>
+<pre><code>-n 在每行后面加一个行号
+-b 与-n一起使用，不要对空白行加行号
+-s 将多个连续的空白行变成一个空白行</code></pre><h3 id="split-分为不同文件"><a href="#split-分为不同文件" class="headerlink" title="split 分为不同文件"></a>split 分为不同文件</h3><p>语法 split [-d] [-a num] [-l lines] [file [prefix]]</p>
+<p>作用： 将一个大文件分解成几个小文件。默认情况下，split将创建1000行长的空间</p>
+<p>参数： </p>
+<pre><code>-l 创建一个5000行的空间
+-d 将文件名改为从00开始编号
+-a 后面加数字，例如3表示从000开始，总共1000个文件名</code></pre><p>默认情况下，split创建的文件将以x开头，后面加aa，ab等</p>
+<h3 id="tac-反转复制"><a href="#tac-反转复制" class="headerlink" title="tac 反转复制"></a>tac 反转复制</h3><p>相关过滤器： cat，rev</p>
+<p>作用：和cat类似，但是在写入文件时把文件内容反转（tac是将cat反过来）。注意，这里的反过来并不是指从后往前倒着写，而是把行与行将顺序反过来。</p>
+<h3 id="rev-反转字符顺序"><a href="#rev-反转字符顺序" class="headerlink" title="rev 反转字符顺序"></a>rev 反转字符顺序</h3><p>相关过滤器： cat tac</p>
+<p>作用： 将各行字符顺序反转</p>
+<p>语法： rev [file…]</p>
+<p>例如： 有一个文件data，里面有</p>
+<figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line"><span class="number">12345</span></span><br><span class="line">abcde</span><br><span class="line">AxAxA</span><br></pre></td></tr></table></figure>
+<p>之后用rev后会变成</p>
+<figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line"><span class="number">54321</span></span><br><span class="line">edcba</span><br><span class="line">AxAxA</span><br></pre></td></tr></table></figure>
+<p>rev也是直接输出到标准输出上的，也就是说并不会对源文件造成改变，如果想输出到文件中，还要重定向一下</p>
+<h3 id="head，tail-从数据开头或者结尾读取"><a href="#head，tail-从数据开头或者结尾读取" class="headerlink" title="head，tail 从数据开头或者结尾读取"></a>head，tail 从数据开头或者结尾读取</h3><p>语法： head/tail [-n lines]，lines是希望选择的数据行</p>
+<p>默认情况下，head和tail都只会选择十行数据，用-n可以选择任意行数</p>
+<p>例： calculate | tail -n 15</p>
+<h3 id="colrm-删除数据列"><a href="#colrm-删除数据列" class="headerlink" title="colrm 删除数据列"></a>colrm 删除数据列</h3><p>相关过滤器： cut paste</p>
+<p>colrm（“column remove”)程序从标准输入中读取数据，删除指定数据列（也就是竖的删除），将剩余数据写入标准输出</p>
+<p>语法： colrm [startcol [endcol]]，编号从1开始</p>
+<p>例： colrm 14 30 &lt;students | less</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>加法溢出和乘法溢出</title>
+    <url>/2020/02/29/%E5%8A%A0%E6%B3%95%E6%BA%A2%E5%87%BA/</url>
+    <content><![CDATA[<p>无符号数加法便是两个数相加，如果超过最大值那么就截断超过的位数。截断超过的位数也就相当于mod2^n,因为这样做超过的位都会被模去变成0.</p>
+<p>有符号数加法相对复杂。先是变成无符号数加法，加完 之后再按有符号数编码去理解，这样就会产生两种溢出，正溢出和负溢出。</p>
+<p>首先，如果两个数一正一负，则不可能产生进位。</p>
+<p>正溢出很好理解，最高一位为符号位，假如两个正数一加，超过了最大值，那么第2^w-1位就会变成1，这一位是符号位，因此这个数字便会变成负数。</p>
+<p>如果是负溢出，因为两个数最高位一定为1，如果2^w-2位没有发生进位的话，那么就产生了溢出，此时最高位为0，变成正数</p>
+<p>例如：10111111+10111111（-65）=01111110（126）</p>
+<p>所以说如果是正数溢出，则需要-2^m,如果是负溢出，则需要加上2^m</p>
+<p>判定是否发生溢出 </p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">s=a+b;</span><br><span class="line"><span class="keyword">if</span>((a&gt;<span class="number">0</span>==b&gt;<span class="number">0</span>)&amp;&amp;(a&lt;<span class="number">0</span>!=s&lt;<span class="number">0</span>))</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">"发生溢出"</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="string">"没有发生溢出"</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>a&gt;0==b&gt;0的意义是判断a和b的符号是否相同,相同为真.a&lt;0!=s&lt;0的含义是判断a和s的符号是否<br>乘法溢出相对简单粗暴，直接把高位全部截断，也就是对2^w取模，有符号数乘法是先不管符号位直接把后面的位相乘，然后再把符号位补上。</p>
+]]></content>
+      <categories>
+        <category>计算机系统基础</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>重定向与管道</title>
+    <url>/2020/02/29/%E9%87%8D%E5%AE%9A%E5%90%91%E4%B8%8E%E7%AE%A1%E9%81%93/</url>
+    <content><![CDATA[<h3 id="标准输入-标准输出和标准错误"><a href="#标准输入-标准输出和标准错误" class="headerlink" title="标准输入 标准输出和标准错误"></a>标准输入 标准输出和标准错误</h3><p>基本思想：每个基于文本的程序都可以从任何源接受输入，并向任何目标输出</p>
+<p>标准输入指的是一种读取数据的通用办法，标准输出有两种，一种是标准输出，另一种是标准错误</p>
+<p>而输入输出其实正常情况下有shell决定。为了保证程序的输出，需要告诉shell将输出目标设置成文件。</p>
+<h3 id="重定向标准输出"><a href="#重定向标准输出" class="headerlink" title="重定向标准输出"></a>重定向标准输出</h3><p>在登陆时，shell会自动将标准输入设置成键盘，将标准输出和标准错误设置成屏幕。</p>
+<p>但是每次输入命令时，可以告诉shell在此命令执行期间更换输入输出对象。</p>
+<p>如果想把一个命令输出送到一个文件中，例如sort命令 可以写成 sort &gt; names</p>
+<p>以这种命令输出时，如果文件不存在，shell会自动创建这个文件。如果文件存在，那他将会把文件内容全部清空然后再把内容输入到里面去</p>
+<p>如果我们只想追加内容到这个文件中，可以用 &gt;&gt; 。如果文件不存在，这个命令也会创建新文件，如果存在，那么会追加内容到后面。</p>
+<p>如果取消清空文件重新输入的选项，可以设置nonclobber选项。但是设置完之后，如果确实想替换掉这个文件，可以临时忽略掉noclobber，这时需要用<code>&gt;|</code>替换 &gt;</p>
+<h4 id="重定向标准输入"><a href="#重定向标准输入" class="headerlink" title="重定向标准输入"></a>重定向标准输入</h4><p>符号： &lt;</p>
+<p>左边是你要运行的程序，右边是你有读入数据的文件</p>
+<p>例如 sort &lt; /etc/passwd</p>
+<p>标准输入和标准输出可以同时指定</p>
+<p>例如 sort &lt; rawdata &gt; report，这个命令会把rawdata中的数据给sort处理，然后把结果给report文件</p>
+<h4 id="重定向标准错误"><a href="#重定向标准错误" class="headerlink" title="重定向标准错误"></a>重定向标准错误</h4><p>shell提供两种输出目标，标准输出和标准错误。正常情况下，两种输出同时显示在屏幕上，在需要时，可以把两种输出分隔开。</p>
+<p>首先对unix处理I/O过程了解。每个输入源和每个输出目标都有一个唯一的数字标识，，这个数字 称为文件描述符。例如一个进程可能从#8中读取数据，并将文件写入#6中</p>
+<p>例如为了将输出写入到文件8中，可以sort 8&gt; results，results就是第8个文件</p>
+<p>默认情况下，Unix为每个进程提供三个预定义的文件描述符。而且大多数时候都可以使用。0代表标准输入，1代表标准输出，3代表标准错误。</p>
+<p>所以要想重定向输入，可以用 0&lt;</p>
+<p>而要想重定向标准输出，可以用 1&gt; ,这样错误信息就会留在屏幕上便于我们查看，而输出信息在文件中。如果想让标准错误在文件中，可以 2&gt;</p>
+<p>此外，平常写的 &gt; 实际上代表的是 1&gt;</p>
+<h4 id="子shell"><a href="#子shell" class="headerlink" title="子shell"></a>子shell</h4><p>进程就是加载到内存中准备运行的程序，当进程需要启动另一个进程的时候，这个进程创建了一个副本进程，原始跌进程叫做父进程，而这个进程叫做子进程。</p>
+<p>而子进程一旦结束，优惠唤醒父进程继续执行命令，此时子进程消失。</p>
+<p>子shell指的是在父shell中重新开一个shell，这样在子shell中造成的改变不会影响父shell，甚至是环境变量也一样，除非把它写入初始化文件中，不然这个全局变量也会随着子shell进程的结束而消亡。</p>
+<p>如果有时你想在子shell中执行一条指令，又不想启动一个全新的shell，那么一个办法就是在外面加上小括号(),例如 （date）</p>
+<h4 id="组合标准重定向输出和错误"><a href="#组合标准重定向输出和错误" class="headerlink" title="组合标准重定向输出和错误"></a>组合标准重定向输出和错误</h4><p>在bash中，基本思想是建议将一种类型的输出重定向到一个文件，然后再追加</p>
+<p>command x&gt; outputfile y&gt;&amp;x</p>
+<blockquote>
+<p>&amp; 符号的意思是替代</p>
+</blockquote>
+<p>y&gt;&amp; x的意思是把2的输出发送给1相同的位置。</p>
+<p>例： sort 2&gt;&amp;1 &gt;output 这个意思是把2的输出发送到与一相同的位置，而一是发送到屏幕的，于是2也发送到屏幕了</p>
+<h4 id="抛弃输出"><a href="#抛弃输出" class="headerlink" title="抛弃输出"></a>抛弃输出</h4><p>为什么要抛弃输出呢？</p>
+<p>有时候，需要运行一个程序。因为可能你并不关心这个文件的输出。有时候，可能希望查看文件正常输出，而不关心错误信息。</p>
+<p>那么这个时候只需要重定向输出到 /etc/null即可。这个文件的特殊之处在于发送给他的任何东西都会消失。所以 它有个奇怪的名字叫做 位桶(bit bucket)</p>
+<h3 id="管道线"><a href="#管道线" class="headerlink" title="管道线"></a>管道线</h3><p>管道线的作用就是让各个程序组合发挥作用</p>
+<p>shell允许创建一系列的命令，在这一系列的命令中，一个命令的标准输出可以发送给下一个程序的标准输入。当这样做时，两个程序之间的连接就是管道，而命令序列本身叫做管道线。</p>
+<p>在创建管道线时，只需将希望键入的命令用竖线| （管道符号） 分隔开即可</p>
+<p>能从标准输入读取文本，并向标准输出写入文本的程序，称为过滤器。</p>
+<h4 id="管道线分流-tee"><a href="#管道线分流-tee" class="headerlink" title="管道线分流 tee"></a>管道线分流 tee</h4><p>有时候，可能希望把程序的输出发送到两个地方</p>
+<p>语法： tee [-a] file…</p>
+<p>file就是希望将数据发送到的文件的名称</p>
+<p>例：cat name1 name2 | tee masterlist | grep Harley</p>
+<p>这个指令中的tee 会将输出保存到masterlist中并且将cat的输出给grep</p>
+<p>同样，如果这个文件存在，那么tee将会重写这个文件。如果想要追加内容，那么可以tee -a(append)</p>
+]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+  </entry>
+  <entry>
     <title>初始化文件</title>
     <url>/2020/02/27/%E5%88%9D%E5%A7%8B%E5%8C%96%E6%96%87%E4%BB%B6/</url>
     <content><![CDATA[<p>有两个初始化文件，第一个文件是在启动时执行的，叫做登录文件（login file).第二个文件是在启动shell时执行的，叫做环境文件(environment file)。<br>有的shell还有注销文件，注销文件指的是在shell关闭时执行的文件</p>
