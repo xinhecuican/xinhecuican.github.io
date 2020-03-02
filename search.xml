@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>程序的进入与退出</title>
+    <url>/2020/03/02/%E7%A8%8B%E5%BA%8F%E7%9A%84%E8%BF%9B%E5%85%A5%E4%B8%8E%E9%80%80%E5%87%BA/</url>
+    <content><![CDATA[<h3 id="程序进入"><a href="#程序进入" class="headerlink" title="程序进入"></a>程序进入</h3><p>在c++中，程序的入口是main函数，并且main函数有两个参数</p>
+<p>int main(int argc,char* argv[])</p>
+<p>argc是用来记录输入的参数的数量，而argv是用来记录输入的参数。</p>
+<p>例如： ls -la，这个输入中有两个参数，第一个参数是ls，第二个参数是-la</p>
+<h3 id="程序退出"><a href="#程序退出" class="headerlink" title="程序退出"></a>程序退出</h3><p>return 是退出当前函数，例如退出主函数或者退出任意函数</p>
+<p>而 exit 是退出当前进程，也就是说就算是在调用的函数中，这个程序也会直接结束</p>
+<p>exit(0)表示正常退出，exit(1)表示异常退出，更深入的内容涉及到进程。</p>
+]]></content>
+      <categories>
+        <category>基础</category>
+        <category>c++</category>
+      </categories>
+  </entry>
+  <entry>
     <title>过滤器</title>
     <url>/2020/03/01/%E8%BF%87%E6%BB%A4%E5%99%A8/</url>
     <content><![CDATA[<p>管道线中一个个的命令就是过滤器（从标准输入中接受数据，然后再传到标准输出中），但是在最前面的和在最后面的不一定是过滤器。</p>

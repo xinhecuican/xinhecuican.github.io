@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://xinhecuican.github.io/"/>
-  <updated>2020-03-01T08:27:07.781Z</updated>
+  <updated>2020-03-02T06:33:06.911Z</updated>
   <id>http://xinhecuican.github.io/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>程序的进入与退出</title>
+    <link href="http://xinhecuican.github.io/2020/03/02/%E7%A8%8B%E5%BA%8F%E7%9A%84%E8%BF%9B%E5%85%A5%E4%B8%8E%E9%80%80%E5%87%BA/"/>
+    <id>http://xinhecuican.github.io/2020/03/02/%E7%A8%8B%E5%BA%8F%E7%9A%84%E8%BF%9B%E5%85%A5%E4%B8%8E%E9%80%80%E5%87%BA/</id>
+    <published>2020-03-02T06:18:00.000Z</published>
+    <updated>2020-03-02T06:33:06.911Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="程序进入"><a href="#程序进入" class="headerlink" title="程序进入"></a>程序进入</h3><p>在c++中，程序的入口是main函数，并且main函数有两个参数</p><p>int main(int argc,char* argv[])</p><p>argc是用来记录输入的参数的数量，而argv是用来记录输入的参数。</p><p>例如： ls -la，这个输入中有两个参数，第一个参数是ls，第二个参数是-la</p><h3 id="程序退出"><a href="#程序退出" class="headerlink" title="程序退出"></a>程序退出</h3><p>return 是退出当前函数，例如退出主函数或者退出任意函数</p><p>而 exit 是退出当前进程，也就是说就算是在调用的函数中，这个程序也会直接结束</p><p>exit(0)表示正常退出，exit(1)表示异常退出，更深入的内容涉及到进程。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;程序进入&quot;&gt;&lt;a href=&quot;#程序进入&quot; class=&quot;headerlink&quot; title=&quot;程序进入&quot;&gt;&lt;/a&gt;程序进入&lt;/h3&gt;&lt;p&gt;在c++中，程序的入口是main函数，并且main函数有两个参数&lt;/p&gt;
+&lt;p&gt;int main(int argc,char
+      
+    
+    </summary>
+    
+    
+      <category term="基础" scheme="http://xinhecuican.github.io/categories/%E5%9F%BA%E7%A1%80/"/>
+    
+      <category term="c++" scheme="http://xinhecuican.github.io/categories/%E5%9F%BA%E7%A1%80/c/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>过滤器</title>
@@ -491,30 +518,6 @@
     
     
       <category term="数学" scheme="http://xinhecuican.github.io/categories/%E6%95%B0%E5%AD%A6/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title> 链式前向星</title>
-    <link href="http://xinhecuican.github.io/2020/02/04/%E9%93%BE%E8%A1%A8-%E9%93%BE%E5%BC%8F%E5%89%8D%E5%90%91%E6%98%9F/"/>
-    <id>http://xinhecuican.github.io/2020/02/04/%E9%93%BE%E8%A1%A8-%E9%93%BE%E5%BC%8F%E5%89%8D%E5%90%91%E6%98%9F/</id>
-    <published>2020-02-04T06:11:22.000Z</published>
-    <updated>2020-02-05T08:19:49.660Z</updated>
-    
-    <content type="html"><![CDATA[<p>静态链表（链式前向星）是表示图的另外一种方法</p><h3 id="前向星"><a href="#前向星" class="headerlink" title="前向星"></a>前向星</h3><p>前向星也称为邻接数组</p><p>例 <img src="/images/static_linked_list_example.svg" alt=""></p><p>总共有这几条边</p><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">(<span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">(<span class="number">2</span>, <span class="number">4</span>)</span><br><span class="line">(<span class="number">3</span>, <span class="number">4</span>)</span><br><span class="line">(<span class="number">1</span>, <span class="number">3</span>)</span><br><span class="line">(<span class="number">4</span>, <span class="number">3</span>)</span><br><span class="line">(<span class="number">3</span>, <span class="number">2</span>)</span><br><span class="line">(<span class="number">1</span>, <span class="number">4</span>)</span><br></pre></td></tr></table></figure><p>现在将这些边按从小到大排序，变成</p><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">(<span class="number">1</span>, <span class="number">2</span>) --|</span><br><span class="line">(<span class="number">1</span>, <span class="number">3</span>) --| =&gt; len[<span class="number">1</span>] = <span class="number">3</span></span><br><span class="line">(<span class="number">1</span>, <span class="number">4</span>) --|</span><br><span class="line">(<span class="number">2</span>, <span class="number">4</span>)</span><br><span class="line">(<span class="number">3</span>, <span class="number">2</span>) =&gt; head[<span class="number">3</span>] = <span class="number">5</span></span><br><span class="line">(<span class="number">3</span>, <span class="number">4</span>)</span><br><span class="line">(<span class="number">4</span>, <span class="number">3</span>)</span><br></pre></td></tr></table></figure><p>然后再将数据填入三个数组中，分别是</p><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">es</span><span class="selector-attr">[]</span> 这个数组是用来记录每条边的终点的，而因为前面已经排好了序，起点很容易知道</span><br><span class="line"><span class="selector-tag">head</span><span class="selector-attr">[]</span> 记录以<span class="selector-tag">i</span>为起点的边在数组中的第一个位置</span><br><span class="line"><span class="selector-tag">len</span><span class="selector-attr">[]</span> 记录以<span class="selector-tag">i</span>为起点的边有多少</span><br></pre></td></tr></table></figure><table><thead><tr><th>Array</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th></tr></thead><tbody><tr><td>es</td><td>2</td><td>3</td><td>4</td><td>4</td><td>2</td><td>4</td><td>3</td></tr><tr><td>head</td><td>1</td><td>4</td><td>5</td><td>7</td><td></td><td></td><td></td></tr><tr><td>len</td><td>3</td><td>1</td><td>2</td><td>1</td><td></td><td></td><td></td></tr></tbody></table><p>head[2]=4表示2为起点的第一条边在es中的位置为4</p><p>通过这几个函数我们就能很清楚的知道点与边的关系</p><p>例如，我们想知道起点为1的所有边，我们只需要知道len[1]和head[1],这样我们知道起点为1的边有三个且从es[1]开始</p><p>但是前向星要排序，时间复杂度高，因此并不怎么使用</p><h3 id="邻接表"><a href="#邻接表" class="headerlink" title="邻接表"></a>邻接表</h3><p>邻接表通常用vector来实现</p><p>vector<int> g[max_v]，g[i]表示了以i为起点的所有边</p><h3 id="链式前向星"><a href="#链式前向星" class="headerlink" title="链式前向星"></a>链式前向星</h3><p>其他部分与前向星相同，但是链式前向星多了一个next数组，取消了len数组（因为没有排序了）</p><p>next数组的含义是下一条以i为节点的边在es中的位置，如果这是最后一个节点，则令next[i]=0</p><p>例如</p><table><thead><tr><th>Array</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th></tr></thead><tbody><tr><td>es</td><td>2</td><td>4</td><td>4</td><td>3</td><td>3</td><td>2</td><td>4</td></tr><tr><td>head</td><td>1</td><td>2</td><td>3</td><td>5</td><td></td><td></td><td></td></tr><tr><td>next</td><td>4</td><td>0</td><td>6</td><td>7</td><td>0</td><td>0</td><td>0</td></tr></tbody></table><p>举个例子，我们要求以1为起始边的所有节点</p><p>先从head中知道了第一个以1为起始点的边是1号，所以可以知道（1，2），然后next[1]=4,而4的es=3，所以（1,3）也知道，然后同理</p><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="built_in">int</span> maxn=<span class="number">100</span>+<span class="number">10</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="built_in">int</span> maxm=<span class="number">1000</span>+<span class="number">10</span>;</span><br><span class="line"><span class="built_in">int</span> head[maxn];</span><br><span class="line"><span class="built_in">int</span> n,m,nEdge;      <span class="comment">//n为顶点数，m为边数，nEdge为存储的边的数量</span></span><br><span class="line">                    <span class="comment">//如果边是双向的，那么存储的边的数量就是2m</span></span><br><span class="line">struct NODE<span class="comment">//这里是双向的</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">int</span> to;</span><br><span class="line">    <span class="built_in">int</span> next;</span><br><span class="line">&#125;;</span><br><span class="line">NODE edge[maxm&lt;&lt;<span class="number">1</span>];</span><br><span class="line"><span class="built_in">void</span> addedges(<span class="built_in">int</span> u,<span class="built_in">int</span> v)       <span class="comment">//将边(u,v)添加进去</span></span><br><span class="line">&#123;</span><br><span class="line">    nEdge++;</span><br><span class="line">    edge[nEdge].next=head[u];</span><br><span class="line">    edge[nEdge].to=v;</span><br><span class="line">    head[u]=nEdge;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">void</span> foreach()       <span class="comment">//遍历边</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">int</span> i,k;</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(k=head[i];k!=<span class="number">-1</span>;k=edge[k].next)</span><br><span class="line">        &#123;</span><br><span class="line">            cout&lt;&lt;i&lt;&lt;<span class="string">" "</span>&lt;&lt;edge[k].to&lt;&lt;endl;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">void</span> Init()</span><br><span class="line">&#123;</span><br><span class="line">    nEdge=<span class="number">-1</span>;</span><br><span class="line">    memset(head,<span class="number">0xff</span>,sizeof(head));</span><br><span class="line">    <span class="built_in">int</span> u,v;</span><br><span class="line">    <span class="keyword">for</span>(<span class="built_in">int</span> i=<span class="number">0</span>;i&lt;m;++i)</span><br><span class="line">    &#123;</span><br><span class="line">        cin&gt;&gt;u&gt;&gt;v;</span><br><span class="line">        addedges(u,v);</span><br><span class="line">        addedges(v,u);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;静态链表（链式前向星）是表示图的另外一种方法&lt;/p&gt;
-&lt;h3 id=&quot;前向星&quot;&gt;&lt;a href=&quot;#前向星&quot; class=&quot;headerlink&quot; title=&quot;前向星&quot;&gt;&lt;/a&gt;前向星&lt;/h3&gt;&lt;p&gt;前向星也称为邻接数组&lt;/p&gt;
-&lt;p&gt;例 &lt;img src=&quot;/image
-      
-    
-    </summary>
-    
     
     
   </entry>
