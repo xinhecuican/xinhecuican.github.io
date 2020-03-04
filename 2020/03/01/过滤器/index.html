@@ -85,14 +85,14 @@
 
 
 
-<meta name="description" content="管道线中一个个的命令就是过滤器（从标准输入中接受数据，然后再传到标准输出中），但是在最前面的和在最后面的不一定是过滤器。 cat 复制cat的用途就是把标准输入中的数据复制到标准输出中 应用：可以与重定向结合。cat &gt; data，这样从键盘中输入的数据将直接传到data文件中 此外还可以让文件内容显示在控制台上，有 cat &lt; data，标准输入变成了data文件，标准输出是屏幕。为">
+<meta name="description" content="管道线中一个个的命令就是过滤器（从标准输入中接受数据，然后再传到标准输出中），但是在最前面的和在最后面的不一定是过滤器。 基础cat 复制cat的用途就是把标准输入中的数据复制到标准输出中 应用：可以与重定向结合。cat &gt; data，这样从键盘中输入的数据将直接传到data文件中 此外还可以让文件内容显示在控制台上，有 cat &lt; data，标准输入变成了data文件，标准输出是屏幕">
 <meta property="og:type" content="article">
 <meta property="og:title" content="过滤器">
 <meta property="og:url" content="http://xinhecuican.github.io/2020/03/01/%E8%BF%87%E6%BB%A4%E5%99%A8/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="管道线中一个个的命令就是过滤器（从标准输入中接受数据，然后再传到标准输出中），但是在最前面的和在最后面的不一定是过滤器。 cat 复制cat的用途就是把标准输入中的数据复制到标准输出中 应用：可以与重定向结合。cat &gt; data，这样从键盘中输入的数据将直接传到data文件中 此外还可以让文件内容显示在控制台上，有 cat &lt; data，标准输入变成了data文件，标准输出是屏幕。为">
+<meta property="og:description" content="管道线中一个个的命令就是过滤器（从标准输入中接受数据，然后再传到标准输出中），但是在最前面的和在最后面的不一定是过滤器。 基础cat 复制cat的用途就是把标准输入中的数据复制到标准输出中 应用：可以与重定向结合。cat &gt; data，这样从键盘中输入的数据将直接传到data文件中 此外还可以让文件内容显示在控制台上，有 cat &lt; data，标准输入变成了data文件，标准输出是屏幕">
 <meta property="article:published_time" content="2020-03-01T02:53:00.000Z">
-<meta property="article:modified_time" content="2020-03-01T08:27:07.781Z">
+<meta property="article:modified_time" content="2020-03-04T13:40:04.781Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 
@@ -370,26 +370,26 @@
 
       
         <p>管道线中一个个的命令就是过滤器（从标准输入中接受数据，然后再传到标准输出中），但是在最前面的和在最后面的不一定是过滤器。</p>
-<h3 id="cat-复制"><a href="#cat-复制" class="headerlink" title="cat 复制"></a>cat 复制</h3><p>cat的用途就是把标准输入中的数据复制到标准输出中</p>
+<h3 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h3><h4 id="cat-复制"><a href="#cat-复制" class="headerlink" title="cat 复制"></a>cat 复制</h4><p>cat的用途就是把标准输入中的数据复制到标准输出中</p>
 <p>应用：可以与重定向结合。cat &gt; data，这样从键盘中输入的数据将直接传到data文件中</p>
 <p>此外还可以让文件内容显示在控制台上，有 cat &lt; data，标准输入变成了data文件，标准输出是屏幕。为了方便，直接cat 文件名也是可以的</p>
 <p>此外，tail也有类似的功能，但是它只能显示最后的十行</p>
 <p>另外一个应用就是把一个文件复制到另一个文件。例如，cat &lt; data &gt; newdata</p>
-<h4 id="增强cat功能"><a href="#增强cat功能" class="headerlink" title="增强cat功能"></a>增强cat功能</h4><p>cat &lt; file…= cat file …</p>
+<h5 id="增强cat功能"><a href="#增强cat功能" class="headerlink" title="增强cat功能"></a>增强cat功能</h5><p>cat &lt; file…= cat file …</p>
 <p>有三个点说明了可以同时输入多个文件，这样就为组合多个文件提供了途径</p>
 <p>cat data1 data2 data3 &gt;file</p>
 <p>后缀： </p>
 <pre><code>-n 在每行后面加一个行号
 -b 与-n一起使用，不要对空白行加行号
--s 将多个连续的空白行变成一个空白行</code></pre><h3 id="split-分为不同文件"><a href="#split-分为不同文件" class="headerlink" title="split 分为不同文件"></a>split 分为不同文件</h3><p>语法 split [-d] [-a num] [-l lines] [file [prefix]]</p>
+-s 将多个连续的空白行变成一个空白行</code></pre><h4 id="split-分为不同文件"><a href="#split-分为不同文件" class="headerlink" title="split 分为不同文件"></a>split 分为不同文件</h4><p>语法 split [-d] [-a num] [-l lines] [file [prefix]]</p>
 <p>作用： 将一个大文件分解成几个小文件。默认情况下，split将创建1000行长的空间</p>
 <p>参数： </p>
 <pre><code>-l 创建一个5000行的空间
 -d 将文件名改为从00开始编号
 -a 后面加数字，例如3表示从000开始，总共1000个文件名</code></pre><p>默认情况下，split创建的文件将以x开头，后面加aa，ab等</p>
-<h3 id="tac-反转复制"><a href="#tac-反转复制" class="headerlink" title="tac 反转复制"></a>tac 反转复制</h3><p>相关过滤器： cat，rev</p>
+<h4 id="tac-反转复制"><a href="#tac-反转复制" class="headerlink" title="tac 反转复制"></a>tac 反转复制</h4><p>相关过滤器： cat，rev</p>
 <p>作用：和cat类似，但是在写入文件时把文件内容反转（tac是将cat反过来）。注意，这里的反过来并不是指从后往前倒着写，而是把行与行将顺序反过来。</p>
-<h3 id="rev-反转字符顺序"><a href="#rev-反转字符顺序" class="headerlink" title="rev 反转字符顺序"></a>rev 反转字符顺序</h3><p>相关过滤器： cat tac</p>
+<h4 id="rev-反转字符顺序"><a href="#rev-反转字符顺序" class="headerlink" title="rev 反转字符顺序"></a>rev 反转字符顺序</h4><p>相关过滤器： cat tac</p>
 <p>作用： 将各行字符顺序反转</p>
 <p>语法： rev [file…]</p>
 <p>例如： 有一个文件data，里面有</p>
@@ -397,13 +397,63 @@
 <p>之后用rev后会变成</p>
 <figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">54321</span></span><br><span class="line">edcba</span><br><span class="line">AxAxA</span><br></pre></td></tr></table></figure>
 <p>rev也是直接输出到标准输出上的，也就是说并不会对源文件造成改变，如果想输出到文件中，还要重定向一下</p>
-<h3 id="head，tail-从数据开头或者结尾读取"><a href="#head，tail-从数据开头或者结尾读取" class="headerlink" title="head，tail 从数据开头或者结尾读取"></a>head，tail 从数据开头或者结尾读取</h3><p>语法： head/tail [-n lines]，lines是希望选择的数据行</p>
+<h4 id="head，tail-从数据开头或者结尾读取"><a href="#head，tail-从数据开头或者结尾读取" class="headerlink" title="head，tail 从数据开头或者结尾读取"></a>head，tail 从数据开头或者结尾读取</h4><p>语法： head/tail [-n lines]，lines是希望选择的数据行</p>
 <p>默认情况下，head和tail都只会选择十行数据，用-n可以选择任意行数</p>
 <p>例： calculate | tail -n 15</p>
-<h3 id="colrm-删除数据列"><a href="#colrm-删除数据列" class="headerlink" title="colrm 删除数据列"></a>colrm 删除数据列</h3><p>相关过滤器： cut paste</p>
+<h4 id="colrm-删除数据列"><a href="#colrm-删除数据列" class="headerlink" title="colrm 删除数据列"></a>colrm 删除数据列</h4><p>相关过滤器： cut paste</p>
 <p>colrm（“column remove”)程序从标准输入中读取数据，删除指定数据列（也就是竖的删除），将剩余数据写入标准输出</p>
 <p>语法： colrm [startcol [endcol]]，编号从1开始</p>
 <p>例： colrm 14 30 &lt;students | less</p>
+<h3 id="比较文件"><a href="#比较文件" class="headerlink" title="比较文件"></a>比较文件</h3><h4 id="cmp-比较两个任意文件"><a href="#cmp-比较两个任意文件" class="headerlink" title="cmp 比较两个任意文件"></a>cmp 比较两个任意文件</h4><p>相关过滤器：comm diff sdiff</p>
+<p>语法: cmp file1 file2</p>
+<p>cmp程序逐字节的比较文件，查看两个文件是否相同。如果两个文件相同，那么不做任何处理，如果不同，将会返回第一个不同的行和列</p>
+<h4 id="comm-比较有序文件"><a href="#comm-比较有序文件" class="headerlink" title="comm 比较有序文件"></a>comm 比较有序文件</h4><p>语法：comm [-123] file1 file2</p>
+<p>comm程序一行一行的比较两个有序的文本间，程序输出三列，第一列输出只包含在第一个文件中的行，第二列输出只包含在第二个文件中的行，第三列输出两个文件中都有的行。</p>
+<p>因为comm是逐行比较，所以在比较之前最好使用sort进行排序</p>
+<p>参数： -1 -2 -3 取消第一二三列的输出</p>
+<h4 id="diff-比较无序文件"><a href="#diff-比较无序文件" class="headerlink" title="diff 比较无序文件"></a>diff 比较无序文件</h4><p>语法： diff [-bBiqswy] [-c| -Clines | -u | -Ulines] file1 file2</p>
+<p>lines是说明上下文关系的行号</p>
+<p>输出： diff的输出有三个不同的单字符指示： c（change） d（delete） a（append）。这三个字符说明了要想让两个文件相同需要做哪些改变。</p>
+<p>这三个字符左右两边都会有数字，代表着需要修改的行号。例如，3c3代表把左边文件中的第三行变成右边文件中的第三行。</p>
+<p>diff要求改变时，就会给出每一个文件的实际行，第一个文件中的行用小于号标记，第二个文件中的行用大于号标记。两组行之间还会有横线分隔开</p>
+<p>例如，第一个文件为</p>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">abcd</span><br><span class="line">asdf</span><br><span class="line"><span class="keyword">as</span> df</span><br><span class="line">xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</span><br></pre></td></tr></table></figure>
+<p>第二个文件为</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">a</span>     </span><br><span class="line"><span class="attribute">abcd</span></span><br><span class="line"><span class="attribute">asdf</span></span><br><span class="line"><span class="attribute">xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</span></span><br></pre></td></tr></table></figure>
+<p>结果为</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">0a1</span></span><br><span class="line"><span class="string">&gt;</span> <span class="string">a</span>     </span><br><span class="line"><span class="number">3</span><span class="string">,4c4</span></span><br><span class="line"><span class="string">&lt;</span> <span class="string">as</span> <span class="string">df</span></span><br><span class="line"><span class="string">&lt;</span> <span class="string">xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="string">&gt;</span> <span class="string">xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</span></span><br></pre></td></tr></table></figure>
+
+<p>a左边的数代表在左边数后面追加一行，例如0a1代表在第0行后面加上右边的第一行</p>
+<p>d一般只需要管左边的数字，它的意思是删去左边的那一行</p>
+<p>参数：</p>
+<figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="deletion">-i 忽略大小写区别</span></span><br><span class="line"><span class="deletion">-w（whitespace) 忽略所有空白符</span></span><br><span class="line"><span class="deletion">-b 忽略空白符数量上的区别，就是把多个空白符看成一个</span></span><br><span class="line"><span class="deletion">-B 忽略所有空白行，</span></span><br><span class="line"><span class="deletion">-q 当两个文本不同时，忽略所有细节，只说两文本不同</span></span><br><span class="line"><span class="deletion">-s 会明确告诉两个文本相同</span></span><br><span class="line"><span class="deletion">-c 全文比较，+代表要增加，-代表要减少，！代表要替换</span></span><br><span class="line"><span class="deletion">-u 与-c类似，但是把两个文件混合在一起显示，两个重复行只输出一个</span></span><br><span class="line"><span class="deletion">-y 把两个文件并排输出</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="sdiff"><a href="#sdiff" class="headerlink" title="sdiff"></a>sdiff</h4><p>语法： sdiff [-bBilsW] [-w columns] file1 file2</p>
+<p>作用：与 diff -y 类似，并排比较<br>参数：</p>
+<figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="deletion">-l 当两个文件有共同行时，只显示左边的列</span></span><br><span class="line"><span class="deletion">-s 不显示两个文件中任何相同的行</span></span><br><span class="line"><span class="deletion">-w+数字 改变列的宽度</span></span><br><span class="line"><span class="deletion">-i 忽略大写和小写的区别</span></span><br><span class="line"><span class="deletion">-W 忽略所有的空白符</span></span><br><span class="line"><span class="deletion">-b 忽略空白符数量上的区别</span></span><br><span class="line"><span class="deletion">-B 忽略所有空白行</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="差分"><a href="#差分" class="headerlink" title="差分"></a>差分</h4><p>例如： diff game1_ver1.0.c game2_ver2.0.c &gt; game2_ver2.1</p>
+<p>这个命令会把第一个文件和第二个文佳之间的差保存下来，这样可以节省空间，此外在日后不慎丢失文件时也有办法快速找回</p>
+<h4 id="cut-抽取数据列"><a href="#cut-抽取数据列" class="headerlink" title="cut 抽取数据列"></a>cut 抽取数据列</h4><p>相关过滤器： colrm join paste</p>
+<p>语法： cut -c list [file…]</p>
+<p>list就是要抽取的数据列，各个列之间用逗号隔开，不能有空格，或者14-19表示从14列到19列</p>
+<p>作用：抽取指定的列</p>
+<p>这种按列切分遇到长度不同的数据时就显得无能为力，因此还有另一种抽取方式，抽取字段，即按照一定的定界符进行分割（如逗号，空格等）</p>
+<p>参数：</p>
+<figure class="highlight sas"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-c  <span class="meta">list</span> [<span class="meta">file</span>...] <span class="meta">list</span>表明抽取第几个字段</span><br><span class="line">-f  <span class="meta">list</span> [-d <span class="meta">delimiter</span>] [-s] [<span class="meta">file</span>...]  -d后面是定界符种类 -s（suppress 抑制）抛弃没有定界符的行。例如 cut -f 1 -d <span class="string">':'</span> ./temp</span><br></pre></td></tr></table></figure>
+
+<h4 id="paste"><a href="#paste" class="headerlink" title="paste"></a>paste</h4><p>语法： paste [-d char…] [file…]</p>
+<p>其中char是用来做分隔符的字符，默认情况为一个制表符或者是空格</p>
+<p>作用： 把几个文件组合成一个表格（组合数据列）</p>
+<p>如果指定了不止一个定界符，那么将会轮流使用定界符</p>
+<p>例如： paste -d ‘|%’ name phone ，这个指令中就有两个定界符</p>
+<h3 id="统计和格式化"><a href="#统计和格式化" class="headerlink" title="统计和格式化"></a>统计和格式化</h3><h4 id="nl-创建行号"><a href="#nl-创建行号" class="headerlink" title="nl 创建行号"></a>nl 创建行号</h4><p>语法： nl [-v start] [-i increment] [-b a] [-n ln|rn|rz] [file…]</p>
+<p>start是起始行号 ，increment是增量</p>
+<p>作用：希望在一些数据中永久的插入行号，在输出中临时插入行号。一般状况下，插入的行号都是临时的，原始数据并不会发生改变，除非重定向输出到文件中。</p>
+<p>默认情况下，不会对空行编号</p>
+<p>参数：</p>
+<figure class="highlight diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="deletion">-v 改变起始编号，默认起始编号是1</span></span><br><span class="line"><span class="deletion">-i 改变增量，默认增量为1</span></span><br><span class="line"><span class="deletion">-b a 对所有行编号，包括空行</span></span><br><span class="line"><span class="deletion">-n ln 左对齐 rn 右对齐 rz 右对齐，有前导0</span></span><br></pre></td></tr></table></figure>
+
 
       
     </div>
@@ -587,7 +637,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#cat-复制"><span class="nav-number">1.</span> <span class="nav-text">cat 复制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#增强cat功能"><span class="nav-number">1.1.</span> <span class="nav-text">增强cat功能</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#split-分为不同文件"><span class="nav-number">2.</span> <span class="nav-text">split 分为不同文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tac-反转复制"><span class="nav-number">3.</span> <span class="nav-text">tac 反转复制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rev-反转字符顺序"><span class="nav-number">4.</span> <span class="nav-text">rev 反转字符顺序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#head，tail-从数据开头或者结尾读取"><span class="nav-number">5.</span> <span class="nav-text">head，tail 从数据开头或者结尾读取</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#colrm-删除数据列"><span class="nav-number">6.</span> <span class="nav-text">colrm 删除数据列</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#基础"><span class="nav-number">1.</span> <span class="nav-text">基础</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#cat-复制"><span class="nav-number">1.1.</span> <span class="nav-text">cat 复制</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#增强cat功能"><span class="nav-number">1.1.1.</span> <span class="nav-text">增强cat功能</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#split-分为不同文件"><span class="nav-number">1.2.</span> <span class="nav-text">split 分为不同文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#tac-反转复制"><span class="nav-number">1.3.</span> <span class="nav-text">tac 反转复制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#rev-反转字符顺序"><span class="nav-number">1.4.</span> <span class="nav-text">rev 反转字符顺序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#head，tail-从数据开头或者结尾读取"><span class="nav-number">1.5.</span> <span class="nav-text">head，tail 从数据开头或者结尾读取</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#colrm-删除数据列"><span class="nav-number">1.6.</span> <span class="nav-text">colrm 删除数据列</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#比较文件"><span class="nav-number">2.</span> <span class="nav-text">比较文件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#cmp-比较两个任意文件"><span class="nav-number">2.1.</span> <span class="nav-text">cmp 比较两个任意文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#comm-比较有序文件"><span class="nav-number">2.2.</span> <span class="nav-text">comm 比较有序文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#diff-比较无序文件"><span class="nav-number">2.3.</span> <span class="nav-text">diff 比较无序文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#sdiff"><span class="nav-number">2.4.</span> <span class="nav-text">sdiff</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#差分"><span class="nav-number">2.5.</span> <span class="nav-text">差分</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#cut-抽取数据列"><span class="nav-number">2.6.</span> <span class="nav-text">cut 抽取数据列</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#paste"><span class="nav-number">2.7.</span> <span class="nav-text">paste</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#统计和格式化"><span class="nav-number">3.</span> <span class="nav-text">统计和格式化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#nl-创建行号"><span class="nav-number">3.1.</span> <span class="nav-text">nl 创建行号</span></a></li></ol></li></ol></div>
             
 
           </div>
