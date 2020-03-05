@@ -1884,7 +1884,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #54ff85;
+  background: #ffff49;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3235,4 +3235,10 @@ pre .javascript .function {
 }
 .highlight:hover .btn-copy {
   opacity: 1;
+}
+.sidebar-toggle {
+  left: 30px;
+}
+.sidebar {
+  left: 0px;
 }
