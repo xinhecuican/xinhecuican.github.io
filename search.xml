@@ -140,6 +140,56 @@
 <p>参数：</p>
 <figure class="highlight diff"><table><tr><td class="code"><pre><span class="line"><span class="deletion">-v 改变起始编号，默认起始编号是1</span></span><br><span class="line"><span class="deletion">-i 改变增量，默认增量为1</span></span><br><span class="line"><span class="deletion">-b a 对所有行编号，包括空行</span></span><br><span class="line"><span class="deletion">-n ln 左对齐 rn 右对齐 rz 右对齐，有前导0</span></span><br></pre></td></tr></table></figure>
 
+<h4 id="wc（word-count）统计行单词和字符的数量"><a href="#wc（word-count）统计行单词和字符的数量" class="headerlink" title="wc（word count）统计行单词和字符的数量"></a>wc（word count）统计行单词和字符的数量</h4><p>语法： wc [-clLw] [file…]</p>
+<p>作用：统计行，单词，字符的数量。所统计的数据可以来自另一个程序或者是一个或多个文件</p>
+<p>输出依次输出行，单词数，字符数 和文件名。如果不止一个文件，那么会为每一个文件显示一个输出，然后最后一行是一个总输出。</p>
+<p>参数</p>
+<figure class="highlight diff"><table><tr><td class="code"><pre><span class="line"><span class="deletion">-l 统计行</span></span><br><span class="line"><span class="deletion">-w 统计单词</span></span><br><span class="line"><span class="deletion">-c 统计字符</span></span><br><span class="line"><span class="deletion">-L 该选项显示输入中最长行的长度</span></span><br></pre></td></tr></table></figure>
+<p>此外，还可以用wc来统计某一目录中文件的数量，假设一个文件一行，用ls file | wc -l.</p>
+<h4 id="制表符和空格"><a href="#制表符和空格" class="headerlink" title="制表符和空格"></a>制表符和空格</h4><p>在老式机器中，会在某些特定的为做一些机器标记，这些标记叫做制表位，如果按了制表位，那么机器会直接跳转到下一个制表位上，tab键与这个作用类似。一旦按了tab键，那么他将会自动跳转到下一个制表位。例如输入<code>A&lt;Tab&gt;BBBB&lt;Tab&gt;CCC</code>，实际上看起来中间有空格，实际上只有一个Tab</p>
+<p>可视化制表符</p>
+<p>第一种办法是在vi中，set list 那么制表符会转化成^I符号</p>
+<h4 id="expand-将制表符转化成空格"><a href="#expand-将制表符转化成空格" class="headerlink" title="expand 将制表符转化成空格"></a>expand 将制表符转化成空格</h4><p>语法： expand [-i] [-t size] [-t list] [file…]</p>
+<p>其中size是固定宽度制表符的大小（默认为8)，list是制表位列表</p>
+<p>作用：expand将输入文件中所有的制表符转化成空格，别切维持与原文本相同的对齐方式</p>
+<p>-i 只转换开头的制表符，其他的制表符保持不变</p>
+<h4 id="unexpand-将空格转化成制表符"><a href="#unexpand-将空格转化成制表符" class="headerlink" title="unexpand 将空格转化成制表符"></a>unexpand 将空格转化成制表符</h4><p>语法： unexpand [-a] [-t size] [-t list] [file…]</p>
+<p>其中size是制表符的大小（希望设置的），list是制表位列表</p>
+<p>一般情况下，unexpand只转化第一行的空格，如果想要转换所有行的空格，那么需要-a选项</p>
+<h4 id="fold-格式化行"><a href="#fold-格式化行" class="headerlink" title="fold 格式化行"></a>fold 格式化行</h4><p>相关过滤器： fmt ,pr</p>
+<p>语法： fold [-s] [w witch] [file…]</p>
+<p>其中witch是新行的宽度。</p>
+<p>作用： 将长的行分割成短行。也就是把一行分成多行。其实就是在适当位置插入一个回车符</p>
+<p>默认状态下，80个字符为一行。</p>
+<p>-s选项是告诉程序不要分割单词，也就是说如果那个单词正好在要分割的位置，那么现在会先显示这个单词在转到下一行。</p>
+<h4 id="fmt-格式化段落"><a href="#fmt-格式化段落" class="headerlink" title="fmt 格式化段落"></a>fmt 格式化段落</h4><p>语法： fmt [-su] [-w width] [file…]</p>
+<p>作用：让各行连接在一起，并且不改变空白符。</p>
+<p>当它读取文本时，假定段落由空行分隔。一个“段落”就是一个或多个连续的文本行，不包括空行。fmt根据下列规则读取一个段落</p>
+<ul>
+<li>行宽： 让每行尽可能的长，并且不超过指定的长度。默认情况下，每行最多75个字符</li>
+<li>句子： 无论何时，尽可能在句子末尾分隔行。避免在句子的第一个单词之后或最后一个单词之前分隔行。</li>
+<li>空白符： 保持单词及空行之间的所有缩进，空格。</li>
+<li>制表符： 所有制表符转化成空格。并在最后输出时合适的位置插入制表符</li>
+</ul>
+<p>说起来复杂，其实就是让那些长短不一的段落尽量变得长。</p>
+<p>例如</p>
+<figure class="highlight subunit"><table><tr><td class="code"><pre><span class="line">As we all know,</span><br><span class="line"><span class="keyword">success </span>cones slowly and</span><br><span class="line">is due to a number of different factors all coming</span><br><span class="line">together</span><br><span class="line">over a period of years</span><br></pre></td></tr></table></figure>
+<p>使用命令后</p>
+<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">As</span> we <span class="keyword">all</span> know, <span class="type">real</span> success comes slowly <span class="keyword">and</span> <span class="keyword">is</span></span><br><span class="line">due <span class="keyword">to</span> a number <span class="keyword">of</span> different factors <span class="keyword">all</span> coming</span><br><span class="line">together <span class="keyword">over</span> a period <span class="keyword">of</span> years.</span><br></pre></td></tr></table></figure>
+<p>此外，它是一段的作用，如果两行之间有个空行就把他们当成两段单独处理，互不影响</p>
+<p>参数</p>
+<figure class="highlight diff"><table><tr><td class="code"><pre><span class="line"><span class="deletion">-u(uniform spacing 统一间距) 减少空格，每个单词之间最多只有一个空格，句子末尾最多只有两个空格。</span></span><br><span class="line"><span class="deletion">-w 设定宽度</span></span><br></pre></td></tr></table></figure>
+<h4 id="pr-按页格式化文本"><a href="#pr-按页格式化文本" class="headerlink" title="pr 按页格式化文本"></a>pr 按页格式化文本</h4><p>语法： pr [-dt] [+beg[:end]] [-h text] [-l n] [-o margin] [-W width] [file…]</p>
+<p>作用： 按页格式化文件，以便于打印。</p>
+<p>其中 beg是需要格式化的第一页，end是最后一页，text是标题，n是每页的行数，margin是左边缘的大小，width是输出的宽度。</p>
+<p>默认情况下，pr是通过顶端插入一个标题，左边插入一个边缘，底部插入一个页尾来格式化文件。标题包括修改时间，文件名称和页号。</p>
+<p>如果想查看效果，最好在less程序中</p>
+<p>参数：</p>
+<figure class="highlight diff"><table><tr><td class="code"><pre><span class="line"><span class="deletion">-d 双倍行距文本（word中的）</span></span><br><span class="line"><span class="addition">+begin;end 从那页到哪页格式化</span></span><br><span class="line"><span class="deletion">-l 改变每页总行数</span></span><br><span class="line"><span class="deletion">-o 设置左边缘</span></span><br><span class="line"><span class="deletion">-W 改变每一行的字符数（默认是72）</span></span><br></pre></td></tr></table></figure>
+
+<p>还可以按列格式化文本</p>
+<p>语法： pr [-mt] [-columns] [-l lines] [-W width] [file…]</p>
+<p>column是输出列的数量，lines是每页的行数，width是每行的字符数。这个选项不建议用，会截断字符。</p>
 ]]></content>
   </entry>
   <entry>
