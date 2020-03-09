@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://xinhecuican.github.io/"/>
-  <updated>2020-03-02T10:48:43.882Z</updated>
+  <updated>2020-03-09T03:41:59.882Z</updated>
   <id>http://xinhecuican.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>在不更改注册表的情况下把程序移出c盘</title>
+    <link href="http://xinhecuican.github.io/2020/03/09/%E5%9C%A8%E4%B8%8D%E6%9B%B4%E6%94%B9%E6%B3%A8%E5%86%8C%E8%A1%A8%E7%9A%84%E6%83%85%E5%86%B5%E4%B8%8B%E6%8A%8A%E7%A8%8B%E5%BA%8F%E7%A7%BB%E5%87%BAc%E7%9B%98/"/>
+    <id>http://xinhecuican.github.io/2020/03/09/%E5%9C%A8%E4%B8%8D%E6%9B%B4%E6%94%B9%E6%B3%A8%E5%86%8C%E8%A1%A8%E7%9A%84%E6%83%85%E5%86%B5%E4%B8%8B%E6%8A%8A%E7%A8%8B%E5%BA%8F%E7%A7%BB%E5%87%BAc%E7%9B%98/</id>
+    <published>2020-03-09T03:37:00.000Z</published>
+    <updated>2020-03-09T03:41:59.882Z</updated>
+    
+    <content type="html"><![CDATA[<p>这里用的类似于快捷方式。用mklink命令，这个命令可以将两个文件夹连接，一个是真实存放内容的文件夹，另一个只有名称，实际内容并不放在哪里。所以我们可以创建一个这样的文件夹来骗过程序。例如 office</p><p>首先要用cmd而不能用powershell，这是系统自带命令.然后在其他盘建一个同名的文件夹。注意c盘的文件夹不要创建，执行命令后系统自动创建。</p><p><code>mklink /J &quot;C:\Program Files (x86)\Microsoft Files&quot; &quot;D:\Program Files (x86)\Microsoft Files&quot;</code></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;这里用的类似于快捷方式。用mklink命令，这个命令可以将两个文件夹连接，一个是真实存放内容的文件夹，另一个只有名称，实际内容并不放在哪里。所以我们可以创建一个这样的文件夹来骗过程序。例如 office&lt;/p&gt;
+&lt;p&gt;首先要用cmd而不能用powershell，这是系统自带
+      
+    
+    </summary>
+    
+    
+      <category term="windows" scheme="http://xinhecuican.github.io/categories/windows/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>c语言的动态内存分配</title>
@@ -495,29 +520,6 @@
     
     
       <category term="数学" scheme="http://xinhecuican.github.io/categories/%E6%95%B0%E5%AD%A6/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>数论</title>
-    <link href="http://xinhecuican.github.io/2020/02/06/%E6%95%B0%E8%AE%BA/"/>
-    <id>http://xinhecuican.github.io/2020/02/06/%E6%95%B0%E8%AE%BA/</id>
-    <published>2020-02-05T23:48:00.000Z</published>
-    <updated>2020-02-09T06:24:55.600Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="整除"><a href="#整除" class="headerlink" title="整除"></a>整除</h3><p>如果a能被b整除，a=b*q，q为一整数记作b|a,a是被除的那个</p><h3 id="同余"><a href="#同余" class="headerlink" title="同余"></a>同余</h3><p>如果a和bmod m 是同一个值，则称a和b同余，记作a (三横线） b(mod m)</p><p>例如： 3 和 8 关于5 同余  因为 3%5=3,8%5=3</p><p>重要性质：  </p><pre><code>（a+b)%c=a%c+b%c(a*b)%c=(a%c*b%c)%c(a^b)%c=(a%c^b)%c</code></pre><h3 id="唯一分解定理"><a href="#唯一分解定理" class="headerlink" title="唯一分解定理"></a>唯一分解定理</h3><p>任何大于1的正整数n都可以被分解为若干质数的乘积</p><p>约数个数 例如 72=2^3<em>3^2  ，而72有 1 2 3 4 6 8 9 12 18 24 36 72 12个约数<br>，而我可以从2^3 中提取出0个2,1个2，两个2，三个2把其他的数放到另一边，这样我们就可以得到4个约数，3也同理，用一下分配率，就可以得到约数个数为3</em>4=12</p><p>约数和  因为约数是从2和3中随机挑出若干个数进行分配，所以用分配率可得约数和为</p><p>(1+2+2^2+2^3)(1+3+3^2)</p><h3 id="费马小定理"><a href="#费马小定理" class="headerlink" title="费马小定理"></a>费马小定理</h3><p>如果p是质数且a与p互质，则</p><p>a^(p-1)%p=1(a的p-1次方和1关于p同余）</p><p>互质指的是 二者除了1以外没有相同的约数</p><h3 id="求质数的方法"><a href="#求质数的方法" class="headerlink" title="求质数的方法"></a>求质数的方法</h3><p><a href="http://localhost:4000/2020/01/04/%E5%9F%83%E6%B0%8F%E7%AD%9B/" target="_blank" rel="noopener">埃氏筛</a></p><p><a href="http://localhost:4000/2020/01/04/%E7%BA%BF%E6%80%A7%E7%AD%9B/" target="_blank" rel="noopener">线性筛</a></p><h3 id="欧拉函数"><a href="#欧拉函数" class="headerlink" title="欧拉函数"></a>欧拉函数</h3><p>概念：表示0到n-1中与n互素的数的个数</p><p>积性函数：如果 m和n互质 ，则f(m<em>n)=f(m)</em>f(n)</p><p>欧拉函数的性质：</p><ol><li>对于质数p  f(p)=p-1</li><li>如果n=p^k,则f(n)=p^k-p^k-1</li><li>欧拉函数是积性函数，但不是完全积性函数，当n为质数时成立，当m=2,n为奇数时，f(2*n)=n</li><li>n&gt;2时 f(n)是偶数</li><li>与n互质的数的和为 f(n)*n/2</li><li>n的因数的欧拉函数的和为n</li></ol><h3 id="模意义下的乘法逆元"><a href="#模意义下的乘法逆元" class="headerlink" title="模意义下的乘法逆元"></a>模意义下的乘法逆元</h3><p>例 1/5%7=?</p><p>3*5%7=1,所以1/5的逆元是3，所以1/5%7=3</p><p>逆元的求法</p><p>1 费马小定理</p><p>a*a^-1%p=1,a^p-1%p=1</p><p>可得 a^-1%p=a^p-2%p，然后用快速幂。但是费马小定理要求必须要是素数</p><p>2 线性求逆元（不理解）</p><p>公式：inv(a)=-p/a*inv(p%a)%p;</p><figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">inv[<span class="number">1</span>]=<span class="number">1</span>;</span><br><span class="line"><span class="keyword">for</span>(int <span class="built_in">i</span>=<span class="number">2</span>;<span class="built_in">i</span>&lt;=n;++<span class="built_in">i</span>)&#123;</span><br><span class="line">inv[<span class="built_in">i</span>]=((<span class="number">1</span>ll*(-p/<span class="built_in">i</span>)*inv[p<span class="comment">%i]%p)+p)%p;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>3 扩展欧几里得法</p><p>exgcd</p><p>exgcd用来求解ax+by=c，其中a，b，c都为整数</p><p>裴蜀定理</p><p>不定方程 ax+by=c存在整数解当且仅当gcd(a,b)|c ，当存在一组整数解时，必存在无限组解<br>ax+by=gcd(a,b)=&gt;bx1+a%by1=gcd(b,a%b)=&gt;x=x1,y=x1-(a/b)y1</p><p>x=x1+k<em>b/gcd(a,b) , y= y1-k</em>a/gcd(a,b)</p><p>之后一直求解直到x=1,y=0,这时b=0,所以gcd(a,b)=a,方程一定成立</p><p>在这里我们可以用递归反推，把x=1,y=0带入方程，一步步向上推</p><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">void</span> exgcd(<span class="built_in">int</span> a,<span class="built_in">int</span> b,<span class="built_in">int</span> &amp;x,<span class="built_in">int</span> &amp;y)&#123;</span><br><span class="line"><span class="keyword">if</span>(b==<span class="number">0</span>)&#123;</span><br><span class="line">x=<span class="number">1</span>;</span><br><span class="line">y=<span class="number">0</span>;</span><br><span class="line"><span class="keyword">return</span> ;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">int</span> x1,y1;</span><br><span class="line">exgcd(b,a%b,x1,y1);</span><br><span class="line">x=y1;</span><br><span class="line">y=x1-(a/b)*y1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>这里我们就可以得到第三种方法</p><p>求逆元可以转化为：求关于x的同余方程ax（三横）1 mod b的最小正整数解</p><p>ax%b=1  ax=kb+1</p><p>即 ax-by=1</p><p>最后 x1%b+b即是答案</p><p><a href="https://big-news.cn/2019/05/19/%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E4%B8%8E%E6%89%A9%E5%B1%95%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E5%AE%9A%E7%90%86/" target="_blank" rel="noopener">可以看这篇博客</a></p><h3 id="排列组合"><a href="#排列组合" class="headerlink" title="排列组合"></a>排列组合</h3><p>求C(m,n)%p的值</p><p>可变成  (n!/m!(n-m)!)%p</p><p>之后就用费马小定理求逆元</p><figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">int</span> ksm(<span class="built_in">int</span> a,<span class="built_in">int</span> b,<span class="built_in">int</span> p)&#123;</span><br><span class="line"><span class="built_in">int</span> ret=<span class="number">1</span>;</span><br><span class="line"><span class="keyword">while</span>(b)&#123;</span><br><span class="line"><span class="keyword">if</span>(b&amp;<span class="number">1</span>) ret=<span class="number">1</span>ll*ret*a%p;</span><br><span class="line">a=<span class="number">1</span>ll*a*a%p;</span><br><span class="line">b&gt;&gt;=<span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> ret%p;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">int</span> fac[maxn];</span><br><span class="line"><span class="built_in">int</span> inv(<span class="built_in">int</span> x)&#123;</span><br><span class="line"><span class="keyword">return</span> ksm(x,p<span class="number">-2</span>,p);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">int</span> C(<span class="built_in">int</span> n,<span class="built_in">int</span> m)&#123;</span><br><span class="line"><span class="built_in">int</span> qwq=<span class="number">1</span>ll*fac[n]*inv(fac[n-m])%p;</span><br><span class="line"><span class="keyword">return</span> <span class="number">1</span>ll*qwq*inv(fac[m])%p;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">int</span> main()&#123;</span><br><span class="line">fac[<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line"><span class="built_in">int</span> n,m;</span><br><span class="line">scanf(<span class="string">"%d%d"</span>,&amp;n,&amp;m);</span><br><span class="line"><span class="keyword">for</span>(<span class="built_in">int</span> i=<span class="number">1</span>;i&lt;=n;++i)&#123;</span><br><span class="line">fac[i]=<span class="number">1</span>ll*fac[i<span class="number">-1</span>]*i%p;</span><br><span class="line">&#125;</span><br><span class="line">printf(<span class="string">"%d"</span>,C(n,m));</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;整除&quot;&gt;&lt;a href=&quot;#整除&quot; class=&quot;headerlink&quot; title=&quot;整除&quot;&gt;&lt;/a&gt;整除&lt;/h3&gt;&lt;p&gt;如果a能被b整除，a=b*q，q为一整数记作b|a,a是被除的那个&lt;/p&gt;
-&lt;h3 id=&quot;同余&quot;&gt;&lt;a href=&quot;#同余&quot; class=
-      
-    
-    </summary>
-    
     
     
   </entry>
