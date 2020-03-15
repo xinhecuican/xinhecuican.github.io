@@ -100,14 +100,14 @@
 
 
 
-<meta name="description" content="用g++ -Og -s -masm&#x3D;intel name.c 可以生成intel格式的汇编代码，-s是生成汇编代码，-Og是省去不重要的部分，如果不加这个，可能5条指令要变成十多条指令 mov 移动指令格式： movq a,b a是原操作数，b是目标操作数 这个指令中的q代表的是64位 | 长度 | 类型 | 别名 | 缩写 ||—-|| 1   | char | byte | b   || 2">
+<meta name="description" content="用g++ -Og -s -masm&#x3D;intel name.c 可以生成intel格式的汇编代码，-s是生成汇编代码，-Og是省去不重要的部分，如果不加这个，可能5条指令要变成十多条指令 -fno-if-conversion 分支语句不要采用条件传输的方式，条件跳转的方式 -g debug objdump -d 反汇编 gdb 调试 b+ 标号 设置断点 info register 查看寄存器 r">
 <meta property="og:type" content="article">
 <meta property="og:title" content="汇编指令 AT&amp;T版 64位">
 <meta property="og:url" content="http://xinhecuican.github.io/2020/03/12/%E6%B1%87%E7%BC%96%E6%8C%87%E4%BB%A4-AT-T%E7%89%88-64%E4%BD%8D/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="用g++ -Og -s -masm&#x3D;intel name.c 可以生成intel格式的汇编代码，-s是生成汇编代码，-Og是省去不重要的部分，如果不加这个，可能5条指令要变成十多条指令 mov 移动指令格式： movq a,b a是原操作数，b是目标操作数 这个指令中的q代表的是64位 | 长度 | 类型 | 别名 | 缩写 ||—-|| 1   | char | byte | b   || 2">
+<meta property="og:description" content="用g++ -Og -s -masm&#x3D;intel name.c 可以生成intel格式的汇编代码，-s是生成汇编代码，-Og是省去不重要的部分，如果不加这个，可能5条指令要变成十多条指令 -fno-if-conversion 分支语句不要采用条件传输的方式，条件跳转的方式 -g debug objdump -d 反汇编 gdb 调试 b+ 标号 设置断点 info register 查看寄存器 r">
 <meta property="article:published_time" content="2020-03-11T23:46:00.000Z">
-<meta property="article:modified_time" content="2020-03-12T00:32:18.415Z">
+<meta property="article:modified_time" content="2020-03-14T12:09:10.207Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="AT&amp;T">
 <meta name="twitter:card" content="summary">
@@ -408,12 +408,106 @@
 
       
         <p>用g++ -Og -s -masm=intel name.c 可以生成intel格式的汇编代码，-s是生成汇编代码，-Og是省去不重要的部分，如果不加这个，可能5条指令要变成十多条指令</p>
+<p>-fno-if-conversion 分支语句不要采用条件传输的方式，条件跳转的方式</p>
+<p>-g debug</p>
+<p>objdump -d 反汇编</p>
+<p>gdb 调试 b+ 标号 设置断点 info register 查看寄存器 r 执行到断点出</p>
+<p>n（next） 执行下一条命令</p>
 <h4 id="mov-移动指令"><a href="#mov-移动指令" class="headerlink" title="mov 移动指令"></a>mov 移动指令</h4><p>格式： movq a,b</p>
 <p>a是原操作数，b是目标操作数</p>
 <p>这个指令中的q代表的是64位</p>
-<p>| 长度 | 类型 | 别名 | 缩写 |<br>|—-|<br>| 1   | char | byte | b   |<br>| 2   | short| word | w   |<br>| 4   | int  | double word（long word）| l |<br>| 8   | long | quad word | q |<br>| 8   | char*| quad word | q |<br>| 4   | float| …  | s |<br>| 8   | double | … | l |</p>
-<p>| 源操作数 | 目标操作数 |<br>|—|<br>| 立即数（idata) | 寄存器 ，地址|<br>| 寄存器  | 寄存器，地址 |<br>| 地址   | 寄存器 |</p>
-<p>| 操作数 | 符号 |<br>|—|<br>| 立即数 | $ |<br>| 寄存器 | % |<br>| 地址  | （）|</p>
+<table>
+<thead>
+<tr>
+<th>长度</th>
+<th>类型</th>
+<th>别名</th>
+<th>缩写</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>char</td>
+<td>byte</td>
+<td>b</td>
+</tr>
+<tr>
+<td>2</td>
+<td>short</td>
+<td>word</td>
+<td>w</td>
+</tr>
+<tr>
+<td>4</td>
+<td>int</td>
+<td>double word（long word）</td>
+<td>l</td>
+</tr>
+<tr>
+<td>8</td>
+<td>long</td>
+<td>quad word</td>
+<td>q</td>
+</tr>
+<tr>
+<td>8</td>
+<td>char*</td>
+<td>quad word</td>
+<td>q</td>
+</tr>
+<tr>
+<td>4</td>
+<td>float</td>
+<td>…</td>
+<td>s</td>
+</tr>
+<tr>
+<td>8</td>
+<td>double</td>
+<td>…</td>
+<td>l</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>源操作数</th>
+<th>目标操作数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>立即数（idata)</td>
+<td>寄存器 ，地址</td>
+</tr>
+<tr>
+<td>寄存器</td>
+<td>寄存器，地址</td>
+</tr>
+<tr>
+<td>地址</td>
+<td>寄存器</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>操作数</th>
+<th>符号</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>立即数</td>
+<td>$</td>
+</tr>
+<tr>
+<td>寄存器</td>
+<td>%</td>
+</tr>
+<tr>
+<td>地址</td>
+<td>（）</td>
+</tr>
+</tbody></table>
 <p>例：</p>
 <figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">movq $2,%rax</span><br><span class="line">movq %rax,%rbx</span><br><span class="line">mov<span class="string">q (%rax)</span>,%rbx</span><br></pre></td></tr></table></figure>
 <p>注意；</p>
@@ -446,6 +540,115 @@
 <p>例如 要求x* 12</p>
 <figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> mul(<span class="keyword">int</span> <span class="keyword">x</span>)</span><br><span class="line">&#123;</span><br><span class="line">   lea<span class="string">q (%rdi,%rdi,2)</span>,%rax</span><br><span class="line">   salq %rax,<span class="number">2</span>//左移指令</span><br><span class="line">   <span class="keyword">return</span> <span class="keyword">x</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>这段代码只要看中间两条指令就可以了，leaq 中的数运算之后是3rdi，然后左移两位就是12了。</p>
+<p>但是这条指令不会判断溢出</p>
+<h4 id="比较指令"><a href="#比较指令" class="headerlink" title="比较指令"></a>比较指令</h4><p>这里涉及到标志寄存器，<a href="https://xinhecuican.github.io/2020/01/29/%E6%A0%87%E5%BF%97%E5%AF%84%E5%AD%98%E5%99%A8/">在前面一篇博客中已经提到</a></p>
+<p>cmpq 比较指令</p>
+<p>textq 与比较</p>
+<p>textq b a 把a与b相与，不改变a和b的值，只会改变标志寄存器中的zf和sf。</p>
+<p>这个指令通常用来判断某一位是否是1，例如 textq a,0x1 ，如果最低位为1，那么zf就是0，说明最低位是1</p>
+<h5 id="标志寄存器的访问"><a href="#标志寄存器的访问" class="headerlink" title="标志寄存器的访问"></a>标志寄存器的访问</h5><table>
+<thead>
+<tr>
+<th>操作名</th>
+<th>含义</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>sete</td>
+<td>ZF</td>
+<td>Equal</td>
+</tr>
+<tr>
+<td>setne</td>
+<td>~ZF</td>
+<td>not equal</td>
+</tr>
+<tr>
+<td>sets</td>
+<td>SF</td>
+<td>sign</td>
+</tr>
+<tr>
+<td>setns</td>
+<td>~SF</td>
+<td></td>
+</tr>
+<tr>
+<td>setg</td>
+<td><del>(SF^OF)&amp;</del>ZF</td>
+<td>greater 有符号数</td>
+</tr>
+<tr>
+<td>setge</td>
+<td>~(SF^OF)</td>
+<td>大于等于</td>
+</tr>
+<tr>
+<td>setl</td>
+<td>(SF^OF)</td>
+<td>less</td>
+</tr>
+<tr>
+<td>setle</td>
+<td>…</td>
+<td>小于等于</td>
+</tr>
+<tr>
+<td>seta</td>
+<td><del>CF&amp;</del>ZF</td>
+<td>above 无符号数</td>
+</tr>
+<tr>
+<td>setb</td>
+<td>CF</td>
+<td>below 小于</td>
+</tr>
+</tbody></table>
+<p>这些指令都是返回到8位寄存器上，将高七位置0，最低位依据含义所进行的运算来判断是0还是1</p>
+<h4 id="跳转指令"><a href="#跳转指令" class="headerlink" title="跳转指令"></a>跳转指令</h4><p><a href="https://xinhecuican.github.io/2020/01/31/%E6%A3%80%E6%B5%8B%E6%AF%94%E8%BE%83%E7%BB%93%E6%9E%9C%E7%9A%84%E6%9D%A1%E4%BB%B6%E6%8C%87%E4%BB%A4/">前面博客中也已谈到过</a></p>
+<p>这里再补充jg和gb等，其实就是上面同样的模式</p>
+<p>此外，由于是64位系统，没有cs寄存器，且intel使用cisc指令集，所以会自动根据指令长度进行判断用多少位长来储存位移</p>
+<h4 id="条件跳转指令"><a href="#条件跳转指令" class="headerlink" title="条件跳转指令"></a>条件跳转指令</h4><p>格式： cmov +后缀 a b，后缀格式就是前面set的格式</p>
+<p>作用: 如果满足条件，则把a赋值给b，如果不满足，则不做处理</p>
+<p>现代编译器在遇到分支语句时会尽量用条件跳转的格式执行，因为cpu采用了流水线作业的模式（就是一次提前搬运多条指令） 但是条件跳转指令会使流水线停止运行，而流水线可以明显增加cpu速度。</p>
+<p>条件跳转的格式就是先把 if 和else的内容都计算出来，然后在最后用条件跳转指令进行比较。</p>
+<p>例如</p>
+<figure class="highlight sas"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">int a;</span><br><span class="line"><span class="meta">if</span>(<span class="meta">x</span>&gt;y)</span><br><span class="line">&#123;</span><br><span class="line">    a=<span class="meta">x</span>-y;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">else</span></span><br><span class="line">&#123;</span><br><span class="line">    a=y-<span class="meta">x</span>;</span><br><span class="line">&#125;</span><br><span class="line">汇编模式</span><br><span class="line">movq <span class="name">%rdi</span>,<span class="name">%rax</span></span><br><span class="line">subq <span class="name">%rsi</span>,<span class="name">%rax</span></span><br><span class="line">movq <span class="name">%rsi</span>,<span class="name">%rdx</span></span><br><span class="line">subq <span class="name">%rdi</span>,<span class="name">%rdx</span></span><br><span class="line">cmovle <span class="name">%rdx</span>,<span class="name">%rax</span></span><br></pre></td></tr></table></figure>
+<p>可以看出，用条件跳转模式会多计算一些指令，不会破坏流水线，如果在流水线上减少的时间大于多进行指令所消耗的时间，那么用条件跳转指令比较合适。反之，直接用条件指令。</p>
+<p>下列几种情况不适合用条件跳转指令</p>
+<ol>
+<li>分支语句计算量大（执行时间过多，划不来）</li>
+<li>在要判断是否可以运算的情况，例如 var=p ？*p ： 0，这条语句意思是如果p不为空指针那么将p的内容赋给var，否则赋0.但是如果用条件跳转会出错，因为空指针不能取值</li>
+<li>计算可能产生副作用（即前后两个分支之间会产生影响）。例如 var=x&gt;0 ? x*=3 : x+=6,这个分支前面对后面会产生影响，因此不能简单粗暴的直接条件跳转</li>
+</ol>
+<h4 id="循环语句"><a href="#循环语句" class="headerlink" title="循环语句"></a>循环语句</h4><ul>
+<li>do-while循环</li>
+</ul>
+<p>do-while循环用goto语句表达成</p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">loop</span>:</span><br><span class="line">statement;</span><br><span class="line"><span class="keyword">if</span>(x) <span class="keyword">goto</span> <span class="keyword">loop</span>;</span><br></pre></td></tr></table></figure>
+<p>这段代码便是先执行，后比较。很容易就可以转化成汇编。goto可以用条件转移指令代替。</p>
+<ul>
+<li>while循环</li>
+</ul>
+<p>while循环有两种形式，第一种是在最开始进行一次跳转，如果符合则进入循环，不符合则退出</p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(x) <span class="keyword">goto</span> done;</span><br><span class="line"><span class="keyword">loop</span>:</span><br><span class="line">statement;</span><br><span class="line"><span class="keyword">if</span>(x) <span class="keyword">goto</span> <span class="keyword">loop</span>;</span><br><span class="line">done:</span><br></pre></td></tr></table></figure>
+<p>第二种是先跳过第一次循环直接进行判断。</p>
+<figure class="highlight subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">goto test;</span><br><span class="line">loop:</span><br><span class="line">statement;</span><br><span class="line">test:</span><br><span class="line">if(x) goto loop;</span><br></pre></td></tr></table></figure>
+<p>由于cpu流水线的限制，两条连续的跳转指令会减慢cpu运行的速度，因此最好采用第一种办法（虽然代码多）</p>
+<ul>
+<li>for循环</li>
+</ul>
+<p>for(init; test; update)</p>
+<p>可以转化成</p>
+<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">init<span class="comment">;</span></span><br><span class="line">while(test)</span><br><span class="line">&#123;</span><br><span class="line">  statement<span class="comment">;</span></span><br><span class="line">  update<span class="comment">;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>再然后就可以变成汇编代码</p>
+<h4 id="switch-汇编实现"><a href="#switch-汇编实现" class="headerlink" title="switch 汇编实现"></a>switch 汇编实现</h4><p>首先要了解条件语句和switch的区别，if语句要从上倒下一条一条判断，如果数量多的话时间开销大。而switch是根据标号直接跳转，无论要跳转到哪一个时间开销都一定。</p>
+<p>内存中实际上在编译时已经设定了一个跳转表，这个跳转表的标号是一个固定的地址，不能被改变，这个标号内的数据就是每一条指令的跳转地址，而且是8字节。</p>
+<p>因此跳转语句可以这样写: jmp .L4(,%rdi,8)</p>
+<p>其中.L4代表的是跳转表的标号（不一定是这个名字，举个例子）而rdi就是switch中的x，</p>
+<p>如果标号很大，例如10000甚至1000000开始的时候，如果把前面的查找表一个个全部设置出来，空间开销会很大，所以编译器会先自动的减去一个数使他处于较小的范围，但是这种情况只适用于数据密集的情况。</p>
+<p>如果数据稀疏例如一个是1一个是10000，这个时候偏移也不行了，只有通过先排序再二分搜索来查找标号，这个复杂度是logn</p>
 
       
     </div>
@@ -490,6 +693,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/03/15/%E5%B9%BF%E4%B9%89%E8%A1%A8/" rel="prev" title="广义表">
+                广义表 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -569,7 +776,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">86</span>
+                  <span class="site-state-item-count">88</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -631,7 +838,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#mov-移动指令"><span class="nav-number">1.</span> <span class="nav-text">mov 移动指令</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#地址的写法"><span class="nav-number">1.1.</span> <span class="nav-text">地址的写法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#强制类型转换"><span class="nav-number">1.2.</span> <span class="nav-text">强制类型转换</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#leaq-地址转移"><span class="nav-number">2.</span> <span class="nav-text">leaq 地址转移</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#mov-移动指令"><span class="nav-number">1.</span> <span class="nav-text">mov 移动指令</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#地址的写法"><span class="nav-number">1.1.</span> <span class="nav-text">地址的写法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#强制类型转换"><span class="nav-number">1.2.</span> <span class="nav-text">强制类型转换</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#leaq-地址转移"><span class="nav-number">2.</span> <span class="nav-text">leaq 地址转移</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#比较指令"><span class="nav-number">3.</span> <span class="nav-text">比较指令</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#标志寄存器的访问"><span class="nav-number">3.1.</span> <span class="nav-text">标志寄存器的访问</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#跳转指令"><span class="nav-number">4.</span> <span class="nav-text">跳转指令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#条件跳转指令"><span class="nav-number">5.</span> <span class="nav-text">条件跳转指令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#循环语句"><span class="nav-number">6.</span> <span class="nav-text">循环语句</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#switch-汇编实现"><span class="nav-number">7.</span> <span class="nav-text">switch 汇编实现</span></a></li></ol></div>
             
 
           </div>
