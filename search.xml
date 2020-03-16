@@ -533,7 +533,7 @@
 <p>作用： 从标准输入或文件中读取数据，抽取所有包含特定模式的行，并写入标准输出。</p>
 <p>这个模式可以是字符串标点符号等，但是如果是标号或者特殊字符时，最好用’’强引用，以防止歧义。</p>
 <p>选项：</p>
-<figure class="highlight diff"><table><tr><td class="code"><pre><span class="line"><span class="deletion">-c(count) 统计所抽取行的数量，但不显示行本身</span></span><br><span class="line"><span class="deletion">-i（ignore) 忽略大小写的区别</span></span><br><span class="line"><span class="deletion">-n 所选行在原文件中的位置</span></span><br><span class="line"><span class="deletion">-l（list），如果在不只一个文件中搜索，使用这个选项可以只把匹配的文件名列举处来，此时文件名也要输出多个</span></span><br><span class="line"><span class="deletion">-L 显示不包含该模式的文件名</span></span><br><span class="line"><span class="deletion">-v（reverse） 选取不包含模式的行</span></span><br><span class="line"><span class="deletion">-x 选取完全匹配的行</span></span><br><span class="line"><span class="deletion">-r（recursive递归） 搜索整个目录树</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight diff"><table><tr><td class="code"><pre><span class="line"><span class="deletion">-c(count) 统计所抽取行的数量，但不显示行本身</span></span><br><span class="line"><span class="deletion">-i（ignore) 忽略大小写的区别</span></span><br><span class="line"><span class="deletion">-n 所选行在原文件中的位置</span></span><br><span class="line"><span class="deletion">-l（list），如果在不只一个文件中搜索，使用这个选项可以只把匹配的文件名列举出来，此时文件名也要输出多个</span></span><br><span class="line"><span class="deletion">-L 显示不包含该模式的文件名</span></span><br><span class="line"><span class="deletion">-v（reverse） 选取不包含模式的行</span></span><br><span class="line"><span class="deletion">-x 选取完全匹配的行</span></span><br><span class="line"><span class="deletion">-r（recursive递归） 搜索整个目录树</span></span><br></pre></td></tr></table></figure>
 <h5 id="fgrep，egrep-grep变体"><a href="#fgrep，egrep-grep变体" class="headerlink" title="fgrep，egrep grep变体"></a>fgrep，egrep grep变体</h5><p>fgrep，历史上使用，现在基本不用</p>
 <p>egrep grep扩展版本，功能比grep强大，可以通过 grep -E的方式<br>-w 只匹配完整的单词，并且最好配合-l使用。</p>
 <h4 id="look-选取以特定模式开头的行"><a href="#look-选取以特定模式开头的行" class="headerlink" title="look 选取以特定模式开头的行"></a>look 选取以特定模式开头的行</h4><p>格式： look [-df] pattern file…</p>
@@ -552,7 +552,37 @@
 <p>-r 反向排序</p>
 <p>-u（unique 唯一） 对于相同行，只保留一行</p>
 <h5 id="检测数据是否有序-c"><a href="#检测数据是否有序-c" class="headerlink" title="检测数据是否有序 -c"></a>检测数据是否有序 -c</h5><p>-c（check） 不会排列数据，只会告诉数据是否有序，如果有序，将不会显示任何内容</p>
-]]></content>
+<h4 id="uniq-查找重复的行"><a href="#uniq-查找重复的行" class="headerlink" title="uniq 查找重复的行"></a>uniq 查找重复的行</h4><p>语法： uniq [-cdu] [infile [outfile]</p>
+<p>作用： 消除重复行，选取重复行，选取唯一行，统计重复行的数量。不加选项输出非重复行和只输出一次重复行</p>
+<p>注意uniq的输入必须是有序的</p>
+<p>-d 只查看重复行</p>
+<p>-u 只查看非重复行</p>
+<p>-c 统计重复行出现的次数</p>
+<h4 id="join-合并两个文件的有序数据"><a href="#join-合并两个文件的有序数据" class="headerlink" title="join 合并两个文件的有序数据"></a>join 合并两个文件的有序数据</h4><p>相关过滤器： colrm cut paste</p>
+<p>语法： join [-i] [-al|-vl] [-a2|-v2] [-l field1] [-2 field2] file1 file2</p>
+<p>其中field是引用特定数段的数字</p>
+<p>作用： 把两个文件中对应行合并到一起。但是这又和sort不同，sort是直接把两个文件拼接在一起，而join则是重复数据合并为一个输出。不重复数据直接输出。读取输入时，会忽略前导空白符。</p>
+<p>不使用其他标号情况下，只会显示有匹配的连接字段（也就是两个文件对应行有相同字段），如果使用-a(all)选项，将会显示整个文件，后面要加a1或a2。a1代表把第一个文件中不匹配的内容也加上去。如果是v1，显示V1中不匹配的行</p>
+<p>-1+sum 将第一个文件中的第sum个字段和第二个文件中的第一个字段进行匹配</p>
+<h4 id="tsort-由偏序创建全序"><a href="#tsort-由偏序创建全序" class="headerlink" title="tsort 由偏序创建全序"></a>tsort 由偏序创建全序</h4><p>语法： tsort file</p>
+<p>作用：将一系列的事一件一件从头到尾输出</p>
+<p>例如：两个单词第二个单词代表在第一个单词后要做的事</p>
+<figure class="highlight mipsasm"><table><tr><td class="code"><pre><span class="line">eat clean-<span class="keyword">dishes</span></span><br><span class="line"><span class="keyword">clean-dishes </span>watch-TV</span><br><span class="line"><span class="keyword">shop </span>cook</span><br><span class="line">cook eat</span><br></pre></td></tr></table></figure>
+<p>在使用了tsort后，输出为</p>
+<figure class="highlight mipsasm"><table><tr><td class="code"><pre><span class="line"><span class="keyword">shop</span></span><br><span class="line"><span class="keyword">cook</span></span><br><span class="line"><span class="keyword">eat</span></span><br><span class="line"><span class="keyword">clean-dishes</span></span><br><span class="line"><span class="keyword">watch-TV</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="strings-在二进制文件中搜索字符串"><a href="#strings-在二进制文件中搜索字符串" class="headerlink" title="strings 在二进制文件中搜索字符串"></a>strings 在二进制文件中搜索字符串</h4><p>语法： strings [-length] file…</p>
+<p>在现代软件中基本都有这种功能，不再展开</p>
+<h4 id="转换字符-tr"><a href="#转换字符-tr" class="headerlink" title="转换字符 tr"></a>转换字符 tr</h4><p>语法： tr [-cds] [set1 [set2]]</p>
+<p>set1是字符组</p>
+<p>作用：可以将一个字符转化成另一个字符，例如将小写转化成大写，将制表符转化成空格，或者将0转化成x等。此外，还可以将多个字符变成一个字符，例如将多个空格转化成一个空格。最后，还可以删除指定字符，例如删除制表符。</p>
+<p>例如： tr a A &lt; old tr a-z A-Z &lt; old</p>
+<p>当需要替换的字符中出现由特殊意义的字符时，需要引用他们</p>
+<p>还有几种特殊的缩写 [:lower:] 代表小写字母，[:upper:]代表大写字母，[:digit:]代表数字</p>
+<p>tr还可以转换不可见字符</p>
+<p>例如： tr ‘\n’ ‘\t’ &lt; old</p>
+<p>参数：</p>
+<figure class="highlight haml"><table><tr><td class="code"><pre><span class="line">-<span class="ruby">s 多个字符变成一个字符 例如 tr -s <span class="string">' '</span> <span class="string">' '</span> &lt; old</span></span><br><span class="line"><span class="ruby">-d 删除指定字符</span></span><br><span class="line"><span class="ruby">-c 把没选上的字符变成另一个字符，例如 tr -c <span class="string">' \n'</span> x &lt; old，这个的意思就是除了空格和换行之外其他所有字符都变成x</span></span><br></pre></td></tr></table></figure>]]></content>
   </entry>
   <entry>
     <title>加法溢出和乘法溢出</title>
