@@ -1,6 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>压缩矩阵</title>
+    <url>/2020/03/16/%E5%8E%8B%E7%BC%A9%E7%9F%A9%E9%98%B5/</url>
+    <content><![CDATA[<p>对于特殊的矩阵，例如上下三角矩阵，对称矩阵，三对角矩阵，可以转化成1维矩阵，减小空间的消耗。</p>
+<h3 id="特殊矩阵"><a href="#特殊矩阵" class="headerlink" title="特殊矩阵"></a>特殊矩阵</h3><h4 id="对称矩阵"><a href="#对称矩阵" class="headerlink" title="对称矩阵"></a>对称矩阵</h4><p>对称矩阵有 aij=aji的特性，因此可以只保存一边，也就是压缩成 <code>n(n+1)/2</code>个</p>
+<p>如果我们用一个一维数组s[n(n+1)/2]来保存，那么它域原矩阵的对应关系</p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">k= <span class="built_in">i</span>(<span class="built_in">i</span><span class="number">-1</span>)/<span class="number">2</span>+<span class="built_in">j</span><span class="number">-1</span> <span class="built_in">i</span>&gt;=<span class="built_in">j</span></span><br><span class="line">    <span class="built_in">j</span>(<span class="built_in">j</span><span class="number">-1</span>)/<span class="number">2</span>+<span class="built_in">i</span><span class="number">-1</span>  <span class="built_in">i</span>&lt;<span class="built_in">j</span></span><br></pre></td></tr></table></figure>
+
+<p>这个式子先只考虑一边，先看i&gt;=j的情况。此时第一行中压缩矩阵只保存一个值，第二行两个值，依此类推。所以对于第i行先把前i-1行中对应压缩矩阵的值的数量加起来，也就死i(i-1)/2，之后再加上第j行的第j-1个（这里因为数组下标是从0开始）。</p>
+<p>这个例子中的行数是从第一行开始，实际上应该从第0行开始，所以</p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">k= <span class="built_in">i</span>(<span class="built_in">i</span>+<span class="number">1</span>)/<span class="number">2</span>+<span class="built_in">j</span> <span class="built_in">i</span>&gt;=<span class="built_in">j</span></span><br><span class="line">  <span class="built_in">j</span>(<span class="built_in">j</span>+<span class="number">1</span>)/<span class="number">2</span>+<span class="built_in">i</span> <span class="built_in">i</span>&lt;<span class="built_in">j</span></span><br></pre></td></tr></table></figure>
+<p>举个例子，第0行第0个在k中对应位置就是0</p>
+<h4 id="上下三角矩阵"><a href="#上下三角矩阵" class="headerlink" title="上下三角矩阵"></a>上下三角矩阵</h4><p>对称矩阵行数和列数相同</p>
+<p>上三角矩阵其实就是对称矩阵中 i&gt;=j的那一段</p>
+<p>下三角矩阵中第一行的压缩矩阵元素数量是n,第二行是n-1,以此类推，我们也可以得到相应的关系式</p>
+<figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">k=（<span class="number">2</span>*n-<span class="built_in">i</span><span class="number">-1</span>)*<span class="built_in">i</span>/<span class="number">2</span>+<span class="built_in">j</span> <span class="built_in">i</span>&lt;=<span class="built_in">j</span></span><br><span class="line">  (<span class="number">2</span>*n-<span class="built_in">j</span><span class="number">-1</span>)*<span class="built_in">j</span>/<span class="number">2</span>+<span class="built_in">i</span> <span class="built_in">i</span>&gt;<span class="built_in">j</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="三对角矩阵"><a href="#三对角矩阵" class="headerlink" title="三对角矩阵"></a>三对角矩阵</h4><p>除了第一行和最后一行有两个元素之外，其他行都有三个元素</p>
+<p>对于<code>a[i][j]</code>来说，前面有 3*i-1个元素，本行它前面有j-i+1个位置。所以k=2 * i+j</p>
+<p>反之，如果在压缩矩阵中是第k个位置，那么在原矩阵中 i=(k+1)/3 j=k-2*i</p>
+<h4 id="稀疏矩阵"><a href="#稀疏矩阵" class="headerlink" title="稀疏矩阵"></a>稀疏矩阵</h4><p>对于非零元素较少的矩阵，可以直接用一个结构体保存 i,j ,sum，然后再用一个结构体数组来保存所有的值</p>
+]]></content>
+      <categories>
+        <category>数据结构</category>
+      </categories>
+  </entry>
+  <entry>
     <title>union</title>
     <url>/2020/03/15/union/</url>
     <content><![CDATA[<p>首先看一下结构体，c语言中的结构体占用字节数是所有类型字节数的总和。</p>

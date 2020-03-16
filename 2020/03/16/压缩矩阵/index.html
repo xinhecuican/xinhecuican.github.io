@@ -100,14 +100,14 @@
 
 
 
-<meta name="description" content="在筛质数时，我们会发现，筛去2后，2的倍数4、6、8等一定不是素数;筛去3后，3的倍数6、9、12等一定不是倍数。简单模拟这个过程如下 const int MAXN &#x3D; 1000000；   void Prime()   {       for (int i&#x3D;0; i&lt;MAXN; i++) prime[i]&#x3D;1;  &#x2F;&#x2F;先把每个数都定义为质数     prime[0]&#x3D;prime[1]&#x3D;0;">
+<meta name="description" content="对于特殊的矩阵，例如上下三角矩阵，对称矩阵，三对角矩阵，可以转化成1维矩阵，减小空间的消耗。 特殊矩阵对称矩阵对称矩阵有 aij&#x3D;aji的特性，因此可以只保存一边，也就是压缩成 n(n+1)&#x2F;2个 如果我们用一个一维数组s[n(n+1)&#x2F;2]来保存，那么它域原矩阵的对应关系 12k&#x3D; i(i-1)&#x2F;2+j-1 i&gt;&#x3D;j    j(j-1)&#x2F;2+i-1  i&lt;j  这个式子先只考虑一边，">
 <meta property="og:type" content="article">
-<meta property="og:title" content="埃氏筛">
-<meta property="og:url" content="http://xinhecuican.github.io/2020/01/04/%E5%9F%83%E6%B0%8F%E7%AD%9B/index.html">
+<meta property="og:title" content="压缩矩阵">
+<meta property="og:url" content="http://xinhecuican.github.io/2020/03/16/%E5%8E%8B%E7%BC%A9%E7%9F%A9%E9%98%B5/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="在筛质数时，我们会发现，筛去2后，2的倍数4、6、8等一定不是素数;筛去3后，3的倍数6、9、12等一定不是倍数。简单模拟这个过程如下 const int MAXN &#x3D; 1000000；   void Prime()   {       for (int i&#x3D;0; i&lt;MAXN; i++) prime[i]&#x3D;1;  &#x2F;&#x2F;先把每个数都定义为质数     prime[0]&#x3D;prime[1]&#x3D;0;">
-<meta property="article:published_time" content="2020-01-04T03:52:00.000Z">
-<meta property="article:modified_time" content="2020-01-07T11:09:40.219Z">
+<meta property="og:description" content="对于特殊的矩阵，例如上下三角矩阵，对称矩阵，三对角矩阵，可以转化成1维矩阵，减小空间的消耗。 特殊矩阵对称矩阵对称矩阵有 aij&#x3D;aji的特性，因此可以只保存一边，也就是压缩成 n(n+1)&#x2F;2个 如果我们用一个一维数组s[n(n+1)&#x2F;2]来保存，那么它域原矩阵的对应关系 12k&#x3D; i(i-1)&#x2F;2+j-1 i&gt;&#x3D;j    j(j-1)&#x2F;2+i-1  i&lt;j  这个式子先只考虑一边，">
+<meta property="article:published_time" content="2020-03-16T02:39:00.000Z">
+<meta property="article:modified_time" content="2020-03-16T03:43:06.821Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 
@@ -139,13 +139,13 @@
 
 
 
-  <link rel="canonical" href="http://xinhecuican.github.io/2020/01/04/埃氏筛/"/>
+  <link rel="canonical" href="http://xinhecuican.github.io/2020/03/16/压缩矩阵/"/>
 
 
 
 
 
-  <title>埃氏筛 | Hexo</title>
+  <title>压缩矩阵 | Hexo</title>
   
 
 
@@ -317,7 +317,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://xinhecuican.github.io/2020/01/04/%E5%9F%83%E6%B0%8F%E7%AD%9B/">
+    <link itemprop="mainEntityOfPage" href="http://xinhecuican.github.io/2020/03/16/%E5%8E%8B%E7%BC%A9%E7%9F%A9%E9%98%B5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -334,7 +334,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">埃氏筛</h1>
+          <h1 class="post-title" itemprop="name headline">压缩矩阵</h1>
         
 
         <div class="post-meta">
@@ -346,8 +346,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-04T11:52:00+08:00">
-                2020-01-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-16T10:39:00+08:00">
+                2020-03-16
               </time>
             
 
@@ -369,8 +369,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index">
+                    <span itemprop="name">数据结构</span>
                   </a>
                 </span>
 
@@ -406,18 +406,25 @@
       
 
       
-        <p>在筛质数时，我们会发现，筛去2后，2的倍数4、6、8等一定不是素数;筛去3后，3的倍数6、9、12等一定不是倍数。简单模拟这个过程如下</p>
-<pre><code>const int MAXN = 1000000；  
-void Prime()  
-{  
-    for (int i=0; i&lt;MAXN; i++) prime[i]=1;  //先把每个数都定义为质数
-    prime[0]=prime[1]=0;  
-    for (int i=2; i&lt;MAXN; i++)  
-    {  
-        if (!prime[i]) continue;  
-        for (int j=i*2; j&lt;MAXN; j+=i) prime[j] = 0;  //将i的倍数标记为合数
-    }  
-}</code></pre>
+        <p>对于特殊的矩阵，例如上下三角矩阵，对称矩阵，三对角矩阵，可以转化成1维矩阵，减小空间的消耗。</p>
+<h3 id="特殊矩阵"><a href="#特殊矩阵" class="headerlink" title="特殊矩阵"></a>特殊矩阵</h3><h4 id="对称矩阵"><a href="#对称矩阵" class="headerlink" title="对称矩阵"></a>对称矩阵</h4><p>对称矩阵有 aij=aji的特性，因此可以只保存一边，也就是压缩成 <code>n(n+1)/2</code>个</p>
+<p>如果我们用一个一维数组s[n(n+1)/2]来保存，那么它域原矩阵的对应关系</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">k= <span class="built_in">i</span>(<span class="built_in">i</span><span class="number">-1</span>)/<span class="number">2</span>+<span class="built_in">j</span><span class="number">-1</span> <span class="built_in">i</span>&gt;=<span class="built_in">j</span></span><br><span class="line">    <span class="built_in">j</span>(<span class="built_in">j</span><span class="number">-1</span>)/<span class="number">2</span>+<span class="built_in">i</span><span class="number">-1</span>  <span class="built_in">i</span>&lt;<span class="built_in">j</span></span><br></pre></td></tr></table></figure>
+
+<p>这个式子先只考虑一边，先看i&gt;=j的情况。此时第一行中压缩矩阵只保存一个值，第二行两个值，依此类推。所以对于第i行先把前i-1行中对应压缩矩阵的值的数量加起来，也就死i(i-1)/2，之后再加上第j行的第j-1个（这里因为数组下标是从0开始）。</p>
+<p>这个例子中的行数是从第一行开始，实际上应该从第0行开始，所以</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">k= <span class="built_in">i</span>(<span class="built_in">i</span>+<span class="number">1</span>)/<span class="number">2</span>+<span class="built_in">j</span> <span class="built_in">i</span>&gt;=<span class="built_in">j</span></span><br><span class="line">  <span class="built_in">j</span>(<span class="built_in">j</span>+<span class="number">1</span>)/<span class="number">2</span>+<span class="built_in">i</span> <span class="built_in">i</span>&lt;<span class="built_in">j</span></span><br></pre></td></tr></table></figure>
+<p>举个例子，第0行第0个在k中对应位置就是0</p>
+<h4 id="上下三角矩阵"><a href="#上下三角矩阵" class="headerlink" title="上下三角矩阵"></a>上下三角矩阵</h4><p>对称矩阵行数和列数相同</p>
+<p>上三角矩阵其实就是对称矩阵中 i&gt;=j的那一段</p>
+<p>下三角矩阵中第一行的压缩矩阵元素数量是n,第二行是n-1,以此类推，我们也可以得到相应的关系式</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">k=（<span class="number">2</span>*n-<span class="built_in">i</span><span class="number">-1</span>)*<span class="built_in">i</span>/<span class="number">2</span>+<span class="built_in">j</span> <span class="built_in">i</span>&lt;=<span class="built_in">j</span></span><br><span class="line">  (<span class="number">2</span>*n-<span class="built_in">j</span><span class="number">-1</span>)*<span class="built_in">j</span>/<span class="number">2</span>+<span class="built_in">i</span> <span class="built_in">i</span>&gt;<span class="built_in">j</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="三对角矩阵"><a href="#三对角矩阵" class="headerlink" title="三对角矩阵"></a>三对角矩阵</h4><p>除了第一行和最后一行有两个元素之外，其他行都有三个元素</p>
+<p>对于<code>a[i][j]</code>来说，前面有 3*i-1个元素，本行它前面有j-i+1个位置。所以k=2 * i+j</p>
+<p>反之，如果在压缩矩阵中是第k个位置，那么在原矩阵中 i=(k+1)/3 j=k-2*i</p>
+<h4 id="稀疏矩阵"><a href="#稀疏矩阵" class="headerlink" title="稀疏矩阵"></a>稀疏矩阵</h4><p>对于非零元素较少的矩阵，可以直接用一个结构体保存 i,j ,sum，然后再用一个结构体数组来保存所有的值</p>
+
       
     </div>
     
@@ -446,8 +453,8 @@ void Prime()
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/01/03/%E7%BB%84%E5%90%88/" rel="next" title="组合">
-                <i class="fa fa-chevron-left"></i> 组合
+              <a href="/2020/03/15/union/" rel="next" title="union">
+                <i class="fa fa-chevron-left"></i> union
               </a>
             
           </div>
@@ -455,10 +462,6 @@ void Prime()
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/01/04/%E7%BA%BF%E6%80%A7%E7%AD%9B/" rel="prev" title="线性筛">
-                线性筛 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -488,7 +491,7 @@ void Prime()
           
 
   
-<iframe title="livere"   src="https://was.livere.me/comment/city?id=city&refer=http://xinhecuican.github.io/2020/01/04/%E5%9F%83%E6%B0%8F%E7%AD%9B/&uid=MTAyMC80ODE3Mi8yNDY2OA==&site=http://xinhecuican.github.io/2020/01/04/%E5%9F%83%E6%B0%8F%E7%AD%9B/&title=埃氏筛" scrolling="" frameborder="0" id="lv-comment-399" style="min-width: 100%; width: 100px; min-height: 400px; overflow: auto; border: 0px; z-index: 124212; height: 800px;" ></iframe>
+<iframe title="livere"   src="https://was.livere.me/comment/city?id=city&refer=http://xinhecuican.github.io/2020/03/16/%E5%8E%8B%E7%BC%A9%E7%9F%A9%E9%98%B5/&uid=MTAyMC80ODE3Mi8yNDY2OA==&site=http://xinhecuican.github.io/2020/03/16/%E5%8E%8B%E7%BC%A9%E7%9F%A9%E9%98%B5/&title=压缩矩阵" scrolling="" frameborder="0" id="lv-comment-399" style="min-width: 100%; width: 100px; min-height: 400px; overflow: auto; border: 0px; z-index: 124212; height: 800px;" ></iframe>
 
   
 
@@ -513,8 +516,17 @@ void Prime()
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -581,6 +593,22 @@ void Prime()
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#特殊矩阵"><span class="nav-number">1.</span> <span class="nav-text">特殊矩阵</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#对称矩阵"><span class="nav-number">1.1.</span> <span class="nav-text">对称矩阵</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#上下三角矩阵"><span class="nav-number">1.2.</span> <span class="nav-text">上下三角矩阵</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三对角矩阵"><span class="nav-number">1.3.</span> <span class="nav-text">三对角矩阵</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#稀疏矩阵"><span class="nav-number">1.4.</span> <span class="nav-text">稀疏矩阵</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
