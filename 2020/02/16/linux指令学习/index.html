@@ -107,7 +107,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="命令语法一次输入多条命令，可以在命令之间用 ;分割开来 语法： 命令名称 选项 参数 选项有时被称为开关（switches）或标志（flags），选项通常是由一个连字符后面接着一些字母，或者两个连字符后接着一个单词构成。例如 –help，–version（显示版本信息） 使用多个单字符选项时，可以把他们连接在一起，用一个连字符来表示。例如 ls -lF。注意，unix的选项区分大小写 实际上许多长">
 <meta property="article:published_time" content="2020-02-16T02:20:00.000Z">
-<meta property="article:modified_time" content="2020-02-29T02:20:14.872Z">
+<meta property="article:modified_time" content="2020-03-18T12:26:52.537Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 
@@ -534,6 +534,151 @@
 <p>在条件1满足的情况下执行command2</p>
 <p>command1|| command2</p>
 <p>在条件1不满足的情况下也执行command2</p>
+<h5 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h5><p>regular expression 通常简写成regex或re，是一种指定字符串模式的输出方式。</p>
+<p>例如： harley1 harley2 harley3 ，作为正则表达式，可以用harley[123]表达这组模式。</p>
+<p>从这里我们可以了解到，正则表达式就像把许多字符串化为一个表达式。</p>
+<p>下面介绍一些常用的正则表达式</p>
+<table>
+<thead>
+<tr>
+<th>元字符</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>.</td>
+<td>除新行字符外，匹配任意的单个字符</td>
+</tr>
+<tr>
+<td>^</td>
+<td>锚，匹配行的开头</td>
+</tr>
+<tr>
+<td>$</td>
+<td>锚，匹配行的末尾</td>
+</tr>
+<tr>
+<td>&lt;</td>
+<td>锚，匹配单词的开头</td>
+</tr>
+<tr>
+<td>\ &gt;</td>
+<td>锚，匹配单词的末尾</td>
+</tr>
+<tr>
+<td>[list]</td>
+<td>字符类，匹配list中的任意字符</td>
+</tr>
+<tr>
+<td>^[list]</td>
+<td>子父类，匹配不再list中的任意字符</td>
+</tr>
+<tr>
+<td>()</td>
+<td>组，视为一个单独的单元</td>
+</tr>
+<tr>
+<td>竖线</td>
+<td>匹配选择之一</td>
+</tr>
+<tr>
+<td>\</td>
+<td>引用： 从字面上解释元字符</td>
+</tr>
+<tr>
+<td><strong>注意</strong></td>
+<td><strong>下面是判定匹配次数的字符</strong></td>
+</tr>
+<tr>
+<td>*</td>
+<td>匹配0次或者多次</td>
+</tr>
+<tr>
+<td>+</td>
+<td>匹配一次或者多次</td>
+</tr>
+<tr>
+<td>？</td>
+<td>匹配0次或1次</td>
+</tr>
+<tr>
+<td>{n}</td>
+<td>匹配n次</td>
+</tr>
+<tr>
+<td>{0，m}</td>
+<td>最多匹配m次</td>
+</tr>
+<tr>
+<td>{n,}</td>
+<td>最少匹配n次</td>
+</tr>
+<tr>
+<td>{，m}</td>
+<td>最多匹配m次</td>
+</tr>
+<tr>
+<td>{n,m}</td>
+<td>最少n次，最多m次</td>
+</tr>
+<tr>
+<td><strong>注意</strong></td>
+<td><strong>预定义字符类</strong></td>
+</tr>
+<tr>
+<td>[:lower:]</td>
+<td>小写字母</td>
+</tr>
+<tr>
+<td>[:upper:]</td>
+<td>大写字母</td>
+</tr>
+<tr>
+<td>[:alpha:]</td>
+<td>大小写字母</td>
+</tr>
+<tr>
+<td>[:alnum:]</td>
+<td>大小写字母，数字</td>
+</tr>
+<tr>
+<td>[:digit:]</td>
+<td>数字</td>
+</tr>
+<tr>
+<td>[:punct:]</td>
+<td>标点符号</td>
+</tr>
+<tr>
+<td>[:blank:]</td>
+<td>制表符或者空格</td>
+</tr>
+</tbody></table>
+<h6 id="基本和扩展正则表达式"><a href="#基本和扩展正则表达式" class="headerlink" title="基本和扩展正则表达式"></a>基本和扩展正则表达式</h6><h6 id="匹配行和单词"><a href="#匹配行和单词" class="headerlink" title="匹配行和单词"></a>匹配行和单词</h6><p>有些元字符具有定位的作用，这些字符叫做<strong>锚</strong>。例如，harley$仍是匹配字符串harley，但是这个时候只匹配行末尾的字符了。</p>
+<p>如果我们要找以harley开头的行，可以</p>
+<p>grep ‘^harley’ data</p>
+<p>注意，当我们使用含有元字符的表达式时，为了不干扰，最好加上单引号</p>
+<p>通过使用 ^$ ，我们可以很方便的查找空行。这个的意思就是既找行首又找行尾，只有空行才满足这个条件。</p>
+<p>例如： grep ‘^$’ data | wc -l</p>
+<p>如果我们要找 某个字符位于开头的，可以用 &lt;</p>
+<p>例如： grep ‘&lt;kn’ data，这个就是找kn为于单词开头的单词。或者grep ‘kn&gt;‘ data</p>
+<p>在linux系统中，可以采用\b代替&lt;和&gt;，\b相当于边界标记。此外，要尊重客观规律，不能把开头标记和结尾标记都写在开头。</p>
+<p>如果想匹配所有包含字母 H ，后面加a或者A的，可以用 grep ‘H[aA]’ data</p>
+<p>如果想表示一个范围，可以用 [a-b]，例如 [3-6] 或 [a-z]，这应该是按ascii码来的</p>
+<p>grep ‘[^A-Z,a-z]’ data可以用来搜索所有不包含字母的行</p>
+<h6 id="重复使用运算符"><a href="#重复使用运算符" class="headerlink" title="重复使用运算符"></a>重复使用运算符</h6><p>例如，如果我想找首字母是大写H，后面接了0个或者多个字母的行，可以使用</p>
+<p>grep ‘H[[:alpha:]]*’ data</p>
+<p>如果想搜索一个或者多个，可以用+号，</p>
+<p>例如： grep ‘variable[0-9]+’ data</p>
+<p>到现在，我们一直使用单个字符作为查找对象，如果想用多个字符作为查找对象，就需要用到组（小括号）</p>
+<p>例如： (xyz){5},这条命令就是查找重复出现xyz五次的字符串</p>
+<p>如果我们想搜索多个单词，可以用 | 分隔开来。</p>
+<p>例如： grep ‘(cat | dog | bird) ‘ data</p>
+<p>如果我们想搜索有特殊含义的元字符，可以用(转义字符）把这些字符的含义变成常规字符，如果我们想搜索 \ 本身，那么可以用两个 \ </p>
+<p>例如： grep ‘$‘ data</p>
+<h6 id="字典文件"><a href="#字典文件" class="headerlink" title="字典文件"></a>字典文件</h6><p>字典顾名思义，就是许多经常用的单词放到一起，每个单词一行，并且按照字母表顺序排列。一般储存在 /usr/share/dict/words中。</p>
+<p>利用这个文件，我们就可以很方便的查找单词。例如，那些单词以qu开头并且以y结尾呢？</p>
+<p>grep ‘^qu[a-z]+y$’ /usr/share/dict/words</p>
 <h5 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h5><table>
 <thead>
 <tr>
@@ -741,7 +886,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#命令语法"><span class="nav-number">1.</span> <span class="nav-text">命令语法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#用户提醒命令"><span class="nav-number">2.</span> <span class="nav-text">用户提醒命令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#登入登出命令"><span class="nav-number">3.</span> <span class="nav-text">登入登出命令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#快捷键和便捷输入命令"><span class="nav-number">4.</span> <span class="nav-text">快捷键和便捷输入命令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#立即使用的程序"><span class="nav-number">5.</span> <span class="nav-text">立即使用的程序</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#变量显示命令"><span class="nav-number">6.</span> <span class="nav-text">变量显示命令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#编辑命令"><span class="nav-number">7.</span> <span class="nav-text">编辑命令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#条件执行指令"><span class="nav-number">8.</span> <span class="nav-text">条件执行指令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#环境变量"><span class="nav-number">9.</span> <span class="nav-text">环境变量</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#命令语法"><span class="nav-number">1.</span> <span class="nav-text">命令语法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#用户提醒命令"><span class="nav-number">2.</span> <span class="nav-text">用户提醒命令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#登入登出命令"><span class="nav-number">3.</span> <span class="nav-text">登入登出命令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#快捷键和便捷输入命令"><span class="nav-number">4.</span> <span class="nav-text">快捷键和便捷输入命令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#立即使用的程序"><span class="nav-number">5.</span> <span class="nav-text">立即使用的程序</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#变量显示命令"><span class="nav-number">6.</span> <span class="nav-text">变量显示命令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#编辑命令"><span class="nav-number">7.</span> <span class="nav-text">编辑命令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#条件执行指令"><span class="nav-number">8.</span> <span class="nav-text">条件执行指令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#正则表达式"><span class="nav-number">9.</span> <span class="nav-text">正则表达式</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#基本和扩展正则表达式"><span class="nav-number">9.1.</span> <span class="nav-text">基本和扩展正则表达式</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#匹配行和单词"><span class="nav-number">9.2.</span> <span class="nav-text">匹配行和单词</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#重复使用运算符"><span class="nav-number">9.3.</span> <span class="nav-text">重复使用运算符</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#字典文件"><span class="nav-number">9.4.</span> <span class="nav-text">字典文件</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#环境变量"><span class="nav-number">10.</span> <span class="nav-text">环境变量</span></a></li></ol></div>
             
 
           </div>

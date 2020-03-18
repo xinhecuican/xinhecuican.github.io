@@ -106,10 +106,13 @@
 <meta property="og:url" content="http://xinhecuican.github.io/2020/03/16/%E5%8E%8B%E7%BC%A9%E7%9F%A9%E9%98%B5/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="对于特殊的矩阵，例如上下三角矩阵，对称矩阵，三对角矩阵，可以转化成1维矩阵，减小空间的消耗。 特殊矩阵对称矩阵对称矩阵有 aij&#x3D;aji的特性，因此可以只保存一边，也就是压缩成 n(n+1)&#x2F;2个 如果我们用一个一维数组s[n(n+1)&#x2F;2]来保存，那么它域原矩阵的对应关系 12k&#x3D; i(i-1)&#x2F;2+j-1 i&gt;&#x3D;j    j(j-1)&#x2F;2+i-1  i&lt;j  这个式子先只考虑一边，">
+<meta property="og:image" content="http://xinhecuican.github.io/images/%E6%8D%95%E8%8E%B71.PNG">
+<meta property="og:image" content="http://xinhecuican.github.io/images/%E6%8D%95%E8%8E%B7.PNG">
 <meta property="article:published_time" content="2020-03-16T02:39:00.000Z">
-<meta property="article:modified_time" content="2020-03-16T03:43:06.821Z">
+<meta property="article:modified_time" content="2020-03-17T13:51:40.185Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://xinhecuican.github.io/images/%E6%8D%95%E8%8E%B71.PNG">
 
 
 
@@ -423,7 +426,12 @@
 <h4 id="三对角矩阵"><a href="#三对角矩阵" class="headerlink" title="三对角矩阵"></a>三对角矩阵</h4><p>除了第一行和最后一行有两个元素之外，其他行都有三个元素</p>
 <p>对于<code>a[i][j]</code>来说，前面有 3*i-1个元素，本行它前面有j-i+1个位置。所以k=2 * i+j</p>
 <p>反之，如果在压缩矩阵中是第k个位置，那么在原矩阵中 i=(k+1)/3 j=k-2*i</p>
-<h4 id="稀疏矩阵"><a href="#稀疏矩阵" class="headerlink" title="稀疏矩阵"></a>稀疏矩阵</h4><p>对于非零元素较少的矩阵，可以直接用一个结构体保存 i,j ,sum，然后再用一个结构体数组来保存所有的值</p>
+<h4 id="稀疏矩阵"><a href="#稀疏矩阵" class="headerlink" title="稀疏矩阵"></a>稀疏矩阵</h4><p>对于非零元素较少的矩阵，可以直接用一个结构体保存 i,j ,sum，然后再用一个结构体数组来保存所有的值。这个数组是从左至右扫描遍历的。</p>
+<h5 id="稀疏矩阵转置的算法"><a href="#稀疏矩阵转置的算法" class="headerlink" title="稀疏矩阵转置的算法"></a>稀疏矩阵转置的算法</h5><p>首先，如果用朴素的算法，就是从第零行开始遍历每一列，然后把列变成行。</p>
+<p>如果我们用两个数组分别保存 每一列中元素的数量以及每一列在新的稀疏矩阵中的位置，就有办法可以加快速度</p>
+<p>例如：<img src="/images/%E6%8D%95%E8%8E%B71.PNG" alt=""></p>
+<p><img src="/images/%E6%8D%95%E8%8E%B7.PNG" alt=""></p>
+<p>for循环中注意q=cpot[col]，代表现在这个位置已经有东西了，所以再最后++cpot[col]代表现在这一列在新稀疏矩阵的首位置要后移一位。</p>
 
       
     </div>
@@ -603,7 +611,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#特殊矩阵"><span class="nav-number">1.</span> <span class="nav-text">特殊矩阵</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#对称矩阵"><span class="nav-number">1.1.</span> <span class="nav-text">对称矩阵</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#上下三角矩阵"><span class="nav-number">1.2.</span> <span class="nav-text">上下三角矩阵</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三对角矩阵"><span class="nav-number">1.3.</span> <span class="nav-text">三对角矩阵</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#稀疏矩阵"><span class="nav-number">1.4.</span> <span class="nav-text">稀疏矩阵</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#特殊矩阵"><span class="nav-number">1.</span> <span class="nav-text">特殊矩阵</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#对称矩阵"><span class="nav-number">1.1.</span> <span class="nav-text">对称矩阵</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#上下三角矩阵"><span class="nav-number">1.2.</span> <span class="nav-text">上下三角矩阵</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三对角矩阵"><span class="nav-number">1.3.</span> <span class="nav-text">三对角矩阵</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#稀疏矩阵"><span class="nav-number">1.4.</span> <span class="nav-text">稀疏矩阵</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#稀疏矩阵转置的算法"><span class="nav-number">1.4.1.</span> <span class="nav-text">稀疏矩阵转置的算法</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
