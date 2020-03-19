@@ -87,7 +87,7 @@
 
 
 
-  <meta name="keywords" content="排序," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -100,19 +100,16 @@
 
 
 
-<meta name="description" content="基本原理归并排序运用了分治的思想，先将数组二分成一个元素（一个元素时看为有序），然后将这些元素不断合并，每合并一次排一次序，最后就可以得到有序的数组。 比如说一个序列:12 ,23,1,44,233,10,9,8。我们先分成两段：12 ,23,1,44 和 233,10,9,8，发现还能再分成4段：12 ,23 和 1,44——233,10 和 9,8。再分成8段：12–23–1–44 和233–">
+<meta name="description" content="进入函数在汇编中其实就是callq，出函数就是retq。 而callq和retq的功能之前已经提到过 参数的传递在x86-64位系统中，有六个寄存器负责传入参数，分别是rdi，rsi，rdx，rcx,r8,r9，同时程序返回时返回值放在rax中。如果大于6个，多的部分就要放在栈上。如果我们想操作在栈上的参数，就要通过 x(%rsp)来操作了。 例如有7个参数，此时第7个参数就放在栈上那么 8(%r">
 <meta property="og:type" content="article">
-<meta property="og:title" content="归并排序">
-<meta property="og:url" content="http://xinhecuican.github.io/2020/01/13/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/index.html">
+<meta property="og:title" content="汇编 函数">
+<meta property="og:url" content="http://xinhecuican.github.io/2020/03/19/%E6%B1%87%E7%BC%96-%E5%87%BD%E6%95%B0/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="基本原理归并排序运用了分治的思想，先将数组二分成一个元素（一个元素时看为有序），然后将这些元素不断合并，每合并一次排一次序，最后就可以得到有序的数组。 比如说一个序列:12 ,23,1,44,233,10,9,8。我们先分成两段：12 ,23,1,44 和 233,10,9,8，发现还能再分成4段：12 ,23 和 1,44——233,10 和 9,8。再分成8段：12–23–1–44 和233–">
-<meta property="og:image" content="http://xinhecuican.github.io/images/1024555-20161218163120151-452283750.png">
-<meta property="article:published_time" content="2020-01-13T06:31:00.000Z">
-<meta property="article:modified_time" content="2020-01-13T07:12:13.018Z">
+<meta property="og:description" content="进入函数在汇编中其实就是callq，出函数就是retq。 而callq和retq的功能之前已经提到过 参数的传递在x86-64位系统中，有六个寄存器负责传入参数，分别是rdi，rsi，rdx，rcx,r8,r9，同时程序返回时返回值放在rax中。如果大于6个，多的部分就要放在栈上。如果我们想操作在栈上的参数，就要通过 x(%rsp)来操作了。 例如有7个参数，此时第7个参数就放在栈上那么 8(%r">
+<meta property="article:published_time" content="2020-03-19T07:30:00.000Z">
+<meta property="article:modified_time" content="2020-03-19T13:21:39.961Z">
 <meta property="article:author" content="John Doe">
-<meta property="article:tag" content="排序">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://xinhecuican.github.io/images/1024555-20161218163120151-452283750.png">
 
 
 
@@ -142,13 +139,13 @@
 
 
 
-  <link rel="canonical" href="http://xinhecuican.github.io/2020/01/13/归并排序/"/>
+  <link rel="canonical" href="http://xinhecuican.github.io/2020/03/19/汇编-函数/"/>
 
 
 
 
 
-  <title>归并排序 | Hexo</title>
+  <title>汇编 函数 | Hexo</title>
   
 
 
@@ -320,7 +317,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://xinhecuican.github.io/2020/01/13/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/">
+    <link itemprop="mainEntityOfPage" href="http://xinhecuican.github.io/2020/03/19/%E6%B1%87%E7%BC%96-%E5%87%BD%E6%95%B0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -337,7 +334,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">归并排序</h1>
+          <h1 class="post-title" itemprop="name headline">汇编 函数</h1>
         
 
         <div class="post-meta">
@@ -349,8 +346,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-13T14:31:00+08:00">
-                2020-01-13
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-19T15:30:00+08:00">
+                2020-03-19
               </time>
             
 
@@ -372,8 +369,19 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
+                  <a href="/categories/%E6%B1%87%E7%BC%96/" itemprop="url" rel="index">
+                    <span itemprop="name">汇编</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B1%87%E7%BC%96/AT-T/" itemprop="url" rel="index">
+                    <span itemprop="name">AT&T</span>
                   </a>
                 </span>
 
@@ -409,13 +417,46 @@
       
 
       
-        <h4 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h4><p>归并排序运用了分治的思想，先将数组二分成一个元素（一个元素时看为有序），然后将这些元素不断合并，每合并一次排一次序，最后就可以得到有序的数组。</p>
-<p>比如说一个序列:12 ,23,1,44,233,10,9,8。我们先分成两段：12 ,23,1,44 和 233,10,9,8，<br>发现还能再分成4段：12 ,23 和 1,44——233,10 和 9,8。<br>再分成8段：12–23–1–44 和233–10–9–8。<br>这时候开始把子序列进行排序合并，一个元素就是有序的。所以不用排序。<br>合并成2个一组排序得到：12，23—-1，44—10，233—8，9。<br>再合并成4个一组排序得到：1，12，23，44—8，9，10，233。<br>最后合并得到最终结果：1，8，9，10，12，23，44，233。</p>
-<p>合并过程看代码</p>
-<p>链接：<a href="https://www.jianshu.com/p/b50a6034eb90" target="_blank" rel="noopener">https://www.jianshu.com/p/b50a6034eb90</a></p>
-<h4 id="图解"><a href="#图解" class="headerlink" title="图解"></a>图解</h4><p><img src="/images/1024555-20161218163120151-452283750.png" alt=""></p>
-<p>这个图片蓝色部分就是拆的过程，而绿的部分为并的过程</p>
-<h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">paixu</span><span class="params">(<span class="keyword">int</span> first,<span class="keyword">int</span> mid,<span class="keyword">int</span> last,<span class="keyword">int</span> a[],<span class="keyword">int</span> temp[])</span><span class="comment">//这是合并过程</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> l1=first,l2=mid+<span class="number">1</span>,r1=mid,r2=last;</span><br><span class="line">    <span class="keyword">int</span> k=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(l1&lt;=r1&amp;&amp;l2&lt;=r2)<span class="comment">//两部分都存在时看哪个小就加上哪个</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(a[l1]&lt;=a[l2])</span><br><span class="line">        &#123;</span><br><span class="line">            temp[k++]=a[l1++];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            temp[k++]=a[l2++];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(l1&lt;=r1)<span class="comment">//第一部分有剩余就把第一部分剩下的全加上</span></span><br><span class="line">    &#123;</span><br><span class="line">        temp[k++]=a[l1++];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(l2&lt;=r2)</span><br><span class="line">    &#123;</span><br><span class="line">        temp[k++]=a[l2++];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;k;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        a[i+first]=temp[i];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">xunhuan</span><span class="params">(<span class="keyword">int</span> first,<span class="keyword">int</span> last,<span class="keyword">int</span> a[],<span class="keyword">int</span> temp[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(first&lt;last)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> mid=(first+last)/<span class="number">2</span>;</span><br><span class="line">        xunhuan(first,mid,a,temp);<span class="comment">//拆左边</span></span><br><span class="line">        xunhuan(mid+<span class="number">1</span>,last,a,temp);<span class="comment">//拆右边</span></span><br><span class="line">        paixu(first,mid,last,a,temp);<span class="comment">//合并</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">mergesort</span><span class="params">(<span class="keyword">int</span> a[],<span class="keyword">int</span> first,<span class="keyword">int</span> last)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span>* p=<span class="keyword">new</span> <span class="keyword">int</span>[last-first];<span class="comment">//建一个临时数组，合并时用</span></span><br><span class="line">    <span class="keyword">if</span>(p==<span class="literal">NULL</span>)<span class="comment">//判断是否传入空数组</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    xunhuan(first,last,a,p);</span><br><span class="line">    <span class="keyword">delete</span> [] p;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <p>进入函数在汇编中其实就是callq，出函数就是retq。</p>
+<p>而callq和retq的功能之前已经提到过</p>
+<h3 id="参数的传递"><a href="#参数的传递" class="headerlink" title="参数的传递"></a>参数的传递</h3><p>在x86-64位系统中，有六个寄存器负责传入参数，分别是rdi，rsi，rdx，rcx,r8,r9，同时程序返回时返回值放在rax中。如果大于6个，多的部分就要放在栈上。如果我们想操作在栈上的参数，就要通过 x(%rsp)来操作了。</p>
+<p>例如有7个参数，此时第7个参数就放在栈上那么 8(%rsp)就可以访问这个参数了，pushq操作分为两部分，首先是rsp-8，然后把数据放进去。这个时候其实数据就是在rsp-rsp+8的区域中，也就是说我们直接movq (%rsp)…就可以访问到我们刚才放进去的元素了</p>
+<p>我们这里不采用(%rsp)的原因是因为调用函数是callq，在最后应该是把rip放到栈中，所以要加8到下一个元素。</p>
+<p>如果有8个参数，那么栈中要先存第8个，然后再存第7个。</p>
+<h3 id="栈上的局部储存"><a href="#栈上的局部储存" class="headerlink" title="栈上的局部储存"></a>栈上的局部储存</h3><p>由于现代编译器的不断优化和寄存器的增多，我们一般不把局部变量放到栈中，但是有的时候我们不得不把他们放到栈中。</p>
+<ol>
+<li>寄存器不足时</li>
+<li>某一变量用了&amp;（取地址），因此这个时候不得不把它放到栈中，这样才有一个地址</li>
+<li>当局部变量是数组或结构体时</li>
+</ol>
+<p>例如：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">long <span class="keyword">caller</span>()</span><br><span class="line">&#123;</span><br><span class="line">    long <span class="keyword">x</span> = <span class="number">534</span>;</span><br><span class="line">    long <span class="keyword">y</span> = <span class="number">1057</span>;</span><br><span class="line">    long sum = swap_add(&amp;<span class="keyword">x</span>, &amp;<span class="keyword">y</span>);</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line">汇编代码为：</span><br><span class="line"><span class="keyword">caller</span>:</span><br><span class="line">  subq $16, %rsp</span><br><span class="line">  movq $534, (%rsp)</span><br><span class="line">  movq $1057, <span class="number">8</span>(%rsp)</span><br><span class="line">  leaq <span class="number">8</span>(%rsp), %rsi</span><br><span class="line">  movq %rsp, %rdi</span><br><span class="line">  callq swap_add</span><br><span class="line">  ...</span><br><span class="line">  addq $16,%rsp</span><br></pre></td></tr></table></figure>
+<p>汇编中第一行代码为rsp-16，这是为局部变量分配内存空间。534存在最近的一个，1057存在较远的一个，这与前面多个参数存储符合。</p>
+<p>注意在这个函数结束时，分配的栈空间也要清除，也就是最后的addq</p>
+<p>例2：</p>
+<figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">long call_proc()</span><br><span class="line">&#123;</span><br><span class="line">    long <span class="keyword">x</span><span class="number">1</span> = <span class="number">1</span><span class="comment">;</span></span><br><span class="line"><span class="comment">    int x2 = 2;</span></span><br><span class="line"><span class="comment">    short x3 = 3;</span></span><br><span class="line"><span class="comment">    char x4 = 4;</span></span><br><span class="line"><span class="comment">    proc(x1,&amp;x1,x2,&amp;x2,x3,&amp;x3,x4,&amp;x4);</span></span><br><span class="line"><span class="comment">    return x1-x2;</span></span><br><span class="line"><span class="comment">&#125;</span></span><br><span class="line"><span class="comment">汇编：</span></span><br><span class="line"><span class="comment">call_proc:</span></span><br><span class="line"><span class="comment">  subq $32,%rsp</span></span><br><span class="line"><span class="comment">  movq $1, 24(%rsp)</span></span><br><span class="line"><span class="comment">  movq $2, 20(%rsp)</span></span><br><span class="line"><span class="comment">  movq $3, 18(%rsp)</span></span><br><span class="line"><span class="comment">  movq $4, 17(%rsp)</span></span><br><span class="line"><span class="comment">  leaq 17(%rsp), %rax</span></span><br><span class="line"><span class="comment">  </span></span><br><span class="line"><span class="comment">  movq %rax, 8(%rsp)</span></span><br><span class="line"><span class="comment">  movl $4, (%rsp)</span></span><br><span class="line"><span class="comment">  leaq 18(%rsp), %r9</span></span><br><span class="line"><span class="comment">  movl $3, %r8d</span></span><br><span class="line"><span class="comment">  leaq 20(%rsp), %rcx</span></span><br><span class="line"><span class="comment">  movl $2,%edx</span></span><br><span class="line"><span class="comment">  leaq 24(%rsp), %rsi</span></span><br><span class="line"><span class="comment">  movl $1, %edi</span></span><br><span class="line"><span class="comment">  call proc</span></span><br><span class="line"><span class="comment">  ...</span></span><br><span class="line"><span class="comment">  add $32,%rsp</span></span><br></pre></td></tr></table></figure>
+
+<p>注意空行前面是存储地址，因为后面函数的参数中有使用。空行后面就是把8个参数赋值。可能这里会有疑问就是这里把参数都赋了值，那么函数返回到原函数时那些参数值不都变了吗？</p>
+<p>按照惯例，寄存器 %rbx，%rbp 和 %r12到%15被划分成被调用者保存寄存器，也就是说，这些寄存器在被调用的函数中都会保存好，因此我们可以把参数存在这些寄存器中，然后需要的时候又从这些寄存器中取出来，这样就保证了参数值不会被改变。其他寄存器[1]<br>。叫做调用者保存寄存器，这些寄存器不会被被调用者特殊保护，这种保护是调用者负责的。<br>[1]:rsp除外</p>
+<p>例：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">long p(long <span class="keyword">x</span>, long <span class="keyword">y</span>)</span><br><span class="line">&#123;</span><br><span class="line">    long u = <span class="string">q(y)</span>;</span><br><span class="line">    long v = <span class="string">q(x)</span>;</span><br><span class="line">    <span class="keyword">return</span> u+v;</span><br><span class="line">&#125;</span><br><span class="line">汇编：</span><br><span class="line">p:</span><br><span class="line">  pushq %rbp</span><br><span class="line">  pushq %rbx</span><br><span class="line">  subq $8,%rsp</span><br><span class="line">  movq %rdi, %rbp</span><br><span class="line">  movq %rsi, %rdi</span><br><span class="line">  call <span class="keyword">q</span></span><br><span class="line">  movq %rax, %rbx//保存得到的函数值</span><br><span class="line">  movq %rbp, %rdi</span><br><span class="line">  calll <span class="keyword">q</span></span><br><span class="line">  addq %rbx, %rax</span><br><span class="line">  addq $8, %rsp</span><br><span class="line">  popq %rbx</span><br><span class="line">  popq %rbp</span><br><span class="line">  ret</span><br></pre></td></tr></table></figure>
+<p>这段代码开始把rbp和rbx拉进栈，是因为后面要改变rbx和rbp，而p本身也是一个函数，要保证被调用者保存寄存器不会被改变，之后在q函数传递参数前先把p的参数保存到rbp和rbx中，这样就保证了参数在函数中不会被破坏。之后传递参数时也可以直接从rbp中传入，</p>
+<h3 id="栈中的内容"><a href="#栈中的内容" class="headerlink" title="栈中的内容"></a>栈中的内容</h3><p>从上面我们可以看到，栈中的内容可能会有寄存器，局部变量，下一个函数所需要的参数等。</p>
+<p>他们之间的顺序是：</p>
+<table>
+<thead>
+<tr>
+<th>高 ———-&gt;低</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>这个函数要保存的寄存器</td>
+<td>局部变量</td>
+</tr>
+</tbody></table>
+<p>此外，函数的一般顺序为： 保存上一个函数所需要的参数。进行一系列运算，保存下一个函数所需要的参数，传递参数。</p>
+
       
     </div>
     
@@ -435,12 +476,6 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/%E6%8E%92%E5%BA%8F/" rel="tag"><i class="fa fa-tag"></i> 排序</a>
-          
-        </div>
-      
 
       
       
@@ -450,8 +485,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/01/13/%E5%89%8D%E7%BC%80%E5%92%8C/" rel="next" title="前缀和">
-                <i class="fa fa-chevron-left"></i> 前缀和
+              <a href="/2020/03/16/%E5%8E%8B%E7%BC%A9%E7%9F%A9%E9%98%B5/" rel="next" title="压缩矩阵">
+                <i class="fa fa-chevron-left"></i> 压缩矩阵
               </a>
             
           </div>
@@ -459,10 +494,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/01/13/%E9%98%9F%E5%88%97/" rel="prev" title="队列">
-                队列 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -492,7 +523,7 @@
           
 
   
-<iframe title="livere"   src="https://was.livere.me/comment/city?id=city&refer=http://xinhecuican.github.io/2020/01/13/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/&uid=MTAyMC80ODE3Mi8yNDY2OA==&site=http://xinhecuican.github.io/2020/01/13/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/&title=归并排序" scrolling="" frameborder="0" id="lv-comment-399" style="min-width: 100%; width: 100px; min-height: 400px; overflow: auto; border: 0px; z-index: 124212; height: 800px;" ></iframe>
+<iframe title="livere"   src="https://was.livere.me/comment/city?id=city&refer=http://xinhecuican.github.io/2020/03/19/%E6%B1%87%E7%BC%96-%E5%87%BD%E6%95%B0/&uid=MTAyMC80ODE3Mi8yNDY2OA==&site=http://xinhecuican.github.io/2020/03/19/%E6%B1%87%E7%BC%96-%E5%87%BD%E6%95%B0/&title=汇编 函数" scrolling="" frameborder="0" id="lv-comment-399" style="min-width: 100%; width: 100px; min-height: 400px; overflow: auto; border: 0px; z-index: 124212; height: 800px;" ></iframe>
 
   
 
@@ -604,7 +635,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#基本原理"><span class="nav-number">1.</span> <span class="nav-text">基本原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#图解"><span class="nav-number">2.</span> <span class="nav-text">图解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码实现"><span class="nav-number">3.</span> <span class="nav-text">代码实现</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#参数的传递"><span class="nav-number">1.</span> <span class="nav-text">参数的传递</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#栈上的局部储存"><span class="nav-number">2.</span> <span class="nav-text">栈上的局部储存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#栈中的内容"><span class="nav-number">3.</span> <span class="nav-text">栈中的内容</span></a></li></ol></div>
             
 
           </div>

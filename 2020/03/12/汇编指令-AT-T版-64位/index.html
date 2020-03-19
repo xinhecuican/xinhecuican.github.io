@@ -107,7 +107,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="用g++ -Og -s -masm&#x3D;intel name.c 可以生成intel格式的汇编代码，-s是生成汇编代码，-Og是省去不重要的部分，如果不加这个，可能5条指令要变成十多条指令 -fno-if-conversion 分支语句不要采用条件传输的方式，条件跳转的方式 -g debug objdump -d 反汇编 gdb 调试 b+ 标号 设置断点 info register 查看寄存器 r">
 <meta property="article:published_time" content="2020-03-11T23:46:00.000Z">
-<meta property="article:modified_time" content="2020-03-17T01:38:43.397Z">
+<meta property="article:modified_time" content="2020-03-19T07:29:21.429Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="AT&amp;T">
 <meta name="twitter:card" content="summary">
@@ -651,6 +651,19 @@
 <p>其中.L4代表的是跳转表的标号（不一定是这个名字，举个例子）而rdi就是switch中的x，</p>
 <p>如果标号很大，例如10000甚至1000000开始的时候，如果把前面的查找表一个个全部设置出来，空间开销会很大，所以编译器会先自动的减去一个数使他处于较小的范围，但是这种情况只适用于数据密集的情况。</p>
 <p>如果数据稀疏例如一个是1一个是10000，这个时候偏移也不行了，只有通过先排序再二分搜索来查找标号，这个复杂度是logn</p>
+<h4 id="杂项"><a href="#杂项" class="headerlink" title="杂项"></a>杂项</h4><ul>
+<li>inc 自增</li>
+<li>dec 自减</li>
+<li>neg 取负 -x</li>
+<li>not 取非 ~x</li>
+<li>imul 乘</li>
+<li>xor 异或</li>
+<li>or 或</li>
+<li>and 与</li>
+<li>sal shl 左移</li>
+<li>sar 算数右移</li>
+<li>shr 逻辑右移</li>
+</ul>
 
       
     </div>
@@ -778,7 +791,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">89</span>
+                  <span class="site-state-item-count">90</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -789,7 +802,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-count">13</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -840,7 +853,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#mov-移动指令"><span class="nav-number">1.</span> <span class="nav-text">mov 移动指令</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#地址的写法"><span class="nav-number">1.1.</span> <span class="nav-text">地址的写法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#强制类型转换"><span class="nav-number">1.2.</span> <span class="nav-text">强制类型转换</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#leaq-地址转移"><span class="nav-number">2.</span> <span class="nav-text">leaq 地址转移</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#比较指令"><span class="nav-number">3.</span> <span class="nav-text">比较指令</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#标志寄存器的访问"><span class="nav-number">3.1.</span> <span class="nav-text">标志寄存器的访问</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#跳转指令"><span class="nav-number">4.</span> <span class="nav-text">跳转指令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#条件跳转指令"><span class="nav-number">5.</span> <span class="nav-text">条件跳转指令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#循环语句"><span class="nav-number">6.</span> <span class="nav-text">循环语句</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#switch-汇编实现"><span class="nav-number">7.</span> <span class="nav-text">switch 汇编实现</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#mov-移动指令"><span class="nav-number">1.</span> <span class="nav-text">mov 移动指令</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#地址的写法"><span class="nav-number">1.1.</span> <span class="nav-text">地址的写法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#强制类型转换"><span class="nav-number">1.2.</span> <span class="nav-text">强制类型转换</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#leaq-地址转移"><span class="nav-number">2.</span> <span class="nav-text">leaq 地址转移</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#比较指令"><span class="nav-number">3.</span> <span class="nav-text">比较指令</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#标志寄存器的访问"><span class="nav-number">3.1.</span> <span class="nav-text">标志寄存器的访问</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#跳转指令"><span class="nav-number">4.</span> <span class="nav-text">跳转指令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#条件跳转指令"><span class="nav-number">5.</span> <span class="nav-text">条件跳转指令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#循环语句"><span class="nav-number">6.</span> <span class="nav-text">循环语句</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#switch-汇编实现"><span class="nav-number">7.</span> <span class="nav-text">switch 汇编实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#杂项"><span class="nav-number">8.</span> <span class="nav-text">杂项</span></a></li></ol></div>
             
 
           </div>
