@@ -100,14 +100,14 @@
 
 
 
-<meta name="description" content="用g++ -Og -s -masm&#x3D;intel name.c 可以生成intel格式的汇编代码，-s是生成汇编代码，-Og是省去不重要的部分，如果不加这个，可能5条指令要变成十多条指令 -fno-if-conversion 分支语句不要采用条件传输的方式，条件跳转的方式 -g debug objdump -d 反汇编 gdb 调试 b+ 标号 设置断点 info register 查看寄存器 r">
+<meta name="description" content="用g++ -Og -S -masm&#x3D;intel name.c 可以生成intel格式的汇编代码，-S是生成汇编代码，-Og是省去不重要的部分，如果不加这个，可能5条指令要变成十多条指令 -fno-if-conversion 分支语句不要采用条件传输的方式，条件跳转的方式 -g debug objdump -d 反汇编 gdb 调试 b+ 标号 设置断点 info register 查看寄存器 r">
 <meta property="og:type" content="article">
 <meta property="og:title" content="汇编指令 AT&amp;T版 64位">
 <meta property="og:url" content="http://xinhecuican.github.io/2020/03/12/%E6%B1%87%E7%BC%96%E6%8C%87%E4%BB%A4-AT-T%E7%89%88-64%E4%BD%8D/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="用g++ -Og -s -masm&#x3D;intel name.c 可以生成intel格式的汇编代码，-s是生成汇编代码，-Og是省去不重要的部分，如果不加这个，可能5条指令要变成十多条指令 -fno-if-conversion 分支语句不要采用条件传输的方式，条件跳转的方式 -g debug objdump -d 反汇编 gdb 调试 b+ 标号 设置断点 info register 查看寄存器 r">
+<meta property="og:description" content="用g++ -Og -S -masm&#x3D;intel name.c 可以生成intel格式的汇编代码，-S是生成汇编代码，-Og是省去不重要的部分，如果不加这个，可能5条指令要变成十多条指令 -fno-if-conversion 分支语句不要采用条件传输的方式，条件跳转的方式 -g debug objdump -d 反汇编 gdb 调试 b+ 标号 设置断点 info register 查看寄存器 r">
 <meta property="article:published_time" content="2020-03-11T23:46:00.000Z">
-<meta property="article:modified_time" content="2020-03-19T07:29:21.429Z">
+<meta property="article:modified_time" content="2020-03-21T00:59:52.033Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="AT&amp;T">
 <meta name="twitter:card" content="summary">
@@ -407,7 +407,7 @@
       
 
       
-        <p>用g++ -Og -s -masm=intel name.c 可以生成intel格式的汇编代码，-s是生成汇编代码，-Og是省去不重要的部分，如果不加这个，可能5条指令要变成十多条指令</p>
+        <p>用g++ -Og -S -masm=intel name.c 可以生成intel格式的汇编代码，-S是生成汇编代码，-Og是省去不重要的部分，如果不加这个，可能5条指令要变成十多条指令</p>
 <p>-fno-if-conversion 分支语句不要采用条件传输的方式，条件跳转的方式</p>
 <p>-g debug</p>
 <p>objdump -d 反汇编</p>

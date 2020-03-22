@@ -1034,7 +1034,7 @@ B（e) 只有一个原子元素e
       
         
           
-          用g++ -Og -s -masm=intel name.c 可以生成intel格式的汇编代码，-s是生成汇编代码，-Og是省去不重要的部分，如果不加这个，可能5条指令要变成十多条指令
+          用g++ -Og -S -masm=intel name.c 可以生成intel格式的汇编代码，-S是生成汇编代码，-Og是省去不重要的部分，如果不加这个，可能5条指令要变成十多条指令
 -fno-if-conversion 分支语句不要采用条件传输的方式，条件跳转的方式
 -g debug
 objdu

@@ -107,7 +107,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="命令语法一次输入多条命令，可以在命令之间用 ;分割开来 语法： 命令名称 选项 参数 选项有时被称为开关（switches）或标志（flags），选项通常是由一个连字符后面接着一些字母，或者两个连字符后接着一个单词构成。例如 –help，–version（显示版本信息） 使用多个单字符选项时，可以把他们连接在一起，用一个连字符来表示。例如 ls -lF。注意，unix的选项区分大小写 实际上许多长">
 <meta property="article:published_time" content="2020-02-16T02:20:00.000Z">
-<meta property="article:modified_time" content="2020-03-18T12:26:52.537Z">
+<meta property="article:modified_time" content="2020-03-22T12:56:10.509Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 
@@ -530,6 +530,14 @@
 <li>gedit 文本编辑器，相当于windows下的记事本</li>
 <li>#注释</li>
 </ul>
+<h5 id="文件显示指令"><a href="#文件显示指令" class="headerlink" title="文件显示指令"></a>文件显示指令</h5><ul>
+<li>less，这条指令是让大量的数据分成一页一页进行查看，如果不使用这个程序。那么输出时会直接到这些数据的末尾。less在正常情况下是区分大小写的，如果想不区分，可以使用I选项。此外，less命令内部还有许多搜索，翻页等指令，这些指令可以通过help去查看。</li>
+</ul>
+<p>less还有一个特殊的功能，就是直接跳转到某一页。less +5g …代表跳转到第5页，less +/buffer …是从第一个buffer处开始。</p>
+<h5 id="显示十六进制文件"><a href="#显示十六进制文件" class="headerlink" title="显示十六进制文件"></a>显示十六进制文件</h5><p>显示二进制文件的命令是 hexdump（显示十六进制文件），od（显示八进制文件），</p>
+<p>hexdump -C file。将自动选取适合的选项组合进行输出。</p>
+<p>-s 偏移一定字节数开始输出。</p>
+<p>-n 显示多少字节输出</p>
 <h5 id="条件执行指令"><a href="#条件执行指令" class="headerlink" title="条件执行指令"></a>条件执行指令</h5><p>command1 &amp;&amp; command2</p>
 <p>在条件1满足的情况下执行command2</p>
 <p>command1|| command2</p>
@@ -886,7 +894,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#命令语法"><span class="nav-number">1.</span> <span class="nav-text">命令语法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#用户提醒命令"><span class="nav-number">2.</span> <span class="nav-text">用户提醒命令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#登入登出命令"><span class="nav-number">3.</span> <span class="nav-text">登入登出命令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#快捷键和便捷输入命令"><span class="nav-number">4.</span> <span class="nav-text">快捷键和便捷输入命令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#立即使用的程序"><span class="nav-number">5.</span> <span class="nav-text">立即使用的程序</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#变量显示命令"><span class="nav-number">6.</span> <span class="nav-text">变量显示命令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#编辑命令"><span class="nav-number">7.</span> <span class="nav-text">编辑命令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#条件执行指令"><span class="nav-number">8.</span> <span class="nav-text">条件执行指令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#正则表达式"><span class="nav-number">9.</span> <span class="nav-text">正则表达式</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#基本和扩展正则表达式"><span class="nav-number">9.1.</span> <span class="nav-text">基本和扩展正则表达式</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#匹配行和单词"><span class="nav-number">9.2.</span> <span class="nav-text">匹配行和单词</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#重复使用运算符"><span class="nav-number">9.3.</span> <span class="nav-text">重复使用运算符</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#字典文件"><span class="nav-number">9.4.</span> <span class="nav-text">字典文件</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#环境变量"><span class="nav-number">10.</span> <span class="nav-text">环境变量</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#命令语法"><span class="nav-number">1.</span> <span class="nav-text">命令语法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#用户提醒命令"><span class="nav-number">2.</span> <span class="nav-text">用户提醒命令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#登入登出命令"><span class="nav-number">3.</span> <span class="nav-text">登入登出命令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#快捷键和便捷输入命令"><span class="nav-number">4.</span> <span class="nav-text">快捷键和便捷输入命令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#立即使用的程序"><span class="nav-number">5.</span> <span class="nav-text">立即使用的程序</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#变量显示命令"><span class="nav-number">6.</span> <span class="nav-text">变量显示命令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#编辑命令"><span class="nav-number">7.</span> <span class="nav-text">编辑命令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#文件显示指令"><span class="nav-number">8.</span> <span class="nav-text">文件显示指令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#显示十六进制文件"><span class="nav-number">9.</span> <span class="nav-text">显示十六进制文件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#条件执行指令"><span class="nav-number">10.</span> <span class="nav-text">条件执行指令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#正则表达式"><span class="nav-number">11.</span> <span class="nav-text">正则表达式</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#基本和扩展正则表达式"><span class="nav-number">11.1.</span> <span class="nav-text">基本和扩展正则表达式</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#匹配行和单词"><span class="nav-number">11.2.</span> <span class="nav-text">匹配行和单词</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#重复使用运算符"><span class="nav-number">11.3.</span> <span class="nav-text">重复使用运算符</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#字典文件"><span class="nav-number">11.4.</span> <span class="nav-text">字典文件</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#环境变量"><span class="nav-number">12.</span> <span class="nav-text">环境变量</span></a></li></ol></div>
             
 
           </div>
