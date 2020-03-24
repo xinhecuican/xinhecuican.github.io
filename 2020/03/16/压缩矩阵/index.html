@@ -109,7 +109,7 @@
 <meta property="og:image" content="http://xinhecuican.github.io/images/%E6%8D%95%E8%8E%B71.PNG">
 <meta property="og:image" content="http://xinhecuican.github.io/images/%E6%8D%95%E8%8E%B7.PNG">
 <meta property="article:published_time" content="2020-03-16T02:39:00.000Z">
-<meta property="article:modified_time" content="2020-03-17T13:51:40.185Z">
+<meta property="article:modified_time" content="2020-03-23T06:15:45.806Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://xinhecuican.github.io/images/%E6%8D%95%E8%8E%B71.PNG">
@@ -431,7 +431,9 @@
 <p>如果我们用两个数组分别保存 每一列中元素的数量以及每一列在新的稀疏矩阵中的位置，就有办法可以加快速度</p>
 <p>例如：<img src="/images/%E6%8D%95%E8%8E%B71.PNG" alt=""></p>
 <p><img src="/images/%E6%8D%95%E8%8E%B7.PNG" alt=""></p>
+<p>cpot 第一个位置是一是因为数组下标从1开始</p>
 <p>for循环中注意q=cpot[col]，代表现在这个位置已经有东西了，所以再最后++cpot[col]代表现在这一列在新稀疏矩阵的首位置要后移一位。</p>
+<p>其次，因为转置前行号已经是从小到大排了，所以行号小的一定在前面。</p>
 
       
     </div>
@@ -553,7 +555,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">90</span>
+                  <span class="site-state-item-count">91</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
