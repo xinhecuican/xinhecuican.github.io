@@ -109,7 +109,7 @@
 <meta property="og:image" content="http://xinhecuican.github.io/images/%E6%8D%95%E8%8E%B71.PNG">
 <meta property="og:image" content="http://xinhecuican.github.io/images/%E6%8D%95%E8%8E%B7.PNG">
 <meta property="article:published_time" content="2020-03-16T02:39:00.000Z">
-<meta property="article:modified_time" content="2020-03-23T06:15:45.806Z">
+<meta property="article:modified_time" content="2020-03-25T05:38:49.302Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://xinhecuican.github.io/images/%E6%8D%95%E8%8E%B71.PNG">
@@ -426,7 +426,7 @@
 <h4 id="三对角矩阵"><a href="#三对角矩阵" class="headerlink" title="三对角矩阵"></a>三对角矩阵</h4><p>除了第一行和最后一行有两个元素之外，其他行都有三个元素</p>
 <p>对于<code>a[i][j]</code>来说，前面有 3*i-1个元素，本行它前面有j-i+1个位置。所以k=2 * i+j</p>
 <p>反之，如果在压缩矩阵中是第k个位置，那么在原矩阵中 i=(k+1)/3 j=k-2*i</p>
-<h4 id="稀疏矩阵"><a href="#稀疏矩阵" class="headerlink" title="稀疏矩阵"></a>稀疏矩阵</h4><p>对于非零元素较少的矩阵，可以直接用一个结构体保存 i,j ,sum，然后再用一个结构体数组来保存所有的值。这个数组是从左至右扫描遍历的。</p>
+<h4 id="稀疏矩阵"><a href="#稀疏矩阵" class="headerlink" title="稀疏矩阵"></a>稀疏矩阵</h4><p>对于非零元素较少的矩阵，可以直接用一个结构体保存 i,j ,sum，然后再用一个结构体数组来保存所有的值。这个数组是从左至右扫描遍历的。一般稀疏矩阵中元素只占5%</p>
 <h5 id="稀疏矩阵转置的算法"><a href="#稀疏矩阵转置的算法" class="headerlink" title="稀疏矩阵转置的算法"></a>稀疏矩阵转置的算法</h5><p>首先，如果用朴素的算法，就是从第零行开始遍历每一列，然后把列变成行。</p>
 <p>如果我们用两个数组分别保存 每一列中元素的数量以及每一列在新的稀疏矩阵中的位置，就有办法可以加快速度</p>
 <p>例如：<img src="/images/%E6%8D%95%E8%8E%B71.PNG" alt=""></p>

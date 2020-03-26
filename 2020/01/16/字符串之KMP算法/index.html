@@ -114,7 +114,7 @@
 <meta property="og:image" content="http://xinhecuican.github.io/images/3344.jpg">
 <meta property="og:image" content="http://xinhecuican.github.io/images/3353.png">
 <meta property="article:published_time" content="2020-01-16T05:04:00.000Z">
-<meta property="article:modified_time" content="2020-01-16T06:55:17.342Z">
+<meta property="article:modified_time" content="2020-03-26T10:49:02.575Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="字符串">
 <meta name="twitter:card" content="summary">
@@ -434,6 +434,10 @@
 <p>代码实现：</p>
 <figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">void</span> GetNext(char* p,<span class="built_in">int</span> next[])  </span><br><span class="line">&#123;  </span><br><span class="line">    <span class="built_in">int</span> pLen = strlen(p);  </span><br><span class="line">    next[<span class="number">0</span>] = <span class="number">-1</span>;  </span><br><span class="line">    <span class="built_in">int</span> k = <span class="number">-1</span>;  </span><br><span class="line">    <span class="built_in">int</span> j = <span class="number">0</span>;  </span><br><span class="line">    <span class="keyword">while</span> (j &lt; pLen - <span class="number">1</span>)  </span><br><span class="line">    &#123;  </span><br><span class="line">        <span class="comment">//p[k]表示前缀，p[j]表示后缀  </span></span><br><span class="line">        <span class="keyword">if</span> (k == <span class="number">-1</span> || p[j] == p[k])   </span><br><span class="line">        &#123;  </span><br><span class="line">            ++k;  </span><br><span class="line">            ++j;  </span><br><span class="line">            next[j] = k;  </span><br><span class="line">        &#125;  </span><br><span class="line">        <span class="keyword">else</span>   </span><br><span class="line">        &#123;  </span><br><span class="line">            k = next[k];  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<h3 id="nextval"><a href="#nextval" class="headerlink" title="nextval"></a>nextval</h3><p>nextval是next的进阶版。例如某一位是next[5]，但是next[5]和5的字符相同，这样肯定还是不行，所以多比了一次。</p>
+<p>nextval判断方法：在next的基础上,s是用来匹配的串</p>
+<p>s[next[i]] = s[i], 继续比较。如果next[i]和next[next[i]]还是相同，那么要继续比，直到不相同或者过了第一个为止</p>
+<p>s[next[i]] != s[i] , nextval[flag] = next[i]</p>
 <h3 id="匹配（最终代码）"><a href="#匹配（最终代码）" class="headerlink" title="匹配（最终代码）"></a>匹配（最终代码）</h3><p>匹配过程：</p>
 <p>“假设现在文本串S匹配到 i 位置，模式串 P 匹配到 j 位置</p>
 <p>如果 j = -1，或者当前字符匹配成功（即 S[i] == P[j]），都令 i++，j++，继续匹配下一个字符；</p>
@@ -637,7 +641,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#由（扯）来（蛋）"><span class="nav-number">1.</span> <span class="nav-text">由（扯）来（蛋）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最长前缀和与后缀和"><span class="nav-number">2.</span> <span class="nav-text">最长前缀和与后缀和</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#next数组"><span class="nav-number">2.1.</span> <span class="nav-text">next数组</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用next数组进行匹配"><span class="nav-number">3.</span> <span class="nav-text">用next数组进行匹配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#next数组求法"><span class="nav-number">4.</span> <span class="nav-text">next数组求法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#匹配（最终代码）"><span class="nav-number">5.</span> <span class="nav-text">匹配（最终代码）</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#由（扯）来（蛋）"><span class="nav-number">1.</span> <span class="nav-text">由（扯）来（蛋）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最长前缀和与后缀和"><span class="nav-number">2.</span> <span class="nav-text">最长前缀和与后缀和</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#next数组"><span class="nav-number">2.1.</span> <span class="nav-text">next数组</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#用next数组进行匹配"><span class="nav-number">3.</span> <span class="nav-text">用next数组进行匹配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#next数组求法"><span class="nav-number">4.</span> <span class="nav-text">next数组求法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nextval"><span class="nav-number">5.</span> <span class="nav-text">nextval</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#匹配（最终代码）"><span class="nav-number">6.</span> <span class="nav-text">匹配（最终代码）</span></a></li></ol></div>
             
 
           </div>
