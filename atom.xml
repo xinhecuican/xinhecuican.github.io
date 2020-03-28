@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://xinhecuican.github.io/"/>
-  <updated>2020-03-28T06:18:18.648Z</updated>
+  <updated>2020-03-28T11:04:40.197Z</updated>
   <id>http://xinhecuican.github.io/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>进程的储存和缓冲区溢出</title>
+    <link href="http://xinhecuican.github.io/2020/03/28/%E8%BF%9B%E7%A8%8B%E7%9A%84%E5%82%A8%E5%AD%98%E5%92%8C%E7%BC%93%E5%86%B2%E5%8C%BA%E6%BA%A2%E5%87%BA/"/>
+    <id>http://xinhecuican.github.io/2020/03/28/%E8%BF%9B%E7%A8%8B%E7%9A%84%E5%82%A8%E5%AD%98%E5%92%8C%E7%BC%93%E5%86%B2%E5%8C%BA%E6%BA%A2%E5%87%BA/</id>
+    <published>2020-03-28T06:20:00.000Z</published>
+    <updated>2020-03-28T11:04:40.197Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="用户空间"><a href="#用户空间" class="headerlink" title="用户空间"></a>用户空间</h3><p>用户空间是用户可以使用的空间，与之对应的是内核空间，这是系统所使用的空间。用户空间的大小有2的48次方，远远超出了内存的大小。</p><p>用户空间主要分为四个区域：</p><ul><li>栈，栈位于用户空间的最高处，从高处向低处生长。linux系统中栈空间大小是8MB</li><li>堆， 用于存放一些动态分配的数据</li><li>数据， 用来存放全局变量，静态变量，字符串常量</li><li>代码， 存放指令和共享库</li></ul><p>在Linux中，对于大小小于某一阈值的数据，在堆中分配时是从低地址向高地址生长。反之，从高地址向低地址生长</p><h3 id="缓冲区溢出"><a href="#缓冲区溢出" class="headerlink" title="缓冲区溢出"></a>缓冲区溢出</h3><p>常见原因： 申请了一个数组但是访问时越界。</p><p>我们可以把数组叫做缓冲区，超出边界就是缓冲区溢出。</p><p>常见表现，对于输入的字符串没有进行长度检查直接赋值。如果缓冲区分配在栈中，就有可能造成栈中数据的破坏。如果造成了返回地址的破坏，可能直接导致程序的崩溃。这种错误叫做 segmentation fault</p><p>这里便可以被黑客利用，先故意把返回地址破坏了并且让返回地址到他自己写的程序上，这样retq时就可以调用自己写的程序。这种方法叫做注入。一般注入的数据有三部分，第一部分是恶意的指令。第二部分是占位数据，这部分数据没什么含义，只是和指令加起来正好到返回地址处，第三部分就是篡改的地址，篡改后的地址指向缓冲区底部即恶意指令所在的地方。</p><h3 id="防御代码注入攻击"><a href="#防御代码注入攻击" class="headerlink" title="防御代码注入攻击"></a>防御代码注入攻击</h3><ul><li>程序员：不要使用不安全的函数</li><li>系统： 栈基地址随机化分配。设置可执行权限位（就是设置一些地方的bit只能当做数据而不能当做指令）</li><li>编译器： 添加栈破坏检测。通过添加金丝雀值（canary value），位于当前栈帧底部。如果金丝雀值被破坏，那么就终止程序。</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;用户空间&quot;&gt;&lt;a href=&quot;#用户空间&quot; class=&quot;headerlink&quot; title=&quot;用户空间&quot;&gt;&lt;/a&gt;用户空间&lt;/h3&gt;&lt;p&gt;用户空间是用户可以使用的空间，与之对应的是内核空间，这是系统所使用的空间。用户空间的大小有2的48次方，远远超出了内存的大小
+      
+    
+    </summary>
+    
+    
+      <category term="计算机系统基础" scheme="http://xinhecuican.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>结构体</title>
@@ -492,31 +516,6 @@
         &lt;p&gt;有些命令是shell外部的，shell会解析参数然后调用外部的程序去处理它，另外还有一些是对shell起作用的，叫shell内置命令&lt;/p&gt;
 &lt;p&gt;如果先查看内部命令，需要 man + shell名称 ，例如，man bash&lt;/p&gt;
 &lt;h3 id=&quot;外部命令和搜索路径&quot;&gt;
-      
-    
-    </summary>
-    
-    
-      <category term="Linux" scheme="http://xinhecuican.github.io/categories/Linux/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>元字符的使用</title>
-    <link href="http://xinhecuican.github.io/2020/02/22/%E4%BA%91%E5%AD%97%E7%AC%A6%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
-    <id>http://xinhecuican.github.io/2020/02/22/%E4%BA%91%E5%AD%97%E7%AC%A6%E7%9A%84%E4%BD%BF%E7%94%A8/</id>
-    <published>2020-02-22T00:39:00.000Z</published>
-    <updated>2020-02-22T01:07:20.277Z</updated>
-    
-    <content type="html"><![CDATA[<h3 id="元字符"><a href="#元字符" class="headerlink" title="元字符"></a>元字符</h3><p>元字符指的是Linux中有特殊含义的字符，例如 ； 换行符等。</p><h3 id="字符引用和转义"><a href="#字符引用和转义" class="headerlink" title="字符引用和转义"></a>字符引用和转义</h3><p>如果不想用元字符内在含义，只想打出这个字符，那么就需要用到引用字符。</p><p>字符引用的方法有三种，使用反斜线，使用一对单引号或者使用一对双引号</p><p>例如 echo a ; b 这样就会把他们当成不同的指令，但是如果 echo a; b,这样就会当成同一个指令，实际上\是转义字符，转义字符指的是把一个字符从一中状态转移到另一种状态</p><p>单引号会将一切字符引用，这样有时例如我需要引用其中一个变量的值的时候就会出现问题</p><p>这时我们就可以用到双引号，双引号不会引用 $ , \ , `(反引号），</p><p>引用能力强弱 ，&gt;‘’&gt;””</p><p>如果输入换行字符，单引号并不会转义它，但是\会转义它</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h3 id=&quot;元字符&quot;&gt;&lt;a href=&quot;#元字符&quot; class=&quot;headerlink&quot; title=&quot;元字符&quot;&gt;&lt;/a&gt;元字符&lt;/h3&gt;&lt;p&gt;元字符指的是Linux中有特殊含义的字符，例如 ； 换行符等。&lt;/p&gt;
-&lt;h3 id=&quot;字符引用和转义&quot;&gt;&lt;a href=&quot;#字符引
       
     
     </summary>
