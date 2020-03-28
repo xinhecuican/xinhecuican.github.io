@@ -120,6 +120,30 @@
 <p>此外C命令是将光标后面的字符都替换，如果输入了这个命令，那么在该行的最后将会出现$</p>
 <p>cc命令可以替换一整行，无论光标在哪里</p>
 <p>c+移动光标命令，这将替换从光标处到移动后的光标处所有的字符，可以有重复次数</p>
+<h3 id="替换文本"><a href="#替换文本" class="headerlink" title="替换文本"></a>替换文本</h3><p>这里我们主要谈论的是ex命令。这些命令都以 ： 为开始。</p>
+<p>替换语法： :s/pattern/replace/</p>
+<p>这条命令的含义是替换第一个pattern，如果后面加上g（global），那么将替换所有pattern。</p>
+<p>如果希望改变之前先请求同意，可以在后面加上 c（confirm）。也可以同时使用gc</p>
+<p>如果想要删除某些pattern，只需要 :s/pattern//g即可</p>
+<p>在s前面加上数字表示替换某些行。例如： :57s/unix/linux 表示把第57行第一次出现的unix变成linux。</p>
+<p>如果想从当前行到末尾，那么可以使用 : . , $s/pattern/replace/</p>
+<p>其中 .(点）表示当前行，$表示最后一行，中间用逗号分割开来。</p>
+<h3 id="删除字符"><a href="#删除字符" class="headerlink" title="删除字符"></a>删除字符</h3><figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">x</span> 删除右边的字符</span><br><span class="line"><span class="selector-tag">X</span> 删除左边的字符</span><br><span class="line"><span class="selector-tag">D</span> 删除当前光标到本行末尾的字符</span><br><span class="line"><span class="selector-tag">d</span>+移动指令 删除从当前光标到移动指令后的字符</span><br><span class="line"><span class="selector-tag">dd</span> 删除当前行</span><br><span class="line"><span class="selector-tag">ex</span> 命令</span><br><span class="line"><span class="selector-pseudo">:lined</span> 删除指定行</span><br><span class="line"><span class="selector-pseudo">:line</span>,<span class="selector-tag">lined</span> 删除多个行</span><br></pre></td></tr></table></figure>
+
+<p>如果要删除所有行，一种是 :1,$d，另一种是:%d，%指的是所有行</p>
+<h3 id="撤销或重复改变"><a href="#撤销或重复改变" class="headerlink" title="撤销或重复改变"></a>撤销或重复改变</h3><p>撤销就是如果命令输入错误，可以使用命令撤销</p>
+<p>u 撤销上一命令对缓冲区进行的修改</p>
+<p>U 恢复当前行</p>
+<p>. 重复上一命令对编辑缓冲区进行的修改</p>
+<p>其中 U 指的是将撤销至移动到当前行的那一刻起，对当前行所进行的所有改变</p>
+<p>.命令可以用来重复，但是如果使用了撤销，那么它将会使用撤销所恢复的命令</p>
+<h4 id="恢复删除"><a href="#恢复删除" class="headerlink" title="恢复删除"></a>恢复删除</h4><p>每当删除<strong>一行或者多行</strong>文本时，vi都将文本储存在一个缓冲区中，这个缓冲区称为编号缓冲区。vi有9个缓冲区。在任何时候，都可以将一个编号缓冲区中的内容插入到编辑缓冲区中。这样做时，需要键入一个双引号（“），后面跟着缓冲区的编号，再后面跟着一个p（put)命令，p是在当前行下面插入，P是在当前行上面插入。</p>
+<p>如果你忘记是哪个编号缓冲区的话，可以先撤销一次，然后使用.号重复插入，这时vi将自动把缓冲区编号加1</p>
+<h3 id="移动文本"><a href="#移动文本" class="headerlink" title="移动文本"></a>移动文本</h3><p>vi总是在一个称为无名缓冲区的地方为上一次删除保存一个副本。与编号缓冲区不同，编号缓冲区只会保存删除的多行，删除少数字符是不会被保存的。</p>
+<p>p 命令用来把无名缓冲区的内容插入到当前位置之后</p>
+<p>考虑组合命令xp，x是删除当前光标处的字符。p是把字符插入光标的右边。这样相当于把两个自住房换了一下顺序。</p>
+<p>另一个重要的组合命令是deep，这个命令是将两个单词换序</p>
+<p>ddp 调换两行，因为dd是删除一行，删除这行后光标在原本该行的下一行，然后p是插入到这一行的后一行，相当于两行换了位置。</p>
 ]]></content>
       <categories>
         <category>Linux</category>
@@ -1227,7 +1251,7 @@
 <td>锚，匹配行的末尾</td>
 </tr>
 <tr>
-<td>&lt;</td>
+<td>\ &lt;</td>
 <td>锚，匹配单词的开头</td>
 </tr>
 <tr>
