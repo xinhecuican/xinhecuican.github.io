@@ -107,7 +107,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="启动vi语法： vi [-rR] [file…] 如果用vi启动了一个不存在的文件，那么他将新建这个文件。如果只输入vi，那么他将在当前文件夹下创建一个空文件 -R 以只读模式启动 vim是vi的进阶版本 语法： vi -C [-rR] [file…] -C是兼容模式，它将尽可能的和vi保持一样 命令模式和编辑模式当使用vi时，存放数据的区域叫做编辑缓冲区（editing buffer),如果想编">
 <meta property="article:published_time" content="2020-03-23T12:18:00.000Z">
-<meta property="article:modified_time" content="2020-03-24T12:45:11.754Z">
+<meta property="article:modified_time" content="2020-03-26T13:28:28.751Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 
@@ -451,6 +451,24 @@
 <p>如果使用两个单引号，那么将会回到对应地址的开头。</p>
 <p>此外，我们还可以通过设置标识来新增跳转地址。先键入m，再输入标识符，之后就可以直接跳转到有标识符的位置。标识符是不可见字符，所以最好自己先记好。</p>
 <p>例如： ma设置a标识符。 `a回到a的位置</p>
+<h3 id="搜索模式"><a href="#搜索模式" class="headerlink" title="搜索模式"></a>搜索模式</h3><p>符号： / ?</p>
+<p>/ 向下面搜索，/+字符表示要搜索哪个字符。如果还想继续搜索该字符只需要输入/然后回车就会搜索下一个</p>
+<p>？ 用法相同，向上搜索</p>
+<p>或者按n继续向下搜索，N继续向上搜索</p>
+<p>此外，还可以使用正则表达式中的锚</p>
+<h3 id="使用行号和切换模式"><a href="#使用行号和切换模式" class="headerlink" title="使用行号和切换模式"></a>使用行号和切换模式</h3><p>可以通过 :set number 设置显示行号</p>
+<p>如果行号关闭，可以通过 ^G键查看现在在文本中的哪个位置</p>
+<p>可以通过 数字+G（大写）跳转到任意一行</p>
+<p>此外，还可以通过 :+数字跳转到任意一行，其中 :$ 跳转到文本末尾</p>
+<p>前文已经说了vi有两种模式，一种是编辑模式，一种是命令模式，从编辑模式切换成命令模式只有一种方法，按esc键。但是从命令模式转换到编辑模式有十二种之多</p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">i</span> <span class="string">在当前光标之前插入字符</span></span><br><span class="line"><span class="attr">a</span> <span class="string">在光标之后插入字符</span></span><br><span class="line"><span class="attr">I</span> <span class="string">在当前行的开头插入字符</span></span><br><span class="line"><span class="attr">A</span> <span class="string">在当前行的末尾插入字符</span></span><br><span class="line"><span class="attr">o</span> <span class="string">在当前行下面插入一行</span></span><br><span class="line"><span class="attr">O</span> <span class="string">在当前行上面插入一行</span></span><br></pre></td></tr></table></figure>
+<h3 id="修改文本"><a href="#修改文本" class="headerlink" title="修改文本"></a>修改文本</h3><p>如果只需要修改一个字符的话，那么可以在命令模式下输入r+字符就可以修改光标后面的字符（注意不是增加而是直接把光标后面的字符变成输入的字符）</p>
+<p>如果想要修改很多字符，可以输入R，这时会切换到输入模式。随后键入的每个字符都会替换当前字符。</p>
+<p>如果想要修改的字符数与原来并不相同，那么可以使用s（substitute)命令把一个字符变成许多个字符。如果输入了s，那么将回到输入模式，且此时光标后面的后面的字符将会变成$，然后再输入字符，$就会变成对应的字符</p>
+<p>例如 m|a,输入s后变成 m|$，然后输入other，就会变成 mother</p>
+<p>此外C命令是将光标后面的字符都替换，如果输入了这个命令，那么在该行的最后将会出现$</p>
+<p>cc命令可以替换一整行，无论光标在哪里</p>
+<p>c+移动光标命令，这将替换从光标处到移动后的光标处所有的字符，可以有重复次数</p>
 
       
     </div>
@@ -489,6 +507,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/03/24/%E7%BB%93%E6%9E%84%E4%BD%93/" rel="prev" title="结构体">
+                结构体 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -630,7 +652,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#启动vi"><span class="nav-number">1.</span> <span class="nav-text">启动vi</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#命令模式和编辑模式"><span class="nav-number">2.</span> <span class="nav-text">命令模式和编辑模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#了解所处模式的方式"><span class="nav-number">3.</span> <span class="nav-text">了解所处模式的方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据的恢复和关闭vi"><span class="nav-number">4.</span> <span class="nav-text">数据的恢复和关闭vi</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vi屏幕的格式即vi和ex命令"><span class="nav-number">5.</span> <span class="nav-text">vi屏幕的格式即vi和ex命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#移动光标"><span class="nav-number">6.</span> <span class="nav-text">移动光标</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#整屏移动"><span class="nav-number">6.1.</span> <span class="nav-text">整屏移动</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#跳转到前一位置"><span class="nav-number">6.2.</span> <span class="nav-text">跳转到前一位置</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#启动vi"><span class="nav-number">1.</span> <span class="nav-text">启动vi</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#命令模式和编辑模式"><span class="nav-number">2.</span> <span class="nav-text">命令模式和编辑模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#了解所处模式的方式"><span class="nav-number">3.</span> <span class="nav-text">了解所处模式的方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据的恢复和关闭vi"><span class="nav-number">4.</span> <span class="nav-text">数据的恢复和关闭vi</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vi屏幕的格式即vi和ex命令"><span class="nav-number">5.</span> <span class="nav-text">vi屏幕的格式即vi和ex命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#移动光标"><span class="nav-number">6.</span> <span class="nav-text">移动光标</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#整屏移动"><span class="nav-number">6.1.</span> <span class="nav-text">整屏移动</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#跳转到前一位置"><span class="nav-number">6.2.</span> <span class="nav-text">跳转到前一位置</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#搜索模式"><span class="nav-number">7.</span> <span class="nav-text">搜索模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用行号和切换模式"><span class="nav-number">8.</span> <span class="nav-text">使用行号和切换模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改文本"><span class="nav-number">9.</span> <span class="nav-text">修改文本</span></a></li></ol></div>
             
 
           </div>

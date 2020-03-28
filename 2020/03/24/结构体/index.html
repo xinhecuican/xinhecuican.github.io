@@ -100,14 +100,14 @@
 
 
 
-<meta name="description" content="在c++中，结构体与类类似，都有个体域和成员函数，不同是class中默认的成员访问权限是private的，而struct中则是public的。 (2)class继承默认是private继承，而从struct继承默认是public继承。 定义：  struct tag  {   member-list }variable-list;注：struct为结构体关键字；   tag为结构体的标志；   m">
+<meta name="description" content="结构体的构成首先位于结构体中的元素在计算机也是对应存储的。而结构体的名字其实就可以看成是第一个变量的首地址。 例如： 123456struct node&amp;#123;    int val;    char c;    int a[2];&amp;#125; 在内存中是这样的 12| val | c | a[0] | a[1]p   p+4   p+5   p+9  而变量在内存中的位置于定义时的位置是对应">
 <meta property="og:type" content="article">
 <meta property="og:title" content="结构体">
-<meta property="og:url" content="http://xinhecuican.github.io/2020/01/12/%E7%BB%93%E6%9E%84%E4%BD%93/index.html">
+<meta property="og:url" content="http://xinhecuican.github.io/2020/03/24/%E7%BB%93%E6%9E%84%E4%BD%93/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="在c++中，结构体与类类似，都有个体域和成员函数，不同是class中默认的成员访问权限是private的，而struct中则是public的。 (2)class继承默认是private继承，而从struct继承默认是public继承。 定义：  struct tag  {   member-list }variable-list;注：struct为结构体关键字；   tag为结构体的标志；   m">
-<meta property="article:published_time" content="2020-01-12T03:55:00.000Z">
-<meta property="article:modified_time" content="2020-01-12T04:06:14.247Z">
+<meta property="og:description" content="结构体的构成首先位于结构体中的元素在计算机也是对应存储的。而结构体的名字其实就可以看成是第一个变量的首地址。 例如： 123456struct node&amp;#123;    int val;    char c;    int a[2];&amp;#125; 在内存中是这样的 12| val | c | a[0] | a[1]p   p+4   p+5   p+9  而变量在内存中的位置于定义时的位置是对应">
+<meta property="article:published_time" content="2020-03-24T13:26:00.000Z">
+<meta property="article:modified_time" content="2020-03-28T06:18:18.648Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 
@@ -139,7 +139,7 @@
 
 
 
-  <link rel="canonical" href="http://xinhecuican.github.io/2020/01/12/结构体/"/>
+  <link rel="canonical" href="http://xinhecuican.github.io/2020/03/24/结构体/"/>
 
 
 
@@ -317,7 +317,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://xinhecuican.github.io/2020/01/12/%E7%BB%93%E6%9E%84%E4%BD%93/">
+    <link itemprop="mainEntityOfPage" href="http://xinhecuican.github.io/2020/03/24/%E7%BB%93%E6%9E%84%E4%BD%93/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -346,8 +346,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-12T11:55:00+08:00">
-                2020-01-12
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-24T21:26:00+08:00">
+                2020-03-24
               </time>
             
 
@@ -369,8 +369,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index">
-                    <span itemprop="name">基础</span>
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机系统基础</span>
                   </a>
                 </span>
 
@@ -406,15 +406,26 @@
       
 
       
-        <p>在c++中，结构体与类类似，都有个体域和成员函数，不同是class中默认的成员访问权限是private的，而struct中则是public的。 (2)class继承默认是private继承，而从struct继承默认是public继承。</p>
-<p>定义：</p>
-<pre><code> struct tag 
-{
-  member-list
-}variable-list;</code></pre><p>注：struct为结构体关键字；<br>   tag为结构体的标志；<br>   member-list为结构体成员变量及成员函数列表，其必须列出其所有成员；<br>   variable-list为此结构体声明的变量；</p>
-<p>tag相当于class中的类名，而variable-list相当于class中创建的对象</p>
-<p>另外，如果想多创建几个对象，只需要<code>tag 变量名</code>即可</p>
-<p>在c++中，可以直接用<code>variable-list+变量名</code>创建对象</p>
+        <h3 id="结构体的构成"><a href="#结构体的构成" class="headerlink" title="结构体的构成"></a>结构体的构成</h3><p>首先位于结构体中的元素在计算机也是对应存储的。而结构体的名字其实就可以看成是第一个变量的首地址。</p>
+<p>例如：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> val;</span><br><span class="line">    <span class="keyword">char</span> c;</span><br><span class="line">    <span class="keyword">int</span> a[<span class="number">2</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在内存中是这样的</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">| val | c | a[<span class="number">0</span>] | a[<span class="number">1</span>]</span><br><span class="line">p   p+<span class="number">4</span>   p+<span class="number">5</span>   p+<span class="number">9</span></span><br></pre></td></tr></table></figure>
+
+<p>而变量在内存中的位置于定义时的位置是对应的</p>
+<h3 id="字节对齐"><a href="#字节对齐" class="headerlink" title="字节对齐"></a>字节对齐</h3><p>首先说明什么事字节对齐。它指的是变量在内存中的首地址是变量的长度的整数倍。</p>
+<p>例如定义一个int型变量，那么这个变量首地址尽量要是4的整数倍。也就是地址最后两位一定为零，如果是long型，地址最后三位一定为零</p>
+<p><strong>为什么要字节对齐？</strong></p>
+<p>字节对齐可以加快访问数据的效率。原因是64位处理器数据总线是64位的，一次传过来8个字节的数据，所以如果我们是按8的整倍数进行存放，那么一定可以一次性取完，但是如果不是8的整倍数，例如int型首地址是6，那么就不可以一次性取完，要两次来取。而如果我们放在4这个位置，那么一定可以一次性取完。</p>
+<p>此外例如首地址是2，这样也可以一次性取完，但是这样会造成空间浪费，因为现在不能再存int型了，可能会导致剩下4个字节都不能用。</p>
+<p>对于x86系列，可以通过拼凑的方式把数据合起来。但是arm系列，如果没字节对齐，甚至会直接报错。</p>
+<p>因此对于上面这个例子在c这个位置后面应该是p+8,为了让后面的整型保持对齐。而这多出的三个字节不会被使用（从此我们可以得出定义char型最好定义4个，不然多浪费）</p>
+<p>此外，结构体的首地址的倍数由后面元素中占用空间最多的那个来决定。<strong>结尾的地址也要是占用空间最多的整倍数</strong>。结尾也要符合标准是为了便于用数组，因为数组的地址是连续的，所以每个的头和尾都要满足要求。</p>
+<p>字节对齐还有利于结构体中元素的访问。我们之所以可以直接写a.data是因为每个元素在结构体中所占用的空间大小是一样的（考虑字节对齐），这样我们就可以像数组那样直接加上一个偏移量去访问。</p>
+<p><strong>提示</strong>，为了节省空间，把相同类型的元素放到一块写，</p>
+<p>例如：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">char</span> a;</span><br><span class="line">    <span class="keyword">int</span> b;</span><br><span class="line">    <span class="keyword">char</span> c;</span><br><span class="line">|</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">nodeb</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">    <span class="keyword">char</span> b;</span><br><span class="line">    <span class="keyword">char</span> c;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以看出，第一种写法为保证字节对齐需要多消耗6字节的空间，而第二种写法只需要消耗两字节的空间。</p>
 
       
     </div>
@@ -444,8 +455,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/01/11/memset/" rel="next" title="memset">
-                <i class="fa fa-chevron-left"></i> memset
+              <a href="/2020/03/23/vi/" rel="next" title="vi">
+                <i class="fa fa-chevron-left"></i> vi
               </a>
             
           </div>
@@ -453,10 +464,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/01/13/%E5%89%8D%E7%BC%80%E5%92%8C/" rel="prev" title="前缀和">
-                前缀和 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -486,7 +493,7 @@
           
 
   
-<iframe title="livere"   src="https://was.livere.me/comment/city?id=city&refer=http://xinhecuican.github.io/2020/01/12/%E7%BB%93%E6%9E%84%E4%BD%93/&uid=MTAyMC80ODE3Mi8yNDY2OA==&site=http://xinhecuican.github.io/2020/01/12/%E7%BB%93%E6%9E%84%E4%BD%93/&title=结构体" scrolling="" frameborder="0" id="lv-comment-399" style="min-width: 100%; width: 100px; min-height: 400px; overflow: auto; border: 0px; z-index: 124212; height: 800px;" ></iframe>
+<iframe title="livere"   src="https://was.livere.me/comment/city?id=city&refer=http://xinhecuican.github.io/2020/03/24/%E7%BB%93%E6%9E%84%E4%BD%93/&uid=MTAyMC80ODE3Mi8yNDY2OA==&site=http://xinhecuican.github.io/2020/03/24/%E7%BB%93%E6%9E%84%E4%BD%93/&title=结构体" scrolling="" frameborder="0" id="lv-comment-399" style="min-width: 100%; width: 100px; min-height: 400px; overflow: auto; border: 0px; z-index: 124212; height: 800px;" ></iframe>
 
   
 
@@ -511,8 +518,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -579,6 +595,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#结构体的构成"><span class="nav-number">1.</span> <span class="nav-text">结构体的构成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字节对齐"><span class="nav-number">2.</span> <span class="nav-text">字节对齐</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
