@@ -107,7 +107,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="启动vi语法： vi [-rR] [file…] 如果用vi启动了一个不存在的文件，那么他将新建这个文件。如果只输入vi，那么他将在当前文件夹下创建一个空文件 -R 以只读模式启动 vim是vi的进阶版本 语法： vi -C [-rR] [file…] -C是兼容模式，它将尽可能的和vi保持一样 命令模式和编辑模式当使用vi时，存放数据的区域叫做编辑缓冲区（editing buffer),如果想编">
 <meta property="article:published_time" content="2020-03-23T12:18:00.000Z">
-<meta property="article:modified_time" content="2020-03-28T13:06:59.354Z">
+<meta property="article:modified_time" content="2020-03-29T12:12:08.360Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 
@@ -416,7 +416,6 @@
 <p>在命令模式中，输入的一切字符都是命令。例如，在命令模式中，单个字母x就是删除一个字符。dd就是删除整行的命令。</p>
 <p>第二种模式就是输入模式。这种模式下，任何内容都会输入到缓冲区中。</p>
 <p>在启动过程中，vi完成三件事情。将文件中的内容复制到编辑缓冲区，将光标定位到缓冲区第一行的开头。最后vi进入命令模式。</p>
-<h3 id="了解所处模式的方式"><a href="#了解所处模式的方式" class="headerlink" title="了解所处模式的方式"></a>了解所处模式的方式</h3><p>:set showmode.使用了这个选项之后，vi将在屏幕底部显示一个消息来指示当前模式</p>
 <h3 id="数据的恢复和关闭vi"><a href="#数据的恢复和关闭vi" class="headerlink" title="数据的恢复和关闭vi"></a>数据的恢复和关闭vi</h3><p>当使用vi时，数据会保存在编辑缓冲区内，因此当程序非正常终止时，临时文件依然存在。使用-r(recovery)就可以重新打开缓冲区</p>
 <p>如果需要先保存再退出，使用的命令时ZZ,即先按下shift键，然后按z两次。这个命令不需要按enter键</p>
 <p>如果不保存直接退出，可以 :q!，然后按return键</p>
@@ -493,6 +492,44 @@
 <p>考虑组合命令xp，x是删除当前光标处的字符。p是把字符插入光标的右边。这样相当于把两个自住房换了一下顺序。</p>
 <p>另一个重要的组合命令是deep，这个命令是将两个单词换序</p>
 <p>ddp 调换两行，因为dd是删除一行，删除这行后光标在原本该行的下一行，然后p是插入到这一行的后一行，相当于两行换了位置。</p>
+<h3 id="复制文本"><a href="#复制文本" class="headerlink" title="复制文本"></a>复制文本</h3><p>复制文本分为三步：</p>
+<ol>
+<li>使用y，yy或Y命令将文本有编辑缓冲区复制到无名缓冲区中，但不删除原始文本。</li>
+<li>将光标移动到希望插入文本的位置。</li>
+<li>使用p或P命令命令执行插入</li>
+</ol>
+<p>在不删除文本的情况下将文本复制到无名缓冲区，叫做接出（yank)，因此将命令命名为y，yy，Y。y，yy命令和d命令执行情况相同，</p>
+<h3 id="改变字母大小写"><a href="#改变字母大小写" class="headerlink" title="改变字母大小写"></a>改变字母大小写</h3><p>符号： ~</p>
+<p>该命令会改变vi当前字母的大小写，然后将光标向前移动一个字符。改变大小写的意思是把大写变成小写，小写变成大写。</p>
+<p>有些版本的vi使用这个命令不会超过一行，just like me。</p>
+<h3 id="设置选项"><a href="#设置选项" class="headerlink" title="设置选项"></a>设置选项</h3><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">:<span class="builtin-name">set</span> showmode 输入模式提醒</span><br><span class="line">:<span class="builtin-name">set</span> number 显示行号</span><br><span class="line">:<span class="builtin-name">set</span> nonumber 不显示行号</span><br><span class="line">:<span class="builtin-name">set</span> tabstop = number 设置制表符间距</span><br><span class="line">:<span class="builtin-name">set</span> autoindent 缩进以匹配上一行/下一行</span><br><span class="line">:<span class="builtin-name">set</span> autowrite 如果文本已修改，则在切换文件前保存</span><br><span class="line">:<span class="builtin-name">set</span> errorbells 显示错误信息时发出声音</span><br><span class="line">:<span class="builtin-name">set</span> list 将制表符显示成^I,将行的结束显示成$</span><br><span class="line">:<span class="builtin-name">set</span> showmatch 显示匹配的 () &#123;&#125; []</span><br><span class="line">:<span class="builtin-name">set</span> wrapscan 环绕文本进行搜索</span><br><span class="line">:<span class="builtin-name">set</span> lines 设置文本行数</span><br><span class="line">:<span class="builtin-name">set</span> wrapmargin = n 在键入过程中自动换行，n是离右边缘的位置，例如<span class="attribute">n</span>=6意味着在例右边缘6个字符的地方换行，为0关闭自动换行</span><br></pre></td></tr></table></figure>
+
+<p>如果想查看当前选项是在什么状态，可以使用:set 选项？</p>
+<p>如果显示所有选项的值，可以使用 :set all</p>
+<h3 id="复制移动行"><a href="#复制移动行" class="headerlink" title="复制移动行"></a>复制移动行</h3><p>如果想指定行号进行移动，可以使用ex命令中的 :co(copy) :m(move)</p>
+<p>:5co10,复制第5行，并将其放在第10行的下面</p>
+<p>:4,8co20 复制4到8行，并将其放在20行的下面</p>
+<h3 id="输入shell命令"><a href="#输入shell命令" class="headerlink" title="输入shell命令"></a>输入shell命令</h3><p>可以通过 :!+命令的方式，在不退出vi的情况下进行shell命令</p>
+<p>:!! 重复上一条shell命令</p>
+<p>如果现在缓冲区中直接插入shell命令的输出，可以使用 :r ! </p>
+<p>例如 :1r !date，就是将date输出插入第一行的后面</p>
+<p>如果直接用感叹号，那么就会将文件中的数据交给shell命令进行操作，然后再将操作后的文件复制到原位置</p>
+<p>例如： 5!!sort ，这个命令将会从当前开始把接下来5行排序。</p>
+<p> !}sort 这个命令是将接下来一段排序。</p>
+<h3 id="将文件中的数据插入编辑缓冲区中"><a href="#将文件中的数据插入编辑缓冲区中" class="headerlink" title="将文件中的数据插入编辑缓冲区中"></a>将文件中的数据插入编辑缓冲区中</h3><p>语法： :[line]r file</p>
+<p>line 是行号 file是文件名</p>
+<p>:r命令读取文件中的内容，然后将其插入指定行的后面</p>
+<h3 id="不退出vi的情况下进行保存"><a href="#不退出vi的情况下进行保存" class="headerlink" title="不退出vi的情况下进行保存"></a>不退出vi的情况下进行保存</h3><p>:w 将数据写入原有文件<br>:w file 将数据写入一个新文件中<br>:w! file 覆盖原有文件<br>:w&gt;&gt; file 将数据追加到一个新文件中<br>:10w! save 将特定行保存到文件中<br>:wq 保存退出vi 和 ZZ有同样的效果</p>
+<h3 id="切换到一个新文件"><a href="#切换到一个新文件" class="headerlink" title="切换到一个新文件"></a>切换到一个新文件</h3><p>:e + 文件名</p>
+<p>当编辑一个新文件时，原有缓冲区内容会消失，所以首先要使用 :w保存.当使用:e时，系统会自动检查是否保存，如果没有保存，不允许切换到新文件。如果希望忽略这种保护，可以使用:e!命令</p>
+<h3 id="使用缩写"><a href="#使用缩写" class="headerlink" title="使用缩写"></a>使用缩写</h3><p>:ab [short long]</p>
+<p>short是缩写，long是缩写的原文。如果确定了缩写，那么在编辑模式下，如果拼写了缩写，系统会自动变成全称。当然，只有在这个缩写是一个单词（两边有空格）的情况下才会变全称。</p>
+<h3 id="宏"><a href="#宏" class="headerlink" title="宏"></a>宏</h3><p>:map命令可以创建命令模式下的缩写，实际上，这就可以自己创建命令。这些命令叫做宏</p>
+<p>语法： :map [x commands]</p>
+<p>x是一个字符，commands是vi或ex命令序列</p>
+<p>例如 :map K deep就是将两个单词换位的命令设置成一个宏</p>
+<h3 id="初始化文件"><a href="#初始化文件" class="headerlink" title="初始化文件"></a>初始化文件</h3><p>对于vim来说，初始化文件是.vimrc,</p>
+<p>如果想删除一个缩写，可以使用 :una short</p>
 
       
     </div>
@@ -614,7 +651,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">93</span>
+                  <span class="site-state-item-count">94</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -676,7 +713,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#启动vi"><span class="nav-number">1.</span> <span class="nav-text">启动vi</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#命令模式和编辑模式"><span class="nav-number">2.</span> <span class="nav-text">命令模式和编辑模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#了解所处模式的方式"><span class="nav-number">3.</span> <span class="nav-text">了解所处模式的方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据的恢复和关闭vi"><span class="nav-number">4.</span> <span class="nav-text">数据的恢复和关闭vi</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vi屏幕的格式即vi和ex命令"><span class="nav-number">5.</span> <span class="nav-text">vi屏幕的格式即vi和ex命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#移动光标"><span class="nav-number">6.</span> <span class="nav-text">移动光标</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#整屏移动"><span class="nav-number">6.1.</span> <span class="nav-text">整屏移动</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#跳转到前一位置"><span class="nav-number">6.2.</span> <span class="nav-text">跳转到前一位置</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#搜索模式"><span class="nav-number">7.</span> <span class="nav-text">搜索模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用行号和切换模式"><span class="nav-number">8.</span> <span class="nav-text">使用行号和切换模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改文本"><span class="nav-number">9.</span> <span class="nav-text">修改文本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#替换文本"><span class="nav-number">10.</span> <span class="nav-text">替换文本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除字符"><span class="nav-number">11.</span> <span class="nav-text">删除字符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#撤销或重复改变"><span class="nav-number">12.</span> <span class="nav-text">撤销或重复改变</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#恢复删除"><span class="nav-number">12.1.</span> <span class="nav-text">恢复删除</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#移动文本"><span class="nav-number">13.</span> <span class="nav-text">移动文本</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#启动vi"><span class="nav-number">1.</span> <span class="nav-text">启动vi</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#命令模式和编辑模式"><span class="nav-number">2.</span> <span class="nav-text">命令模式和编辑模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据的恢复和关闭vi"><span class="nav-number">3.</span> <span class="nav-text">数据的恢复和关闭vi</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#vi屏幕的格式即vi和ex命令"><span class="nav-number">4.</span> <span class="nav-text">vi屏幕的格式即vi和ex命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#移动光标"><span class="nav-number">5.</span> <span class="nav-text">移动光标</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#整屏移动"><span class="nav-number">5.1.</span> <span class="nav-text">整屏移动</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#跳转到前一位置"><span class="nav-number">5.2.</span> <span class="nav-text">跳转到前一位置</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#搜索模式"><span class="nav-number">6.</span> <span class="nav-text">搜索模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用行号和切换模式"><span class="nav-number">7.</span> <span class="nav-text">使用行号和切换模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#修改文本"><span class="nav-number">8.</span> <span class="nav-text">修改文本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#替换文本"><span class="nav-number">9.</span> <span class="nav-text">替换文本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除字符"><span class="nav-number">10.</span> <span class="nav-text">删除字符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#撤销或重复改变"><span class="nav-number">11.</span> <span class="nav-text">撤销或重复改变</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#恢复删除"><span class="nav-number">11.1.</span> <span class="nav-text">恢复删除</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#移动文本"><span class="nav-number">12.</span> <span class="nav-text">移动文本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#复制文本"><span class="nav-number">13.</span> <span class="nav-text">复制文本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#改变字母大小写"><span class="nav-number">14.</span> <span class="nav-text">改变字母大小写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置选项"><span class="nav-number">15.</span> <span class="nav-text">设置选项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#复制移动行"><span class="nav-number">16.</span> <span class="nav-text">复制移动行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输入shell命令"><span class="nav-number">17.</span> <span class="nav-text">输入shell命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#将文件中的数据插入编辑缓冲区中"><span class="nav-number">18.</span> <span class="nav-text">将文件中的数据插入编辑缓冲区中</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不退出vi的情况下进行保存"><span class="nav-number">19.</span> <span class="nav-text">不退出vi的情况下进行保存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#切换到一个新文件"><span class="nav-number">20.</span> <span class="nav-text">切换到一个新文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用缩写"><span class="nav-number">21.</span> <span class="nav-text">使用缩写</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#宏"><span class="nav-number">22.</span> <span class="nav-text">宏</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#初始化文件"><span class="nav-number">23.</span> <span class="nav-text">初始化文件</span></a></li></ol></div>
             
 
           </div>

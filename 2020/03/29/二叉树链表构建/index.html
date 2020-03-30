@@ -107,7 +107,7 @@
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="递归遍历中序 123456789void inorder(binarytree *T)&amp;#123;    if(T !&#x3D; NULL)    &amp;#123;         inorder(T-&gt;left);        cout &lt;&lt; T-&gt;data &lt;&lt; endl;        inorder(T-&gt;right);    &amp;#125;&amp;#125; 前序">
 <meta property="article:published_time" content="2020-03-29T01:23:00.000Z">
-<meta property="article:modified_time" content="2020-03-29T06:19:41.639Z">
+<meta property="article:modified_time" content="2020-03-30T08:56:57.542Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 
@@ -425,7 +425,7 @@
 <h4 id="复制二叉树"><a href="#复制二叉树" class="headerlink" title="复制二叉树"></a>复制二叉树</h4><p>按前序遍历的方法最好复制</p>
 <figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">binode* <span class="keyword">copy</span>(binarytree *T)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(T == <span class="keyword">NULL</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    binode *<span class="keyword">temp</span> = <span class="built_in">new</span> node;</span><br><span class="line">    <span class="keyword">if</span>(!<span class="keyword">temp</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">exit</span>(overflow);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">temp</span>-&gt;data = T-&gt;data;</span><br><span class="line">    <span class="keyword">temp</span>-&gt;left = <span class="keyword">copy</span>(T-&gt;left);</span><br><span class="line">    <span class="keyword">temp</span>-&gt;right = <span class="keyword">copy</span>(T-&gt;right);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">temp</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="非递归构造二叉树"><a href="#非递归构造二叉树" class="headerlink" title="非递归构造二叉树"></a>非递归构造二叉树</h3><p>非递归构造二叉树主要用到了栈来模拟递归过程。</p>
+<h3 id="非递归搜索二叉树"><a href="#非递归搜索二叉树" class="headerlink" title="非递归搜索二叉树"></a>非递归搜索二叉树</h3><p>非递归构造二叉树主要用到了栈来模拟递归过程。</p>
 <figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> inorder(binode *T)</span><br><span class="line">&#123;</span><br><span class="line">    binode *p;</span><br><span class="line">    stack&lt;binode*&gt; s;<span class="comment">//如果不行就自己构建一个栈</span></span><br><span class="line">    s.<span class="keyword">push</span>(T);<span class="comment">//初始化</span></span><br><span class="line">    <span class="keyword">while</span>(!s.empty())</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">while</span>( p == s.gettop() &amp;&amp; p != <span class="keyword">NULL</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">push</span>(p-&gt;left);</span><br><span class="line">        &#125;</span><br><span class="line">        s.<span class="keyword">pop</span>();</span><br><span class="line">        <span class="comment">/*因为是push左子树，所以最后先push进一个空然后才会退出循环</span></span><br><span class="line"><span class="comment">        所以要先把这个NULL去掉*/</span></span><br><span class="line">        <span class="keyword">if</span>(!s.empty())</span><br><span class="line">        &#123;</span><br><span class="line">            p = s.gettop();</span><br><span class="line">            cout &lt;&lt; p-&gt;data;</span><br><span class="line">            s.<span class="keyword">pop</span>();<span class="comment">//去掉p节点</span></span><br><span class="line">            s.<span class="keyword">push</span>(p-&gt;right);</span><br><span class="line">            <span class="comment">/*如果p是叶结点，那么push右边也是NULL,内层循环不会执行，然后</span></span><br><span class="line"><span class="comment">            执行pop取点NULL，之后if中又会取出上一层节点继续找右子树*/</span></span><br><span class="line">            <span class="comment">//如果右子树中还有分支，那么会继续这个过程</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>这段程序的含义是先找左节点，然后把中间节点退出去，找右节点，在右节点中重复找左节点。</p>
 <p><strong>前序遍历</strong>又稍有不同，因为前序遍历是先直接输出根节点，所以根节点就不需要存入栈中，实际栈中存入的是右节点。</p>
@@ -470,6 +470,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/03/29/%E7%BA%BF%E7%B4%A2%E4%BA%8C%E5%8F%89%E6%A0%91/" rel="prev" title="线索二叉树">
+                线索二叉树 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -549,7 +553,7 @@
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">93</span>
+                  <span class="site-state-item-count">94</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -611,7 +615,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#递归遍历"><span class="nav-number">1.</span> <span class="nav-text">递归遍历</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用"><span class="nav-number">2.</span> <span class="nav-text">应用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#二叉树构建"><span class="nav-number">2.1.</span> <span class="nav-text">二叉树构建</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#计算叶结点个数"><span class="nav-number">2.2.</span> <span class="nav-text">计算叶结点个数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#计算节点个数"><span class="nav-number">2.3.</span> <span class="nav-text">计算节点个数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#计算二叉树高度"><span class="nav-number">2.4.</span> <span class="nav-text">计算二叉树高度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#复制二叉树"><span class="nav-number">2.5.</span> <span class="nav-text">复制二叉树</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#非递归构造二叉树"><span class="nav-number">3.</span> <span class="nav-text">非递归构造二叉树</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#递归遍历"><span class="nav-number">1.</span> <span class="nav-text">递归遍历</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用"><span class="nav-number">2.</span> <span class="nav-text">应用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#二叉树构建"><span class="nav-number">2.1.</span> <span class="nav-text">二叉树构建</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#计算叶结点个数"><span class="nav-number">2.2.</span> <span class="nav-text">计算叶结点个数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#计算节点个数"><span class="nav-number">2.3.</span> <span class="nav-text">计算节点个数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#计算二叉树高度"><span class="nav-number">2.4.</span> <span class="nav-text">计算二叉树高度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#复制二叉树"><span class="nav-number">2.5.</span> <span class="nav-text">复制二叉树</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#非递归搜索二叉树"><span class="nav-number">3.</span> <span class="nav-text">非递归搜索二叉树</span></a></li></ol></div>
             
 
           </div>
