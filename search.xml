@@ -1,6 +1,159 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>unix文件系统</title>
+    <url>/2020/03/30/unix%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/</url>
+    <content><![CDATA[<p>文件就是任意源，有一个名称，可以从中写入读出数据。</p>
+<h3 id="文件类型"><a href="#文件类型" class="headerlink" title="文件类型"></a>文件类型</h3><p>unix中有三种文件类型，普通文件，目录和伪文件。</p>
+<p>普通文件是大多数时候所使用的文件，包括文本文件和二进制文件。例如，纯文本，shell脚本，源程序，配置文件，html文件等。</p>
+<p>目录不同之处在于他们用来组织，访问其他文件。从概念上讲，目录包含其他文件。这个文件其实类似于windows下的文件夹。</p>
+<p>伪文件有时候也称为设备文件。这种文件是物理设备的内部表示。例如键盘，显示器，打印机等，这些设备都可以当成一个文件进行访问。</p>
+<p>有一种特殊的伪文件时proc文件，这种文件可以访问linux内核中的信息，设置可以修改Linux内核中的数据。</p>
+<h3 id="特殊文件"><a href="#特殊文件" class="headerlink" title="特殊文件"></a>特殊文件</h3><p>特殊文件就是表示物理设备的伪文件。这些文件都被存放于/dev下</p>
+<p>一些常见的设备如下</p>
+<table>
+<thead>
+<tr>
+<th>位置</th>
+<th>硬件</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>/dev/sda</td>
+<td>SCSI硬盘</td>
+</tr>
+<tr>
+<td>/dev/sda</td>
+<td>第一分区</td>
+</tr>
+<tr>
+<td>/dev/hda</td>
+<td>硬盘</td>
+</tr>
+<tr>
+<td>/dev/Ip0</td>
+<td>打印机</td>
+</tr>
+<tr>
+<td>/dev/tty</td>
+<td>当前终端</td>
+</tr>
+<tr>
+<td>/dev/random</td>
+<td>随机数生成器</td>
+</tr>
+<tr>
+<td>/dev/null</td>
+<td>放弃输入 输入不返回内容</td>
+</tr>
+<tr>
+<td>/dev/zero</td>
+<td>放弃送站，输入返回0</td>
+</tr>
+</tbody></table>
+<p>写入到/dev/null 或/dev/zero 中的任何文件都会被抛弃，因此这些文件又叫做位桶。</p>
+<p>如果想读取随即数，只需要读取/dev/random。</p>
+<h3 id="mkfifo-命名管道"><a href="#mkfifo-命名管道" class="headerlink" title="mkfifo 命名管道"></a>mkfifo 命名管道</h3><p>在前面我们已经介绍过了管道，那种管道是匿名管道，就是只有当程序运行的时候它才被创建。</p>
+<p>命名管道与匿名管道的显著区别就是必须显式的创建管道，其次，当命令结束之后，管道并不会消失，而是会继续存在，除非使用命令删除他们。</p>
+<p>通常将命名管道称为FIFO，实际上就是队列。</p>
+<p>语法： mkfifo [-m mode] pipe</p>
+<p>其中，mode是chmod程序使用的一种文件类型，pipe是希望创建的管道名称。</p>
+<p>用途：经常被用来两个进程中的通信。</p>
+<p>例：</p>
+<figure class="highlight gradle"><table><tr><td class="code"><pre><span class="line">mkfifo fifotest</span><br><span class="line"><span class="keyword">grep</span> bash <span class="regexp">/etc/</span>passwd &gt; fifotest <span class="comment">//第一个窗口上的命令</span></span><br><span class="line">wc -l &lt; fifotest <span class="comment">//这是第二个窗口上的命令</span></span><br></pre></td></tr></table></figure>
+<p>如果想要去除管道，只需要rm + 管道名即可。</p>
+<h3 id="proc文件"><a href="#proc文件" class="headerlink" title="proc文件"></a>proc文件</h3><p>proc文件时那些提供一些简单途径来检查多种类型的系统信息的伪文件。proc文件可以直接从内核中提取数据。</p>
+<p>所有的proc文件都存放在/proc目录下，在这个目录中，可以发现每一个进程对应一个子目录。</p>
+<p>如果想提取这些进程的信息，可以使用cat命令去找到当前有那些进程正在执行，如果进入这些目录，还可以知道这些进程的详细状态。</p>
+<p>有一个特殊的proc文件，/proc/kcore，这个文件表示计算机的实际物理内存。可以使用ls -l选项查看这个文件的大小。</p>
+<h3 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h3><h4 id="根目录-子目录"><a href="#根目录-子目录" class="headerlink" title="根目录 子目录"></a>根目录 子目录</h4><p>目录是一个树形结构，对于每一层一定会有一个根，而用root过于麻烦，所以一般用/表示根目录。</p>
+<p>例如 ls / 表示列举根目录下的所有文件。这样 ls /bin代表列bin目录下的所有文件。但是实际上如果列举根目录下的文件是不需要加/的，直接加上名字就好了，如果想访问根目录下子目录中的文件，就需要在子目录和子目录文件之间加一个/</p>
+<p>例如： ls homework/bomb</p>
+<h4 id="mount-umount挂载文件系统"><a href="#mount-umount挂载文件系统" class="headerlink" title="mount umount挂载文件系统"></a>mount umount挂载文件系统</h4><p>在系统中，有许多设备，也就有许多个文件系统。但是如果都是完全分隔的话，没办法在不同文件系统之间进行访问，所以一定有一颗主树，然后其他树挂载在主树上，这一个个文件系统其实类似于windows下的磁盘分区。</p>
+<p>当小的文件系统连接上主树时，我们称为挂载。小文件系统附加到主树上的目录叫做挂载点</p>
+<p>一般来说，系统已经自动挂载好了子树，但是有时候需要我们手动挂载子树（例如插入u盘时，当然现在也是自动挂载了）。这时需要mount程序。这里不再展开</p>
+<h4 id="漫游根目录"><a href="#漫游根目录" class="headerlink" title="漫游根目录"></a>漫游根目录</h4><table>
+<thead>
+<tr>
+<th>目录</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>/</td>
+<td>根目录</td>
+</tr>
+<tr>
+<td>/bin</td>
+<td>基本程序</td>
+</tr>
+<tr>
+<td>/boot</td>
+<td>启动系统时所需要的文件</td>
+</tr>
+<tr>
+<td>/etc</td>
+<td>配置文件</td>
+</tr>
+<tr>
+<td>/dev</td>
+<td>设备文件</td>
+</tr>
+<tr>
+<td>/home</td>
+<td>用户home目录</td>
+</tr>
+<tr>
+<td>/lib</td>
+<td>基本共享库，内核模块</td>
+</tr>
+<tr>
+<td>/lost+found</td>
+<td>由fsck恢复的受损文件</td>
+</tr>
+<tr>
+<td>/media</td>
+<td>可移动介质的挂载点</td>
+</tr>
+<tr>
+<td>/mnt</td>
+<td>不能挂载在其他位置的挂载点</td>
+</tr>
+<tr>
+<td>/opt</td>
+<td>第三方应用程序</td>
+</tr>
+<tr>
+<td>/proc</td>
+<td></td>
+</tr>
+<tr>
+<td>/root</td>
+<td>超级用户home目录</td>
+</tr>
+<tr>
+<td>/srv</td>
+<td>本地系统提供服务的数据</td>
+</tr>
+<tr>
+<td>/tmp</td>
+<td>临时文件</td>
+</tr>
+<tr>
+<td>/usr</td>
+<td>静态数据使用的文件系统</td>
+</tr>
+<tr>
+<td>/var</td>
+<td>可变数据使用的文件系统</td>
+</tr>
+</tbody></table>
+]]></content>
+      <categories>
+        <category>Linux</category>
+      </categories>
+  </entry>
+  <entry>
     <title>线索二叉树</title>
     <url>/2020/03/29/%E7%BA%BF%E7%B4%A2%E4%BA%8C%E5%8F%89%E6%A0%91/</url>
     <content><![CDATA[<p>普通的二叉树中空节点数量很多，例如一个有2n条分支的二叉树，其中节点数只有n-1个，空节点有n+1个，因此就要想办法把这些没用到的节点利用起来。</p>
