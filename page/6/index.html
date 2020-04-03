@@ -314,6 +314,158 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://xinhecuican.github.io/2020/01/24/%E6%B1%87%E7%BC%96%E4%B8%AD%E7%9A%84%E5%A4%9A%E5%B1%82%E5%BE%AA%E7%8E%AF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/01/24/%E6%B1%87%E7%BC%96%E4%B8%AD%E7%9A%84%E5%A4%9A%E5%B1%82%E5%BE%AA%E7%8E%AF/" itemprop="url">汇编中的多层循环</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-24T09:19:00+08:00">
+                2020-01-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B1%87%E7%BC%96/" itemprop="url" rel="index">
+                    <span itemprop="name">汇编</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          因为唯一的用于统计循环次数的寄存器就是cx，所以有多层循环的时候就会碰到循环次数难以记录的问题，以下是一种解决办法
+1234567891011s0:mov dx,cx//用另一个寄存器来存cx的次数   mov si,0   mov cx,3 s:mov al,[si+bx]   and al,11
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2020/01/24/%E6%B1%87%E7%BC%96%E4%B8%AD%E7%9A%84%E5%A4%9A%E5%B1%82%E5%BE%AA%E7%8E%AF/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+    <div>
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://xinhecuican.github.io/2020/01/24/si%E5%92%8Cdi/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1644,159 +1796,6 @@ mov [bx],ax
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://xinhecuican.github.io/2020/01/21/%E4%BB%8Easm%E5%88%B0exe/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/01/21/%E4%BB%8Easm%E5%88%B0exe/" itemprop="url">从asm到exe</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-21T09:40:00+08:00">
-                2020-01-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%B1%87%E7%BC%96/" itemprop="url" rel="index">
-                    <span itemprop="name">汇编</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          先要有masm.exe和link.exe，然后输入masm+程序名和link+程序名
-或者masm+盘符+程序名，可以省略中间过程，节省时间例：masm c:\1.asm
-
-          
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2020/01/21/%E4%BB%8Easm%E5%88%B0exe/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-    <div>
-      
-    </div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1847,7 +1846,7 @@ mov [bx],ax
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">95</span>
+                  <span class="site-state-item-count">96</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

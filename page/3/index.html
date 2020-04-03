@@ -314,6 +314,158 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://xinhecuican.github.io/2020/02/26/delete%E7%9A%84%E4%B8%80%E4%B8%AA%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/02/26/delete%E7%9A%84%E4%B8%80%E4%B8%AA%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" itemprop="url">delete的一个注意事项</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-26T15:34:00+08:00">
+                2020-02-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/c/" itemprop="url" rel="index">
+                    <span itemprop="name">c++</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+          实际上delete后的指针并不会变成空指针，仍指向堆里的地址。但是这个时候这块空间已经可以被其他的new申请了，如果你没有把原指针更改的话，有可能对原指针进行的修改会影响到新指针。因此每次delete完之后最好把这个指针变成空指针
+
+          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2020/02/26/delete%E7%9A%84%E4%B8%80%E4%B8%AA%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+    <div>
+      
+    </div>
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://xinhecuican.github.io/2020/02/25/%E4%BD%8D%E8%BF%90%E7%AE%97%E5%92%8C%E4%B8%80%E4%BD%8D%E5%8E%9F%E9%85%B8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1685,162 +1837,6 @@ bitset有头文件 &lt;bitset&gt;
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://xinhecuican.github.io/2020/02/09/%E5%8F%8C%E7%AB%AF%E9%98%9F%E5%88%97deque/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/02/09/%E5%8F%8C%E7%AB%AF%E9%98%9F%E5%88%97deque/" itemprop="url">双端队列deque</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-09T14:28:00+08:00">
-                2020-02-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/stl/" itemprop="url" rel="index">
-                    <span itemprop="name">stl</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-          普通的队列有许多限制，例如从一边删除插入，不能使用迭代器（因为空间不连续）等等。双端队列就允许从两边插入
-deque的特点：
-1、支持随机访问，即支持[]以及at()，但是性能没有vector好。
-2、可以在内部进行插入和删除操作，但性能不及list。
-deque和vector的不同之处：
-1、两端
-          ...
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2020/02/09/%E5%8F%8C%E7%AB%AF%E9%98%9F%E5%88%97deque/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-    <div>
-      
-    </div>
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1891,7 +1887,7 @@ deque和vector的不同之处：
               
                 <a href="/archives/%7C%7C%20archive">
               
-                  <span class="site-state-item-count">95</span>
+                  <span class="site-state-item-count">96</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

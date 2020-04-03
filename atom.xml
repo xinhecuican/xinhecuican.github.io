@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://xinhecuican.github.io/"/>
-  <updated>2020-03-31T12:09:23.589Z</updated>
+  <updated>2020-04-03T11:01:10.054Z</updated>
   <id>http://xinhecuican.github.io/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>gdb</title>
+    <link href="http://xinhecuican.github.io/2020/04/03/gdb/"/>
+    <id>http://xinhecuican.github.io/2020/04/03/gdb/</id>
+    <published>2020-04-03T08:44:00.000Z</published>
+    <updated>2020-04-03T11:01:10.054Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="进入gdb"><a href="#进入gdb" class="headerlink" title="进入gdb"></a>进入gdb</h3><p>首先gdb一般都是用来调试c或c++的，gdb是要运行可执行文件的，所以先要进行编译。具体命令如下：</p><p><code>gcc -g 源文件.c -o 输出的目标文件</code></p><p>-g是用来插入编译所需的信息, -o是用来生成可执行文件</p><p>生成的时候会产生一大堆信息，如果不想看的话可以使用 -q 选项，如果想永久设定可以在bashrc中设置别名 alias gdb = ‘gdb -q’</p><h3 id="执行"><a href="#执行" class="headerlink" title="执行"></a>执行</h3><table><thead><tr><th>名称</th><th>用途</th><th>简写</th></tr></thead><tbody><tr><td>start</td><td>进入main函数</td><td>无</td></tr><tr><td>run</td><td>重新开始运行 run-text 加载文本文件 run-bin加载二进制文件</td><td>r</td></tr><tr><td>next</td><td>执行一行程序，不进入函数，直接把函数执行完</td><td>n</td></tr><tr><td>step</td><td>执行一行程序，进入函数</td><td>s</td></tr><tr><td>list</td><td>查看程序，list+函数名查看函数</td><td>l</td></tr><tr><td>continue</td><td>继续执行到断点处</td><td>c</td></tr><tr><td>quit</td><td>终止程序</td><td>q</td></tr><tr><td>set 参数</td><td>设置断点</td><td>无</td></tr></tbody></table><h3 id="程序"><a href="#程序" class="headerlink" title="程序"></a>程序</h3><table><thead><tr><th>名称</th><th>用途</th><th>简写</th></tr></thead><tbody><tr><td>return</td><td>退出函数且不执行后面代码，也可以return+参数指定返回值</td><td>无</td></tr><tr><td>finish</td><td>退出函数且执行完剩下的代码</td><td>无</td></tr><tr><td>call/print</td><td>直接调用函数执行</td><td>无</td></tr><tr><td>info files</td><td>显示所有程序及位置</td><td>无</td></tr><tr><td>info functions（regex）</td><td>显示函数（可加正则表达式）</td><td>无</td></tr><tr><td>set step-mode on</td><td>进入不带调试信息的函数（如printf）</td><td>无</td></tr></tbody></table><h3 id="设置断点"><a href="#设置断点" class="headerlink" title="设置断点"></a>设置断点</h3><table><thead><tr><th>名称</th><th>用途</th><th>简写</th></tr></thead><tbody><tr><td>break</td><td>设置断点</td><td>b</td></tr><tr><td>tbreak</td><td>设置临时断点（智能使用一次）</td><td>tb</td></tr><tr><td>info breakpoints</td><td>查看当前所有断点</td><td>无</td></tr><tr><td>enable/disable breakpoints</td><td>启用/禁用断点</td><td>无</td></tr><tr><td>clear+编号</td><td>删除断点</td><td>无</td></tr><tr><td>** break参数 **</td><td></td><td><strong>例</strong></td></tr><tr><td>*+地址</td><td>在某一地址设置断点</td><td>b *0x400522</td></tr><tr><td>函数名</td><td>在某一函数进入前停止</td><td>b main</td></tr><tr><td>行号</td><td>在某一行号处设置断点</td><td>b 7</td></tr><tr><td>+offset/-offset</td><td>在当前行前后offset行设置</td><td>无</td></tr><tr><td>break … if &lt; condition&gt;</td><td>只有在条件满足时，断点才会被触发</td><td>b 10 if i==101</td></tr><tr><td>ignore bnum count</td><td>忽略bnum次编号为count的断点</td><td>ignore 1 5</td></tr><tr><td><strong>观察点</strong></td><td>观察变量值的变化</td><td></td></tr><tr><td>watch</td><td>当一个值发生变化时，程序会停下来，相当于是写观察点</td><td>无</td></tr><tr><td>reatch</td><td>当一个值发生读行为时，程序停止</td><td>无</td></tr><tr><td>awatch</td><td>每次读取或改变a的值都会让程序停下来</td><td>aw</td></tr><tr><td>info watch</td><td>显示观察点</td><td>i watch</td></tr><tr><td><strong>catchpoint</strong></td><td>当程序异常终止或加载链接库时停止运行，这里不展开</td><td></td></tr><tr><td><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span><span class="string">）设置catchpoints:</span></span><br><span class="line"><span class="attr">a. catch event:</span> <span class="string">当事件event发生的时候，程序停止运行，这里event的取值有：</span></span><br><span class="line"></span><br><span class="line"><span class="number">1</span><span class="string">）throw:</span> <span class="string">C++抛出异常</span></span><br><span class="line"><span class="number">2</span><span class="string">）catch:</span> <span class="string">C++捕捉到异常</span></span><br><span class="line"><span class="number">3</span><span class="string">）exec:</span> <span class="string">exec被调用</span></span><br><span class="line"><span class="number">4</span><span class="string">）fork:</span> <span class="string">fork被调用</span></span><br><span class="line"><span class="number">5</span><span class="string">）vfork:</span> <span class="string">vfork被调用</span></span><br><span class="line"><span class="number">6</span><span class="string">）load:</span> <span class="string">加载动态库</span></span><br><span class="line"><span class="number">7</span><span class="string">）load</span> <span class="attr">libname:</span> <span class="string">加载名为libname的动态库</span></span><br><span class="line"><span class="number">8</span><span class="string">）unload:</span> <span class="string">卸载动态库</span></span><br><span class="line"><span class="number">9</span><span class="string">）unload</span> <span class="attr">libname:</span> <span class="string">卸载名为libname的动态库</span></span><br><span class="line"><span class="number">10</span><span class="string">）syscall</span> <span class="string">[args]:</span> <span class="string">调用系统调用，args可以指定系统调用号，或者系统名称</span></span><br><span class="line"><span class="attr">b. tcatch event:</span> <span class="string">设置只停一次的catchpoint，第一次生效后，该catchpoint被自动删除</span></span><br></pre></td></tr></table></figure></td><td></td><td></td></tr><tr><td><a href="https://blog.csdn.net/kevinx_xu/article/details/36261571" target="_blank" rel="noopener">这一段从网上扒的</a></td><td></td><td></td></tr></tbody></table><h3 id="打印"><a href="#打印" class="headerlink" title="打印"></a>打印</h3><table><thead><tr><th>名称</th><th>用途</th><th>简写</th></tr></thead><tbody><tr><td>** 函数栈帧打印**</td><td></td><td></td></tr><tr><td>i frame</td><td>输出了当前函数堆栈帧的地址，指令寄存器的值，局部变量地址及值等信息</td><td>无</td></tr><tr><td>frame n</td><td>打印第n层的函数栈帧</td><td>无</td></tr><tr><td>up/down n</td><td>向上/向下切换栈帧</td><td>无</td></tr><tr><td>print + 数组名</td><td>打印数组内容</td><td>p</td></tr><tr><td>set print array-indexes on</td><td>打印数组时打印下标</td><td>无</td></tr><tr><td>info locals</td><td>打印局部变量值</td><td>i locals</td></tr><tr><td>backtrace full n</td><td>由内向外显示n个栈帧的值</td><td>bt</td></tr><tr><td>set print pretty on</td><td>打印结构体</td><td>无</td></tr><tr><td>p *array@len</td><td>array数组名 len 数据长度</td><td>无</td></tr><tr><td>p $寄存器名</td><td>查看某个寄存器的值</td><td>无</td></tr><tr><td>info register</td><td>查看所有寄存器</td><td>无</td></tr></tbody></table><h4 id="x-显示内存中内容命令"><a href="#x-显示内存中内容命令" class="headerlink" title="x 显示内存中内容命令"></a>x 显示内存中内容命令</h4><p>格式: x /nfu <addr><br>  <figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">n表示要显示的内存单元的个数</span></span><br><span class="line"></span><br><span class="line"><span class="meta">f表示显示方式,</span> <span class="string">可取如下值</span></span><br><span class="line"><span class="attr">x</span> <span class="string">按十六进制格式显示变量。</span></span><br><span class="line"><span class="attr">d</span> <span class="string">按十进制格式显示变量。</span></span><br><span class="line"><span class="attr">u</span> <span class="string">按十进制格式显示无符号整型。</span></span><br><span class="line"><span class="attr">o</span> <span class="string">按八进制格式显示变量。</span></span><br><span class="line"><span class="attr">t</span> <span class="string">按二进制格式显示变量。</span></span><br><span class="line"><span class="attr">a</span> <span class="string">按十六进制格式显示变量。</span></span><br><span class="line"><span class="attr">i</span> <span class="string">指令地址格式</span></span><br><span class="line"><span class="attr">c</span> <span class="string">按字符格式显示变量。</span></span><br><span class="line"><span class="attr">f</span> <span class="string">按浮点数格式显示变量。</span></span><br><span class="line"></span><br><span class="line"><span class="attr">u表示一个地址单元的长度</span></span><br><span class="line"><span class="attr">b表示单字节，</span></span><br><span class="line"><span class="attr">h表示双字节，</span></span><br><span class="line"><span class="attr">w表示四字节，</span></span><br><span class="line"><span class="attr">g表示八字节</span></span><br></pre></td></tr></table></figure></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;进入gdb&quot;&gt;&lt;a href=&quot;#进入gdb&quot; class=&quot;headerlink&quot; title=&quot;进入gdb&quot;&gt;&lt;/a&gt;进入gdb&lt;/h3&gt;&lt;p&gt;首先gdb一般都是用来调试c或c++的，gdb是要运行可执行文件的，所以先要进行编译。具体命令如下：&lt;/p&gt;
+&lt;p&gt;
+      
+    
+    </summary>
+    
+    
+      <category term="基础" scheme="http://xinhecuican.github.io/categories/%E5%9F%BA%E7%A1%80/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>unix文件系统</title>
@@ -494,31 +519,6 @@
     
     
       <category term="基础" scheme="http://xinhecuican.github.io/categories/%E5%9F%BA%E7%A1%80/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>delete的一个注意事项</title>
-    <link href="http://xinhecuican.github.io/2020/02/26/delete%E7%9A%84%E4%B8%80%E4%B8%AA%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/"/>
-    <id>http://xinhecuican.github.io/2020/02/26/delete%E7%9A%84%E4%B8%80%E4%B8%AA%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/</id>
-    <published>2020-02-26T07:34:00.000Z</published>
-    <updated>2020-02-26T08:10:04.183Z</updated>
-    
-    <content type="html"><![CDATA[<p>实际上delete后的指针并不会变成空指针，仍指向堆里的地址。但是这个时候这块空间已经可以被其他的new申请了，如果你没有把原指针更改的话，有可能对原指针进行的修改会影响到新指针。因此每次delete完之后最好把这个指针变成空指针</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;实际上delete后的指针并不会变成空指针，仍指向堆里的地址。但是这个时候这块空间已经可以被其他的new申请了，如果你没有把原指针更改的话，有可能对原指针进行的修改会影响到新指针。因此每次delete完之后最好把这个指针变成空指针&lt;/p&gt;
-
-      
-    
-    </summary>
-    
-    
-      <category term="c++" scheme="http://xinhecuican.github.io/categories/c/"/>
     
     
   </entry>
