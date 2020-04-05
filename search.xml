@@ -55,7 +55,18 @@
 <td>设置断点</td>
 <td>无</td>
 </tr>
+<tr>
+<td>nexti</td>
+<td>运行一条机器指令</td>
+<td>ni</td>
+</tr>
+<tr>
+<td>jump + 标号</td>
+<td>跳转到某一位置执行</td>
+<td>j</td>
+</tr>
 </tbody></table>
+<p>注意jump命令跳转后仍是一直执行，所以要在某一位置手动设置断点</p>
 <h3 id="程序"><a href="#程序" class="headerlink" title="程序"></a>程序</h3><table>
 <thead>
 <tr>
@@ -116,7 +127,7 @@
 <tr>
 <td>info breakpoints</td>
 <td>查看当前所有断点</td>
-<td>无</td>
+<td>i b</td>
 </tr>
 <tr>
 <td>enable/disable breakpoints</td>
@@ -193,17 +204,52 @@
 <td>当程序异常终止或加载链接库时停止运行，这里不展开</td>
 <td></td>
 </tr>
+</tbody></table>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="number">1</span><span class="string">）设置catchpoints:</span></span><br><span class="line"><span class="attr">a. catch event:</span> <span class="string">当事件event发生的时候，程序停止运行，这里event的取值有：</span></span><br><span class="line"></span><br><span class="line"><span class="number">1</span><span class="string">）throw:</span> <span class="string">C++抛出异常</span></span><br><span class="line"><span class="number">2</span><span class="string">）catch:</span> <span class="string">C++捕捉到异常</span></span><br><span class="line"><span class="number">3</span><span class="string">）exec:</span> <span class="string">exec被调用</span></span><br><span class="line"><span class="number">4</span><span class="string">）fork:</span> <span class="string">fork被调用</span></span><br><span class="line"><span class="number">5</span><span class="string">）vfork:</span> <span class="string">vfork被调用</span></span><br><span class="line"><span class="number">6</span><span class="string">）load:</span> <span class="string">加载动态库</span></span><br><span class="line"><span class="number">7</span><span class="string">）load</span> <span class="attr">libname:</span> <span class="string">加载名为libname的动态库</span></span><br><span class="line"><span class="number">8</span><span class="string">）unload:</span> <span class="string">卸载动态库</span></span><br><span class="line"><span class="number">9</span><span class="string">）unload</span> <span class="attr">libname:</span> <span class="string">卸载名为libname的动态库</span></span><br><span class="line"><span class="number">10</span><span class="string">）syscall</span> <span class="string">[args]:</span> <span class="string">调用系统调用，args可以指定系统调用号，或者系统名称</span></span><br><span class="line"><span class="attr">b. tcatch event:</span> <span class="string">设置只停一次的catchpoint，第一次生效后，该catchpoint被自动删除</span></span><br></pre></td></tr></table></figure>
+<p><a href="https://blog.csdn.net/kevinx_xu/article/details/36261571" target="_blank" rel="noopener">这一段从网上扒的</a></p>
+<h3 id="反汇编"><a href="#反汇编" class="headerlink" title="反汇编"></a>反汇编</h3><p>disassemble 如果不带参数，会自动显示后面若干条汇编指令。简写disas</p>
+<p>如果带一个参数，可以带函数名也可以带某一个地址，都是显示那个地址处的函数的汇编代码。</p>
+<p>如果带两个参数，也就是起始地址和终止地址，那么就会显示两个之间的代码</p>
+<h3 id="回退"><a href="#回退" class="headerlink" title="回退"></a>回退</h3><table>
+<thead>
 <tr>
-<td><figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="number">1</span><span class="string">）设置catchpoints:</span></span><br><span class="line"><span class="attr">a. catch event:</span> <span class="string">当事件event发生的时候，程序停止运行，这里event的取值有：</span></span><br><span class="line"></span><br><span class="line"><span class="number">1</span><span class="string">）throw:</span> <span class="string">C++抛出异常</span></span><br><span class="line"><span class="number">2</span><span class="string">）catch:</span> <span class="string">C++捕捉到异常</span></span><br><span class="line"><span class="number">3</span><span class="string">）exec:</span> <span class="string">exec被调用</span></span><br><span class="line"><span class="number">4</span><span class="string">）fork:</span> <span class="string">fork被调用</span></span><br><span class="line"><span class="number">5</span><span class="string">）vfork:</span> <span class="string">vfork被调用</span></span><br><span class="line"><span class="number">6</span><span class="string">）load:</span> <span class="string">加载动态库</span></span><br><span class="line"><span class="number">7</span><span class="string">）load</span> <span class="attr">libname:</span> <span class="string">加载名为libname的动态库</span></span><br><span class="line"><span class="number">8</span><span class="string">）unload:</span> <span class="string">卸载动态库</span></span><br><span class="line"><span class="number">9</span><span class="string">）unload</span> <span class="attr">libname:</span> <span class="string">卸载名为libname的动态库</span></span><br><span class="line"><span class="number">10</span><span class="string">）syscall</span> <span class="string">[args]:</span> <span class="string">调用系统调用，args可以指定系统调用号，或者系统名称</span></span><br><span class="line"><span class="attr">b. tcatch event:</span> <span class="string">设置只停一次的catchpoint，第一次生效后，该catchpoint被自动删除</span></span><br></pre></td></tr></table></figure></td>
-<td></td>
-<td></td>
+<th>名称</th>
+<th>用途</th>
+<th>简写</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>reverse-continue</td>
+<td>反向运行程序知道遇到一个能使程序中断的事件（比如断点，观察点，异常）</td>
+<td>无</td>
 </tr>
 <tr>
-<td><a href="https://blog.csdn.net/kevinx_xu/article/details/36261571" target="_blank" rel="noopener">这一段从网上扒的</a></td>
-<td></td>
-<td></td>
+<td>reverse-step</td>
+<td>返回到上一次执行的源代码行</td>
+<td>无</td>
+</tr>
+<tr>
+<td>reverse-stepi</td>
+<td>返回上一条机器指令</td>
+<td>无</td>
+</tr>
+<tr>
+<td>reverse-next</td>
+<td>返回上一次执行的源代码行，但不执行函数</td>
+<td>无</td>
+</tr>
+<tr>
+<td>reverse-nexti</td>
+<td>反向运行到上一条机器指令，除非这条指令用来返回一个函数调用、整个函数将会被反向执行。</td>
+<td>无</td>
+</tr>
+<tr>
+<td>reverse-finish</td>
+<td>反向运行程序回到调用当前函数的地方</td>
+<td>无</td>
 </tr>
 </tbody></table>
+<p>注意，想使用回退功能先要用record命令对指令进行录制</p>
 <h3 id="打印"><a href="#打印" class="headerlink" title="打印"></a>打印</h3><table>
 <thead>
 <tr>
@@ -270,10 +316,12 @@
 <tr>
 <td>info register</td>
 <td>查看所有寄存器</td>
-<td>无</td>
+<td>i reg</td>
 </tr>
 </tbody></table>
-<h4 id="x-显示内存中内容命令"><a href="#x-显示内存中内容命令" class="headerlink" title="x 显示内存中内容命令"></a>x 显示内存中内容命令</h4><p>格式: x /nfu <addr><br>  <figure class="highlight properties"><table><tr><td class="code"><pre><span class="line"><span class="attr">n表示要显示的内存单元的个数</span></span><br><span class="line"></span><br><span class="line"><span class="meta">f表示显示方式,</span> <span class="string">可取如下值</span></span><br><span class="line"><span class="attr">x</span> <span class="string">按十六进制格式显示变量。</span></span><br><span class="line"><span class="attr">d</span> <span class="string">按十进制格式显示变量。</span></span><br><span class="line"><span class="attr">u</span> <span class="string">按十进制格式显示无符号整型。</span></span><br><span class="line"><span class="attr">o</span> <span class="string">按八进制格式显示变量。</span></span><br><span class="line"><span class="attr">t</span> <span class="string">按二进制格式显示变量。</span></span><br><span class="line"><span class="attr">a</span> <span class="string">按十六进制格式显示变量。</span></span><br><span class="line"><span class="attr">i</span> <span class="string">指令地址格式</span></span><br><span class="line"><span class="attr">c</span> <span class="string">按字符格式显示变量。</span></span><br><span class="line"><span class="attr">f</span> <span class="string">按浮点数格式显示变量。</span></span><br><span class="line"></span><br><span class="line"><span class="attr">u表示一个地址单元的长度</span></span><br><span class="line"><span class="attr">b表示单字节，</span></span><br><span class="line"><span class="attr">h表示双字节，</span></span><br><span class="line"><span class="attr">w表示四字节，</span></span><br><span class="line"><span class="attr">g表示八字节</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="x-显示内存中内容命令"><a href="#x-显示内存中内容命令" class="headerlink" title="x 显示内存中内容命令"></a>x 显示内存中内容命令</h4><p>格式: x /nfu <addr></p>
+<figure class="highlight properties"><table><tr><td class="code"><pre><span class="line"><span class="attr">n表示要显示的内存单元的个数</span></span><br><span class="line"></span><br><span class="line"><span class="meta">f表示显示方式,</span> <span class="string">可取如下值</span></span><br><span class="line"><span class="attr">x</span> <span class="string">按十六进制格式显示变量。</span></span><br><span class="line"><span class="attr">d</span> <span class="string">按十进制格式显示变量。</span></span><br><span class="line"><span class="attr">u</span> <span class="string">按十进制格式显示无符号整型。</span></span><br><span class="line"><span class="attr">o</span> <span class="string">按八进制格式显示变量。</span></span><br><span class="line"><span class="attr">t</span> <span class="string">按二进制格式显示变量。</span></span><br><span class="line"><span class="attr">a</span> <span class="string">按十六进制格式显示变量。</span></span><br><span class="line"><span class="attr">i</span> <span class="string">指令地址格式</span></span><br><span class="line"><span class="attr">c</span> <span class="string">按字符格式显示变量。</span></span><br><span class="line"><span class="attr">f</span> <span class="string">按浮点数格式显示变量。</span></span><br><span class="line"></span><br><span class="line"><span class="attr">u表示一个地址单元的长度</span></span><br><span class="line"><span class="attr">b表示单字节，</span></span><br><span class="line"><span class="attr">h表示双字节，</span></span><br><span class="line"><span class="attr">w表示四字节，</span></span><br><span class="line"><span class="attr">g表示八字节</span></span><br></pre></td></tr></table></figure>
+
 ]]></content>
       <categories>
         <category>基础</category>
