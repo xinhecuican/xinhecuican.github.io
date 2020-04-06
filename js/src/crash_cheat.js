@@ -1,3 +1,3 @@
-// build time:Mon Apr 06 2020 20:04:21 GMT+0800 (中国标准时间)
+// build time:Mon Apr 06 2020 20:20:06 GMT+0800 (中国标准时间)
 $(window).load(function(){var e=document.title;var t;document.addEventListener("visibilitychange",function(){if(document.hidden){$('[rel="icon"]').attr("href","../../images/failure.png");$('[rel="shortcut icon"]').attr("href","../../images/failure.png");document.title="(つェ⊂) 我藏好了哦~ ";clearTimeout(t)}else{$('[rel="icon"]').attr("href","../../images/favicon.png");$('[rel="shortcut icon"]').attr("href","../../images/favicon.png");document.title="o(^▽^)o 被你发现啦~ ";t=setTimeout(function(){document.title=e},2e3)}})});
 //rebuild by neat 
