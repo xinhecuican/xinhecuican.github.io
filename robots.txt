@@ -9,5 +9,5 @@ Disallow: /fonts/
 Disallow: /vendors/
 Disallow: /fancybox/
 
-Sitemap: https://luanzhuxian.github.io/sitemap.xml
-Sitemap: https://luanzhuxian.github.io/baidusitemap.xml
+Sitemap: https://xinhecuican.github.io/sitemap.xml
+Sitemap: https://xinhecuican.github.io/baidusitemap.xml
