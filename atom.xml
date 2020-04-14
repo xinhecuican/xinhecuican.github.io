@@ -5,9 +5,9 @@
   
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://xinhecuican.tk/"/>
-  <updated>2020-04-11T13:21:58.250Z</updated>
-  <id>http://xinhecuican.tk/</id>
+  <link href="http://xinhecuican.github.io/"/>
+  <updated>2020-04-13T14:00:02.334Z</updated>
+  <id>http://xinhecuican.github.io/</id>
   
   <author>
     <name>星河璀璨</name>
@@ -18,18 +18,18 @@
   
   <entry>
     <title>文件操作</title>
-    <link href="http://xinhecuican.tk/post/95495db.html"/>
-    <id>http://xinhecuican.tk/post/95495db.html</id>
+    <link href="http://xinhecuican.github.io/post/95495db.html"/>
+    <id>http://xinhecuican.github.io/post/95495db.html</id>
     <published>2020-04-10T08:53:00.000Z</published>
-    <updated>2020-04-11T13:21:58.250Z</updated>
+    <updated>2020-04-13T14:00:02.334Z</updated>
     
-    <content type="html"><![CDATA[<!-- build time:Sun Apr 12 2020 08:17:32 GMT+0800 (中国标准时间) --><h3 id="touch-创建文件"><a href="#touch-创建文件" class="headerlink" title="touch 创建文件"></a>touch 创建文件</h3><p>创建文件有许多种方式，例如用vi创建文件，利用重定向创建文件。</p><p>语法： touch [-acm] [-t time] file…</p><p>作用： 创建文件，改变文件的修改时间和访问时间。</p><p>-m 改变修改时间</p><p>-a 改变访问时间</p><p>-t 用一个具体的时间去替换</p><p>如果不加参数会将修改时间和访问时间全部修改。</p><p>例如： touch * ，这个命令会修改目录下的所有文件的访问时间和修改时间。</p><p>如果后面接的文件名不存在，touch将会创建一个文件。</p><p>-c 不创建文件。如果文件存在，会修改时间，如果文件不存在，不进行操作。</p><h4 id="文件命名"><a href="#文件命名" class="headerlink" title="文件命名"></a>文件命名</h4><p>要求：</p><ol><li>文件名最长是255个字符</li><li>文件名可以包含除了/外的任何字符</li></ol><p>虽然说创建文件名的时候没有太多的要求，但是最好创建有意义的名字并且不要实用一些特殊字符。例如-，虽然创建的时候不会出现问题，但是使用命令进行操作的时候却会带来麻烦。</p><h3 id="cp-复制文件"><a href="#cp-复制文件" class="headerlink" title="cp 复制文件"></a>cp 复制文件</h3><p>语法： cp [-ip] file1 file2</p><p>file1是已有文件 file2是目标文件</p><p>例如： cp /etc/passwd ~/pword</p><p>这个命令会复制passwd文件到pword中，如果pword不存在，那么就会创建。这时需要特别小心，如果目标文件存在，那么复制完之后原来的内容咩有办法找回。</p><p>如果想追加数据，则不能用cp，只能用cat重定向追加内容。</p><p>cp很容易错误的清楚数据，为了保险起见，可以用-i选项。这个选项会在替换已有文件时先询问。可以在初始化文件中直接设定。</p><p>还有一个选项是-p，这个命令使目标文件和原文件有相同的修改时间访问时间和权限。</p><p><strong>-r</strong>，将一个目录复制到另一个目录中。</p><p><strong>将文件复制到不同目录中</strong></p><p>就是将file2变成directory。</p><h3 id="mv-移动文件"><a href="#mv-移动文件" class="headerlink" title="mv 移动文件"></a>mv 移动文件</h3><p><a href="https://xinhecuican.github.io/post/61312.html#more" target="_blank" rel="external nofollow noopener noreferrer">在前面博客中已经提到</a></p><h3 id="rm-删除文件"><a href="#rm-删除文件" class="headerlink" title="rm 删除文件"></a>rm 删除文件</h3><p>语法： rm [-fir] file…</p><p>rm删除同样是不可恢复的。为了防止误删文件，可以使用-i选项，每次删除之前请求许可。</p><p>-f 强制删除文件，不考虑权限和-i。</p><p>-r 删除整个目录树，这个选项会将从工作目录开始的所有文件全部删除</p><h3 id="文件权限"><a href="#文件权限" class="headerlink" title="文件权限"></a>文件权限</h3><p>权限一共有三种，读权限，写权限，执行权限。这些权限和用户标识也有关，如果是普通用户，可能对一些文件没有写权限和执行权限。</p><p>设置权限有两个目的，限制其他用户的访问和避免自己错误的使用。</p><p>下面是权限的作用</p><table><thead><tr><th>文件</th><th></th></tr></thead><tbody><tr><td>读</td><td>读取文件(没有这个权限使用命令也无法查看文件）</td></tr><tr><td>写</td><td>写入文件，没有写权限的话在删除和替换时都会先询问</td></tr><tr><td>执行</td><td>执行文件</td></tr><tr><td>** 目录**</td><td></td></tr><tr><td>读</td><td>读取（查看）目录</td></tr><tr><td>写</td><td>创建、移动、复制或删除目录</td></tr><tr><td>执行</td><td>搜索目录</td></tr></tbody></table><p>例如，有这个文件的写权限和执行权限，那么无法看到它（也就是点文件），但是如果知道它的位置，还是可以对他进行操作。</p><h4 id="id-groups-维护文件权限"><a href="#id-groups-维护文件权限" class="headerlink" title="id groups 维护文件权限"></a>id groups 维护文件权限</h4><p>创建文件的用户标识就是文件的属主。每个用户都属于一个组，第二组是组中其他人，第三组是其他人，可以为这三组设置读写和执行权限。</p><p>系统中组标识的列表在/etc/group中，这个文件可以自由查看</p><p>id就是用来查看当前用户标识和属于那个组的。groups命令是同样的作用。</p><h4 id="ls-l显示文件权限"><a href="#ls-l显示文件权限" class="headerlink" title="ls -l显示文件权限"></a>ls -l显示文件权限</h4><p>使用-l时，从左边开始会有一些字符。例如-rwx等等</p><p>首先第一个字符是-或者d，-代表普通文件，d代表目录。之后会有9个字符分成3组，分别代表个人权限，族权限，其他人权限。</p><p>除了这种表示方法，还可以用三个数字表示三中类型的权限</p><ul><li>r: 读权限 数字 4</li><li>w: 写权限 数字 2</li><li>x: 执行权限 数字 1</li><li>-: 没有权限 数字 0</li></ul><p>例如只有读写权限，那么就可以用6来代表。</p><h4 id="改变文件权限"><a href="#改变文件权限" class="headerlink" title="改变文件权限"></a>改变文件权限</h4><p>可以使用chmod（change file mode）来改变文件权限</p><p>语法： chmod mode file…</p><p>这里的mode是使用数字表示的，并且一次要写三种类型。</p><p>例如： chmod 644 file1</p><h3 id="shred-清空文件内容"><a href="#shred-清空文件内容" class="headerlink" title="shred 清空文件内容"></a>shred 清空文件内容</h3><p>前面讲的rm命令只是删除了文件，但是文件所在的空间还是可以重新被使用的。甚至这个时候如果用昂贵的设备，那么其中的内容还是可以恢复的。如果使用了shred，那么就会毁坏硬盘（后备隐藏能源？），这时数据就永远无法恢复了。这里就不展开了。</p><h3 id="stat-ls-i-链接的概念"><a href="#stat-ls-i-链接的概念" class="headerlink" title="stat ls -i 链接的概念"></a>stat ls -i 链接的概念</h3><p>当linux创建文件时，进行两个操作。在储存设备上保留一块空间来保存数据，之后创建一个索引节点（i节点）来存放数据的基本信息。i节点包含使用文件所需的全部信息</p><p>stat命令就是查看i节点的内容</p><p>所有的i节点存放于一个大表中，称为i节点表。在节点表中，每个i节点由索引号和i节点号表示。为了查看节点号，可以使用ls -i选项。如果想查看所有节点，可以使用ls -il。</p><p>处理目录时，其实我们处理的是i节点号和节点名称。所以目录实际上很小。只有一个名称，每一个名称对应一个i节点号。</p><p>例如，我们现在bin目录中创建swap文件。那么先保留一块空间，如果查看i节点表，查找一个空闲的i节点。然后linux将信息填充到属于这个文件的i节点中。之后在bin目录中放入一个条目，该条目有名称和i节点号。</p><p>文件名和i节点之间的连接叫链接。</p><h3 id="多重链接，一个文件，多个名字"><a href="#多重链接，一个文件，多个名字" class="headerlink" title="多重链接，一个文件，多个名字"></a>多重链接，一个文件，多个名字</h3><p>多重链接就是一个文件可以有不同的名称。因为文件标识实际上是i节点号，我们从目录中查询的时候也是查询i节点号然后根据节点号中的信息去访问。因此我们可以在不同目录中创建指向同一个节点号的文件，这其实就是快捷方式。</p><h4 id="ln-创建新链接"><a href="#ln-创建新链接" class="headerlink" title="ln 创建新链接"></a>ln 创建新链接</h4><p>语法： ln file newname</p><p>作用：每当创建文件时，系统都会自动在文件和文件名间创建一个链接。如果我们想为已有文件创建一个新链接，就可以用ln（link）。</p><p>我们也可以将newname改成directory，那么就是创建快捷方式</p><p><strong>移除链接</strong></p><p>直接用rm命令即可，除非所有链接都被删除，不然文件不会被删除。</p><h3 id="符号链接-ln-s"><a href="#符号链接-ln-s" class="headerlink" title="符号链接 ln -s"></a>符号链接 ln -s</h3><p>前面讲的链接有两点限制。一，不能为目录创建链接。二，不能为不同文件系统创建链接。（因为目录没有i节点）</p><p>如果想克服上述情况，就需要创建符号链接。符号链接包含的不是文件的i节点号，而是原文件的路径名。</p><p>但是用ls -l时，左边会有一个l代表链接。实际符号链接在右边。用一个-&gt;符号后面加上指向的真实文件名表示。因为符号链接只存一个路径，所以大小也只有4字节。注意这是符号链接才会有-&gt;符号，一般的链接不会显示。</p><p>一般的链接叫做硬链接，就是起了一个别名。符号链接叫做软链接，实际上并不是存放那个文件，只是存放一个指向文件的地址。</p><!-- rebuild by neat -->]]></content>
+    <content type="html"><![CDATA[<!-- build time:Mon Apr 13 2020 22:00:02 GMT+0800 (中国标准时间) --><h3 id="touch-创建文件"><a href="#touch-创建文件" class="headerlink" title="touch 创建文件"></a>touch 创建文件</h3><p>创建文件有许多种方式，例如用vi创建文件，利用重定向创建文件。</p><p>语法： touch [-acm] [-t time] file…</p><p>作用： 创建文件，改变文件的修改时间和访问时间。</p><p>-m 改变修改时间</p><p>-a 改变访问时间</p><p>-t 用一个具体的时间去替换</p><p>如果不加参数会将修改时间和访问时间全部修改。</p><p>例如： touch * ，这个命令会修改目录下的所有文件的访问时间和修改时间。</p><p>如果后面接的文件名不存在，touch将会创建一个文件。</p><p>-c 不创建文件。如果文件存在，会修改时间，如果文件不存在，不进行操作。</p><h4 id="文件命名"><a href="#文件命名" class="headerlink" title="文件命名"></a>文件命名</h4><p>要求：</p><ol><li>文件名最长是255个字符</li><li>文件名可以包含除了/外的任何字符</li></ol><p>虽然说创建文件名的时候没有太多的要求，但是最好创建有意义的名字并且不要实用一些特殊字符。例如-，虽然创建的时候不会出现问题，但是使用命令进行操作的时候却会带来麻烦。</p><h3 id="cp-复制文件"><a href="#cp-复制文件" class="headerlink" title="cp 复制文件"></a>cp 复制文件</h3><p>语法： cp [-ip] file1 file2</p><p>file1是已有文件 file2是目标文件</p><p>例如： cp /etc/passwd ~/pword</p><p>这个命令会复制passwd文件到pword中，如果pword不存在，那么就会创建。这时需要特别小心，如果目标文件存在，那么复制完之后原来的内容咩有办法找回。</p><p>如果想追加数据，则不能用cp，只能用cat重定向追加内容。</p><p>cp很容易错误的清楚数据，为了保险起见，可以用-i选项。这个选项会在替换已有文件时先询问。可以在初始化文件中直接设定。</p><p>还有一个选项是-p，这个命令使目标文件和原文件有相同的修改时间访问时间和权限。</p><p><strong>-r</strong>，将一个目录复制到另一个目录中。</p><p><strong>将文件复制到不同目录中</strong></p><p>就是将file2变成directory。</p><h3 id="mv-移动文件"><a href="#mv-移动文件" class="headerlink" title="mv 移动文件"></a>mv 移动文件</h3><p><a href="https://xinhecuican.github.io/post/61312.html#more" target="_blank" rel="external nofollow noopener noreferrer">在前面博客中已经提到</a></p><h3 id="rm-删除文件"><a href="#rm-删除文件" class="headerlink" title="rm 删除文件"></a>rm 删除文件</h3><p>语法： rm [-fir] file…</p><p>rm删除同样是不可恢复的。为了防止误删文件，可以使用-i选项，每次删除之前请求许可。</p><p>-f 强制删除文件，不考虑权限和-i。</p><p>-r 删除整个目录树，这个选项会将从工作目录开始的所有文件全部删除</p><h3 id="文件权限"><a href="#文件权限" class="headerlink" title="文件权限"></a>文件权限</h3><p>权限一共有三种，读权限，写权限，执行权限。这些权限和用户标识也有关，如果是普通用户，可能对一些文件没有写权限和执行权限。</p><p>设置权限有两个目的，限制其他用户的访问和避免自己错误的使用。</p><p>下面是权限的作用</p><table><thead><tr><th>文件</th><th></th></tr></thead><tbody><tr><td>读</td><td>读取文件(没有这个权限使用命令也无法查看文件）</td></tr><tr><td>写</td><td>写入文件，没有写权限的话在删除和替换时都会先询问</td></tr><tr><td>执行</td><td>执行文件</td></tr><tr><td>** 目录**</td><td></td></tr><tr><td>读</td><td>读取（查看）目录</td></tr><tr><td>写</td><td>创建、移动、复制或删除目录</td></tr><tr><td>执行</td><td>搜索目录</td></tr></tbody></table><p>例如，有这个文件的写权限和执行权限，那么无法看到它（也就是点文件），但是如果知道它的位置，还是可以对他进行操作。</p><h4 id="id-groups-维护文件权限"><a href="#id-groups-维护文件权限" class="headerlink" title="id groups 维护文件权限"></a>id groups 维护文件权限</h4><p>创建文件的用户标识就是文件的属主。每个用户都属于一个组，第二组是组中其他人，第三组是其他人，可以为这三组设置读写和执行权限。</p><p>系统中组标识的列表在/etc/group中，这个文件可以自由查看</p><p>id就是用来查看当前用户标识和属于那个组的。groups命令是同样的作用。</p><h4 id="ls-l显示文件权限"><a href="#ls-l显示文件权限" class="headerlink" title="ls -l显示文件权限"></a>ls -l显示文件权限</h4><p>使用-l时，从左边开始会有一些字符。例如-rwx等等</p><p>首先第一个字符是-或者d，-代表普通文件，d代表目录。之后会有9个字符分成3组，分别代表个人权限，族权限，其他人权限。</p><p>除了这种表示方法，还可以用三个数字表示三中类型的权限</p><ul><li>r: 读权限 数字 4</li><li>w: 写权限 数字 2</li><li>x: 执行权限 数字 1</li><li>-: 没有权限 数字 0</li></ul><p>例如只有读写权限，那么就可以用6来代表。</p><h4 id="改变文件权限"><a href="#改变文件权限" class="headerlink" title="改变文件权限"></a>改变文件权限</h4><p>可以使用chmod（change file mode）来改变文件权限</p><p>语法： chmod mode file…</p><p>这里的mode是使用数字表示的，并且一次要写三种类型。</p><p>例如： chmod 644 file1</p><h3 id="shred-清空文件内容"><a href="#shred-清空文件内容" class="headerlink" title="shred 清空文件内容"></a>shred 清空文件内容</h3><p>前面讲的rm命令只是删除了文件，但是文件所在的空间还是可以重新被使用的。甚至这个时候如果用昂贵的设备，那么其中的内容还是可以恢复的。如果使用了shred，那么就会毁坏硬盘（后备隐藏能源？），这时数据就永远无法恢复了。这里就不展开了。</p><h3 id="stat-ls-i-链接的概念"><a href="#stat-ls-i-链接的概念" class="headerlink" title="stat ls -i 链接的概念"></a>stat ls -i 链接的概念</h3><p>当linux创建文件时，进行两个操作。在储存设备上保留一块空间来保存数据，之后创建一个索引节点（i节点）来存放数据的基本信息。i节点包含使用文件所需的全部信息</p><p>stat命令就是查看i节点的内容</p><p>所有的i节点存放于一个大表中，称为i节点表。在节点表中，每个i节点由索引号和i节点号表示。为了查看节点号，可以使用ls -i选项。如果想查看所有节点，可以使用ls -il。</p><p>处理目录时，其实我们处理的是i节点号和节点名称。所以目录实际上很小。只有一个名称，每一个名称对应一个i节点号。</p><p>例如，我们现在bin目录中创建swap文件。那么先保留一块空间，如果查看i节点表，查找一个空闲的i节点。然后linux将信息填充到属于这个文件的i节点中。之后在bin目录中放入一个条目，该条目有名称和i节点号。</p><p>文件名和i节点之间的连接叫链接。</p><h3 id="多重链接，一个文件，多个名字"><a href="#多重链接，一个文件，多个名字" class="headerlink" title="多重链接，一个文件，多个名字"></a>多重链接，一个文件，多个名字</h3><p>多重链接就是一个文件可以有不同的名称。因为文件标识实际上是i节点号，我们从目录中查询的时候也是查询i节点号然后根据节点号中的信息去访问。因此我们可以在不同目录中创建指向同一个节点号的文件，这其实就是快捷方式。</p><h4 id="ln-创建新链接"><a href="#ln-创建新链接" class="headerlink" title="ln 创建新链接"></a>ln 创建新链接</h4><p>语法： ln file newname</p><p>作用：每当创建文件时，系统都会自动在文件和文件名间创建一个链接。如果我们想为已有文件创建一个新链接，就可以用ln（link）。</p><p>我们也可以将newname改成directory，那么就是创建快捷方式</p><p><strong>移除链接</strong></p><p>直接用rm命令即可，除非所有链接都被删除，不然文件不会被删除。</p><h3 id="符号链接-ln-s"><a href="#符号链接-ln-s" class="headerlink" title="符号链接 ln -s"></a>符号链接 ln -s</h3><p>前面讲的链接有两点限制。一，不能为目录创建链接。二，不能为不同文件系统创建链接。（因为目录没有i节点）</p><p>如果想克服上述情况，就需要创建符号链接。符号链接包含的不是文件的i节点号，而是原文件的路径名。</p><p>但是用ls -l时，左边会有一个l代表链接。实际符号链接在右边。用一个-&gt;符号后面加上指向的真实文件名表示。因为符号链接只存一个路径，所以大小也只有4字节。注意这是符号链接才会有-&gt;符号，一般的链接不会显示。</p><p>一般的链接叫做硬链接，就是起了一个别名。符号链接叫做软链接，实际上并不是存放那个文件，只是存放一个指向文件的地址。</p><p>硬链接数量ls -l可以显示，但是软链接无法显示，因为系统也不知道有多少软链接。并且当文件被删除时，软链接也不会被删除，只是打开时发生错误</p><h4 id="目录使用符号链接"><a href="#目录使用符号链接" class="headerlink" title="目录使用符号链接"></a>目录使用符号链接</h4><p>当我们对目录使用符号链接之后，cd时到底应该显示真实的目录还是符号链接目录呢？实际上两种都可以。</p><p>如果使用cd -L选项，将把符号链接视为真实目录，使用-P选项将用真实目录替换符号链接，也就是直接进入真实目录。默认情况是-L。</p><p>我们使用-L情况是和-P一样的，使用-L时目录显示与原文件相同，就是实际对源文件进行操作的时候想要进行跳转。</p><h3 id="locate-通过数据库查看文件"><a href="#locate-通过数据库查看文件" class="headerlink" title="locate 通过数据库查看文件"></a>locate 通过数据库查看文件</h3><p>语法： locate [-bcirS] pattern…</p><p>作用： 在一个特殊的数据库（包含所有的可公共访问的文件，且定期更新）查找文件。</p><p>如果想使用正则表达式，可以使用-r选项 ，可以用^和$表示开头和结尾。</p><p>例如 locate -r ‘.jpg$’ 是找jpg图片</p><p>locate -ir ‘^/usr*x11$’ 是找以/usr开头，x11结尾的。</p><ul><li>-c 统计数目，而不显示位置</li><li>-i 忽略大小写</li></ul><h3 id="find-搜索目录树查找文件"><a href="#find-搜索目录树查找文件" class="headerlink" title="find 搜索目录树查找文件"></a>find 搜索目录树查找文件</h3><p>语法： find path… test… action…</p><p>输入命令后，find执行三步</p><ol><li>路径，先查看每个路径，检查这个路径代表的整个目录树</li><li>测试，对于遇到的每个文件，find用指定的测试条件进行测试，成功就进行下一步</li><li>动作，一旦搜索完成，对成功通过上面两个步骤的文件做的操作</li></ol><p>例如： find /home/harley -name important -print</p><p>路径： /home/harley。表示从harley目录开始进行搜索，也就是home目录不搜索。路径可以有多个</p><p>动作： -name important。这个的含义是查找名字是important的文件</p><p>动作： -print。输出路径名</p><h4 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h4><p>下列是一些模式</p><table><thead><tr><th>文件名</th><th></th></tr></thead><tbody><tr><td>-name pattern</td><td>包含pattern的文件名</td></tr><tr><td>-iname pattern</td><td>不区分大小写</td></tr><tr><td>** 文件特征 **</td><td></td></tr><tr><td>-type [df]</td><td>文件类型 d：目录 f：普通文件</td></tr><tr><td>-perm mode</td><td>文件权限</td></tr><tr><td>-user userid</td><td>文件属主</td></tr><tr><td>-group groupid</td><td>组为groupid</td></tr><tr><td>-size [-+]n[cbkMG]</td><td>大小为n[字节，块，kb，mb，gb]</td></tr><tr><td>-empty</td><td>空文件</td></tr><tr><td><strong>访问时间，修改时间</strong></td><td></td></tr><tr><td>-amin [-+]n</td><td>n分钟之前访问，-是小于这个时间</td></tr><tr><td>-atime [-+]n</td><td>n天之前访问</td></tr><tr><td>-anewer file</td><td>file之后访问</td></tr><tr><td>-cmin [-+]n</td><td>n分钟之前状态改变</td></tr><tr><td>-cnewer file</td><td>file状态改变之后改变</td></tr><tr><td>-time [-+]n</td><td>…</td></tr><tr><td>-mmin [-+]n</td><td>n分钟之前修改</td></tr><tr><td>-mtime [-+]n</td><td>n天之前修改</td></tr><tr><td>-newer file</td><td>file文件之后修改</td></tr></tbody></table><p>最重要的是type和name。中括号中的加减号代表的是大于和小于。</p><p>type控制查找那些类型。除了上面的之外，还有b(块设备），c（字符设备），p（命名管道），l（符号链接）</p><p>例如： <code>find . -type f -name important -print</code></p><p>其中name后面的pattern可以用通配符。</p><p>cmin代表的是访问或修改。</p><p>例如： find ~ -cmin -10 -print</p><p>这个的含义是查找10分钟内被访问或修改的文件。</p><h4 id="使用！对测试求反"><a href="#使用！对测试求反" class="headerlink" title="使用！对测试求反"></a>使用！对测试求反</h4><p>使用!时要注意两个问题：</p><ol><li>！号两边要有空格</li><li>必须要引用！，可以<code>\!</code>,也可以’!’</li></ol><p>并且一个感叹号只对一个测试有效。</p><h4 id="动作"><a href="#动作" class="headerlink" title="动作"></a>动作</h4><table><thead><tr><th>动作</th><th></th></tr></thead><tbody><tr><td>-print</td><td>将路径名写入标准输出</td></tr><tr><td>-fprint file</td><td>将输出写入file中</td></tr><tr><td>-ls</td><td>显示长目录列表，和ls -l输出样式差不多</td></tr><tr><td>-fls file</td><td>输出写入file中</td></tr><tr><td>-delete</td><td>输出文件</td></tr><tr><td>-exec command {} ;</td><td>执行command，{}指示匹配的文件名</td></tr><tr><td>-ok command {} ;</td><td>同exec，在执行command前先确认</td></tr></tbody></table><p>exec后面的command是linux的程序例如ls，echo等。这条命令以;（封号）结尾，前面的\是转义字符。而{}有些系统必须要加转义字符。</p><p>例如： <code>find . -name &#39;*.backup&#39; -exec ls -dils {} \;</code></p><h4 id="xargs-处理查找到的文件"><a href="#xargs-处理查找到的文件" class="headerlink" title="xargs 处理查找到的文件"></a>xargs 处理查找到的文件</h4><p>对于查找到的文件可以用exec处理，但是这里专门有一个程序去处理。</p><p>语法： xargs [-prt] [-i string] [command | argument…]</p><p>command是希望运行的程序，string是占位符，argument是从标准输入中读取的参数。</p><p>例如： find ~ -type f | xargs ls -s</p><p>如果想多次运行同一命令，那么需要使用-i选项，并且后面要使用 { }作为占位符，占位符在命令开始之前会被参数替代。</p><p>例如： find . -type f | xargs -i echo { } { }</p><p>这条命令将会连续输出两次。如果想自己指定占位符，可以直接在-i后面添加字符串。</p><p>例如： find . -type f | xargs -iXX mv XX ~/backups/XX.old</p><p>这条命令即移动又进行了重命名（变成XX.old)</p><p>-p 运行命令之前先提示</p><p>-t 运行命令不会请求许可但是会显示在标准输出中。</p><p>-r 如果没有参数，则不执行。</p><p>例如： <code>find . -empty | xarg -r ls -l</code></p><p>原本如果是没有空文件的话ls将会输出整个目录，这当然不对，所以没有空文件的时候就可以让他忽略。</p><!-- rebuild by neat -->]]></content>
     
     <summary type="html">
     
       
       
-        &lt;!-- build time:Sun Apr 12 2020 08:17:32 GMT+0800 (中国标准时间) --&gt;&lt;h3 id=&quot;touch-创建文件&quot;&gt;&lt;a href=&quot;#touch-创建文件&quot; class=&quot;headerlink&quot; title=&quot;touch 创建文件
+        &lt;!-- build time:Mon Apr 13 2020 22:00:02 GMT+0800 (中国标准时间) --&gt;&lt;h3 id=&quot;touch-创建文件&quot;&gt;&lt;a href=&quot;#touch-创建文件&quot; class=&quot;headerlink&quot; title=&quot;touch 创建文件
       
     
     </summary>
@@ -40,8 +40,8 @@
   
   <entry>
     <title>流水线</title>
-    <link href="http://xinhecuican.tk/post/b4c1d206.html"/>
-    <id>http://xinhecuican.tk/post/b4c1d206.html</id>
+    <link href="http://xinhecuican.github.io/post/b4c1d206.html"/>
+    <id>http://xinhecuican.github.io/post/b4c1d206.html</id>
     <published>2020-04-09T08:25:00.000Z</published>
     <updated>2020-04-09T09:58:26.545Z</updated>
     
@@ -57,39 +57,39 @@
     </summary>
     
     
-      <category term="计算机系统基础" scheme="http://xinhecuican.tk/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/"/>
+      <category term="计算机系统基础" scheme="http://xinhecuican.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/"/>
     
     
   </entry>
   
   <entry>
     <title>linux目录操作</title>
-    <link href="http://xinhecuican.tk/post/61312.html"/>
-    <id>http://xinhecuican.tk/post/61312.html</id>
+    <link href="http://xinhecuican.github.io/post/61312.html"/>
+    <id>http://xinhecuican.github.io/post/61312.html</id>
     <published>2020-04-05T11:24:00.000Z</published>
-    <updated>2020-04-09T08:24:10.888Z</updated>
+    <updated>2020-04-13T08:57:02.026Z</updated>
     
-    <content type="html"><![CDATA[<!-- build time:Sun Apr 12 2020 08:17:31 GMT+0800 (中国标准时间) --><h3 id="目录名和工作目录"><a href="#目录名和工作目录" class="headerlink" title="目录名和工作目录"></a>目录名和工作目录</h3><p>斜杠表示根目录，如果最后一个名称代表的是文件名。当然，这个文件名也可以是一个目录。</p><p>工作目录又叫当前目录，也是进行操作的根目录（但不是系统的根目录），如果命令后面直接输入一个文件名，那么就是代表这个目录在工作目录中，系统也只会在当前目录中搜寻。</p><h3 id="绝对目录和相对目录"><a href="#绝对目录和相对目录" class="headerlink" title="绝对目录和相对目录"></a>绝对目录和相对目录</h3><p>绝对目录就是从根目录开始。在Linux系统中，根目录是home（这个根目录是当前用户的根目录）目录。</p><p>相对目录就是从工作目录（当前目录）开始。大多数时候我们输入一个文件名其实都是输入相对目录，我们也可以输入绝对目录，但那样过于麻烦。</p><h3 id="路径名缩写"><a href="#路径名缩写" class="headerlink" title="路径名缩写"></a>路径名缩写</h3><p><strong>第一个</strong>： ..（两个点号）。这个符号的含义是父目录，也就是上级目录。用..可以回到上级目录然后在进入子目录</p><p>例：现在绝对目录是 /home/abcd/ceshi，如果我想进入abcd的gongzuoqu目录，那么输入cd ../gongzuoqu即可。这是从左向右读的， ..代表进入父目录，然后再进入父目录中的工作区目录。</p><p><strong>第二个</strong>： .(一个点号）。代表的是当前目录，注意<strong>任何不以/开头的路径名都被认为相对于工作目录</strong>。所以大部分情况下直接输入文件名即可，但是在某些情况下必须输入完整的目录，因此这个时候就需要.代表当前目录便于输入。</p><p>unix只能运行它能找到的程序，也就是在path环境变量中的路径。但是如果我们输入绝对路径的话，程序也能运行，因此这里我们就可以简单的用 . 来代替长长的绝对路径名。</p><p>如果我们想运行new程序，而这个程序不在搜索路径中，那么可以用 ./new来运行它</p><p>一个点号和两个点号都是缩写，所以其实我们运用点号时都是输入<strong>绝对路径名</strong></p><p><strong>第三个</strong> ~(波浪号）。 用这个符号代表home目录（这里的home是系统的根，也就是没有目录包含它）。</p><h3 id="cd-pwd-在目录树中移动"><a href="#cd-pwd-在目录树中移动" class="headerlink" title="cd pwd 在目录树中移动"></a>cd pwd 在目录树中移动</h3><p>pwd命令是显示当前的绝对目录</p><p>cd 命令</p><p>语法： cd [-LP] [directory | - ]</p><p>其中dircetory是你想切换到的目录的名称。</p><p>如果只输入cd，那么会进入home目录下。如果输入cd -， 那么将会进入前一个目录，与cd ..命令效果相同。</p><p>如果使用绝对路径名，那么第一个符号是/。</p><p>例如 cd /home/abcd/gongzuoqu</p><p>如果使用相对路径名，那么第一个就没有/</p><p>例如 cd gongzuoqu/temp</p><h3 id="mkdir-rmdir新建目录和移除目录"><a href="#mkdir-rmdir新建目录和移除目录" class="headerlink" title="mkdir rmdir新建目录和移除目录"></a>mkdir rmdir新建目录和移除目录</h3><p>语法： mkdir [-P] dictory…</p><p>首先，可以使用字母，数字和没有特殊含义的标点符号作为文件名。</p><p>创建目录要遵循两条规则。第一条，不能在一个目录下创建两个同名的目录。第二条，默认情况下，如果父目录不存在，那么就无法创建目录。可以使用-p选项忽略第二条规则。</p><p>语法： redir [-p] directory …</p><p>这里要注意只能移除空的目录。如果想要移除非空的目录，可以使用rm程序</p><p>如果想一次性移除一串目录，那么可以使用-p选项。但是有一个不是空的就不行（除了在这条链上的目录外）</p><p>其次，不能移除根目录和工作目录之间的任何程序。也就是说就算是使用了绝对地址，如果它在工作目录外部，那么也无法移除它。</p><h3 id="mv-移动或重命名目录"><a href="#mv-移动或重命名目录" class="headerlink" title="mv 移动或重命名目录"></a>mv 移动或重命名目录</h3><p>语法： mv directory target</p><p>target如果是一个路径，那么一定是移动目录，如果是名字，那么要看情况。</p><p>例如：</p><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="HASKELL"><figure class="iseeu highlight /haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">/home/harley/<span class="class"><span class="keyword">data</span></span></span><br><span class="line">/home/harley/storge</span><br><span class="line"></span><br><span class="line"><span class="title">mv</span> <span class="class"><span class="keyword">data</span> storage</span></span><br><span class="line"></span><br><span class="line">现在的位置： /home/harley/storge/<span class="class"><span class="keyword">data</span></span></span><br></pre></td></tr></table></figure></div><p>也就是说，如果该路径下没有这个名字的目录，那么就会重命名，但是如果有这个名字的目录，那么就会移动到这个目录下。</p><h3 id="pushd-popd-dirs-使用目录栈"><a href="#pushd-popd-dirs-使用目录栈" class="headerlink" title="pushd,popd,dirs 使用目录栈"></a>pushd,popd,dirs 使用目录栈</h3><p>语法： pushd [directory | +n]</p><p>pop [+n]</p><p>dirs [-c] [-l] [-v]</p><p>push是将目录的名称压入栈中，pop是弹出栈中，dirs是显示栈的内容，n是标识符</p><table><thead><tr><th>命令</th><th>动作</th></tr></thead><tbody><tr><td>dirs</td><td>显示名称，home显示为~</td></tr><tr><td>dirs -l</td><td>home显示为完整路径</td></tr><tr><td>dirs -v</td><td>每行一个显示名称，并有标识符</td></tr><tr><td>pushd directory</td><td>将其压入栈中</td></tr><tr><td>push +n</td><td>把n移到栈顶</td></tr><tr><td>popd +n</td><td>把n移除</td></tr><tr><td>dirs -c</td><td>除当前目录外，移除所有目录</td></tr></tbody></table><p>在任何时候，栈顶都是存放当前工作目录的名称。每当改变工作目录时，栈顶元素也会随之改变。</p><p>如果我们使用了pushd命令，这时我们也会进入这个目录，同时只能进入自己的下级目录。</p><h3 id="ls"><a href="#ls" class="headerlink" title="ls"></a>ls</h3><p>语法： ls [aCdFglrRs1] [name…]</p><p>作用，列举该目录下的文件名称。</p><p>参数：</p><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="DIFF"><figure class="iseeu highlight /diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="deletion">-C 横的列举文件</span></span><br><span class="line"><span class="deletion">-1 竖的列举文件 可以与wc -l组成管道</span></span><br><span class="line"><span class="deletion">-r 按字母表相反顺序进行排序。</span></span><br><span class="line"><span class="deletion">-R 递归。也就是列举完这一层继续列举下一层。如果这个很长的话，可以用less程序</span></span><br><span class="line"><span class="deletion">-F 检查文件类型，会增加几种标识，如下表所示</span></span><br><span class="line"><span class="deletion">--color 使用不同颜色来显示不同类型文件</span></span><br><span class="line"><span class="deletion">-l 显示长列表</span></span><br><span class="line"><span class="deletion">-u 显示访问时间</span></span><br><span class="line"><span class="deletion">-r reverse 从旧的到新的</span></span><br><span class="line"><span class="deletion">-h 自动显示大小</span></span><br><span class="line"><span class="deletion">-d 显示目录本身的信息。</span></span><br><span class="line"><span class="deletion">-a 显示隐藏文件</span></span><br></pre></td></tr></table></figure></div><table><thead><tr><th>标志</th><th>含义</th></tr></thead><tbody><tr><td>空</td><td>非可执行文件</td></tr><tr><td>*</td><td>可执行文件</td></tr><tr><td>/</td><td>目录</td></tr><tr><td>@</td><td>符号链接</td></tr><tr><td>竖线</td><td>命名管道 /FIFO</td></tr></tbody></table><h4 id="hs-du-df-quota-掌握磁盘空间使用情况"><a href="#hs-du-df-quota-掌握磁盘空间使用情况" class="headerlink" title="-hs du -df -quota 掌握磁盘空间使用情况"></a>-hs du -df -quota 掌握磁盘空间使用情况</h4><p>-s 前面以字节为单位输出文件的大小</p><p>-sh 自动选择合适的单位</p><p>du（disk usage) 显示文件的大小，这是一个程序</p><p>语法： du [-achs] [name…]</p><p>-h 显示单位</p><p>如果不指定名称，du会递归搜索整个目录树</p><p>-s 显示总和</p><p>-c 是先输出每个文件的大小，最后输出总量</p><p>-h 以适合大小输出</p><p>df 显示磁盘可用空间</p><p>quota 显示配额</p><h3 id="file-检查文件类型"><a href="#file-检查文件类型" class="headerlink" title="file 检查文件类型"></a>file 检查文件类型</h3><p>file的使用相当直接，只需要file + 路径就可以检查那个路径下的文件类型，但是比ls显示的更为详细。</p><p>可能显示下列几种类型：</p><ul><li>ELF:可执行和链接模式</li><li>32-bit： 字长</li><li>LSB： 采用最低有效字节编译（小端序）</li><li>executable： 可执行文件</li><li>Intel 80386： 内部文件格式版本</li><li>GNU/linux2.6.9 操作系统和内核版本</li><li>dynamically linked 使用共享库</li><li>stripped 将符号表移除的可执行文件</li></ul><h3 id="块和分配单元"><a href="#块和分配单元" class="headerlink" title="块和分配单元"></a>块和分配单元</h3><p>在文件系统中，空间以固定大小进行分配，我们把固定大小的组块叫做块。块的大小在不同系统中不同。块的大小有512,1,2,4kb等。典型的linux系统是1kb。</p><p>此时我们只是说在文件系统中的分配方式。但是写入到磁盘中时出于效率的考虑，磁盘中也有特定的单元叫做分配单元或者簇。例如，分配单元为8kb代表即使只有1btye的数据系统也会自动分配8kb</p><h3 id="使用通配符进行通配"><a href="#使用通配符进行通配" class="headerlink" title="使用通配符进行通配"></a>使用通配符进行通配</h3><p>使用通配符可以指定特定的文件名，类似于正则表达式。</p><table><thead><tr><th>符号</th><th>含义</th></tr></thead><tbody><tr><td>*</td><td>匹配任何0个或多个字符组成的序列</td></tr><tr><td>？</td><td>匹配任何单个字符</td></tr><tr><td>[list]</td><td>匹配list中任意字符</td></tr><tr><td>[^list]</td><td>匹配不再list中任意字符</td></tr><tr><td>{string1竖线string2}</td><td>匹配任意一个字符串</td></tr></tbody></table><p>其实就是一个简化版的正则表达式。例如： ls h*表示显示所有以h为开头的文件或目录</p><p>此外，还可以使用一些预定义字符类，例如[[:lower:]]等</p><h3 id="显示目录树"><a href="#显示目录树" class="headerlink" title="显示目录树"></a>显示目录树</h3><p>语法： tree [-adfFilrst] [-L level] [directory…]</p><p>level是树的深度</p><p>作用：绘制文件系统中任意部分的图形（真的就是一个目录图表，可以自己试一下）。</p><p>选项：</p><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="DIFF"><figure class="iseeu highlight /diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="deletion">-a 显示所有文件，包括点文件</span></span><br><span class="line"><span class="deletion">-s 显示文件大小</span></span><br><span class="line"><span class="deletion">-F 显示标识文件的标志</span></span><br><span class="line"><span class="deletion">-r 以相反顺序输出</span></span><br><span class="line"><span class="deletion">-t 按修改时间顺序输出</span></span><br><span class="line"><span class="deletion">-d 只显示目录</span></span><br><span class="line"><span class="deletion">-i 省略缩进，这种模式只会输出一条条路径，但是不会生成一个图标</span></span><br><span class="line"><span class="deletion">-L 限制树的深度。后面的数字就是树的深度</span></span><br></pre></td></tr></table></figure></div><p>个人意见可以重定向到一个文件中然后再文件中查找。</p><!-- rebuild by neat -->]]></content>
+    <content type="html"><![CDATA[<!-- build time:Mon Apr 13 2020 16:57:02 GMT+0800 (中国标准时间) --><h3 id="目录名和工作目录"><a href="#目录名和工作目录" class="headerlink" title="目录名和工作目录"></a>目录名和工作目录</h3><p>斜杠表示根目录，如果最后一个名称代表的是文件名。当然，这个文件名也可以是一个目录。</p><p>工作目录又叫当前目录，也是进行操作的根目录（但不是系统的根目录），如果命令后面直接输入一个文件名，那么就是代表这个目录在工作目录中，系统也只会在当前目录中搜寻。</p><h3 id="绝对目录和相对目录"><a href="#绝对目录和相对目录" class="headerlink" title="绝对目录和相对目录"></a>绝对目录和相对目录</h3><p>绝对目录就是从根目录开始。在Linux系统中，根目录是home（这个根目录是当前用户的根目录）目录。</p><p>相对目录就是从工作目录（当前目录）开始。大多数时候我们输入一个文件名其实都是输入相对目录，我们也可以输入绝对目录，但那样过于麻烦。</p><h3 id="路径名缩写"><a href="#路径名缩写" class="headerlink" title="路径名缩写"></a>路径名缩写</h3><p><strong>第一个</strong>： ..（两个点号）。这个符号的含义是父目录，也就是上级目录。用..可以回到上级目录然后在进入子目录</p><p>例：现在绝对目录是 /home/abcd/ceshi，如果我想进入abcd的gongzuoqu目录，那么输入cd ../gongzuoqu即可。这是从左向右读的， ..代表进入父目录，然后再进入父目录中的工作区目录。</p><p><strong>第二个</strong>： .(一个点号）。代表的是当前目录，注意<strong>任何不以/开头的路径名都被认为相对于工作目录</strong>。所以大部分情况下直接输入文件名即可，但是在某些情况下必须输入完整的目录，因此这个时候就需要.代表当前目录便于输入。</p><p>unix只能运行它能找到的程序，也就是在path环境变量中的路径。但是如果我们输入绝对路径的话，程序也能运行，因此这里我们就可以简单的用 . 来代替长长的绝对路径名。</p><p>如果我们想运行new程序，而这个程序不在搜索路径中，那么可以用 ./new来运行它</p><p>一个点号和两个点号都是缩写，所以其实我们运用点号时都是输入<strong>绝对路径名</strong></p><p><strong>第三个</strong> ~(波浪号）。 用这个符号代表home目录（这里的home是系统的根，也就是没有目录包含它）。</p><h3 id="cd-pwd-在目录树中移动"><a href="#cd-pwd-在目录树中移动" class="headerlink" title="cd pwd 在目录树中移动"></a>cd pwd 在目录树中移动</h3><p>pwd命令是显示当前的绝对目录</p><p>cd 命令</p><p>语法： cd [-LP] [directory | - ]</p><p>其中dircetory是你想切换到的目录的名称。</p><p>如果只输入cd，那么会进入home目录下。如果输入cd -， 那么将会进入前一个目录，与cd ..命令效果相同。</p><p>如果使用绝对路径名，那么第一个符号是/。</p><p>例如 cd /home/abcd/gongzuoqu</p><p>如果使用相对路径名，那么第一个就没有/</p><p>例如 cd gongzuoqu/temp</p><h3 id="mkdir-rmdir新建目录和移除目录"><a href="#mkdir-rmdir新建目录和移除目录" class="headerlink" title="mkdir rmdir新建目录和移除目录"></a>mkdir rmdir新建目录和移除目录</h3><p>语法： mkdir [-P] dictory…</p><p>首先，可以使用字母，数字和没有特殊含义的标点符号作为文件名。</p><p>创建目录要遵循两条规则。第一条，不能在一个目录下创建两个同名的目录。第二条，默认情况下，如果父目录不存在，那么就无法创建目录。可以使用-p选项忽略第二条规则。</p><p>语法： redir [-p] directory …</p><p>这里要注意只能移除空的目录。如果想要移除非空的目录，可以使用rm程序</p><p>如果想一次性移除一串目录，那么可以使用-p选项。但是有一个不是空的就不行（除了在这条链上的目录外）</p><p>其次，不能移除根目录和工作目录之间的任何程序。也就是说就算是使用了绝对地址，如果它在工作目录外部，那么也无法移除它。</p><h3 id="mv-移动或重命名目录"><a href="#mv-移动或重命名目录" class="headerlink" title="mv 移动或重命名目录"></a>mv 移动或重命名目录</h3><p>语法： mv directory target</p><p>target如果是一个路径，那么一定是移动目录，如果是名字，那么要看情况。</p><p>例如：</p><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="HASKELL"><figure class="iseeu highlight /haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">/home/harley/<span class="class"><span class="keyword">data</span></span></span><br><span class="line">/home/harley/storge</span><br><span class="line"></span><br><span class="line"><span class="title">mv</span> <span class="class"><span class="keyword">data</span> storage</span></span><br><span class="line"></span><br><span class="line">现在的位置： /home/harley/storge/<span class="class"><span class="keyword">data</span></span></span><br></pre></td></tr></table></figure></div><p>也就是说，如果该路径下没有这个名字的目录，那么就会重命名，但是如果有这个名字的目录，那么就会移动到这个目录下。</p><h3 id="pushd-popd-dirs-使用目录栈"><a href="#pushd-popd-dirs-使用目录栈" class="headerlink" title="pushd,popd,dirs 使用目录栈"></a>pushd,popd,dirs 使用目录栈</h3><p>语法： pushd [directory | +n]</p><p>pop [+n]</p><p>dirs [-c] [-l] [-v]</p><p>push是将目录的名称压入栈中，pop是弹出栈中，dirs是显示栈的内容，n是标识符</p><table><thead><tr><th>命令</th><th>动作</th></tr></thead><tbody><tr><td>dirs</td><td>显示名称，home显示为~</td></tr><tr><td>dirs -l</td><td>home显示为完整路径</td></tr><tr><td>dirs -v</td><td>每行一个显示名称，并有标识符</td></tr><tr><td>pushd directory</td><td>将其压入栈中</td></tr><tr><td>push +n</td><td>把n移到栈顶</td></tr><tr><td>popd +n</td><td>把n移除</td></tr><tr><td>dirs -c</td><td>除当前目录外，移除所有目录</td></tr></tbody></table><p>在任何时候，栈顶都是存放当前工作目录的名称。每当改变工作目录时，栈顶元素也会随之改变。</p><p>如果我们使用了pushd命令，这时我们也会进入这个目录，同时只能进入自己的下级目录。</p><h3 id="ls"><a href="#ls" class="headerlink" title="ls"></a>ls</h3><p>语法： ls [aCdFglrRs1] [name…]</p><p>作用，列举该目录下的文件名称。</p><p>参数：</p><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="DIFF"><figure class="iseeu highlight /diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="deletion">-C 横的列举文件</span></span><br><span class="line"><span class="deletion">-1 竖的列举文件 可以与wc -l组成管道</span></span><br><span class="line"><span class="deletion">-r 按字母表相反顺序进行排序。</span></span><br><span class="line"><span class="deletion">-R 递归。也就是列举完这一层继续列举下一层。如果这个很长的话，可以用less程序</span></span><br><span class="line"><span class="deletion">-F 检查文件类型，会增加几种标识，如下表所示</span></span><br><span class="line"><span class="deletion">--color 使用不同颜色来显示不同类型文件</span></span><br><span class="line"><span class="deletion">-l 显示长列表</span></span><br><span class="line"><span class="deletion">-u 显示访问时间</span></span><br><span class="line"><span class="deletion">-r reverse 从旧的到新的</span></span><br><span class="line"><span class="deletion">-h 自动显示大小</span></span><br><span class="line"><span class="deletion">-d 显示目录本身的信息。</span></span><br><span class="line"><span class="deletion">-a 显示隐藏文件</span></span><br></pre></td></tr></table></figure></div><table><thead><tr><th>标志</th><th>含义</th></tr></thead><tbody><tr><td>空</td><td>非可执行文件</td></tr><tr><td>*</td><td>可执行文件</td></tr><tr><td>/</td><td>目录</td></tr><tr><td>@</td><td>符号链接</td></tr><tr><td>竖线</td><td>命名管道 /FIFO</td></tr></tbody></table><h4 id="hs-du-df-quota-掌握磁盘空间使用情况"><a href="#hs-du-df-quota-掌握磁盘空间使用情况" class="headerlink" title="-hs du -df -quota 掌握磁盘空间使用情况"></a>-hs du -df -quota 掌握磁盘空间使用情况</h4><p>-s 前面以字节为单位输出文件的大小</p><p>-sh 自动选择合适的单位</p><p>du（disk usage) 显示文件的大小，这是一个程序</p><p>语法： du [-achs] [name…]</p><p>-h 显示单位</p><p>如果不指定名称，du会递归搜索整个目录树</p><p>-s 显示总和</p><p>-c 是先输出每个文件的大小，最后输出总量</p><p>df 显示磁盘可用空间</p><p>quota 显示配额</p><h3 id="file-检查文件类型"><a href="#file-检查文件类型" class="headerlink" title="file 检查文件类型"></a>file 检查文件类型</h3><p>file的使用相当直接，只需要file + 路径就可以检查那个路径下的文件类型，但是比ls显示的更为详细。</p><p>可能显示下列几种类型：</p><ul><li>ELF:可执行和链接模式</li><li>32-bit： 字长</li><li>LSB： 采用最低有效字节编译（小端序）</li><li>executable： 可执行文件</li><li>Intel 80386： 内部文件格式版本</li><li>GNU/linux2.6.9 操作系统和内核版本</li><li>dynamically linked 使用共享库</li><li>stripped 将符号表移除的可执行文件</li></ul><h3 id="块和分配单元"><a href="#块和分配单元" class="headerlink" title="块和分配单元"></a>块和分配单元</h3><p>在文件系统中，空间以固定大小进行分配，我们把固定大小的组块叫做块。块的大小在不同系统中不同。块的大小有512,1,2,4kb等。典型的linux系统是1kb。</p><p>此时我们只是说在文件系统中的分配方式。但是写入到磁盘中时出于效率的考虑，磁盘中也有特定的单元叫做分配单元或者簇。例如，分配单元为8kb代表即使只有1btye的数据系统也会自动分配8kb</p><h3 id="使用通配符进行通配"><a href="#使用通配符进行通配" class="headerlink" title="使用通配符进行通配"></a>使用通配符进行通配</h3><p>使用通配符可以指定特定的文件名，类似于正则表达式。</p><table><thead><tr><th>符号</th><th>含义</th></tr></thead><tbody><tr><td>*</td><td>匹配任何0个或多个字符组成的序列</td></tr><tr><td>？</td><td>匹配任何单个字符</td></tr><tr><td>[list]</td><td>匹配list中任意字符</td></tr><tr><td>[^list]</td><td>匹配不再list中任意字符</td></tr><tr><td>{string1竖线string2}</td><td>匹配任意一个字符串</td></tr></tbody></table><p>其实就是一个简化版的正则表达式。例如： ls h*表示显示所有以h为开头的文件或目录</p><p>此外，还可以使用一些预定义字符类，例如[[:lower:]]等</p><h3 id="显示目录树"><a href="#显示目录树" class="headerlink" title="显示目录树"></a>显示目录树</h3><p>语法： tree [-adfFilrst] [-L level] [directory…]</p><p>level是树的深度</p><p>作用：绘制文件系统中任意部分的图形（真的就是一个目录图表，可以自己试一下）。</p><p>选项：</p><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="DIFF"><figure class="iseeu highlight /diff"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="deletion">-a 显示所有文件，包括点文件</span></span><br><span class="line"><span class="deletion">-s 显示文件大小</span></span><br><span class="line"><span class="deletion">-F 显示标识文件的标志</span></span><br><span class="line"><span class="deletion">-r 以相反顺序输出</span></span><br><span class="line"><span class="deletion">-t 按修改时间顺序输出</span></span><br><span class="line"><span class="deletion">-d 只显示目录</span></span><br><span class="line"><span class="deletion">-i 省略缩进，这种模式只会输出一条条路径，但是不会生成一个图标</span></span><br><span class="line"><span class="deletion">-L 限制树的深度。后面的数字就是树的深度</span></span><br></pre></td></tr></table></figure></div><p>个人意见可以重定向到一个文件中然后再文件中查找。</p><!-- rebuild by neat -->]]></content>
     
     <summary type="html">
     
       
       
-        &lt;!-- build time:Sun Apr 12 2020 08:17:31 GMT+0800 (中国标准时间) --&gt;&lt;h3 id=&quot;目录名和工作目录&quot;&gt;&lt;a href=&quot;#目录名和工作目录&quot; class=&quot;headerlink&quot; title=&quot;目录名和工作目录&quot;&gt;&lt;/a&gt;
+        &lt;!-- build time:Mon Apr 13 2020 16:57:02 GMT+0800 (中国标准时间) --&gt;&lt;h3 id=&quot;目录名和工作目录&quot;&gt;&lt;a href=&quot;#目录名和工作目录&quot; class=&quot;headerlink&quot; title=&quot;目录名和工作目录&quot;&gt;&lt;/a&gt;
       
     
     </summary>
     
     
-      <category term="Linux" scheme="http://xinhecuican.tk/categories/Linux/"/>
+      <category term="Linux" scheme="http://xinhecuican.github.io/categories/Linux/"/>
     
     
   </entry>
   
   <entry>
     <title>gdb</title>
-    <link href="http://xinhecuican.tk/post/63002.html"/>
-    <id>http://xinhecuican.tk/post/63002.html</id>
+    <link href="http://xinhecuican.github.io/post/63002.html"/>
+    <id>http://xinhecuican.github.io/post/63002.html</id>
     <published>2020-04-03T08:44:00.000Z</published>
     <updated>2020-04-07T08:32:34.580Z</updated>
     
@@ -105,15 +105,15 @@
     </summary>
     
     
-      <category term="基础" scheme="http://xinhecuican.tk/categories/%E5%9F%BA%E7%A1%80/"/>
+      <category term="基础" scheme="http://xinhecuican.github.io/categories/%E5%9F%BA%E7%A1%80/"/>
     
     
   </entry>
   
   <entry>
     <title>unix文件系统</title>
-    <link href="http://xinhecuican.tk/post/35532.html"/>
-    <id>http://xinhecuican.tk/post/35532.html</id>
+    <link href="http://xinhecuican.github.io/post/35532.html"/>
+    <id>http://xinhecuican.github.io/post/35532.html</id>
     <published>2020-03-30T12:50:00.000Z</published>
     <updated>2020-04-07T08:32:34.647Z</updated>
     
@@ -129,15 +129,15 @@
     </summary>
     
     
-      <category term="Linux" scheme="http://xinhecuican.tk/categories/Linux/"/>
+      <category term="Linux" scheme="http://xinhecuican.github.io/categories/Linux/"/>
     
     
   </entry>
   
   <entry>
     <title>线索二叉树</title>
-    <link href="http://xinhecuican.tk/post/43817.html"/>
-    <id>http://xinhecuican.tk/post/43817.html</id>
+    <link href="http://xinhecuican.github.io/post/43817.html"/>
+    <id>http://xinhecuican.github.io/post/43817.html</id>
     <published>2020-03-29T06:54:00.000Z</published>
     <updated>2020-04-07T08:32:34.885Z</updated>
     
@@ -153,15 +153,15 @@
     </summary>
     
     
-      <category term="数据结构" scheme="http://xinhecuican.tk/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+      <category term="数据结构" scheme="http://xinhecuican.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
     
   </entry>
   
   <entry>
     <title>二叉树链表构建和应用</title>
-    <link href="http://xinhecuican.tk/post/11799.html"/>
-    <id>http://xinhecuican.tk/post/11799.html</id>
+    <link href="http://xinhecuican.github.io/post/11799.html"/>
+    <id>http://xinhecuican.github.io/post/11799.html</id>
     <published>2020-03-29T01:23:00.000Z</published>
     <updated>2020-04-07T08:32:34.670Z</updated>
     
@@ -177,15 +177,15 @@
     </summary>
     
     
-      <category term="数据结构" scheme="http://xinhecuican.tk/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+      <category term="数据结构" scheme="http://xinhecuican.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
     
   </entry>
   
   <entry>
     <title>进程的储存和缓冲区溢出</title>
-    <link href="http://xinhecuican.tk/post/27045.html"/>
-    <id>http://xinhecuican.tk/post/27045.html</id>
+    <link href="http://xinhecuican.github.io/post/27045.html"/>
+    <id>http://xinhecuican.github.io/post/27045.html</id>
     <published>2020-03-28T06:20:00.000Z</published>
     <updated>2020-04-07T08:32:34.897Z</updated>
     
@@ -201,15 +201,15 @@
     </summary>
     
     
-      <category term="计算机系统基础" scheme="http://xinhecuican.tk/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/"/>
+      <category term="计算机系统基础" scheme="http://xinhecuican.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/"/>
     
     
   </entry>
   
   <entry>
     <title>结构体</title>
-    <link href="http://xinhecuican.tk/post/6880.html"/>
-    <id>http://xinhecuican.tk/post/6880.html</id>
+    <link href="http://xinhecuican.github.io/post/6880.html"/>
+    <id>http://xinhecuican.github.io/post/6880.html</id>
     <published>2020-03-24T13:26:00.000Z</published>
     <updated>2020-04-07T08:32:34.893Z</updated>
     
@@ -225,15 +225,15 @@
     </summary>
     
     
-      <category term="计算机系统基础" scheme="http://xinhecuican.tk/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/"/>
+      <category term="计算机系统基础" scheme="http://xinhecuican.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/"/>
     
     
   </entry>
   
   <entry>
     <title>vi</title>
-    <link href="http://xinhecuican.tk/post/20198.html"/>
-    <id>http://xinhecuican.tk/post/20198.html</id>
+    <link href="http://xinhecuican.github.io/post/20198.html"/>
+    <id>http://xinhecuican.github.io/post/20198.html</id>
     <published>2020-03-23T12:18:00.000Z</published>
     <updated>2020-04-07T08:32:34.651Z</updated>
     
@@ -249,15 +249,15 @@
     </summary>
     
     
-      <category term="Linux" scheme="http://xinhecuican.tk/categories/Linux/"/>
+      <category term="Linux" scheme="http://xinhecuican.github.io/categories/Linux/"/>
     
     
   </entry>
   
   <entry>
     <title>汇编 函数</title>
-    <link href="http://xinhecuican.tk/post/30479.html"/>
-    <id>http://xinhecuican.tk/post/30479.html</id>
+    <link href="http://xinhecuican.github.io/post/30479.html"/>
+    <id>http://xinhecuican.github.io/post/30479.html</id>
     <published>2020-03-19T07:30:00.000Z</published>
     <updated>2020-04-07T08:32:34.851Z</updated>
     
@@ -273,17 +273,17 @@
     </summary>
     
     
-      <category term="汇编" scheme="http://xinhecuican.tk/categories/%E6%B1%87%E7%BC%96/"/>
+      <category term="汇编" scheme="http://xinhecuican.github.io/categories/%E6%B1%87%E7%BC%96/"/>
     
-      <category term="AT&amp;T" scheme="http://xinhecuican.tk/categories/%E6%B1%87%E7%BC%96/AT-T/"/>
+      <category term="AT&amp;T" scheme="http://xinhecuican.github.io/categories/%E6%B1%87%E7%BC%96/AT-T/"/>
     
     
   </entry>
   
   <entry>
     <title>压缩矩阵</title>
-    <link href="http://xinhecuican.tk/post/56929.html"/>
-    <id>http://xinhecuican.tk/post/56929.html</id>
+    <link href="http://xinhecuican.github.io/post/56929.html"/>
+    <id>http://xinhecuican.github.io/post/56929.html</id>
     <published>2020-03-16T02:39:00.000Z</published>
     <updated>2020-04-07T08:32:34.721Z</updated>
     
@@ -299,15 +299,15 @@
     </summary>
     
     
-      <category term="数据结构" scheme="http://xinhecuican.tk/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+      <category term="数据结构" scheme="http://xinhecuican.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
     
   </entry>
   
   <entry>
     <title>union</title>
-    <link href="http://xinhecuican.tk/post/9197.html"/>
-    <id>http://xinhecuican.tk/post/9197.html</id>
+    <link href="http://xinhecuican.github.io/post/9197.html"/>
+    <id>http://xinhecuican.github.io/post/9197.html</id>
     <published>2020-03-15T04:52:00.000Z</published>
     <updated>2020-04-07T08:32:34.623Z</updated>
     
@@ -323,15 +323,15 @@
     </summary>
     
     
-      <category term="基础" scheme="http://xinhecuican.tk/categories/%E5%9F%BA%E7%A1%80/"/>
+      <category term="基础" scheme="http://xinhecuican.github.io/categories/%E5%9F%BA%E7%A1%80/"/>
     
     
   </entry>
   
   <entry>
     <title>广义表</title>
-    <link href="http://xinhecuican.tk/post/14379.html"/>
-    <id>http://xinhecuican.tk/post/14379.html</id>
+    <link href="http://xinhecuican.github.io/post/14379.html"/>
+    <id>http://xinhecuican.github.io/post/14379.html</id>
     <published>2020-03-15T01:58:00.000Z</published>
     <updated>2020-04-07T08:32:34.781Z</updated>
     
@@ -347,41 +347,41 @@
     </summary>
     
     
-      <category term="数据结构" scheme="http://xinhecuican.tk/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+      <category term="数据结构" scheme="http://xinhecuican.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
     
   </entry>
   
   <entry>
     <title>汇编指令 AT&amp;T版 64位</title>
-    <link href="http://xinhecuican.tk/post/1326.html"/>
-    <id>http://xinhecuican.tk/post/1326.html</id>
+    <link href="http://xinhecuican.github.io/post/1326.html"/>
+    <id>http://xinhecuican.github.io/post/1326.html</id>
     <published>2020-03-11T23:46:00.000Z</published>
-    <updated>2020-04-07T08:32:34.836Z</updated>
+    <updated>2020-04-14T00:56:07.678Z</updated>
     
-    <content type="html"><![CDATA[<!-- build time:Sun Apr 12 2020 08:17:32 GMT+0800 (中国标准时间) --><p>用g++ -Og -S -masm=intel name.c 可以生成intel格式的汇编代码，-S是生成汇编代码，-Og是省去不重要的部分，如果不加这个，可能5条指令要变成十多条指令</p><p>-fno-if-conversion 分支语句不要采用条件传输的方式，条件跳转的方式</p><p>-g debug</p><p>objdump -d 反汇编</p><p>gdb 调试 b+ 标号 设置断点 info register 查看寄存器 r 执行到断点出</p><p>n（next） 执行下一条命令</p><h4 id="mov-移动指令"><a href="#mov-移动指令" class="headerlink" title="mov 移动指令"></a>mov 移动指令</h4><p>格式： movq a,b</p><p>a是原操作数，b是目标操作数</p><p>这个指令中的q代表的是64位</p><table><thead><tr><th>长度</th><th>类型</th><th>别名</th><th>缩写</th></tr></thead><tbody><tr><td>1</td><td>char</td><td>byte</td><td>b</td></tr><tr><td>2</td><td>short</td><td>word</td><td>w</td></tr><tr><td>4</td><td>int</td><td>double word（long word）</td><td>l</td></tr><tr><td>8</td><td>long</td><td>quad word</td><td>q</td></tr><tr><td>8</td><td>char*</td><td>quad word</td><td>q</td></tr><tr><td>4</td><td>float</td><td>…</td><td>s</td></tr><tr><td>8</td><td>double</td><td>…</td><td>l</td></tr></tbody></table><table><thead><tr><th>源操作数</th><th>目标操作数</th></tr></thead><tbody><tr><td>立即数（idata)</td><td>寄存器 ，地址</td></tr><tr><td>寄存器</td><td>寄存器，地址</td></tr><tr><td>地址</td><td>寄存器</td></tr></tbody></table><table><thead><tr><th>操作数</th><th>符号</th></tr></thead><tbody><tr><td>立即数</td><td>$</td></tr><tr><td>寄存器</td><td>%</td></tr><tr><td>地址</td><td>（）</td></tr></tbody></table><p>例：</p><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PERL"><figure class="iseeu highlight /perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">movq $2,%rax</span><br><span class="line">movq %rax,%rbx</span><br><span class="line">mov<span class="string">q (%rax)</span>,%rbx</span><br></pre></td></tr></table></figure></div><p>注意；</p><ul><li>当源操作数为地址的时候，目标操作数不能也是地址，因为一定要通过cpu进行调控，从地址到地址代表没有经过cpu（解释是这样，但我觉得不太合理）</li><li>立即数不能为8字节，使用 movabsq 可以让立即数为8字节</li><li>地址都是8字节，也就是上面的char*</li><li>如果把一个32位数给64位寄存器，那么高三十二位自动变成0.但是如果是16位或者8位的话高位不会改变</li></ul><p>例如：</p><p>movabsq $0x0011223344556677,%rax</p><p>movq $-1,%rax</p><p>%rax= 00000000ffffffff</p><h5 id="地址的写法"><a href="#地址的写法" class="headerlink" title="地址的写法"></a>地址的写法</h5><p>地址可以写为一个四元组 A（寄存器1，寄存器2，B）</p><p>这个四元组其实是 寄存器1+B*寄存器2+A</p><p>其中B可以是1,2,4,8。从数组的角度来看，寄存器1相当于起始地址，寄存器2相当于偏移地址，B是一个数据的字节数</p><p>同时 64位寄存器前缀是r，三十二位前缀是e，16位没有前缀，8位后面是l和h</p><p>例：</p><figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">rax</span></span><br><span class="line"><span class="built_in">eax</span></span><br><span class="line"><span class="built_in">ax</span></span><br><span class="line"><span class="built_in">al</span></span><br><span class="line"><span class="number">ah</span></span><br></pre></td></tr></table></figure><h5 id="强制类型转换"><a href="#强制类型转换" class="headerlink" title="强制类型转换"></a>强制类型转换</h5><p>格式 movzab</p><p>a代表原格式，b代表现格式，一般是从小的转换成大的。而z代表多的位补0</p><p>例： movzlq</p><p>特殊形式： cltq 把32位寄存器扩展到64位并且赋值给自己，</p><p>movsab 有符号扩展，最高位为1那么扩展出来的位全是1。</p><h4 id="leaq-地址转移"><a href="#leaq-地址转移" class="headerlink" title="leaq 地址转移"></a>leaq 地址转移</h4><p>格式 leaq 地址，寄存器</p><p>看起来与mov没什么区别，但是mov中的地址是要取地址中的数，而这里的地址只是把对应地址给寄存器</p><p>例如： leaq (%rax,%rbx,4),%rdx 这条指令类似于把数组中某一元素的地址给了rdx</p><p>它还可用来求值</p><p>例如 要求x* 12</p><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PERL"><figure class="iseeu highlight /perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> mul(<span class="keyword">int</span> <span class="keyword">x</span>)</span><br><span class="line">&#123;</span><br><span class="line">   lea<span class="string">q (%rdi,%rdi,2)</span>,%rax</span><br><span class="line">   salq %rax,<span class="number">2</span>//左移指令</span><br><span class="line">   <span class="keyword">return</span> <span class="keyword">x</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div><p>这段代码只要看中间两条指令就可以了，leaq 中的数运算之后是3rdi，然后左移两位就是12了。</p><p>但是这条指令不会判断溢出，且不会改变标志寄存器</p><h4 id="比较指令"><a href="#比较指令" class="headerlink" title="比较指令"></a>比较指令</h4><p>这里涉及到标志寄存器，<a href="https://xinhecuican.github.io/2020/01/29/%E6%A0%87%E5%BF%97%E5%AF%84%E5%AD%98%E5%99%A8/" target="_blank" rel="external nofollow noopener noreferrer">在前面一篇博客中已经提到</a></p><p>cmpq 比较指令</p><p>textq 与比较</p><p>textq b a 把a与b相与，不改变a和b的值，只会改变标志寄存器中的zf和sf。</p><p>这个指令通常用来判断某一位是否是1，例如 textq a,0x1 ，如果最低位为1，那么zf就是0，说明最低位是1</p><h5 id="标志寄存器的访问"><a href="#标志寄存器的访问" class="headerlink" title="标志寄存器的访问"></a>标志寄存器的访问</h5><table><thead><tr><th>操作名</th><th>含义</th><th>描述</th></tr></thead><tbody><tr><td>sete</td><td>ZF</td><td>Equal</td></tr><tr><td>setne</td><td>~ZF</td><td>not equal</td></tr><tr><td>sets</td><td>SF</td><td>sign</td></tr><tr><td>setns</td><td>~SF</td><td></td></tr><tr><td>setg</td><td><del>(SF^OF)&amp;</del>ZF</td><td>greater 有符号数</td></tr><tr><td>setge</td><td>~(SF^OF)</td><td>大于等于</td></tr><tr><td>setl</td><td>(SF^OF)</td><td>less</td></tr><tr><td>setle</td><td>…</td><td>小于等于</td></tr><tr><td>seta</td><td><del>CF&amp;</del>ZF</td><td>above 无符号数</td></tr><tr><td>setb</td><td>CF</td><td>below 小于</td></tr></tbody></table><p>这些指令都是返回到8位寄存器上，将高七位置0，最低位依据含义所进行的运算来判断是0还是1</p><p>之后可以 movzbl %al,%eax，这时高三十二位也会被清零</p><h4 id="跳转指令"><a href="#跳转指令" class="headerlink" title="跳转指令"></a>跳转指令</h4><p><a href="https://xinhecuican.github.io/2020/01/31/%E6%A3%80%E6%B5%8B%E6%AF%94%E8%BE%83%E7%BB%93%E6%9E%9C%E7%9A%84%E6%9D%A1%E4%BB%B6%E6%8C%87%E4%BB%A4/" target="_blank" rel="external nofollow noopener noreferrer">前面博客中也已谈到过</a></p><p>这里再补充jg和gb等，其实就是上面同样的模式</p><p>此外，由于是64位系统，没有cs寄存器，且intel使用cisc指令集，所以会自动根据指令长度进行判断用多少位长来储存位移</p><p>此外 x86 64位系统中 还提供了一种 jmp *(%rax) 也就是把rax作为地址，取内存中的内容</p><h4 id="条件跳转指令"><a href="#条件跳转指令" class="headerlink" title="条件跳转指令"></a>条件跳转指令</h4><p>格式： cmov +后缀 a b，后缀格式就是前面set的格式</p><p>作用: 如果满足条件，则把a赋值给b，如果不满足，则不做处理</p><p>现代编译器在遇到分支语句时会尽量用条件跳转的格式执行，因为cpu采用了流水线作业的模式（就是一次提前搬运多条指令） 但是条件跳转指令会使流水线停止运行，而流水线可以明显增加cpu速度。</p><p>条件跳转的格式就是先把 if 和else的内容都计算出来，然后在最后用条件跳转指令进行比较。</p><p>例如</p><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="SAS"><figure class="iseeu highlight /sas"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">int a;</span><br><span class="line"><span class="meta">if</span>(<span class="meta">x</span>&gt;y)</span><br><span class="line">&#123;</span><br><span class="line">    a=<span class="meta">x</span>-y;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">else</span></span><br><span class="line">&#123;</span><br><span class="line">    a=y-<span class="meta">x</span>;</span><br><span class="line">&#125;</span><br><span class="line">汇编模式</span><br><span class="line">movq <span class="name">%rdi</span>,<span class="name">%rax</span></span><br><span class="line">subq <span class="name">%rsi</span>,<span class="name">%rax</span></span><br><span class="line">movq <span class="name">%rsi</span>,<span class="name">%rdx</span></span><br><span class="line">subq <span class="name">%rdi</span>,<span class="name">%rdx</span></span><br><span class="line">cmovle <span class="name">%rdx</span>,<span class="name">%rax</span></span><br></pre></td></tr></table></figure></div><p>可以看出，用条件跳转模式会多计算一些指令，不会破坏流水线，如果在流水线上减少的时间大于多进行指令所消耗的时间，那么用条件跳转指令比较合适。反之，直接用条件指令。</p><p>下列几种情况不适合用条件跳转指令</p><ol><li>分支语句计算量大（执行时间过多，划不来）</li><li>在要判断是否可以运算的情况，例如 var=p ？*p ： 0，这条语句意思是如果p不为空指针那么将p的内容赋给var，否则赋0.但是如果用条件跳转会出错，因为空指针不能取值</li><li>计算可能产生副作用（即前后两个分支之间会产生影响）。例如 var=x&gt;0 ? x*=3 : x+=6,这个分支前面对后面会产生影响，因此不能简单粗暴的直接条件跳转</li></ol><h4 id="循环语句"><a href="#循环语句" class="headerlink" title="循环语句"></a>循环语句</h4><ul><li>do-while循环</li></ul><p>do-while循环用goto语句表达成</p><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="ADA"><figure class="iseeu highlight /ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">loop</span>:</span><br><span class="line">statement;</span><br><span class="line"><span class="keyword">if</span>(x) <span class="keyword">goto</span> <span class="keyword">loop</span>;</span><br></pre></td></tr></table></figure></div><p>这段代码便是先执行，后比较。很容易就可以转化成汇编。goto可以用条件转移指令代替。</p><ul><li>while循环</li></ul><p>while循环有两种形式，第一种是在最开始进行一次跳转，如果符合则进入循环，不符合则退出</p><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="ADA"><figure class="iseeu highlight /ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(!x) <span class="keyword">goto</span> done;</span><br><span class="line"><span class="keyword">loop</span>:</span><br><span class="line">statement;</span><br><span class="line"><span class="keyword">if</span>(x) <span class="keyword">goto</span> <span class="keyword">loop</span>;</span><br><span class="line">done:</span><br></pre></td></tr></table></figure></div><p>第二种是先跳过第一次循环直接进行判断。</p><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="SUBUNIT"><figure class="iseeu highlight /subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">goto test;</span><br><span class="line">loop:</span><br><span class="line">statement;</span><br><span class="line">test:</span><br><span class="line">if(x) goto loop;</span><br></pre></td></tr></table></figure></div><p>由于cpu流水线的限制，两条连续的跳转指令会减慢cpu运行的速度，因此最好采用第一种办法（虽然代码多）</p><ul><li>for循环</li></ul><p>for(init; test; update)</p><p>可以转化成</p><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="ABNF"><figure class="iseeu highlight /abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">init<span class="comment">;</span></span><br><span class="line">while(test)</span><br><span class="line">&#123;</span><br><span class="line">  statement<span class="comment">;</span></span><br><span class="line">  update<span class="comment">;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div><p>再然后就可以变成汇编代码</p><h4 id="switch-汇编实现"><a href="#switch-汇编实现" class="headerlink" title="switch 汇编实现"></a>switch 汇编实现</h4><p>首先要了解条件语句和switch的区别，if语句要从上倒下一条一条判断，如果数量多的话时间开销大。而switch是根据标号直接跳转，无论要跳转到哪一个时间开销都一定。</p><p>内存中实际上在编译时已经设定了一个跳转表，这个跳转表的标号是一个固定的地址，不能被改变，这个标号内的数据就是每一条指令的跳转地址，而且是8字节。</p><p>因此跳转语句可以这样写: jmp .L4(,%rdi,8)</p><p>其中.L4代表的是跳转表的标号（不一定是这个名字，举个例子）而rdi就是switch中的x，</p><p>如果标号很大，例如10000甚至1000000开始的时候，如果把前面的查找表一个个全部设置出来，空间开销会很大，所以编译器会先自动的减去一个数使他处于较小的范围，但是这种情况只适用于数据密集的情况。</p><p>如果数据稀疏例如一个是1一个是10000，这个时候偏移也不行了，只有通过先排序再二分搜索来查找标号，这个复杂度是logn</p><h4 id="杂项"><a href="#杂项" class="headerlink" title="杂项"></a>杂项</h4><ul><li>inc 自增</li><li>dec 自减</li><li>neg 取负 -x</li><li>not 取非 ~x</li><li>imul 乘</li><li>xor 异或</li><li>or 或</li><li>and 与</li><li>sal shl 左移</li><li>sar 算数右移</li><li>shr 逻辑右移</li></ul><!-- rebuild by neat -->]]></content>
+    <content type="html"><![CDATA[<!-- build time:Tue Apr 14 2020 08:56:14 GMT+0800 (中国标准时间) --><p>用g++ -Og -S -masm=intel name.c 可以生成intel格式的汇编代码，-S是生成汇编代码，-Og是省去不重要的部分，如果不加这个，可能5条指令要变成十多条指令</p><p>-fno-if-conversion 分支语句不要采用条件传输的方式，条件跳转的方式</p><p>-g debug</p><p>objdump -d 反汇编</p><p>gdb 调试 b+ 标号 设置断点 info register 查看寄存器 r 执行到断点出</p><p>n（next） 执行下一条命令</p><h4 id="mov-移动指令"><a href="#mov-移动指令" class="headerlink" title="mov 移动指令"></a>mov 移动指令</h4><p>格式： movq a,b</p><p>a是原操作数，b是目标操作数</p><p>这个指令中的q代表的是64位</p><table><thead><tr><th>长度</th><th>类型</th><th>别名</th><th>缩写</th></tr></thead><tbody><tr><td>1</td><td>char</td><td>byte</td><td>b</td></tr><tr><td>2</td><td>short</td><td>word</td><td>w</td></tr><tr><td>4</td><td>int</td><td>double word（long word）</td><td>l</td></tr><tr><td>8</td><td>long</td><td>quad word</td><td>q</td></tr><tr><td>8</td><td>char*</td><td>quad word</td><td>q</td></tr><tr><td>4</td><td>float</td><td>…</td><td>s</td></tr><tr><td>8</td><td>double</td><td>…</td><td>l</td></tr></tbody></table><table><thead><tr><th>源操作数</th><th>目标操作数</th></tr></thead><tbody><tr><td>立即数（idata)</td><td>寄存器 ，地址</td></tr><tr><td>寄存器</td><td>寄存器，地址</td></tr><tr><td>地址</td><td>寄存器</td></tr></tbody></table><table><thead><tr><th>操作数</th><th>符号</th></tr></thead><tbody><tr><td>立即数</td><td>$</td></tr><tr><td>寄存器</td><td>%</td></tr><tr><td>地址</td><td>（）</td></tr><tr><td>地址中数据</td><td>不加任何符号</td></tr></tbody></table><p>例：</p><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PERL"><figure class="iseeu highlight /perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">movq $2,%rax</span><br><span class="line">movq %rax,%rbx</span><br><span class="line">mov<span class="string">q (%rax)</span>,%rbx</span><br></pre></td></tr></table></figure></div><p>注意；</p><ul><li>当源操作数为地址的时候，目标操作数不能也是地址，因为一定要通过cpu进行调控，从地址到地址代表没有经过cpu（解释是这样，但我觉得不太合理）</li><li>立即数不能为8字节，使用 movabsq 可以让立即数为8字节</li><li>地址都是8字节，也就是上面的char*</li><li>如果把一个32位数给64位寄存器，那么高三十二位自动变成0.但是如果是16位或者8位的话高位不会改变</li></ul><p>例如：</p><p>movabsq $0x0011223344556677,%rax</p><p>movq $-1,%rax</p><p>%rax= 00000000ffffffff</p><h5 id="地址的写法"><a href="#地址的写法" class="headerlink" title="地址的写法"></a>地址的写法</h5><p>地址可以写为一个四元组 A（寄存器1，寄存器2，B）</p><p>这个四元组其实是 寄存器1+B*寄存器2+A</p><p>其中B可以是1,2,4,8。从数组的角度来看，寄存器1相当于起始地址，寄存器2相当于偏移地址，B是一个数据的字节数</p><p>同时 64位寄存器前缀是r，三十二位前缀是e，16位没有前缀，8位后面是l和h</p><p>例：</p><figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">rax</span></span><br><span class="line"><span class="built_in">eax</span></span><br><span class="line"><span class="built_in">ax</span></span><br><span class="line"><span class="built_in">al</span></span><br><span class="line"><span class="number">ah</span></span><br></pre></td></tr></table></figure><h5 id="强制类型转换"><a href="#强制类型转换" class="headerlink" title="强制类型转换"></a>强制类型转换</h5><p>格式 movzab</p><p>a代表原格式，b代表现格式，一般是从小的转换成大的。而z代表多的位补0</p><p>例： movzlq</p><p>特殊形式： cltq 把32位寄存器扩展到64位并且赋值给自己，</p><p>movsab 有符号扩展，最高位为1那么扩展出来的位全是1。</p><h4 id="leaq-地址转移"><a href="#leaq-地址转移" class="headerlink" title="leaq 地址转移"></a>leaq 地址转移</h4><p>格式 leaq 地址，寄存器</p><p>看起来与mov没什么区别，但是mov中的地址是要取地址中的数，而这里的地址只是把对应地址给寄存器</p><p>例如： leaq (%rax,%rbx,4),%rdx 这条指令类似于把数组中某一元素的地址给了rdx</p><p>它还可用来求值</p><p>例如 要求x* 12</p><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="PERL"><figure class="iseeu highlight /perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> mul(<span class="keyword">int</span> <span class="keyword">x</span>)</span><br><span class="line">&#123;</span><br><span class="line">   lea<span class="string">q (%rdi,%rdi,2)</span>,%rax</span><br><span class="line">   salq %rax,<span class="number">2</span>//左移指令</span><br><span class="line">   <span class="keyword">return</span> <span class="keyword">x</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div><p>这段代码只要看中间两条指令就可以了，leaq 中的数运算之后是3rdi，然后左移两位就是12了。</p><p>但是这条指令不会判断溢出，且不会改变标志寄存器</p><h4 id="比较指令"><a href="#比较指令" class="headerlink" title="比较指令"></a>比较指令</h4><p>这里涉及到标志寄存器，<a href="https://xinhecuican.github.io/2020/01/29/%E6%A0%87%E5%BF%97%E5%AF%84%E5%AD%98%E5%99%A8/">在前面一篇博客中已经提到</a></p><p>cmpq 比较指令</p><p>textq 与比较</p><p>textq b a 把a与b相与，不改变a和b的值，只会改变标志寄存器中的zf和sf。</p><p>这个指令通常用来判断某一位是否是1，例如 textq a,0x1 ，如果最低位为1，那么zf就是0，说明最低位是1</p><h5 id="标志寄存器的访问"><a href="#标志寄存器的访问" class="headerlink" title="标志寄存器的访问"></a>标志寄存器的访问</h5><table><thead><tr><th>操作名</th><th>含义</th><th>描述</th></tr></thead><tbody><tr><td>sete</td><td>ZF</td><td>Equal</td></tr><tr><td>setne</td><td>~ZF</td><td>not equal</td></tr><tr><td>sets</td><td>SF</td><td>sign</td></tr><tr><td>setns</td><td>~SF</td><td></td></tr><tr><td>setg</td><td><del>(SF^OF)&amp;</del>ZF</td><td>greater 有符号数</td></tr><tr><td>setge</td><td>~(SF^OF)</td><td>大于等于</td></tr><tr><td>setl</td><td>(SF^OF)</td><td>less</td></tr><tr><td>setle</td><td>…</td><td>小于等于</td></tr><tr><td>seta</td><td><del>CF&amp;</del>ZF</td><td>above 无符号数</td></tr><tr><td>setb</td><td>CF</td><td>below 小于</td></tr></tbody></table><p>这些指令都是返回到8位寄存器上，将高七位置0，最低位依据含义所进行的运算来判断是0还是1</p><p>之后可以 movzbl %al,%eax，这时高三十二位也会被清零</p><h4 id="跳转指令"><a href="#跳转指令" class="headerlink" title="跳转指令"></a>跳转指令</h4><p><a href="https://xinhecuican.github.io/2020/01/31/%E6%A3%80%E6%B5%8B%E6%AF%94%E8%BE%83%E7%BB%93%E6%9E%9C%E7%9A%84%E6%9D%A1%E4%BB%B6%E6%8C%87%E4%BB%A4/">前面博客中也已谈到过</a></p><p>这里再补充jg和gb等，其实就是上面同样的模式</p><p>此外，由于是64位系统，没有cs寄存器，且intel使用cisc指令集，所以会自动根据指令长度进行判断用多少位长来储存位移</p><p>此外 x86 64位系统中 还提供了一种 jmp *(%rax) 也就是把rax作为地址，取内存中的内容</p><h4 id="条件跳转指令"><a href="#条件跳转指令" class="headerlink" title="条件跳转指令"></a>条件跳转指令</h4><p>格式： cmov +后缀 a b，后缀格式就是前面set的格式</p><p>作用: 如果满足条件，则把a赋值给b，如果不满足，则不做处理</p><p>现代编译器在遇到分支语句时会尽量用条件跳转的格式执行，因为cpu采用了流水线作业的模式（就是一次提前搬运多条指令） 但是条件跳转指令会使流水线停止运行，而流水线可以明显增加cpu速度。</p><p>条件跳转的格式就是先把 if 和else的内容都计算出来，然后在最后用条件跳转指令进行比较。</p><p>例如</p><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="SAS"><figure class="iseeu highlight /sas"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">int a;</span><br><span class="line"><span class="meta">if</span>(<span class="meta">x</span>&gt;y)</span><br><span class="line">&#123;</span><br><span class="line">    a=<span class="meta">x</span>-y;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">else</span></span><br><span class="line">&#123;</span><br><span class="line">    a=y-<span class="meta">x</span>;</span><br><span class="line">&#125;</span><br><span class="line">汇编模式</span><br><span class="line">movq <span class="name">%rdi</span>,<span class="name">%rax</span></span><br><span class="line">subq <span class="name">%rsi</span>,<span class="name">%rax</span></span><br><span class="line">movq <span class="name">%rsi</span>,<span class="name">%rdx</span></span><br><span class="line">subq <span class="name">%rdi</span>,<span class="name">%rdx</span></span><br><span class="line">cmovle <span class="name">%rdx</span>,<span class="name">%rax</span></span><br></pre></td></tr></table></figure></div><p>可以看出，用条件跳转模式会多计算一些指令，不会破坏流水线，如果在流水线上减少的时间大于多进行指令所消耗的时间，那么用条件跳转指令比较合适。反之，直接用条件指令。</p><p>下列几种情况不适合用条件跳转指令</p><ol><li>分支语句计算量大（执行时间过多，划不来）</li><li>在要判断是否可以运算的情况，例如 var=p ？*p ： 0，这条语句意思是如果p不为空指针那么将p的内容赋给var，否则赋0.但是如果用条件跳转会出错，因为空指针不能取值</li><li>计算可能产生副作用（即前后两个分支之间会产生影响）。例如 var=x&gt;0 ? x*=3 : x+=6,这个分支前面对后面会产生影响，因此不能简单粗暴的直接条件跳转</li></ol><h4 id="循环语句"><a href="#循环语句" class="headerlink" title="循环语句"></a>循环语句</h4><ul><li>do-while循环</li></ul><p>do-while循环用goto语句表达成</p><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="ADA"><figure class="iseeu highlight /ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">loop</span>:</span><br><span class="line">statement;</span><br><span class="line"><span class="keyword">if</span>(x) <span class="keyword">goto</span> <span class="keyword">loop</span>;</span><br></pre></td></tr></table></figure></div><p>这段代码便是先执行，后比较。很容易就可以转化成汇编。goto可以用条件转移指令代替。</p><ul><li>while循环</li></ul><p>while循环有两种形式，第一种是在最开始进行一次跳转，如果符合则进入循环，不符合则退出</p><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="ADA"><figure class="iseeu highlight /ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(!x) <span class="keyword">goto</span> done;</span><br><span class="line"><span class="keyword">loop</span>:</span><br><span class="line">statement;</span><br><span class="line"><span class="keyword">if</span>(x) <span class="keyword">goto</span> <span class="keyword">loop</span>;</span><br><span class="line">done:</span><br></pre></td></tr></table></figure></div><p>第二种是先跳过第一次循环直接进行判断。</p><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="SUBUNIT"><figure class="iseeu highlight /subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">goto test;</span><br><span class="line">loop:</span><br><span class="line">statement;</span><br><span class="line">test:</span><br><span class="line">if(x) goto loop;</span><br></pre></td></tr></table></figure></div><p>由于cpu流水线的限制，两条连续的跳转指令会减慢cpu运行的速度，因此最好采用第一种办法（虽然代码多）</p><ul><li>for循环</li></ul><p>for(init; test; update)</p><p>可以转化成</p><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="ABNF"><figure class="iseeu highlight /abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">init<span class="comment">;</span></span><br><span class="line">while(test)</span><br><span class="line">&#123;</span><br><span class="line">  statement<span class="comment">;</span></span><br><span class="line">  update<span class="comment">;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div><p>再然后就可以变成汇编代码</p><h4 id="switch-汇编实现"><a href="#switch-汇编实现" class="headerlink" title="switch 汇编实现"></a>switch 汇编实现</h4><p>首先要了解条件语句和switch的区别，if语句要从上倒下一条一条判断，如果数量多的话时间开销大。而switch是根据标号直接跳转，无论要跳转到哪一个时间开销都一定。</p><p>内存中实际上在编译时已经设定了一个跳转表，这个跳转表的标号是一个固定的地址，不能被改变，这个标号内的数据就是每一条指令的跳转地址，而且是8字节。</p><p>因此跳转语句可以这样写: jmp .L4(,%rdi,8)</p><p>其中.L4代表的是跳转表的标号（不一定是这个名字，举个例子）而rdi就是switch中的x，</p><p>如果标号很大，例如10000甚至1000000开始的时候，如果把前面的查找表一个个全部设置出来，空间开销会很大，所以编译器会先自动的减去一个数使他处于较小的范围，但是这种情况只适用于数据密集的情况。</p><p>如果数据稀疏例如一个是1一个是10000，这个时候偏移也不行了，只有通过先排序再二分搜索来查找标号，这个复杂度是logn</p><h4 id="杂项"><a href="#杂项" class="headerlink" title="杂项"></a>杂项</h4><ul><li>inc 自增</li><li>dec 自减</li><li>neg 取负 -x</li><li>not 取非 ~x</li><li>imul 乘</li><li>xor 异或</li><li>or 或</li><li>and 与</li><li>sal shl 左移</li><li>sar 算数右移</li><li>shr 逻辑右移</li></ul><!-- rebuild by neat -->]]></content>
     
     <summary type="html">
     
       
       
-        &lt;!-- build time:Sun Apr 12 2020 08:17:32 GMT+0800 (中国标准时间) --&gt;&lt;p&gt;用g++ -Og -S -masm=intel name.c 可以生成intel格式的汇编代码，-S是生成汇编代码，-Og是省去不重要的部分，如果不加
+        &lt;!-- build time:Tue Apr 14 2020 08:56:14 GMT+0800 (中国标准时间) --&gt;&lt;p&gt;用g++ -Og -S -masm=intel name.c 可以生成intel格式的汇编代码，-S是生成汇编代码，-Og是省去不重要的部分，如果不加
       
     
     </summary>
     
     
-      <category term="汇编" scheme="http://xinhecuican.tk/categories/%E6%B1%87%E7%BC%96/"/>
+      <category term="汇编" scheme="http://xinhecuican.github.io/categories/%E6%B1%87%E7%BC%96/"/>
     
     
-      <category term="AT&amp;T" scheme="http://xinhecuican.tk/tags/AT-T/"/>
+      <category term="AT&amp;T" scheme="http://xinhecuican.github.io/tags/AT-T/"/>
     
   </entry>
   
   <entry>
     <title>在不更改注册表的情况下把程序移出c盘</title>
-    <link href="http://xinhecuican.tk/post/44336.html"/>
-    <id>http://xinhecuican.tk/post/44336.html</id>
+    <link href="http://xinhecuican.github.io/post/44336.html"/>
+    <id>http://xinhecuican.github.io/post/44336.html</id>
     <published>2020-03-09T03:37:00.000Z</published>
     <updated>2020-04-07T08:32:34.725Z</updated>
     
@@ -397,15 +397,15 @@
     </summary>
     
     
-      <category term="windows" scheme="http://xinhecuican.tk/categories/windows/"/>
+      <category term="windows" scheme="http://xinhecuican.github.io/categories/windows/"/>
     
     
   </entry>
   
   <entry>
     <title>c语言的动态内存分配</title>
-    <link href="http://xinhecuican.tk/post/8039.html"/>
-    <id>http://xinhecuican.tk/post/8039.html</id>
+    <link href="http://xinhecuican.github.io/post/8039.html"/>
+    <id>http://xinhecuican.github.io/post/8039.html</id>
     <published>2020-03-02T08:39:00.000Z</published>
     <updated>2020-04-07T08:32:34.536Z</updated>
     
@@ -421,15 +421,15 @@
     </summary>
     
     
-      <category term="基础" scheme="http://xinhecuican.tk/categories/%E5%9F%BA%E7%A1%80/"/>
+      <category term="基础" scheme="http://xinhecuican.github.io/categories/%E5%9F%BA%E7%A1%80/"/>
     
     
   </entry>
   
   <entry>
     <title>程序的进入与退出</title>
-    <link href="http://xinhecuican.tk/post/27890.html"/>
-    <id>http://xinhecuican.tk/post/27890.html</id>
+    <link href="http://xinhecuican.github.io/post/27890.html"/>
+    <id>http://xinhecuican.github.io/post/27890.html</id>
     <published>2020-03-02T06:18:00.000Z</published>
     <updated>2020-04-07T08:32:34.870Z</updated>
     
@@ -445,17 +445,17 @@
     </summary>
     
     
-      <category term="基础" scheme="http://xinhecuican.tk/categories/%E5%9F%BA%E7%A1%80/"/>
+      <category term="基础" scheme="http://xinhecuican.github.io/categories/%E5%9F%BA%E7%A1%80/"/>
     
-      <category term="c++" scheme="http://xinhecuican.tk/categories/%E5%9F%BA%E7%A1%80/c/"/>
+      <category term="c++" scheme="http://xinhecuican.github.io/categories/%E5%9F%BA%E7%A1%80/c/"/>
     
     
   </entry>
   
   <entry>
     <title>过滤器</title>
-    <link href="http://xinhecuican.tk/post/3257.html"/>
-    <id>http://xinhecuican.tk/post/3257.html</id>
+    <link href="http://xinhecuican.github.io/post/3257.html"/>
+    <id>http://xinhecuican.github.io/post/3257.html</id>
     <published>2020-03-01T02:53:00.000Z</published>
     <updated>2020-04-07T08:32:34.907Z</updated>
     
@@ -476,8 +476,8 @@
   
   <entry>
     <title>加法溢出和乘法溢出</title>
-    <link href="http://xinhecuican.tk/post/41763.html"/>
-    <id>http://xinhecuican.tk/post/41763.html</id>
+    <link href="http://xinhecuican.github.io/post/41763.html"/>
+    <id>http://xinhecuican.github.io/post/41763.html</id>
     <published>2020-02-29T03:07:00.000Z</published>
     <updated>2020-04-07T08:32:34.707Z</updated>
     
@@ -493,7 +493,7 @@
     </summary>
     
     
-      <category term="计算机系统基础" scheme="http://xinhecuican.tk/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/"/>
+      <category term="计算机系统基础" scheme="http://xinhecuican.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/"/>
     
     
   </entry>
