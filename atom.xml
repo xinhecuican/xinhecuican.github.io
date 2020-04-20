@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://xinhecuican.github.io/"/>
-  <updated>2020-04-18T13:26:53.845Z</updated>
+  <updated>2020-04-20T03:40:13.593Z</updated>
   <id>http://xinhecuican.github.io/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>java初探</title>
+    <link href="http://xinhecuican.github.io/post/912b2566.html"/>
+    <id>http://xinhecuican.github.io/post/912b2566.html</id>
+    <published>2020-04-19T10:59:00.000Z</published>
+    <updated>2020-04-20T03:40:13.593Z</updated>
+    
+    <content type="html"><![CDATA[<!-- build time:Mon Apr 20 2020 11:40:19 GMT+0800 (中国标准时间) --><h3 id="源文件结构"><a href="#源文件结构" class="headerlink" title="源文件结构"></a>源文件结构</h3><p>java源文件可能包含以下内容：</p><ul><li>包声明语句</li><li>包引入语句</li><li>类声明</li><li>接口声明</li></ul><p>这些内容都不是必须的。此外要注意只能有一个类或接口是public的（一般也是private）。</p><h4 id="包声明语句"><a href="#包声明语句" class="headerlink" title="包声明语句"></a>包声明语句</h4><p>包声明语句把类放到特定的包中。例如</p><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="NIMROD"><figure class="iseeu highlight /nimrod"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">package com.abc.dollapp;</span><br><span class="line">public calss appmain<span class="meta">&#123;...&#125;</span>;</span><br><span class="line">class doll<span class="meta">&#123;...&#125;</span>;</span><br></pre></td></tr></table></figure></div><p>在这个例子中appmain和doll都在com.abc.dollapp包中。</p><p>在一个java文件中，只能有一个package语句。如果没有提供package，那么就表明在系统默认的包中。</p><h5 id="包的作用"><a href="#包的作用" class="headerlink" title="包的作用"></a>包的作用</h5><ol><li>用于区分名字相同的类。例如定义了两中车类名都叫car，一种实际上是奔驰，一种是宝马。把他们丢在不同的包中就可以区分他们，相当于使用了不同的命名空间[^1]。</li></ol><p>[^1]:命名空间实际上就是在函数前的一些附加消息。因为可能同时引入了多个库，库文件中可能某些函数名字相同，这个时候只有通过前面添加一些信息来辨别。典型例子就是using namespace std;这个含义就是使用标准命名空间。不然就要写std::cout来进行辨别。<br>2. 有助于访问权限的控制。但不同包之间进行访问时，就会受到访问权限的控制。<br>3. 有助于组织划分各个类。</p><h5 id="包的命名规范"><a href="#包的命名规范" class="headerlink" title="包的命名规范"></a>包的命名规范</h5><p>包的名字通常用小写，一般包含以下信息：</p><ol><li>类的创建者信息</li><li>类所属软件信息</li><li>类在具体项目中所处的位置</li></ol><p>jdk提供了一些基本包</p><ul><li>java.lang包，包含线程类（Thread)，异常类（Exception），系统类（System），整数类（Integer），字符串类（String）等。这个包系统会自动引入。</li><li>java.awt。抽象窗口工具包。用于构建GUI界面和绘图类</li><li>java.io 输入输出包。例如文件输入类（FileInputStream类）</li><li>java.util 实用类，例如日期类（Date）集合类（Collection）</li><li>java.net 支持TCP/IP网络协议。</li></ul><h5 id="包引入"><a href="#包引入" class="headerlink" title="包引入"></a>包引入</h5><p>如果一个类访问了另一个包的类，那么一定要引入这个类（就像c++中的库引入一样）。</p><p>语法： import 包名.类名</p><p>如果想引入一个包中所有类， 可以 import 包名.*</p><p>要注意最好使用第一种语法，因为第二种不仅耗时大并且还可能带来类名重复的问题，这个时候每写一个类都要写它的包名。</p><p>并且如果包中还有包的话，第二种语法是不会把内层包的类引入的。之所以可以包中有包是为了保证层次结构。例如前面提到的com.abc其实就是包中有包，com是外层，abc是内层。</p><p>package语句必须在import前</p><h4 id="方法（函数）声明"><a href="#方法（函数）声明" class="headerlink" title="方法（函数）声明"></a>方法（函数）声明</h4><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="DUST"><figure class="iseeu highlight /dust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml">返回值 函数名（参数）</span></span><br><span class="line"><span class="template-variable">&#123;</span></span><br><span class="line"><span class="template-variable">    主体</span></span><br><span class="line"><span class="template-variable">&#125;</span></span><br></pre></td></tr></table></figure></div><p>这里的函数和c++大致相同</p><h4 id="main方法"><a href="#main方法" class="headerlink" title="main方法"></a>main方法</h4><p>main方法和c++不一样了，要包含几个要素</p><ul><li>访问限制 public</li><li>静态方法 static</li><li>参数 main(String args[])</li><li>返回类型 void</li></ul><p>所以合起来就是 static public void main（String args[])</p><h5 id="给main传递参数"><a href="#给main传递参数" class="headerlink" title="给main传递参数"></a>给main传递参数</h5><p>格式： java classname [args…]</p><p>classname指的是类名</p><p>例如： java com.abc.dollapp.main.MainApp parameter0 parameter1</p><p>也就是c++中的argc，argv</p><h4 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h4><p>第一种 //</p><p>第二种 <code>/*...*/</code></p><p>第三种 <code>/**...*/</code>，当这种注释出现在类的声明时，会作为javadoc的内容</p><h4 id="标识符和关键字"><a href="#标识符和关键字" class="headerlink" title="标识符和关键字"></a>标识符和关键字</h4><p>关键字之后慢慢就会知道</p><p>标识符命名规则：</p><ul><li>首字母必须是字母，下划线（_)，符号￥或符号$。</li><li>除开首字母其他字符可以用数字</li><li>没有长度限制</li></ul><h3 id="用jdk管理java应用"><a href="#用jdk管理java应用" class="headerlink" title="用jdk管理java应用"></a>用jdk管理java应用</h3><p>java常用目录（防止以后看到这些目录都不知道是干什么的）</p><table><thead><tr><th>src</th><th>存放源文件</th></tr></thead><tbody><tr><td>classes</td><td>存放编译生成的java文件</td></tr><tr><td>lib</td><td>存放第三方java软件的JAR文件（不要问我这是什么）</td></tr><tr><td>doc</td><td>存放帮助文档</td></tr><tr><td>doc\api</td><td>存放javadoc文档</td></tr><tr><td>deploy</td><td>存放打包文件，jar文件</td></tr></tbody></table><h3 id="使用javadoc文档"><a href="#使用javadoc文档" class="headerlink" title="使用javadoc文档"></a>使用javadoc文档</h3><p>java中有一个程序，可以识别类中的注释并将其转化成html文件。只有满足规范的文件才可以转化。</p><p>首先的规范就是注释要<code>/**...*/</code>才可以。里面可以有普通文件，html标记和javadoc标记。</p><p>范围：javadoc命令只处理类声明，接口声明，成员方法声明，成员变量声明，以及构造方法<strong>之前</strong>声明的注释。也就是说要在函数或类等的外面去声明。</p><h4 id="javadoc标记"><a href="#javadoc标记" class="headerlink" title="javadoc标记"></a>javadoc标记</h4><table><thead><tr><th>标记</th><th>说明</th></tr></thead><tbody><tr><td>@version</td><td>版本</td></tr><tr><td>@since</td><td>指定最早出现在哪个版本</td></tr><tr><td>@author</td><td>作者</td></tr><tr><td>@see</td><td>生成参考其他javadoc的链接</td></tr><tr><td>@link</td><td>生成链接，但是还可以添加其他的话</td></tr><tr><td>@deprecated</td><td>表示某些类或方法不提倡使用，之后可能会被废弃</td></tr><tr><td>@param</td><td>描述方法参数</td></tr><tr><td>@return</td><td>返回值</td></tr><tr><td>@throws</td><td>描述方法抛出的异常，指出抛出异常的条件</td></tr></tbody></table><p>@see用于生成到其他文档的链接。例如<code>@see #setWord</code>生成到setWord的链接。一共有三种格式</p><ul><li>set com.abc.dollapp.doll 生成到其他类的javadoc文档</li><li>set #setWord 生成当前类不同方法的javadoc文档</li><li>set com.abc.dollapp.doll#speak 生成到其他类的某一个方法的javadoc文档</li></ul><p>至于link在语法上与set大致相同，但是他可以用大括号插入到某一句话中，例如</p><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="ELIXIR"><figure class="iseeu highlight /elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">* 如果&#123;<span class="variable">@link</span> <span class="comment">#word word成员变量&#125;不为NULL；</span></span><br><span class="line">*<span class="regexp">/</span></span><br></pre></td></tr></table></figure></div><p>输出： 如果word<u>成员变量</u>不为NULL；</p><p>javadoc命令用法：</p><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="D"><figure class="iseeu highlight /d"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">-<span class="keyword">public</span> 仅为<span class="keyword">public</span>级别的类建立文档</span><br><span class="line">-<span class="keyword">protected</span> 进位<span class="keyword">public</span>和<span class="keyword">protected</span>建立文档 默认选项</span><br><span class="line">-<span class="keyword">package</span></span><br><span class="line">-<span class="keyword">private</span></span><br><span class="line">-<span class="keyword">version</span> 解析<span class="keyword">version</span>标记，默认情况会忽略</span><br><span class="line">-author </span><br><span class="line">-sourcepath&lt;path&gt; 指定源文件路径</span><br><span class="line">-classpath</span><br><span class="line">-d &lt;directory&gt; 指定javadoc的输出目录</span><br></pre></td></tr></table></figure></div><p>语法： javadoc [options] [packagenames] [sourcefiles]</p><h3 id="java虚拟机运行java的基本原理"><a href="#java虚拟机运行java的基本原理" class="headerlink" title="java虚拟机运行java的基本原理"></a>java虚拟机运行java的基本原理</h3><p>过程：先进行编译，之后进入虚拟机中变成机器指令。具体过程就不解释了，但是这里有一步就是根据操作系统进行运行。而java程序使运行在虚拟机上的。所以编译出来的文件可以在任何平台上运行。</p><p>系统会先给虚拟机分配一个空间。虚拟机又会把这个空间分成若干个部分。主要包括堆区，栈区，方法区等等。堆中存放对象，方法区中存放类的类型信息，方法信息和静态变量等等。</p><p>运行程序时，先要把程序的二进制加载到内存，然后对程序进行验证（包括初始化），之后再执行。</p><p>当生成一个实例时，虚拟机会先搜索方法区，如果方法区没有，那么就会先加载这个类。之后在堆区分配一片内存用来存放实例，实例有一个指向方法区的指针。这个实例用一个局部指针指向它（也就是实例名，和数组很像，不是说java不提供指针吗）。</p><p>所以运行一个java方法的过程是：先由类名到堆区，然后堆指向方法区的指针把对应的方法取出来（机器指令）。</p><!-- rebuild by neat -->]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;!-- build time:Mon Apr 20 2020 11:40:19 GMT+0800 (中国标准时间) --&gt;&lt;h3 id=&quot;源文件结构&quot;&gt;&lt;a href=&quot;#源文件结构&quot; class=&quot;headerlink&quot; title=&quot;源文件结构&quot;&gt;&lt;/a&gt;源文件结构&lt;/h3
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
   
   <entry>
     <title> UML简介</title>
@@ -470,30 +492,6 @@
     
     
       <category term="windows" scheme="http://xinhecuican.github.io/categories/windows/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>c语言的动态内存分配</title>
-    <link href="http://xinhecuican.github.io/post/8039.html"/>
-    <id>http://xinhecuican.github.io/post/8039.html</id>
-    <published>2020-03-02T08:39:00.000Z</published>
-    <updated>2020-04-07T08:32:34.536Z</updated>
-    
-    <content type="html"><![CDATA[<!-- build time:Sun Apr 12 2020 08:17:31 GMT+0800 (中国标准时间) --><h3 id="malloc"><a href="#malloc" class="headerlink" title="malloc"></a>malloc</h3><p>头文件： malloc.h</p><p>原型 void* malloc( size)（不标准写法）</p><p>其中size表示的是你想申请的字节数，为了准确我们一般使用sizeof函数，而返回的是一个void指针，这就导致了我们一般都要强制类型转换到对应的类型。</p><p>例： int* p=(int*)malloc(sizeof(int))</p><p>int* p=(int<em>)malloc(10</em>sizeof(int)) //数组</p><p>前面的int* 就是强制类型转换</p><p>此外，malloc一般分配完内存后还要进行检查看是否分配成功</p><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="AWK"><figure class="iseeu highlight /awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(p==NULL)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">exit</span>(<span class="number">1</span>);<span class="regexp">//</span>退出程序</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div><p>而且malloc是不会自动初始化的，所以在分配完内存后最好先用NULL初始化一下。</p><h3 id="realloc"><a href="#realloc" class="headerlink" title="realloc"></a>realloc</h3><p>字面意思，就是给一个已经分配内存的指针增加内存,原内存中的数据不变</p><p>头文件 #include &lt;stdlib.h&gt; 有些编译器需要#include &lt;alloc.h&gt;</p><p>原型： void* realloc(void *mem_address, unsigned int newsize);</p><p>mem_address是原指针，newsize是原有空间加上新增的空间</p><p>可能有下列几种情况</p><ol><li>如果原有空间后面还有足够的内存空间，那么直接在后面增加内存空间</li><li>如果原有空间不足，会重新分配空间到其他地方，同时原地址中的数据也会复制过去</li><li>如果没有可供分配的空间，返回NULL。此时，原指针仍然有效</li></ol><p>注意，如果分配成功，无论是否分到新空间，原指针都会被释放掉</p><p>如果 mem_address为0 那么和malloc相似，也是分配一块内存空间</p><p>如果 newsize为0，相当于free</p><p>也就是说，最好不要出现 p=realloc(p,size)这种写法，防止分配失败后指针直接丢失。好的办法是先用另一个参数接受realloc的内容，如果不为null，再让p=q</p><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="CPP"><figure class="iseeu highlight /cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>* q;</span><br><span class="line">q=(<span class="keyword">int</span>*)<span class="built_in">realloc</span>(p,newsize);</span><br><span class="line"><span class="keyword">if</span>(q!=<span class="literal">NULL</span>)</span><br><span class="line">&#123;</span><br><span class="line">    p=q;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div><h3 id="free"><a href="#free" class="headerlink" title="free"></a>free</h3><p>释放动态申请的内存空间</p><p>原型： void free(void* ptr)</p><!-- rebuild by neat -->]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;!-- build time:Sun Apr 12 2020 08:17:31 GMT+0800 (中国标准时间) --&gt;&lt;h3 id=&quot;malloc&quot;&gt;&lt;a href=&quot;#malloc&quot; class=&quot;headerlink&quot; title=&quot;malloc&quot;&gt;&lt;/a&gt;malloc
-      
-    
-    </summary>
-    
-    
-      <category term="基础" scheme="http://xinhecuican.github.io/categories/%E5%9F%BA%E7%A1%80/"/>
     
     
   </entry>
