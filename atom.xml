@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://xinhecuican.github.io/"/>
-  <updated>2020-04-21T12:13:51.107Z</updated>
+  <updated>2020-04-22T12:06:50.059Z</updated>
   <id>http://xinhecuican.github.io/</id>
   
   <author>
@@ -15,6 +15,54 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>java 继承和多态</title>
+    <link href="http://xinhecuican.github.io/post/17862176.html"/>
+    <id>http://xinhecuican.github.io/post/17862176.html</id>
+    <published>2020-04-22T09:00:00.000Z</published>
+    <updated>2020-04-22T12:06:50.059Z</updated>
+    
+    <content type="html"><![CDATA[<!-- build time:Wed Apr 22 2020 20:06:56 GMT+0800 (中国标准时间) --><h3 id="基础语法"><a href="#基础语法" class="headerlink" title="基础语法"></a>基础语法</h3><p>利用extends来进行继承，例如：</p><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="SCALA"><figure class="iseeu highlight /scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">Sub</span> <span class="keyword">extends</span> <span class="title">Base</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div><p>以上表明Sub类继承Base类，具体继承还要分两种情况。</p><ul><li>如果在同一个包中，那么Sub继承了Base中的public，protected和默认访问级别的成员变量和方法</li><li>如果在不同的包中，不继承默认访问级别的成员变量和成员方法，其他和上一个相同。</li></ul><p>默认访问级别就是前面没有加任何关键字。</p><p>java不支持多继承，一个类只能继承于一个类，但是父类可以有多个子类，就像一棵树。下级继承会继承同一分支上所有的成员和方法。</p><p>java中有一个所有类的祖先叫object类，如果没有使用extends关键字那么会自动继承这个类。</p><h3 id="方法覆盖"><a href="#方法覆盖" class="headerlink" title="方法覆盖"></a>方法覆盖</h3><p>覆盖指的是父类中的函数在子类中重新写。要满足下列条件：</p><ul><li>子类方法名称，函数签名（包括参数位置）和返回类型都要和父类方法一致</li><li>在子类中，必须要先覆盖函数，才可以重写函数</li></ul><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="OXYGENE"><figure class="iseeu highlight /oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">Base类中：</span><br><span class="line"><span class="keyword">public</span> void <span class="function"><span class="keyword">method</span><span class="params">()</span></span></span><br><span class="line"><span class="function"><span class="comment">&#123;</span></span></span><br><span class="line"><span class="function"><span class="comment">    ...</span></span></span><br><span class="line"><span class="function"><span class="comment">&#125;</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="title">Sub</span>类中：</span></span><br><span class="line"><span class="function"><span class="title">public</span> <span class="title">int</span> <span class="title">method</span><span class="params">()</span></span></span><br><span class="line"><span class="function"><span class="comment">&#123;</span></span></span><br><span class="line"><span class="function"><span class="comment">    ...</span></span></span><br><span class="line"><span class="function"><span class="comment">&#125;</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">这样会报错</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">如果<span class="title">Sub</span>类这样</span></span><br><span class="line"><span class="function"><span class="title">public</span> <span class="title">void</span> <span class="title">method</span><span class="params">()</span></span></span><br><span class="line"><span class="function"><span class="comment">&#123;</span></span></span><br><span class="line"><span class="function"><span class="comment">    ...</span></span></span><br><span class="line"><span class="function"><span class="comment">&#125;</span></span></span><br><span class="line"><span class="function"><span class="title">public</span> <span class="title">int</span> <span class="title">method</span><span class="params">()</span></span></span><br><span class="line"><span class="function"><span class="comment">&#123;</span></span></span><br><span class="line"><span class="function"><span class="comment">    ...</span></span></span><br><span class="line"><span class="function"><span class="comment">&#125;</span></span></span><br><span class="line"><span class="function">这样可以编译通过</span></span><br></pre></td></tr></table></figure></div><ul><li>子类方法不可以缩小父类的访问权限，如果父类的方法时private那么子类就不能写public</li><li>子类不能抛出比父类更多的异常</li><li>子类无法覆盖父类的方法，只能够隐藏。这两者的区别是覆盖的话父类可以使用子类的，子类也可以使用父类的。隐藏的话父类只能使用父类的，子类只能使用子类的。这是由于static定义的区域所决定的。<br>例：</li></ul><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="ARDUINO"><figure class="iseeu highlight /arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">package newpackage;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Base</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">method</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        System.out.<span class="built_in">println</span>(<span class="string">"Base"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">method2</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        System.out.<span class="built_in">println</span>(<span class="string">"Base"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">--------------------------------</span><br><span class="line">package newpackage;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">newsec</span> <span class="title">extends</span> <span class="title">Base</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">method</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        System.out.<span class="built_in">println</span>(<span class="string">"Sub"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">method2</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        System.out.<span class="built_in">println</span>(<span class="string">"Sub"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(<span class="keyword">String</span>[] args)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        Base a = <span class="keyword">new</span> newsec();</span><br><span class="line">        a.method();</span><br><span class="line">        a.method2();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">输出时Base和Sub</span><br></pre></td></tr></table></figure></div><ul><li>可以扩大访问权限。并且如果是抽象类，子类可以只扩大访问范围而不做任何事</li></ul><h3 id="super"><a href="#super" class="headerlink" title="super"></a>super</h3><p>super和this一样都是指向一个对象，不同的是super指向父类，this指向自己。</p><p>使用场合：</p><ul><li>局部变量和类变量重名</li><li>子类覆盖了父类的方法或成员变量时，可以用这种方法使用父类的方法</li></ul><p>需要注意，如果父类成员变量和方法被定义成private，那么子类无论如何都无法访问他们。不能再静态方法区使用super关键字。</p><h3 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h3><p>多态就是父类可以使用子类，子类也可以使用父类（自我理解）。下面讲具体使用规范。</p><ul><li>对于一个引用类型变量，编译器按声明变量进行处理。例如</li></ul><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="MIPSASM"><figure class="iseeu highlight /mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Base </span>who = new <span class="keyword">Sub();</span></span><br><span class="line"><span class="keyword">who.subVar </span>= <span class="string">"123"</span>;</span><br><span class="line">这里编译会出错，无论后面引用了谁，who都是<span class="keyword">Base类，而父类不能直接使用子类的变量</span></span><br></pre></td></tr></table></figure></div><ul><li><p>编译器允许继承分支关系的类进行类型转换。对于向上转型（子类使用父类的），编译器会自动类型转换。对于向下转型则需要强制类型转换。在运行时，子类可以转换成父类，但是父类实际上无法转换成子类。因为父类有的子类一定有，子类有的父类却不一定有。</p></li><li><p>对于引用对象绑定，遵循如下规则</p><ol><li>对于实例方法和引用变量是由实际使用的对象进行绑定。这个是动态的，也就是说方法的实际输出是由实际类型所决定。例如 Base a = new Sub();输出时Sub的。如果这个时候Sub的子类b = a;那么输出还是Sub的。</li><li>静态方法和成员变量由前面定义的类型所决定，这属于静态绑定，在编译时期已经决定。无论引用了谁都不会改变。</li></ol></li></ul><h3 id="继承的使用"><a href="#继承的使用" class="headerlink" title="继承的使用"></a>继承的使用</h3><p>继承树的最上层一般是抽象层。并且继承树上有接口类型，那么尽可能的把应用变量声明成继承树上层的接口类型。</p><p>继承关系会打破封装，因为上层类改变会使下层类也跟着改变。所以对上层类定义要谨慎。</p><!-- rebuild by neat -->]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;!-- build time:Wed Apr 22 2020 20:06:56 GMT+0800 (中国标准时间) --&gt;&lt;h3 id=&quot;基础语法&quot;&gt;&lt;a href=&quot;#基础语法&quot; class=&quot;headerlink&quot; title=&quot;基础语法&quot;&gt;&lt;/a&gt;基础语法&lt;/h3&gt;&lt;p&gt;
+      
+    
+    </summary>
+    
+    
+      <category term="java" scheme="http://xinhecuican.github.io/categories/java/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>java switch foreach</title>
+    <link href="http://xinhecuican.github.io/post/4c720881.html"/>
+    <id>http://xinhecuican.github.io/post/4c720881.html</id>
+    <published>2020-04-22T08:49:00.000Z</published>
+    <updated>2020-04-22T09:00:38.545Z</updated>
+    
+    <content type="html"><![CDATA[<!-- build time:Wed Apr 22 2020 20:06:56 GMT+0800 (中国标准时间) --><h3 id="switch"><a href="#switch" class="headerlink" title="switch"></a>switch</h3><p>switch的条件（switch括号中的内容）可以有一下几种。</p><ul><li>可以自动转换成int的类型（byte,short,int,char)</li><li>字符串类型<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="AUTOIT"><figure class="iseeu highlight /autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">String</span> color = <span class="string">"red"</span><span class="comment">;</span></span><br><span class="line"><span class="keyword">switch</span>(color)</span><br><span class="line">&#123;</span><br><span class="line"> <span class="keyword">case</span> <span class="string">"red"</span>:</span><br><span class="line">   System.out.println(<span class="string">"红色"</span>)<span class="comment">;</span></span><br><span class="line">   <span class="built_in">break</span><span class="comment">;</span></span><br><span class="line"> <span class="keyword">case</span> <span class="string">"blue:</span></span><br><span class="line"><span class="string">   System.out.println("</span>蓝色<span class="string">");</span></span><br><span class="line"><span class="string">   break;</span></span><br><span class="line"><span class="string"> default:</span></span><br><span class="line"><span class="string">   System.out.println("</span>其他颜色<span class="string">");</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure></div></li><li>枚举类型<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="CRYSTAL"><figure class="iseeu highlight /crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">Colour</span>(<span class="title">red</span>,<span class="title">blue</span>);</span></span><br><span class="line">Colour c = Colour.red;</span><br><span class="line">Switch(c)</span><br><span class="line">...</span><br></pre></td></tr></table></figure></div><h3 id="foreach语句"><a href="#foreach语句" class="headerlink" title="foreach语句"></a>foreach语句</h3></li></ul><p>foreach是for的特殊简化版本。用来遍历数组或集合</p><p>语法：</p><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="STYLUS"><figure class="iseeu highlight /stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">for</span><span class="params">(变量类型 变量名 : 待输出的集合或数组)</span></span></span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div><p>其实这也只能说是稍稍简化，直接写for就可以了。</p><!-- rebuild by neat -->]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;!-- build time:Wed Apr 22 2020 20:06:56 GMT+0800 (中国标准时间) --&gt;&lt;h3 id=&quot;switch&quot;&gt;&lt;a href=&quot;#switch&quot; class=&quot;headerlink&quot; title=&quot;switch&quot;&gt;&lt;/a&gt;switch
+      
+    
+    </summary>
+    
+    
+      <category term="java" scheme="http://xinhecuican.github.io/categories/java/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>java 操作符</title>
@@ -438,54 +486,6 @@
       
       
         &lt;!-- build time:Sun Apr 12 2020 08:17:31 GMT+0800 (中国标准时间) --&gt;&lt;p&gt;对于特殊的矩阵，例如上下三角矩阵，对称矩阵，三对角矩阵，可以转化成1维矩阵，减小空间的消耗。&lt;/p&gt;&lt;h3 id=&quot;特殊矩阵&quot;&gt;&lt;a href=&quot;#特
-      
-    
-    </summary>
-    
-    
-      <category term="数据结构" scheme="http://xinhecuican.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>union</title>
-    <link href="http://xinhecuican.github.io/post/9197.html"/>
-    <id>http://xinhecuican.github.io/post/9197.html</id>
-    <published>2020-03-15T04:52:00.000Z</published>
-    <updated>2020-04-07T08:32:34.623Z</updated>
-    
-    <content type="html"><![CDATA[<!-- build time:Sun Apr 12 2020 08:17:31 GMT+0800 (中国标准时间) --><p>首先看一下结构体，c语言中的结构体占用字节数是所有类型字节数的总和。</p><p>例如：</p><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="CPP"><figure class="iseeu highlight /cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> a;</span><br><span class="line">    <span class="keyword">int</span> b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div><p>用sizeof测试一下结果是8，但是如果用union呢？会发现结果是4</p><p>union中的参数共用同一块内存空间，它们在内存中起始地址都相同，也就是说同一时间内联合体中其实只会有一个参数存在，当另一个参数被赋值时，此时内存中存的就是另一个参数的值，而前面的参数会被覆盖</p><p>但是size并不一定是根据最长的那个长度来决定的（实测不是，但是不懂），还要考虑内存对齐的问题</p><p>如果此时已经给某一变量赋上了值，再用另外一个变量输出，那么内存中的编码并不会改变，只是会按找相应类型的编码方式进行编码然后输出。</p><ul><li>在c++中的使用</li></ul><p>大致相同，但是union中不能有类，如果我们在再类CA中添加了构造函数，或者添加析构函数，我们就会发现程序就会出现错误。由于union里面的东西共享内存，所以不能定义静态、引用类型的变量。由于在union里也不允许存放带有构造函数、析构函数和复制构造函数等的类的对象，但是可以存放对应的类对象指针</p><ul><li>应用 类型转换</li></ul><p>因为union共用一片地址，所以我可以通过不同的定义去访问这片地址。例如一个double类型的数据，我可以用int型访问低四字节和高四字节，并且不改变位级别的数据，这就相当于类型转换</p><!-- rebuild by neat -->]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;!-- build time:Sun Apr 12 2020 08:17:31 GMT+0800 (中国标准时间) --&gt;&lt;p&gt;首先看一下结构体，c语言中的结构体占用字节数是所有类型字节数的总和。&lt;/p&gt;&lt;p&gt;例如：&lt;/p&gt;&lt;div class=&quot;highlight-wrap&quot;
-      
-    
-    </summary>
-    
-    
-      <category term="基础" scheme="http://xinhecuican.github.io/categories/%E5%9F%BA%E7%A1%80/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>广义表</title>
-    <link href="http://xinhecuican.github.io/post/14379.html"/>
-    <id>http://xinhecuican.github.io/post/14379.html</id>
-    <published>2020-03-15T01:58:00.000Z</published>
-    <updated>2020-04-07T08:32:34.781Z</updated>
-    
-    <content type="html"><![CDATA[<!-- build time:Sun Apr 12 2020 08:17:31 GMT+0800 (中国标准时间) --><p>广义表一般记作：LS=（a1,a2,…)</p><p>其中ai在线性表中只可以是单个元素，而在广义表中即可以是单个元素，也可以是广义表。如果是单个元素，叫做原子，如果是广义表，叫做子表。当广义表非空时，第一个元素叫做广义表的表头，其余所有元素叫做广义表的表尾。</p><p>例如： A（），空表</p><p>B（e) 只有一个原子元素e,长度为1</p><p>c（a,(b,c,d)) 长度是2</p><p>d( a ( d)) 递归表</p><ul><li>广义表的储存结构</li></ul><p>通常用链式存储结构</p><p>每个节点有tag域（标志域），hp，tp三个域，但是原子节点（就是表头节点）只有两个域，标志域和值域</p><p>定义：</p><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="CRYSTAL"><figure class="iseeu highlight /crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">glnnode</span></span></span><br><span class="line">&#123;</span><br><span class="line">    int tag;<span class="regexp">//</span>表示是原子节点还是表结点</span><br><span class="line">    <span class="class"><span class="keyword">union</span></span></span><br><span class="line">    &#123;</span><br><span class="line">        int atom;<span class="regexp">//</span>原子节点值域</span><br><span class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">ptr</span></span></span><br><span class="line">        &#123;</span><br><span class="line">            glnnode *hp,*tp;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></div><p>除了空表表头指针为空外，其他表表头指针必定指向一个表节点</p><p>同一层次的表可以从第一个节点通过尾节点依次往后数，而头结点则指向一个原子节点或者是一个子表。</p><p>例如，画出c表的表示</p><p>| | | 代表tag， 头结点，尾结点</p><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="GHERKIN"><figure class="iseeu highlight /gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">c-&gt; 1|<span class="string"> </span>|<span class="string"> </span>|<span class="string"> -&gt; 1</span>|<span class="string"> </span>|<span class="string"> NULL</span></span><br><span class="line"><span class="string">    </span>|<span class="string">      </span>|<span class="string">  </span></span><br><span class="line"><span class="string">    -&gt;0</span>|<span class="string">a</span>|<span class="string">   -&gt;1</span>|<span class="string"> </span>|<span class="string"> </span>|<span class="string">-&gt;1</span>|<span class="string"> </span>|<span class="string"> </span>|<span class="string">-&gt;1</span>|<span class="string"> </span>|NULL</span><br><span class="line">             |<span class="string">     </span>|<span class="string">     </span>|</span><br><span class="line">             -&gt;0|<span class="string">b</span>|<span class="string">  -&gt;0</span>|<span class="string">c</span>|<span class="string">  -&gt;0</span>|<span class="string">c</span>|</span><br></pre></td></tr></table></figure></div><p>这个代表的是 c=（a,(b,c,d))，可以看到，第一层节点的数目就是表的长度，第一层如果头结点接一个原子节点，那么在表中代表一个数，如果接一个表节点，代表一个子表，同理，第二层头节点如果是一个数，那么就代表第二层增加一个元素，如果头结点接一个表节点，那么说明还有一个子表</p><!-- rebuild by neat -->]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;!-- build time:Sun Apr 12 2020 08:17:31 GMT+0800 (中国标准时间) --&gt;&lt;p&gt;广义表一般记作：LS=（a1,a2,…)&lt;/p&gt;&lt;p&gt;其中ai在线性表中只可以是单个元素，而在广义表中即可以是单个元素，也可以是广义表。如果是单个元素
       
     
     </summary>
