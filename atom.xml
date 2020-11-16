@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://xinhecuican.github.io/"/>
-  <updated>2020-11-15T13:57:50.852Z</updated>
+  <updated>2020-11-16T00:44:28.514Z</updated>
   <id>http://xinhecuican.github.io/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>回溯法和分支限界法</title>
+    <link href="http://xinhecuican.github.io/post/a50b8908.html"/>
+    <id>http://xinhecuican.github.io/post/a50b8908.html</id>
+    <published>2020-11-09T08:25:00.000Z</published>
+    <updated>2020-11-16T00:44:28.514Z</updated>
+    
+    <content type="html"><![CDATA[<!-- build time:Mon Nov 16 2020 08:44:42 GMT+0800 (中国标准时间) --><h1 id="回溯法"><a href="#回溯法" class="headerlink" title="回溯法"></a>回溯法</h1><h2 id="回溯法概念"><a href="#回溯法概念" class="headerlink" title="回溯法概念"></a>回溯法概念</h2><p>回溯法是一种能避免不必要搜索的穷举式算法，适用于一些解空间相当大的问题。</p><p>它经常呈现一种树形结构，先进入左节点，当到了底部或者条件不满足时返回父节点并进入右节点。一个典型的例子就是<a href="https://xinhecuican.github.io/post/37663.html">深度优先搜索</a></p><p>如果不加限制条件直接搜索的话复杂度将是2^n。因此我们需要添加一些限界函数来减小搜索量。</p><p>限界函数一般有两个，一个是用来限制左支的，叫显式约数条件。另一种是限制是否搜索右支的，叫隐式约束条件。</p><h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><h3 id="01背包问题"><a href="#01背包问题" class="headerlink" title="01背包问题"></a>01背包问题</h3><p><a href="https://xinhecuican.github.io/post/21624.html">01背包问题</a>最常见的办法是动态规划算法.这里介绍回溯法求解</p><ol><li>将物品按密度进行排序</li><li>设bestp是当前最好收益并初始化为负无穷</li><li>设bound = cp+r是效益值的上界。其中cp是这个节点的收益值，r是剩下所有物品的连续背包问题收益值（也就是说不满一件也可以装进去）</li><li>展开左子节点：<ul><li>如果<script type="math/tex">cw+Wk <= c</script>, 则装入k,且cw += Wk, cp += pk Xk = 1(说明这个节点使用了）</li></ul></li><li>否则展开右节点：<ul><li>如果bound &lt;= bestp。则停止展开右子树（就算把剩余物品都放进去也抵不上它的收益）。否则就 xk = 0,然后继续搜索</li></ul></li></ol><p><img src="/images/回溯法1.PNG" alt></p><h3 id="货箱装船问题"><a href="#货箱装船问题" class="headerlink" title="货箱装船问题"></a>货箱装船问题</h3><p><strong>问题</strong>：给定载重量为 c 的货船，找一种装船的方法，使得装载的货箱数目最多。</p><p><strong>分析</strong><br></p><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="GLSL"><figure class="iseeu highlight /glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">设<span class="keyword">cw</span>是已装载货物重量</span><br><span class="line"></span><br><span class="line">显式限界条件： 如果<span class="keyword">cw</span>+w(i) &gt; maxw 则杀死该左节点。</span><br><span class="line">隐式限界条件： 如果<span class="keyword">cw</span>+r &lt;= bestw，则停止展开右节点。r是剩余货物的重量。</span><br></pre></td></tr></table></figure></div><p></p><h1 id="分支限界法"><a href="#分支限界法" class="headerlink" title="分支限界法"></a>分支限界法</h1><p>分支限界法也是一种穷举搜索算法。但是同样可以通过限界函数进行限界。一个典型例子就是广度优先搜索。</p><h2 id="旅行商问题"><a href="#旅行商问题" class="headerlink" title="旅行商问题"></a>旅行商问题</h2><p>首先说一下归约矩阵。</p><ul><li>行规约矩阵：找到每一行最小的数，然后让这一行都减去最小的数。</li><li>行规约数： 每一行最小的数求和</li><li>归约矩阵： 每一行做归约后每一列再做归约。归约数就是行规约数加上列归约数</li></ul><p>归约矩阵的性质：</p><ul><li>每一行每一列都必须有一个0</li><li>对于旅行商问题， 它的结果就是在归约矩阵中得到的结果加上归约数 W(f) = w’(f)+h</li></ul><p>例：<img src="/images/回溯法和分支限界法1.PNG" alt><br><img src="/images/回溯法和分支限界法2.PNG" alt></p><p>其中q12表示A’矩阵中第一行第二列的点，表示我们要先从1到2.</p><p>之后的h’表示去掉这一行这一列和qji为无穷后的矩阵的归约值。因为我们到过这个节点之后这一行这一列都不会再有点了，所以可以去掉。另外如果不是导数第二个节点的话也不可能回到起点。</p><p>找到$\delta(i)$的最小值后以这个点作为起始点除去这一行这一列进行下一步搜索。<br><img src="/images/回溯法和分支限界法3.PNG" alt></p><p>之后一直重复上述步骤直到搜索完成。</p><p>使用行规约矩阵的目的在于提前知道一些信息来进行分支限界。</p><!-- rebuild by neat -->]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;!-- build time:Mon Nov 16 2020 08:44:42 GMT+0800 (中国标准时间) --&gt;&lt;h1 id=&quot;回溯法&quot;&gt;&lt;a href=&quot;#回溯法&quot; class=&quot;headerlink&quot; title=&quot;回溯法&quot;&gt;&lt;/a&gt;回溯法&lt;/h1&gt;&lt;h2 id=
+      
+    
+    </summary>
+    
+    
+      <category term="算法" scheme="http://xinhecuican.github.io/categories/%E7%AE%97%E6%B3%95/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>进程与线程</title>
@@ -464,30 +488,6 @@
     
     
       <category term="Python" scheme="http://xinhecuican.github.io/categories/Python/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>java 图片操作</title>
-    <link href="http://xinhecuican.github.io/post/3319ed9a.html"/>
-    <id>http://xinhecuican.github.io/post/3319ed9a.html</id>
-    <published>2020-06-11T01:12:00.000Z</published>
-    <updated>2020-06-11T02:41:29.119Z</updated>
-    
-    <content type="html"><![CDATA[<!-- build time:Thu Jun 11 2020 10:41:29 GMT+0800 (中国标准时间) --><h1 id="读取图片"><a href="#读取图片" class="headerlink" title="读取图片"></a>读取图片</h1><p><strong>通过Toolkit</strong></p><p>可以通过Toolkit工具从本地，网络或内存获取图片</p><ul><li>Image Toolkit.getDefaultToolkit().getImage(String filename)</li><li>Image Toolkit.getDefaultToolkit().getImage(URL url)</li><li>Image Toolkit.getDefaultToolkit().createImage(byte[] imageData)</li></ul><p><strong>通过ImageIO</strong></p><p>方法：</p><ul><li>BufferedImage ImageIO.read(File input)</li><li>ImageIO.read(URL input)</li><li>ImageIO.read(InputStream input)</li></ul><p>一般用这种方法</p><p><strong>ImageIO常用方法</strong></p><ul><li>int getWidth()： 获取图片宽度</li><li>int getHeight()</li><li>int getWidth(ImageObserver observer)</li><li>int getHeight(ImageObserver observer)</li><li>setRGB(int x, int y, int rgb)： 设置图片在(x, y)处像素</li><li>getRGB(int x, int y)： 获取像素</li><li>setRGB(int startX, int startY, int w, int h, int[] rgbArray, int offset, int scansize)：startx,starty是左上角，w和h是宽和高，offset是rgbarray偏移量。scansize是每一行在数组内长度，一般取w。</li><li>int[] getRGB(int startX, int startY, int w, int h, int[] rgbArray, int offset, int scansize)</li><li>BufferedImage getSubimage (int x, int y, int w, int h)： 剪裁图片</li><li>Image getScaledInstance(int width, int height, int hints)：图片缩放，生成的是Image，如果想变成BufferedImage，可以创建一个同样大小的BufferedImage，然后绘制进去。hints是缩放算法，取值如下：<ul><li>SCALE_AREA_AVERAGING: 使用 Area Averaging 图像缩放算法;</li><li>SCALE_DEFAULT: 使用默认的图像缩放算法;</li><li>SCALE_FAST: 选择一种图像缩放算法，在这种缩放算法中，缩放速度比缩放平滑度具有更高的优先级;</li><li>SCALE_REPLICATE: 使用 ReplicateScaleFilter 类中包含的图像缩放 算法;</li><li>SCALE_SMOOTH: 选择图像平滑度比缩放速度具有更高优先级的图像缩放算法。</li></ul></li></ul><p>在图片上绘制文字等</p><ul><li>Graphics2D createGraphics()： 创建绘制图片的画布</li><li>Graphics getGraphics()： 获得画布</li></ul><h1 id="保存图片"><a href="#保存图片" class="headerlink" title="保存图片"></a>保存图片</h1><ul><li>ImageIO.write(RenderedImage im, String formatName, File output)：RenderedImage可以是BufferedImage，format是图片格式，例如”jpg”等。output是输出文件</li><li>ImageIO.write(RenderedImage im, String formatName, OutputStream output)：这里的output是输出位置，可以输出到内存或文件中。</li></ul><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="REASONML"><figure class="iseeu highlight /reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">public <span class="keyword">class</span> Main &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String<span class="literal">[]</span> args) throws Exception &#123;</span><br><span class="line">        <span class="comment">// 获取屏幕尺寸</span></span><br><span class="line">        Dimension screenSize = <span class="module-access"><span class="module"><span class="identifier">Toolkit</span>.</span></span>get<span class="constructor">DefaultToolkit()</span>.get<span class="constructor">ScreenSize()</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 创建需要截取的矩形区域</span></span><br><span class="line">        Rectangle rect = <span class="keyword">new</span> <span class="constructor">Rectangle(0, 0, <span class="params">screenSize</span>.<span class="params">width</span>, <span class="params">screenSize</span>.<span class="params">height</span>)</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 截屏操作</span></span><br><span class="line">        BufferedImage bufImage = <span class="keyword">new</span> <span class="constructor">Robot()</span>.create<span class="constructor">ScreenCapture(<span class="params">rect</span>)</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 保存截取的图片</span></span><br><span class="line">        <span class="module-access"><span class="module"><span class="identifier">ImageIO</span>.</span></span>write(bufImage, <span class="string">"PNG"</span>, <span class="keyword">new</span> <span class="constructor">File(<span class="string">"capture.png"</span>)</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div><!-- rebuild by neat -->]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;!-- build time:Thu Jun 11 2020 10:41:29 GMT+0800 (中国标准时间) --&gt;&lt;h1 id=&quot;读取图片&quot;&gt;&lt;a href=&quot;#读取图片&quot; class=&quot;headerlink&quot; title=&quot;读取图片&quot;&gt;&lt;/a&gt;读取图片&lt;/h1&gt;&lt;p&gt;
-      
-    
-    </summary>
-    
-    
-      <category term="java" scheme="http://xinhecuican.github.io/categories/java/"/>
     
     
   </entry>
