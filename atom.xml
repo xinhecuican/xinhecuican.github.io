@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://xinhecuican.github.io/"/>
-  <updated>2020-11-18T06:00:10.608Z</updated>
+  <updated>2020-11-18T11:32:04.124Z</updated>
   <id>http://xinhecuican.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>抽样分布定理证明</title>
+    <link href="http://xinhecuican.github.io/post/74e7fdff.html"/>
+    <id>http://xinhecuican.github.io/post/74e7fdff.html</id>
+    <published>2020-11-18T11:02:00.000Z</published>
+    <updated>2020-11-18T11:32:04.124Z</updated>
+    
+    <content type="html"><![CDATA[<p>定理 ：$\frac{(n-1)S^2}{\delta^2}$</p><p><strong>证明</strong></p><script type="math/tex;mode=display">\frac{(n-1)S^2}{\delta^2} = \sum_{k=1}^n\frac{(x_i-\overline{x})^2}{\delta^2}    = \sum_{k=1}^n\frac{(x_i - \mu +\mu - \overline{x})^2}{\delta^2}    = \sum_{k=1}^n\frac{(x_i - \mu)^2}{\delta^2} - \sum_{k=1}^n\frac{(\overline{x})^2 - \mu}{\delta^2}    = \sum_{k=1}^n\frac{(x_i - \mu)^2}{\delta^2} - \frac{n(\overline{x})^2 - \mu}{\delta^2}    = \sum_{k=1}^n\frac{(x_i - \mu)^2}{\delta^2} - \frac{n(\overline{x})^2 - \mu}{\delta^2 / \sqrt{n}}</script><script type="math/tex;mode=display">\sum_{k=1}^n\frac{(x_i - \mu)^2}{\delta^2} ~ X_{n-1}^2</script><script type="math/tex;mode=display">\frac{n(\overline{x})^2 - \mu}{\delta^2 / \sqrt{n}} ~ X_1^2</script><p>$\sigma(x_i - \mu)^2 与 \overline{x}$相互独立，所以根据卡方分布可加性可得服从于$X_{n-1}^2$</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;定理 ：$\frac{(n-1)S^2}{\delta^2}$&lt;/p&gt;&lt;p&gt;&lt;strong&gt;证明&lt;/strong&gt;&lt;/p&gt;&lt;script type=&quot;math/tex;mode=display&quot;&gt;\frac{(n-1)S^2}{\delta^2} = \sum_{k=1}^
+      
+    
+    </summary>
+    
+    
+      <category term="数学" scheme="http://xinhecuican.github.io/categories/%E6%95%B0%E5%AD%A6/"/>
+    
+      <category term="概率论" scheme="http://xinhecuican.github.io/categories/%E6%95%B0%E5%AD%A6/%E6%A6%82%E7%8E%87%E8%AE%BA/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>回溯法和分支限界法</title>
@@ -458,30 +484,6 @@
       
       
         &lt;h1 id=&quot;requests&quot;&gt;&lt;a href=&quot;#requests&quot; class=&quot;headerlink&quot; title=&quot;requests&quot;&gt;&lt;/a&gt;requests&lt;/h1&gt;&lt;p&gt;requests用来爬取网站上的信息。有七个主要方法&lt;/p&gt;&lt;ul&gt;&lt;li&gt;r = requ
-      
-    
-    </summary>
-    
-    
-      <category term="Python" scheme="http://xinhecuican.github.io/categories/Python/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>python time random turtle jieba</title>
-    <link href="http://xinhecuican.github.io/post/a3a786d6.html"/>
-    <id>http://xinhecuican.github.io/post/a3a786d6.html</id>
-    <published>2020-06-29T00:45:00.000Z</published>
-    <updated>2020-07-19T02:41:02.954Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="time"><a href="#time" class="headerlink" title="time"></a>time</h1><ul><li>time(): 输出从1970年1月1日到现在时间时间差（以秒为单位）。可以用来获取程序运行时间。</li><li>gmtime(): 获取utc时间。返回一个struct_time对象</li><li>localtime(): 获取本地时间,也是返回struct_time对象</li><li><p>ctime(): 获取本地时间的字符串</p></li><li><p>mktime(t): 把struct_time类型的t转化成时间差（从1970到现在）</p></li><li>strftime(“%Y-%m-%d %H:%M:%S”, t): 格式化t.例如2020-02-02 01:02:03</li><li><p>strptime(timestring, “…”): 将格式为…的timestring转化成struct_time</p></li><li><p>sleep(): 进程睡眠</p></li><li>perf_counter(): 用来计时。和time类似，但精度更高</li></ul><h1 id="random"><a href="#random" class="headerlink" title="random"></a>random</h1><ul><li>seed(): 初始化随机数种子</li><li>random(): 生成一个0到1的小数</li><li>randint(a, b): 生成a到b的随机整数</li><li>getrandbits(k): 生成一个kbit长的随机整数</li><li>randrange(start, stop, step): 生成一个start到stop步长为step的随机整数</li><li>uniform(a, b): 生成a到b随机小数</li><li>choice(seq): 从列表中随机返回一个元素</li><li>shuffle(seq): 随机排列</li><li>sample(pop, k): 从pop中选出k个数，以列表形式返回</li></ul><h1 id="turtle"><a href="#turtle" class="headerlink" title="turtle"></a>turtle</h1><ul><li>setup(width, height, startx, starty)如果width是小数，那么是窗口相对屏幕比例。如果startx是null，则在水平中央</li><li>forword(x):</li><li>backword(x)</li><li>right(x): 向右旋转</li><li>left(x):</li><li><p>setheading(x): 设置角度</p></li><li><p>goto(x, y): 移动到坐标处，原点是0,0。</p></li><li>circle(radius, e): 绘制半径是r，角度是e的圆</li><li><p>undo(): 取消最后一步动作。</p></li><li><p>speed(x): 设置速度，范围1到10</p></li><li><p>penup(): 提起画笔</p></li><li>pendown():</li><li>pensize():</li><li>color(): 设置颜色</li><li>begin_fill(): 开始填充</li><li>end_fill():</li><li><p>filling(): 是否填充。必须要在end_fill前写，如果在fill范围外写一定是false</p></li><li><p>clean(): 清空画的东西，但不改变画笔的位置</p></li><li><p>reset(): 重置</p></li><li><p>screensize(x, y): 设置屏幕长宽，超出屏幕大小的size时会有滚动条。</p></li><li><p>hideturtle(): 去除小箭头</p></li><li>showturtle(): 显示箭头</li></ul><h1 id="jieba"><a href="#jieba" class="headerlink" title="jieba"></a>jieba</h1><ul><li>lcut(x): 精确模式</li><li>lcut(x, cut_all=True): 全模式，速度快但是划分不精确</li><li>lcut_for_search(x): 饭后适合搜索引擎搜索的词。</li><li>add_word(x): 添加词</li></ul><h1 id="wordcloud"><a href="#wordcloud" class="headerlink" title="wordcloud"></a>wordcloud</h1><p>根据频率来确定大小。默认以空格和,为分隔符。</p><p>函数：</p><ul><li>a = wordcloud.WordCloud(font_path=, width=, height=).generate(text): 其中第二个WordCloud是wordcloud库中的类。</li><li>a.to_file(filename): 把词云输出成文件，filename是文件名。文件类型可以是png，jpg等。</li></ul><p><img src="/images/python_wordcloud.PNG" alt><br>这些是WordCloud的参数</p><p>如果是中文，先要用jieba进行分词。</p><h1 id="pyinstaller"><a href="#pyinstaller" class="headerlink" title="pyinstaller"></a>pyinstaller</h1><p>把源文件转化成exe文件。</p><p>使用： pyinstaller -F 源文件名</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h1 id=&quot;time&quot;&gt;&lt;a href=&quot;#time&quot; class=&quot;headerlink&quot; title=&quot;time&quot;&gt;&lt;/a&gt;time&lt;/h1&gt;&lt;ul&gt;&lt;li&gt;time(): 输出从1970年1月1日到现在时间时间差（以秒为单位）。可以用来获取程序运行时间。&lt;/li&gt;&lt;li
       
     
     </summary>
