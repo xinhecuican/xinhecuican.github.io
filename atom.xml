@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://xinhecuican.github.io/"/>
-  <updated>2020-11-18T11:38:26.479Z</updated>
+  <updated>2020-11-18T11:41:12.221Z</updated>
   <id>http://xinhecuican.github.io/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="http://xinhecuican.github.io/post/74e7fdff.html"/>
     <id>http://xinhecuican.github.io/post/74e7fdff.html</id>
     <published>2020-11-18T11:02:00.000Z</published>
-    <updated>2020-11-18T11:38:26.479Z</updated>
+    <updated>2020-11-18T11:41:12.221Z</updated>
     
-    <content type="html"><![CDATA[<p>定理 ：$\frac{(n-1)S^2}{\delta^2}$</p><p><strong>证明</strong></p><script type="math/tex;mode=display">\begin{align}\frac{(n-1)S^2}{\delta^2} =& \sum_{k=1}^n\frac{(x_i-\overline{x})^2}{\delta^2}    =& \sum_{k=1}^n\frac{(x_i - \mu +\mu - \overline{x})^2}{\delta^2}    =& \sum_{k=1}^n\frac{(x_i - \mu)^2}{\delta^2} - \sum_{k=1}^n\frac{(\overline{x})^2 - \mu}{\delta^2}    =& \sum_{k=1}^n\frac{(x_i - \mu)^2}{\delta^2} - \frac{n(\overline{x})^2 - \mu}{\delta^2}    =& \sum_{k=1}^n\frac{(x_i - \mu)^2}{\delta^2} - \frac{n(\overline{x})^2 - \mu}{\delta^2 / \sqrt{n}}\end{align}</script><script type="math/tex;mode=display">\sum_{k=1}^n\frac{(x_i - \mu)^2}{\delta^2} \sim X_{n-1}^2</script><script type="math/tex;mode=display">\frac{n(\overline{x})^2 - \mu}{\delta^2 / \sqrt{n}} \sim X_1^2</script><p>$\sigma(x_i - \mu)^2 与 \overline{x}$相互独立，所以根据卡方分布可加性可得服从于$X_{n-1}^2$</p>]]></content>
+    <content type="html"><![CDATA[<p>定理 ：$\frac{(n-1)S^2}{\delta^2}$</p><p><strong>证明</strong></p><script type="math/tex;mode=display">\begin{align}\frac{(n-1)S^2}{\delta^2} =& \sum_{k=1}^n\frac{(x_i-\overline{x})^2}{\delta^2}    =& \sum_{k=1}^n\frac{(x_i - \mu +\mu - \overline{x})^2}{\delta^2}    =& \sum_{k=1}^n\frac{(x_i - \mu)^2}{\delta^2} - \sum_{k=1}^n\frac{(\overline{x}-\mu)^2}{\delta^2}    =& \sum_{k=1}^n\frac{(x_i - \mu)^2}{\delta^2} - \frac{n(\overline{x}-\mu)^2 }{\delta^2}    =& \sum_{k=1}^n\frac{(x_i - \mu)^2}{\delta^2} - \frac{n(\overline{x}-\mu)^2}{\delta^2 / \sqrt{n}}\end{align}</script><script type="math/tex;mode=display">\sum_{k=1}^n\frac{(x_i - \mu)^2}{\delta^2} \sim X_{n-1}^2</script><script type="math/tex;mode=display">\frac{n(\overline{x})^2 - \mu}{\delta^2 / \sqrt{n}} \sim X_1^2</script><p>$\sigma(x_i - \mu)^2 与 \overline{x}$相互独立，所以根据卡方分布可加性可得服从于$X_{n-1}^2$</p>]]></content>
     
     <summary type="html">
     
