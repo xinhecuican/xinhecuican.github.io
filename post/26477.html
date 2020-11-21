@@ -1,14 +1,527 @@
-<!DOCTYPE html><html class="theme-next gemini use-motion" lang="zh-Hans"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><meta name="theme-color" content="#222"><script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script><link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet"><style>.pace .pace-progress{background:#1e92fb;height:3px}.pace .pace-progress-inner{box-shadow:0 0 10px #1e92fb,0 0 5px #1e92fb}.pace .pace-activity{border-top-color:#1e92fb;border-left-color:#1e92fb}</style><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="google-site-verification" content="zmX9zYZL0QVB6fFG_e98QsQogwE11Vdf5hOd4xMbgN4"><link href="https://cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css"><link href="//fonts.lug.ustc.edu.cn/css?family=EB Garamond:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css"><link href="https://cdn.bootcss.com/font-awesome/4.6.2/css/font-awesome.min.css" rel="stylesheet" type="text/css"><link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css"><link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4"><link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4"><link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4"><link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222"><meta name="keywords" content="Hexo, NexT"><link rel="alternate" href="/atom.xml" title="Xinhecuican's Blog" type="application/atom+xml"><meta name="description" content="命令语法一次输入多条命令，可以在命令之间用 ;分割开来语法： 命令名称 选项 参数选项有时被称为开关（switches）或标志（flags），选项通常是由一个连字符后面接着一些字母，或者两个连字符后接着一个单词构成。例如 —help，—version（显示版本信息）使用多个单字符选项时，可以把他们连接在一起，用一个连字符来表示。例如 ls -lF。注意，unix的选项区分大小写实际上许多长参数有着"><meta property="og:type" content="article"><meta property="og:title" content="linux指令学习"><meta property="og:url" content="http://xinhecuican.github.io/post/26477.html"><meta property="og:site_name" content="Xinhecuican&#39;s Blog"><meta property="og:description" content="命令语法一次输入多条命令，可以在命令之间用 ;分割开来语法： 命令名称 选项 参数选项有时被称为开关（switches）或标志（flags），选项通常是由一个连字符后面接着一些字母，或者两个连字符后接着一个单词构成。例如 —help，—version（显示版本信息）使用多个单字符选项时，可以把他们连接在一起，用一个连字符来表示。例如 ls -lF。注意，unix的选项区分大小写实际上许多长参数有着"><meta property="article:published_time" content="2020-02-16T02:20:00.000Z"><meta property="article:modified_time" content="2020-09-29T01:34:07.773Z"><meta property="article:author" content="星河璀璨"><meta name="twitter:card" content="summary"><script type="text/javascript" id="hexo.configurations">var NexT=window.NexT||{},CONFIG={root:"/",scheme:"Gemini",version:"5.1.4",sidebar:{position:"left",display:"post",offset:12,b2t:!1,scrollpercent:!1,onmobile:!1},fancybox:!0,tabs:!0,motion:{enable:!0,async:!1,transition:{post_block:"fadeIn",post_header:"slideDownIn",post_body:"slideDownIn",coll_header:"slideLeftIn",sidebar:"slideUpIn"}},duoshuo:{userId:"0",author:"博主"},algolia:{applicationID:"",apiKey:"",indexName:"",hits:{per_page:10},labels:{input_placeholder:"Search for Posts",hits_empty:"We didn't find any results for the search: ${query}",hits_stats:"${hits} results found in ${time} ms"}}}</script><link rel="canonical" href="http://xinhecuican.github.io/post/26477.html"><title>linux指令学习 | Xinhecuican's Blog</title><meta name="generator" content="Hexo 4.2.1"></head><body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans"><div class="container sidebar-position-left page-post-detail"><div class="headband"></div><a href="https://your-url" target="_blank" rel="external nofollow noopener noreferrer" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill:#70b7fd;color:#fff;position:absolute;top:0;border:0;right:0" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin:130px 106px" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style><header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="header-inner"><div class="site-brand-wrapper"><div class="site-meta"><meta name="baidu-site-verification" content="EVZv9BO5R3Y"><meta name="google-site-verification" content="zmX9zYZL0QVB6fFG_e98QsQogwE11Vdf5hOd4xMbgN4"><div class="custom-logo-site-title"><a href="/" class="brand" rel="start"><span class="logo-line-before"><i></i></span> <span class="site-title">Xinhecuican's Blog</span> <span class="logo-line-after"><i></i></span></a></div><h1 class="site-subtitle" itemprop="description"></h1></div><div class="site-nav-toggle"><button><span class="btn-bar"></span> <span class="btn-bar"></span> <span class="btn-bar"></span></button></div></div><nav class="site-nav"><ul id="menu" class="menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i><br>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i><br>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i><br>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i><br>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i><br>归档</a></li><li class="menu-item menu-item-search"><a href="javascript:;" class="popup-trigger"><i class="menu-item-icon fa fa-search fa-fw"></i><br>搜索</a></li></ul><div class="site-search"><div class="popup search-popup local-search-popup"><div class="local-search-header clearfix"><span class="search-icon"><i class="fa fa-search"></i> </span><span class="popup-btn-close"><i class="fa fa-times-circle"></i></span><div class="local-search-input-wrapper"><input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input"></div></div><div id="local-search-result"></div></div></div></nav></div></header><main id="main" class="main"><div class="main-inner"><div class="content-wrap"><div id="content" class="content"><div id="posts" class="posts-expand"><article class="post post-type-normal" itemscope itemtype="http://schema.org/Article"><div class="post-block"><link itemprop="mainEntityOfPage" href="http://xinhecuican.github.io/post/26477.html"><span hidden itemprop="author" itemscope itemtype="http://schema.org/Person"><meta itemprop="name" content="星河璀璨"><meta itemprop="description" content><meta itemprop="image" content="/images/avatar.gif"></span><span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization"><meta itemprop="name" content="Xinhecuican's Blog"></span><header class="post-header"><h2 class="post-title" itemprop="name headline">linux指令学习</h2><div class="post-meta"><span class="post-time"><span class="post-meta-item-icon"><i class="fa fa-calendar-o"></i> </span><span class="post-meta-item-text">发表于</span> <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-16T10:20:00+08:00">2020-02-16 </time></span><span class="post-category"><span class="post-meta-divider">|</span> <span class="post-meta-item-icon"><i class="fa fa-folder-o"></i> </span><span class="post-meta-item-text">分类于</span> <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Linux/" itemprop="url" rel="index"><span itemprop="name">Linux</span></a></span></span></div></header><div class="post-body" itemprop="articleBody"><h5 id="命令语法"><a href="#命令语法" class="headerlink" title="命令语法"></a>命令语法</h5><p>一次输入多条命令，可以在命令之间用 <code>;</code>分割开来</p><p>语法： 命令名称 选项 参数</p><p><strong>选项</strong>有时被称为开关（switches）或标志（flags），选项通常是由一个连字符后面接着一些字母，或者两个连字符后接着一个单词构成。例如 —help，—version（显示版本信息）</p><p>使用多个单字符选项时，可以把他们连接在一起，用一个连字符来表示。例如 ls -lF<br>。注意，unix的选项区分大小写</p><p>实际上许多长参数有着对应的短参数，但是长参数是一个完整的单词，为了便于记忆，有时也是用长参数，这时就要用两个连字符</p><p>输入命令时，必须要把每个选项和参数用空格分隔开</p><p>有些命令有默认值，有些命令没有默认值，例如 ls 如果只输入ls的话他会返回当前工作目录下所有文件</p><p>手册中提示的语法</p><ol><li>方括号中的项是可选的</li><li>不再方括号中的项是必选项</li><li>黑体字必须原样输入</li><li>斜体字可以用适当的值代替</li><li>有省略号代表可以重复多次</li><li>如果一个单独的选项和参数组合在一起，这二者必须同时出现</li><li>由竖线（|）字符分开的两个或者多个项，宝石可以从这个列表中选择任意一项</li></ol><h5 id="用户提醒命令"><a href="#用户提醒命令" class="headerlink" title="用户提醒命令"></a>用户提醒命令</h5><ul><li>who 用来显示用这个计算机的用户</li><li>whoami 用来显示当前用户标识</li><li>quota 用来看自己拥有多少空间</li><li>lock 临时上锁 lock -5 锁5分钟</li><li>leave leave +15 十五分钟后离开 leave 1344 13点44分离开，到了时间它会不停的提醒你，相当于一个闹钟</li><li>id 用来显示你的基本信息</li><li>date 时间 date -u 协调世界时间（UTC时间）</li><li>cal 显示日历 cal+某一年份可以显示某一年份的日历 cal 7 2019 显示2019年7月的日历 cal -j +… 会显示第几天，所以想要知道这一年是不是闰年只需 cal -j 12 + 年份，看看12月最后一天是不是366天就可以了</li><li>su（substitute user） 这个指令是用来切换用户的，如果你知道一个用户的口令，那么就可以采用su+用户名的方式切换，这个时候用户标识改变了，但是你仍位于旧的环境之中。就像你让别人来你家做事，如果你想让别人在自己家做事，就要用su+’-‘+用户名</li></ul><p>特别的，如果你想拥有root权限，你需要 su - root ，这时你输入的是你自己的口令而不是root口令，因为在计算机中有特殊的配置文件，这个文件只有管理员能操作，他可以修改那些人可以通过su口令获得root权限</p><ul><li>man 联机文档帮助 当你查看联机文档时，可以用/符加上你想搜索的内容进行搜索，用n来显示下一个，用N来显示上一个。？符是向下搜索。<br>如果想在查看man文档时执行指令，只需输入！在输入命令，之后按enter键又能回到man文档中</li><li>foo bar 可以指代任意标识<br>man文档显示的内容</li></ul><ol><li>命令</li><li>系统调用</li><li>库函数</li><li>特殊文件</li><li>文件格式</li><li>游戏</li><li>杂项</li><li>系统管理</li></ol><ul><li>whatis 显示说明书页的第一行（名字和用途）例如 whatis time date，这样同时显示两条指令的信息。这种指令可以用 man -f 替换</li><li>apropos 搜索命令 他将显示所有带有该字符的命令。这种命令可以用man -k代替</li><li><p>info 另一种搜索命令，这种命令的特点是它有到其他命令的连接，就好像网页一样。这时一种树形结构，n跳转到下一个节点，p跳转到上一个节点，t跳转到当前文件的顶节点</p><h5 id="登入登出命令"><a href="#登入登出命令" class="headerlink" title="登入登出命令"></a>登入登出命令</h5></li><li><p>exit 退出当前用户，例如想从root模式退出用exit</p></li><li>sudo 以超级用户模式运行一条指令。如果你经常使用超级用户，可能在无意间删去一些重要文件导致系统出现故障，因此超级用户需慎用。因此要用可以用sudo命令。</li><li>less 浏览配置文件。例如我想浏览passwd文件，只需 less /etc/passwd</li></ul><p>配置文件就像windows系统下的注册表和ini文件</p><ul><li>dmesg 显示启动信息，但是这种显示太快，看不清</li><li>dmesg | less 显示启动信息</li><li>init 设置运行级别，1为单用户，2为多用户，等等，0是关机，6是重启</li></ul><p>如果想重启，可以用 sudo init 6</p><ul><li>reboot 重启 sudo reboot</li><li>shutdown 关机，这个要说关机时间，经常用的是sudo shutdown now</li></ul><h5 id="快捷键和便捷输入命令"><a href="#快捷键和便捷输入命令" class="headerlink" title="快捷键和便捷输入命令"></a>快捷键和便捷输入命令</h5><ul><li>erase 删除最好一个键入的字符，Ctrl+H</li><li>werase 删除最后一个单词 Ctrl+W</li><li>kill 删除一行 Ctrl+U</li><li>intr 停止程序 有些系统是Ctrl+C，有些是delete</li><li>quit 停止程序 Ctrl+\ 它不仅会停止程序，还会生成一个副本保存在core的文件中</li><li>stop 停止屏幕显示，Ctrl+S</li><li>start 开始屏幕显示 Ctrl+Q</li><li>eof 文件终止信号 Ctrl+D<br>可以通过Ctrl+D终止shell，但是有时候会不小心按到。为了让shell忽略eof，需要使用一个叫IGNOREEOF的环境变量，这个变量表示注销前BASH会忽略多少次eof，设置这个变量时，要 IGNOREEOF = 数字</li><li>stty -a 显示键盘映射，这个命令是表示各个快捷方式如erase的快捷键。stty是set terminal(设置终端）-a表示显示所有设置</li><li>stty 修改键映射。例如想修改kill命令 ，可以 stty kill Ctrl a</li><li>返回字符 ^M，指的是返回到这一行的开头</li><li>换行字符 ^J<br>文件每一行最后一定是一个返回加换行</li><li>stty sane，reset 候终端的设置被弄乱，可以采用这个命令是终端恢复到初始值</li><li>up 向上键，会转到上一条指令</li><li>down 转到下一条指令</li><li>fc 查看历史命令列表，用fc -l来查看，前面都有一个编号。如果想转到某一条指令，可以 fc -s(substitute) 编号。如果后面不接编号，则默认为上一条指令。但是用fc -s会立刻执行这条指令</li></ul><p>可以对这条命令进行小范围修改，格式为 fc -s pattern=replacement number<br>。pattern和replacement 都是字符串，而number是要修改时间的编号</p><ul><li>tab 自动补全命令，按一下如果有歧义，会发出提示声<h5 id="立即使用的程序"><a href="#立即使用的程序" class="headerlink" title="立即使用的程序"></a>立即使用的程序</h5></li><li>gedit 文本编辑器，相当于windows下的记事本</li><li>which 看某个命令会使用那些程序，如果显示地址，则说明有这些程序，如果没有输出，或者输出错误信息，则说明这个命令无法使用</li><li>quit 终止程序命令，但是也可以输入eof使程序终止</li><li>bc 计算器 如果想用bc内部的函数，要用bc -l命令（library)。如果是多个算式，中间要用”;”号隔开</li></ul><p>常用函数<br></p><div class="highlight-wrap" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true" data-rel="STYLUS"><figure class="iseeu highlight /stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">s</span><span class="params">(x)</span></span> sinx  弧度制</span><br><span class="line"><span class="function"><span class="title">c</span><span class="params">(x)</span></span> cosx</span><br><span class="line"><span class="function"><span class="title">a</span><span class="params">(x)</span></span> arctanx</span><br><span class="line"><span class="function"><span class="title">ln</span><span class="params">(x)</span></span></span><br><span class="line"><span class="function"><span class="title">j</span><span class="params">(n,x)</span></span>  x的n次整阶贝塞尔函数</span><br></pre></td></tr></table></figure></div><br>如果想用小数运算，先要设置标度因子 scale 来确定精确到小数点后多少位。如果输入scale 则会返回scale的当前值 scale=3，则设置小数点后三位<p></p><p>有一点需要注意，当你用来 bc -l时，scale会自动设置为20</p><p>bc实际上是一套功能完整的数学编程语言，可以使用的变量有26个字母<br>例如 x=100 就是将x变量设为100</p><h5 id="变量显示命令"><a href="#变量显示命令" class="headerlink" title="变量显示命令"></a>变量显示命令</h5><p>环境变量实际上就是全局变量，用env显示环境变量，如果想让输出按字母表排序，可以用 env | sort | less</p><ul><li><p>set 显示shell变量</p></li><li><p>echo 显示赋予它对象的值，例如 echo I 将会输出I</p></li></ul><p>如果要显示一个变量的值，可以用$(美元符号），后面的变量最好加花括号（{}）</p><p>例如 echo ${TERM}</p><p>实际上，很多标点符号都有特殊的用途，为了能正确显示他们，要在最外面用双引号</p><ul><li><p>变量创建只需要一边写变量名，另一边写值即可。例如，HARLEY=cool，如果希望变量中有空格，则需使用双引号</p></li><li><p>export 将变量导出环境中（即变成全局变量）。还可以在创建同时导出。用 export 变量名=值即可</p></li><li><p>unset 删除变量。实际上没有办法简单的从环境中移除变量，因此最简单的办法是直接删除它。</p></li><li><p>set 显示shell所有选项的当前值，如果用 -o 则会简要的显示 +o是详细的显示。例如，set -o ignoreeof 这样在按 Ctrl+D的时候就不会突出shell了，如果想复位，只要+o</p></li><li><p>alias 建立别名，语法为alias name=command 例如 <code>alias It=&#39;-l temp*&#39;</code>。这种时候，单引号就比双引号要好，因为这样可以防止一些特殊字符被转义。此外，可以通过alias name 知道这个别名的当前值。可以只输入alias得知所有别名，通过unalias删去别名。如果想暂时不用别名，可以在命令之前输入” \ “</p></li></ul><h5 id="文件显示指令"><a href="#文件显示指令" class="headerlink" title="文件显示指令"></a>文件显示指令</h5><ul><li>less，这条指令是让大量的数据分成一页一页进行查看，如果不使用这个程序。那么输出时会直接到这些数据的末尾。less在正常情况下是区分大小写的，如果想不区分，可以使用I选项。此外，less命令内部还有许多搜索，翻页等指令，这些指令可以通过help去查看。</li></ul><p>less还有一个特殊的功能，就是直接跳转到某一页。less +5g …代表跳转到第5页，less +/buffer …是从第一个buffer处开始。</p><h6 id="显示十六进制文件"><a href="#显示十六进制文件" class="headerlink" title="显示十六进制文件"></a>显示十六进制文件</h6><p>显示二进制文件的命令是 hexdump（显示十六进制文件），od（显示八进制文件），</p><p>hexdump -C file。将自动选取适合的选项组合进行输出。</p><p>-s 偏移一定字节数开始输出。</p><p>-n 显示多少字节输出</p><p>strings: 显示二进制文件中的字符串</p><h5 id="条件执行指令"><a href="#条件执行指令" class="headerlink" title="条件执行指令"></a>条件执行指令</h5><p>command1 &amp;&amp; command2</p><p>在条件1满足的情况下执行command2</p><p>command1|| command2</p><p>在条件1不满足的情况下也执行command2</p><h5 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h5><p>regular expression 通常简写成regex或re，是一种指定字符串模式的输出方式。</p><p>例如： harley1 harley2 harley3 ，作为正则表达式，可以用harley[123]表达这组模式。</p><p>从这里我们可以了解到，正则表达式就像把许多字符串化为一个表达式。</p><p>下面介绍一些常用的正则表达式</p><div class="table-container"><table><thead><tr><th>元字符</th><th>含义</th></tr></thead><tbody><tr><td>.</td><td>除新行字符外，匹配任意的单个字符</td></tr><tr><td>^</td><td>锚，匹配行的开头</td></tr><tr><td>$</td><td>锚，匹配行的末尾</td></tr><tr><td>\ &lt;</td><td>锚，匹配单词的开头</td></tr><tr><td>\ &gt;</td><td>锚，匹配单词的末尾</td></tr><tr><td>[list]</td><td>字符类，匹配list中的任意字符</td></tr><tr><td>^[list]</td><td>子父类，匹配不再list中的任意字符</td></tr><tr><td>()</td><td>组，视为一个单独的单元</td></tr><tr><td>竖线</td><td>匹配选择之一</td></tr><tr><td>\</td><td>引用： 从字面上解释元字符</td></tr><tr><td><strong>注意</strong></td><td><strong>下面是判定匹配次数的字符</strong></td></tr><tr><td>*</td><td>匹配0次或者多次</td></tr><tr><td>+</td><td>匹配一次或者多次</td></tr><tr><td>？</td><td>匹配0次或1次，如果是多个字符，则代表最小匹配。例如 &lt;.*?&gt;,这是用来匹配html标签的，如果同时匹配到多个，则选取匹配数目最少的</td></tr><tr><td>{n}</td><td>匹配n次</td></tr><tr><td>{0，m}</td><td>最多匹配m次</td></tr><tr><td>{n,}</td><td>最少匹配n次</td></tr><tr><td>{，m}</td><td>最多匹配m次</td></tr><tr><td>{n,m}</td><td>最少n次，最多m次</td></tr><tr><td><strong>注意</strong></td><td><strong>预定义字符类</strong></td></tr><tr><td>[:lower:]</td><td>小写字母</td></tr><tr><td>[:upper:]</td><td>大写字母</td></tr><tr><td>[:alpha:]</td><td>大小写字母</td></tr><tr><td>[:alnum:]</td><td>大小写字母，数字</td></tr><tr><td>[:digit:]</td><td>数字</td></tr><tr><td>[:punct:]</td><td>标点符号</td></tr><tr><td>[:blank:]</td><td>制表符或者空格</td></tr></tbody></table></div><h6 id="基本和扩展正则表达式"><a href="#基本和扩展正则表达式" class="headerlink" title="基本和扩展正则表达式"></a>基本和扩展正则表达式</h6><h6 id="匹配行和单词"><a href="#匹配行和单词" class="headerlink" title="匹配行和单词"></a>匹配行和单词</h6><p>有些元字符具有定位的作用，这些字符叫做<strong>锚</strong>。例如，harley$仍是匹配字符串harley，但是这个时候只匹配行末尾的字符了。</p><p>如果我们要找以harley开头的行，可以</p><p>grep ‘^harley’ data</p><p>注意，当我们使用含有元字符的表达式时，为了不干扰，最好加上单引号</p><p>通过使用 ^$ ，我们可以很方便的查找空行。这个的意思就是既找行首又找行尾，只有空行才满足这个条件。</p><p>例如： grep ‘^$’ data | wc -l</p><p>如果我们要找 某个字符位于开头的，可以用 \&lt;</p><p>例如： grep ‘\&lt;kn’ data，这个就是找kn为于单词开头的单词。或者grep ‘kn>‘ data</p><p>在linux系统中，可以采用\b代替\&lt;和>，\b相当于边界标记。此外，要尊重客观规律，不能把开头标记和结尾标记都写在开头。</p><p>如果想匹配所有包含字母 H ，后面加a或者A的，可以用 grep ‘H[aA]’ data</p><p>如果想表示一个范围，可以用 [a-b]，例如 [3-6] 或 [a-z]，这应该是按ascii码来的</p><p>grep ‘<sup><a href="#fn_A-Z,a-z" id="reffn_A-Z,a-z">A-Z,a-z</a></sup>‘ data可以用来搜索所有不包含字母的行</p><h6 id="重复使用运算符"><a href="#重复使用运算符" class="headerlink" title="重复使用运算符"></a>重复使用运算符</h6><p>例如，如果我想找首字母是大写H，后面接了0个或者多个字母的行，可以使用</p><p>grep ‘H[[:alpha:]]*’ data</p><p>如果想搜索一个或者多个，可以用+号，</p><p>例如： grep ‘variable[0-9]+’ data</p><p>到现在，我们一直使用单个字符作为查找对象，如果想用多个字符作为查找对象，就需要用到组（小括号）</p><p>例如： (xyz){5},这条命令就是查找重复出现xyz五次的字符串</p><p>如果我们想搜索多个单词，可以用 | 分隔开来。</p><p>例如： grep ‘(cat | dog | bird) ‘ data</p><p>如果我们想搜索有特殊含义的元字符，可以用(转义字符）把这些字符的含义变成常规字符，如果我们想搜索 \ 本身，那么可以用两个 \</p><p>例如： grep ‘$‘ data</p><h6 id="字典文件"><a href="#字典文件" class="headerlink" title="字典文件"></a>字典文件</h6><p>字典顾名思义，就是许多经常用的单词放到一起，每个单词一行，并且按照字母表顺序排列。一般储存在 /usr/share/dict/words中。</p><p>利用这个文件，我们就可以很方便的查找单词。例如，那些单词以qu开头并且以y结尾呢？</p><p>grep ‘^qu[a-z]+y$’ /usr/share/dict/words</p><h5 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h5><div class="table-container"><table><thead><tr><th>变量名</th><th>作用</th></tr></thead><tbody><tr><td>PATH</td><td>设置shell搜索路径</td></tr><tr><td>PS1</td><td>设置标识符</td></tr><tr><td>SHELL</td><td>shell路径</td></tr><tr><td>HISTSIZE</td><td>fc中最大保存的指令数</td></tr></tbody></table></div></div><div></div><footer class="post-footer"><div class="post-nav"><div class="post-nav-next post-nav-item"><a href="/post/9187.html" rel="next" title="开始使用unix"><i class="fa fa-chevron-left"></i> 开始使用unix</a></div><span class="post-nav-divider"></span><div class="post-nav-prev post-nav-item"><a href="/post/52078.html" rel="prev" title="顺序表">顺序表 <i class="fa fa-chevron-right"></i></a></div></div></footer></div></article><div class="post-spread"></div></div></div><iframe title="livere" src="https://was.livere.me/comment/city?id=city&refer=http://xinhecuican.github.io/post/26477.html&uid=MTAyMC80ODE3Mi8yNDY2OA==&site=http://xinhecuican.github.io/post/26477.html&title=linux指令学习" scrolling frameborder="0" id="lv-comment-399" style="min-width:100%;width:100px;min-height:400px;overflow:auto;border:0;z-index:124212;height:800px"></iframe></div><div class="sidebar-toggle"><div class="sidebar-toggle-line-wrap"><span class="sidebar-toggle-line sidebar-toggle-line-first"></span> <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span> <span class="sidebar-toggle-line sidebar-toggle-line-last"></span></div></div><aside id="sidebar" class="sidebar"><div class="sidebar-inner"><ul class="sidebar-nav motion-element"><li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">文章目录</li><li class="sidebar-nav-overview" data-target="site-overview-wrap">站点概览</li></ul><section class="site-overview-wrap sidebar-panel"><div class="site-overview"><div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person"><p class="site-author-name" itemprop="name">星河璀璨</p><p class="site-description motion-element" itemprop="description"></p></div><nav class="site-state motion-element"><div class="site-state-item site-state-posts"><a href="/archives/%7C%7C%20archive"><span class="site-state-item-count">152</span> <span class="site-state-item-name">日志</span></a></div><div class="site-state-item site-state-categories"><a href="/categories/index.html"><span class="site-state-item-count">18</span> <span class="site-state-item-name">分类</span></a></div><div class="site-state-item site-state-tags"><a href="/tags/index.html"><span class="site-state-item-count">6</span> <span class="site-state-item-name">标签</span></a></div></nav><div class="feed-link motion-element"><a href="/atom.xml" rel="alternate"><i class="fa fa-rss"></i> RSS</a></div></div></section><section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active"><div class="post-toc"><div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#命令语法"><span class="nav-number">1.</span> <span class="nav-text">命令语法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#用户提醒命令"><span class="nav-number">2.</span> <span class="nav-text">用户提醒命令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#登入登出命令"><span class="nav-number">3.</span> <span class="nav-text">登入登出命令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#快捷键和便捷输入命令"><span class="nav-number">4.</span> <span class="nav-text">快捷键和便捷输入命令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#立即使用的程序"><span class="nav-number">5.</span> <span class="nav-text">立即使用的程序</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#变量显示命令"><span class="nav-number">6.</span> <span class="nav-text">变量显示命令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#文件显示指令"><span class="nav-number">7.</span> <span class="nav-text">文件显示指令</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#显示十六进制文件"><span class="nav-number">7.1.</span> <span class="nav-text">显示十六进制文件</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#条件执行指令"><span class="nav-number">8.</span> <span class="nav-text">条件执行指令</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#正则表达式"><span class="nav-number">9.</span> <span class="nav-text">正则表达式</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#基本和扩展正则表达式"><span class="nav-number">9.1.</span> <span class="nav-text">基本和扩展正则表达式</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#匹配行和单词"><span class="nav-number">9.2.</span> <span class="nav-text">匹配行和单词</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#重复使用运算符"><span class="nav-number">9.3.</span> <span class="nav-text">重复使用运算符</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#字典文件"><span class="nav-number">9.4.</span> <span class="nav-text">字典文件</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#环境变量"><span class="nav-number">10.</span> <span class="nav-text">环境变量</span></a></li></ol></div></div></section></div></aside></div></main><footer id="footer" class="footer"><div class="footer-inner"><div class="copyright">&copy; <span itemprop="copyrightYear">2020</span> <span class="with-love"><i class="fa fa-user"></i> </span><span class="author" itemprop="copyrightHolder">星河璀璨</span></div><div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io" rel="external nofollow noopener noreferrer">Hexo</a> 强力驱动</div><span class="post-meta-divider">|</span><div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next" rel="external nofollow noopener noreferrer">NexT.Gemini</a> v5.1.4</div></div></footer><div class="back-to-top"><i class="fa fa-arrow-up"></i></div></div><script type="text/javascript">"[object Function]"!==Object.prototype.toString.call(window.Promise)&&(window.Promise=null)</script><script type="text/javascript" src="https://cdn.bootcss.com/jquery/2.1.3/jquery.min.js"></script><script type="text/javascript" src="https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js"></script><script type="text/javascript" src="https://cdn.bootcss.com/jquery_lazyload/1.9.7/jquery.lazyload.min.js"></script><script type="text/javascript" src="https://cdn.bootcss.com/velocity/1.2.1/velocity.min.js"></script><script type="text/javascript" src="https://cdn.bootcss.com/velocity/1.2.1/velocity.ui.min.js"></script><script type="text/javascript" src="https://cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.pack.js"></script><script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script><script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script><script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script><script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script><script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script><script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script><script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><script type="text/javascript">!function(e,t){var n=e.getElementsByTagName(t)[0];"function"!=typeof LivereTower&&((t=e.createElement(t)).src="https://cdn-city.livere.com/js/embed.dist.js",t.async=!0,n.parentNode.insertBefore(t,n))}(document,"script")</script><script type="text/javascript">var isfetched=!1,isXml=!0,search_path="search.xml";0===search_path.length?search_path="search.xml":/json$/i.test(search_path)&&(isXml=!1);var path="/"+search_path,onPopupClose=function(t){$(".popup").hide(),$("#local-search-input").val(""),$(".search-result-list").remove(),$("#no-result").remove(),$(".local-search-pop-overlay").remove(),$("body").css("overflow","")};function proceedsearch(){$("body").append('<div class="search-popup-overlay local-search-pop-overlay"></div>').css("overflow","hidden"),$(".search-popup-overlay").click(onPopupClose),$(".popup").toggle();var t=$("#local-search-input");t.attr("autocapitalize","none"),t.attr("autocorrect","off"),t.focus()}var searchFunc=function(t,e,s){"use strict";$("body").append('<div class="search-popup-overlay local-search-pop-overlay"><div id="search-loading-icon"><i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i></div></div>').css("overflow","hidden"),$("#search-loading-icon").css("margin","20% auto 0 auto").css("text-align","center"),$.ajax({url:t,dataType:isXml?"xml":"json",async:!0,success:function(t){isfetched=!0,$(".popup").detach().appendTo(".header-inner");var o=isXml?$("entry",t).map(function(){return{title:$("title",this).text(),content:$("content",this).text(),url:$("url",this).text()}}).get():t,n=document.getElementById(e),r=document.getElementById(s),t=function(){var m=n.value.trim().toLowerCase(),x=m.split(/[\s\-]+/);1<x.length&&x.push(m);var e,w=[];0<m.length&&o.forEach(function(t){var e=!1,o=0,h=0,n=t.title.trim(),r=n.toLowerCase(),s=t.content.trim().replace(/<[^>]+>/g,""),a=s.toLowerCase(),i=decodeURIComponent(t.url),c=[],l=[];if(""!=n&&(x.forEach(function(t){function e(t,e,o){var n=t.length;if(0===n)return[];var r,s=0,a=[];for(o||(e=e.toLowerCase(),t=t.toLowerCase());-1<(r=e.indexOf(t,s));)a.push({position:r,word:t}),s=r+n;return a}c=c.concat(e(t,r,!1)),l=l.concat(e(t,a,!1))}),(0<c.length||0<l.length)&&(e=!0,o=c.length+l.length)),e){function p(t,e,o,n){for(var r=n[n.length-1],s=r.position,a=r.word,i=[],c=0;s+a.length<=o&&0!=n.length;){a===m&&c++,i.push({position:s,length:a.length});var l=s+a.length;for(n.pop();0!=n.length&&(s=(r=n[n.length-1]).position,a=r.word,s<l);)n.pop()}return h+=c,{hits:i,start:e,end:o,searchTextCount:c}}[c,l].forEach(function(t){t.sort(function(t,e){return e.position!==t.position?e.position-t.position:t.word.length-e.word.length})});t=[];0!=c.length&&t.push(p(0,0,n.length,c));for(var u=[];0!=l.length;){var f=l[l.length-1],d=f.position,g=f.word,v=d-20,f=d+80;v<0&&(v=0),f<d+g.length&&(f=d+g.length),f>s.length&&(f=s.length),u.push(p(0,v,f,l))}u.sort(function(t,e){return t.searchTextCount!==e.searchTextCount?e.searchTextCount-t.searchTextCount:t.hits.length!==e.hits.length?e.hits.length-t.hits.length:t.start-e.start});e=parseInt("1");function $(o,t){var n="",r=t.start;return t.hits.forEach(function(t){n+=o.substring(r,t.position);var e=t.position+t.length;n+='<b class="search-keyword">'+o.substring(t.position,e)+"</b>",r=e}),n+=o.substring(r,t.end)}0<=e&&(u=u.slice(0,e));var C="";0!=t.length?C+="<li><a href='"+i+"' class='search-result-title'>"+$(n,t[0])+"</a>":C+="<li><a href='"+i+"' class='search-result-title'>"+n+"</a>",u.forEach(function(t){C+="<a href='"+i+'\'><p class="search-result">'+$(s,t)+"...</p></a>"}),C+="</li>",w.push({item:C,searchTextCount:h,hitCount:o,id:w.length})}}),1===x.length&&""===x[0]?r.innerHTML='<div id="no-result"><i class="fa fa-search fa-5x" /></div>':0===w.length?r.innerHTML='<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>':(w.sort(function(t,e){return t.searchTextCount!==e.searchTextCount?e.searchTextCount-t.searchTextCount:t.hitCount!==e.hitCount?e.hitCount-t.hitCount:e.id-t.id}),e='<ul class="search-result-list">',w.forEach(function(t){e+=t.item}),e+="</ul>",r.innerHTML=e)};n.addEventListener("input",t),$(".local-search-pop-overlay").remove(),$("body").css("overflow",""),proceedsearch()}})};$(".popup-trigger").click(function(t){t.stopPropagation(),!1===isfetched?searchFunc(path,"local-search-input","local-search-result"):proceedsearch()}),$(".popup-btn-close").click(onPopupClose),$(".popup").click(function(t){t.stopPropagation()}),$(document).on("keyup",function(t){27===t.which&&$(".search-popup").is(":visible")&&onPopupClose()})</script><script>!function(){var t=document.createElement("script"),e=window.location.protocol.split(":")[0];t.src="https"===e?"https://zz.bdstatic.com/linksubmit/push.js":"http://push.zhanzhang.baidu.com/push.js";e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(t,e)}()</script><script type="text/x-mathjax-config">MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+<!DOCTYPE html><html lang="zh-Hans" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>linux指令学习 | Xinhecuican's Blog</title><meta name="author" content="星河璀璨"><meta name="copyright" content="星河璀璨"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="description" content="命令语法一次输入多条命令，可以在命令之间用 ;分割开来 语法： 命令名称 选项 参数 选项有时被称为开关（switches）或标志（flags），选项通常是由一个连字符后面接着一些字母，或者两个连字符后接着一个单词构成。例如 —help，—version（显示版本信息） 使用多个单字符选项时，可以把他们连接在一起，用一个连字符来表示。例如 ls -lF。注意，unix的选项区分大小写 实际上许多长">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux指令学习">
+<meta property="og:url" content="http://xinhecuican.github.io/post/26477.html">
+<meta property="og:site_name" content="Xinhecuican&#39;s Blog">
+<meta property="og:description" content="命令语法一次输入多条命令，可以在命令之间用 ;分割开来 语法： 命令名称 选项 参数 选项有时被称为开关（switches）或标志（flags），选项通常是由一个连字符后面接着一些字母，或者两个连字符后接着一个单词构成。例如 —help，—version（显示版本信息） 使用多个单字符选项时，可以把他们连接在一起，用一个连字符来表示。例如 ls -lF。注意，unix的选项区分大小写 实际上许多长">
+<meta property="og:locale">
+<meta property="og:image" content="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg">
+<meta property="article:published_time" content="2020-02-16T02:20:00.000Z">
+<meta property="article:modified_time" content="2020-09-29T01:34:07.773Z">
+<meta property="article:author" content="星河璀璨">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg"><link rel="shortcut icon" href="/img/favicon.png"><!--link(rel="canonical" href=urlNoIndex())--><link rel="preconnect" href="//cdn.jsdelivr.net"><link rel="preconnect" href="//busuanzi.ibruce.info"><meta name="google-site-verification" content="4hJ-bnA7PCrh-B4xC_dDIud_h3CNu-md9LidRVZTNxw"><meta name="baidu-site-verification" content="EVZv9BO5R3"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.10.5/dist/instantsearch.min.css"><script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.10.5/dist/instantsearch.min.js" defer></script><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: {"appId":"Z7A3XW4R2I","apiKey":"12db1ad54372045549ef465881c17e743","indexName":"my-hexo-blog","hits":{"per_page":6},"languages":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}.","hits_stats":"${hits} results found in ${time} ms"}},
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  ClickShowText: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"Traditional Chinese Activated Manually","cht_to_chs":"Simplified Chinese Activated Manually","day_to_night":"Dark Mode Activated Manually","night_to_day":"Light Mode Activated Manually","bgLight":"#49b1f5","bgDark":"#121212","position":"bottom-left"},
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+  },
+
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}
+
+// https://stackoverflow.com/questions/16839698/jquery-getscript-alternative-in-native-javascript
+const getScript = url => new Promise((resolve, reject) => {
+  const script = document.createElement('script')
+  script.src = url
+  script.async = true
+  script.onerror = reject
+  script.onload = script.onreadystatechange = function() {
+    const loadState = this.readyState
+    if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+    script.onload = script.onreadystatechange = null
+    resolve()
+  }
+  document.head.appendChild(script)
+})</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2020-09-29 09:34:07'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(function () {  window.activateDarkMode = function () {
+    document.documentElement.setAttribute('data-theme', 'dark')
+    if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+    }
+  }
+  window.activateLightMode = function () {
+    document.documentElement.setAttribute('data-theme', 'light')
+   if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+    }
+  }
+  const autoChangeMode = 'false'
+  const t = saveToLocal.get('theme')
+  if (autoChangeMode === '1') {
+    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+    const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+    const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+    if (t === undefined) {
+      if (isLightMode) activateLightMode()
+      else if (isDarkMode) activateDarkMode()
+      else if (isNotSpecified || hasNoSupport) {
+        const now = new Date()
+        const hour = now.getHours()
+        const isNight = hour <= 6 || hour >= 18
+        isNight ? activateDarkMode() : activateLightMode()
+      }
+      window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+        if (saveToLocal.get('theme') === undefined) {
+          e.matches ? activateDarkMode() : activateLightMode()
         }
-      });</script><script type="text/x-mathjax-config">MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-      });</script><script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({
-        TeX: { equationNumbers: { autoNumber: "AMS" } }
-      });</script><script type="text/javascript" src="/js/src/clipboard.min.js"></script><script type="text/javascript" src="/js/src/clipboard-use.js"></script><script type="text/javascript" src="/js/src/crash_cheat.js"></script><script type="text/javascript" src="/js/src/image.js"></script></body></html>
+      })
+    } else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else if (autoChangeMode === '2') {
+    const now = new Date()
+    const hour = now.getHours()
+    const isNight = hour <= 6 || hour >= 18
+    if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+    else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else {
+    if (t === 'dark') activateDarkMode()
+    else if (t === 'light') activateLightMode()
+  }const asideStatus = saveToLocal.get('aside-status')
+if (asideStatus !== undefined) {
+   if (asideStatus === 'hide') {
+     document.documentElement.classList.add('hide-aside')
+   } else {
+     document.documentElement.classList.remove('hide-aside')
+   }
+}})()</script><link rel="stylesheet" href="footer.min.css"><meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Xinhecuican's Blog" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">Loading...</div></div></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/null" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">152</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">Tags</div><div class="length-num">6</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">Categories</div><div class="length-num">18</div></a></div></div></div><hr><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Xinhecuican's Blog</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">linux指令学习</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2020-02-16T02:20:00.000Z" title="Created 2020-02-16 10:20:00">2020-02-16</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2020-09-29T01:34:07.773Z" title="Updated 2020-09-29 09:34:07">2020-09-29</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Linux/">Linux</a></span></div><div class="meta-secondline"> <span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">Word count:</span><span class="word-count">3.7k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">Reading time:</span><span>11min</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h5 id="命令语法"><a href="#命令语法" class="headerlink" title="命令语法"></a>命令语法</h5><p>一次输入多条命令，可以在命令之间用 <code>;</code>分割开来</p>
+<p>语法： 命令名称 选项 参数</p>
+<p><strong>选项</strong>有时被称为开关（switches）或标志（flags），选项通常是由一个连字符后面接着一些字母，或者两个连字符后接着一个单词构成。例如 —help，—version（显示版本信息）</p>
+<p>使用多个单字符选项时，可以把他们连接在一起，用一个连字符来表示。例如 ls -lF<br>。注意，unix的选项区分大小写</p>
+<p>实际上许多长参数有着对应的短参数，但是长参数是一个完整的单词，为了便于记忆，有时也是用长参数，这时就要用两个连字符</p>
+<p>输入命令时，必须要把每个选项和参数用空格分隔开</p>
+<p>有些命令有默认值，有些命令没有默认值，例如 ls 如果只输入ls的话他会返回当前工作目录下所有文件</p>
+<p>手册中提示的语法</p>
+<ol>
+<li>方括号中的项是可选的</li>
+<li>不再方括号中的项是必选项</li>
+<li>黑体字必须原样输入</li>
+<li>斜体字可以用适当的值代替</li>
+<li>有省略号代表可以重复多次</li>
+<li>如果一个单独的选项和参数组合在一起，这二者必须同时出现</li>
+<li>由竖线（|）字符分开的两个或者多个项，宝石可以从这个列表中选择任意一项</li>
+</ol>
+<h5 id="用户提醒命令"><a href="#用户提醒命令" class="headerlink" title="用户提醒命令"></a>用户提醒命令</h5><ul>
+<li>who 用来显示用这个计算机的用户</li>
+<li>whoami 用来显示当前用户标识</li>
+<li>quota 用来看自己拥有多少空间</li>
+<li>lock 临时上锁 lock -5 锁5分钟</li>
+<li>leave leave +15 十五分钟后离开 leave 1344 13点44分离开，到了时间它会不停的提醒你，相当于一个闹钟</li>
+<li>id 用来显示你的基本信息</li>
+<li>date 时间 date -u 协调世界时间（UTC时间）</li>
+<li>cal 显示日历 cal+某一年份可以显示某一年份的日历 cal 7 2019 显示2019年7月的日历 cal -j +… 会显示第几天，所以想要知道这一年是不是闰年只需 cal -j 12 + 年份，看看12月最后一天是不是366天就可以了</li>
+<li>su（substitute user） 这个指令是用来切换用户的，如果你知道一个用户的口令，那么就可以采用su+用户名的方式切换，这个时候用户标识改变了，但是你仍位于旧的环境之中。就像你让别人来你家做事，如果你想让别人在自己家做事，就要用su+’-‘+用户名</li>
+</ul>
+<p>特别的，如果你想拥有root权限，你需要 su - root ，这时你输入的是你自己的口令而不是root口令，因为在计算机中有特殊的配置文件，这个文件只有管理员能操作，他可以修改那些人可以通过su口令获得root权限</p>
+<ul>
+<li>man 联机文档帮助 当你查看联机文档时，可以用/符加上你想搜索的内容进行搜索，用n来显示下一个，用N来显示上一个。？符是向下搜索。<br>如果想在查看man文档时执行指令，只需输入！在输入命令，之后按enter键又能回到man文档中</li>
+<li>foo bar 可以指代任意标识<br>man文档显示的内容</li>
+</ul>
+<ol>
+<li>命令</li>
+<li>系统调用</li>
+<li>库函数</li>
+<li>特殊文件</li>
+<li>文件格式</li>
+<li>游戏</li>
+<li>杂项</li>
+<li>系统管理</li>
+</ol>
+<ul>
+<li>whatis 显示说明书页的第一行（名字和用途）例如 whatis time date，这样同时显示两条指令的信息。这种指令可以用 man -f 替换</li>
+<li>apropos 搜索命令 他将显示所有带有该字符的命令。这种命令可以用man -k代替</li>
+<li><p>info 另一种搜索命令，这种命令的特点是它有到其他命令的连接，就好像网页一样。这时一种树形结构，n跳转到下一个节点，p跳转到上一个节点，t跳转到当前文件的顶节点</p>
+<h5 id="登入登出命令"><a href="#登入登出命令" class="headerlink" title="登入登出命令"></a>登入登出命令</h5></li>
+<li><p>exit 退出当前用户，例如想从root模式退出用exit</p>
+</li>
+<li>sudo 以超级用户模式运行一条指令。如果你经常使用超级用户，可能在无意间删去一些重要文件导致系统出现故障，因此超级用户需慎用。因此要用可以用sudo命令。</li>
+<li>less 浏览配置文件。例如我想浏览passwd文件，只需 less /etc/passwd</li>
+</ul>
+<p>配置文件就像windows系统下的注册表和ini文件</p>
+<ul>
+<li>dmesg 显示启动信息，但是这种显示太快，看不清</li>
+<li>dmesg | less 显示启动信息</li>
+<li>init 设置运行级别，1为单用户，2为多用户，等等，0是关机，6是重启</li>
+</ul>
+<p>如果想重启，可以用 sudo init 6</p>
+<ul>
+<li>reboot 重启 sudo reboot</li>
+<li>shutdown 关机，这个要说关机时间，经常用的是sudo shutdown now</li>
+</ul>
+<h5 id="快捷键和便捷输入命令"><a href="#快捷键和便捷输入命令" class="headerlink" title="快捷键和便捷输入命令"></a>快捷键和便捷输入命令</h5><ul>
+<li>erase 删除最好一个键入的字符，Ctrl+H</li>
+<li>werase 删除最后一个单词 Ctrl+W</li>
+<li>kill 删除一行 Ctrl+U</li>
+<li>intr 停止程序 有些系统是Ctrl+C，有些是delete</li>
+<li>quit 停止程序 Ctrl+\ 它不仅会停止程序，还会生成一个副本保存在core的文件中</li>
+<li>stop 停止屏幕显示，Ctrl+S</li>
+<li>start 开始屏幕显示 Ctrl+Q</li>
+<li>eof 文件终止信号 Ctrl+D<br>可以通过Ctrl+D终止shell，但是有时候会不小心按到。为了让shell忽略eof，需要使用一个叫IGNOREEOF的环境变量，这个变量表示注销前BASH会忽略多少次eof，设置这个变量时，要 IGNOREEOF = 数字</li>
+<li>stty -a 显示键盘映射，这个命令是表示各个快捷方式如erase的快捷键。stty是set terminal(设置终端）-a表示显示所有设置</li>
+<li>stty 修改键映射。例如想修改kill命令 ，可以 stty kill Ctrl a</li>
+<li>返回字符 ^M，指的是返回到这一行的开头</li>
+<li>换行字符 ^J<br>文件每一行最后一定是一个返回加换行</li>
+<li>stty sane，reset 候终端的设置被弄乱，可以采用这个命令是终端恢复到初始值</li>
+<li>up 向上键，会转到上一条指令</li>
+<li>down 转到下一条指令</li>
+<li>fc 查看历史命令列表，用fc -l来查看，前面都有一个编号。如果想转到某一条指令，可以 fc -s(substitute) 编号。如果后面不接编号，则默认为上一条指令。但是用fc -s会立刻执行这条指令</li>
+</ul>
+<p>可以对这条命令进行小范围修改，格式为 fc -s pattern=replacement number<br>。pattern和replacement 都是字符串，而number是要修改时间的编号</p>
+<ul>
+<li>tab 自动补全命令，按一下如果有歧义，会发出提示声<h5 id="立即使用的程序"><a href="#立即使用的程序" class="headerlink" title="立即使用的程序"></a>立即使用的程序</h5></li>
+<li>gedit 文本编辑器，相当于windows下的记事本</li>
+<li>which 看某个命令会使用那些程序，如果显示地址，则说明有这些程序，如果没有输出，或者输出错误信息，则说明这个命令无法使用</li>
+<li>quit 终止程序命令，但是也可以输入eof使程序终止</li>
+<li>bc 计算器 如果想用bc内部的函数，要用bc -l命令（library)。如果是多个算式，中间要用”;”号隔开</li>
+</ul>
+<p>常用函数<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">s(x) sinx  弧度制</span><br><span class="line">c(x) cosx</span><br><span class="line">a(x) arctanx</span><br><span class="line">ln(x)</span><br><span class="line">j(n,x)  x的n次整阶贝塞尔函数</span><br></pre></td></tr></table></figure><br>如果想用小数运算，先要设置标度因子 scale 来确定精确到小数点后多少位。如果输入scale 则会返回scale的当前值 scale=3，则设置小数点后三位</p>
+<p>有一点需要注意，当你用来 bc -l时，scale会自动设置为20</p>
+<p>bc实际上是一套功能完整的数学编程语言，可以使用的变量有26个字母<br>例如 x=100 就是将x变量设为100</p>
+<h5 id="变量显示命令"><a href="#变量显示命令" class="headerlink" title="变量显示命令"></a>变量显示命令</h5><p>环境变量实际上就是全局变量，用env显示环境变量，如果想让输出按字母表排序，可以用 env | sort | less</p>
+<ul>
+<li><p>set 显示shell变量</p>
+</li>
+<li><p>echo 显示赋予它对象的值，例如 echo I 将会输出I</p>
+</li>
+</ul>
+<p>如果要显示一个变量的值，可以用$(美元符号），后面的变量最好加花括号（{}）</p>
+<p>例如 echo ${TERM}</p>
+<p>实际上，很多标点符号都有特殊的用途，为了能正确显示他们，要在最外面用双引号</p>
+<ul>
+<li><p>变量创建只需要一边写变量名，另一边写值即可。例如，HARLEY=cool，如果希望变量中有空格，则需使用双引号</p>
+</li>
+<li><p>export 将变量导出环境中（即变成全局变量）。还可以在创建同时导出。用 export 变量名=值即可</p>
+</li>
+<li><p>unset 删除变量。实际上没有办法简单的从环境中移除变量，因此最简单的办法是直接删除它。</p>
+</li>
+<li><p>set 显示shell所有选项的当前值，如果用 -o 则会简要的显示 +o是详细的显示。例如，set -o ignoreeof 这样在按 Ctrl+D的时候就不会突出shell了，如果想复位，只要+o</p>
+</li>
+<li><p>alias 建立别名，语法为alias name=command 例如 <code>alias It=&#39;-l temp*&#39;</code>。这种时候，单引号就比双引号要好，因为这样可以防止一些特殊字符被转义。此外，可以通过alias name 知道这个别名的当前值。可以只输入alias得知所有别名，通过unalias删去别名。如果想暂时不用别名，可以在命令之前输入” \ “</p>
+</li>
+</ul>
+<h5 id="文件显示指令"><a href="#文件显示指令" class="headerlink" title="文件显示指令"></a>文件显示指令</h5><ul>
+<li>less，这条指令是让大量的数据分成一页一页进行查看，如果不使用这个程序。那么输出时会直接到这些数据的末尾。less在正常情况下是区分大小写的，如果想不区分，可以使用I选项。此外，less命令内部还有许多搜索，翻页等指令，这些指令可以通过help去查看。</li>
+</ul>
+<p>less还有一个特殊的功能，就是直接跳转到某一页。less +5g …代表跳转到第5页，less +/buffer …是从第一个buffer处开始。</p>
+<h6 id="显示十六进制文件"><a href="#显示十六进制文件" class="headerlink" title="显示十六进制文件"></a>显示十六进制文件</h6><p>显示二进制文件的命令是 hexdump（显示十六进制文件），od（显示八进制文件），</p>
+<p>hexdump -C file。将自动选取适合的选项组合进行输出。</p>
+<p>-s 偏移一定字节数开始输出。</p>
+<p>-n 显示多少字节输出</p>
+<p>strings: 显示二进制文件中的字符串</p>
+<h5 id="条件执行指令"><a href="#条件执行指令" class="headerlink" title="条件执行指令"></a>条件执行指令</h5><p>command1 &amp;&amp; command2</p>
+<p>在条件1满足的情况下执行command2</p>
+<p>command1|| command2</p>
+<p>在条件1不满足的情况下也执行command2</p>
+<h5 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h5><p>regular expression 通常简写成regex或re，是一种指定字符串模式的输出方式。</p>
+<p>例如： harley1 harley2 harley3 ，作为正则表达式，可以用harley[123]表达这组模式。</p>
+<p>从这里我们可以了解到，正则表达式就像把许多字符串化为一个表达式。</p>
+<p>下面介绍一些常用的正则表达式</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>元字符</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>.</td>
+<td>除新行字符外，匹配任意的单个字符</td>
+</tr>
+<tr>
+<td>^</td>
+<td>锚，匹配行的开头</td>
+</tr>
+<tr>
+<td>$</td>
+<td>锚，匹配行的末尾</td>
+</tr>
+<tr>
+<td>\ &lt;</td>
+<td>锚，匹配单词的开头</td>
+</tr>
+<tr>
+<td>\ &gt;</td>
+<td>锚，匹配单词的末尾</td>
+</tr>
+<tr>
+<td>[list]</td>
+<td>字符类，匹配list中的任意字符</td>
+</tr>
+<tr>
+<td>^[list]</td>
+<td>子父类，匹配不再list中的任意字符</td>
+</tr>
+<tr>
+<td>()</td>
+<td>组，视为一个单独的单元</td>
+</tr>
+<tr>
+<td>竖线</td>
+<td>匹配选择之一</td>
+</tr>
+<tr>
+<td>\</td>
+<td>引用： 从字面上解释元字符</td>
+</tr>
+<tr>
+<td><strong>注意</strong></td>
+<td><strong>下面是判定匹配次数的字符</strong></td>
+</tr>
+<tr>
+<td>*</td>
+<td>匹配0次或者多次</td>
+</tr>
+<tr>
+<td>+</td>
+<td>匹配一次或者多次</td>
+</tr>
+<tr>
+<td>？</td>
+<td>匹配0次或1次，如果是多个字符，则代表最小匹配。例如 &lt;.*?&gt;,这是用来匹配html标签的，如果同时匹配到多个，则选取匹配数目最少的</td>
+</tr>
+<tr>
+<td>{n}</td>
+<td>匹配n次</td>
+</tr>
+<tr>
+<td>{0，m}</td>
+<td>最多匹配m次</td>
+</tr>
+<tr>
+<td>{n,}</td>
+<td>最少匹配n次</td>
+</tr>
+<tr>
+<td>{，m}</td>
+<td>最多匹配m次</td>
+</tr>
+<tr>
+<td>{n,m}</td>
+<td>最少n次，最多m次</td>
+</tr>
+<tr>
+<td><strong>注意</strong></td>
+<td><strong>预定义字符类</strong></td>
+</tr>
+<tr>
+<td>[:lower:]</td>
+<td>小写字母</td>
+</tr>
+<tr>
+<td>[:upper:]</td>
+<td>大写字母</td>
+</tr>
+<tr>
+<td>[:alpha:]</td>
+<td>大小写字母</td>
+</tr>
+<tr>
+<td>[:alnum:]</td>
+<td>大小写字母，数字</td>
+</tr>
+<tr>
+<td>[:digit:]</td>
+<td>数字</td>
+</tr>
+<tr>
+<td>[:punct:]</td>
+<td>标点符号</td>
+</tr>
+<tr>
+<td>[:blank:]</td>
+<td>制表符或者空格</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h6 id="基本和扩展正则表达式"><a href="#基本和扩展正则表达式" class="headerlink" title="基本和扩展正则表达式"></a>基本和扩展正则表达式</h6><h6 id="匹配行和单词"><a href="#匹配行和单词" class="headerlink" title="匹配行和单词"></a>匹配行和单词</h6><p>有些元字符具有定位的作用，这些字符叫做<strong>锚</strong>。例如，harley$仍是匹配字符串harley，但是这个时候只匹配行末尾的字符了。</p>
+<p>如果我们要找以harley开头的行，可以</p>
+<p>grep ‘^harley’ data</p>
+<p>注意，当我们使用含有元字符的表达式时，为了不干扰，最好加上单引号</p>
+<p>通过使用 ^$ ，我们可以很方便的查找空行。这个的意思就是既找行首又找行尾，只有空行才满足这个条件。</p>
+<p>例如： grep ‘^$’ data | wc -l</p>
+<p>如果我们要找 某个字符位于开头的，可以用 \&lt;</p>
+<p>例如： grep ‘\&lt;kn’ data，这个就是找kn为于单词开头的单词。或者grep ‘kn>‘ data</p>
+<p>在linux系统中，可以采用\b代替\&lt;和>，\b相当于边界标记。此外，要尊重客观规律，不能把开头标记和结尾标记都写在开头。</p>
+<p>如果想匹配所有包含字母 H ，后面加a或者A的，可以用 grep ‘H[aA]’ data</p>
+<p>如果想表示一个范围，可以用 [a-b]，例如 [3-6] 或 [a-z]，这应该是按ascii码来的</p>
+<p>grep ‘<sup><a href="#fn_A-Z,a-z" id="reffn_A-Z,a-z">A-Z,a-z</a></sup>‘ data可以用来搜索所有不包含字母的行</p>
+<h6 id="重复使用运算符"><a href="#重复使用运算符" class="headerlink" title="重复使用运算符"></a>重复使用运算符</h6><p>例如，如果我想找首字母是大写H，后面接了0个或者多个字母的行，可以使用</p>
+<p>grep ‘H[[:alpha:]]*’ data</p>
+<p>如果想搜索一个或者多个，可以用+号，</p>
+<p>例如： grep ‘variable[0-9]+’ data</p>
+<p>到现在，我们一直使用单个字符作为查找对象，如果想用多个字符作为查找对象，就需要用到组（小括号）</p>
+<p>例如： (xyz){5},这条命令就是查找重复出现xyz五次的字符串</p>
+<p>如果我们想搜索多个单词，可以用 | 分隔开来。</p>
+<p>例如： grep ‘(cat | dog | bird) ‘ data</p>
+<p>如果我们想搜索有特殊含义的元字符，可以用(转义字符）把这些字符的含义变成常规字符，如果我们想搜索 \ 本身，那么可以用两个 \ </p>
+<p>例如： grep ‘$‘ data</p>
+<h6 id="字典文件"><a href="#字典文件" class="headerlink" title="字典文件"></a>字典文件</h6><p>字典顾名思义，就是许多经常用的单词放到一起，每个单词一行，并且按照字母表顺序排列。一般储存在 /usr/share/dict/words中。</p>
+<p>利用这个文件，我们就可以很方便的查找单词。例如，那些单词以qu开头并且以y结尾呢？</p>
+<p>grep ‘^qu[a-z]+y$’ /usr/share/dict/words</p>
+<h5 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h5><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>变量名</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PATH</td>
+<td>设置shell搜索路径</td>
+</tr>
+<tr>
+<td>PS1</td>
+<td>设置标识符</td>
+</tr>
+<tr>
+<td>SHELL</td>
+<td>shell路径</td>
+</tr>
+<tr>
+<td>HISTSIZE</td>
+<td>fc中最大保存的指令数</td>
+</tr>
+</tbody>
+</table>
+</div>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined" rel="external nofollow noopener noreferrer" target="_blank">星河璀璨</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://xinhecuican.github.io/post/26477.html">http://xinhecuican.github.io/post/26477.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/post/52078.html"><img class="prev-cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">Previous Post</div><div class="prev_info">顺序表</div></div></a></div><div class="next-post pull-right"><a href="/post/9187.html"><img class="next-cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">开始使用unix</div></div></a></div></nav><hr><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> Comment</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside_content" id="aside_content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="card-content"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%91%BD%E4%BB%A4%E8%AF%AD%E6%B3%95"><span class="toc-number">1.</span> <span class="toc-text">命令语法</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E6%8F%90%E9%86%92%E5%91%BD%E4%BB%A4"><span class="toc-number">2.</span> <span class="toc-text">用户提醒命令</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%99%BB%E5%85%A5%E7%99%BB%E5%87%BA%E5%91%BD%E4%BB%A4"><span class="toc-number">3.</span> <span class="toc-text">登入登出命令</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%BF%AB%E6%8D%B7%E9%94%AE%E5%92%8C%E4%BE%BF%E6%8D%B7%E8%BE%93%E5%85%A5%E5%91%BD%E4%BB%A4"><span class="toc-number">4.</span> <span class="toc-text">快捷键和便捷输入命令</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%AB%8B%E5%8D%B3%E4%BD%BF%E7%94%A8%E7%9A%84%E7%A8%8B%E5%BA%8F"><span class="toc-number">5.</span> <span class="toc-text">立即使用的程序</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8F%98%E9%87%8F%E6%98%BE%E7%A4%BA%E5%91%BD%E4%BB%A4"><span class="toc-number">6.</span> <span class="toc-text">变量显示命令</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E6%98%BE%E7%A4%BA%E6%8C%87%E4%BB%A4"><span class="toc-number">7.</span> <span class="toc-text">文件显示指令</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E6%98%BE%E7%A4%BA%E5%8D%81%E5%85%AD%E8%BF%9B%E5%88%B6%E6%96%87%E4%BB%B6"><span class="toc-number">7.1.</span> <span class="toc-text">显示十六进制文件</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%9D%A1%E4%BB%B6%E6%89%A7%E8%A1%8C%E6%8C%87%E4%BB%A4"><span class="toc-number">8.</span> <span class="toc-text">条件执行指令</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-number">9.</span> <span class="toc-text">正则表达式</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E5%92%8C%E6%89%A9%E5%B1%95%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-number">9.1.</span> <span class="toc-text">基本和扩展正则表达式</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E5%8C%B9%E9%85%8D%E8%A1%8C%E5%92%8C%E5%8D%95%E8%AF%8D"><span class="toc-number">9.2.</span> <span class="toc-text">匹配行和单词</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E9%87%8D%E5%A4%8D%E4%BD%BF%E7%94%A8%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-number">9.3.</span> <span class="toc-text">重复使用运算符</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E5%AD%97%E5%85%B8%E6%96%87%E4%BB%B6"><span class="toc-number">9.4.</span> <span class="toc-text">字典文件</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="toc-number">10.</span> <span class="toc-text">环境变量</span></a></li></ol></div></div></div><div class="card-widget card-recent-post"><div class="card-content"><div class="item-headline"><i class="fas fa-history"></i><span>Recent Post</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/post/74e7fdff.html" title="抽样分布定理证明"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="抽样分布定理证明"></a><div class="content"><a class="title" href="/post/74e7fdff.html" title="抽样分布定理证明">抽样分布定理证明</a><time datetime="2020-11-18T11:02:00.000Z" title="Created 2020-11-18 19:02:00">2020-11-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/a50b8908.html" title="回溯法和分支限界法"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="回溯法和分支限界法"></a><div class="content"><a class="title" href="/post/a50b8908.html" title="回溯法和分支限界法">回溯法和分支限界法</a><time datetime="2020-11-09T08:25:00.000Z" title="Created 2020-11-09 16:25:00">2020-11-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/eefe591f.html" title="进程与线程"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="进程与线程"></a><div class="content"><a class="title" href="/post/eefe591f.html" title="进程与线程">进程与线程</a><time datetime="2020-10-23T10:36:00.000Z" title="Created 2020-10-23 18:36:00">2020-10-23</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/7f3bcd7f.html" title="分治法"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="分治法"></a><div class="content"><a class="title" href="/post/7f3bcd7f.html" title="分治法">分治法</a><time datetime="2020-10-17T13:29:00.000Z" title="Created 2020-10-17 21:29:00">2020-10-17</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/post/71038564.html" title="复杂度"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="复杂度"></a><div class="content"><a class="title" href="/post/71038564.html" title="复杂度">复杂度</a><time datetime="2020-10-02T05:52:00.000Z" title="Created 2020-10-02 13:52:00">2020-10-02</time></div></div></div></div></div></div></div></main><footer id="footer" style="background-image: url(https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg)"><div id="footer-wrap"><div class="copyright">&copy;2020 By 星河璀璨</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="external nofollow noopener noreferrer" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="Switch Between Traditional Chinese And Simplified Chinese">繁</button><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="Scroll To Comments"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div id="algolia-search"><div class="search-dialog"><div class="search-dialog__title" id="algolia-search-title">Algolia</div><div id="algolia-input-panel"><div id="algolia-search-input"></div></div><hr><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-stats"></div></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script src="/js/search/algolia.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> {preloader.endLoading()})</script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    let initData = {
+      el: '#vcomment',
+      appId: 'ppBSSMr3xMsbRBArQedKeS5B-gzGzoHsz',
+      appKey: 'cdaxbHoq61wB6rrC3hTn2Ubo',
+      placeholder: '别让博主寂寞太久',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'zh-CN',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      path: window.location.pathname,
+    }
+
+    if (true) { 
+      initData.requiredFields= ('nick,mail'.split(','))
+    }
+    
+    if (false) {
+      const otherData = false
+      initData = Object.assign({}, initData, otherData)
+    }
+    
+    const valine = new Valine(initData)
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.querySelector('#vcomment'),loadValine)
+  else setTimeout(() => loadValine(), 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zindex="-1" mobile="false" data-click="false"></script></div></body></html>
