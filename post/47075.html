@@ -194,7 +194,7 @@ and al,00111011b
 <p>div bx 这个除数是16位，则要用dx和ax两个寄存器来储存被除数，先转为16进制，dx储存高位，ax储存低位</p>
 <p>例 计算 100001/100<br>
 被除数大于65536，因此要用32位 寄存器，100001的16进制是186A1h</p>
-  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mov dx，1h</span><br><span class="line">mov ax,86A1h</span><br><span class="line">mov bx,100</span><br><span class="line">div bx</span><br></pre></td></tr></table></figure>
+  <figure class="highlight x86asm"><table><tr><td class="code"><pre><span class="line"><span class="keyword">mov</span> <span class="built_in">dx</span>，<span class="number">1h</span></span><br><span class="line"><span class="keyword">mov</span> <span class="built_in">ax</span>,<span class="number">86A1h</span></span><br><span class="line"><span class="keyword">mov</span> <span class="built_in">bx</span>,<span class="number">100</span></span><br><span class="line"><span class="keyword">div</span> <span class="built_in">bx</span></span><br></pre></td></tr></table></figure>
 <ul>
 <li>diwdw（这不是关键字，这是一个子程序） 进行不会产生除法溢出的运算，被除数为dword型，除数为word型，结果为dword型</li>
 </ul>

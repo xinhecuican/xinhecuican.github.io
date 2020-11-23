@@ -284,7 +284,7 @@ if (asideStatus !== undefined) {
 </tbody>
 </table>
 <p>例：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">movq $2,%rax</span><br><span class="line">movq %rax,%rbx</span><br><span class="line">movq (%rax),%rbx</span><br></pre></td></tr></table></figure>
+<figure class="highlight perl"><table><tr><td class="code"><pre><span class="line">movq $2,%rax</span><br><span class="line">movq %rax,%rbx</span><br><span class="line">mov<span class="string">q (%rax)</span>,%rbx</span><br></pre></td></tr></table></figure>
 <p>注意；</p>
 <ul>
 <li>当源操作数为地址的时候，目标操作数不能也是地址，因为一定要通过cpu进行调控，从地址到地址代表没有经过cpu（解释是这样，但我觉得不太合理）</li>
@@ -302,7 +302,7 @@ if (asideStatus !== undefined) {
 <p>其中B可以是1,2,4,8。从数组的角度来看，寄存器1相当于起始地址，寄存器2相当于偏移地址，B是一个数据的字节数</p>
 <p>同时 64位寄存器前缀是r，三十二位前缀是e，16位没有前缀，8位后面是l和h</p>
 <p>例：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">rax</span><br><span class="line">eax</span><br><span class="line">ax</span><br><span class="line">al</span><br><span class="line">ah</span><br></pre></td></tr></table></figure>
+<figure class="highlight x86asm"><table><tr><td class="code"><pre><span class="line"><span class="built_in">rax</span></span><br><span class="line"><span class="built_in">eax</span></span><br><span class="line"><span class="built_in">ax</span></span><br><span class="line"><span class="built_in">al</span></span><br><span class="line"><span class="number">ah</span></span><br></pre></td></tr></table></figure>
 <h5 id="强制类型转换"><a class="markdownIt-Anchor" href="#强制类型转换"></a> 强制类型转换</h5>
 <p>格式 movzab</p>
 <p>a代表原格式，b代表现格式，一般是从小的转换成大的。而z代表多的位补0</p>
@@ -315,7 +315,7 @@ if (asideStatus !== undefined) {
 <p>例如： leaq (%rax,%rbx,4),%rdx 这条指令类似于把数组中某一元素的地址给了rdx</p>
 <p>它还可用来求值</p>
 <p>例如 要求x* 12</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">int mul(int x)</span><br><span class="line">&#123;</span><br><span class="line">   leaq (%rdi,%rdi,2),%rax</span><br><span class="line">   salq %rax,2&#x2F;&#x2F;左移指令</span><br><span class="line">   return x;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight perl"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> mul(<span class="keyword">int</span> <span class="keyword">x</span>)</span><br><span class="line">&#123;</span><br><span class="line">   lea<span class="string">q (%rdi,%rdi,2)</span>,%rax</span><br><span class="line">   salq %rax,<span class="number">2</span>//左移指令</span><br><span class="line">   <span class="keyword">return</span> <span class="keyword">x</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>这段代码只要看中间两条指令就可以了，leaq 中的数运算之后是3rdi，然后左移两位就是12了。</p>
 <p>但是这条指令不会判断溢出，且不会改变标志寄存器</p>
 <h4 id="比较指令"><a class="markdownIt-Anchor" href="#比较指令"></a> 比较指令</h4>
@@ -399,7 +399,7 @@ if (asideStatus !== undefined) {
 <p>现代编译器在遇到分支语句时会尽量用条件跳转的格式执行，因为cpu采用了流水线作业的模式（就是一次提前搬运多条指令） 但是条件跳转指令会使流水线停止运行，而流水线可以明显增加cpu速度。</p>
 <p>条件跳转的格式就是先把 if 和else的内容都计算出来，然后在最后用条件跳转指令进行比较。</p>
 <p>例如</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">int a;</span><br><span class="line">if(x&gt;y)</span><br><span class="line">&#123;</span><br><span class="line">    a&#x3D;x-y;</span><br><span class="line">&#125;</span><br><span class="line">else</span><br><span class="line">&#123;</span><br><span class="line">    a&#x3D;y-x;</span><br><span class="line">&#125;</span><br><span class="line">汇编模式</span><br><span class="line">movq %rdi,%rax</span><br><span class="line">subq %rsi,%rax</span><br><span class="line">movq %rsi,%rdx</span><br><span class="line">subq %rdi,%rdx</span><br><span class="line">cmovle %rdx,%rax</span><br></pre></td></tr></table></figure>
+<figure class="highlight sas"><table><tr><td class="code"><pre><span class="line">int a;</span><br><span class="line"><span class="meta">if</span>(<span class="meta">x</span>&gt;y)</span><br><span class="line">&#123;</span><br><span class="line">    a=<span class="meta">x</span>-y;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">else</span></span><br><span class="line">&#123;</span><br><span class="line">    a=y-<span class="meta">x</span>;</span><br><span class="line">&#125;</span><br><span class="line">汇编模式</span><br><span class="line">movq <span class="name">%rdi</span>,<span class="name">%rax</span></span><br><span class="line">subq <span class="name">%rsi</span>,<span class="name">%rax</span></span><br><span class="line">movq <span class="name">%rsi</span>,<span class="name">%rdx</span></span><br><span class="line">subq <span class="name">%rdi</span>,<span class="name">%rdx</span></span><br><span class="line">cmovle <span class="name">%rdx</span>,<span class="name">%rax</span></span><br></pre></td></tr></table></figure>
 <p>可以看出，用条件跳转模式会多计算一些指令，不会破坏流水线，如果在流水线上减少的时间大于多进行指令所消耗的时间，那么用条件跳转指令比较合适。反之，直接用条件指令。</p>
 <p>下列几种情况不适合用条件跳转指令</p>
 <ol>
@@ -412,22 +412,22 @@ if (asideStatus !== undefined) {
 <li>do-while循环</li>
 </ul>
 <p>do-while循环用goto语句表达成</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">loop:</span><br><span class="line">statement;</span><br><span class="line">if(x) goto loop;</span><br></pre></td></tr></table></figure>
+<figure class="highlight ada"><table><tr><td class="code"><pre><span class="line"><span class="keyword">loop</span>:</span><br><span class="line">statement;</span><br><span class="line"><span class="keyword">if</span>(x) <span class="keyword">goto</span> <span class="keyword">loop</span>;</span><br></pre></td></tr></table></figure>
 <p>这段代码便是先执行，后比较。很容易就可以转化成汇编。goto可以用条件转移指令代替。</p>
 <ul>
 <li>while循环</li>
 </ul>
 <p>while循环有两种形式，第一种是在最开始进行一次跳转，如果符合则进入循环，不符合则退出</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">if(!x) goto done;</span><br><span class="line">loop:</span><br><span class="line">statement;</span><br><span class="line">if(x) goto loop;</span><br><span class="line">done:</span><br></pre></td></tr></table></figure>
+<figure class="highlight ada"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(!x) <span class="keyword">goto</span> done;</span><br><span class="line"><span class="keyword">loop</span>:</span><br><span class="line">statement;</span><br><span class="line"><span class="keyword">if</span>(x) <span class="keyword">goto</span> <span class="keyword">loop</span>;</span><br><span class="line">done:</span><br></pre></td></tr></table></figure>
 <p>第二种是先跳过第一次循环直接进行判断。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">goto test;</span><br><span class="line">loop:</span><br><span class="line">statement;</span><br><span class="line">test:</span><br><span class="line">if(x) goto loop;</span><br></pre></td></tr></table></figure>
+<figure class="highlight subunit"><table><tr><td class="code"><pre><span class="line">goto test;</span><br><span class="line">loop:</span><br><span class="line">statement;</span><br><span class="line">test:</span><br><span class="line">if(x) goto loop;</span><br></pre></td></tr></table></figure>
 <p>由于cpu流水线的限制，两条连续的跳转指令会减慢cpu运行的速度，因此最好采用第一种办法（虽然代码多）</p>
 <ul>
 <li>for循环</li>
 </ul>
 <p>for(init; test; update)</p>
 <p>可以转化成</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">init;</span><br><span class="line">while(test)</span><br><span class="line">&#123;</span><br><span class="line">  statement;</span><br><span class="line">  update;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight abnf"><table><tr><td class="code"><pre><span class="line">init<span class="comment">;</span></span><br><span class="line">while(test)</span><br><span class="line">&#123;</span><br><span class="line">  statement<span class="comment">;</span></span><br><span class="line">  update<span class="comment">;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>再然后就可以变成汇编代码</p>
 <h4 id="switch-汇编实现"><a class="markdownIt-Anchor" href="#switch-汇编实现"></a> switch 汇编实现</h4>
 <p>首先要了解条件语句和switch的区别，if语句要从上倒下一条一条判断，如果数量多的话时间开销大。而switch是根据标号直接跳转，无论要跳转到哪一个时间开销都一定。</p>

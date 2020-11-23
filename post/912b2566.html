@@ -181,7 +181,7 @@ if (asideStatus !== undefined) {
 <p>这些内容都不是必须的。此外要注意只能有一个类或接口是public的（一般也是private）。</p>
 <h4 id="包声明语句"><a class="markdownIt-Anchor" href="#包声明语句"></a> 包声明语句</h4>
 <p>包声明语句把类放到特定的包中。例如</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">package com.abc.dollapp;</span><br><span class="line">public calss appmain&#123;...&#125;;</span><br><span class="line">class doll&#123;...&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight nim"><table><tr><td class="code"><pre><span class="line">package com.abc.dollapp;</span><br><span class="line">public calss appmain<span class="meta">&#123;...&#125;</span>;</span><br><span class="line">class doll<span class="meta">&#123;...&#125;</span>;</span><br></pre></td></tr></table></figure>
 <p>在这个例子中appmain和doll都在com.abc.dollapp包中。</p>
 <p>在一个java文件中，只能有一个package语句。如果没有提供package，那么就表明在系统默认的包中。</p>
 <h5 id="包的作用"><a class="markdownIt-Anchor" href="#包的作用"></a> 包的作用</h5>
@@ -215,7 +215,7 @@ if (asideStatus !== undefined) {
 <p>并且如果包中还有包的话，第二种语法是不会把内层包的类引入的。之所以可以包中有包是为了保证层次结构。例如前面提到的com.abc其实就是包中有包，com是外层，abc是内层。</p>
 <p>package语句必须在import前</p>
 <h4 id="方法函数声明"><a class="markdownIt-Anchor" href="#方法函数声明"></a> 方法（函数）声明</h4>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">返回值 函数名（参数）</span><br><span class="line">&#123;</span><br><span class="line">    主体</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight dust"><table><tr><td class="code"><pre><span class="line"><span class="xml">返回值 函数名（参数）</span></span><br><span class="line"><span class="template-variable">&#123;</span></span><br><span class="line"><span class="template-variable">    主体</span></span><br><span class="line"><span class="template-variable">&#125;</span></span><br></pre></td></tr></table></figure>
 <p>这里的函数和c++大致相同</p>
 <h4 id="main方法"><a class="markdownIt-Anchor" href="#main方法"></a> main方法</h4>
 <p>main方法和c++不一样了，要包含几个要素</p>
@@ -333,10 +333,10 @@ if (asideStatus !== undefined) {
 <li>set com.abc.dollapp.doll#speak 生成到其他类的某一个方法的javadoc文档</li>
 </ul>
 <p>至于link在语法上与set大致相同，但是他可以用大括号插入到某一句话中，例如</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;**</span><br><span class="line">* 如果&#123;@link #word word成员变量&#125;不为NULL；</span><br><span class="line">*&#x2F;</span><br></pre></td></tr></table></figure>
+<figure class="highlight elixir"><table><tr><td class="code"><pre><span class="line">/**</span><br><span class="line">* 如果&#123;<span class="variable">@link</span> <span class="comment">#word word成员变量&#125;不为NULL；</span></span><br><span class="line">*<span class="regexp">/</span></span><br></pre></td></tr></table></figure>
 <p>输出： 如果word<u>成员变量</u>不为NULL；</p>
 <p>javadoc命令用法：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">-public 仅为public级别的类建立文档</span><br><span class="line">-protected 进位public和protected建立文档 默认选项</span><br><span class="line">-package</span><br><span class="line">-private</span><br><span class="line">-version 解析version标记，默认情况会忽略</span><br><span class="line">-author </span><br><span class="line">-sourcepath&lt;path&gt; 指定源文件路径</span><br><span class="line">-classpath</span><br><span class="line">-d &lt;directory&gt; 指定javadoc的输出目录</span><br></pre></td></tr></table></figure>
+<figure class="highlight d"><table><tr><td class="code"><pre><span class="line">-<span class="keyword">public</span> 仅为<span class="keyword">public</span>级别的类建立文档</span><br><span class="line">-<span class="keyword">protected</span> 进位<span class="keyword">public</span>和<span class="keyword">protected</span>建立文档 默认选项</span><br><span class="line">-<span class="keyword">package</span></span><br><span class="line">-<span class="keyword">private</span></span><br><span class="line">-<span class="keyword">version</span> 解析<span class="keyword">version</span>标记，默认情况会忽略</span><br><span class="line">-author </span><br><span class="line">-sourcepath&lt;path&gt; 指定源文件路径</span><br><span class="line">-classpath</span><br><span class="line">-d &lt;directory&gt; 指定javadoc的输出目录</span><br></pre></td></tr></table></figure>
 <p>语法： javadoc [options] [packagenames] [sourcefiles]</p>
 <h3 id="java虚拟机运行java的基本原理"><a class="markdownIt-Anchor" href="#java虚拟机运行java的基本原理"></a> java虚拟机运行java的基本原理</h3>
 <p>过程：先进行编译，之后进入虚拟机中变成机器指令。具体过程就不解释了，但是这里有一步就是根据操作系统进行运行。而java程序使运行在虚拟机上的。所以编译出来的文件可以在任何平台上运行。</p>

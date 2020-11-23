@@ -183,9 +183,9 @@ if (asideStatus !== undefined) {
 <p>但是这样速度不够快，因为cpu同一时间内只有一部分在工作，其他的都处于待机状态，所以可以用一种办法把其他部分利用起来。</p>
 <p>之前我们之所以不能连续送入多条指令的原因是如果牵一条指令还未执行完成后一条指令便开始执行很可能导致电路出现问题（先这样理解吧）。如果我们在中间插入寄存器的话便不存在这个问题了。</p>
 <p>例如：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">| 算术单元 | 寄存器 |</span><br><span class="line">| 300ps   |  20ps  |</span><br><span class="line">| 算术单元1 | 寄存器1 | 算术单元2 | 寄存器2 | 算术单元3 | 寄存器</span><br><span class="line">| 100ps    | 20ps   | 100ps    | 20ps   | 100ps    | 20ps</span><br></pre></td></tr></table></figure>
+<figure class="highlight gherkin"><table><tr><td class="code"><pre><span class="line">|<span class="string"> 算术单元 </span>|<span class="string"> 寄存器 </span>|</span><br><span class="line">|<span class="string"> 300ps   </span>|<span class="string">  20ps  </span>|</span><br><span class="line">|<span class="string"> 算术单元1 </span>|<span class="string"> 寄存器1 </span>|<span class="string"> 算术单元2 </span>|<span class="string"> 寄存器2 </span>|<span class="string"> 算术单元3 </span>|<span class="string"> 寄存器</span></span><br><span class="line">|<span class="string"> 100ps    </span>|<span class="string"> 20ps   </span>|<span class="string"> 100ps    </span>|<span class="string"> 20ps   </span>|<span class="string"> 100ps    </span>|<span class="string"> 20ps</span></span><br></pre></td></tr></table></figure>
 <p>乍一看加了寄存器之后时钟周期反而变长了，便成360ps。但实际上现在可以每120ps送入一条指令，先前的运算结果可以先储存在寄存器中，新一个时钟周期时把寄存器中的值送入下一个运算单元，这样就节省了时间</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">如果把时间分成3部分来运算</span><br><span class="line">abcabcabc  不用流水线</span><br><span class="line">abc</span><br><span class="line"> abc      用流水线</span><br><span class="line">  abc</span><br></pre></td></tr></table></figure>
+<figure class="highlight vim"><table><tr><td class="code"><pre><span class="line">如果把时间分成<span class="number">3</span>部分来运算</span><br><span class="line">abcabcabc  不用流水线</span><br><span class="line"><span class="keyword">abc</span></span><br><span class="line"> <span class="keyword">abc</span>      用流水线</span><br><span class="line">  <span class="keyword">abc</span></span><br></pre></td></tr></table></figure>
 <p>可以看出使用流水线后时间明显缩短</p>
 <p>但是流水线也有一些问题。</p>
 <ol>
@@ -197,7 +197,7 @@ if (asideStatus !== undefined) {
 </ol>
 <p>解决办法：</p>
 <p>对于数据相关可以中间插入一个空命令例如</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">a阶段只有命令的传入，并没有涉及到数据的传入,假设第一条和第二条有冲突</span><br><span class="line"></span><br><span class="line">a  b  c</span><br><span class="line">  空</span><br><span class="line">    a  b  c</span><br><span class="line">      a  b  c</span><br></pre></td></tr></table></figure>
+<figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line">a阶段只有命令的传入，并没有涉及到数据的传入,假设第一条和第二条有冲突</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">a</span>  <span class="selector-tag">b</span>  c</span><br><span class="line">  空</span><br><span class="line">    <span class="selector-tag">a</span>  <span class="selector-tag">b</span>  c</span><br><span class="line">      <span class="selector-tag">a</span>  <span class="selector-tag">b</span>  c</span><br></pre></td></tr></table></figure>
 <p>但是这样还是会导致效率的降低。</p>
 <p>一个更好的办法是在cpu内部对命令进行重排，但是又不影响运行逻辑。</p>
 <p>对于控制相关可以使用数据传输指令，但是数据传输指令也具有局限性。</p>

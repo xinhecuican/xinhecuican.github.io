@@ -186,7 +186,7 @@ if (asideStatus !== undefined) {
 <p>reverse(vec.begin(),vec.end()) <strong>(头文件<code>&lt;algorithm&gt;</code>)</strong></p>
 <p>实际上不一定是begin到end，也可以begin()+1到、、、，只需要用迭代器就行了
 </p><p>sort排序，也要用<code>&lt;algorithm&gt;</code>默认升序</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">bool Comp(const int &amp;a,const int &amp;b)</span><br><span class="line">&#123;</span><br><span class="line">    return a&gt;b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight reasonml"><table><tr><td class="code"><pre><span class="line"><span class="built_in">bool</span> <span class="constructor">Comp(<span class="params">const</span> <span class="params">int</span> &amp;<span class="params">a</span>,<span class="params">const</span> <span class="params">int</span> &amp;<span class="params">b</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    return a&gt;b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>调用时:sort(vec.begin(),vec.end(),Comp)，这样就降序排序。</p>
 <h3 id="二维数组"><a class="markdownIt-Anchor" href="#二维数组"></a> 二维数组</h3>
 <pre><code>vector&lt;vector&lt;数据类型&gt; &gt; vec[3];//3行

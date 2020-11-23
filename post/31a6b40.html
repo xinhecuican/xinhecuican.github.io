@@ -314,7 +314,7 @@ if (asideStatus !== undefined) {
 <h3 id="ps程序"><a class="markdownIt-Anchor" href="#ps程序"></a> ps程序</h3>
 <p>ps程序是用来显示进程状态的</p>
 <p>语法： ps [-aefFly] [-p pid] [-u userid]</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ps 显示与当前用户标识和终端相关的进程</span><br><span class="line">ps -a 所有与用户标识进程与终端相关的非守护进程</span><br><span class="line">ps -e 所有进程</span><br><span class="line">ps -p pid 显示指定pid的进程</span><br><span class="line">ps -u userid 显示指定userid的进程</span><br><span class="line">ps -ef 显示所有用户的进程，完整输出</span><br><span class="line">ps -t 显示所有守护进程</span><br></pre></td></tr></table></figure>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="built_in">ps</span> 显示与当前用户标识和终端相关的进程</span><br><span class="line"><span class="built_in">ps</span> <span class="literal">-a</span> 所有与用户标识进程与终端相关的非守护进程</span><br><span class="line"><span class="built_in">ps</span> <span class="literal">-e</span> 所有进程</span><br><span class="line"><span class="built_in">ps</span> <span class="literal">-p</span> pid 显示指定pid的进程</span><br><span class="line"><span class="built_in">ps</span> <span class="literal">-u</span> userid 显示指定userid的进程</span><br><span class="line"><span class="built_in">ps</span> <span class="literal">-ef</span> 显示所有用户的进程，完整输出</span><br><span class="line"><span class="built_in">ps</span> <span class="literal">-t</span> 显示所有守护进程</span><br></pre></td></tr></table></figure>
 <p>下面列举了ps输出时的标题和所代表的含义</p>
 <table>
 <thead>
@@ -391,7 +391,7 @@ if (asideStatus !== undefined) {
 </tbody>
 </table>
 <p>状态代码</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">D 不可中断睡眠，等待事件结束</span><br><span class="line">I 空闲，超过20s的睡眠</span><br><span class="line">R 正在运行或者可运行（可运行是在运行队列中等待）</span><br><span class="line">S 可中断睡眠，等待时间结束</span><br><span class="line">T 挂起</span><br><span class="line">Z 僵进程</span><br></pre></td></tr></table></figure>
+<figure class="highlight mathematica"><table><tr><td class="code"><pre><span class="line"><span class="built_in">D</span> 不可中断睡眠，等待事件结束</span><br><span class="line"><span class="built_in">I</span> 空闲，超过<span class="number">20</span><span class="variable">s</span>的睡眠</span><br><span class="line"><span class="variable">R</span> 正在运行或者可运行（可运行是在运行队列中等待）</span><br><span class="line"><span class="variable">S</span> 可中断睡眠，等待时间结束</span><br><span class="line"><span class="variable">T</span> 挂起</span><br><span class="line"><span class="variable">Z</span> 僵进程</span><br></pre></td></tr></table></figure>
 <p>-ly 显示状态代码</p>
 <h3 id="监视系统进程"><a class="markdownIt-Anchor" href="#监视系统进程"></a> 监视系统进程</h3>
 <p>语法： top [-d delay] [-n count] [p pid[,pid]…]</p>

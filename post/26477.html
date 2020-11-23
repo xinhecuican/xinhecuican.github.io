@@ -274,7 +274,7 @@ man文档显示的内容</li>
 <li>bc 计算器 如果想用bc内部的函数，要用bc -l命令（library)。如果是多个算式，中间要用&quot;;&quot;号隔开</li>
 </ul>
 <p>常用函数</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">s(x) sinx  弧度制</span><br><span class="line">c(x) cosx</span><br><span class="line">a(x) arctanx</span><br><span class="line">ln(x)</span><br><span class="line">j(n,x)  x的n次整阶贝塞尔函数</span><br></pre></td></tr></table></figure>
+<figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="title">s</span><span class="params">(x)</span></span> sinx  弧度制</span><br><span class="line"><span class="function"><span class="title">c</span><span class="params">(x)</span></span> cosx</span><br><span class="line"><span class="function"><span class="title">a</span><span class="params">(x)</span></span> arctanx</span><br><span class="line"><span class="function"><span class="title">ln</span><span class="params">(x)</span></span></span><br><span class="line"><span class="function"><span class="title">j</span><span class="params">(n,x)</span></span>  x的n次整阶贝塞尔函数</span><br></pre></td></tr></table></figure>
 <p>如果想用小数运算，先要设置标度因子 scale 来确定精确到小数点后多少位。如果输入scale 则会返回scale的当前值 scale=3，则设置小数点后三位</p>
 <p>有一点需要注意，当你用来 bc -l时，scale会自动设置为20</p>
 <p>bc实际上是一套功能完整的数学编程语言，可以使用的变量有26个字母<br>

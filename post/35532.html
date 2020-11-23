@@ -232,7 +232,7 @@ if (asideStatus !== undefined) {
 <p>其中，mode是chmod程序使用的一种文件类型，pipe是希望创建的管道名称。</p>
 <p>用途：经常被用来两个进程中的通信。</p>
 <p>例：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">mkfifo fifotest</span><br><span class="line">grep bash &#x2F;etc&#x2F;passwd &gt; fifotest &#x2F;&#x2F;第一个窗口上的命令</span><br><span class="line">wc -l &lt; fifotest &#x2F;&#x2F;这是第二个窗口上的命令</span><br></pre></td></tr></table></figure>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">mkfifo fifotest</span><br><span class="line">grep bash <span class="regexp">/etc/</span>passwd &gt; fifotest <span class="regexp">//</span>第一个窗口上的命令</span><br><span class="line">wc -l &lt; fifotest <span class="regexp">//</span>这是第二个窗口上的命令</span><br></pre></td></tr></table></figure>
 <p>如果想要去除管道，只需要rm + 管道名即可。</p>
 <h3 id="proc文件"><a class="markdownIt-Anchor" href="#proc文件"></a> proc文件</h3>
 <p>proc文件时那些提供一些简单途径来检查多种类型的系统信息的伪文件。proc文件可以直接从内核中提取数据。</p>
