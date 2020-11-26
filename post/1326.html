@@ -1,0 +1,506 @@
+<!DOCTYPE html><html lang="zh-Hans" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>汇编指令 AT&amp;T版 64位 | Xinhecuican's Blog</title><meta name="keywords" content="AT&amp;T"><meta name="author" content="星河璀璨"><meta name="copyright" content="星河璀璨"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="description" content="用g++ -Og -S -masm&#x3D;intel name.c 可以生成intel格式的汇编代码，-S是生成汇编代码，-Og是省去不重要的部分，如果不加这个，可能5条指令要变成十多条指令 -fno-if-conversion 分支语句不要采用条件传输的方式，条件跳转的方式 -g debug objdump -d 反汇编 gdb 调试 b+ 标号 设置断点 info register 查看寄存器 r">
+<meta property="og:type" content="article">
+<meta property="og:title" content="汇编指令 AT&amp;T版 64位">
+<meta property="og:url" content="http://xinhecuican.github.io/post/1326.html">
+<meta property="og:site_name" content="Xinhecuican&#39;s Blog">
+<meta property="og:description" content="用g++ -Og -S -masm&#x3D;intel name.c 可以生成intel格式的汇编代码，-S是生成汇编代码，-Og是省去不重要的部分，如果不加这个，可能5条指令要变成十多条指令 -fno-if-conversion 分支语句不要采用条件传输的方式，条件跳转的方式 -g debug objdump -d 反汇编 gdb 调试 b+ 标号 设置断点 info register 查看寄存器 r">
+<meta property="og:locale">
+<meta property="og:image" content="https://img.paulzzh.tech/touhou/random">
+<meta property="article:published_time" content="2020-03-11T23:46:00.000Z">
+<meta property="article:modified_time" content="2020-04-14T00:56:07.678Z">
+<meta property="article:author" content="星河璀璨">
+<meta property="article:tag" content="AT&amp;T">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img.paulzzh.tech/touhou/random"><link rel="shortcut icon" href="/img/favicon.png"><!--link(rel="canonical" href=urlNoIndex())--><link rel="preconnect" href="//cdn.jsdelivr.net"><link rel="preconnect" href="//busuanzi.ibruce.info"><meta name="google-site-verification" content="4hJ-bnA7PCrh-B4xC_dDIud_h3CNu-md9LidRVZTNxw"><meta name="baidu-site-verification" content="EVZv9BO5R3"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.10.5/dist/instantsearch.min.css"><script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.10.5/dist/instantsearch.min.js" defer></script><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: {"appId":"TANL0YELGF","apiKey":"0f5da1a96c4587c1b8c376aa44c488d1","indexName":"hexo","hits":{"per_page":6},"languages":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}.","hits_stats":"${hits} results found in ${time} ms"}},
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  ClickShowText: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"Traditional Chinese Activated Manually","cht_to_chs":"Simplified Chinese Activated Manually","day_to_night":"Dark Mode Activated Manually","night_to_day":"Light Mode Activated Manually","bgLight":"#49b1f5","bgDark":"#121212","position":"bottom-left"},
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+  },
+
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}
+
+// https://stackoverflow.com/questions/16839698/jquery-getscript-alternative-in-native-javascript
+const getScript = url => new Promise((resolve, reject) => {
+  const script = document.createElement('script')
+  script.src = url
+  script.async = true
+  script.onerror = reject
+  script.onload = script.onreadystatechange = function() {
+    const loadState = this.readyState
+    if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+    script.onload = script.onreadystatechange = null
+    resolve()
+  }
+  document.head.appendChild(script)
+})</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2020-04-14 08:56:07'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(function () {  window.activateDarkMode = function () {
+    document.documentElement.setAttribute('data-theme', 'dark')
+    if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+    }
+  }
+  window.activateLightMode = function () {
+    document.documentElement.setAttribute('data-theme', 'light')
+   if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+    }
+  }
+  const autoChangeMode = 'false'
+  const t = saveToLocal.get('theme')
+  if (autoChangeMode === '1') {
+    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+    const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+    const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+    if (t === undefined) {
+      if (isLightMode) activateLightMode()
+      else if (isDarkMode) activateDarkMode()
+      else if (isNotSpecified || hasNoSupport) {
+        const now = new Date()
+        const hour = now.getHours()
+        const isNight = hour <= 6 || hour >= 18
+        isNight ? activateDarkMode() : activateLightMode()
+      }
+      window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+        if (saveToLocal.get('theme') === undefined) {
+          e.matches ? activateDarkMode() : activateLightMode()
+        }
+      })
+    } else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else if (autoChangeMode === '2') {
+    const now = new Date()
+    const hour = now.getHours()
+    const isNight = hour <= 6 || hour >= 18
+    if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+    else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else {
+    if (t === 'dark') activateDarkMode()
+    else if (t === 'light') activateLightMode()
+  }const asideStatus = saveToLocal.get('aside-status')
+if (asideStatus !== undefined) {
+   if (asideStatus === 'hide') {
+     document.documentElement.classList.add('hide-aside')
+   } else {
+     document.documentElement.classList.remove('hide-aside')
+   }
+}})()</script><link rel="stylesheet" href="/css/background.css"><link rel="stylesheet" href="footer.min.css"><!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Xinhecuican's Blog" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">Loading...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/null" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">152</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">Tags</div><div class="length-num">6</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">Categories</div><div class="length-num">18</div></a></div></div></div><hr><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://img.paulzzh.tech/touhou/random)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Xinhecuican's Blog</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">汇编指令 AT&amp;T版 64位</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2020-03-11T23:46:00.000Z" title="Created 2020-03-12 07:46:00">2020-03-12</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2020-04-14T00:56:07.678Z" title="Updated 2020-04-14 08:56:07">2020-04-14</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%B1%87%E7%BC%96/">汇编</a></span></div><div class="meta-secondline"> <span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">Word count:</span><span class="word-count">2.1k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">Reading time:</span><span>7min</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>用g++ -Og -S -masm=intel name.c 可以生成intel格式的汇编代码，-S是生成汇编代码，-Og是省去不重要的部分，如果不加这个，可能5条指令要变成十多条指令</p>
+<p>-fno-if-conversion 分支语句不要采用条件传输的方式，条件跳转的方式</p>
+<p>-g debug</p>
+<p>objdump -d 反汇编</p>
+<p>gdb 调试 b+ 标号 设置断点 info register 查看寄存器 r 执行到断点出</p>
+<p>n（next） 执行下一条命令</p>
+<h4 id="mov-移动指令"><a class="markdownIt-Anchor" href="#mov-移动指令"></a> mov 移动指令</h4>
+<p>格式： movq a,b</p>
+<p>a是原操作数，b是目标操作数</p>
+<p>这个指令中的q代表的是64位</p>
+<table>
+<thead>
+<tr>
+<th>长度</th>
+<th>类型</th>
+<th>别名</th>
+<th>缩写</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>char</td>
+<td>byte</td>
+<td>b</td>
+</tr>
+<tr>
+<td>2</td>
+<td>short</td>
+<td>word</td>
+<td>w</td>
+</tr>
+<tr>
+<td>4</td>
+<td>int</td>
+<td>double word（long word）</td>
+<td>l</td>
+</tr>
+<tr>
+<td>8</td>
+<td>long</td>
+<td>quad word</td>
+<td>q</td>
+</tr>
+<tr>
+<td>8</td>
+<td>char*</td>
+<td>quad word</td>
+<td>q</td>
+</tr>
+<tr>
+<td>4</td>
+<td>float</td>
+<td>…</td>
+<td>s</td>
+</tr>
+<tr>
+<td>8</td>
+<td>double</td>
+<td>…</td>
+<td>l</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>源操作数</th>
+<th>目标操作数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>立即数（idata)</td>
+<td>寄存器 ，地址</td>
+</tr>
+<tr>
+<td>寄存器</td>
+<td>寄存器，地址</td>
+</tr>
+<tr>
+<td>地址</td>
+<td>寄存器</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>操作数</th>
+<th>符号</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>立即数</td>
+<td>$</td>
+</tr>
+<tr>
+<td>寄存器</td>
+<td>%</td>
+</tr>
+<tr>
+<td>地址</td>
+<td>（）</td>
+</tr>
+<tr>
+<td>地址中数据</td>
+<td>不加任何符号</td>
+</tr>
+</tbody>
+</table>
+<p>例：</p>
+<figure class="highlight perl"><table><tr><td class="code"><pre><span class="line">movq $2,%rax</span><br><span class="line">movq %rax,%rbx</span><br><span class="line">mov<span class="string">q (%rax)</span>,%rbx</span><br></pre></td></tr></table></figure>
+<p>注意；</p>
+<ul>
+<li>当源操作数为地址的时候，目标操作数不能也是地址，因为一定要通过cpu进行调控，从地址到地址代表没有经过cpu（解释是这样，但我觉得不太合理）</li>
+<li>立即数不能为8字节，使用 movabsq 可以让立即数为8字节</li>
+<li>地址都是8字节，也就是上面的char*</li>
+<li>如果把一个32位数给64位寄存器，那么高三十二位自动变成0.但是如果是16位或者8位的话高位不会改变</li>
+</ul>
+<p>例如：</p>
+<p>movabsq $0x0011223344556677,%rax</p>
+<p>movq $-1,%rax</p>
+<p>%rax= 00000000ffffffff</p>
+<h5 id="地址的写法"><a class="markdownIt-Anchor" href="#地址的写法"></a> 地址的写法</h5>
+<p>地址可以写为一个四元组 A（寄存器1，寄存器2，B）</p>
+<p>这个四元组其实是  寄存器1+B*寄存器2+A</p>
+<p>其中B可以是1,2,4,8。从数组的角度来看，寄存器1相当于起始地址，寄存器2相当于偏移地址，B是一个数据的字节数</p>
+<p>同时 64位寄存器前缀是r，三十二位前缀是e，16位没有前缀，8位后面是l和h</p>
+<p>例：</p>
+<figure class="highlight x86asm"><table><tr><td class="code"><pre><span class="line"><span class="built_in">rax</span></span><br><span class="line"><span class="built_in">eax</span></span><br><span class="line"><span class="built_in">ax</span></span><br><span class="line"><span class="built_in">al</span></span><br><span class="line"><span class="number">ah</span></span><br></pre></td></tr></table></figure>
+<h5 id="强制类型转换"><a class="markdownIt-Anchor" href="#强制类型转换"></a> 强制类型转换</h5>
+<p>格式 movzab</p>
+<p>a代表原格式，b代表现格式，一般是从小的转换成大的。而z代表多的位补0</p>
+<p>例： movzlq</p>
+<p>特殊形式： cltq 把32位寄存器扩展到64位并且赋值给自己，</p>
+<p>movsab 有符号扩展，最高位为1那么扩展出来的位全是1。</p>
+<h4 id="leaq-地址转移"><a class="markdownIt-Anchor" href="#leaq-地址转移"></a> leaq 地址转移</h4>
+<p>格式 leaq 地址，寄存器</p>
+<p>看起来与mov没什么区别，但是mov中的地址是要取地址中的数，而这里的地址只是把对应地址给寄存器</p>
+<p>例如： leaq (%rax,%rbx,4),%rdx 这条指令类似于把数组中某一元素的地址给了rdx</p>
+<p>它还可用来求值</p>
+<p>例如 要求x* 12</p>
+<figure class="highlight perl"><table><tr><td class="code"><pre><span class="line"><span class="keyword">int</span> mul(<span class="keyword">int</span> <span class="keyword">x</span>)</span><br><span class="line">&#123;</span><br><span class="line">   lea<span class="string">q (%rdi,%rdi,2)</span>,%rax</span><br><span class="line">   salq %rax,<span class="number">2</span>//左移指令</span><br><span class="line">   <span class="keyword">return</span> <span class="keyword">x</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这段代码只要看中间两条指令就可以了，leaq 中的数运算之后是3rdi，然后左移两位就是12了。</p>
+<p>但是这条指令不会判断溢出，且不会改变标志寄存器</p>
+<h4 id="比较指令"><a class="markdownIt-Anchor" href="#比较指令"></a> 比较指令</h4>
+<p>这里涉及到标志寄存器，<a href="https://xinhecuican.github.io/2020/01/29/%E6%A0%87%E5%BF%97%E5%AF%84%E5%AD%98%E5%99%A8/">在前面一篇博客中已经提到</a></p>
+<p>cmpq 比较指令</p>
+<p>textq 与比较</p>
+<p>textq b a 把a与b相与，不改变a和b的值，只会改变标志寄存器中的zf和sf。</p>
+<p>这个指令通常用来判断某一位是否是1，例如 textq a,0x1 ，如果最低位为1，那么zf就是0，说明最低位是1</p>
+<h5 id="标志寄存器的访问"><a class="markdownIt-Anchor" href="#标志寄存器的访问"></a> 标志寄存器的访问</h5>
+<table>
+<thead>
+<tr>
+<th>操作名</th>
+<th>含义</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>sete</td>
+<td>ZF</td>
+<td>Equal</td>
+</tr>
+<tr>
+<td>setne</td>
+<td>~ZF</td>
+<td>not equal</td>
+</tr>
+<tr>
+<td>sets</td>
+<td>SF</td>
+<td>sign</td>
+</tr>
+<tr>
+<td>setns</td>
+<td>~SF</td>
+<td></td>
+</tr>
+<tr>
+<td>setg</td>
+<td><sub>(SF^OF)&amp;</sub>ZF</td>
+<td>greater 有符号数</td>
+</tr>
+<tr>
+<td>setge</td>
+<td>~(SF^OF)</td>
+<td>大于等于</td>
+</tr>
+<tr>
+<td>setl</td>
+<td>(SF^OF)</td>
+<td>less</td>
+</tr>
+<tr>
+<td>setle</td>
+<td>…</td>
+<td>小于等于</td>
+</tr>
+<tr>
+<td>seta</td>
+<td><sub>CF&amp;</sub>ZF</td>
+<td>above 无符号数</td>
+</tr>
+<tr>
+<td>setb</td>
+<td>CF</td>
+<td>below 小于</td>
+</tr>
+</tbody>
+</table>
+<p>这些指令都是返回到8位寄存器上，将高七位置0，最低位依据含义所进行的运算来判断是0还是1</p>
+<p>之后可以 movzbl %al,%eax，这时高三十二位也会被清零</p>
+<h4 id="跳转指令"><a class="markdownIt-Anchor" href="#跳转指令"></a> 跳转指令</h4>
+<p><a href="https://xinhecuican.github.io/2020/01/31/%E6%A3%80%E6%B5%8B%E6%AF%94%E8%BE%83%E7%BB%93%E6%9E%9C%E7%9A%84%E6%9D%A1%E4%BB%B6%E6%8C%87%E4%BB%A4/">前面博客中也已谈到过</a></p>
+<p>这里再补充jg和gb等，其实就是上面同样的模式</p>
+<p>此外，由于是64位系统，没有cs寄存器，且intel使用cisc指令集，所以会自动根据指令长度进行判断用多少位长来储存位移</p>
+<p>此外 x86 64位系统中 还提供了一种 jmp *(%rax) 也就是把rax作为地址，取内存中的内容</p>
+<h4 id="条件跳转指令"><a class="markdownIt-Anchor" href="#条件跳转指令"></a> 条件跳转指令</h4>
+<p>格式： cmov +后缀 a b，后缀格式就是前面set的格式</p>
+<p>作用: 如果满足条件，则把a赋值给b，如果不满足，则不做处理</p>
+<p>现代编译器在遇到分支语句时会尽量用条件跳转的格式执行，因为cpu采用了流水线作业的模式（就是一次提前搬运多条指令） 但是条件跳转指令会使流水线停止运行，而流水线可以明显增加cpu速度。</p>
+<p>条件跳转的格式就是先把 if 和else的内容都计算出来，然后在最后用条件跳转指令进行比较。</p>
+<p>例如</p>
+<figure class="highlight sas"><table><tr><td class="code"><pre><span class="line">int a;</span><br><span class="line"><span class="meta">if</span>(<span class="meta">x</span>&gt;y)</span><br><span class="line">&#123;</span><br><span class="line">    a=<span class="meta">x</span>-y;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">else</span></span><br><span class="line">&#123;</span><br><span class="line">    a=y-<span class="meta">x</span>;</span><br><span class="line">&#125;</span><br><span class="line">汇编模式</span><br><span class="line">movq <span class="name">%rdi</span>,<span class="name">%rax</span></span><br><span class="line">subq <span class="name">%rsi</span>,<span class="name">%rax</span></span><br><span class="line">movq <span class="name">%rsi</span>,<span class="name">%rdx</span></span><br><span class="line">subq <span class="name">%rdi</span>,<span class="name">%rdx</span></span><br><span class="line">cmovle <span class="name">%rdx</span>,<span class="name">%rax</span></span><br></pre></td></tr></table></figure>
+<p>可以看出，用条件跳转模式会多计算一些指令，不会破坏流水线，如果在流水线上减少的时间大于多进行指令所消耗的时间，那么用条件跳转指令比较合适。反之，直接用条件指令。</p>
+<p>下列几种情况不适合用条件跳转指令</p>
+<ol>
+<li>分支语句计算量大（执行时间过多，划不来）</li>
+<li>在要判断是否可以运算的情况，例如 var=p ？*p ： 0，这条语句意思是如果p不为空指针那么将p的内容赋给var，否则赋0.但是如果用条件跳转会出错，因为空指针不能取值</li>
+<li>计算可能产生副作用（即前后两个分支之间会产生影响）。例如 var=x&gt;0 ? x*=3 : x+=6,这个分支前面对后面会产生影响，因此不能简单粗暴的直接条件跳转</li>
+</ol>
+<h4 id="循环语句"><a class="markdownIt-Anchor" href="#循环语句"></a> 循环语句</h4>
+<ul>
+<li>do-while循环</li>
+</ul>
+<p>do-while循环用goto语句表达成</p>
+<figure class="highlight ada"><table><tr><td class="code"><pre><span class="line"><span class="keyword">loop</span>:</span><br><span class="line">statement;</span><br><span class="line"><span class="keyword">if</span>(x) <span class="keyword">goto</span> <span class="keyword">loop</span>;</span><br></pre></td></tr></table></figure>
+<p>这段代码便是先执行，后比较。很容易就可以转化成汇编。goto可以用条件转移指令代替。</p>
+<ul>
+<li>while循环</li>
+</ul>
+<p>while循环有两种形式，第一种是在最开始进行一次跳转，如果符合则进入循环，不符合则退出</p>
+<figure class="highlight ada"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(!x) <span class="keyword">goto</span> done;</span><br><span class="line"><span class="keyword">loop</span>:</span><br><span class="line">statement;</span><br><span class="line"><span class="keyword">if</span>(x) <span class="keyword">goto</span> <span class="keyword">loop</span>;</span><br><span class="line">done:</span><br></pre></td></tr></table></figure>
+<p>第二种是先跳过第一次循环直接进行判断。</p>
+<figure class="highlight subunit"><table><tr><td class="code"><pre><span class="line">goto test;</span><br><span class="line">loop:</span><br><span class="line">statement;</span><br><span class="line">test:</span><br><span class="line">if(x) goto loop;</span><br></pre></td></tr></table></figure>
+<p>由于cpu流水线的限制，两条连续的跳转指令会减慢cpu运行的速度，因此最好采用第一种办法（虽然代码多）</p>
+<ul>
+<li>for循环</li>
+</ul>
+<p>for(init; test; update)</p>
+<p>可以转化成</p>
+<figure class="highlight abnf"><table><tr><td class="code"><pre><span class="line">init<span class="comment">;</span></span><br><span class="line">while(test)</span><br><span class="line">&#123;</span><br><span class="line">  statement<span class="comment">;</span></span><br><span class="line">  update<span class="comment">;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>再然后就可以变成汇编代码</p>
+<h4 id="switch-汇编实现"><a class="markdownIt-Anchor" href="#switch-汇编实现"></a> switch 汇编实现</h4>
+<p>首先要了解条件语句和switch的区别，if语句要从上倒下一条一条判断，如果数量多的话时间开销大。而switch是根据标号直接跳转，无论要跳转到哪一个时间开销都一定。</p>
+<p>内存中实际上在编译时已经设定了一个跳转表，这个跳转表的标号是一个固定的地址，不能被改变，这个标号内的数据就是每一条指令的跳转地址，而且是8字节。</p>
+<p>因此跳转语句可以这样写: jmp .L4(,%rdi,8)</p>
+<p>其中.L4代表的是跳转表的标号（不一定是这个名字，举个例子）而rdi就是switch中的x，</p>
+<p>如果标号很大，例如10000甚至1000000开始的时候，如果把前面的查找表一个个全部设置出来，空间开销会很大，所以编译器会先自动的减去一个数使他处于较小的范围，但是这种情况只适用于数据密集的情况。</p>
+<p>如果数据稀疏例如一个是1一个是10000，这个时候偏移也不行了，只有通过先排序再二分搜索来查找标号，这个复杂度是logn</p>
+<h4 id="杂项"><a class="markdownIt-Anchor" href="#杂项"></a> 杂项</h4>
+<ul>
+<li>inc 自增</li>
+<li>dec 自减</li>
+<li>neg 取负 -x</li>
+<li>not 取非 ~x</li>
+<li>imul 乘</li>
+<li>xor 异或</li>
+<li>or 或</li>
+<li>and 与</li>
+<li>sal shl 左移</li>
+<li>sar 算数右移</li>
+<li>shr 逻辑右移</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined" rel="external nofollow noopener noreferrer" target="_blank">星河璀璨</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://xinhecuican.github.io/post/1326.html">http://xinhecuican.github.io/post/1326.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/AT-T/">AT&amp;T</a></div><div class="post_share"><div class="social-share" data-image="https://img.paulzzh.tech/touhou/random" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/post/14379.html"><img class="prev-cover" src="https://img.paulzzh.tech/touhou/random" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">Previous Post</div><div class="prev_info">广义表</div></div></a></div><div class="next-post pull-right"><a href="/post/44336.html"><img class="next-cover" src="https://uploadbeta.com/api/pictures/random/?key=BingEverydayWallpaperPicture" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">在不更改注册表的情况下把程序移出c盘</div></div></a></div></nav><hr><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> Comment</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside_content" id="aside_content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="card-content"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#mov-%E7%A7%BB%E5%8A%A8%E6%8C%87%E4%BB%A4"><span class="toc-number">1.</span> <span class="toc-text"> mov 移动指令</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%9C%B0%E5%9D%80%E7%9A%84%E5%86%99%E6%B3%95"><span class="toc-number">1.1.</span> <span class="toc-text"> 地址的写法</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%BC%BA%E5%88%B6%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="toc-number">1.2.</span> <span class="toc-text"> 强制类型转换</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#leaq-%E5%9C%B0%E5%9D%80%E8%BD%AC%E7%A7%BB"><span class="toc-number">2.</span> <span class="toc-text"> leaq 地址转移</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AF%94%E8%BE%83%E6%8C%87%E4%BB%A4"><span class="toc-number">3.</span> <span class="toc-text"> 比较指令</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%A0%87%E5%BF%97%E5%AF%84%E5%AD%98%E5%99%A8%E7%9A%84%E8%AE%BF%E9%97%AE"><span class="toc-number">3.1.</span> <span class="toc-text"> 标志寄存器的访问</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B7%B3%E8%BD%AC%E6%8C%87%E4%BB%A4"><span class="toc-number">4.</span> <span class="toc-text"> 跳转指令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9D%A1%E4%BB%B6%E8%B7%B3%E8%BD%AC%E6%8C%87%E4%BB%A4"><span class="toc-number">5.</span> <span class="toc-text"> 条件跳转指令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BE%AA%E7%8E%AF%E8%AF%AD%E5%8F%A5"><span class="toc-number">6.</span> <span class="toc-text"> 循环语句</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#switch-%E6%B1%87%E7%BC%96%E5%AE%9E%E7%8E%B0"><span class="toc-number">7.</span> <span class="toc-text"> switch 汇编实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9D%82%E9%A1%B9"><span class="toc-number">8.</span> <span class="toc-text"> 杂项</span></a></li></ol></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 By 星河璀璨</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="external nofollow noopener noreferrer" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="Switch Between Traditional Chinese And Simplified Chinese">繁</button><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="Scroll To Comments"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div id="algolia-search"><div class="search-dialog"><div class="search-dialog__title" id="algolia-search-title">Algolia</div><div id="algolia-input-panel"><div id="algolia-search-input"></div></div><hr><div id="algolia-search-results"><div id="algolia-hits"></div><div id="algolia-pagination"></div><div id="algolia-stats"></div></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script src="/js/search/algolia.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',()=> {preloader.endLoading()})</script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    let initData = {
+      el: '#vcomment',
+      appId: 'ppBSSMr3xMsbRBArQedKeS5B-gzGzoHsz',
+      appKey: 'cdaxbHoq61wB6rrC3hTn2Ubo',
+      placeholder: '别让博主寂寞太久',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'zh-CN',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: true,
+      path: window.location.pathname,
+    }
+
+    if (true) { 
+      initData.requiredFields= ('nick,mail'.split(','))
+    }
+    
+    if (false) {
+      const otherData = false
+      initData = Object.assign({}, initData, otherData)
+    }
+    
+    const valine = new Valine(initData)
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.querySelector('#vcomment'),loadValine)
+  else setTimeout(() => loadValine(), 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script><script src="https://unpkg.com/xiaokang-style/butterfly/js/xkTool.js"></script><script src="/js/mychange.js"></script><script src="https://cdn.jsdelivr.net/gh/xiabo2/CDN@latest/fishes.js"></script><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zindex="-1" mobile="false" data-click="false"></script></div><script async>window.onload=function(){var a=document.createElement('script'),b=document.getElementsByTagName('script')[0];a.type='text/javascript',a.async=!0,a.src='/sw-register.js?v='+Date.now(),b.parentNode.insertBefore(a,b)};</script></body></html>
