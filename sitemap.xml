@@ -1154,13 +1154,6 @@
   </url>
   
   <url>
-    <loc>http://xinhecuican.github.io/categories/%E7%AE%97%E6%B3%95/</loc>
-    <lastmod>2020-11-27</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://xinhecuican.github.io/categories/stl/</loc>
     <lastmod>2020-11-27</lastmod>
     <changefreq>daily</changefreq>
@@ -1168,7 +1161,7 @@
   </url>
   
   <url>
-    <loc>http://xinhecuican.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</loc>
+    <loc>http://xinhecuican.github.io/categories/%E7%AE%97%E6%B3%95/</loc>
     <lastmod>2020-11-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1176,6 +1169,13 @@
   
   <url>
     <loc>http://xinhecuican.github.io/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/</loc>
+    <lastmod>2020-11-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://xinhecuican.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/</loc>
     <lastmod>2020-11-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1196,14 +1196,14 @@
   </url>
   
   <url>
-    <loc>http://xinhecuican.github.io/categories/%E6%B1%87%E7%BC%96/</loc>
+    <loc>http://xinhecuican.github.io/categories/%E5%9F%BA%E7%A1%80/</loc>
     <lastmod>2020-11-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://xinhecuican.github.io/categories/%E5%9F%BA%E7%A1%80/</loc>
+    <loc>http://xinhecuican.github.io/categories/%E6%B1%87%E7%BC%96/</loc>
     <lastmod>2020-11-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1245,14 +1245,14 @@
   </url>
   
   <url>
-    <loc>http://xinhecuican.github.io/categories/%E6%B1%87%E7%BC%96/AT-T/</loc>
+    <loc>http://xinhecuican.github.io/categories/%E6%95%B0%E5%AD%A6/%E6%A6%82%E7%8E%87%E8%AE%BA/</loc>
     <lastmod>2020-11-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://xinhecuican.github.io/categories/%E6%95%B0%E5%AD%A6/%E6%A6%82%E7%8E%87%E8%AE%BA/</loc>
+    <loc>http://xinhecuican.github.io/categories/%E6%B1%87%E7%BC%96/AT-T/</loc>
     <lastmod>2020-11-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
