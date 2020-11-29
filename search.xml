@@ -1,6 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>文件系统</title>
+    <url>/post/1b9c8662.html</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="文件"><a class="markdownIt-Anchor" href="#文件"></a> 文件</h1>
+<h2 id="文件的结构和类型"><a class="markdownIt-Anchor" href="#文件的结构和类型"></a> 文件的结构和类型</h2>
+<p>文件在系统中其实就是一串二进制数，结尾有特殊的符号标识，而他的入口处由操作系统管理。</p>
+<p>在linux系统中，文件的类型有目录文件，一般文件和特殊文件（如设备文件）等，这些文件在内容组织上各不相同，但是他们的基础构成还是上面说的。</p>
+<h2 id="查找文件"><a class="markdownIt-Anchor" href="#查找文件"></a> 查找文件</h2>
+<p>首先在linux中文件通过树形结构进行组织，在找到对应目录下的文件后就要打开文件了。linux目录中存放的i节点表，i节点中存放着一些文件的信息和文件的入口地址。</p>
+<p><img src="/images/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F1.PNG" alt="" />如图就是一些文件的属性，操作系统会根据自身需要选取某些属性。</p>
+<p><img src="/images/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F2.PNG" alt="" />这个图中就是i节点的结构，注意Point to Block data就是在磁盘中的位置</p>
+<h2 id="文件在磁盘中的储存"><a class="markdownIt-Anchor" href="#文件在磁盘中的储存"></a> 文件在磁盘中的储存</h2>
+<ul>
+<li>第一种方法时每个文件在磁盘中有固定的位置，当然这种方法是不可行的，因为这样必须事先分配好大小，如果达到了事先分配的最大值后就无法继续增大。</li>
+<li>第二种方法是通过一个链表组织。这种方法中链表在磁盘的前几个字节，然后i节点指向入口地址。它的缺点是如果想访问后面的节点必须把前面节点都扫一遍，并且因为他在磁盘中占有了位置，所以现在磁盘中所能容纳的文件字节数减少了，需要重新考虑对齐的问题。</li>
+<li>第三种方法是在i节点中增加15*4个字节。它是12+1+1+1的结构。低12字节保存第0到11块的入口地址（如果一块大小矢1k的话，那么0-12k地址内容可以通过低12字节访问）。而第12个字节保存到下一个链表的指针，这个链表大小就是一页大小，也就是说保存着从12k开始到<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>12</mn><mo>+</mo><mn>1024</mn><mo>∗</mo><mo stretchy="false">(</mo><mfrac><mn>1024</mn><mn>4</mn></mfrac><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">12+ 1024*(\frac{1024}{4})</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="mord">1</span><span class="mord">2</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span><span class="mord">0</span><span class="mord">2</span><span class="mord">4</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∗</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.190108em;vertical-align:-0.345em;"></span><span class="mopen">(</span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.845108em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">4</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mord mtight">0</span><span class="mord mtight">2</span><span class="mord mtight">4</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mclose">)</span></span></span></span>位置的数据。同样第13字节有两个页表，那么它保存着 1024 * 1024/4 * 1024/4大小的数据。以此类推,第二个图展示了它的结构</li>
+</ul>
+<p><img src="/images/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F3.PNG" alt="" /><br />
+<img src="/images/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F4.PNG" alt="" /></p>
+<h1 id="文件系统"><a class="markdownIt-Anchor" href="#文件系统"></a> 文件系统</h1>
+<p>不同的操作系统中有不同的文件系统。</p>
+<ul>
+<li>linux： minix, ext2, ext3, ext4, reiserFS, IBMJFS, xfxs</li>
+<li>windows: FAT-16, FAT-32, FAT-12, exFat， NTFS</li>
+</ul>
+<p>不同的文件系统不一定兼容，下面以ext2作为例子来说明文件系统的结构。</p>
+<p><strong>磁盘</strong>被分为若干块，它的大小可以是1024， 2048， 4096等等。磁盘块的大小是由操作系统决定的。</p>
+<p><img src="/images/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F5.PNG" alt="" /></p>
+<ul>
+<li>超级块（superblock）是文件系统中的第一个块，其中存放着文件系统的一些信息如文件系统的根目录，挂载点，空闲块指针，空闲i节点指针。超级块坏了文件系统就坏了。</li>
+</ul>
+<blockquote>
+<p>为了保证超级块坏的时候文件系统不至于崩溃，超级块一般由多个备份。</p>
+</blockquote>
+<ul>
+<li>i节点和间接i节点表。这两个作用在上面说了</li>
+<li>数据块（data Block)真正存储数据的块</li>
+</ul>
+<h2 id="空数据块位置"><a class="markdownIt-Anchor" href="#空数据块位置"></a> 空数据块位置</h2>
+<p>每次操作系统想分配空间给一个文件时，首先要知道空的数据块在哪。</p>
+<ul>
+<li>一种办法是使用一个链表来维护空数据块，这种办法的问题是消耗太大</li>
+<li>另一种办法是使用位图法，因为块是有编号的，如果对应位置是1表示不是空的。<img src="/images/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F6.PNG" alt="" /></li>
+</ul>
+<h2 id="文件系统的创建和挂载"><a class="markdownIt-Anchor" href="#文件系统的创建和挂载"></a> 文件系统的创建和挂载</h2>
+<p>可以使用<strong>mkfs</strong>命令进行文件系统的创建</p>
+<blockquote>
+<p><code>mkfs [-t type] [fs-options] &lt;device&gt; size</code></p>
+</blockquote>
+<p>例： mkfs -t ext4 /dev/sda6</p>
+<p><strong>mount</strong>命令进行文件系统的挂载</p>
+<p><a href="https://xinhecuican.github.io/post/35532.html">此命令可以看这篇文章中目录部分</a></p>
+<p>例： mount /dev/lv100 /home/patsie</p>
+<p><strong>注意</strong>：不同文件系统中i节点是不一样的，挂载时经历了一些转换过程，这时可以看到挂载进来的内容，但是该目录下原有内容被隐藏了，只有使用卸载命令<strong>umount</strong>才可以重新看到原有内容。</p>
+<h1 id="磁盘及卷组管理"><a class="markdownIt-Anchor" href="#磁盘及卷组管理"></a> 磁盘及卷组管理</h1>
+<p><a href="https://xinhecuican.github.io/post/7d1c86da.html">有关磁盘基础结构请看</a></p>
+<p>首先磁盘分区有两种，分别是MBR和GPT（也就是C盘D盘之类的）</p>
+<ul>
+<li>MBR（Master Boot Record):
+<ul>
+<li>位于第一个扇面</li>
+<li>支持4个主分区，加上扩展分区最多也就支持32个分区</li>
+<li>一个分区最大2T</li>
+</ul>
+</li>
+<li>GPT（GUID Partition table):
+<ul>
+<li>理论支持无限多个分区（实际上操作系统会限制）</li>
+<li>最大支持18EB</li>
+<li>需要操作系统支持和主板支持EFI/UEFI</li>
+</ul>
+</li>
+</ul>
+<p>直接磁盘分区有很多问题</p>
+<ol>
+<li>磁盘分区大小是固定的，很难改变（除非格式化）</li>
+<li>受文件系统大小的限制（因为文件系统无法跨越设备，所以分区也不可以）</li>
+<li>需要提前考虑大小</li>
+</ol>
+<p>LVM（逻辑卷管理）就是为了克服这些问题而产生的。他将物理设备分为若干物理卷，然后使用逻辑卷进行管理和分区。</p>
+<blockquote>
+<p>物理储存介质： 如磁盘等，在linux上是/dev/sda等设备文件<br />
+物理卷(PV): 相当于一个个磁盘分区，但是分区大小固定并且还有一些与LVM相关参数<br />
+卷组（VG）： 多个物理卷组成的储存池，也就是说可以让文件系统跨设备<br />
+逻辑卷（LV）： 从卷组中分出一些卷进行管理，可以在上面划分分区</p>
+</blockquote>
+<p><img src="/images/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F7.PNG" alt="" /></p>
+<p><strong>一些linux命令</strong></p>
+<ul>
+<li>fdisk： 创建分区 例如 fdisk /dev/sda</li>
+<li>pvcreate:创建物理卷</li>
+<li>vgcreate: 创建卷组 例如： vgcreate vg0 /dev/sda6(sda6是一个物理卷）</li>
+<li>vgextend: 扩展卷组 例如： vgextend vg0 /dev/sdb1</li>
+<li>lvcreate: 创建逻辑卷 例如： lvcreate -L 10G -n lv0 /dev/vg0（名字是lv0，大小是10G）</li>
+<li>mkfs： 创建文件系统，现在是在逻辑卷中创造</li>
+<li>lvextend: 扩大逻辑卷</li>
+<li>resize2fs： 扩大文件系统</li>
+<li>umount： 卸载文件系统，为减小大小做准备。</li>
+<li>lvreduce： 减小逻辑卷大小。<strong>首先要减小文件系统大小，使用resize2fs命令</strong></li>
+</ul>
+<p>这些命令基本按照顺序把文件系统创建和增删过程说了出来。</p>
+<p>基本过程： 创建硬盘分区-&gt;创建逻辑卷-&gt;创建卷组-&gt;创建逻辑卷-&gt;创建文件系统</p>
+<p>扩大物理卷-&gt;扩散卷组-&gt;扩大逻辑卷-&gt;扩大文件系统</p>
+<p>减小文件系统-&gt;减小逻辑卷…</p>
+]]></content>
+      <categories>
+        <category>计算机系统基础</category>
+      </categories>
+  </entry>
+  <entry>
     <title>K-means</title>
     <url>/post/766f9b60.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="概念"><a class="markdownIt-Anchor" href="#概念"></a> 概念</h1>
@@ -5309,30 +5418,63 @@ int main()
       </categories>
   </entry>
   <entry>
-    <title>储存设备</title>
+    <title>储存设备与缓存</title>
     <url>/post/7d1c86da.html</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h3 id="机械硬盘"><a class="markdownIt-Anchor" href="#机械硬盘"></a> 机械硬盘</h3>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="机械硬盘"><a class="markdownIt-Anchor" href="#机械硬盘"></a> 机械硬盘</h1>
 <p><img src="/images/%E7%A1%AC%E7%9B%98.jpg" alt="" /></p>
-<p>结构： 由若干个盘片组成，每个盘片有2两面，每一面上有若干个磁道，每个磁道上又划分成若干个扇区，扇区是数据访问的最小单位。中间的轴在不停转动。每个扇区都有一个编号。</p>
+<p>结构： 由若干个盘片组成，每个盘片有2两面，每一面上有若干个磁道（柱面就是指和中心轴平行的圆柱面，有多个每个盘上都有两个磁道在上面） ，每个磁道上又划分成若干个扇区，扇区是数据访问的最小单位。中间的轴在不停转动。每个扇区都有一个编号。</p>
 <p>显然如果扇区划分时是从中心发出多根射线的话是不好的。因为内圈的扇区划分小，外面的扇区划分大，因此每个扇区读写数据数目可能会有较大的差距。但是很可能只需要利用其中很小一部分，这样就造成了浪费。所以磁道与磁道之间扇区数目是不同的，尽量使数据分布均匀。</p>
 <p>图中左边的架子是读写头，可以前后滑动。数据就是通过读写头进行读写的。</p>
 <p><strong>大致过程</strong>：先移动到对应扇区（寻道），然后等待读写头划过我们要读取的扇区。之后在读取这个扇区。要注意即使只需要读取一个字节也要把这个扇区全部读取完。如果是写的话，先把扇区中数据读取出来，然后再在这些数据中进行更改，最后再把这些数据写入到扇区中。</p>
 <p>一般寻道在2-9ms，旋转也是10ms左右，而读取只需要0.02ms，所以说大头都在寻找过程中。并且要比dram慢2500倍，比sram慢40000倍。</p>
+<blockquote>
+<p>旋转时间如果没有特殊规定一般都是算旋转半圈的时间，而读取时间一般使用旋转一圈时间/扇区数得到</p>
+</blockquote>
 <p>机械硬盘扇区的读取次数是由限制的，大概是十万到100万次左右。如果某一扇区坏了是不是会导致整个硬盘都异常呢？当然这是不可能的，那样也太不经用了。</p>
 <p>为了解决这个问题，可以用逻辑编号代替物理编号，然后用一定的映射规则转换到物理编号，如果某一个扇区损坏，硬盘中有一些备用的扇区可以替补上，这样就可以解决某一个扇区损坏的问题。可能某些逻辑扇区会被频繁的使用，如果对应规则是确定的那么可能很快那个扇区就会损坏，所以对应规则也要不断变化使每个扇区利用大致平均。</p>
-<h3 id="固态硬盘ssd"><a class="markdownIt-Anchor" href="#固态硬盘ssd"></a> 固态硬盘（ssd）</h3>
+<h2 id="寻道算法"><a class="markdownIt-Anchor" href="#寻道算法"></a> 寻道算法</h2>
+<ul>
+<li>FCFS（先来先服务）： 这种算法就是先来的请求先服务。但是固态采用的是这种算法（因为不需要考虑寻道时间）</li>
+<li>SSTF（最短位置优先）： 这种算法是在所有请求中找到距离他最近的</li>
+<li>SCAN（电梯算法）： 先一直朝着某个方向走，这个方向没有之后再往反方向走，这种在实际中有应用</li>
+<li>CSCAN(循环电梯算法）： 这种方法时一直朝一个方向走，到了顶部又直接放回底部重新扫描</li>
+</ul>
+<p>例：现在在15磁道。请求有81， 47， 90， 18， 5.并且现在向上走</p>
+<p>FCFS： 15-&gt;81, 81-&gt;47, 47-&gt;90, 90-&gt;18, 18-&gt;5</p>
+<p>SSTF: 15-&gt;18, 18-&gt;5, 5-&gt;47, 47-&gt;81, 81-&gt;90</p>
+<p>SCAN: 15-&gt;47, 47-&gt;81, 81-&gt;90, 80-&gt;18, 18-&gt;5</p>
+<h2 id="磁盘raid"><a class="markdownIt-Anchor" href="#磁盘raid"></a> 磁盘RAID</h2>
+<p>磁盘RAID是在逻辑卷出来之前为了多个磁盘同时使用而想出来的算法。首先要求这些磁盘大小相同</p>
+<h3 id="raid0"><a class="markdownIt-Anchor" href="#raid0"></a> RAID0</h3>
+<p>RAID0就是将一个文件拆分成多个部分，然后同时写和读。但是有一个相当大的问题是如果一个磁盘坏了那么所有文件都坏了。</p>
+<h3 id="raid1"><a class="markdownIt-Anchor" href="#raid1"></a> RAID1</h3>
+<p>RAID1是从一个极端到了另一个极端。例如有两份磁盘，那么他将把一份数据写到两份磁盘中。这样写的效率毫无疑问是低的，但是读的效率还行（因为可以两个磁盘同时读），并且浪费一半的空间</p>
+<h3 id="raid10"><a class="markdownIt-Anchor" href="#raid10"></a> RAID10</h3>
+<p>RAID10并不是10而是RAID1和RAID0的组合<br />
+<img src="/images/%E5%82%A8%E5%AD%98%E8%AE%BE%E5%A4%87%E5%92%8C%E7%BC%93%E5%AD%981.PNG" alt="" /><br />
+这种兼顾读写效率和可靠性，但是同样要浪费一半的空间</p>
+<h3 id="raid5"><a class="markdownIt-Anchor" href="#raid5"></a> RAID5</h3>
+<p>RAID5是现在一般使用的技术。RAID5同样是把一个文件拆分成多个文件写（一般是以块为单位拆分）。但是现在每个磁盘都储存着其他磁盘文件的恢复信息。例如2磁盘存着1磁盘的信息，3磁盘存着2磁盘的信息。这样如果一个磁盘损坏另外的磁盘还可以恢复信息。</p>
+<p>会浪费一块磁盘的空间</p>
+<h3 id="raid4"><a class="markdownIt-Anchor" href="#raid4"></a> RAID4</h3>
+<p>RAID4是单独拿一块盘出来保存一些恢复信息，但是这样如果校验盘坏了就非常危险。</p>
+<h3 id="raid67等"><a class="markdownIt-Anchor" href="#raid67等"></a> RAID6，7等</h3>
+<p>市面上说的RAID6就是多出一块盘来做备用，如果一块盘坏了这块盘立刻读取恢复信息并工作。这实际上是RAID5。实际上是有RAID6的技术的，但是一般不采用</p>
+<h3 id="总结"><a class="markdownIt-Anchor" href="#总结"></a> 总结</h3>
+<p><img src="/images/%E5%82%A8%E5%AD%98%E8%AE%BE%E5%A4%87%E5%92%8C%E7%BC%93%E5%AD%982.PNG" alt="" /></p>
+<h1 id="固态硬盘ssd"><a class="markdownIt-Anchor" href="#固态硬盘ssd"></a> 固态硬盘（ssd）</h1>
 <p>结构： 固态硬盘最小的结构是页，每一页有若干个字节。之后若干个页组成了块。它是由闪存构成的（就是usb所使用的）</p>
 <p>读写过程：读的过程是以<strong>页</strong>作为单位，也需要通过一定的映射使之利用均衡。但是写的过程却是以<strong>块</strong>作为单位，就算只改一个字节也需要读取整个块，并且写的过程中需要先把原来的内容全部擦除，所以写过程比读过程慢的多。</p>
 <p>ssd好处是读写较快，但是价格贵，并且读写次数少，只有1万到10万次。</p>
-<h3 id="局部性和高速缓存"><a class="markdownIt-Anchor" href="#局部性和高速缓存"></a> 局部性和高速缓存</h3>
+<h1 id="局部性和高速缓存"><a class="markdownIt-Anchor" href="#局部性和高速缓存"></a> 局部性和高速缓存</h1>
 <p>局部性分为时间局部性和空间局部性。</p>
 <p>时间局部性指的是在短时间内多次重复使用某个内存。</p>
 <p>空间局部性指的是一个内存被使用，很可能接下来会使用这段内存附近的数据。</p>
 <p>现代计算机cpu运算速度已经很快了，但是内存的访问速度却跟不上cpu的运算速度。因此现在更重要的是解决内存读取速度的问题。</p>
 <p>根据上面所说的局部性原理（这是人们通过大量观察总结得出的规律），人们想到可以把常用的数据放在一个更快的储存器里，这样就可以提高运算速度。</p>
 <p>于是就有了高速缓存。高速缓存（cahce）是用sram制成的，它的速度很快但是容量很小，直接集成到了cpu内部，每次cpu访问内存的时候都会先从高速缓存中读取。如果高速缓存中没有才会去内存中查找。从内存中取出数据并不是只取那几个字节，而是把附近的指令都放到高速缓存中（因为局部性原理），这样就可以提高速度。</p>
-<h3 id="高速缓存运行原理"><a class="markdownIt-Anchor" href="#高速缓存运行原理"></a> 高速缓存运行原理</h3>
-<h4 id="基本结构"><a class="markdownIt-Anchor" href="#基本结构"></a> 基本结构</h4>
+<h1 id="高速缓存运行原理"><a class="markdownIt-Anchor" href="#高速缓存运行原理"></a> 高速缓存运行原理</h1>
+<h2 id="基本结构"><a class="markdownIt-Anchor" href="#基本结构"></a> 基本结构</h2>
 <p><img src="/images/%E9%AB%98%E9%80%9F%E7%BC%93%E5%AD%98.png" alt="" /></p>
 <p>一共有S个组，每个组有E行，每行有B个字节。S，E，B都是2的n次方，记S是2的s次方，E是2的e次方，B是2的b次方。</p>
 <p>每一行的B字节都是由三部分组成。最高位叫做有效位，用来判定这一行中是否储存了数据。之后又t字节标记位，用来进行判别，后面的位才是实际从内存中取出来的内容。</p>
@@ -5340,16 +5482,16 @@ int main()
 <p>进行查询时，先用中间s位找出组索引。例如中间s位是010，那么组索引是2.找到组索引后就用高t位的标记进行比对，如果对应行中最高位为1且标记位正好符合那么就通过最后的b字节找到块偏移。然后取出数据。</p>
 <p>注意，我们只需要找到对应的组就行了，cpu可以自动对该组所有行同时进行比对而不用一一比对。</p>
 <p>例  cpu发出一个指令，要从0111位置取出两字节数据。首先高速缓存中有四组，每组一行。每行四字节。所以这里块偏移是1组索引是11，标记是0.那么我们先通过中间的11确定是第三组，之后再和第三组最高位为1的进行比对，如果有一行标记位正好是0，那么就算出偏移量是1，所以从后面开始的第一位（有第零位）取出两个字节。</p>
-<h4 id="直接映射高速缓存"><a class="markdownIt-Anchor" href="#直接映射高速缓存"></a> 直接映射高速缓存</h4>
+<h2 id="直接映射高速缓存"><a class="markdownIt-Anchor" href="#直接映射高速缓存"></a> 直接映射高速缓存</h2>
 <p>直接映射高速缓存的特点是每一组只有一行。所以找到组后直接进行比对即可。但是这里有一个问题，例如组索引是1，标记位有两位。那么可能频繁的取出组索引相同但是标记位不同的数据，那么我们就要频繁的从内存中取出数据（miss），这样就降低了速度。</p>
-<h4 id="组相联高速缓存"><a class="markdownIt-Anchor" href="#组相联高速缓存"></a> 组相联高速缓存</h4>
+<h2 id="组相联高速缓存"><a class="markdownIt-Anchor" href="#组相联高速缓存"></a> 组相联高速缓存</h2>
 <p>组相联高速缓存和直接告诉缓存的不同是组相联高速缓存中每一组有多个行，这样就更可以存放更多的标记位，miss的可能性也就越低。但是这个的问题是因为要同时访问多行，所以硬件设计比较困难。</p>
-<h4 id="全相连高速缓存"><a class="markdownIt-Anchor" href="#全相连高速缓存"></a> 全相连高速缓存</h4>
+<h2 id="全相连高速缓存"><a class="markdownIt-Anchor" href="#全相连高速缓存"></a> 全相连高速缓存</h2>
 <p>全相连高速缓存中只有一个组，因此没有组索引（想要有组索引最少要有两个组）。</p>
 <p>因此把cpu发送的内存地址分成两个部分，块偏移和标记。因为没有组索引，所以这两部分一般比较大。它可以同时匹配所有的行，也就少了寻找组索引的计算，但是如果行太多设计极为困难，所以只适合做小的高速缓存。</p>
-<h4 id="直写与回写"><a class="markdownIt-Anchor" href="#直写与回写"></a> 直写与回写</h4>
+<h2 id="直写与回写"><a class="markdownIt-Anchor" href="#直写与回写"></a> 直写与回写</h2>
 <p>直写就是每次都要写到内存或者硬盘中，回写就是每次先在缓存中写，等到这个缓存被替换的时候再写回。毫无疑问回写要快，但是直写也有用武之地。</p>
-<h4 id="块替换策略"><a class="markdownIt-Anchor" href="#块替换策略"></a> 块替换策略</h4>
+<h2 id="块替换策略"><a class="markdownIt-Anchor" href="#块替换策略"></a> 块替换策略</h2>
 <p>每次未命中时并且缓存中已经全部使用的时候就要进行块替换。块替换有两种策略，第一种是把最近没有使用的块替换出去，第二种是把最不经常使用的块替换出去。</p>
 ]]></content>
       <categories>
@@ -8626,7 +8768,7 @@ O(nlogn)</p>
       </categories>
   </entry>
   <entry>
-    <title>重定向与管道</title>
+    <title>Linux重定向与管道</title>
     <url>/post/22102.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h3 id="标准输入-标准输出和标准错误"><a class="markdownIt-Anchor" href="#标准输入-标准输出和标准错误"></a> 标准输入 标准输出和标准错误</h3>
 <p>基本思想：每个基于文本的程序都可以从任何源接受输入，并向任何目标输出</p>
