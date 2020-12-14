@@ -1367,8 +1367,8 @@ body {
   min-height: 100%;
   background: var(--global-bg);
   color: var(--font-color);
-  font-size: 14.5px;
-  font-family: Noto Serif SC, Lato;
+  font-size: 15px;
+  font-family: Noto Serif SC, serif;
   line-height: 2;
   -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
@@ -1715,8 +1715,8 @@ blockquote footer cite:before {
 }
 #article-container pre,
 #article-container code {
-  font-size: 14.5px;
-  font-family: Monaco, consolas !important;
+  font-size: 15px;
+  font-family: Monaco, consolas, Menlo, "PingFang SC", "Microsoft YaHei", monospace, Helvetica Neue For Number !important;
 }
 #article-container code {
   padding: 0.1rem 0.2rem;
@@ -1746,7 +1746,7 @@ blockquote footer cite:before {
 #article-container figure.highlight figcaption,
 #article-container figure.highlight .caption {
   padding: 0.3rem 0 0.1rem 0.7rem;
-  font-size: 14.5px;
+  font-size: 15px;
   line-height: 1em;
 }
 #article-container figure.highlight figcaption a,
@@ -1778,7 +1778,7 @@ blockquote footer cite:before {
   height: 2.15em;
   background: #e6ebf1;
   color: #90a4ae;
-  font-size: 14.5px;
+  font-size: 15px;
 }
 #article-container .highlight-tools.closed + table {
   display: none;
