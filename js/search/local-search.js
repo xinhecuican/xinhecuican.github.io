@@ -70,7 +70,8 @@ window.addEventListener('load', () => {
             }
             let dataTitle = data.title.trim().toLowerCase()
             const dataContent = data.content.trim().replace(/<[^>]+>/g, '').toLowerCase()
-            const dataUrl = data.url.startsWith('/') ? data.url : GLOBAL_CONFIG.root + data.url
+            //const dataUrl = data.url.startsWith('/') ? data.url : GLOBAL_CONFIG.root + data.url\
+            const dataUrl = https://cdn.jsdelivr.net/gh/xinhecuican/xinhecuican.github.io@master/local-search.xml
             let indexTitle = -1
             let indexContent = -1
             let firstOccur = -1
