@@ -50,7 +50,8 @@ window.addEventListener('load', () => {
           return {
             title: item.querySelector('title').textContent,
             content: item.querySelector('content').textContent,
-            url: item.querySelector('url').textContent
+            //url: item.querySelector('url').textContent
+            url: "https://cdn.jsdelivr.net/gh/xinhecuican/xinhecuican.github.io/search.xml"
           }
         })
 
