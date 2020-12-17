@@ -50,8 +50,8 @@ window.addEventListener('load', () => {
           return {
             title: item.querySelector('title').textContent,
             content: item.querySelector('content').textContent,
-            //url: item.querySelector('url').textContent
-            url: "https://cdn.jsdelivr.net/gh/xinhecuican/xinhecuican.github.io/search.xml"
+            url: item.querySelector('url').textContent
+            //url: "https://cdn.jsdelivr.net/gh/xinhecuican/xinhecuican.github.io/search.xml"
           }
         })
 
@@ -71,7 +71,8 @@ window.addEventListener('load', () => {
             }
             let dataTitle = data.title.trim().toLowerCase()
             const dataContent = data.content.trim().replace(/<[^>]+>/g, '').toLowerCase()
-            const dataUrl = data.url.startsWith('/') ? data.url : GLOBAL_CONFIG.root + data.url
+            //const dataUrl = data.url.startsWith('/') ? data.url : GLOBAL_CONFIG.root + data.url
+            const dataUrl = "https://cdn.jsdelivr.net/gh/xinhecuican/xinhecuican.github.io/search.xml"
             let indexTitle = -1
             let indexContent = -1
             let firstOccur = -1
