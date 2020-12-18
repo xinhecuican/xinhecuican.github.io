@@ -1210,6 +1210,13 @@
   </url>
   
   <url>
+    <loc>http://xinhecuican.github.io/categories/Linux/</loc>
+    <lastmod>2020-12-18</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://xinhecuican.github.io/categories/java/</loc>
     <lastmod>2020-12-18</lastmod>
     <changefreq>daily</changefreq>
@@ -1217,7 +1224,7 @@
   </url>
   
   <url>
-    <loc>http://xinhecuican.github.io/categories/Linux/</loc>
+    <loc>http://xinhecuican.github.io/categories/MySQL/</loc>
     <lastmod>2020-12-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1294,13 +1301,6 @@
   </url>
   
   <url>
-    <loc>http://xinhecuican.github.io/categories/%E6%9D%82%E9%A1%B9/</loc>
-    <lastmod>2020-12-18</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>http://xinhecuican.github.io/categories/%E5%9F%BA%E7%A1%80/c/</loc>
     <lastmod>2020-12-18</lastmod>
     <changefreq>daily</changefreq>
@@ -1308,14 +1308,14 @@
   </url>
   
   <url>
-    <loc>http://xinhecuican.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E7%AE%97%E6%B3%95/</loc>
+    <loc>http://xinhecuican.github.io/categories/%E6%9D%82%E9%A1%B9/</loc>
     <lastmod>2020-12-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://xinhecuican.github.io/categories/MySQL/</loc>
+    <loc>http://xinhecuican.github.io/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/%E7%AE%97%E6%B3%95/</loc>
     <lastmod>2020-12-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
