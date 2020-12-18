@@ -6,7 +6,7 @@
   <link href="http://xinhecuican.github.io/atom.xml" rel="self"/>
   
   <link href="http://xinhecuican.github.io/"/>
-  <updated>2020-12-18T08:26:32.608Z</updated>
+  <updated>2020-12-18T08:59:45.098Z</updated>
   <id>http://xinhecuican.github.io/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="http://xinhecuican.github.io/post/d213fc7f.html"/>
     <id>http://xinhecuican.github.io/post/d213fc7f.html</id>
     <published>2020-12-18T08:02:00.000Z</published>
-    <updated>2020-12-18T08:26:32.608Z</updated>
+    <updated>2020-12-18T08:59:45.098Z</updated>
     
-    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="基础名词"><a class="markdownIt-Anchor" href="#基础名词"></a> 基础名词</h1><ul><li>数据库：</li></ul><h1 id="use和show"><a class="markdownIt-Anchor" href="#use和show"></a> USE和SHOW</h1><ul><li>USE 数据库名：<ul><li>使用某个数据库</li></ul></li><li>SHOW DATABASES：<ul><li>返回可用数据库的列表</li></ul></li><li>SHOW TABLES：<ul><li>展示数据库内列表的信息</li></ul></li><li>SHOW COLUMNS FROM 列表名：<ul><li>DESCRIBE 列表名作用与它相同</li><li>展示数据列（表头）的信息.下面是一个输出样例<img src="/images/MySQL%E8%AF%AD%E5%8F%A5%E9%80%9F%E6%9F%A51.PNG" alt="" /></li></ul></li><li>SHOW STATUS：<ul><li>用于显示服务器状态信息</li></ul></li><li>SHOW CREATE DATABASE和 SHOW CREATE TABLE<ul><li>分别用来显示创建特定数据库或表</li></ul></li><li>SHOW GRANTS：<ul><li>用来显示用户的安全权限</li></ul></li><li>SHOW ERRORS和SHOW WARNINGS：<ul><li>用来显示服务器错误或警告信息</li></ul></li></ul><h1 id="检索数据select"><a class="markdownIt-Anchor" href="#检索数据select"></a> 检索数据（SELECT，</h1>]]></content>
+    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="基础名词"><a class="markdownIt-Anchor" href="#基础名词"></a> 基础名词</h1><ul><li>数据库： 保存有组织数据的容器，一般是一个或一组文件</li><li>表： 表在数据库中，用来进行分类存储各式各样的信息。如果把数据库看为一个柜子，那么表就是一个个抽屉，里面装着一些文件。表在实际应用中可以是顾客清单，产品目录等。</li><li>列： 表是由列和行构成。例如一个城市信息表，它的列可以使地址，城市，州，邮政编码等等。</li><li>行： 行是表中的一个记录。例如一个学生信息表，一个行包含一个学生的名字、年龄、性别等信息。</li><li>主键： 是一列，这一列可以唯一的标识每一个行。例如身份证号可以唯一的标识每一个人，而姓名不可以。因此身份证号可以作为主键。</li></ul><h1 id="use和show"><a class="markdownIt-Anchor" href="#use和show"></a> USE和SHOW</h1><ul><li>USE 数据库名：<ul><li>使用某个数据库</li></ul></li><li>SHOW DATABASES：<ul><li>返回可用数据库的列表</li></ul></li><li>SHOW TABLES：<ul><li>展示数据库内列表的信息</li></ul></li><li>SHOW COLUMNS FROM 列表名：<ul><li>DESCRIBE 列表名作用与它相同</li><li>展示数据列（表头）的信息.下面是一个输出样例<img src="/images/MySQL%E8%AF%AD%E5%8F%A5%E9%80%9F%E6%9F%A51.PNG" alt="" /></li></ul></li><li>SHOW STATUS：<ul><li>用于显示服务器状态信息</li></ul></li><li>SHOW CREATE DATABASE和 SHOW CREATE TABLE<ul><li>分别用来显示创建特定数据库或表</li></ul></li><li>SHOW GRANTS：<ul><li>用来显示用户的安全权限</li></ul></li><li>SHOW ERRORS和SHOW WARNINGS：<ul><li>用来显示服务器错误或警告信息</li></ul></li></ul><h1 id="检索数据select"><a class="markdownIt-Anchor" href="#检索数据select"></a> 检索数据（SELECT，</h1><ul><li>SELECT 列名 FROM 表名：<ul><li>展示某个表中某一列的详细信息</li><li>列名可以有多个，同时检索多个列</li><li>列名前可以添加表名，表名前可以添加数据库名进行限定。</li><li>列名可以用<code>*</code>代替来检索所有列</li><li>可以通过DISTINCT来排除相同的行（这时不能同时检索多个列）</li><li>LIMIT可用于限制结果行数。例如 SELECT prod_name FROM products LIMIT 5;限制为5行。LIMIT 5, 5;只显示从第五行开始的五行。<strong>注意</strong>：下标也是从0开始。</li><li></li></ul></li></ul>]]></content>
     
     
       
