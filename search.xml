@@ -667,6 +667,191 @@
 <figure class="highlight less"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">vend_title</span></span><br><span class="line"><span class="selector-tag">ACME</span> (USA) </span><br><span class="line"><span class="selector-tag">Anvils</span> <span class="selector-tag">R</span> <span class="selector-tag">Us</span> (USA) </span><br><span class="line"><span class="selector-tag">Furball</span> <span class="selector-tag">Inc</span>. (USA) </span><br><span class="line"><span class="selector-tag">Jet</span> <span class="selector-tag">Set</span> (England) </span><br><span class="line"><span class="selector-tag">Jouets</span> <span class="selector-tag">Et</span> <span class="selector-tag">Ours</span> (France) </span><br><span class="line"><span class="selector-tag">LT</span> <span class="selector-tag">Supplies</span> (USA) </span><br></pre></td></tr></table></figure>
 <p>除了让Concat结果赋予名字外，还可以对算术计算结果赋予名字。算术计算支持加减乘除。</p>
 <p>例如：<code>quantity * item_price AS expanded_price</code></p>
+<h1 id="函数"><a class="markdownIt-Anchor" href="#函数"></a> 函数</h1>
+<h2 id="文本处理函数"><a class="markdownIt-Anchor" href="#文本处理函数"></a> 文本处理函数</h2>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Left(str, len)</td>
+<td>返回串左边的字符</td>
+</tr>
+<tr>
+<td>Length(str)</td>
+<td>返回串的长度</td>
+</tr>
+<tr>
+<td>Locate(substr, str, begin_len)</td>
+<td>找出一个串的子串</td>
+</tr>
+<tr>
+<td>Lower(str)</td>
+<td>将串变成小写</td>
+</tr>
+<tr>
+<td>LTrim(str)</td>
+<td>去掉左边的空格</td>
+</tr>
+<tr>
+<td>Right(str, len)</td>
+<td>返回串右边的字符</td>
+</tr>
+<tr>
+<td>RTrim(str)</td>
+<td>去掉串右边的空格</td>
+</tr>
+<tr>
+<td>Soundex(str)</td>
+<td>返回串的SOUNDEX值</td>
+</tr>
+<tr>
+<td>SubString(str, pos, len)</td>
+<td>返回子串的字符</td>
+</tr>
+<tr>
+<td>Upper(str)</td>
+<td>将串变成大写</td>
+</tr>
+</tbody>
+</table>
+<p>其中SOUNDEX是一个将字符串转化成按照语音表示的数字的算法。</p>
+<p>例如：Y.lee和Y.lie虽然拼写不同但是读起来相同，这样他们的Soundex是相同的。</p>
+<h2 id="日期和时间处理函数"><a class="markdownIt-Anchor" href="#日期和时间处理函数"></a> 日期和时间处理函数</h2>
+<p>日期的格式是yyyy-mm-dd。例如2005-11-9.并且最好使用四位数的年份。</p>
+<p>时间的格式是 hh:mm:ss</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AddDate(date, INTERVAL sum unit)</td>
+<td>增加一个日期</td>
+</tr>
+<tr>
+<td>AddTime()</td>
+<td>增加一个时间</td>
+</tr>
+<tr>
+<td>CurDate()</td>
+<td>返回当前日期</td>
+</tr>
+<tr>
+<td>CurTime()</td>
+<td>返回当前时间</td>
+</tr>
+<tr>
+<td>Date(expr)</td>
+<td>返回日期的日期部分</td>
+</tr>
+<tr>
+<td>DateDiff()</td>
+<td>计算两个日期之差</td>
+</tr>
+<tr>
+<td>Date_Add()</td>
+<td>更复杂的日期增加</td>
+</tr>
+<tr>
+<td>Date_Format()</td>
+<td>返回一个格式化的日期或时间</td>
+</tr>
+<tr>
+<td>Day()</td>
+<td>返回一个日期中的天数部分</td>
+</tr>
+<tr>
+<td>DayOfWeek()</td>
+<td>返回星期几</td>
+</tr>
+<tr>
+<td>Hour()</td>
+<td>返回时间的小时部分</td>
+</tr>
+<tr>
+<td>Minute()</td>
+<td>返回分钟</td>
+</tr>
+<tr>
+<td>Month()</td>
+<td>…</td>
+</tr>
+<tr>
+<td>Now()</td>
+<td>返回当前的日期和时间</td>
+</tr>
+<tr>
+<td>Second()</td>
+<td>…</td>
+</tr>
+<tr>
+<td>Time</td>
+<td>返回一个日期和时间的时间部分</td>
+</tr>
+<tr>
+<td>Year()</td>
+<td>…</td>
+</tr>
+</tbody>
+</table>
+<p>例如 ：<code>SELECT DATE_ADD('1998-01-02', INTERVAL 31 DAY);</code></p>
+<p>INTERVAL是经过的意思，也就是过31天。后面也可以加MONTH，YEAR，HOUR等。</p>
+<p>expr就是标准的日期时间或只有日期。要注意日期都是字符串，都要加引号。</p>
+<h2 id="数值处理函数"><a class="markdownIt-Anchor" href="#数值处理函数"></a> 数值处理函数</h2>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Abs()</td>
+<td>返回一个数的绝对值</td>
+</tr>
+<tr>
+<td>Cos()</td>
+<td>…</td>
+</tr>
+<tr>
+<td>Exp()</td>
+<td>返回一个数的指数</td>
+</tr>
+<tr>
+<td>Mod()</td>
+<td>返回一个数的余数，相当于 %</td>
+</tr>
+<tr>
+<td>Pi()</td>
+<td>返回圆周率</td>
+</tr>
+<tr>
+<td>Rand()</td>
+<td>返回随机数</td>
+</tr>
+<tr>
+<td>Sin()</td>
+<td>…</td>
+</tr>
+<tr>
+<td>Sqrt()</td>
+<td>返回平方根</td>
+</tr>
+<tr>
+<td>Tan()</td>
+<td>返回一个数的正切值</td>
+</tr>
+</tbody>
+</table>
 ]]></content>
       <categories>
         <category>MySQL</category>
@@ -6359,7 +6544,8 @@ a[i][j]+=a[i][j-1]+a[i-1][j]-a[i-1][j-1]，因为这样，二维前缀和最好�
 <img src="/images/%E5%9B%9E%E6%BA%AF%E6%B3%95%E5%92%8C%E5%88%86%E6%94%AF%E9%99%90%E7%95%8C%E6%B3%952.PNG" alt="" /></p>
 <p>其中q12表示A’矩阵中第一行第二列的点，表示我们要先从1到2.</p>
 <p>之后的h’表示去掉这一行这一列和qji为无穷后的矩阵的归约值。因为我们到过这个节点之后这一行这一列都不会再有点了，所以可以去掉。另外如果不是导数第二个节点的话也不可能回到起点。</p>
-<p>找到<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>δ</mi><mo stretchy="false">(</mo><mi>i</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\delta(i)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.03785em;">δ</span><span class="mopen">(</span><span class="mord mathdefault">i</span><span class="mclose">)</span></span></span></span>的最小值后以这个点作为起始点除去这一行这一列进行下一步搜索。<br />
+<p>找到<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>δ</mi><mo stretchy="false">(</mo><mi>i</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\delta(i)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.03785em;">δ</span><span class="mopen">(</span><span class="mord mathdefault">i</span><span class="mclose">)</span></span></span></span>的最小值后以这个点作为起始点除去这一行这一列进行下一步搜索。</p>
+<p>现在<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>δ</mi><mo stretchy="false">(</mo><mn>4</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\delta(4)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.03785em;">δ</span><span class="mopen">(</span><span class="mord">4</span><span class="mclose">)</span></span></span></span>最小，所以<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>δ</mi><mo stretchy="false">(</mo><mn>4</mn><mo stretchy="false">)</mo><mo stretchy="false">(</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\delta(4)(1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.03785em;">δ</span><span class="mopen">(</span><span class="mord">4</span><span class="mclose">)</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span>变成<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>+</mo><mi>inf</mi><mo>⁡</mo></mrow><annotation encoding="application/x-tex">+\inf</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.77777em;vertical-align:-0.08333em;"></span><span class="mord">+</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop">in<span style="margin-right:0.07778em;">f</span></span></span></span></span>并且将第四行提到第一行，之后重复上述过程。<br />
 <img src="/images/%E5%9B%9E%E6%BA%AF%E6%B3%95%E5%92%8C%E5%88%86%E6%94%AF%E9%99%90%E7%95%8C%E6%B3%953.PNG" alt="" /></p>
 <p>之后一直重复上述步骤直到搜索完成。</p>
 <p>使用行规约矩阵的目的在于提前知道一些信息来进行分支限界。</p>
