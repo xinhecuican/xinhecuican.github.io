@@ -967,6 +967,57 @@
 <h2 id="内部联结inner-join"><a class="markdownIt-Anchor" href="#内部联结inner-join"></a> 内部联结（INNER JOIN）</h2>
 <figure class="highlight n1ql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> vend_name, prod_name, prod_price</span><br><span class="line"><span class="keyword">FROM</span> vendors <span class="keyword">INNER</span> <span class="keyword">JOIN</span> products</span><br><span class="line"><span class="keyword">ON</span> vendors.vend_id = products.vend_id;</span><br></pre></td></tr></table></figure>
 <p>这条语句作用和上面相同，并且INNER可以算作FROM的组成部分，使用这种语法时，后面限定条件使用ON而不是WHERE（但实际作用相同）。</p>
+<h2 id="自联结"><a class="markdownIt-Anchor" href="#自联结"></a> 自联结</h2>
+<p>例如某见物品（ID=DTNTR）有问题，因此想知道生产该物品的供应商生产的其他物品是否有问题。这个查询首先要找到生产ID是DTNTR的物品的供应商，然后找到这个供应商生产的其他物品。</p>
+<figure class="highlight n1ql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> prod_id, prod_name</span><br><span class="line"><span class="keyword">FROM</span> products</span><br><span class="line"><span class="keyword">WHERE</span> vend_id = (<span class="keyword">SELECT</span> vend_id</span><br><span class="line">                 <span class="keyword">FROM</span> products</span><br><span class="line">                 <span class="keyword">WHERE</span> prod_id = <span class="string">&quot;DTNTR&quot;</span>);</span><br><span class="line">                 </span><br><span class="line">等价于：</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> prod_id, prod_name</span><br><span class="line"><span class="keyword">FROM</span> products, vendors</span><br><span class="line"><span class="keyword">WHERE</span> vendors.vend_id = products.vend_id</span><br><span class="line">  <span class="keyword">AND</span> products.prod_id = <span class="string">&#x27;DTNTR&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<p>自联结使用子查询代替联结。这样可以避免列名重复而导致的一些问题，但是有时候处理联结比处理查询快很多，所以要综合比较。</p>
+<h2 id="自然联结"><a class="markdownIt-Anchor" href="#自然联结"></a> 自然联结</h2>
+<p>标准的联结会返回所有数据，甚至完全相同的列会多次出现。而自然联结就是为了避免多次出现。自然联结通过对表使用通配符（*），对其他所有表使用明确的子集来完成。</p>
+<p>例如：</p>
+<figure class="highlight mipsasm"><table><tr><td class="code"><pre><span class="line">SELECT c.*, o.<span class="keyword">order_num, </span>o.<span class="keyword">order_date,</span></span><br><span class="line"><span class="keyword"> </span>      oi.prod_id, oi.quantity, oi.item_price</span><br><span class="line">FROM customers AS c, <span class="keyword">orders </span>AS o, <span class="keyword">orderitems </span>AS oi</span><br><span class="line">WHERE c.cust_id = o.cust_id</span><br><span class="line">  <span class="keyword">AND </span>oi.<span class="keyword">order_num </span>= o.<span class="keyword">order_num</span></span><br><span class="line"><span class="keyword"> </span> <span class="keyword">AND </span>prod_id = <span class="string">&#x27;FB&#x27;</span>;</span><br><span class="line">  </span><br></pre></td></tr></table></figure>
+<p>在这个例子中，通配符只对第一个表使用，其他列都明确给出。</p>
+<h2 id="外部联结"><a class="markdownIt-Anchor" href="#外部联结"></a> 外部联结</h2>
+<p>外部联结指的是即使相关表没有关联行也进行输出。</p>
+<figure class="highlight n1ql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> customers.cust_id, orders.order_num</span><br><span class="line"><span class="keyword">FROM</span> customers <span class="keyword">LEFT</span> <span class="keyword">OUTER</span> <span class="keyword">JOIN</span> orders</span><br><span class="line"><span class="keyword">ON</span>  customers.cust_id = orders.cust_id</span><br><span class="line"></span><br><span class="line">输出</span><br><span class="line">cust_id order_num</span><br><span class="line"><span class="number">10001</span>	<span class="number">20005</span></span><br><span class="line"><span class="number">10001</span>	<span class="number">20009</span></span><br><span class="line"><span class="number">10002</span>	<span class="literal">null</span></span><br><span class="line"><span class="number">10003</span>	<span class="number">20006</span></span><br><span class="line"><span class="number">10004</span>	<span class="number">20007</span></span><br><span class="line"><span class="number">10005</span>	<span class="number">20008</span></span><br></pre></td></tr></table></figure>
+<p>上面的orders表中没有10002，但是输出却包含了10002.它是以左边的customer为基准的，在右边的表中寻找是否与左边的表有关联，有关联输出对应值，没有关联输出null。</p>
+<p>如果是RIGHT OUTER JOIN，则不会输出10002.</p>
+<h1 id="组合查询union"><a class="markdownIt-Anchor" href="#组合查询union"></a> 组合查询（UNION）</h1>
+<p>UNION是将几个SELECT的输出结合到一起。</p>
+<p>例如：</p>
+<figure class="highlight n1ql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> vend_id, prod_id, prod_price</span><br><span class="line"><span class="keyword">FROM</span> products</span><br><span class="line"><span class="keyword">WHERE</span> prod_price &lt;= <span class="number">5</span></span><br><span class="line"><span class="keyword">UNION</span></span><br><span class="line"><span class="keyword">SELECT</span> vend_id, prod_id, prod_price</span><br><span class="line"><span class="keyword">FROM</span> products</span><br><span class="line"><span class="keyword">WHERE</span> vend_id <span class="keyword">IN</span> (<span class="number">1001</span>, <span class="number">1002</span>);</span><br><span class="line"></span><br><span class="line">等同于：</span><br><span class="line"><span class="keyword">SELECT</span> vend_id, prod_id, prod_pric</span><br><span class="line"><span class="keyword">FROM</span> products</span><br><span class="line"><span class="keyword">WHERE</span> prod_pric &lt;= <span class="number">5</span> <span class="keyword">OR</span> vend_id <span class="keyword">IN</span> (<span class="number">1001</span>, <span class="number">1002</span>);</span><br></pre></td></tr></table></figure>
+<p>这个例子中似乎直接用OR更为方便。但是如果在复杂的表达式或者查询两个表的时候可能会更加清楚</p>
+<p>注意：</p>
+<ul>
+<li>每两个SELECT之间都要有UNION</li>
+<li>每个SELECT查询的内容必须相同</li>
+<li>UNION查询会自动去除重复的行。如果使用<strong>UNION ALL</strong>的话就可以不去除重复的行。</li>
+<li>排序（ORDER BY）必须要在最后一个SELECT语句之后</li>
+</ul>
+<h1 id="数据修改"><a class="markdownIt-Anchor" href="#数据修改"></a> 数据修改</h1>
+<h2 id="插入insert"><a class="markdownIt-Anchor" href="#插入insert"></a> 插入（INSERT）</h2>
+<p>数据插入的关键字是<strong>INSERT</strong>。它可以插入完整的行，也可以插入行的一部分，还可以插入查询结果。</p>
+<p>例:</p>
+<figure class="highlight n1ql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> customers</span><br><span class="line"><span class="keyword">VALUES</span>&#123;<span class="literal">NULL</span>,</span><br><span class="line">    <span class="string">&#x27;Pep E. LaPew&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;100 Main Street&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;Los Angeles&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;CA&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;90046&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;USA&#x27;</span>,</span><br><span class="line">    <span class="literal">NULL</span>,</span><br><span class="line">    <span class="literal">NULL</span>);</span><br></pre></td></tr></table></figure>
+<p>它通过<strong>VALUES</strong>给出插入一行的信息。另外可以指定插入列是操作更为安全</p>
+<figure class="highlight autohotkey"><table><tr><td class="code"><pre><span class="line">INSERT INTO customers(cust_name,</span><br><span class="line"><span class="built_in">    cust_address,</span></span><br><span class="line"><span class="built_in">    cust_city,</span></span><br><span class="line"><span class="built_in">    cust_state,</span></span><br><span class="line"><span class="built_in">    cust_zip,</span></span><br><span class="line"><span class="built_in">    cust_country,</span></span><br><span class="line"><span class="built_in">    cust_contract,</span></span><br><span class="line">    cust_email)</span><br><span class="line">VALUES(&#x27;Pep E. LaPew&#x27;,</span><br><span class="line">    &#x27;<span class="number">100</span> Main Street&#x27;,</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
+<p>这种方式更为清楚，但是也更加麻烦。但是这样可以更改插入信息的顺序。</p>
+<p><strong>插入多行</strong></p>
+<figure class="highlight n1ql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> customers(cust_name,</span><br><span class="line">    cust_address,</span><br><span class="line">    cust_city,</span><br><span class="line">    cust_state,</span><br><span class="line">    cust_zip,</span><br><span class="line">    cust_country)</span><br><span class="line"><span class="keyword">VALUES</span>(</span><br><span class="line">    <span class="string">&#x27;Pep E. LaPew&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;100 Main Street&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;Los Angeles&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;CA&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;90046&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;USA&#x27;</span>),</span><br><span class="line">  (</span><br><span class="line">    <span class="string">&#x27;M. Martian&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;42 Galaxy Way&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;New York&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;NY&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;11213&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;USA&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<p><strong>插入检索出来的数据</strong></p>
+<figure class="highlight autohotkey"><table><tr><td class="code"><pre><span class="line">INSERT INTO customers(cust_id,</span><br><span class="line"><span class="built_in">    cust_contact,</span></span><br><span class="line"><span class="built_in">    cust_email,</span></span><br><span class="line"><span class="built_in">    cust_name,</span></span><br><span class="line"><span class="built_in">    cust_address,</span></span><br><span class="line"><span class="built_in">    cust_city,</span></span><br><span class="line"><span class="built_in">    cust_state,</span></span><br><span class="line"><span class="built_in">    cust_zip,</span></span><br><span class="line">    cust_country)</span><br><span class="line">SELECT cust_id,</span><br><span class="line">    ...</span><br><span class="line">FROM custnew<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<p>只需要使用select而不需要再放入VALUES中了。</p>
+<h2 id="更新和删除"><a class="markdownIt-Anchor" href="#更新和删除"></a> 更新和删除</h2>
+<p>更新数据关键字是<strong>UPDATE</strong>。</p>
+<p>例如：</p>
+<figure class="highlight gams"><table><tr><td class="code"><pre><span class="line">UPDATE customers</span><br><span class="line"><span class="keyword">SET</span> cust_email <span class="comment">=</span> <span class="comment">&#x27;elmer@udd.com&#x27;</span></span><br><span class="line">WHERE <span class="comment">cust_id = 10005</span>;</span><br></pre></td></tr></table></figure>
+<p>UPDATE后接要更新的表。SET接更新的列。WHERE用来限制要更新那些行，如果没有WHERE，那么会更新所有行。</p>
+<p>SET后面可以使用子查询来更新列数据</p>
+<p>如果想删除某个列的某些值，可以把它设成NULL。例如</p>
+<figure class="highlight n1ql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">UPDATE</span> customers</span><br><span class="line"><span class="keyword">SET</span> cust_email = <span class="literal">NULL</span></span><br><span class="line"><span class="keyword">WHERE</span> cust_id = <span class="number">10005</span>;</span><br></pre></td></tr></table></figure>
+<p>删除数据使用<strong>DELETE</strong></p>
+<p>例如：</p>
+<figure class="highlight n1ql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> customers</span><br><span class="line"><span class="keyword">WHERE</span> cust_id = <span class="number">10006</span>;</span><br></pre></td></tr></table></figure>
+<p>这是删除一行的方法。</p>
 ]]></content>
       <categories>
         <category>MySQL</category>
@@ -5998,6 +6049,11 @@ transform(str.begin(),str.end(),str.begin(),::toupper)<br />
 <p>SCAN: 15-&gt;47, 47-&gt;81, 81-&gt;90, 80-&gt;18, 18-&gt;5</p>
 <h2 id="磁盘raid"><a class="markdownIt-Anchor" href="#磁盘raid"></a> 磁盘RAID</h2>
 <p>磁盘RAID是在逻辑卷出来之前为了多个磁盘同时使用而想出来的算法。首先要求这些磁盘大小相同</p>
+<p><strong>条带化</strong>： 条带化指的是将一个数据分成多个部分写入不同的磁盘的机制。RAID0就是用了这种机制。</p>
+<p><strong>缓存</strong>： 和下面将的回写类似</p>
+<p><strong>奇偶校验</strong>： 将数据奇偶校验信息放到不同磁盘上。奇偶校验信息是这个数据的0的个数或者1的个数。RAID5使用了奇偶校验</p>
+<p><strong>磁盘镜像</strong>： 指的是将磁盘内容复制到领一块磁盘中，这样一块磁盘损坏还可以使用领一块磁盘。RAID1使用了磁盘镜像</p>
+<p>奇偶校验和磁盘镜像可以提高RAID可靠性。条带化和缓存提高速度。</p>
 <h3 id="raid0"><a class="markdownIt-Anchor" href="#raid0"></a> RAID0</h3>
 <p>RAID0就是将一个文件拆分成多个部分，然后同时写和读。但是有一个相当大的问题是如果一个磁盘坏了那么所有文件都坏了。</p>
 <h3 id="raid1"><a class="markdownIt-Anchor" href="#raid1"></a> RAID1</h3>
