@@ -1,0 +1,318 @@
+<!DOCTYPE html><html lang="zh-Hans" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>骑砍2类列举 | Xinhecuican's Blog</title><meta name="author" content="星河璀璨"><meta name="copyright" content="星河璀璨"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="description" content="基础 参考1： 非官方文档 参考2： 有关保存数据的讨论 本文只是为了记录自己看到和使用的一些类的大致用途和一些主要方法，具体请使用dnspy等工具进行查看。  dnspy的分析功能很好用。还有程序集搜索功能    类  settlement: settlement是在战役地图中的村庄，城镇，城堡 MobileParty: 军队  TroopRoster: 军队花名册 PrisonRoster:">
+<meta property="og:type" content="article">
+<meta property="og:title" content="骑砍2类列举">
+<meta property="og:url" content="http://xinhecuican.github.io/post/d94f88de.html">
+<meta property="og:site_name" content="Xinhecuican&#39;s Blog">
+<meta property="og:description" content="基础 参考1： 非官方文档 参考2： 有关保存数据的讨论 本文只是为了记录自己看到和使用的一些类的大致用途和一些主要方法，具体请使用dnspy等工具进行查看。  dnspy的分析功能很好用。还有程序集搜索功能    类  settlement: settlement是在战役地图中的村庄，城镇，城堡 MobileParty: 军队  TroopRoster: 军队花名册 PrisonRoster:">
+<meta property="og:locale">
+<meta property="og:image" content="http://api.btstu.cn/sjbz/?lx=dongman">
+<meta property="article:published_time" content="2020-12-23T13:30:00.000Z">
+<meta property="article:modified_time" content="2021-01-03T11:15:58.958Z">
+<meta property="article:author" content="星河璀璨">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://api.btstu.cn/sjbz/?lx=dongman"><link rel="shortcut icon" href="/img/favicon.png"><!--link(rel="canonical" href=urlNoIndex())--><link rel="preconnect" href="//cdn.jsdelivr.net"><link rel="preconnect" href="//busuanzi.ibruce.info"><meta name="google-site-verification" content="zmX9zYZL0QVB6fFG_e98QsQogwE11Vdf5hOd4xMbgN4"><meta name="baidu-site-verification" content="EVZv9BO5R3"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"We didn't find any results for the search: ${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  ClickShowText: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"Traditional Chinese Activated Manually","cht_to_chs":"Simplified Chinese Activated Manually","day_to_night":"Dark Mode Activated Manually","night_to_day":"Light Mode Activated Manually","bgLight":"#49b1f5","bgDark":"#121212","position":"bottom-left"},
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+  },
+
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}
+
+// https://stackoverflow.com/questions/16839698/jquery-getscript-alternative-in-native-javascript
+const getScript = url => new Promise((resolve, reject) => {
+  const script = document.createElement('script')
+  script.src = url
+  script.async = true
+  script.onerror = reject
+  script.onload = script.onreadystatechange = function() {
+    const loadState = this.readyState
+    if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+    script.onload = script.onreadystatechange = null
+    resolve()
+  }
+  document.head.appendChild(script)
+})</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-01-03 19:15:58'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(function () {  window.activateDarkMode = function () {
+    document.documentElement.setAttribute('data-theme', 'dark')
+    if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+    }
+  }
+  window.activateLightMode = function () {
+    document.documentElement.setAttribute('data-theme', 'light')
+   if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+    }
+  }
+  const autoChangeMode = 'false'
+  const t = saveToLocal.get('theme')
+  if (autoChangeMode === '1') {
+    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+    const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+    const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+    if (t === undefined) {
+      if (isLightMode) activateLightMode()
+      else if (isDarkMode) activateDarkMode()
+      else if (isNotSpecified || hasNoSupport) {
+        const now = new Date()
+        const hour = now.getHours()
+        const isNight = hour <= 6 || hour >= 18
+        isNight ? activateDarkMode() : activateLightMode()
+      }
+      window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+        if (saveToLocal.get('theme') === undefined) {
+          e.matches ? activateDarkMode() : activateLightMode()
+        }
+      })
+    } else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else if (autoChangeMode === '2') {
+    const now = new Date()
+    const hour = now.getHours()
+    const isNight = hour <= 6 || hour >= 18
+    if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+    else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else {
+    if (t === 'dark') activateDarkMode()
+    else if (t === 'light') activateLightMode()
+  }const asideStatus = saveToLocal.get('aside-status')
+if (asideStatus !== undefined) {
+   if (asideStatus === 'hide') {
+     document.documentElement.classList.add('hide-aside')
+   } else {
+     document.documentElement.classList.remove('hide-aside')
+   }
+}})()</script><link rel="stylesheet" href="/css/background.css"><link rel="stylesheet" href="https://fonts.loli.net/css?family=Noto+Serif+SC:500&display=swap"><link rel="stylesheet" href="footer.min.css"><!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Xinhecuican's Blog" type="application/atom+xml">
+</head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/null" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">160</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">Tags</div><div class="length-num">6</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">Categories</div><div class="length-num">20</div></a></div></div></div><hr><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(http://api.btstu.cn/sjbz/?lx=dongman)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Xinhecuican's Blog</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">骑砍2类列举</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2020-12-23T13:30:00.000Z" title="Created 2020-12-23 21:30:00">2020-12-23</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2021-01-03T11:15:58.958Z" title="Updated 2021-01-03 19:15:58">2021-01-03</time></span></div><div class="meta-secondline"> <span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">Word count:</span><span class="word-count">977</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">Reading time:</span><span>3min</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="基础"><a class="markdownIt-Anchor" href="#基础"></a> 基础</h1>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://docs.bannerlordmodding.com/">参考1： 非官方文档</a></p>
+<p><a target="_blank" rel="external nofollow noopener noreferrer" href="https://forums.taleworlds.com/index.php?threads/saving-mod-data-settings-thoughts.412611/">参考2： 有关保存数据的讨论</a></p>
+<p>本文只是为了记录自己看到和使用的一些类的大致用途和一些主要方法，具体请使用dnspy等工具进行查看。</p>
+<blockquote>
+<p>dnspy的分析功能很好用。还有程序集搜索功能</p>
+</blockquote>
+<p><img src="/images/%E9%AA%91%E7%A0%8D1.PNG" alt></p>
+<h1 id="类"><a class="markdownIt-Anchor" href="#类"></a> 类</h1>
+<ul>
+<li>settlement: settlement是在战役地图中的村庄，城镇，城堡</li>
+<li>MobileParty: 军队
+<ul>
+<li><a href="#Roster">TroopRoster</a>: 军队花名册</li>
+<li><a href="#Roster">PrisonRoster</a>: 囚犯花名册</li>
+<li>TickAi(): 最终决定ai的函数，下面的aibehavior不一定是最终的ai</li>
+<li>Morale： 士气，通过DefaultPartyMoraleModel决定</li>
+<li>DefaultBehavior: 当前的ai</li>
+<li>ShortTermBehavior: 短期ai，用来设置追逐和逃跑行为</li>
+<li>ItemRoster: 物品清单。</li>
+<li>InventoryCapacity： 容量，通过InventoryCapacityModel得到</li>
+<li>Tier： 部队的等阶，最高是6阶。英雄是0阶</li>
+<li>GetBestInitiativeBehavior(): 里面有一些模拟战的行为</li>
+</ul>
+</li>
+<li>Army： 军团，也就是需要凝聚力的那个</li>
+<li><span id="Roster">Roster</span>: 队伍花名册
+<ul>
+<li>TotalManCount: 所有人</li>
+<li>TotalWounded: 所有受伤的人</li>
+<li>TotalHeroes: 所有英雄</li>
+</ul>
+</li>
+<li>Campaign: 战役系统管理类。
+<ul>
+<li>MainParty: 玩家</li>
+<li>RealTick(): 每次tick触发的函数</li>
+<li>CurrentTime： 当前时间（转化为小时的）</li>
+</ul>
+</li>
+<li>CampaignTime： 时间类
+<ul>
+<li>Now： 当前的时间（没有转化为小时）</li>
+<li>IsDayTime: 是否是白天</li>
+</ul>
+</li>
+<li>MapVM： 地图类，没有仔细看</li>
+<li>Mission： 在场景里面的战斗。也没看</li>
+</ul>
+<h2 id="model-behavior"><a class="markdownIt-Anchor" href="#model-behavior"></a> Model &amp;&amp; Behavior</h2>
+<p><strong>Model</strong>指的是游戏中使用的一些计算模型，例如食物消耗，攻击力计算等模型。这些model会在官方游戏代码中调用。</p>
+<p><strong>Behavior</strong>是在游戏中触发某些事件时执行的函数。Campaign中可以执行的Behavior可以搜索Campaign类中的AddBehavior函数，这些Behavior的具体实现大多在Campaign.Sandbox.某某Bahavior中</p>
+<p>替换官方model和增加Behavior</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">在继承了Submodule的类中</span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">OnGameStart</span>(<span class="params">Game game, IGameStarter gameStarterObject</span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">		<span class="built_in">bool</span> flag = game.GameType <span class="keyword">is</span> Campaign;</span><br><span class="line">		<span class="keyword">if</span> (flag)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">//将Model和Behavior加入到Campaign中</span></span><br><span class="line">            CampaignGameStarter campaignGameStarter = (CampaignGameStarter)gameStarterObject;</span><br><span class="line">            campaignGameStarter.AddModel(<span class="keyword">new</span> YourModel());<span class="comment">//增加model</span></span><br><span class="line">            IList&lt;GameModel&gt; list = starter.Models <span class="keyword">as</span> IList&lt;GameModel&gt;;</span><br><span class="line">            <span class="built_in">bool</span> flag = list != <span class="literal">null</span>;</span><br><span class="line">            <span class="keyword">if</span> (flag)<span class="comment">//替换model</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">for</span>(<span class="built_in">int</span> i=<span class="number">0</span>; i&lt;list.Count; i++)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">if</span>(list[i] <span class="keyword">is</span> DefaultxxxModel)</span><br><span class="line">                    &#123;</span><br><span class="line">                        list[i] = <span class="keyword">new</span> replacemodel();</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            campaignGameStarter.AddBehavior(<span class="keyword">new</span> YourBehavior());<span class="comment">//增加Behavior</span></span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">在继承了Behavior的类中</span><br><span class="line">注册Behavior</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">RegisterEvents</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">            CampaignEvents.HourlyTickEvent.AddNonSerializedListener(<span class="keyword">this</span>, <span class="keyword">new</span> Action(<span class="keyword">this</span>.HourlyEvent));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>触发过程</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">一个报错</span><br><span class="line"><span class="selector-tag">at</span> <span class="selector-tag">TaleWorlds</span><span class="selector-class">.CampaignSystem</span><span class="selector-class">.Army</span><span class="selector-class">.ThinkAboutTravelingToAssignment</span>()</span><br><span class="line"><span class="selector-tag">at</span> <span class="selector-tag">TaleWorlds</span><span class="selector-class">.CampaignSystem</span><span class="selector-class">.Army</span><span class="selector-class">.HourlyTick</span>(<span class="selector-tag">MBCampaignEvent</span> <span class="selector-tag">campaignevent</span>, <span class="selector-tag">Object</span><span class="selector-attr">[]</span> <span class="selector-tag">delegateparams</span>)</span><br><span class="line"><span class="selector-tag">at</span> <span class="selector-tag">TaleWorlds</span><span class="selector-class">.CampaignSystem</span><span class="selector-class">.MBCampaignEvent</span><span class="selector-class">.RunHandlers</span>(<span class="selector-tag">Object</span><span class="selector-attr">[]</span> <span class="selector-tag">delegateParams</span>)</span><br><span class="line"><span class="selector-tag">at</span> <span class="selector-tag">TaleWorlds</span><span class="selector-class">.CampaignSystem</span><span class="selector-class">.MBCampaignEvent</span><span class="selector-class">.CheckUpdate</span>()</span><br><span class="line"><span class="selector-tag">at</span> <span class="selector-tag">TaleWorlds</span><span class="selector-class">.CampaignSystem</span><span class="selector-class">.CampaignEvents</span><span class="selector-class">.SignalPeriodicEvents</span>()</span><br><span class="line"><span class="selector-tag">at</span> <span class="selector-tag">TaleWorlds</span><span class="selector-class">.CampaignSystem</span><span class="selector-class">.Campaign</span><span class="selector-class">.Tick</span>(<span class="selector-tag">Single</span> <span class="selector-tag">dt</span>)</span><br><span class="line"><span class="selector-tag">at</span> <span class="selector-tag">TaleWorlds</span><span class="selector-class">.CampaignSystem</span><span class="selector-class">.Campaign</span><span class="selector-class">.RealTick</span>(<span class="selector-tag">Single</span> <span class="selector-tag">realDt</span>)</span><br><span class="line"><span class="selector-tag">at</span> <span class="selector-tag">TaleWorlds</span><span class="selector-class">.CampaignSystem</span><span class="selector-class">.MapState</span><span class="selector-class">.OnMapModeTick</span>(<span class="selector-tag">Single</span> <span class="selector-tag">dt</span>)</span><br><span class="line"><span class="selector-tag">at</span> <span class="selector-tag">TaleWorlds</span><span class="selector-class">.Core</span><span class="selector-class">.GameStateManager</span><span class="selector-class">.OnTick</span>(<span class="selector-tag">Single</span> <span class="selector-tag">dt</span>)</span><br><span class="line"><span class="selector-tag">at</span> <span class="selector-tag">TaleWorlds</span><span class="selector-class">.Core</span><span class="selector-class">.Game</span><span class="selector-class">.OnTick</span>(<span class="selector-tag">Single</span> <span class="selector-tag">dt</span>)</span><br><span class="line"><span class="selector-tag">at</span> <span class="selector-tag">TaleWorlds</span><span class="selector-class">.Core</span><span class="selector-class">.GameManagerBase</span><span class="selector-class">.OnTick</span>(<span class="selector-tag">Single</span> <span class="selector-tag">dt</span>)</span><br><span class="line"><span class="selector-tag">at</span> <span class="selector-tag">TaleWorlds</span><span class="selector-class">.MountAndBlade</span><span class="selector-class">.Module</span><span class="selector-class">.OnApplicationTick_Patch1</span>(<span class="selector-tag">Module</span> <span class="selector-tag">this</span>, <span class="selector-tag">Single</span> <span class="selector-tag">dt</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="model"><a class="markdownIt-Anchor" href="#model"></a> Model</h3>
+<ul>
+<li>DefaultPartyMoraleModel： 士气计算模型。主要是通过GetEffectivePartyMorale()函数得到士气</li>
+<li>DefaultPartySpeedCalculatingModel： 部队速度计算模型</li>
+<li>DefaultCombatSimulationModel： 模拟战计算类</li>
+</ul>
+<h3 id="behavior"><a class="markdownIt-Anchor" href="#behavior"></a> Behavior</h3>
+<ul>
+<li>HourlyTickBehavior(): 每小时触发一次</li>
+<li>HourlyTickPartyBehavior(): 以部队为单位每小时触发</li>
+<li>OnPartySizeChangedEvent():</li>
+<li>OnNewGameCreatedEvent9(): 可以在这里面做一些初始化内容，有一些在Submodule中无法完成。</li>
+<li>OnBeforeSaveEvent():</li>
+<li>OnGameLoadedEvent():</li>
+</ul>
+<h3 id="aibehavior"><a class="markdownIt-Anchor" href="#aibehavior"></a> AiBehavior</h3>
+<p>这个在Taleworlds.CampaignSystem.Sanbox.CampaignBehaviors.AiBehaviors中</p>
+<ul>
+<li>ThinkBehavior: 这是总的ai计算模型（但是限制很多，例如GotoPoint在这里设置是没用的,并且之后还要受MobileParty中的TickAi()调节)
+<ul>
+<li>其中调用了AiHourTick()，也就是说会调用所有申请了AiHourTickEvent的函数。</li>
+<li>它是通过比较AiBehaviorScores来确定到底是进行哪种Ai活动的。也就是说想要更改Ai的话要自己确定这个Score是多少。</li>
+</ul>
+</li>
+<li>EngageBehavior、PatrollingBehavior等： 大致结构是通过一些限制条件限制进行这些活动的情况。然后通过计算Score的函数得到最终得数。（得分好像并不大，一般应该在0到1之间）</li>
+</ul>
+<h1 id="关于保存"><a class="markdownIt-Anchor" href="#关于保存"></a> 关于保存</h1>
+<p>关于上面参考中给出的使用json保存的方式。有一个问题就是无法保存骑砍官方类的内容。所以推荐还是使用Attribute的方式，但是如果是Dictionary的数据无法保存可以试一下在DefineContainerDefinitions()中添加对要保存的类的List定义和Dictionary定义。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined" rel="external nofollow noopener noreferrer" target="_blank">星河璀璨</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://xinhecuican.github.io/post/d94f88de.html">http://xinhecuican.github.io/post/d94f88de.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="http://api.btstu.cn/sjbz/?lx=dongman" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/post/41e39f2b.html"><img class="prev-cover" src="https://uploadbeta.com/api/pictures/random/" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">Previous Post</div><div class="prev_info">内存管理</div></div></a></div><div class="next-post pull-right"><a href="/post/9954ba8e.html"><img class="next-cover" src="https://api.ixiaowai.cn/gqapi/gqapi.php" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">c++函数指针备忘</div></div></a></div></nav><hr><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> Comment</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside_content" id="aside_content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="card-content"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80"><span class="toc-number">1.</span> <span class="toc-text"> 基础</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%B1%BB"><span class="toc-number">2.</span> <span class="toc-text"> 类</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#model-behavior"><span class="toc-number">2.1.</span> <span class="toc-text"> Model &amp;&amp; Behavior</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#model"><span class="toc-number">2.1.1.</span> <span class="toc-text"> Model</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#behavior"><span class="toc-number">2.1.2.</span> <span class="toc-text"> Behavior</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#aibehavior"><span class="toc-number">2.1.3.</span> <span class="toc-text"> AiBehavior</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E%E4%BF%9D%E5%AD%98"><span class="toc-number">3.</span> <span class="toc-text"> 关于保存</span></a></li></ol></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By 星河璀璨</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="external nofollow noopener noreferrer" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="Switch Between Traditional Chinese And Simplified Chinese">繁</button><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="Scroll To Comments"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">Local search</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"></div></div></div><hr><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.spacingElementById('content-inner')
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.spacingElementById('content-inner')
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    let initData = {
+      el: '#vcomment',
+      appId: 'UJ3adzdUjnlMT2KmVU6dfoyO-MdYXbMMI',
+      appKey: 'SGFIXvul1h4NATEJbvSGuU0i',
+      placeholder: '昵称可以直接填QQ号哟，就不用填邮箱了',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'zh-CN',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: true,
+      path: window.location.pathname,
+      master: '1ee9943f931df37af9dc1c57f5859da4',
+    }
+
+    if (true) { 
+      initData.requiredFields= ('nick,mail'.split(','))
+    }
+    
+    if (false) {
+      const otherData = false
+      initData = Object.assign({}, initData, otherData)
+    }
+    
+    const valine = new Valine(initData)
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/gh/HCLonely/Valine@latest/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.querySelector('#vcomment'),loadValine)
+  else setTimeout(() => loadValine(), 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="/js/mychange.js"></script><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zindex="-1" mobile="false" data-click="false"></script></div></body></html>

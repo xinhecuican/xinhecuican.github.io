@@ -1043,17 +1043,43 @@
 <li>ADD： 添加一列</li>
 <li>DROP COLUMN： 删除一列</li>
 </ul>
-<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> vendors</span><br><span class="line"><span class="keyword">ADD</span> vend_phone <span class="built_in">CHAR</span>(<span class="number">20</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> vendors</span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">COLUMN</span> vend_phone;</span><br><span class="line">```	</span><br><span class="line"></span><br><span class="line">它还可以用来定义外键</span><br></pre></td></tr></table></figure>
-<p>ALTER TABLE orderitems<br />
-ADD CONSTRAINT fk_orderitems_orders<br />
-FOREIGN KEY (order_num)<br />
-REFERENCES orders (order_num);</p>
-<pre class="highlight"><code class="">其中fk_orderitems_orders是外键约束的名字， 前面一个order_num是在orderitems中的名字。
-
-删除表使用**DROP TABLE**. 例如`DROP TABLE customers;`
-
-重命名表使用**RENAME TABLE**。例如`RENAME TABLE customer2 TO customer`
-</code></pre>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> vendors</span><br><span class="line"><span class="keyword">ADD</span> vend_phone <span class="built_in">CHAR</span>(<span class="number">20</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> vendors</span><br><span class="line"><span class="keyword">DROP</span> <span class="keyword">COLUMN</span> vend_phone;</span><br></pre></td></tr></table></figure>
+<p>它还可以用来定义外键</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> orderitems</span><br><span class="line"><span class="keyword">ADD</span> <span class="keyword">CONSTRAINT</span> fk_orderitems_orders</span><br><span class="line"><span class="keyword">FOREIGN</span> <span class="keyword">KEY</span> (order_num)</span><br><span class="line"><span class="keyword">REFERENCES</span> orders (order_num);</span><br></pre></td></tr></table></figure>
+<p>其中fk_orderitems_orders是外键约束的名字， 前面一个order_num是在orderitems中的名字。</p>
+<p>删除表使用<strong>DROP TABLE</strong>. 例如<code>DROP TABLE customers;</code></p>
+<p>重命名表使用<strong>RENAME TABLE</strong>。例如<code>RENAME TABLE customer2 TO customer</code></p>
+<h1 id="视图"><a class="markdownIt-Anchor" href="#视图"></a> 视图</h1>
+<p>视图是一个虚拟的表，视图可以选择各个表的一部分整合成一个表，这样就方便我们查询。视图本身并没有数据，它只是记录了一些表的信息。</p>
+<p>视图的限制：</p>
+<ul>
+<li>视图表和真实表一样需要我们创建并且需要唯一命名</li>
+<li>视图不能索引，也不能有关联的触发器或默认值</li>
+<li>视图可以和表一起使用，也就是说可以写一条联结表和视图的SELECT</li>
+<li>ORDER BY可以用于视图中</li>
+</ul>
+<h2 id="视图使用"><a class="markdownIt-Anchor" href="#视图使用"></a> 视图使用</h2>
+<ul>
+<li>CREATE VIEW： 创建视图</li>
+<li>SHOW CREATE VIEW viewname： 查看创建的视图</li>
+<li>DROP VIEW; 删除视图</li>
+<li>更新视图时可以先DROP再CREATE.</li>
+</ul>
+<p>例如：</p>
+<figure class="highlight n1ql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">VIEW</span> productcustomers <span class="keyword">AS</span></span><br><span class="line"><span class="keyword">SELECT</span> cust_name, cust_contact, prod_id</span><br><span class="line"><span class="keyword">FROM</span> customers, orders, orderitems</span><br><span class="line"><span class="keyword">WHERE</span>  customers.cust_id = orders.cust_id</span><br><span class="line">  <span class="keyword">AND</span> orderitems.order_num = orders.order_num;</span><br><span class="line"> <span class="keyword">SELECT</span> * <span class="keyword">FROM</span> productcustomers;</span><br></pre></td></tr></table></figure>
+<p>这是将一个复杂的联结变成一个视图，之后需要这个联结就可以直接使用这个视图。</p>
+<h2 id="视图更新"><a class="markdownIt-Anchor" href="#视图更新"></a> 视图更新</h2>
+<p>有的视图是可以更新的（可以使用INSERT， UPDATE和DELETE）。更新视图实际上是对基表更新（因为视图本身并没有存储数据）。但是有的操作产生的视图时不允许更新的。</p>
+<p>不允许更新的操作</p>
+<ul>
+<li>分组</li>
+<li>联结</li>
+<li>子查询</li>
+<li>并</li>
+<li>聚集函数（如MIN(), COUNT()等）</li>
+<li>DISTINCT</li>
+<li>导出（计算）列</li>
+</ul>
 ]]></content>
       <categories>
         <category>MySQL</category>
@@ -12827,5 +12853,94 @@ SIGTTOU, SIGSSTP, and SIGTSTOP signals.(返回子进程被某些信号而停止�
       <categories>
         <category>计算机系统基础</category>
       </categories>
+  </entry>
+  <entry>
+    <title>骑砍2类列举</title>
+    <url>/post/d94f88de.html</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="基础"><a class="markdownIt-Anchor" href="#基础"></a> 基础</h1>
+<p><a href="https://docs.bannerlordmodding.com/">参考1： 非官方文档</a></p>
+<p><a href="https://forums.taleworlds.com/index.php?threads/saving-mod-data-settings-thoughts.412611/">参考2： 有关保存数据的讨论</a></p>
+<p>本文只是为了记录自己看到和使用的一些类的大致用途和一些主要方法，具体请使用dnspy等工具进行查看。</p>
+<blockquote>
+<p>dnspy的分析功能很好用。还有程序集搜索功能</p>
+</blockquote>
+<p><img src="/images/%E9%AA%91%E7%A0%8D1.PNG" alt="" /></p>
+<h1 id="类"><a class="markdownIt-Anchor" href="#类"></a> 类</h1>
+<ul>
+<li>settlement: settlement是在战役地图中的村庄，城镇，城堡</li>
+<li>MobileParty: 军队
+<ul>
+<li><a href="#Roster">TroopRoster</a>: 军队花名册</li>
+<li><a href="#Roster">PrisonRoster</a>: 囚犯花名册</li>
+<li>TickAi(): 最终决定ai的函数，下面的aibehavior不一定是最终的ai</li>
+<li>Morale： 士气，通过DefaultPartyMoraleModel决定</li>
+<li>DefaultBehavior: 当前的ai</li>
+<li>ShortTermBehavior: 短期ai，用来设置追逐和逃跑行为</li>
+<li>ItemRoster: 物品清单。</li>
+<li>InventoryCapacity： 容量，通过InventoryCapacityModel得到</li>
+<li>Tier： 部队的等阶，最高是6阶。英雄是0阶</li>
+<li>GetBestInitiativeBehavior(): 里面有一些模拟战的行为</li>
+</ul>
+</li>
+<li>Army： 军团，也就是需要凝聚力的那个</li>
+<li><span id="Roster">Roster</span>: 队伍花名册
+<ul>
+<li>TotalManCount: 所有人</li>
+<li>TotalWounded: 所有受伤的人</li>
+<li>TotalHeroes: 所有英雄</li>
+</ul>
+</li>
+<li>Campaign: 战役系统管理类。
+<ul>
+<li>MainParty: 玩家</li>
+<li>RealTick(): 每次tick触发的函数</li>
+<li>CurrentTime： 当前时间（转化为小时的）</li>
+</ul>
+</li>
+<li>CampaignTime： 时间类
+<ul>
+<li>Now： 当前的时间（没有转化为小时）</li>
+<li>IsDayTime: 是否是白天</li>
+</ul>
+</li>
+<li>MapVM： 地图类，没有仔细看</li>
+<li>Mission： 在场景里面的战斗。也没看</li>
+</ul>
+<h2 id="model-behavior"><a class="markdownIt-Anchor" href="#model-behavior"></a> Model &amp;&amp; Behavior</h2>
+<p><strong>Model</strong>指的是游戏中使用的一些计算模型，例如食物消耗，攻击力计算等模型。这些model会在官方游戏代码中调用。</p>
+<p><strong>Behavior</strong>是在游戏中触发某些事件时执行的函数。Campaign中可以执行的Behavior可以搜索Campaign类中的AddBehavior函数，这些Behavior的具体实现大多在Campaign.Sandbox.某某Bahavior中</p>
+<p>替换官方model和增加Behavior</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">在继承了Submodule的类中</span><br><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">OnGameStart</span>(<span class="params">Game game, IGameStarter gameStarterObject</span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">		<span class="built_in">bool</span> flag = game.GameType <span class="keyword">is</span> Campaign;</span><br><span class="line">		<span class="keyword">if</span> (flag)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">//将Model和Behavior加入到Campaign中</span></span><br><span class="line">            CampaignGameStarter campaignGameStarter = (CampaignGameStarter)gameStarterObject;</span><br><span class="line">            campaignGameStarter.AddModel(<span class="keyword">new</span> YourModel());<span class="comment">//增加model</span></span><br><span class="line">            IList&lt;GameModel&gt; list = starter.Models <span class="keyword">as</span> IList&lt;GameModel&gt;;</span><br><span class="line">            <span class="built_in">bool</span> flag = list != <span class="literal">null</span>;</span><br><span class="line">            <span class="keyword">if</span> (flag)<span class="comment">//替换model</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">for</span>(<span class="built_in">int</span> i=<span class="number">0</span>; i&lt;list.Count; i++)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">if</span>(list[i] <span class="keyword">is</span> DefaultxxxModel)</span><br><span class="line">                    &#123;</span><br><span class="line">                        list[i] = <span class="keyword">new</span> replacemodel();</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            campaignGameStarter.AddBehavior(<span class="keyword">new</span> YourBehavior());<span class="comment">//增加Behavior</span></span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">在继承了Behavior的类中</span><br><span class="line">注册Behavior</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">RegisterEvents</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">            CampaignEvents.HourlyTickEvent.AddNonSerializedListener(<span class="keyword">this</span>, <span class="keyword">new</span> Action(<span class="keyword">this</span>.HourlyEvent));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>触发过程</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">一个报错</span><br><span class="line"><span class="selector-tag">at</span> <span class="selector-tag">TaleWorlds</span><span class="selector-class">.CampaignSystem</span><span class="selector-class">.Army</span><span class="selector-class">.ThinkAboutTravelingToAssignment</span>()</span><br><span class="line"><span class="selector-tag">at</span> <span class="selector-tag">TaleWorlds</span><span class="selector-class">.CampaignSystem</span><span class="selector-class">.Army</span><span class="selector-class">.HourlyTick</span>(<span class="selector-tag">MBCampaignEvent</span> <span class="selector-tag">campaignevent</span>, <span class="selector-tag">Object</span><span class="selector-attr">[]</span> <span class="selector-tag">delegateparams</span>)</span><br><span class="line"><span class="selector-tag">at</span> <span class="selector-tag">TaleWorlds</span><span class="selector-class">.CampaignSystem</span><span class="selector-class">.MBCampaignEvent</span><span class="selector-class">.RunHandlers</span>(<span class="selector-tag">Object</span><span class="selector-attr">[]</span> <span class="selector-tag">delegateParams</span>)</span><br><span class="line"><span class="selector-tag">at</span> <span class="selector-tag">TaleWorlds</span><span class="selector-class">.CampaignSystem</span><span class="selector-class">.MBCampaignEvent</span><span class="selector-class">.CheckUpdate</span>()</span><br><span class="line"><span class="selector-tag">at</span> <span class="selector-tag">TaleWorlds</span><span class="selector-class">.CampaignSystem</span><span class="selector-class">.CampaignEvents</span><span class="selector-class">.SignalPeriodicEvents</span>()</span><br><span class="line"><span class="selector-tag">at</span> <span class="selector-tag">TaleWorlds</span><span class="selector-class">.CampaignSystem</span><span class="selector-class">.Campaign</span><span class="selector-class">.Tick</span>(<span class="selector-tag">Single</span> <span class="selector-tag">dt</span>)</span><br><span class="line"><span class="selector-tag">at</span> <span class="selector-tag">TaleWorlds</span><span class="selector-class">.CampaignSystem</span><span class="selector-class">.Campaign</span><span class="selector-class">.RealTick</span>(<span class="selector-tag">Single</span> <span class="selector-tag">realDt</span>)</span><br><span class="line"><span class="selector-tag">at</span> <span class="selector-tag">TaleWorlds</span><span class="selector-class">.CampaignSystem</span><span class="selector-class">.MapState</span><span class="selector-class">.OnMapModeTick</span>(<span class="selector-tag">Single</span> <span class="selector-tag">dt</span>)</span><br><span class="line"><span class="selector-tag">at</span> <span class="selector-tag">TaleWorlds</span><span class="selector-class">.Core</span><span class="selector-class">.GameStateManager</span><span class="selector-class">.OnTick</span>(<span class="selector-tag">Single</span> <span class="selector-tag">dt</span>)</span><br><span class="line"><span class="selector-tag">at</span> <span class="selector-tag">TaleWorlds</span><span class="selector-class">.Core</span><span class="selector-class">.Game</span><span class="selector-class">.OnTick</span>(<span class="selector-tag">Single</span> <span class="selector-tag">dt</span>)</span><br><span class="line"><span class="selector-tag">at</span> <span class="selector-tag">TaleWorlds</span><span class="selector-class">.Core</span><span class="selector-class">.GameManagerBase</span><span class="selector-class">.OnTick</span>(<span class="selector-tag">Single</span> <span class="selector-tag">dt</span>)</span><br><span class="line"><span class="selector-tag">at</span> <span class="selector-tag">TaleWorlds</span><span class="selector-class">.MountAndBlade</span><span class="selector-class">.Module</span><span class="selector-class">.OnApplicationTick_Patch1</span>(<span class="selector-tag">Module</span> <span class="selector-tag">this</span>, <span class="selector-tag">Single</span> <span class="selector-tag">dt</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="model"><a class="markdownIt-Anchor" href="#model"></a> Model</h3>
+<ul>
+<li>DefaultPartyMoraleModel： 士气计算模型。主要是通过GetEffectivePartyMorale()函数得到士气</li>
+<li>DefaultPartySpeedCalculatingModel： 部队速度计算模型</li>
+<li>DefaultCombatSimulationModel： 模拟战计算类</li>
+</ul>
+<h3 id="behavior"><a class="markdownIt-Anchor" href="#behavior"></a> Behavior</h3>
+<ul>
+<li>HourlyTickBehavior(): 每小时触发一次</li>
+<li>HourlyTickPartyBehavior(): 以部队为单位每小时触发</li>
+<li>OnPartySizeChangedEvent():</li>
+<li>OnNewGameCreatedEvent9(): 可以在这里面做一些初始化内容，有一些在Submodule中无法完成。</li>
+<li>OnBeforeSaveEvent():</li>
+<li>OnGameLoadedEvent():</li>
+</ul>
+<h3 id="aibehavior"><a class="markdownIt-Anchor" href="#aibehavior"></a> AiBehavior</h3>
+<p>这个在Taleworlds.CampaignSystem.Sanbox.CampaignBehaviors.AiBehaviors中</p>
+<ul>
+<li>ThinkBehavior: 这是总的ai计算模型（但是限制很多，例如GotoPoint在这里设置是没用的,并且之后还要受MobileParty中的TickAi()调节)
+<ul>
+<li>其中调用了AiHourTick()，也就是说会调用所有申请了AiHourTickEvent的函数。</li>
+<li>它是通过比较AiBehaviorScores来确定到底是进行哪种Ai活动的。也就是说想要更改Ai的话要自己确定这个Score是多少。</li>
+</ul>
+</li>
+<li>EngageBehavior、PatrollingBehavior等： 大致结构是通过一些限制条件限制进行这些活动的情况。然后通过计算Score的函数得到最终得数。（得分好像并不大，一般应该在0到1之间）</li>
+</ul>
+<h1 id="关于保存"><a class="markdownIt-Anchor" href="#关于保存"></a> 关于保存</h1>
+<p>关于上面参考中给出的使用json保存的方式。有一个问题就是无法保存骑砍官方类的内容。所以推荐还是使用Attribute的方式，但是如果是Dictionary的数据无法保存可以试一下在DefineContainerDefinitions()中添加对要保存的类的List定义和Dictionary定义。</p>
+]]></content>
   </entry>
 </search>
