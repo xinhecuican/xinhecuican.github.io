@@ -6,7 +6,7 @@
   <link href="http://xinhecuican.github.io/atom.xml" rel="self"/>
   
   <link href="http://xinhecuican.github.io/"/>
-  <updated>2021-01-25T01:36:57.257Z</updated>
+  <updated>2021-01-30T11:59:55.197Z</updated>
   <id>http://xinhecuican.github.io/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>应用层与HTTP协议</title>
+    <link href="http://xinhecuican.github.io/post/af3eed3c.html"/>
+    <id>http://xinhecuican.github.io/post/af3eed3c.html</id>
+    <published>2021-01-30T00:31:00.000Z</published>
+    <updated>2021-01-30T11:59:55.197Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="http协议"><a class="markdownIt-Anchor" href="#http协议"></a> HTTP协议</h1><h2 id="基础"><a class="markdownIt-Anchor" href="#基础"></a> 基础</h2><p>HTTP由两个程序组成：客户程序和服务器程序。客户程序就是我们电脑上的程序</p><p>一个Web页面是由若干对象组成的，对象指的是一个文件，例如HTML文件，JPEG图像，Java小程序等。</p><p>多数Web页面包含一个<strong>HTML基本文件</strong>和几个引用对象。首先获得基本文件，基本文件之中又有链接到其他文件的URL,然后通过这些URL又获得其他文件。</p><p>例如有时我们直接从浏览器下网页文件打开后发现这个网页既没有排版也没有字体颜色，也没有图像。这里我们下载的文件就是HTML基本文件，如index.html.如果我们想要获得完整的页面就需要根据基本文件中的url再去获得其他文件然后通过浏览器合并到一起。</p><p>HTTP使用TCP作为传输层协议。TCP大致是首先发起一个与服务器的TCP连接，在链接成立之后就可以进行稳定的传输了。</p><h2 id="非持续连接和持续连接"><a class="markdownIt-Anchor" href="#非持续连接和持续连接"></a> 非持续连接和持续连接</h2><p>非持续连接指的是所有请求都通过单独的TCP连接发送，持续连接时所有请求都通过同一个连接发送。</p><h3 id="http的非持续连接"><a class="markdownIt-Anchor" href="#http的非持续连接"></a> HTTP的非持续连接</h3><p>假设我们请求一个HTML基本文件和若干图形。并且这些对象位于同一台服务器上，那么非持续连接请求的大致过程是：</p><ol><li>HTTP客户进程在端口号80发起一个到服务器的TCP连接</li><li>客户通过套接字想服务器发送一个HTTP请求报文</li><li>服务器接收报文，查找对象之后通过TCP发送给客户</li><li>接收完成之后服务器进程同志TCP断开连接</li><li>客户进程接收到基本页面之后，获得其中的URL，再重复上述四个过程获得其他对象。</li></ol><p>那么总的所需时间=发起TCP连接所需时间 + 请求文件建立TCP锁需时间 + 传输文件所需时间</p><h3 id="持续连接"><a class="markdownIt-Anchor" href="#持续连接"></a> 持续连接</h3><p>非持续连接有这些缺点：</p><ul><li>必须为每一个请求对象建立和维护一个连接。每一个连接都需要额外消耗用户和服务器资源，增加了服务器负担</li><li>其次每次建立TCP连接也需要时间</li></ul><p>HTTP1.1持续连接可以让一个Web页面的所有对象通过一个TCP连接进行传输，这些请求可以同时发送并且不需要等待请求的回答。甚至可以对同一个服务器上的多个Web页面进行传输</p><p>HTTP/2允许相同连接中多个请求和回答交错。</p><h2 id="报文格式"><a class="markdownIt-Anchor" href="#报文格式"></a> 报文格式</h2><p><strong>请求报文</strong></p><figure class="highlight http"><table><tr><td class="code"><pre><span class="line"><span class="keyword">GET</span> <span class="string">/somedir/page.html</span> HTTP/1.1</span><br><span class="line"><span class="attribute">Host</span>: www.someschool.edu</span><br><span class="line"><span class="attribute">Connection</span>: close</span><br><span class="line"><span class="attribute">User-agent</span>: Mozilla/5.0</span><br><span class="line"><span class="attribute">Accept-language</span>: fr</span><br></pre></td></tr></table></figure><p>这是一个典型的报文：</p><ul><li>请求行： 指第一行，有三个字段：方法字段、URL字段和HTTP版本字段。方法字段有GET、POST、HEAD、PUT、DELETE。URL字段要和host拼接起来才是平常熟悉的网址</li><li>首部行： 第一行后面的所有。Connection: close表示不要使用持续连接。</li></ul><p><img src="/images/HTTP1.jpg" alt="" /><br />这是请求报文的一般格式。我们上一个例子没有请求体（实体体）是因为GET不需要请求体。如果是POST就需要请求体提交表单。</p><p><strong>响应报文</strong></p><figure class="highlight"><table><tr><td class="code"><pre><span class="line">HTTP/1.1 <span class="number">200</span> OK</span><br><span class="line"><span class="attribute">Connection</span>: close</span><br><span class="line"><span class="attribute">Date</span>: Tue, 18 Aug 2015 15:44:04 GMT</span><br><span class="line"><span class="attribute">Server</span>: Apache/2.2.3 (CentOS)</span><br><span class="line"><span class="attribute">Last-Modified</span>: Tue, 18 Aug 2015 15:11:03 GMT</span><br><span class="line"><span class="attribute">Content-Length</span>: 6821</span><br><span class="line"><span class="attribute">Conten-Type</span>: text/html</span><br><span class="line"></span><br><span class="line">(data data ...)</span><br></pre></td></tr></table></figure><p>它也分为三个部分：初始状态行，6个首部行、实体体（请求体）。</p><p>初始状态行内容：</p><ul><li>200 OK: 请求成功</li><li>301 Moved Permanently: 请求的对象被永久转移了，新的URL在响应报文的Location中</li><li>400 Bad Request: 一个通用的差错，表示请求不能呗服务器理解</li><li>404 Not Found： 表示请求的对象不再服务器上</li><li>505 HTTP Version Not Supported: 服务器不支持请求报文的HTTP版本</li></ul><p>首部行内容：</p><ul><li>Connection close ： 表示服务器将在这次传输结束之后关闭TCP。</li><li>Date： 这里的时间是发出报文的时间</li><li>Last-Modified: 指示对象最后修改时间</li><li>Content-Length: 内容长度，单位是byte</li></ul><h1 id="cookie"><a class="markdownIt-Anchor" href="#cookie"></a> Cookie</h1><p>前面提到的HTTP服务器是无状态的，也就是说服务器不会对请求进行限制，所有的请求都会一视同仁的响应。然而我们经常要对用户进行限制，因此便是用了cookie。</p><p>cookie生成的大致过程为：当请求报文第一次访问这个网站时，该站点将产生一个唯一识别码，并且作为后端数据库的一个表项。接下来响应报文中就要添加一个Set-cookie项，返回生成的cookie。浏览器接收到相应报文之后，将会把cookie添加到cookie文件中。</p><p>今后访问时请求报文都会在首部行添加Cookie: …。在这种情况下，服务器就可以跟踪用户在站点的活动</p><h1 id="web缓存"><a class="markdownIt-Anchor" href="#web缓存"></a> Web缓存</h1><p>Web缓存器也叫代理服务器。它保存着我们最近浏览的网页信息，我们可以通过配置使HTTP请求首先指向Web缓存器。</p><p>Web缓存器一般由本地ISP提供。例如学校和小区服务（而不是个人电脑上），因为距离非常近所以访问速度也比较快，并且可以从整体上减小因特网的流量。</p><p>但是这也会带来一个问题，缓存器中的副本不是最新的。因此为了确保内容是最新的，还有一种条件GET方法。如果报文是GET并且其中包含If-Modified-Since: 首部行，那么就是一个条件GET请求报文。</p><p>如果使用条件报文，那么也是想到缓存器中去取，如果发现缓存器中的时间比我们要求的时间要早，那么再去原服务器中请求。</p>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;h1 id=&quot;http协议&quot;&gt;&lt;a class=&quot;markdownIt-Anch</summary>
+      
+    
+    
+    
+    <category term="网络" scheme="http://xinhecuican.github.io/categories/%E7%BD%91%E7%BB%9C/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>DLL注入</title>
@@ -423,28 +445,6 @@
       
       
     <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;h1 id=&quot;rnn&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot;</summary>
-      
-    
-    
-    
-    <category term="机器学习" scheme="http://xinhecuican.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>numpy</title>
-    <link href="http://xinhecuican.github.io/post/fa288682.html"/>
-    <id>http://xinhecuican.github.io/post/fa288682.html</id>
-    <published>2020-08-03T01:30:00.000Z</published>
-    <updated>2020-08-04T03:28:22.513Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>numpy用于矩阵计算，内置了大量矩阵计算的函数，并且速度也比列表快</p><p><strong>创建</strong></p><figure class="highlight angelscript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy as np</span><br><span class="line">a = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">b = [[<span class="number">1</span>,<span class="number">2</span>],</span><br><span class="line"><span class="string">    [2, 3]</span>,</span><br><span class="line"><span class="string">    [5, 8]</span>]</span><br><span class="line">c = np.<span class="built_in">array</span>(a)</span><br><span class="line">d = np.<span class="built_in">array</span>(b, <span class="built_in">int</span>)</span><br></pre></td></tr></table></figure><p>通过array就把列表转化成了numpy的矩阵</p><ul><li>ones(shape, dtype): 这个是创建值全为1的矩阵，shape是矩阵的行和列数，dtype是矩阵数据类型。</li><li>zeros(shape, dtype): 创建全是零的矩阵</li><li>full(shape, constant_value, dtype): 创建指定数值的矩阵。其中constant_value是用来填充矩阵的值</li><li>eye(N): 创建单位矩阵，N是矩阵的维度</li><li>diag(v, k): 创建对角矩阵。v如果是一维则是创建对角矩阵，如果是二维是获取对角线上的元素。k=0表示获取主对角线上元素，k&gt;0则获取主对角线上方第k条对角线元素</li></ul><p><strong>创建随机数组</strong></p><ul><li>np.random.rand(shape): 创建一个值在0到1的随机数组。例如np.random.rand(10, 10, 3)是创建一个三维数组</li><li>uniform(low, high, shape): 创建一个值在low到high的随机数组</li><li>randint(low, high, shape): 创建一个值在low到high并且值是整数的随机数组</li><li>normal(loc, scale, shape): 给定均值，方差，维度的正态分布。</li></ul><p><strong>查看矩阵属性</strong></p><ul><li>size(): 获得矩阵元素个数</li><li>shape(): 获得矩阵的行和列，shape[0]是行，shape[1]是列.但是如果是一维数组那么shape[0]表示列数，没有shape[1]</li><li>ndim:  维数</li><li>dtype： 元素类型</li><li>T: 返回这个矩阵的转置</li></ul><p><strong>操作</strong></p><ul><li>np.copy(array): 复制矩阵</li><li>sort(a, axis): axis = 0是每行进行排序，1是每列进行排序，默认是对整个数组进行排序。a是用来排序的矩阵。如果是np.sort()那么原矩阵不改变。如果是array.sort()，原矩阵改变。</li><li>unique(a, return_index, retrun_inverse, return_counts, axis): 查找array中唯一元素。return_index是返回新列表中元素在旧列表出现第一个位置。return_counts是每个元素在原来矩阵中数量。return_inverse是返回一个索引数组，索引的是新列表元素位置。</li></ul><figure class="highlight stylus"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="selector-tag">a</span> = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br><span class="line"><span class="selector-tag">b</span> = np.diag(a)</span><br><span class="line">alpha, beta = np.unique(<span class="selector-tag">b</span>, return_counts=True)</span><br><span class="line"><span class="function"><span class="title">print</span><span class="params">(alpha)</span></span></span><br><span class="line"><span class="function"><span class="title">print</span><span class="params">(beta)</span></span></span><br><span class="line"></span><br><span class="line">输出：</span><br><span class="line">[<span class="number">0</span> <span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span>]</span><br><span class="line">[<span class="number">20</span>  <span class="number">1</span>  <span class="number">1</span>  <span class="number">1</span>  <span class="number">1</span>  <span class="number">1</span>]</span><br></pre></td></tr></table></figure><figure class="highlight tap"><table><tr><td class="code"><pre><span class="line">a = [1, 2, 3, 4, 5]</span><br><span class="line">b = np.diag(a)</span><br><span class="line">alpha, beta = np.unique(b, return_inverse=True)</span><br><span class="line">print(alpha)</span><br><span class="line">print(beta)</span><br><span class="line"></span><br><span class="line">输出</span><br><span class="line">[0<span class="number"> 1 </span>2<span class="number"> 3 </span>4 5]</span><br><span class="line">[1<span class="number"> 0 </span>0<span class="number"> 0 </span>0<span class="number"> 0 </span>2<span class="number"> 0 </span>0<span class="number"> 0 </span>0<span class="number"> 0 </span>3<span class="number"> 0 </span>0<span class="number"> 0 </span>0<span class="number"> 0 </span>4<span class="number"> 0 </span>0<span class="number"> 0 </span>0<span class="number"> 0 </span>5]</span><br></pre></td></tr></table></figure><ul><li>array.reshape(shape): 改变形状，但是元素个数不变，如果改变形状后元素数目和原来不同会报错。原数组改变</li><li>array.resize(shape): 改变形状,元素个数可变，不足补零。如果小于原来数目会输出None，采取逐个填充的方法。</li></ul><p><strong>计算</strong></p><ul><li><code>+</code>： 矩阵加法，让矩阵中每个元素都相加。例如a+5是矩阵中每个元素都加五。a+b是矩阵中对应元素相加</li><li><code>*</code>： 注意矩阵乘法是dot函数，这个是对应元素相乘</li><li>==: 矩阵中逐个元素进行比对，然后返回一个bool型矩阵，如果两个矩阵对应位置相同那么bool型矩阵对应位置就是True。</li><li>dot(): 矩阵相乘</li><li>delete(a, elements, axis): 矩阵删除行或列。elements是删除的行或列的序号</li><li>append()</li><li>insert()</li></ul>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;p&gt;numpy用于矩阵计算，内置了大量矩阵计算的函数，并且速度也比列表快&lt;/p&gt;</summary>
       
     
     

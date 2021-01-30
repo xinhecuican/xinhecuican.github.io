@@ -1,0 +1,298 @@
+<!DOCTYPE html><html lang="zh-Hans" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>应用层与HTTP协议 | Xinhecuican's Blog</title><meta name="author" content="星河璀璨"><meta name="copyright" content="星河璀璨"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="description" content="HTTP协议  基础 HTTP由两个程序组成：客户程序和服务器程序。客户程序就是我们电脑上的程序 一个Web页面是由若干对象组成的，对象指的是一个文件，例如HTML文件，JPEG图像，Java小程序等。 多数Web页面包含一个HTML基本文件和几个引用对象。首先获得基本文件，基本文件之中又有链接到其他文件的URL,然后通过这些URL又获得其他文件。 例如有时我们直接从浏览器下网页文件打开后发现这">
+<meta property="og:type" content="article">
+<meta property="og:title" content="应用层与HTTP协议">
+<meta property="og:url" content="http://xinhecuican.github.io/post/af3eed3c.html">
+<meta property="og:site_name" content="Xinhecuican&#39;s Blog">
+<meta property="og:description" content="HTTP协议  基础 HTTP由两个程序组成：客户程序和服务器程序。客户程序就是我们电脑上的程序 一个Web页面是由若干对象组成的，对象指的是一个文件，例如HTML文件，JPEG图像，Java小程序等。 多数Web页面包含一个HTML基本文件和几个引用对象。首先获得基本文件，基本文件之中又有链接到其他文件的URL,然后通过这些URL又获得其他文件。 例如有时我们直接从浏览器下网页文件打开后发现这">
+<meta property="og:locale">
+<meta property="og:image" content="https://api.ixiaowai.cn/gqapi/gqapi.php">
+<meta property="article:published_time" content="2021-01-30T00:31:00.000Z">
+<meta property="article:modified_time" content="2021-01-30T11:59:55.197Z">
+<meta property="article:author" content="星河璀璨">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://api.ixiaowai.cn/gqapi/gqapi.php"><link rel="shortcut icon" href="/img/favicon.png"><!--link(rel="canonical" href=urlNoIndex())--><link rel="preconnect" href="//cdn.jsdelivr.net"><link rel="preconnect" href="//busuanzi.ibruce.info"><meta name="google-site-verification" content="zmX9zYZL0QVB6fFG_e98QsQogwE11Vdf5hOd4xMbgN4"><meta name="baidu-site-verification" content="EVZv9BO5R3"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"We didn't find any results for the search: ${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  ClickShowText: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"Traditional Chinese Activated Manually","cht_to_chs":"Simplified Chinese Activated Manually","day_to_night":"Dark Mode Activated Manually","night_to_day":"Light Mode Activated Manually","bgLight":"#49b1f5","bgDark":"#121212","position":"bottom-left"},
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+  },
+
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}
+
+// https://stackoverflow.com/questions/16839698/jquery-getscript-alternative-in-native-javascript
+const getScript = url => new Promise((resolve, reject) => {
+  const script = document.createElement('script')
+  script.src = url
+  script.async = true
+  script.onerror = reject
+  script.onload = script.onreadystatechange = function() {
+    const loadState = this.readyState
+    if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+    script.onload = script.onreadystatechange = null
+    resolve()
+  }
+  document.head.appendChild(script)
+})</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-01-30 19:59:55'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(function () {  window.activateDarkMode = function () {
+    document.documentElement.setAttribute('data-theme', 'dark')
+    if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+    }
+  }
+  window.activateLightMode = function () {
+    document.documentElement.setAttribute('data-theme', 'light')
+   if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+    }
+  }
+  const autoChangeMode = 'false'
+  const t = saveToLocal.get('theme')
+  if (autoChangeMode === '1') {
+    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+    const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+    const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+    if (t === undefined) {
+      if (isLightMode) activateLightMode()
+      else if (isDarkMode) activateDarkMode()
+      else if (isNotSpecified || hasNoSupport) {
+        const now = new Date()
+        const hour = now.getHours()
+        const isNight = hour <= 6 || hour >= 18
+        isNight ? activateDarkMode() : activateLightMode()
+      }
+      window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+        if (saveToLocal.get('theme') === undefined) {
+          e.matches ? activateDarkMode() : activateLightMode()
+        }
+      })
+    } else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else if (autoChangeMode === '2') {
+    const now = new Date()
+    const hour = now.getHours()
+    const isNight = hour <= 6 || hour >= 18
+    if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+    else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else {
+    if (t === 'dark') activateDarkMode()
+    else if (t === 'light') activateLightMode()
+  }const asideStatus = saveToLocal.get('aside-status')
+if (asideStatus !== undefined) {
+   if (asideStatus === 'hide') {
+     document.documentElement.classList.add('hide-aside')
+   } else {
+     document.documentElement.classList.remove('hide-aside')
+   }
+}})()</script><link rel="stylesheet" href="/css/background.css"><link rel="stylesheet" href="https://fonts.loli.net/css?family=Noto+Serif+SC:500&display=swap"><link rel="stylesheet" href="footer.min.css"><!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Xinhecuican's Blog" type="application/atom+xml">
+</head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/null" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">166</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">Tags</div><div class="length-num">6</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">Categories</div><div class="length-num">22</div></a></div></div></div><hr><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://api.ixiaowai.cn/gqapi/gqapi.php)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Xinhecuican's Blog</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">应用层与HTTP协议</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2021-01-30T00:31:00.000Z" title="Created 2021-01-30 08:31:00">2021-01-30</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2021-01-30T11:59:55.197Z" title="Updated 2021-01-30 19:59:55">2021-01-30</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%BD%91%E7%BB%9C/">网络</a></span></div><div class="meta-secondline"> <span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">Word count:</span><span class="word-count">1.5k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">Reading time:</span><span>4min</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">Post View:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="http协议"><a class="markdownIt-Anchor" href="#http协议"></a> HTTP协议</h1>
+<h2 id="基础"><a class="markdownIt-Anchor" href="#基础"></a> 基础</h2>
+<p>HTTP由两个程序组成：客户程序和服务器程序。客户程序就是我们电脑上的程序</p>
+<p>一个Web页面是由若干对象组成的，对象指的是一个文件，例如HTML文件，JPEG图像，Java小程序等。</p>
+<p>多数Web页面包含一个<strong>HTML基本文件</strong>和几个引用对象。首先获得基本文件，基本文件之中又有链接到其他文件的URL,然后通过这些URL又获得其他文件。</p>
+<p>例如有时我们直接从浏览器下网页文件打开后发现这个网页既没有排版也没有字体颜色，也没有图像。这里我们下载的文件就是HTML基本文件，如index.html.如果我们想要获得完整的页面就需要根据基本文件中的url再去获得其他文件然后通过浏览器合并到一起。</p>
+<p>HTTP使用TCP作为传输层协议。TCP大致是首先发起一个与服务器的TCP连接，在链接成立之后就可以进行稳定的传输了。</p>
+<h2 id="非持续连接和持续连接"><a class="markdownIt-Anchor" href="#非持续连接和持续连接"></a> 非持续连接和持续连接</h2>
+<p>非持续连接指的是所有请求都通过单独的TCP连接发送，持续连接时所有请求都通过同一个连接发送。</p>
+<h3 id="http的非持续连接"><a class="markdownIt-Anchor" href="#http的非持续连接"></a> HTTP的非持续连接</h3>
+<p>假设我们请求一个HTML基本文件和若干图形。并且这些对象位于同一台服务器上，那么非持续连接请求的大致过程是：</p>
+<ol>
+<li>HTTP客户进程在端口号80发起一个到服务器的TCP连接</li>
+<li>客户通过套接字想服务器发送一个HTTP请求报文</li>
+<li>服务器接收报文，查找对象之后通过TCP发送给客户</li>
+<li>接收完成之后服务器进程同志TCP断开连接</li>
+<li>客户进程接收到基本页面之后，获得其中的URL，再重复上述四个过程获得其他对象。</li>
+</ol>
+<p>那么总的所需时间=发起TCP连接所需时间 + 请求文件建立TCP锁需时间 + 传输文件所需时间</p>
+<h3 id="持续连接"><a class="markdownIt-Anchor" href="#持续连接"></a> 持续连接</h3>
+<p>非持续连接有这些缺点：</p>
+<ul>
+<li>必须为每一个请求对象建立和维护一个连接。每一个连接都需要额外消耗用户和服务器资源，增加了服务器负担</li>
+<li>其次每次建立TCP连接也需要时间</li>
+</ul>
+<p>HTTP1.1持续连接可以让一个Web页面的所有对象通过一个TCP连接进行传输，这些请求可以同时发送并且不需要等待请求的回答。甚至可以对同一个服务器上的多个Web页面进行传输</p>
+<p>HTTP/2允许相同连接中多个请求和回答交错。</p>
+<h2 id="报文格式"><a class="markdownIt-Anchor" href="#报文格式"></a> 报文格式</h2>
+<p><strong>请求报文</strong></p>
+<figure class="highlight http"><table><tr><td class="code"><pre><span class="line"><span class="keyword">GET</span> <span class="string">/somedir/page.html</span> HTTP/1.1</span><br><span class="line"><span class="attribute">Host</span>: www.someschool.edu</span><br><span class="line"><span class="attribute">Connection</span>: close</span><br><span class="line"><span class="attribute">User-agent</span>: Mozilla/5.0</span><br><span class="line"><span class="attribute">Accept-language</span>: fr</span><br></pre></td></tr></table></figure>
+<p>这是一个典型的报文：</p>
+<ul>
+<li>请求行： 指第一行，有三个字段：方法字段、URL字段和HTTP版本字段。方法字段有GET、POST、HEAD、PUT、DELETE。URL字段要和host拼接起来才是平常熟悉的网址</li>
+<li>首部行： 第一行后面的所有。Connection: close表示不要使用持续连接。</li>
+</ul>
+<p><img src="/images/HTTP1.jpg" alt><br>
+这是请求报文的一般格式。我们上一个例子没有请求体（实体体）是因为GET不需要请求体。如果是POST就需要请求体提交表单。</p>
+<p><strong>响应报文</strong></p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">HTTP/1.1 <span class="number">200</span> OK</span><br><span class="line"><span class="attribute">Connection</span>: close</span><br><span class="line"><span class="attribute">Date</span>: Tue, 18 Aug 2015 15:44:04 GMT</span><br><span class="line"><span class="attribute">Server</span>: Apache/2.2.3 (CentOS)</span><br><span class="line"><span class="attribute">Last-Modified</span>: Tue, 18 Aug 2015 15:11:03 GMT</span><br><span class="line"><span class="attribute">Content-Length</span>: 6821</span><br><span class="line"><span class="attribute">Conten-Type</span>: text/html</span><br><span class="line"></span><br><span class="line">(data data ...)</span><br></pre></td></tr></table></figure>
+<p>它也分为三个部分：初始状态行，6个首部行、实体体（请求体）。</p>
+<p>初始状态行内容：</p>
+<ul>
+<li>200 OK: 请求成功</li>
+<li>301 Moved Permanently: 请求的对象被永久转移了，新的URL在响应报文的Location中</li>
+<li>400 Bad Request: 一个通用的差错，表示请求不能呗服务器理解</li>
+<li>404 Not Found： 表示请求的对象不再服务器上</li>
+<li>505 HTTP Version Not Supported: 服务器不支持请求报文的HTTP版本</li>
+</ul>
+<p>首部行内容：</p>
+<ul>
+<li>Connection close ： 表示服务器将在这次传输结束之后关闭TCP。</li>
+<li>Date： 这里的时间是发出报文的时间</li>
+<li>Last-Modified: 指示对象最后修改时间</li>
+<li>Content-Length: 内容长度，单位是byte</li>
+</ul>
+<h1 id="cookie"><a class="markdownIt-Anchor" href="#cookie"></a> Cookie</h1>
+<p>前面提到的HTTP服务器是无状态的，也就是说服务器不会对请求进行限制，所有的请求都会一视同仁的响应。然而我们经常要对用户进行限制，因此便是用了cookie。</p>
+<p>cookie生成的大致过程为：当请求报文第一次访问这个网站时，该站点将产生一个唯一识别码，并且作为后端数据库的一个表项。接下来响应报文中就要添加一个Set-cookie项，返回生成的cookie。浏览器接收到相应报文之后，将会把cookie添加到cookie文件中。</p>
+<p>今后访问时请求报文都会在首部行添加Cookie: …。在这种情况下，服务器就可以跟踪用户在站点的活动</p>
+<h1 id="web缓存"><a class="markdownIt-Anchor" href="#web缓存"></a> Web缓存</h1>
+<p>Web缓存器也叫代理服务器。它保存着我们最近浏览的网页信息，我们可以通过配置使HTTP请求首先指向Web缓存器。</p>
+<p>Web缓存器一般由本地ISP提供。例如学校和小区服务（而不是个人电脑上），因为距离非常近所以访问速度也比较快，并且可以从整体上减小因特网的流量。</p>
+<p>但是这也会带来一个问题，缓存器中的副本不是最新的。因此为了确保内容是最新的，还有一种条件GET方法。如果报文是GET并且其中包含If-Modified-Since: 首部行，那么就是一个条件GET请求报文。</p>
+<p>如果使用条件报文，那么也是想到缓存器中去取，如果发现缓存器中的时间比我们要求的时间要早，那么再去原服务器中请求。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined" rel="external nofollow noopener noreferrer" target="_blank">星河璀璨</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://xinhecuican.github.io/post/af3eed3c.html">http://xinhecuican.github.io/post/af3eed3c.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://api.ixiaowai.cn/gqapi/gqapi.php" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/post/c82a1c99.html"><img class="next-cover" src="https://api.ixiaowai.cn/gqapi/gqapi.php" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">DLL注入</div></div></a></div></nav><hr><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> Comment</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside_content" id="aside_content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="card-content"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#http%E5%8D%8F%E8%AE%AE"><span class="toc-number">1.</span> <span class="toc-text"> HTTP协议</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80"><span class="toc-number">1.1.</span> <span class="toc-text"> 基础</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9D%9E%E6%8C%81%E7%BB%AD%E8%BF%9E%E6%8E%A5%E5%92%8C%E6%8C%81%E7%BB%AD%E8%BF%9E%E6%8E%A5"><span class="toc-number">1.2.</span> <span class="toc-text"> 非持续连接和持续连接</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#http%E7%9A%84%E9%9D%9E%E6%8C%81%E7%BB%AD%E8%BF%9E%E6%8E%A5"><span class="toc-number">1.2.1.</span> <span class="toc-text"> HTTP的非持续连接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%81%E7%BB%AD%E8%BF%9E%E6%8E%A5"><span class="toc-number">1.2.2.</span> <span class="toc-text"> 持续连接</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8A%A5%E6%96%87%E6%A0%BC%E5%BC%8F"><span class="toc-number">1.3.</span> <span class="toc-text"> 报文格式</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#cookie"><span class="toc-number">2.</span> <span class="toc-text"> Cookie</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#web%E7%BC%93%E5%AD%98"><span class="toc-number">3.</span> <span class="toc-text"> Web缓存</span></a></li></ol></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By 星河璀璨</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="external nofollow noopener noreferrer" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="Switch Between Traditional Chinese And Simplified Chinese">繁</button><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="Scroll To Comments"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">Local search</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"></div></div></div><hr><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.spacingElementById('content-inner')
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.spacingElementById('content-inner')
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    let initData = {
+      el: '#vcomment',
+      appId: 'UJ3adzdUjnlMT2KmVU6dfoyO-MdYXbMMI',
+      appKey: 'SGFIXvul1h4NATEJbvSGuU0i',
+      placeholder: '昵称可以直接填QQ号哟，就不用填邮箱了',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'zh-CN',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: true,
+      path: window.location.pathname,
+      master: '1ee9943f931df37af9dc1c57f5859da4',
+    }
+
+    if (true) { 
+      initData.requiredFields= ('nick,mail'.split(','))
+    }
+    
+    if (false) {
+      const otherData = false
+      initData = Object.assign({}, initData, otherData)
+    }
+    
+    const valine = new Valine(initData)
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/gh/HCLonely/Valine@latest/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.querySelector('#vcomment'),loadValine)
+  else setTimeout(() => loadValine(), 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="/js/mychange.js"></script><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zindex="-1" mobile="false" data-click="false"></script></div></body></html>
