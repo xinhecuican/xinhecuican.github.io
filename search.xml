@@ -13453,6 +13453,60 @@ SIGTTOU, SIGSSTP, and SIGTSTOP signals.(返回子进程被某些信号而停止�
 <li>邮件服务器别名： 和上面类似</li>
 <li>负载分配： 对于某些繁忙的站点，DNS会使用多个服务器进行管理。这些服务器的IP地址各不相同，因此使用了一个IP地址集合进行管理。每次请求到来时，先用IP地址整个集合进行响应，之后每次回答中循环地址次序。这样做是因为客户总是向IP地址排在最前面的服务器发出报文。</li>
 </ol>
+<h2 id="工作机理"><a class="markdownIt-Anchor" href="#工作机理"></a> 工作机理</h2>
+<p>将所有的域名分布在各个DNS服务器中，顶层DNS负责决定给哪个服务器解析。一般来说可以将DNS服务器大致分为三层： 根DNS服务器， 顶层域（TLD）和权威DNS服务器。</p>
+<p><img src="/images/%E5%BA%94%E7%94%A8%E5%B1%82%E4%B8%8EHTTP%E5%8D%8F%E8%AE%AE3.jpg" alt="" /></p>
+<p>例如我们想获得baidu.com的地址。那么首先和根服务器之一建立联系，根服务器会返回com域名服务器的IP，然后根据IP找到com域名服务器再找的百度.cmo域名服务器从而找到对应IP。</p>
+<ul>
+<li>根服务器： 大概有四百到五百根服务器遍布世界。由多个组织进行管理</li>
+<li>顶层域DNS服务器： 对于每个顶层域（如com、org、net、edu、gov)和国家（uk、fr、ca、jp)都有对应的顶层域服务器</li>
+<li>权威DNS服务器： 在因特网上可以给公共访问的主机都必须提供可供公共访问的DNS记录。一些组织或公司的DNS服务器收藏了这些DNS记录。个人或组织机构也可以选择支付一定费用来获得域名及在DNS服务器上添加记录。例如阿里云或腾讯云都提供了域名解析服务。</li>
+</ul>
+<p>此外每一个居民区或机构的ISP都有DNS服务器，称为本地DNS服务器本地DNS服务器负责与上面三种服务器进行交互并传递数据。</p>
+<p><img src="/images/%E5%BA%94%E7%94%A8%E5%B1%82%E4%B8%8EHTTP%E5%8D%8F%E8%AE%AE4.jpg" alt="" /></p>
+<p>以上是添加了请求主机后的过程。1-8表示过程先后顺序</p>
+<h2 id="dns缓存"><a class="markdownIt-Anchor" href="#dns缓存"></a> DNS缓存</h2>
+<p>DNS缓存原理非常简单，就是每次请求完成之后保存一份在本地DNS服务器中，每次进行DNS解析时首先到本地服务器中寻找。</p>
+<p>DNS缓存时间是有限的，一般是两天。</p>
+<h2 id="dns记录和报文"><a class="markdownIt-Anchor" href="#dns记录和报文"></a> DNS记录和报文</h2>
+<p>DNS数据库中存储了<strong>资源记录</strong>（RR）。每个DNS回答报文中包含一条或多条资源记录。</p>
+<p>资源记录是一个四元组:</p>
+<p><code>(Name, Value, Type, TTL)</code></p>
+<ul>
+<li>TTL: 该记录生存时间，也就是应当从缓存删除的时间</li>
+<li>如果Type=A,则Name是主机名。Value是该主机名对应IP（<a href="http://abcd.com">abcd.com</a>, 145.37.93.126, A）就是一条A记录</li>
+<li>Type=NS, 则Name是域。 Value是存储着转换信息的<strong>权威DNS服务器主机名</strong>。例如(<a href="http://foo.com">foo.com</a>, <a href="http://dns.foo.com">dns.foo.com</a>, NS)</li>
+<li>Type=CNAME, Value是<strong>别名为Name</strong>的规范主机名。例如(<a href="http://foo.com">foo.com</a>, <a href="http://dns.foo.com">dns.foo.com</a>, NS), (<a href="http://xinhecuican.tk">xinhecuican.tk</a>, <a href="http://xinhecuican.github.io">xinhecuican.github.io</a>, NS)</li>
+<li>Type=MX, Value是别名为Name的邮件服务器的规范主机名。(<a href="http://foo.com">foo.com</a>, <a href="http://mail.bar.foo.com">mail.bar.foo.com</a>, MX)</li>
+</ul>
+<p>如果DNS服务器是用于特定主机名（TLD）的权威DNS服务器，那么它就会包含一条TLD的A记录。如果不是用于主机名， 那么还要记录包含主机名的域的NS记录。</p>
+<p>例如 一台eduTLD不是gaia.cs.umass.edu的权威服务器，那么该服务器将包含一条cs.umass.edu的域记录，如(<a href="http://umass.edu">umass.edu</a>, <a href="http://dns.umass.edu">dns.umass.edu</a>, NS)，然后还有一条A记录,如（<a href="http://dns.umass.edu">dns.umass.edu</a>, 128.119.40.111, A). 也就是说可以通过这台eduTLD找到对应的用于解析的服务器。</p>
+<p><strong>DNS报文</strong></p>
+<p>DNS查询报文和回答报文有相同的格式</p>
+<p><img src="/images/%E5%BA%94%E7%94%A8%E5%B1%82%E4%B8%8EHTTP%E5%8D%8F%E8%AE%AE5.gif" alt="" /></p>
+<ul>
+<li>前12字节是首部区域
+<ul>
+<li>事务ID（标识符）用于标识该查询，占2字节。他会被复制到回答报文中。</li>
+<li>标识： 1bit的标识位指出是查询报文（0）还是回答报文（1）。权威标志位会在权威DNS服务器的回答报文中置1. 希望递归标志位会在DNS服务器支持递归查询时置1.</li>
+<li>四个其他字段： 用来表示后面四个部分的数量</li>
+</ul>
+</li>
+<li>问题区域： 包括
+<ul>
+<li>名字字段： 正在被查询的主机名</li>
+<li>类型： 正在询问的类型。例如A，NS</li>
+</ul>
+</li>
+<li>回答区域： 也就是前面说的资源记录，这里可能有多条</li>
+<li>权威区域： 包含其他权威服务器的记录</li>
+<li>附加区域： 一些附加信息</li>
+</ul>
+<h2 id="向dns服务器中插入记录"><a class="markdownIt-Anchor" href="#向dns服务器中插入记录"></a> 向DNS服务器中插入记录</h2>
+<p>有许多域名登记机构负责插入记录，他们会收取少量费用（几元到几十万不等）。</p>
+<p>例如我们向登记机构注册networkutopia.com时，需要想机构提供基本和辅助权威DNS服务器的名字和IP。<a href="http://xn--dns1-zu6fx14c.networkutopia.com">例如dns1.networkutopia.com</a>, <a href="http://212.212.212.xn--1dns2-rn9h.networkutopia.com">212.212.212.1和dns2.networkutopia.com</a>, 212.212.212.2。对于这两个权威DNS服务器，注册机构都会向其中添加一条NS和一套A记录输入TLCcom服务器。然后将下面两条资源记录插入DNS数据库中</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line">(<span class="selector-tag">networkutopia</span><span class="selector-class">.com</span>, <span class="selector-tag">dns1</span><span class="selector-class">.networkutopia</span><span class="selector-class">.com</span>, <span class="selector-tag">NS</span>)</span><br><span class="line">(<span class="selector-tag">dns1</span><span class="selector-class">.networkutopia</span><span class="selector-class">.com</span>, 212.212.212.1, <span class="selector-tag">A</span>)</span><br></pre></td></tr></table></figure>
+<p>此外，还有确保自己网站的A记录和MX记录被输入到权威DNS服务器中。</p>
 ]]></content>
       <categories>
         <category>网络</category>
