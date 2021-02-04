@@ -13507,6 +13507,47 @@ SIGTTOU, SIGSSTP, and SIGTSTOP signals.(返回子进程被某些信号而停止�
 <p>例如我们向登记机构注册networkutopia.com时，需要想机构提供基本和辅助权威DNS服务器的名字和IP。<a href="http://xn--dns1-zu6fx14c.networkutopia.com">例如dns1.networkutopia.com</a>, <a href="http://212.212.212.xn--1dns2-rn9h.networkutopia.com">212.212.212.1和dns2.networkutopia.com</a>, 212.212.212.2。对于这两个权威DNS服务器，注册机构都会向其中添加一条NS和一套A记录输入TLCcom服务器。然后将下面两条资源记录插入DNS数据库中</p>
 <figure class="highlight css"><table><tr><td class="code"><pre><span class="line">(<span class="selector-tag">networkutopia</span><span class="selector-class">.com</span>, <span class="selector-tag">dns1</span><span class="selector-class">.networkutopia</span><span class="selector-class">.com</span>, <span class="selector-tag">NS</span>)</span><br><span class="line">(<span class="selector-tag">dns1</span><span class="selector-class">.networkutopia</span><span class="selector-class">.com</span>, 212.212.212.1, <span class="selector-tag">A</span>)</span><br></pre></td></tr></table></figure>
 <p>此外，还有确保自己网站的A记录和MX记录被输入到权威DNS服务器中。</p>
+<h1 id="p2p"><a class="markdownIt-Anchor" href="#p2p"></a> P2P</h1>
+<p>一般的文件分发模式是服务器-客户模式，也就是客户上传到服务器，服务器来进行发送。而P2P模式在用户接收到文件之后可以给其他用户发送。与传统的客户-服务器模式相比，P2P模式可以更好的应对大流量。</p>
+<p><img src="/images/%E5%BA%94%E7%94%A8%E5%B1%82%E4%B8%8EHTTP%E5%8D%8F%E8%AE%AE6.jpg" alt="" /></p>
+<p>如图， 服务器上传速率为$$u_s$$，第i个要文件的电脑下载速率为$$d_i$$,上传速率为$$u_i$$.F是文件大小</p>
+<p>最小分发时间&gt;= max{N * F / $$u_s$$, F / $$d_{min}$$ }</p>
+<p>其中N * F / $$u_s$$是服务器传输所有文件所需要的时间，而F / $$d_{min}$$是用户下载需要的最少时间。可以看为每多一个用户就需要占用一份服务器的上传速率，如果它占用的上传速率小于自己的下载速率那么限制因素就变成了第一个。</p>
+<p>因此如果用户非常多，这种模式下服务器负载非常大，对每个用户来说服务器上传速率也就很低了。</p>
+<p><strong>P2P模式</strong></p>
+<ul>
+<li>首先只有服务器有文件。它先将文件中的每个字节发送到各个用户上。所需时间为F/$$u_s$$</li>
+<li>之后用户也可以通过自己接收到的部分参与分发。总的上传速率为$$u_{total} = u_s + u_1 + … + u_n$$。它现在的最小分发时间变为 max{F/$$u_s$$, F/d_{min}, N*F/$$(u_s + \sum_{i=1}^{N}u_i)$$}</li>
+</ul>
+<p><strong>BitTorrent</strong></p>
+<p>BitTorrent是一种P2P协议，BitTorrent把所用下载用户称为洪流（Torrent），在洪流中彼此下载等长度的文件块。如果一个用户下载完成它可以选择退出洪流或者继续共享。</p>
+<p>具体的说，每个洪流都有一个基础节点，称为追踪器（tracker）。每当一个下载用户加入时，他都会向追踪器申请注册并且周期性通知它仍在洪流中。</p>
+<p>在被加入到追踪器后，追踪器会让他参与一个洪流的子集（例如50个用户），并且把这些用户的IP发给该用户。然后该用户就会按照IP创建TCP连接，创建成功则称对方为对等方。</p>
+<p>该用户会周期性的询问邻居他们所具有的块。邻居会发一个他们所具有的块列表，然后该用户会根据表来请求没有的块。</p>
+<p>请求块依据<strong>最稀缺优先</strong>，也就是请求邻居中拥有数量最少的块。</p>
+<h1 id="cdn和视频内容分发"><a class="markdownIt-Anchor" href="#cdn和视频内容分发"></a> CDN和视频内容分发</h1>
+<h2 id="视频"><a class="markdownIt-Anchor" href="#视频"></a> 视频</h2>
+<p>在HTTP中，视频只是一个文件，可以通过一个URL和一个TCP连接得到。当获得的字节到了一定阈值之后，视频就开始播放，与此同时后台还在继续获取并缓存。</p>
+<p>但是有些人的带宽小，有些人的带宽大，如果只有一种分辨率，难以满足所有人的需求。因此产生了HTTP的动态适应性流（DASH）。在DASH中，视频被编码为不同版本，并且有一个告示文件高速了各个版本的地址，用户首先申请告示文件然后再申请对应版本的视频。</p>
+<h2 id="内容分发网cdn"><a class="markdownIt-Anchor" href="#内容分发网cdn"></a> 内容分发网（CDN）</h2>
+<p>传统的视频提供会遇到一些问题。因为对于因特网视频公司，提供视频最直接的方法时建造数据中心，然后进行分发。但是这样当遇到距离遥远的客户时就可能因为某个服务器速度的限制导致传输速率非常低。其次重复数据可能多次经过相同链路分发多次，造成资源浪费。最后如果数据中心出现了某些故障那么将不能分发视频。</p>
+<p>为了解决这些问题，视频供应商使用了内容分发网（content distribution network, CDN).CDN管理多个地理位置上的服务器，并且存储视频或其他内容</p>
+<h3 id="cdn操作"><a class="markdownIt-Anchor" href="#cdn操作"></a> CDN操作</h3>
+<p>CDN具体操作为</p>
+<ol>
+<li>通过DNS截获特定的URL</li>
+<li>查找对应的CDN服务器</li>
+<li>重定向到对应服务器</li>
+</ol>
+<p>例如： NetCineama想让KingCDN来替它分发视频。首先NetCinema的每个视频的URL都有video。例如： <code>http://video.netcinema.com/6Y3B32V</code>.接下来</p>
+<ul>
+<li>用户点击链接并且本地DNS服务器向NetCinema请求IP。该权威服务器发现主机名中有video。为了将该DNS请求给KingCDN，NetCinema返回一个KingCDN的主机名，<a href="http://xn--a1105-gv5i.kingcdn.com">如a1105.kingcdn.com</a></li>
+<li>本地服务器继续发送请求，在KingCDN中返回CDN服务器的IP</li>
+</ul>
+<p><strong>集群选择策略</strong></p>
+<p>前面说了CDN是分布式的。也就是说虽然定向到了CDN的权威服务器但是返回的IP不同最终速度也会大不相同。因此选择集群是非常重要的。</p>
+<p>一种方式是地理上最为临近的集群。每个本地DNS服务器都有一个地理位置，DNS权威服务器返回离他最近的DNS服务器。但是地理距离近不等于网络距离近，还是要看经过的ISP数量。</p>
+<p>另一种方法是进行周期性的实时测量。例如每隔一定时间就向全世界所有本地DNS发送合租来探测速度，但是可能本地DNS不会响应这些探测。</p>
 ]]></content>
       <categories>
         <category>网络</category>
