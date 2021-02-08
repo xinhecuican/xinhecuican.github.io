@@ -13692,4 +13692,85 @@ SIGTTOU, SIGSSTP, and SIGTSTOP signals.(返回子进程被某些信号而停止�
 <p>如果参数是MBBindingList&lt;…VM&gt;类型的，可以使用ListPanel,将所有条目都列举出来，格式为</p>
  <figure class="highlight dust"><table><tr><td class="code"><pre><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">ListPanel</span> <span class="attr">DataSource</span>=<span class="string">&quot;</span></span></span><span class="template-variable">&#123;Texts&#125;</span><span class="xml"><span class="tag"><span class="string">&quot;</span> <span class="attr">WidthSizePolicy</span>=<span class="string">&quot;StretchToParent&quot;</span> <span class="attr">HeightSizePolicy</span>=<span class="string">&quot;CoverChildren&quot;</span></span></span></span><br><span class="line"><span class="xml">&gt;</span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;<span class="name">ItemTamplate</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">Widget</span> <span class="attr">..</span> &gt;</span></span></span><br><span class="line"><span class="xml">      <span class="tag">&lt;<span class="name">Children</span>&gt;</span></span></span><br><span class="line"><span class="xml">        your information</span></span><br><span class="line"><span class="xml">      <span class="tag">&lt;/<span class="name">Children</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;/<span class="name">Widget</span>&gt;</span></span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;/<span class="name">ItemTamplate</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">ListPanel</span>&gt;</span></span></span><br></pre></td></tr></table></figure>]]></content>
   </entry>
+  <entry>
+    <title>运输层</title>
+    <url>/post/2cad8b04.html</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="多路复用和多路分解"><a class="markdownIt-Anchor" href="#多路复用和多路分解"></a> 多路复用和多路分解</h1>
+<p>多路分解： 多路分解指的是将报文段中的数据提交到正确的套接字<sup id="fnref:1"><a href="#fn:1" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="应用程序接受信息的接口">[1]</span></a></sup></p>
+<p>多路复用：从主机不同套接字上收集数据，并为每个数据块加上首部信息（如源端口号和目的端口号等）形成报文段，然后传到网络层。</p>
+<p>多路复用也就是从传输层到网络层的过程，而多路分解是从传输层到应用层的过程</p>
+<p>要想提交到正确的套接字，其实也就是提交到正确的端口。在计算机中端口范围在0-65535中，其中0-1023是周知端口号，有特殊用途，而其他就是分配给应用程序使用的了。</p>
+<p><strong>UDP的多路复用和多路分解</strong></p>
+<p>UDP的运输层报文段包括应用程序数据，源端口号，目的端口号和其他两个值。通过目的端口号可以标识要送到目的的具体位置，而源端口号则是为了送回数据时使用的。</p>
+<p><strong>TCP的多路复用和多路分解</strong></p>
+<p>TCP和UDP区别是TCP套接字是一个四元组(源IP地址， 源端口号， 目的IP地址， 目的端口号）来标识的。因此他还可以让两个到同一个端口号的TCP连接互不干扰（因为有了源IP地址，所以可以分辨出这个数据时从哪发出的）</p>
+<h1 id="udp"><a class="markdownIt-Anchor" href="#udp"></a> UDP</h1>
+<p>UDP是一种不可靠运输，数据可能会丢失，那为什么需要UDP而不使用TCP呢？</p>
+<ul>
+<li>速度更快， TCP在链接建立之前需要经过三次握手，而UDP直接传输</li>
+<li>无连接状态： TCP需要维护连接状态。包括接受发送缓存，用色控制参数和序号及确认号参数等。</li>
+</ul>
+<h2 id="报文段结构"><a class="markdownIt-Anchor" href="#报文段结构"></a> 报文段结构</h2>
+<p>UDP报文段包括源端口号，目的端口号，长度，检验和和报文组成。长度指示了该报文段总的字节数（包括报文的）并且前面四个字段大小都是两字节</p>
+<p>检验和是为了提供差错检验机制的。具体过程为将其他三个字段相加，舍去溢出并取反。之后检验就将这四个字段相加，如果结果全是1则正常。</p>
+<p>例如：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">0110011001100000</span><br><span class="line">0101010101010101</span><br><span class="line">1000111100001100</span><br><span class="line"></span><br><span class="line">相加并舍去溢出为：</span><br><span class="line">0100101011000010</span><br><span class="line"></span><br><span class="line">取反为：</span><br><span class="line">1011010100111101</span><br><span class="line">这就是检验和的值</span><br><span class="line"></span><br><span class="line">然后检验时将四个相加舍去溢出结果应该是1111111111111111</span><br></pre></td></tr></table></figure>
+<h1 id="可靠数据传输"><a class="markdownIt-Anchor" href="#可靠数据传输"></a> 可靠数据传输</h1>
+<p>传输过程为从应用层到传输层是可靠传输，然后从传输层到网络层是不可靠传输，然后从网络层到传输层是可靠传输。</p>
+<h2 id="经完全可靠信道的可靠数据传输"><a class="markdownIt-Anchor" href="#经完全可靠信道的可靠数据传输"></a> 经完全可靠信道的可靠数据传输</h2>
+<p><img src="/images/%E8%BF%90%E8%BE%93%E5%B1%82.jpg" alt="" /></p>
+<p>等待上层的调用指的是从应用层到网络层，等待下层代用相反。rdt_send是从应用层向传输层传输（并且是可靠传输）。</p>
+<p>这是一个有限状态自动机， 横线上方是引起变动的事件，横线下方是发生是采取的动作。</p>
+<h2 id="经比特差错信道的可靠数据运输"><a class="markdownIt-Anchor" href="#经比特差错信道的可靠数据运输"></a> 经比特差错信道的可靠数据运输</h2>
+<p>底层信道可能会出现某些问题导致数据不可靠。因此为了保证数据的可靠性，可能需要对传输过来的数据进行重新检测，返回报文可能会出现肯定确认和否定确认两种情况。为了保证传输稳定，可以使用自动重传请求协议（ARQ)</p>
+<p>ARQ还需要另外三种功能才能进行自动重传</p>
+<ul>
+<li>差错检测：</li>
+<li>接收方反馈： 也就是前面说的肯定确认(ACK)和否定确认(NAK)</li>
+<li>重传： 当接收方收到有差错的分组时，发送方将重传该分组。</li>
+</ul>
+<p>但是接收方反馈的信号也可能出现问题，本来是肯定确认现在变成了无意义的代码。为了解决这个问题可以使用下列方法</p>
+<ul>
+<li>让接收方再次发送信息，但是存在这次信息仍然被干扰的问题。</li>
+<li>增加足够多的检验和比特</li>
+<li>第三种方法是接收到模糊信息直接重发分组。但是这种方法的问题是接收方不知道下一个分组是否是重发的分组，因此无法决定信息用途。</li>
+</ul>
+<p>为了解决第三种方法的问题，可以在分组前加一个序号字段。这个字段对分组进行了编号。现在假设这个字段不会受到干扰，那么接收方接受到的分组和上一个分组相同，表明这是重发分组。</p>
+<h2 id="经丢包信道的可靠数据传输"><a class="markdownIt-Anchor" href="#经丢包信道的可靠数据传输"></a> 经丢包信道的可靠数据传输</h2>
+<p>假设现在发送的分组或者接收方反馈的信息发生了丢失，这种情况下发送方都接收不到反馈，那么发送方可以选择在等待足够长的时间过后认为<strong>分组已丢失</strong>，只需要重新发送分组即可。</p>
+<p>为了实现等待一定时间重传的机制，可以使用倒计时计时器。每次经过一定时间后，如果没有受到恢复，则可以进行重传。</p>
+<h2 id="流水线可靠数据传输协议"><a class="markdownIt-Anchor" href="#流水线可靠数据传输协议"></a> 流水线可靠数据传输协议</h2>
+<p>前面加上了计时器机制之后数据可靠性已经可以保证，但是它的速度不够快，因为它是<strong>停等协议</strong>。停等协议指的是它可以每次发送完数据之后都需要等待响应（ACK或NAK）才进行下一步发送。</p>
+<p>一个简单的方法是发送方可以发送多个分组而无需等待，这种技术称为流水线。</p>
+<p>为了保证流水线正常工作，还需要考虑以下内容</p>
+<ul>
+<li>需要增加序号的范围</li>
+<li>发送方和接收方不得不缓存多个分组，发送方最少要缓存那些已发送但是没有得到确认的分组，接收方也需要保存接收的分组</li>
+<li>对于丢失或损坏的分组，有两种基本方法是： 回退N步和选择重传</li>
+</ul>
+<h3 id="回退n步gbn"><a class="markdownIt-Anchor" href="#回退n步gbn"></a> 回退N步（GBN）</h3>
+<p>在GBN中序号范围分隔成四段。</p>
+<p><img src="/images/%E8%BF%90%E8%BE%93%E5%B1%822.webp" alt="" /></p>
+<p>基序号是最早未确认分组的序号，下一个序号是最小未使用序号。</p>
+<p>窗口长度是被发送当未确认的分组最大数量。要限制最大长度是为了对发送方进行限制。</p>
+<p>发送方需要响应三种事件</p>
+<ul>
+<li>上层调用: 当上层调用rdt_send()发送数据时，如果窗口未满，则产生分组，如果已满，则通知上层。</li>
+<li>收到ACK： 在GBN中，对序号为n的分组的确认采取累积确认。表示接收方已正确接收n及之前所有的分组</li>
+<li>超时事件： 如果出现超时，发送方重传所有已发送但未确认的分组。</li>
+</ul>
+<p>接收方只有接收到n分组并且前一个接收的分组是n-1分组才会交付到上层。其他情况都会丢弃分组。之所以这样是为了减小接收方的负担及简化设计流程。</p>
+<h3 id="选择重传"><a class="markdownIt-Anchor" href="#选择重传"></a> 选择重传</h3>
+<p>GBN缺点就是性能利用率低，可能需要不断大量的重复传输。选择重传（SR）协议让发送方仅重传怀疑接收方未正确接收的分组，从而避免不必要的重传。</p>
+<p><img src="/images/%E8%BF%90%E8%BE%93%E5%B1%823.jpg" alt="" /></p>
+<p>这里和回退N步的模式大致相同，区别是在这个窗口中确认不一定是按序了，例如2已经确认但是0和1未确认。</p>
+<p>如果序号在[base, base + N -1]的数据被正确接收，那么一个ACK传给发送方。如果是[base_ - N, base - 1]的数据被接收，一定要发送ACK。其他情况忽略分组。</p>
+<p>这里可能出现发送方窗口和接收方窗口不一致的现象。因为ACK信息可能丢失，此时接收方已经接收到信息窗口滑动而发送方并不知道，他认为丢失再次发送。因此对于小于接收方base的数据，无论是否收到（一定是收到的，不然无法移动）都要重新发送ACK数据。这样发送方才可以确认已经收到信息并滑动窗口</p>
+<p><img src="/images/%E8%BF%90%E8%BE%93%E5%B1%824.jpg" alt="" /></p>
+<p>SR接收方将缓存分组知道比他小的分组全部接收到为止。</p>
+<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">应用程序接受信息的接口<a href="#fnref:1" rev="footnote"> ↩</a></span></li></ol></div></div>]]></content>
+      <categories>
+        <category>网络</category>
+      </categories>
+  </entry>
 </search>

@@ -6,7 +6,7 @@
   <link href="http://xinhecuican.github.io/atom.xml" rel="self"/>
   
   <link href="http://xinhecuican.github.io/"/>
-  <updated>2021-02-04T12:14:49.950Z</updated>
+  <updated>2021-02-08T10:02:30.130Z</updated>
   <id>http://xinhecuican.github.io/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>运输层</title>
+    <link href="http://xinhecuican.github.io/post/2cad8b04.html"/>
+    <id>http://xinhecuican.github.io/post/2cad8b04.html</id>
+    <published>2021-02-05T02:57:00.000Z</published>
+    <updated>2021-02-08T10:02:30.130Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="多路复用和多路分解"><a class="markdownIt-Anchor" href="#多路复用和多路分解"></a> 多路复用和多路分解</h1><p>多路分解： 多路分解指的是将报文段中的数据提交到正确的套接字<sup id="fnref:1"><a href="#fn:1" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="应用程序接受信息的接口">[1]</span></a></sup></p><p>多路复用：从主机不同套接字上收集数据，并为每个数据块加上首部信息（如源端口号和目的端口号等）形成报文段，然后传到网络层。</p><p>多路复用也就是从传输层到网络层的过程，而多路分解是从传输层到应用层的过程</p><p>要想提交到正确的套接字，其实也就是提交到正确的端口。在计算机中端口范围在0-65535中，其中0-1023是周知端口号，有特殊用途，而其他就是分配给应用程序使用的了。</p><p><strong>UDP的多路复用和多路分解</strong></p><p>UDP的运输层报文段包括应用程序数据，源端口号，目的端口号和其他两个值。通过目的端口号可以标识要送到目的的具体位置，而源端口号则是为了送回数据时使用的。</p><p><strong>TCP的多路复用和多路分解</strong></p><p>TCP和UDP区别是TCP套接字是一个四元组(源IP地址， 源端口号， 目的IP地址， 目的端口号）来标识的。因此他还可以让两个到同一个端口号的TCP连接互不干扰（因为有了源IP地址，所以可以分辨出这个数据时从哪发出的）</p><h1 id="udp"><a class="markdownIt-Anchor" href="#udp"></a> UDP</h1><p>UDP是一种不可靠运输，数据可能会丢失，那为什么需要UDP而不使用TCP呢？</p><ul><li>速度更快， TCP在链接建立之前需要经过三次握手，而UDP直接传输</li><li>无连接状态： TCP需要维护连接状态。包括接受发送缓存，用色控制参数和序号及确认号参数等。</li></ul><h2 id="报文段结构"><a class="markdownIt-Anchor" href="#报文段结构"></a> 报文段结构</h2><p>UDP报文段包括源端口号，目的端口号，长度，检验和和报文组成。长度指示了该报文段总的字节数（包括报文的）并且前面四个字段大小都是两字节</p><p>检验和是为了提供差错检验机制的。具体过程为将其他三个字段相加，舍去溢出并取反。之后检验就将这四个字段相加，如果结果全是1则正常。</p><p>例如：</p><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">0110011001100000</span><br><span class="line">0101010101010101</span><br><span class="line">1000111100001100</span><br><span class="line"></span><br><span class="line">相加并舍去溢出为：</span><br><span class="line">0100101011000010</span><br><span class="line"></span><br><span class="line">取反为：</span><br><span class="line">1011010100111101</span><br><span class="line">这就是检验和的值</span><br><span class="line"></span><br><span class="line">然后检验时将四个相加舍去溢出结果应该是1111111111111111</span><br></pre></td></tr></table></figure><h1 id="可靠数据传输"><a class="markdownIt-Anchor" href="#可靠数据传输"></a> 可靠数据传输</h1><p>传输过程为从应用层到传输层是可靠传输，然后从传输层到网络层是不可靠传输，然后从网络层到传输层是可靠传输。</p><h2 id="经完全可靠信道的可靠数据传输"><a class="markdownIt-Anchor" href="#经完全可靠信道的可靠数据传输"></a> 经完全可靠信道的可靠数据传输</h2><p><img src="/images/%E8%BF%90%E8%BE%93%E5%B1%82.jpg" alt="" /></p><p>等待上层的调用指的是从应用层到网络层，等待下层代用相反。rdt_send是从应用层向传输层传输（并且是可靠传输）。</p><p>这是一个有限状态自动机， 横线上方是引起变动的事件，横线下方是发生是采取的动作。</p><h2 id="经比特差错信道的可靠数据运输"><a class="markdownIt-Anchor" href="#经比特差错信道的可靠数据运输"></a> 经比特差错信道的可靠数据运输</h2><p>底层信道可能会出现某些问题导致数据不可靠。因此为了保证数据的可靠性，可能需要对传输过来的数据进行重新检测，返回报文可能会出现肯定确认和否定确认两种情况。为了保证传输稳定，可以使用自动重传请求协议（ARQ)</p><p>ARQ还需要另外三种功能才能进行自动重传</p><ul><li>差错检测：</li><li>接收方反馈： 也就是前面说的肯定确认(ACK)和否定确认(NAK)</li><li>重传： 当接收方收到有差错的分组时，发送方将重传该分组。</li></ul><p>但是接收方反馈的信号也可能出现问题，本来是肯定确认现在变成了无意义的代码。为了解决这个问题可以使用下列方法</p><ul><li>让接收方再次发送信息，但是存在这次信息仍然被干扰的问题。</li><li>增加足够多的检验和比特</li><li>第三种方法是接收到模糊信息直接重发分组。但是这种方法的问题是接收方不知道下一个分组是否是重发的分组，因此无法决定信息用途。</li></ul><p>为了解决第三种方法的问题，可以在分组前加一个序号字段。这个字段对分组进行了编号。现在假设这个字段不会受到干扰，那么接收方接受到的分组和上一个分组相同，表明这是重发分组。</p><h2 id="经丢包信道的可靠数据传输"><a class="markdownIt-Anchor" href="#经丢包信道的可靠数据传输"></a> 经丢包信道的可靠数据传输</h2><p>假设现在发送的分组或者接收方反馈的信息发生了丢失，这种情况下发送方都接收不到反馈，那么发送方可以选择在等待足够长的时间过后认为<strong>分组已丢失</strong>，只需要重新发送分组即可。</p><p>为了实现等待一定时间重传的机制，可以使用倒计时计时器。每次经过一定时间后，如果没有受到恢复，则可以进行重传。</p><h2 id="流水线可靠数据传输协议"><a class="markdownIt-Anchor" href="#流水线可靠数据传输协议"></a> 流水线可靠数据传输协议</h2><p>前面加上了计时器机制之后数据可靠性已经可以保证，但是它的速度不够快，因为它是<strong>停等协议</strong>。停等协议指的是它可以每次发送完数据之后都需要等待响应（ACK或NAK）才进行下一步发送。</p><p>一个简单的方法是发送方可以发送多个分组而无需等待，这种技术称为流水线。</p><p>为了保证流水线正常工作，还需要考虑以下内容</p><ul><li>需要增加序号的范围</li><li>发送方和接收方不得不缓存多个分组，发送方最少要缓存那些已发送但是没有得到确认的分组，接收方也需要保存接收的分组</li><li>对于丢失或损坏的分组，有两种基本方法是： 回退N步和选择重传</li></ul><h3 id="回退n步gbn"><a class="markdownIt-Anchor" href="#回退n步gbn"></a> 回退N步（GBN）</h3><p>在GBN中序号范围分隔成四段。</p><p><img src="/images/%E8%BF%90%E8%BE%93%E5%B1%822.webp" alt="" /></p><p>基序号是最早未确认分组的序号，下一个序号是最小未使用序号。</p><p>窗口长度是被发送当未确认的分组最大数量。要限制最大长度是为了对发送方进行限制。</p><p>发送方需要响应三种事件</p><ul><li>上层调用: 当上层调用rdt_send()发送数据时，如果窗口未满，则产生分组，如果已满，则通知上层。</li><li>收到ACK： 在GBN中，对序号为n的分组的确认采取累积确认。表示接收方已正确接收n及之前所有的分组</li><li>超时事件： 如果出现超时，发送方重传所有已发送但未确认的分组。</li></ul><p>接收方只有接收到n分组并且前一个接收的分组是n-1分组才会交付到上层。其他情况都会丢弃分组。之所以这样是为了减小接收方的负担及简化设计流程。</p><h3 id="选择重传"><a class="markdownIt-Anchor" href="#选择重传"></a> 选择重传</h3><p>GBN缺点就是性能利用率低，可能需要不断大量的重复传输。选择重传（SR）协议让发送方仅重传怀疑接收方未正确接收的分组，从而避免不必要的重传。</p><p><img src="/images/%E8%BF%90%E8%BE%93%E5%B1%823.jpg" alt="" /></p><p>这里和回退N步的模式大致相同，区别是在这个窗口中确认不一定是按序了，例如2已经确认但是0和1未确认。</p><p>如果序号在[base, base + N -1]的数据被正确接收，那么一个ACK传给发送方。如果是[base_ - N, base - 1]的数据被接收，一定要发送ACK。其他情况忽略分组。</p><p>这里可能出现发送方窗口和接收方窗口不一致的现象。因为ACK信息可能丢失，此时接收方已经接收到信息窗口滑动而发送方并不知道，他认为丢失再次发送。因此对于小于接收方base的数据，无论是否收到（一定是收到的，不然无法移动）都要重新发送ACK数据。这样发送方才可以确认已经收到信息并滑动窗口</p><p><img src="/images/%E8%BF%90%E8%BE%93%E5%B1%824.jpg" alt="" /></p><p>SR接收方将缓存分组知道比他小的分组全部接收到为止。</p><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">应用程序接受信息的接口<a href="#fnref:1" rev="footnote"> ↩</a></span></li></ol></div></div>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;h1 id=&quot;多路复用和多路分解&quot;&gt;&lt;a class=&quot;markdownIt-A</summary>
+      
+    
+    
+    
+    <category term="网络" scheme="http://xinhecuican.github.io/categories/%E7%BD%91%E7%BB%9C/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>应用层与HTTP协议</title>
@@ -428,28 +450,6 @@
     
     
     <category term="Linux" scheme="http://xinhecuican.github.io/categories/Linux/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>RNN及其拓展</title>
-    <link href="http://xinhecuican.github.io/post/aa1eade8.html"/>
-    <id>http://xinhecuican.github.io/post/aa1eade8.html</id>
-    <published>2020-08-21T03:26:00.000Z</published>
-    <updated>2020-10-19T13:59:13.555Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="rnn"><a class="markdownIt-Anchor" href="#rnn"></a> RNN</h1><p>RNN的特点是上一次输入会对下一次产生影响，相当于有了记忆功能，常用于自然语言处理。</p><p><img src="/images/RNN1.jpg" alt="" /></p><p>这是RNN的结构图，它与传统神经网络的区别是在隐藏层有了一个循环。</p><p><img src="/images/RNN2.jpg" alt="" /></p><p>这张图的含义是每一个时间点都可以有输出o，也可以没有。每一个时间点隐藏层输出作为下一个隐藏层的输入，也就是说该次训练对下一次训练会产生影响。</p><p>网上演示的时候隐藏层只有一层，这里就以一层为例。</p><p>隐藏层计算：</p><figure class="highlight gcode"><table><tr><td class="code"><pre><span class="line">z<span class="comment">(h)</span><span class="comment">(t)</span>=U⋅x<span class="comment">(t)</span>+W⋅s<span class="comment">(t−1)</span> <span class="attr">#s(t-1</span>)是前一刻隐藏层输出</span><br><span class="line">s<span class="comment">(t)</span>=fh<span class="comment">(z(h)</span><span class="comment">(t)</span>)</span><br></pre></td></tr></table></figure><p>s(t)是隐藏层输出， fh是激活函数，一般使用tanh或LeRu。</p><p>输出层使用softmax函数进行转换，然后损失函数使用交叉熵</p><p>Lt=−∑（N， i=0）yi(t)log(oi(t))</p><p>其中yi是真实值，oi是预测值</p><h2 id="bptt"><a class="markdownIt-Anchor" href="#bptt"></a> BPTT</h2><p>BPTT是RNN所使用的反向传播算法。它和传统反向传播算法的区别是它还要照顾到W（前一层到这一层的权重）</p><p><img src="/images/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C15.PNG" alt="" /></p><p>大体上还是使用这四个式子</p><p>δk(t) 表示t时刻损失函数对output layer 节点的输入zk(t)的导数（也就是求上面方程中第一个式子）。</p><p>δk(t) = o(t) - 1</p><p>所以∂Lt \ ∂V = (o(t) - 1) * s(t)</p><p>δk(h)(t) = [δ(o)(t) ⋅ Vk] ∙ [1 − sk(t)^2]</p><p>所以 ∂Lt \ ∂U = δ(h)(t) * x(t)</p><p>向w传播的 δ(h)(t−1)=[δ(h)(t)⋅W] ∙ <a href="%E8%BF%99%E9%87%8C%E5%8C%BA%E5%88%AB%E5%B0%B1%E6%98%AFs(t-1)%E5%92%8CW">1−s(t−1)^2</a></p><p>∂Lt \ ∂W = δ(h)(t) *  s(t-1)</p><h1 id="lstm"><a class="markdownIt-Anchor" href="#lstm"></a> LSTM</h1><p>RNN的缺陷是会出现梯度消失现象，因此无法保存长时间记忆。LSTM通过两条记忆途径使得可以保存长时间记忆。</p><p><img src="/images/RNN2.webp" alt="" /><br />这是LSTM的结构图，其中上面那一条线代表长时间记忆，下面那一条代表短时记忆。而保存在尝试记忆中的信息由几个门控制。</p><p><img src="/images/RNN3.webp" alt="" /></p><p>这是第一个门控忘记门，用来剔除不重要的信息。至于为什么能忘掉不重要信息，只能说这是神经网络自己决定的（没找到解释）。如果某一项为0代表舍弃，为1代表全部保留。</p><p>公式中<code>Wf⋅[ht−1,xt] = Wfh * h(t−1) + Wfx * xt</code>。wf可以看成是两个矩阵拼接而成，然后对应和输入相乘。</p><p><img src="/images/DNN4.webp" alt="" /></p><p>记忆门，这个门决定我们要记忆什么，迁前一部分是删去要舍弃的记忆，后面一部分是加上要记住的东西。注意Ct是tanh</p><p><img src="/images/DNN5.webp" alt="" />更新长期记忆。</p><p><img src="/images/DNN6.webp" alt="" /> 输出门。更新ht并输出</p><h2 id="反向更新"><a class="markdownIt-Anchor" href="#反向更新"></a> 反向更新</h2><p>首先确定更新内容。我们要更新四个b，四个w。其中w又要拆分成两部分，所以总共更新12个量。</p><figure class="highlight excel"><table><tr><td class="code"><pre><span class="line">δTo,<span class="built_in">t</span>=δTt⨀<span class="built_in">tanh</span>(ct)⨀ot⨀(<span class="number">1</span>−ot)</span><br><span class="line">δTf,<span class="built_in">t</span>=δTt⨀ot⨀(<span class="number">1</span>−<span class="built_in">tanh</span>(ct)<span class="number">2</span>)⨀ct−<span class="number">1</span>⨀ft⨀(<span class="number">1</span>−ft)</span><br><span class="line">δTi,<span class="built_in">t</span>=δTt⨀ot⨀(<span class="number">1</span>−<span class="built_in">tanh</span>(ct)<span class="number">2</span>)⨀ct^⨀it⨀(<span class="number">1</span>−it)</span><br><span class="line">δTc^,<span class="built_in">t</span>=δTt⨀ot⨀(<span class="number">1</span>−<span class="built_in">tanh</span>(ct)<span class="number">2</span>)⨀it⨀(<span class="number">1</span>−c^<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">yt=σ(Vht+by) // 当前状态输出</span><br><span class="line">δ<span class="built_in">t</span>=∂E \ ∂ht = Vσ`</span><br><span class="line"></span><br><span class="line">∂E \ ∂Woh,<span class="built_in">t</span> = δo,<span class="built_in">t</span> * h(<span class="built_in">t</span>−<span class="number">1</span>)</span><br><span class="line">其他三个 同理</span><br><span class="line"></span><br><span class="line">∂E \ ∂bo,<span class="built_in">t</span> = δo,<span class="built_in">t</span></span><br><span class="line">其他三个同理</span><br><span class="line"></span><br><span class="line">∂E \ ∂Wox = δo,<span class="built_in">t</span> * xt</span><br></pre></td></tr></table></figure><p><a href="https://ilewseu.github.io/2018/01/06/LSTM%E5%8F%82%E6%95%B0%E6%9B%B4%E6%96%B0%E6%8E%A8%E5%AF%BC/">反向更新具体过程可看</a></p><h1 id="gru"><a class="markdownIt-Anchor" href="#gru"></a> GRU</h1><p>GRU相比于LSTM所花的时间更短，但是达成的效果差不多。</p><p><img src="/images/RNN7.svg" alt="" />可以看到GRU只有一个参量要传递给下一个单元，并且需要更新的量也减少。</p><figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="attr">Rt</span>=σ(Xt * Wxr+H(t−<span class="number">1</span>) * Whr+br)</span><br><span class="line"><span class="attr">Zt</span>=σ(Xt * Wxz+H(t−<span class="number">1</span>) * Whz+bz)</span><br></pre></td></tr></table></figure><p>这是重置门和更新门的计算公式，和LSTM计算方法相同，实际上GRU借鉴了LSTM的思想。</p><figure class="highlight excel"><table><tr><td class="code"><pre><span class="line">H~<span class="built_in">t</span>=<span class="built_in">tanh</span>(Xt * Wxh + (Rt ⊙ H(<span class="built_in">t</span>−<span class="number">1</span>)) * Whh + bh) #重置门指的是重置H(<span class="built_in">t</span>-<span class="number">1</span>)</span><br><span class="line">Ht=Zt ⊙ H(<span class="built_in">t</span>−<span class="number">1</span>) + (<span class="number">1</span>−Zt) ⊙ H~<span class="built_in">t</span></span><br><span class="line">最后的zt和<span class="number">1</span>-zt决定要记住新内容多还是老内容多，例如 zt=<span class="number">1</span>/<span class="number">3</span>, 那么老内容一次运行就只剩下<span class="number">1</span>/<span class="number">3</span>.</span><br></pre></td></tr></table></figure>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css&quot;&gt;&lt;h1 id=&quot;rnn&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot;</summary>
-      
-    
-    
-    
-    <category term="机器学习" scheme="http://xinhecuican.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
     
   </entry>
