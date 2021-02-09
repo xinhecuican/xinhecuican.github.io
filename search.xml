@@ -13620,6 +13620,14 @@ SIGTTOU, SIGSSTP, and SIGTSTOP signals.(返回子进程被某些信号而停止�
 <li>DecideAgentHitParticles</li>
 <li>DecideWeaponCollisionReaction</li>
 <li>UpdateMomentumRemaining： 剩余的动量</li>
+<li>SpawnTroops(): 生成个体</li>
+<li>SpawnFormation(): 生成阵营。</li>
+</ul>
+</li>
+<li>SandBoxMissions: 打开各种战役的函数（重要）
+<ul>
+<li>OpenBattleMission(): 开始野战。里面有Battle加载的MissionBehavior</li>
+<li>还有许多各种各样的战役，MissionBehavior都是在这里加载的，有一个BattleAiBehaivor(可能有误）里面还加载了一些Agent的Component</li>
 </ul>
 </li>
 <li>MissionState:
@@ -13629,6 +13637,7 @@ SIGTTOU, SIGSSTP, and SIGTSTOP signals.(返回子进程被某些信号而停止�
 </ul>
 </li>
 <li>PartyScreenManager: 管理部队界面。</li>
+<li>OrderController: 部队命令管理。主要是SetOrder决定了按键之后的处理。</li>
 </ul>
 <h2 id="model-behavior"><a class="markdownIt-Anchor" href="#model-behavior"></a> Model &amp;&amp; Behavior</h2>
 <p><strong>Model</strong>指的是游戏中使用的一些计算模型，例如食物消耗，攻击力计算等模型。这些model会在官方游戏代码中调用。</p>
@@ -13690,7 +13699,14 @@ SIGTTOU, SIGSSTP, and SIGTSTOP signals.(返回子进程被某些信号而停止�
 <figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">[<span class="meta">DataSourceProperty</span>]</span><br><span class="line">        <span class="keyword">public</span> <span class="built_in">string</span> Name</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">get</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">this</span>._name;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">set</span></span><br><span class="line">            &#123;</span><br><span class="line">                <span class="built_in">bool</span> flag = <span class="keyword">value</span> != <span class="keyword">this</span>._name;</span><br><span class="line">                <span class="keyword">if</span> (flag)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">this</span>._name = <span class="keyword">value</span>;</span><br><span class="line">                    <span class="keyword">base</span>.OnPropertyChanged(<span class="string">&quot;Name&quot;</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
 <p>这些变量也是使用@变量名的方式进行使用的，它的区别是可以动态进行变更，每次数据改变时都会调用OnPropertyChanged来对数据进行刷新。注意这里指的变量名是OnPropertyChanged中的名字。</p>
 <p>如果参数是MBBindingList&lt;…VM&gt;类型的，可以使用ListPanel,将所有条目都列举出来，格式为</p>
- <figure class="highlight dust"><table><tr><td class="code"><pre><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">ListPanel</span> <span class="attr">DataSource</span>=<span class="string">&quot;</span></span></span><span class="template-variable">&#123;Texts&#125;</span><span class="xml"><span class="tag"><span class="string">&quot;</span> <span class="attr">WidthSizePolicy</span>=<span class="string">&quot;StretchToParent&quot;</span> <span class="attr">HeightSizePolicy</span>=<span class="string">&quot;CoverChildren&quot;</span></span></span></span><br><span class="line"><span class="xml">&gt;</span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;<span class="name">ItemTamplate</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">Widget</span> <span class="attr">..</span> &gt;</span></span></span><br><span class="line"><span class="xml">      <span class="tag">&lt;<span class="name">Children</span>&gt;</span></span></span><br><span class="line"><span class="xml">        your information</span></span><br><span class="line"><span class="xml">      <span class="tag">&lt;/<span class="name">Children</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;/<span class="name">Widget</span>&gt;</span></span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;/<span class="name">ItemTamplate</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">ListPanel</span>&gt;</span></span></span><br></pre></td></tr></table></figure>]]></content>
+ <figure class="highlight dust"><table><tr><td class="code"><pre><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">ListPanel</span> <span class="attr">DataSource</span>=<span class="string">&quot;</span></span></span><span class="template-variable">&#123;Texts&#125;</span><span class="xml"><span class="tag"><span class="string">&quot;</span> <span class="attr">WidthSizePolicy</span>=<span class="string">&quot;StretchToParent&quot;</span> <span class="attr">HeightSizePolicy</span>=<span class="string">&quot;CoverChildren&quot;</span></span></span></span><br><span class="line"><span class="xml">&gt;</span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;<span class="name">ItemTamplate</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">Widget</span> <span class="attr">..</span> &gt;</span></span></span><br><span class="line"><span class="xml">      <span class="tag">&lt;<span class="name">Children</span>&gt;</span></span></span><br><span class="line"><span class="xml">        your information</span></span><br><span class="line"><span class="xml">      <span class="tag">&lt;/<span class="name">Children</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;/<span class="name">Widget</span>&gt;</span></span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;/<span class="name">ItemTamplate</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">ListPanel</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+<h1 id="xml"><a class="markdownIt-Anchor" href="#xml"></a> XML</h1>
+<p>如果没有特殊说明可以直接在MB文件夹里搜索得到</p>
+<ul>
+<li>action_sets.xml: 里面有各种各样的动作，使用ActionIndexCache.Create(“name”)可以创建动作，使用agent.SetActionChannel可以设置动作。有死亡，坐，躺，蹲，站等一系列动作。注意有些动作如死亡是不能重新设置的，这时候只有使用agent.SetActionSet()对动作重置。</li>
+<li>HotKeyCategory.xml: 这个在document/Documents/Mount and Blade II Bannerlord/Configs文件夹中。里面有一系列的热键，通过这些热键可以查找这些热键对应功能位置。</li>
+</ul>
+]]></content>
   </entry>
   <entry>
     <title>运输层</title>
