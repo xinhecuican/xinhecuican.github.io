@@ -14083,6 +14083,152 @@ SIGTTOU, SIGSSTP, and SIGTSTOP signals.(返回子进程被某些信号而停止�
 <h3 id="链路故障"><a class="markdownIt-Anchor" href="#链路故障"></a> 链路故障</h3>
 <p>上面算法不是完全可靠的，例如x到y的值从2到60。那么我们计算<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>D</mi><mi>y</mi></msub><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">D_y(x)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.036108em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.02778em;">D</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.15139200000000003em;"><span style="top:-2.5500000000000003em;margin-left:-0.02778em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.03588em;">y</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mclose">)</span></span></span></span>时会得到$D_y(x) = min{c(y, x) + D_x(x), c(y,z) + D_z(x)} = min{60 + 0, 1 + 3} = 4 $.这毫无疑问是错误的，更重要的是这会导致一直循环。</p>
 <p>解决问题的一个方法时首先让到达终点的路变为<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">∞</mi></mrow><annotation encoding="application/x-tex">\infty</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord">∞</span></span></span></span>，例如D_z(x) = <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">∞</mi></mrow><annotation encoding="application/x-tex">\infty</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord">∞</span></span></span></span>。这样就会先将其他的路径全更新了，待到更新完成之后再换成真实值，然后再进行更新。</p>
+<h2 id="自治系统内部的路由选择策略"><a class="markdownIt-Anchor" href="#自治系统内部的路由选择策略"></a> 自治系统内部的路由选择策略</h2>
+<p>互联网是一个庞大的系统，如果所有主机都参与路由选择，那么开销是不可估计的，并且不同的机构可能想使用不同的管理策略。因此可以按照机构或地区分成一个个子系统，子系统中可以单独操作。</p>
+<h3 id="开放最短路优先ospf"><a class="markdownIt-Anchor" href="#开放最短路优先ospf"></a> 开放最短路优先（OSPF)</h3>
+<p>开放最短路优先使用的算法是Dijkstra算法。但是这里有一个管理员设置链路开销，可能会把所有开销设置成1，那么关注的是最少跳数。如果按链路容量反比设置，那么表示不鼓励使用低宽带链路。</p>
+<p>并且为了保证链路的健壮性，当链路接入或断开时会第一时间发送信息。如果没有变化也会每隔30分钟发送当前状态信息。</p>
+<h2 id="isp之间路由选择bgp"><a class="markdownIt-Anchor" href="#isp之间路由选择bgp"></a> ISP之间路由选择：BGP</h2>
+<p>如果路由器在自治系统边缘，那么就叫他网关路由器，否则叫他内部路由器。网关路由器负责两个自治系统之间的链接，他们的连接叫外部BGP。反之为内部BGP。</p>
+<p><img src="/images/%E7%BD%91%E7%BB%9C%E5%B1%826.jpg" alt="" /></p>
+<p>使用BGP选择策略时要传递一些信息，这些信息统称为路由，其中最重要的两个属性是AS-PATH和NEXT-HOP</p>
+<ul>
+<li>AS-PATH: 指的是已经通过的自治系统的列表，它可以痛啊哦路径并且检测环路。例如从1a到3d，当他到达3a时AS-PATH = “AS2 AS3”,而如果是1d到3d，那么值为AS3</li>
+<li>NEXT-HOP: 指的是AS-PATH中起始位置的IP地址（注意AS-PATH中不包含起始的自治系统）。例如上面第一个例子NEXT-HOP = 2a左边端口地址。第二个例子NEXT-HOP = 3d左边端口地址。</li>
+</ul>
+<h3 id="热土豆路由选择"><a class="markdownIt-Anchor" href="#热土豆路由选择"></a> 热土豆路由选择</h3>
+<p>热土豆选择算法是一种贪心算法，它的思想是尽快将数据穿输出自己的自治系统。假设我们已经知道了到终点的所有可能路径，然后计算起始点到NEXT-HOP之间的最短开销，然后把这个最短开销对应的接口和终点自治系统记录(x, I)到自己的转发表上</p>
+<h3 id="路由器选择算法"><a class="markdownIt-Anchor" href="#路由器选择算法"></a> 路由器选择算法</h3>
+<p>路由器选择算法是热土豆选择算法的改进。它对热土豆选择算法加了许多限制。它的运行流程如下</p>
+<ol>
+<li>路由被指定一个本地偏好值。这个值可能由路由器设置或者从相同自治系统中的另一台路由器中学习得到。具有最高本地路由编号值的将被优先选择。</li>
+<li>如果学习偏好值相同，那么寻找最短AS-PATH的路由</li>
+<li>否则，按照热土豆路由选择</li>
+<li>否则，按照BGP标识符选择</li>
+</ol>
+<h2 id="ip任播"><a class="markdownIt-Anchor" href="#ip任播"></a> IP任播</h2>
+<p>IP任播服务通常被利用于DNS中，他主要对具有相同内容但是位置不同的服务器进行最佳选择。</p>
+<p>例如CDN公司的多台服务器配制了相同的IP地址。然后某台BGP路由器收到了该IP地址的多个路由通告，之后根据路由器选择算法选出最佳的一个。</p>
+<h1 id="sdn控制平面"><a class="markdownIt-Anchor" href="#sdn控制平面"></a> SDN控制平面</h1>
+<p>传统路由器和交换机基于IP地址进行转发，而通用转发除了IP地址外，还有许多其他因素如TCP端口、IP协议等用于<strong>匹配</strong>，匹配完成之后不一定只有转发一个<strong>动作</strong>，还可能重写、拒绝等等一系列操作。</p>
+<p>通用转发是传统转发的拓展，它拓展了匹配和动作的范围。</p>
+<h2 id="匹配和动作"><a class="markdownIt-Anchor" href="#匹配和动作"></a> 匹配和动作</h2>
+<p>在分组交换机中有匹配和动作表，这个表由远程控制器进行维护，这个表又被称为<strong>流表</strong>，它包含以下内容</p>
+<ul>
+<li>首部字段值集合： 这是用于匹配的部分，也就是下图的字段。这些字段可以是空也可以使用正则表达式替代</li>
+<li>计数器集合： 计数器可以包括该表项已经匹配的分组数量，还可以记录自上次更新所经过的时间</li>
+<li>动作集合： 每个匹配就会对应一个动作。这些动作可以是转发到给定的输出端口，丢弃分组，复制分组和发送到多个输出端口。</li>
+</ul>
+<p><img src="/images/%E7%BD%91%E7%BB%9C%E5%B1%827.jpg" alt="" /></p>
+<p>如图是OpenFlow(一种通用转发标准）的匹配字段。这些匹配字段实际上就是各个协议的首部字段中一些重要内容。</p>
+<p>每个流表项可以有零个或多个动作列表，如果有多个动作，那么这些动作按序执行。</p>
+<p><img src="/images/%E7%BD%91%E7%BB%9C%E5%B1%828.jpg" alt="" /></p>
+<p>例如我们想把h5的数据发送到h3,并且想要从s3-&gt;s1-&gt;s2方式进行发送，那么流表为</p>
+<table>
+<thead>
+<tr>
+<th>匹配</th>
+<th>动作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>s1流表</strong></td>
+<td></td>
+</tr>
+<tr>
+<td><code>Ingress Port=1; IP Src=10.3.*.*; IP Dst=10.2.*.*</code></td>
+<td>Forward(4)</td>
+</tr>
+<tr>
+<td><strong>s3流表</strong></td>
+<td></td>
+</tr>
+<tr>
+<td><code>IP Src=10.3.*.*; IP Dst=10.2.*.*</code></td>
+<td>Forward(3)</td>
+</tr>
+<tr>
+<td><strong>s2流表</strong></td>
+<td></td>
+</tr>
+<tr>
+<td><code>Ingress Port=2; IP Dst=10.2.0.3</code></td>
+<td>Forward(3)</td>
+</tr>
+</tbody>
+</table>
+<p>其中的Forward表示要把数据发送到哪个输出接口</p>
+<h1 id="icmp因特网控制报文协议"><a class="markdownIt-Anchor" href="#icmp因特网控制报文协议"></a> ICMP：因特网控制报文协议</h1>
+<p>ICMP被用来进行主机和路由器之间的沟通，它最典型的用途是差错报告。它在体系结构中位于IP之上，换言之ICMP包括IP。</p>
+<p>ICMP结构为一个类型字段和一个编码字段，不同的类型和编码组合有不同的作用</p>
+<table>
+<thead>
+<tr>
+<th>ICMP类型</th>
+<th>编码</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>回显回答</td>
+</tr>
+<tr>
+<td>3</td>
+<td>0</td>
+<td>目的网络不可达</td>
+</tr>
+<tr>
+<td>3</td>
+<td>1</td>
+<td>目的主机不可达</td>
+</tr>
+<tr>
+<td>3</td>
+<td>2</td>
+<td>目的协议不可达</td>
+</tr>
+<tr>
+<td>3</td>
+<td>3</td>
+<td>目的端口不可达</td>
+</tr>
+<tr>
+<td>3</td>
+<td>6</td>
+<td>目的网络未知</td>
+</tr>
+<tr>
+<td>4</td>
+<td>0</td>
+<td>拥塞控制</td>
+</tr>
+<tr>
+<td>8</td>
+<td>0</td>
+<td>回显请求</td>
+</tr>
+<tr>
+<td>10</td>
+<td>0</td>
+<td>路由器发现</td>
+</tr>
+<tr>
+<td>11</td>
+<td>0</td>
+<td>TTL过期</td>
+</tr>
+<tr>
+<td>12</td>
+<td>0</td>
+<td>IP首部损坏</td>
+</tr>
+</tbody>
+</table>
+<p>其中回显请求也就是ping命令所发送的。</p>
 ]]></content>
       <categories>
         <category>网络</category>
