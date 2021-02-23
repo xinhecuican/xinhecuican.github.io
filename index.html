@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="zh-Hans" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Xinhecuican's Blog</title><meta name="author" content="星河璀璨"><meta name="copyright" content="星河璀璨"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta property="og:type" content="website">
+<!DOCTYPE html><html lang="zh-Hans" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Xinhecuican's Blog</title><meta name="author" content="星河璀璨"><meta name="copyright" content="星河璀璨"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta property="og:type" content="website">
 <meta property="og:title" content="Xinhecuican&#39;s Blog">
 <meta property="og:url" content="http://xinhecuican.github.io/index.html">
 <meta property="og:site_name" content="Xinhecuican&#39;s Blog">
@@ -6,7 +6,7 @@
 <meta property="og:image" content="http://xinhecuican.github.io/null">
 <meta property="article:author" content="星河璀璨">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://xinhecuican.github.io/null"><link rel="shortcut icon" href="/img/favicon.png"><!--link(rel="canonical" href=urlNoIndex())--><link rel="preconnect" href="//cdn.jsdelivr.net"><link rel="preconnect" href="//busuanzi.ibruce.info"><meta name="google-site-verification" content="zmX9zYZL0QVB6fFG_e98QsQogwE11Vdf5hOd4xMbgN4"><meta name="baidu-site-verification" content="EVZv9BO5R3"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css"><script>var GLOBAL_CONFIG = { 
+<meta name="twitter:image" content="http://xinhecuican.github.io/null"><link rel="shortcut icon" href="/img/favicon.png"><!--link(rel="canonical" href=urlNoIndex())--><link rel="preconnect" href="//cdn.jsdelivr.net"><link rel="preconnect" href="//busuanzi.ibruce.info"><meta name="google-site-verification" content="zmX9zYZL0QVB6fFG_e98QsQogwE11Vdf5hOd4xMbgN4"><meta name="baidu-site-verification" content="EVZv9BO5R3"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
   root: '/',
   algolia: undefined,
   localSearch: {"path":"search.xml","languages":{"hits_empty":"We didn't find any results for the search: ${query}"}},
@@ -31,7 +31,6 @@
     month: 'months ago'
   },
   copyright: undefined,
-  ClickShowText: undefined,
   lightbox: 'fancybox',
   Snackbar: {"chs_to_cht":"Traditional Chinese Activated Manually","cht_to_chs":"Simplified Chinese Activated Manually","day_to_night":"Dark Mode Activated Manually","night_to_day":"Light Mode Activated Manually","bgLight":"#49b1f5","bgDark":"#121212","position":"bottom-left"},
   source: {
@@ -47,56 +46,13 @@
   },
   isPhotoFigcaption: false,
   islazyload: false,
-  isanchor: false
-};
-
-var saveToLocal = {
-  set: function setWithExpiry(key, value, ttl) {
-    const now = new Date()
-    const expiryDay = ttl * 86400000
-    const item = {
-      value: value,
-      expiry: now.getTime() + expiryDay,
-    }
-    localStorage.setItem(key, JSON.stringify(item))
-  },
-
-  get: function getWithExpiry(key) {
-    const itemStr = localStorage.getItem(key)
-
-    if (!itemStr) {
-      return undefined
-    }
-    const item = JSON.parse(itemStr)
-    const now = new Date()
-
-    if (now.getTime() > item.expiry) {
-      localStorage.removeItem(key)
-      return undefined
-    }
-    return item.value
-  }
-}
-
-// https://stackoverflow.com/questions/16839698/jquery-getscript-alternative-in-native-javascript
-const getScript = url => new Promise((resolve, reject) => {
-  const script = document.createElement('script')
-  script.src = url
-  script.async = true
-  script.onerror = reject
-  script.onload = script.onreadystatechange = function() {
-    const loadState = this.readyState
-    if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
-    script.onload = script.onreadystatechange = null
-    resolve()
-  }
-  document.head.appendChild(script)
-})</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isanchor: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = { 
   isPost: false,
   isHome: true,
   isHighlightShrink: false,
   isToc: false,
-  postUpdate: '2021-02-22 20:04:17'
+  postUpdate: '2021-02-23 11:04:28'
 }</script><noscript><style type="text/css">
   #nav {
     opacity: 1
@@ -109,64 +65,108 @@ const getScript = url => new Promise((resolve, reject) => {
   #post-meta time {
     display: inline !important
   }
-</style></noscript><script>(function () {  window.activateDarkMode = function () {
-    document.documentElement.setAttribute('data-theme', 'dark')
-    if (document.querySelector('meta[name="theme-color"]') !== null) {
-      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
-    }
-  }
-  window.activateLightMode = function () {
-    document.documentElement.setAttribute('data-theme', 'light')
-   if (document.querySelector('meta[name="theme-color"]') !== null) {
-      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
-    }
-  }
-  const autoChangeMode = 'false'
-  const t = saveToLocal.get('theme')
-  if (autoChangeMode === '1') {
-    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
-    const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
-    const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
-    const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
-    if (t === undefined) {
-      if (isLightMode) activateLightMode()
-      else if (isDarkMode) activateDarkMode()
-      else if (isNotSpecified || hasNoSupport) {
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
         const now = new Date()
-        const hour = now.getHours()
-        const isNight = hour <= 6 || hour >= 18
-        isNight ? activateDarkMode() : activateLightMode()
-      }
-      window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
-        if (saveToLocal.get('theme') === undefined) {
-          e.matches ? activateDarkMode() : activateLightMode()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
         }
-      })
-    } else if (t === 'light') activateLightMode()
-    else activateDarkMode()
-  } else if (autoChangeMode === '2') {
-    const now = new Date()
-    const hour = now.getHours()
-    const isNight = hour <= 6 || hour >= 18
-    if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
-    else if (t === 'light') activateLightMode()
-    else activateDarkMode()
-  } else {
-    if (t === 'dark') activateDarkMode()
-    else if (t === 'light') activateLightMode()
-  }const asideStatus = saveToLocal.get('aside-status')
-if (asideStatus !== undefined) {
-   if (asideStatus === 'hide') {
-     document.documentElement.classList.add('hide-aside')
-   } else {
-     document.documentElement.classList.remove('hide-aside')
-   }
-}})()</script><link rel="stylesheet" href="/css/background.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Serif+SC:500&display=swap" media="print" onload="this.media='all'"><!-- hexo injector head_end start -->
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const fontSizeVal = saveToLocal.get('global-font-size')
+    if (fontSizeVal !== undefined) {
+      document.documentElement.style.setProperty('--global-font-size', fontSizeVal + 'px')
+    }
+    })(window)</script><link rel="stylesheet" href="/css/background.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Serif+SC:500&display=swap" media="print" onload="this.media='all'"><!-- hexo injector head_end start -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
 <!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Xinhecuican's Blog" type="application/atom+xml">
-</head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/null" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">168</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">Tags</div><div class="length-num">6</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">Categories</div><div class="length-num">22</div></a></div></div></div><hr><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div id="body-wrap"><header class="full_page" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Xinhecuican's Blog</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">Xinhecuican's Blog</h1><div id="site-subtitle"><span id="subtitle"></span></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="post_cover left_radius"><a href="/post/769365ef.html" title="网络层">     <img class="post_bg" src="https://api.btstu.cn/sjbz/api.php?lx=dongman&amp;format=images" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="网络层"></a></div><div class="recent-post-info"><a class="article-title" href="/post/769365ef.html" title="网络层">网络层</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2021-02-13T11:41:00.000Z" title="Created 2021-02-13 19:41:00">2021-02-13</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/%E7%BD%91%E7%BB%9C/">网络</a></span></div><div class="content"> 基础概念
+</head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/null" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">169</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">Tags</div><div class="length-num">6</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">Categories</div><div class="length-num">22</div></a></div></div></div><hr><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Xinhecuican's Blog</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">Xinhecuican's Blog</h1><div id="site-subtitle"><span id="subtitle"></span></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="post_cover left_radius"><a href="/post/bd608ff7.html" title="链路层">     <img class="post_bg" src="https://api.ixiaowai.cn/api/api.php" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="链路层"></a></div><div class="recent-post-info"><a class="article-title" href="/post/bd608ff7.html" title="链路层">链路层</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2021-02-22T08:18:00.000Z" title="Created 2021-02-22 16:18:00">2021-02-22</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%BD%91%E7%BB%9C/">网络</a></span></div><div class="content"> 概念
+
+节点： 运行链路层协议的设备，例如主机、路由器等
+链路： 将信息传输到相邻节点的通信信道
+链路层帧： 数据报封装在链路层帧中
+
+链路层提供的服务有：
+
+链路接入： 媒体访问控制（MAC）协议规定了帧在链路上的传输规则，还协调了多个节点共享当个链路时的问题。
+可靠交付： 和TCP协议一样，这里的可靠交付也是通过差错检测和重发保证的。
+差错检测
+
+链路层的主题是在网络适配器中实现的，也叫网络接口卡。
+ 差错检测技术
+ 奇偶校验
+假设发送的信息中有d比特，那么发送方只需要附加上一个比特使得1的个数为偶数即可。接收方接收时检查是否有偶数个1那么就可以得知是否有差错。
+但是这种检测方式检测出错的可能性很大，达到50%，因此需要一种更健壮的检测方式。
+另一种方法时把这些比特划分成i行j列的矩阵，每一行每一列都有一个检验比特，这样不仅可以检测出错误还可以在出错时纠正他。
+ 检验和方法
+在运输层中使用了这个技术
+ 循环冗余检测
+该检测方法的基本思路为： 在d位比特后加上r位校验比特，使得他可以被G正好整除。公式为：
+D∗2rXORR=nGD∗2r=nGXORRR=remainderD∗2rG ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/post/769365ef.html" title="网络层">     <img class="post_bg" src="https://api.btstu.cn/sjbz/api.php?lx=dongman&amp;format=images" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="网络层"></a></div><div class="recent-post-info"><a class="article-title" href="/post/769365ef.html" title="网络层">网络层</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2021-02-13T11:41:00.000Z" title="Created 2021-02-13 19:41:00">2021-02-13</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%BD%91%E7%BB%9C/">网络</a></span></div><div class="content"> 基础概念
 在应用层和运输层已经将数据封装号了，网络层所做的工作就是把数据尽可能传输过去，其中的难点在于选择传输的路径。有些传输算法可能导致需要经过4个路由器，而有的只需要两个。
 
 转发： 从输入接口转移到输出接口，是路由器内部过程。路由器本身有许多个接口，可能要从一个接口输入再从另一个接口输出。
@@ -209,7 +209,7 @@ if (asideStatus !== undefined) {
 
 
 
-可以看到他们的范围中前缀 ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/post/2cad8b04.html" title="运输层">     <img class="post_bg" src="https://api.btstu.cn/sjbz/api.php?lx=dongman&amp;format=images" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="运输层"></a></div><div class="recent-post-info"><a class="article-title" href="/post/2cad8b04.html" title="运输层">运输层</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2021-02-05T02:57:00.000Z" title="Created 2021-02-05 10:57:00">2021-02-05</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/%E7%BD%91%E7%BB%9C/">网络</a></span></div><div class="content"> 多路复用和多路分解
+可以看到他们的范围中前缀 ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/post/2cad8b04.html" title="运输层">     <img class="post_bg" src="https://api.ixiaowai.cn/api/api.php" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="运输层"></a></div><div class="recent-post-info"><a class="article-title" href="/post/2cad8b04.html" title="运输层">运输层</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2021-02-05T02:57:00.000Z" title="Created 2021-02-05 10:57:00">2021-02-05</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%BD%91%E7%BB%9C/">网络</a></span></div><div class="content"> 多路复用和多路分解
 多路分解： 多路分解指的是将报文段中的数据提交到正确的套接字[1]
 多路复用：从主机不同套接字上收集数据，并为每个数据块加上首部信息（如源端口号和目的端口号等）形成报文段，然后传到网络层。
 多路复用也就是从传输层到网络层的过程，而多路分解是从传输层到应用层的过程
@@ -221,7 +221,7 @@ TCP和UDP区别是TCP套接字是一个四元组(源IP地址， 源端口号， 
  UDP
 UDP是一种不可靠运输，数据可能会丢失，那为什么需要UDP而不使用TCP呢？
 
-速度更快， TCP在链接 ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/post/af3eed3c.html" title="应用层与HTTP协议">     <img class="post_bg" src="http://api.btstu.cn/sjbz/?lx=dongman" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="应用层与HTTP协议"></a></div><div class="recent-post-info"><a class="article-title" href="/post/af3eed3c.html" title="应用层与HTTP协议">应用层与HTTP协议</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2021-01-30T00:31:00.000Z" title="Created 2021-01-30 08:31:00">2021-01-30</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/%E7%BD%91%E7%BB%9C/">网络</a></span></div><div class="content"> HTTP协议
+速度更快， TCP在链接 ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/post/af3eed3c.html" title="应用层与HTTP协议">     <img class="post_bg" src="https://api.ixiaowai.cn/api/api.php" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="应用层与HTTP协议"></a></div><div class="recent-post-info"><a class="article-title" href="/post/af3eed3c.html" title="应用层与HTTP协议">应用层与HTTP协议</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2021-01-30T00:31:00.000Z" title="Created 2021-01-30 08:31:00">2021-01-30</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%BD%91%E7%BB%9C/">网络</a></span></div><div class="content"> HTTP协议
  基础
 HTTP由两个程序组成：客户程序和服务器程序。客户程序就是我们电脑上的程序
 一个Web页面是由若干对象组成的，对象指的是一个文件，例如HTML文件，JPEG图像，Java小程序等。
@@ -233,7 +233,7 @@ HTTP使用TCP作为传输层协议。TCP大致是首先发起一个与服务器�
  HTTP的非持续连接
 假设我们请求一个HTML基本文件和若干图形。并且这些对象位于同一台服务器上，那么非持续连接请求的大致过程是：
 
-HTTP客户进程在端 ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/post/c82a1c99.html" title="DLL注入">     <img class="post_bg" src="http://api.btstu.cn/sjbz/?lx=dongman" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="DLL注入"></a></div><div class="recent-post-info"><a class="article-title" href="/post/c82a1c99.html" title="DLL注入">DLL注入</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2021-01-23T11:13:00.000Z" title="Created 2021-01-23 19:13:00">2021-01-23</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/%E9%80%86%E5%90%91/">逆向</a></span></div><div class="content"> 消息钩子
+HTTP客户进程在端 ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/post/c82a1c99.html" title="DLL注入">     <img class="post_bg" src="https://api.btstu.cn/sjbz/api.php?lx=dongman&amp;format=images" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="DLL注入"></a></div><div class="recent-post-info"><a class="article-title" href="/post/c82a1c99.html" title="DLL注入">DLL注入</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2021-01-23T11:13:00.000Z" title="Created 2021-01-23 19:13:00">2021-01-23</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E9%80%86%E5%90%91/">逆向</a></span></div><div class="content"> 消息钩子
 Windows操作系统GUI将键盘敲击，鼠标移动和点击，窗口大小和位置改变都看成事件（Event).消息传递过程大致为
 
 事件发生时，首先将这个事件添加到系统的[OS message queue]中
@@ -253,7 +253,7 @@ DLL注入指的是想运行中的进程强制插入DLL文件。具体来讲就�
 消息勾取
 
  创建远程线程
-bool inject_dll(DWORD dwPID, L ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/post/67454659.html" title="矩阵运算">     <img class="post_bg" src="https://api.ixiaowai.cn/api/api.php" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="矩阵运算"></a></div><div class="recent-post-info"><a class="article-title" href="/post/67454659.html" title="矩阵运算">矩阵运算</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2021-01-21T06:15:00.000Z" title="Created 2021-01-21 14:15:00">2021-01-21</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/%E6%95%B0%E5%AD%A6/">数学</a></span></div><div class="content"> LUP分解求线性方程组
+bool inject_dll(DWORD dwPID, L ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/post/67454659.html" title="矩阵运算">     <img class="post_bg" src="https://api.btstu.cn/sjbz/api.php?lx=dongman&amp;format=images" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="矩阵运算"></a></div><div class="recent-post-info"><a class="article-title" href="/post/67454659.html" title="矩阵运算">矩阵运算</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2021-01-21T06:15:00.000Z" title="Created 2021-01-21 14:15:00">2021-01-21</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%95%B0%E5%AD%A6/">数学</a></span></div><div class="content"> LUP分解求线性方程组
 L、U、P是三个矩阵，满足PA = LU。其中L矩阵是一个单位下三角矩阵，U是一个上三角矩阵，P是一个置换矩阵。
 我们要求解的是A x = b
 Ax=bPAx=PbLUx=Pb(根据上面的式子替换）令Ux=y得Ly=Pb\begin{aligned}
@@ -267,14 +267,14 @@ Ax=bPAx=PbLUx=Pb(根据上面的式子替换）令Ux=y得Ly=Pb\begin{aligned}
  正向替换
 正向替换的目标是通过Ly = Pb来求y
 我们可以使用一个π[1...n]\pi [1...n]π[1...n]来替换P。 对i = 1, 2, …, n, 元素π[i]\pi [i]π[i]表示Pi,π[i]=1P_{i,\pi [i]} = 1Pi,π[i]​=1(第i行第π[i]\pi [i]π[i]列）。由于L是单位下三角矩阵，所以可以将式子写成
-y1=bπ[1]y2l21+y2=bπ[2]y3 ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/post/16e2846c.html" title="PE文件格式">     <img class="post_bg" src="https://api.ixiaowai.cn/api/api.php" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="PE文件格式"></a></div><div class="recent-post-info"><a class="article-title" href="/post/16e2846c.html" title="PE文件格式">PE文件格式</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2021-01-19T01:46:00.000Z" title="Created 2021-01-19 09:46:00">2021-01-19</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/">计算机系统基础</a></span></div><div class="content">PE文件时windows中的32位可执行文件。在linux中是elf。如exe，dll，scr等都是PE文件
+y1=bπ[1]y2l21+y2=bπ[2]y3 ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/post/16e2846c.html" title="PE文件格式">     <img class="post_bg" src="https://api.btstu.cn/sjbz/api.php?lx=dongman&amp;format=images" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="PE文件格式"></a></div><div class="recent-post-info"><a class="article-title" href="/post/16e2846c.html" title="PE文件格式">PE文件格式</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2021-01-19T01:46:00.000Z" title="Created 2021-01-19 09:46:00">2021-01-19</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/">计算机系统基础</a></span></div><div class="content">PE文件时windows中的32位可执行文件。在linux中是elf。如exe，dll，scr等都是PE文件
  基本结构
 
 PE文件中的RVA（相对虚拟地址）一般不是直接转换到真实的虚拟地址的，还要加上一个基准地址（ImageBase).也就是说VA = RVA + ImageBase
 这样做主要是因为DLL，DLL动态链接时如果发现这个虚拟地址已经有其他的dll了，那么就要进行重定位到其他位置，如果没有ImageBase那么重定位是很麻烦的。
  PE头
  DOS头
-typedef struct _IMAGE_DOS_HEADER&#123;    WORD e_magic;    WORD e_cblp;    WORD e_cp;    WORD e_crlc;    WORD e_cpaarhdr;    WORD e_minalloc;    WORD e_maxalloc;    WORD e_ss;    WORD e_sp;    WORD e_csum;    WORD e_ip    WORD e_cs;    WORD e_lfarlc;    WORD e_ovn ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/post/ef3a3fcc.html" title="字符串匹配">     <img class="post_bg" src="https://api.ixiaowai.cn/gqapi/gqapi.php" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="字符串匹配"></a></div><div class="recent-post-info"><a class="article-title" href="/post/ef3a3fcc.html" title="字符串匹配">字符串匹配</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2021-01-18T12:23:00.000Z" title="Created 2021-01-18 20:23:00">2021-01-18</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/%E7%AE%97%E6%B3%95/">算法</a></span></div><div class="content">字符串匹配是在一个长度为s的t串中找到和长度为m的p串相同的部分。t串是匹配串，p串是模式串
+typedef struct _IMAGE_DOS_HEADER&#123;    WORD e_magic;    WORD e_cblp;    WORD e_cp;    WORD e_crlc;    WORD e_cpaarhdr;    WORD e_minalloc;    WORD e_maxalloc;    WORD e_ss;    WORD e_sp;    WORD e_csum;    WORD e_ip    WORD e_cs;    WORD e_lfarlc;    WORD e_ovn ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/post/ef3a3fcc.html" title="字符串匹配">     <img class="post_bg" src="https://api.btstu.cn/sjbz/api.php?lx=dongman&amp;format=images" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="字符串匹配"></a></div><div class="recent-post-info"><a class="article-title" href="/post/ef3a3fcc.html" title="字符串匹配">字符串匹配</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2021-01-18T12:23:00.000Z" title="Created 2021-01-18 20:23:00">2021-01-18</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%AE%97%E6%B3%95/">算法</a></span></div><div class="content">字符串匹配是在一个长度为s的t串中找到和长度为m的p串相同的部分。t串是匹配串，p串是模式串
  Pabin-Karp算法
 它的基本思想是哈希。即将匹配串中每一个长度为m的子串进行哈希并与p串的哈希值进行比较。
 假设模式串p[1…m]，得到哈希值的算法为
@@ -287,7 +287,7 @@ t2=10(t1−10m−1T[s+1])+T[s+m+1]t_2 = 10(t_1 - 10^{m-1}T[s+1]) + T[s+m+1]
 t2​=10(t1​−10m−1T[s+1])+T[s+m+1]
 其中T[s+m+1]是原来字符串的高一位，T[s+1]就是原来字符串的最低位。也就是减去最低位然后将字符串左移一位再加上最高位。
 10m−110^{m-1}10m−1可以使用快速幂的方法在O(lgm)时间计算完。
-在计算完所有子串之后就可以对每一个哈希值进 ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/post/9d855db5.html" title="计算机系统综合实践报告">     <img class="post_bg" src="https://api.ghser.com/random/fengjing.php" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="计算机系统综合实践报告"></a></div><div class="recent-post-info"><a class="article-title" href="/post/9d855db5.html" title="计算机系统综合实践报告">计算机系统综合实践报告</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2021-01-04T12:23:00.000Z" title="Created 2021-01-04 20:23:00">2021-01-04</time></span></div><div class="content"> 实验进度
+在计算完所有子串之后就可以对每一个哈希值进 ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/post/9d855db5.html" title="计算机系统综合实践报告">     <img class="post_bg" src="https://api.ixiaowai.cn/gqapi/gqapi.php" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="计算机系统综合实践报告"></a></div><div class="recent-post-info"><a class="article-title" href="/post/9d855db5.html" title="计算机系统综合实践报告">计算机系统综合实践报告</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2021-01-04T12:23:00.000Z" title="Created 2021-01-04 20:23:00">2021-01-04</time></span></div><div class="content"> 实验进度
 
 
 
@@ -342,7 +342,7 @@ t2​=10(t1​−10m−1T[s+1])+T[s+m+1]
 不能，ＧＤＴ使用线性地址一样，ＣＲ３是用于物理地址转换的，如果他也是虚拟地址就没有什么可以转换ＣＲ３的线性地址了。
 一级页表有占用内存过多的缺点。而二级页表虽然看上去消耗内存反而增大了，但是实际上很多对应ptable并没有实际创建因而减小了内存。
  思考题７
-空指针并不是空的，只是指向的 ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/post/41e39f2b.html" title="内存管理">     <img class="post_bg" src="https://api.ixiaowai.cn/gqapi/gqapi.php" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="内存管理"></a></div><div class="recent-post-info"><a class="article-title" href="/post/41e39f2b.html" title="内存管理">内存管理</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-12-26T07:28:00.000Z" title="Created 2020-12-26 15:28:00">2020-12-26</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/">计算机系统基础</a></span></div><div class="content"> 段式管理
+空指针并不是空的，只是指向的 ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/post/41e39f2b.html" title="内存管理">     <img class="post_bg" src="https://api.ixiaowai.cn/api/api.php" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="内存管理"></a></div><div class="recent-post-info"><a class="article-title" href="/post/41e39f2b.html" title="内存管理">内存管理</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-12-26T07:28:00.000Z" title="Created 2020-12-26 15:28:00">2020-12-26</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/">计算机系统基础</a></span></div><div class="content"> 段式管理
 段指的是一些有相似功能的程序集合（不是准确描述），例如程序段，代码段，全局变量段等。
  段的分配算法
  固定分区法
@@ -356,42 +356,21 @@ t2​=10(t1​−10m−1T[s+1])+T[s+m+1]
 最先适配：从一个方向进行扫描，找到第一个可以容纳的空间放入进程
 下次适配：从上次分配的地方开始扫描，实际上差别并不大
 
-此外还有两种有两种策略，最好匹配和最 ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/post/d94f88de.html" title="骑砍2 mod类列举">     <img class="post_bg" src="https://api.btstu.cn/sjbz/api.php?lx=dongman&amp;format=images" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="骑砍2 mod类列举"></a></div><div class="recent-post-info"><a class="article-title" href="/post/d94f88de.html" title="骑砍2 mod类列举">骑砍2 mod类列举</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-12-23T13:30:00.000Z" title="Created 2020-12-23 21:30:00">2020-12-23</time></span></div><div class="content"> 基础
-参考1： 非官方文档
-参考2： 有关保存数据的讨论
-本文只是为了记录自己看到和使用的一些类的大致用途和一些主要方法，具体请使用dnspy等工具进行查看。
-
-dnspy的分析功能很好用。还有程序集搜索功能
-
-
- 类
-
-settlement: settlement是在战役地图中的村庄，城镇，城堡
-MobileParty: 军队
-
-TroopRoster: 军队花名册
-PrisonRoster: 囚犯花名册
-TickAi(): 最终决定ai的函数，下面的aibehavior不一定是最终的ai
-Morale： 士气，通过DefaultPartyMoraleModel决定
-DefaultBehavior: 当前的ai
-ShortTermBehavior: 短期ai，用来设置追逐和逃跑行为
-ItemRoster: 物品清单。
-InventoryCapacity： 容量，通过InventoryCapacityModel得到
-Tier： 部队的等阶，最高是6阶，英雄是0阶
-GetBestInitiativeBehavior(): 里面有一些模拟战的行为
-
-
-Army： 军团，也就是需要凝聚力的 ...</div></div></div><nav id="pagination"><div class="pagination"><span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/2/"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside_content" id="aside_content"><div class="sticky_layout"><div class="card-widget" id="card-newest-comments"><div class="card-content"><div class="item-headline"><i class="fas fa-bolt"></i><span>Newest Comments</span></div><div class="aside-list"><span>loading...</span></div></div></div><div class="card-widget card-categories"><div class="card-content"><div class="item-headline"><i class="fas fa-folder-open"></i><span>Categories</span></div><ul class="card-category-list" id="aside-cat-list">
+此外还有两种有两种策略，最好匹配和最 ...</div></div></div><nav id="pagination"><div class="pagination"><span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/2/"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-newest-comments"><div class="item-headline"><i class="fas fa-bolt"></i><span>Newest Comments</span></div><div class="aside-list"><span>loading...</span></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>Categories</span>
+            <a class="card-more-btn" href="/categories/" title="More">
+    <i class="fas fa-angle-right"></i></a>
+            </div>
+            <ul class="card-category-list" id="aside-cat-list">
             <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Linux/"><span class="card-category-list-name">Linux</span><span class="card-category-list-count">13</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/MySQL/"><span class="card-category-list-name">MySQL</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Python/"><span class="card-category-list-name">Python</span><span class="card-category-list-count">3</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/c/"><span class="card-category-list-name">c++</span><span class="card-category-list-count">3</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/java/"><span class="card-category-list-name">java</span><span class="card-category-list-count">23</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/next/"><span class="card-category-list-name">next</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/stl/"><span class="card-category-list-name">stl</span><span class="card-category-list-count">8</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/windows/"><span class="card-category-list-name">windows</span><span class="card-category-list-count">1</span></a></li>
-            <li class="card-category-list-item more is-center"><a class="card-category-list-link-more" href="/categories/">
-                <span>More</span><i class="fas fa-angle-right"></i></a></li>
-            </ul></div></div><div class="card-widget card-tags"><div class="card-content"><div class="item-headline"><i class="fas fa-tags"></i><span>Tags</span></div><div class="card-tag-cloud"><a href="/tags/AT-T/" style="font-size: 1.1em; color: #999">AT&T</a> <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 1.5em; color: #99a9bf">动态规划</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" style="font-size: 1.5em; color: #99a9bf">字符串</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E5%B8%B8%E9%87%8F/" style="font-size: 1.1em; color: #999">字符常量</a> <a href="/tags/%E5%BF%AB%E6%8E%92/" style="font-size: 1.1em; color: #999">快排</a> <a href="/tags/%E6%8E%92%E5%BA%8F/" style="font-size: 1.1em; color: #999">排序</a></div></div></div><div class="card-widget card-archives"><div class="card-content"><div class="item-headline"><i class="fas fa-archive"></i><span>Archives</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/02/"><span class="card-archive-list-date">February 2021</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/01/"><span class="card-archive-list-date">January 2021</span><span class="card-archive-list-count">6</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/12/"><span class="card-archive-list-date">December 2020</span><span class="card-archive-list-count">6</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/11/"><span class="card-archive-list-date">November 2020</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/10/"><span class="card-archive-list-date">October 2020</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/08/"><span class="card-archive-list-date">August 2020</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/07/"><span class="card-archive-list-date">July 2020</span><span class="card-archive-list-count">13</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/06/"><span class="card-archive-list-date">June 2020</span><span class="card-archive-list-count">7</span></a></li><li class="card-archive-list-item more is-center"><a class="card-archive-list-link-more" href="/archives/">
-              <span>More</span><i class="fas fa-angle-right"></i></a></li></ul></div></div><div class="card-widget card-webinfo"><div class="card-content"><div class="item-headline"><i class="fas fa-chart-line"></i><span>Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">Article :</div><div class="item-count">168</div></div><div class="webinfo-item"><div class="item-name">Total Count :</div><div class="item-count">206.9k</div></div><div class="webinfo-item"><div class="item-name">UV :</div><div class="item-count" id="busuanzi_value_site_uv"></div></div><div class="webinfo-item"><div class="item-name">PV :</div><div class="item-count" id="busuanzi_value_site_pv"></div></div><div class="webinfo-item"><div class="item-name">Last Push :</div><div class="item-count" id="last-push-date" data-lastpushdate="2021-02-22T12:04:12.822Z"></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By 星河璀璨</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="external nofollow noopener noreferrer" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="Switch Between Traditional Chinese And Simplified Chinese">繁</button><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog"></i></button><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">Local search</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"></div></div></div><hr><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script>function panguFn () {
-  if (typeof pangu === 'object') pangu.spacingElementById('content-inner')
+            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>Tags</span></div><div class="card-tag-cloud"><a href="/tags/AT-T/" style="font-size: 1.1em; color: #999">AT&T</a> <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 1.5em; color: #99a9bf">动态规划</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" style="font-size: 1.5em; color: #99a9bf">字符串</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E5%B8%B8%E9%87%8F/" style="font-size: 1.1em; color: #999">字符常量</a> <a href="/tags/%E5%BF%AB%E6%8E%92/" style="font-size: 1.1em; color: #999">快排</a> <a href="/tags/%E6%8E%92%E5%BA%8F/" style="font-size: 1.1em; color: #999">排序</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>Archives</span><a class="card-more-btn" href="/archives/" title="More">
+    <i class="fas fa-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/02/"><span class="card-archive-list-date">February 2021</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/01/"><span class="card-archive-list-date">January 2021</span><span class="card-archive-list-count">6</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/12/"><span class="card-archive-list-date">December 2020</span><span class="card-archive-list-count">6</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/11/"><span class="card-archive-list-date">November 2020</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/10/"><span class="card-archive-list-date">October 2020</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/08/"><span class="card-archive-list-date">August 2020</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/07/"><span class="card-archive-list-date">July 2020</span><span class="card-archive-list-count">13</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/06/"><span class="card-archive-list-date">June 2020</span><span class="card-archive-list-count">7</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">Article :</div><div class="item-count">169</div></div><div class="webinfo-item"><div class="item-name">Total Count :</div><div class="item-count">207.5k</div></div><div class="webinfo-item"><div class="item-name">UV :</div><div class="item-count" id="busuanzi_value_site_uv"></div></div><div class="webinfo-item"><div class="item-name">PV :</div><div class="item-count" id="busuanzi_value_site_pv"></div></div><div class="webinfo-item"><div class="item-name">Last Push :</div><div class="item-count" id="last-push-date" data-lastpushdate="2021-02-23T03:04:24.693Z"></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By 星河璀璨</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="external nofollow noopener noreferrer" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="font-plus" type="button" title="Increase font size"><i class="fas fa-plus"></i></button><button id="font-minus" type="button" title="Decrease font size"><i class="fas fa-minus"></i></button><button id="translateLink" type="button" title="Toggle Between Traditional Chinese And Simplified Chinese">繁</button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button id="chat_btn" type="button" title="rightside.chat_btn"><i class="fas fa-sms"></i></button><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">Local search</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"></div></div></div><hr><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
   else {
     getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
       .then(() => {
-        pangu.spacingElementById('content-inner')
+        pangu.autoSpacingPage()
       })
   }
 }
@@ -426,97 +405,4 @@ if (true) {
   }
 } else {
   subtitleType()
-}</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="https://cdn.jsdelivr.net/npm/blueimp-md5@2.17.0/js/md5.min.js"></script><script>window.addEventListener('load', () => {
-  const changeContent = (content) => {
-    if (content === '') return content
-
-    content = content.replace(/<[^>]+>/g,"") // remove html tag
-    content = content.replace(/(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|jpeg|gif|png|webp)/g, '') // remove image link
-    content = content.replace(/(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi, '') // remove url
-
-    if (content.length > 150) {
-      content = content.substring(0,150) + '...'
-    }
-    return content
-  }
-
-  const getIcon = (icon, mail) => {
-    if (icon) return icon 
-    let defaultIcon = ''
-    let iconUrl = `https://gravatar.loli.net/avatar/${md5(mail.toLowerCase()) + defaultIcon}`
-    return iconUrl
-  }
-
-  const generateHtml = array => {
-    let result = ''
-
-    for (let i = 0; i < array.length; i++) {
-      result += '<div class=\'aside-list-item\'>'
-
-      if (true) {
-        result += `<a href='${array[i].url}' class="thumbnail"><img src='${getIcon(array[i].avatar, array[i].mail)}' alt='${array[i].nick}'></a>`
-      }
-
-      result += `<div class='content'>
-      <a class='comment' href='${array[i].url}'>${array[i].content}</a>
-      <div class='name'><span>${array[i].nick}</span><time> / ${btf.diffDate(array[i].date, true)}</time></div>
-      </div></div>`
-    }
-
-    let $dom = document.querySelector('#card-newest-comments .aside-list')
-    $dom.innerHTML= result
-    window.pjax && window.pjax.refresh($dom)
-  }
-
-  const getValineData = () => {
-      let serverURL = ''
-      if (false) {
-        serverURL = ''
-      } else {
-        serverURL = 'https://ppBSSMr3.api.lncldglobal.com'
-      }
-
-    var settings = {
-      "method": "GET",
-      "headers": {
-        "X-LC-Id": 'ppBSSMr3xMsbRBArQedKeS5B-gzGzoHsz',
-        "X-LC-Key": 'cdaxbHoq61wB6rrC3hTn2Ubo',
-        "Content-Type": "application/json"
-      },
-    }
-
-    fetch(`${serverURL}/1.1/classes/Comment?limit=6&order=-createdAt`,settings)
-      .then(response => response.json())
-      .then(data => {
-        const valineArray = data.results.map(function (e) {
-          return {
-            'avatar': e.QQAvatar,
-            'content': changeContent(e.comment),
-            'mail': e.mail,
-            'nick': e.nick,
-            'url': e.url,
-            'date': e.createdAt,
-          }
-        })
-        saveToLocal.set('leancloud-newest-comments', JSON.stringify(valineArray), 10/(60*24))
-        generateHtml(valineArray)
-      }).catch(e => { 
-        const $dom = document.querySelector('#card-newest-comments .aside-list')
-        $dom.innerHTML= "Unable to get the data, please make sure the settings are correct."
-      }) 
-  }
-
-  const newestCommentInit = () => {
-    if (document.querySelector('#card-newest-comments .aside-list')) {
-      const data = saveToLocal.get('leancloud-newest-comments')
-      if (data) {
-        generateHtml(JSON.parse(data))
-      } else {
-        getValineData()
-      }
-    }
-  }
-
-  newestCommentInit()
-  document.addEventListener('pjax:complete', newestCommentInit)
-})</script><script src="/js/mychange.js"></script><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zindex="-1" mobile="false" data-click="false"></script></div><script async>window.onload=function(){var a=document.createElement('script'),b=document.getElementsByTagName('script')[0];a.type='text/javascript',a.async=!0,a.src='/sw-register.js?v='+Date.now(),b.parentNode.insertBefore(a,b)};</script></body></html>
+}</script></div><script src="/js/mychange.js"></script><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zindex="-1" mobile="false" data-click="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script async>window.onload=function(){var a=document.createElement('script'),b=document.getElementsByTagName('script')[0];a.type='text/javascript',a.async=!0,a.src='/sw-register.js?v='+Date.now(),b.parentNode.insertBefore(a,b)};</script></body></html>

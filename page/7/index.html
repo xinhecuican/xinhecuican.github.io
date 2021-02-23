@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="zh-Hans" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Xinhecuican's Blog</title><meta name="author" content="星河璀璨"><meta name="copyright" content="星河璀璨"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta property="og:type" content="website">
+<!DOCTYPE html><html lang="zh-Hans" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Xinhecuican's Blog</title><meta name="author" content="星河璀璨"><meta name="copyright" content="星河璀璨"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta property="og:type" content="website">
 <meta property="og:title" content="Xinhecuican&#39;s Blog">
 <meta property="og:url" content="http://xinhecuican.github.io/page/7/index.html">
 <meta property="og:site_name" content="Xinhecuican&#39;s Blog">
@@ -6,7 +6,7 @@
 <meta property="og:image" content="http://xinhecuican.github.io/null">
 <meta property="article:author" content="星河璀璨">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://xinhecuican.github.io/null"><link rel="shortcut icon" href="/img/favicon.png"><!--link(rel="canonical" href=urlNoIndex())--><link rel="preconnect" href="//cdn.jsdelivr.net"><link rel="preconnect" href="//busuanzi.ibruce.info"><meta name="google-site-verification" content="zmX9zYZL0QVB6fFG_e98QsQogwE11Vdf5hOd4xMbgN4"><meta name="baidu-site-verification" content="EVZv9BO5R3"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css"><script>var GLOBAL_CONFIG = { 
+<meta name="twitter:image" content="http://xinhecuican.github.io/null"><link rel="shortcut icon" href="/img/favicon.png"><!--link(rel="canonical" href=urlNoIndex())--><link rel="preconnect" href="//cdn.jsdelivr.net"><link rel="preconnect" href="//busuanzi.ibruce.info"><meta name="google-site-verification" content="zmX9zYZL0QVB6fFG_e98QsQogwE11Vdf5hOd4xMbgN4"><meta name="baidu-site-verification" content="EVZv9BO5R3"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
   root: '/',
   algolia: undefined,
   localSearch: {"path":"search.xml","languages":{"hits_empty":"We didn't find any results for the search: ${query}"}},
@@ -31,7 +31,6 @@
     month: 'months ago'
   },
   copyright: undefined,
-  ClickShowText: undefined,
   lightbox: 'fancybox',
   Snackbar: {"chs_to_cht":"Traditional Chinese Activated Manually","cht_to_chs":"Simplified Chinese Activated Manually","day_to_night":"Dark Mode Activated Manually","night_to_day":"Light Mode Activated Manually","bgLight":"#49b1f5","bgDark":"#121212","position":"bottom-left"},
   source: {
@@ -47,56 +46,13 @@
   },
   isPhotoFigcaption: false,
   islazyload: false,
-  isanchor: false
-};
-
-var saveToLocal = {
-  set: function setWithExpiry(key, value, ttl) {
-    const now = new Date()
-    const expiryDay = ttl * 86400000
-    const item = {
-      value: value,
-      expiry: now.getTime() + expiryDay,
-    }
-    localStorage.setItem(key, JSON.stringify(item))
-  },
-
-  get: function getWithExpiry(key) {
-    const itemStr = localStorage.getItem(key)
-
-    if (!itemStr) {
-      return undefined
-    }
-    const item = JSON.parse(itemStr)
-    const now = new Date()
-
-    if (now.getTime() > item.expiry) {
-      localStorage.removeItem(key)
-      return undefined
-    }
-    return item.value
-  }
-}
-
-// https://stackoverflow.com/questions/16839698/jquery-getscript-alternative-in-native-javascript
-const getScript = url => new Promise((resolve, reject) => {
-  const script = document.createElement('script')
-  script.src = url
-  script.async = true
-  script.onerror = reject
-  script.onload = script.onreadystatechange = function() {
-    const loadState = this.readyState
-    if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
-    script.onload = script.onreadystatechange = null
-    resolve()
-  }
-  document.head.appendChild(script)
-})</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isanchor: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = { 
   isPost: false,
   isHome: true,
   isHighlightShrink: false,
   isToc: false,
-  postUpdate: '2021-02-22 20:04:17'
+  postUpdate: '2021-02-23 11:04:29'
 }</script><noscript><style type="text/css">
   #nav {
     opacity: 1
@@ -109,64 +65,106 @@ const getScript = url => new Promise((resolve, reject) => {
   #post-meta time {
     display: inline !important
   }
-</style></noscript><script>(function () {  window.activateDarkMode = function () {
-    document.documentElement.setAttribute('data-theme', 'dark')
-    if (document.querySelector('meta[name="theme-color"]') !== null) {
-      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
-    }
-  }
-  window.activateLightMode = function () {
-    document.documentElement.setAttribute('data-theme', 'light')
-   if (document.querySelector('meta[name="theme-color"]') !== null) {
-      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
-    }
-  }
-  const autoChangeMode = 'false'
-  const t = saveToLocal.get('theme')
-  if (autoChangeMode === '1') {
-    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
-    const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
-    const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
-    const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
-    if (t === undefined) {
-      if (isLightMode) activateLightMode()
-      else if (isDarkMode) activateDarkMode()
-      else if (isNotSpecified || hasNoSupport) {
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
         const now = new Date()
-        const hour = now.getHours()
-        const isNight = hour <= 6 || hour >= 18
-        isNight ? activateDarkMode() : activateLightMode()
-      }
-      window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
-        if (saveToLocal.get('theme') === undefined) {
-          e.matches ? activateDarkMode() : activateLightMode()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
         }
-      })
-    } else if (t === 'light') activateLightMode()
-    else activateDarkMode()
-  } else if (autoChangeMode === '2') {
-    const now = new Date()
-    const hour = now.getHours()
-    const isNight = hour <= 6 || hour >= 18
-    if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
-    else if (t === 'light') activateLightMode()
-    else activateDarkMode()
-  } else {
-    if (t === 'dark') activateDarkMode()
-    else if (t === 'light') activateLightMode()
-  }const asideStatus = saveToLocal.get('aside-status')
-if (asideStatus !== undefined) {
-   if (asideStatus === 'hide') {
-     document.documentElement.classList.add('hide-aside')
-   } else {
-     document.documentElement.classList.remove('hide-aside')
-   }
-}})()</script><link rel="stylesheet" href="/css/background.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Serif+SC:500&display=swap" media="print" onload="this.media='all'"><!-- hexo injector head_end start -->
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const fontSizeVal = saveToLocal.get('global-font-size')
+    if (fontSizeVal !== undefined) {
+      document.documentElement.style.setProperty('--global-font-size', fontSizeVal + 'px')
+    }
+    })(window)</script><link rel="stylesheet" href="/css/background.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Serif+SC:500&display=swap" media="print" onload="this.media='all'"><!-- hexo injector head_end start -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
 <!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Xinhecuican's Blog" type="application/atom+xml">
-</head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/null" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">168</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">Tags</div><div class="length-num">6</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">Categories</div><div class="length-num">22</div></a></div></div></div><hr><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div id="body-wrap"><header class="full_page" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Xinhecuican's Blog</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">Xinhecuican's Blog</h1><div id="site-subtitle"><span id="subtitle"></span></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="post_cover left_radius"><a href="/post/e058ffd8.html" title="java 异常处理">     <img class="post_bg" src="https://api.ghser.com/random/fengjing.php" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="java 异常处理"></a></div><div class="recent-post-info"><a class="article-title" href="/post/e058ffd8.html" title="java 异常处理">java 异常处理</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-04-25T05:40:00.000Z" title="Created 2020-04-25 13:40:00">2020-04-25</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/java/">java</a></span></div><div class="content"> 异常处理流程
+</head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/null" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">169</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">Tags</div><div class="length-num">6</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">Categories</div><div class="length-num">22</div></a></div></div></div><hr><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Xinhecuican's Blog</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">Xinhecuican's Blog</h1><div id="site-subtitle"><span id="subtitle"></span></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="post_cover left_radius"><a href="/post/61eaf19a.html" title="java 类的生命周期">     <img class="post_bg" src="https://api.ghser.com/random/fengjing.php" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="java 类的生命周期"></a></div><div class="recent-post-info"><a class="article-title" href="/post/61eaf19a.html" title="java 类的生命周期">java 类的生命周期</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-04-26T03:33:00.000Z" title="Created 2020-04-26 11:33:00">2020-04-26</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/java/">java</a></span></div><div class="content"> 类的加载连接和初始化
+
+
+加载： 查找并加载类的二进制数据
+
+
+链接： 包括验证，准备和解析类的二进制数据
+
+验证： 确保加载类的正确性。
+准备： 为类的静态变量分配内存，将其初始化为默认值（也就是0）
+解析： 将类的符号引用&lt;span class=“hint–top hint–error hint–medium hint–rounded hint–bounce” aria-label=&quot;符号引用就是在编译阶段，虚拟机并不知道所有引用类的地址（因为还没有加到内存中），就用一个符号表示地址。而直接引用就是真实的地址。
+
+
+
+ 类的加载&quot;&gt;[1]变成直接引用
+
+初始化： 把类的静态变量赋予正确的初始值。
+
+类的加载是指把类的.class文件中的二进制数据读入到内存中，把它存放在方法区中。然后再兑取川家一个java.lang.Class对象，用来封装类在方法区的数据结构。通俗的来讲就是把代码加载到内存中。
+类的加载是由虚拟机自带的加载器来完成的，但是我们也可以自己去定义。用java.lang.ClassLoader类的子类的实例。
+类加载器允许某个类将要被使 ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/post/e058ffd8.html" title="java 异常处理">     <img class="post_bg" src="http://api.btstu.cn/sjbz/?lx=dongman" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="java 异常处理"></a></div><div class="recent-post-info"><a class="article-title" href="/post/e058ffd8.html" title="java 异常处理">java 异常处理</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-04-25T05:40:00.000Z" title="Created 2020-04-25 13:40:00">2020-04-25</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/java/">java</a></span></div><div class="content"> 异常处理流程
 有两种办法抛出异常：
 
 通过try-catch抛出，例如
@@ -176,7 +174,7 @@ public void method A(int money)&#123;    try    &#123;        if(--money&lt;=0) 
 在方法声明处声明抛出
 
 public void method A(int money)throws SpecialException&#123;    if(--money&lt;=0)    &#123;        throw new SpecialException(&quot;Out of money&quot;);    &#125;&#125;
-每次抛出异常之后，都要找到catch块，如果在当前方法中没有找 ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/post/5951da65.html" title="接口">     <img class="post_bg" src="https://api.ixiaowai.cn/api/api.php" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="接口"></a></div><div class="recent-post-info"><a class="article-title" href="/post/5951da65.html" title="接口">接口</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-04-23T08:39:00.000Z" title="Created 2020-04-23 16:39:00">2020-04-23</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/java/">java</a></span></div><div class="content"> 接口的基本特征
+每次抛出异常之后，都要找到catch块，如果在当前方法中没有找 ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/post/5951da65.html" title="接口">     <img class="post_bg" src="http://api.btstu.cn/sjbz/?lx=dongman" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="接口"></a></div><div class="recent-post-info"><a class="article-title" href="/post/5951da65.html" title="接口">接口</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-04-23T08:39:00.000Z" title="Created 2020-04-23 16:39:00">2020-04-23</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/java/">java</a></span></div><div class="content"> 接口的基本特征
 在java中接口有两种意思
 
 第一种是概念性的接口，指的是封装的内容对外界提供的服务（一开始一听接口一定以为就是这个吧）
@@ -191,7 +189,7 @@ public interface A&#123;    int a;    protected int b;    int c = 3;//正确，�
 
 方法默认是public abstract类型。JDK8开始才可以有默认方法和静态方法之前只能有抽象方法。默认方法用default关键字声明，可以有自己的实现，接口实现类可以直接访问默认方法，也可以覆盖它。静态方法可以在接口内部访问或者实现接口的类通过使用接口名字来访问。
 
-public interface A&#123;    void method();//默认是public abstract    public abstra ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/post/17862176.html" title="java 继承和多态">     <img class="post_bg" src="https://api.ixiaowai.cn/gqapi/gqapi.php" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="java 继承和多态"></a></div><div class="recent-post-info"><a class="article-title" href="/post/17862176.html" title="java 继承和多态">java 继承和多态</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-04-22T09:00:00.000Z" title="Created 2020-04-22 17:00:00">2020-04-22</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/java/">java</a></span></div><div class="content"> 基础语法
+public interface A&#123;    void method();//默认是public abstract    public abstra ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/post/17862176.html" title="java 继承和多态">     <img class="post_bg" src="https://api.btstu.cn/sjbz/api.php?lx=dongman&amp;format=images" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="java 继承和多态"></a></div><div class="recent-post-info"><a class="article-title" href="/post/17862176.html" title="java 继承和多态">java 继承和多态</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-04-22T09:00:00.000Z" title="Created 2020-04-22 17:00:00">2020-04-22</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/java/">java</a></span></div><div class="content"> 基础语法
 利用extends来进行继承，例如：
 public class Sub extends Base&#123;    ...&#125;
 以上表明Sub类继承Base类，具体继承还要分两种情况。
@@ -208,7 +206,7 @@ java中有一个所有类的祖先叫object类，如果没有使用extends关键
 子类方法名称，函数签名（包括参数位置）和返回类型都要和父类方法一致
 在子类中，必须要先覆盖函数，才可以重写函数
 
-Base类中：public void method()&#123;    ...&#125;Sub类中：public int method()&#12 ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/post/4c720881.html" title="java switch foreach">     <img class="post_bg" src="https://api.ixiaowai.cn/gqapi/gqapi.php" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="java switch foreach"></a></div><div class="recent-post-info"><a class="article-title" href="/post/4c720881.html" title="java switch foreach">java switch foreach</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-04-22T08:49:00.000Z" title="Created 2020-04-22 16:49:00">2020-04-22</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/java/">java</a></span></div><div class="content"> switch
+Base类中：public void method()&#123;    ...&#125;Sub类中：public int method()&#12 ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/post/4c720881.html" title="java switch foreach">     <img class="post_bg" src="https://api.ghser.com/random/fengjing.php" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="java switch foreach"></a></div><div class="recent-post-info"><a class="article-title" href="/post/4c720881.html" title="java switch foreach">java switch foreach</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-04-22T08:49:00.000Z" title="Created 2020-04-22 16:49:00">2020-04-22</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/java/">java</a></span></div><div class="content"> switch
 switch的条件（switch括号中的内容）可以有一下几种。
 
 可以自动转换成int的类型（byte,short,int,char)
@@ -224,7 +222,7 @@ foreach是for的特殊简化版本。用来遍历数组或集合
 语法：
 for(变量类型 变量名 : 待输出的集合或数组)&#123;    ...&#125;
 其实这也只能说是稍稍简化，直接写for就可以了。
-</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/post/4b1879e3.html" title="java 操作符">     <img class="post_bg" src="https://api.ghser.com/random/fengjing.php" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="java 操作符"></a></div><div class="recent-post-info"><a class="article-title" href="/post/4b1879e3.html" title="java 操作符">java 操作符</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-04-21T10:23:00.000Z" title="Created 2020-04-21 18:23:00">2020-04-21</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/java/">java</a></span></div><div class="content"> 基础
+</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/post/4b1879e3.html" title="java 操作符">     <img class="post_bg" src="https://api.ghser.com/random/fengjing.php" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="java 操作符"></a></div><div class="recent-post-info"><a class="article-title" href="/post/4b1879e3.html" title="java 操作符">java 操作符</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-04-21T10:23:00.000Z" title="Created 2020-04-21 18:23:00">2020-04-21</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/java/">java</a></span></div><div class="content"> 基础
 c中没有 &gt;&gt;&gt;(逻辑右移）操作符，这是在java中才有的。c想要实现逻辑右移的功能要么进行更复杂的运算要么用unsigned。这篇博客中详细讲了算术右移和逻辑右移
 浮点数不支持移位运算。并且如果其中一个浮点数是double型，结果就是double型。
 
@@ -258,7 +256,7 @@ c中没有 &gt;&gt;&gt;(逻辑右移）操作符，这是在java中才有的。c
  ==操作符在对象中
 当==操作符在对象中时，两个引用变量必须是引用同一个对象，结果才为true。
 例：
-Integer int1 = new Integer(1);Integer int2 = new Integer(1);Integer int3 =  ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/post/f201f9fd.html" title="java 数据类型和变量">     <img class="post_bg" src="http://api.btstu.cn/sjbz/?lx=dongman" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="java 数据类型和变量"></a></div><div class="recent-post-info"><a class="article-title" href="/post/f201f9fd.html" title="java 数据类型和变量">java 数据类型和变量</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-04-20T03:40:00.000Z" title="Created 2020-04-20 11:40:00">2020-04-20</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/java/">java</a></span></div><div class="content"> 基础
+Integer int1 = new Integer(1);Integer int2 = new Integer(1);Integer int3 =  ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/post/f201f9fd.html" title="java 数据类型和变量">     <img class="post_bg" src="http://api.btstu.cn/sjbz/?lx=dongman" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="java 数据类型和变量"></a></div><div class="recent-post-info"><a class="article-title" href="/post/f201f9fd.html" title="java 数据类型和变量">java 数据类型和变量</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-04-20T03:40:00.000Z" title="Created 2020-04-20 11:40:00">2020-04-20</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/java/">java</a></span></div><div class="content"> 基础
 因为是记笔记，这里只说一下和c++不同的地方。
 定义及使用的方式和c++基本一致，就是有些名字改了而已。
 类变量自动初始化，boolean初始化为false，其他初始化为0。但是普通的变量还有自己初始化。这里和c++不同的是如果没有初始化会报错。当然，如果一直没有使用的话不初始化也不会报错。
@@ -266,7 +264,7 @@ boolean 就是c++中的bool型。但是有一点不同，这里只能赋true or 
 byte 一个字节，和char不同，这个是整型的。当然，java中也有char
 在java中，如果数学表达式都是整数，则返回值只能是int或long型。如果把返回值赋给byte型，要进行强制类型转换。强制类型转换例：byte a = (byte)(1+1);
 可以用下划线分隔，例如：int a = 10_000_000;实际上就是1000万，这样可以增加可读性。
-此外，可以在后面加尾标表示 ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/post/912b2566.html" title="java初探">     <img class="post_bg" src="http://api.btstu.cn/sjbz/?lx=dongman" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="java初探"></a></div><div class="recent-post-info"><a class="article-title" href="/post/912b2566.html" title="java初探">java初探</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-04-19T10:59:00.000Z" title="Created 2020-04-19 18:59:00">2020-04-19</time></span></div><div class="content"> 源文件结构
+此外，可以在后面加尾标表示 ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/post/912b2566.html" title="java初探">     <img class="post_bg" src="http://api.btstu.cn/sjbz/?lx=dongman" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="java初探"></a></div><div class="recent-post-info"><a class="article-title" href="/post/912b2566.html" title="java初探">java初探</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-04-19T10:59:00.000Z" title="Created 2020-04-19 18:59:00">2020-04-19</time></span></div><div class="content"> 源文件结构
 java源文件可能包含以下内容：
 
 包声明语句
@@ -282,7 +280,7 @@ package com.abc.dollapp;public calss appmain&#123;...&#125;;class doll&#123;...&
 在一个java文件中，只能有一个package语句。如果没有提供package，那么就表明在系统默认的包中。
  包的作用
 
-用于区分名字相同的类。例如定义了两中车类名都叫car，一种实际上是奔驰，一种是宝马。把他们丢在不同的包中就可以区分他们，相当于使用了不同的命名空间&lt;span class=“hint–top hint–error hint–medium hint–rounded hint–bounce” aria-label=&quot;命名空间实际上就是在函数前的一些附加消息。因为可能同时引 ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/post/5f9e4eff.html" title=" UML简介">     <img class="post_bg" src="https://api.ixiaowai.cn/gqapi/gqapi.php" onerror="this.onerror=null;this.src='/img/404.jpg'" alt=" UML简介"></a></div><div class="recent-post-info"><a class="article-title" href="/post/5f9e4eff.html" title=" UML简介"> UML简介</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-04-18T12:42:00.000Z" title="Created 2020-04-18 20:42:00">2020-04-18</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/java/">java</a></span></div><div class="content">简单来说UML就是结构图，表示对象与类，类与类之间的联系。
+用于区分名字相同的类。例如定义了两中车类名都叫car，一种实际上是奔驰，一种是宝马。把他们丢在不同的包中就可以区分他们，相当于使用了不同的命名空间&lt;span class=“hint–top hint–error hint–medium hint–rounded hint–bounce” aria-label=&quot;命名空间实际上就是在函数前的一些附加消息。因为可能同时引 ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/post/5f9e4eff.html" title=" UML简介">     <img class="post_bg" src="https://api.ixiaowai.cn/api/api.php" onerror="this.onerror=null;this.src='/img/404.jpg'" alt=" UML简介"></a></div><div class="recent-post-info"><a class="article-title" href="/post/5f9e4eff.html" title=" UML简介"> UML简介</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-04-18T12:42:00.000Z" title="Created 2020-04-18 20:42:00">2020-04-18</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/java/">java</a></span></div><div class="content">简单来说UML就是结构图，表示对象与类，类与类之间的联系。
 UML主要包含以下框图：
 
 用例图 从用户角度描述系统功能，简单来说就是用户让系统干什么（也可以说是系统的输入）
@@ -311,7 +309,7 @@ UML主要包含以下框图：
 时序图有两个要素，
 垂直上表示时间，水平上表示发送消息的过程。（用函数名和箭头表示）
 
-协作图就 ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/post/7d1c86da.html" title="储存设备与缓存">     <img class="post_bg" src="http://api.btstu.cn/sjbz/?lx=dongman" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="储存设备与缓存"></a></div><div class="recent-post-info"><a class="article-title" href="/post/7d1c86da.html" title="储存设备与缓存">储存设备与缓存</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-04-16T04:57:00.000Z" title="Created 2020-04-16 12:57:00">2020-04-16</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/">计算机系统基础</a></span></div><div class="content"> 机械硬盘
+协作图就 ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/post/7d1c86da.html" title="储存设备与缓存">     <img class="post_bg" src="https://api.btstu.cn/sjbz/api.php?lx=dongman&amp;format=images" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="储存设备与缓存"></a></div><div class="recent-post-info"><a class="article-title" href="/post/7d1c86da.html" title="储存设备与缓存">储存设备与缓存</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-04-16T04:57:00.000Z" title="Created 2020-04-16 12:57:00">2020-04-16</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/">计算机系统基础</a></span></div><div class="content"> 机械硬盘
 
 结构： 由若干个盘片组成，每个盘片有2两面，每一面上有若干个磁道（柱面就是指和中心轴平行的圆柱面，有多个每个盘上都有两个磁道在上面） ，每个磁道上又划分成若干个扇区，扇区是数据访问的最小单位。中间的轴在不停转动。每个扇区都有一个编号。
 显然如果扇区划分时是从中心发出多根射线的话是不好的。因为内圈的扇区划分小，外面的扇区划分大，因此每个扇区读写数据数目可能会有较大的差距。但是很可能只需要利用其中很小一部分，这样就造成了浪费。所以磁道与磁道之间扇区数目是不同的，尽量使数据分布均匀。
@@ -319,76 +317,21 @@ UML主要包含以下框图：
 大致过程：先移动到对应扇区（寻道），然后等待读写头划过我们要读取的扇区。之后在读取这个扇区。要注意即使只需要读取一个字节也要把这个扇区全部读取完。如果是写的话，先把扇区中数据读取出来，然后再在这些数据中进行更改，最后再把这些数据写入到扇区中。
 一般寻道在2-9ms，旋转也是10ms左右，而读取只需要0.02ms，所以说大头都在寻找过程中。并且要比dram慢2500倍，比sram慢40000倍。
 
-旋转时间如果没有特殊规定一般都是 ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/post/31a6b40.html" title="进程和作业控制">     <img class="post_bg" src="https://api.ghser.com/random/fengjing.php" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="进程和作业控制"></a></div><div class="recent-post-info"><a class="article-title" href="/post/31a6b40.html" title="进程和作业控制">进程和作业控制</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-04-14T13:14:00.000Z" title="Created 2020-04-14 21:14:00">2020-04-14</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox article-meta__icon"></i><a class="article-meta__categories" href="/categories/Linux/">Linux</a></span></div><div class="content">进程就是加载到内存中准备执行的程序。当进程创建的时候，内核赋予了唯一的标识号，这个标识号叫做进程ID或PID。
-进程同一时间内可达数百个之多，为了管理这么多的进程。系统提供了一个调度器来维护。调度器维护一个所有进程的列表，每次选择一个进程（实际上可以一次选择多个进程），然后执行一个短暂的时间（时间片）。
-典型的时间片是10毫秒。为了为了下一个时间片还可以顺利的执行，系统必须要保存下一条指令的位置，环境的副本等。
- 进程分叉到死亡
-当进程需要使用内核的服务时，会使用系统调用发送请求。在编写程序时，系统调用的使用方法取决于语言。例如，c语言使用标准库中的函数进行调用。
-下面列举一些常见的系统调用函数
-
-
-
-系统调用
-作用
-
-
-
-
-进程控制
-
-
-
-fork
-创建当前进程的一个副本
-
-
-wait
-等待另一个程序结束后执行（强制暂停当前进程）
-
-
-exec
-在当前进程中执行一个新进程
-
-
-exit
-中止当前进程
-
-
-kill
-杀死子进程
-
-
-文件I/O
-
-
-
-open
-打开一个用于读取或写入的文件
-
-
-read
-从文件中读取数据
-
-
-write
-向文件中写入了数据
-
-
-close
-关闭文件
-
-
- ...</div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/6/"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/8/"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside_content" id="aside_content"><div class="sticky_layout"><div class="card-widget" id="card-newest-comments"><div class="card-content"><div class="item-headline"><i class="fas fa-bolt"></i><span>Newest Comments</span></div><div class="aside-list"><span>loading...</span></div></div></div><div class="card-widget card-categories"><div class="card-content"><div class="item-headline"><i class="fas fa-folder-open"></i><span>Categories</span></div><ul class="card-category-list" id="aside-cat-list">
+旋转时间如果没有特殊规定一般都是 ...</div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/6/"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/8/"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-newest-comments"><div class="item-headline"><i class="fas fa-bolt"></i><span>Newest Comments</span></div><div class="aside-list"><span>loading...</span></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>Categories</span>
+            <a class="card-more-btn" href="/categories/" title="More">
+    <i class="fas fa-angle-right"></i></a>
+            </div>
+            <ul class="card-category-list" id="aside-cat-list">
             <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Linux/"><span class="card-category-list-name">Linux</span><span class="card-category-list-count">13</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/MySQL/"><span class="card-category-list-name">MySQL</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Python/"><span class="card-category-list-name">Python</span><span class="card-category-list-count">3</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/c/"><span class="card-category-list-name">c++</span><span class="card-category-list-count">3</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/java/"><span class="card-category-list-name">java</span><span class="card-category-list-count">23</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/next/"><span class="card-category-list-name">next</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/stl/"><span class="card-category-list-name">stl</span><span class="card-category-list-count">8</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/windows/"><span class="card-category-list-name">windows</span><span class="card-category-list-count">1</span></a></li>
-            <li class="card-category-list-item more is-center"><a class="card-category-list-link-more" href="/categories/">
-                <span>More</span><i class="fas fa-angle-right"></i></a></li>
-            </ul></div></div><div class="card-widget card-tags"><div class="card-content"><div class="item-headline"><i class="fas fa-tags"></i><span>Tags</span></div><div class="card-tag-cloud"><a href="/tags/AT-T/" style="font-size: 1.1em; color: #999">AT&T</a> <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 1.5em; color: #99a9bf">动态规划</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" style="font-size: 1.5em; color: #99a9bf">字符串</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E5%B8%B8%E9%87%8F/" style="font-size: 1.1em; color: #999">字符常量</a> <a href="/tags/%E5%BF%AB%E6%8E%92/" style="font-size: 1.1em; color: #999">快排</a> <a href="/tags/%E6%8E%92%E5%BA%8F/" style="font-size: 1.1em; color: #999">排序</a></div></div></div><div class="card-widget card-archives"><div class="card-content"><div class="item-headline"><i class="fas fa-archive"></i><span>Archives</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/02/"><span class="card-archive-list-date">February 2021</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/01/"><span class="card-archive-list-date">January 2021</span><span class="card-archive-list-count">6</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/12/"><span class="card-archive-list-date">December 2020</span><span class="card-archive-list-count">6</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/11/"><span class="card-archive-list-date">November 2020</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/10/"><span class="card-archive-list-date">October 2020</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/08/"><span class="card-archive-list-date">August 2020</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/07/"><span class="card-archive-list-date">July 2020</span><span class="card-archive-list-count">13</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/06/"><span class="card-archive-list-date">June 2020</span><span class="card-archive-list-count">7</span></a></li><li class="card-archive-list-item more is-center"><a class="card-archive-list-link-more" href="/archives/">
-              <span>More</span><i class="fas fa-angle-right"></i></a></li></ul></div></div><div class="card-widget card-webinfo"><div class="card-content"><div class="item-headline"><i class="fas fa-chart-line"></i><span>Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">Article :</div><div class="item-count">168</div></div><div class="webinfo-item"><div class="item-name">Total Count :</div><div class="item-count">206.9k</div></div><div class="webinfo-item"><div class="item-name">UV :</div><div class="item-count" id="busuanzi_value_site_uv"></div></div><div class="webinfo-item"><div class="item-name">PV :</div><div class="item-count" id="busuanzi_value_site_pv"></div></div><div class="webinfo-item"><div class="item-name">Last Push :</div><div class="item-count" id="last-push-date" data-lastpushdate="2021-02-22T12:04:12.822Z"></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By 星河璀璨</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="external nofollow noopener noreferrer" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="translateLink" type="button" title="Switch Between Traditional Chinese And Simplified Chinese">繁</button><button id="darkmode" type="button" title="Switch Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog"></i></button><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">Local search</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"></div></div></div><hr><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script>function panguFn () {
-  if (typeof pangu === 'object') pangu.spacingElementById('content-inner')
+            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>Tags</span></div><div class="card-tag-cloud"><a href="/tags/AT-T/" style="font-size: 1.1em; color: #999">AT&T</a> <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 1.5em; color: #99a9bf">动态规划</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" style="font-size: 1.5em; color: #99a9bf">字符串</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E5%B8%B8%E9%87%8F/" style="font-size: 1.1em; color: #999">字符常量</a> <a href="/tags/%E5%BF%AB%E6%8E%92/" style="font-size: 1.1em; color: #999">快排</a> <a href="/tags/%E6%8E%92%E5%BA%8F/" style="font-size: 1.1em; color: #999">排序</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>Archives</span><a class="card-more-btn" href="/archives/" title="More">
+    <i class="fas fa-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/02/"><span class="card-archive-list-date">February 2021</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/01/"><span class="card-archive-list-date">January 2021</span><span class="card-archive-list-count">6</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/12/"><span class="card-archive-list-date">December 2020</span><span class="card-archive-list-count">6</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/11/"><span class="card-archive-list-date">November 2020</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/10/"><span class="card-archive-list-date">October 2020</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/08/"><span class="card-archive-list-date">August 2020</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/07/"><span class="card-archive-list-date">July 2020</span><span class="card-archive-list-count">13</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/06/"><span class="card-archive-list-date">June 2020</span><span class="card-archive-list-count">7</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">Article :</div><div class="item-count">169</div></div><div class="webinfo-item"><div class="item-name">Total Count :</div><div class="item-count">207.5k</div></div><div class="webinfo-item"><div class="item-name">UV :</div><div class="item-count" id="busuanzi_value_site_uv"></div></div><div class="webinfo-item"><div class="item-name">PV :</div><div class="item-count" id="busuanzi_value_site_pv"></div></div><div class="webinfo-item"><div class="item-name">Last Push :</div><div class="item-count" id="last-push-date" data-lastpushdate="2021-02-23T03:04:24.693Z"></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By 星河璀璨</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="external nofollow noopener noreferrer" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="font-plus" type="button" title="Increase font size"><i class="fas fa-plus"></i></button><button id="font-minus" type="button" title="Decrease font size"><i class="fas fa-minus"></i></button><button id="translateLink" type="button" title="Toggle Between Traditional Chinese And Simplified Chinese">繁</button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button id="chat_btn" type="button" title="rightside.chat_btn"><i class="fas fa-sms"></i></button><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">Local search</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"></div></div></div><hr><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
   else {
     getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
       .then(() => {
-        pangu.spacingElementById('content-inner')
+        pangu.autoSpacingPage()
       })
   }
 }
@@ -423,97 +366,4 @@ if (true) {
   }
 } else {
   subtitleType()
-}</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="https://cdn.jsdelivr.net/npm/blueimp-md5@2.17.0/js/md5.min.js"></script><script>window.addEventListener('load', () => {
-  const changeContent = (content) => {
-    if (content === '') return content
-
-    content = content.replace(/<[^>]+>/g,"") // remove html tag
-    content = content.replace(/(http(s?):)([/|.|\w|\s|-])*\.(?:jpg|jpeg|gif|png|webp)/g, '') // remove image link
-    content = content.replace(/(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi, '') // remove url
-
-    if (content.length > 150) {
-      content = content.substring(0,150) + '...'
-    }
-    return content
-  }
-
-  const getIcon = (icon, mail) => {
-    if (icon) return icon 
-    let defaultIcon = ''
-    let iconUrl = `https://gravatar.loli.net/avatar/${md5(mail.toLowerCase()) + defaultIcon}`
-    return iconUrl
-  }
-
-  const generateHtml = array => {
-    let result = ''
-
-    for (let i = 0; i < array.length; i++) {
-      result += '<div class=\'aside-list-item\'>'
-
-      if (true) {
-        result += `<a href='${array[i].url}' class="thumbnail"><img src='${getIcon(array[i].avatar, array[i].mail)}' alt='${array[i].nick}'></a>`
-      }
-
-      result += `<div class='content'>
-      <a class='comment' href='${array[i].url}'>${array[i].content}</a>
-      <div class='name'><span>${array[i].nick}</span><time> / ${btf.diffDate(array[i].date, true)}</time></div>
-      </div></div>`
-    }
-
-    let $dom = document.querySelector('#card-newest-comments .aside-list')
-    $dom.innerHTML= result
-    window.pjax && window.pjax.refresh($dom)
-  }
-
-  const getValineData = () => {
-      let serverURL = ''
-      if (false) {
-        serverURL = ''
-      } else {
-        serverURL = 'https://ppBSSMr3.api.lncldglobal.com'
-      }
-
-    var settings = {
-      "method": "GET",
-      "headers": {
-        "X-LC-Id": 'ppBSSMr3xMsbRBArQedKeS5B-gzGzoHsz',
-        "X-LC-Key": 'cdaxbHoq61wB6rrC3hTn2Ubo',
-        "Content-Type": "application/json"
-      },
-    }
-
-    fetch(`${serverURL}/1.1/classes/Comment?limit=6&order=-createdAt`,settings)
-      .then(response => response.json())
-      .then(data => {
-        const valineArray = data.results.map(function (e) {
-          return {
-            'avatar': e.QQAvatar,
-            'content': changeContent(e.comment),
-            'mail': e.mail,
-            'nick': e.nick,
-            'url': e.url,
-            'date': e.createdAt,
-          }
-        })
-        saveToLocal.set('leancloud-newest-comments', JSON.stringify(valineArray), 10/(60*24))
-        generateHtml(valineArray)
-      }).catch(e => { 
-        const $dom = document.querySelector('#card-newest-comments .aside-list')
-        $dom.innerHTML= "Unable to get the data, please make sure the settings are correct."
-      }) 
-  }
-
-  const newestCommentInit = () => {
-    if (document.querySelector('#card-newest-comments .aside-list')) {
-      const data = saveToLocal.get('leancloud-newest-comments')
-      if (data) {
-        generateHtml(JSON.parse(data))
-      } else {
-        getValineData()
-      }
-    }
-  }
-
-  newestCommentInit()
-  document.addEventListener('pjax:complete', newestCommentInit)
-})</script><script src="/js/mychange.js"></script><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zindex="-1" mobile="false" data-click="false"></script></div><script async>window.onload=function(){var a=document.createElement('script'),b=document.getElementsByTagName('script')[0];a.type='text/javascript',a.async=!0,a.src='/sw-register.js?v='+Date.now(),b.parentNode.insertBefore(a,b)};</script></body></html>
+}</script></div><script src="/js/mychange.js"></script><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zindex="-1" mobile="false" data-click="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script async>window.onload=function(){var a=document.createElement('script'),b=document.getElementsByTagName('script')[0];a.type='text/javascript',a.async=!0,a.src='/sw-register.js?v='+Date.now(),b.parentNode.insertBefore(a,b)};</script></body></html>

@@ -1,12 +1,21 @@
 document.addEventListener('DOMContentLoaded', function () {
-  const blogNameWidth = document.getElementById('site-name').offsetWidth
-  const menusWidth = document.getElementById('menus').offsetWidth
+  const $blogName = document.getElementById('site-name')
+  let blogNameWidth = $blogName && $blogName.offsetWidth
+  const $menusEle = document.querySelector('#menus .menus_items')
+  let menusWidth = $menusEle && $menusEle.offsetWidth
+  const $searchEle = document.querySelector('#search-button')
+  let searchWidth = $searchEle && $searchEle.offsetWidth
 
-  const adjustMenu = () => {
+  const adjustMenu = (change = false) => {
+    if (change) {
+      blogNameWidth = $blogName && $blogName.offsetWidth
+      menusWidth = $menusEle && $menusEle.offsetWidth
+      searchWidth = $searchEle && $searchEle.offsetWidth
+    }
     const $nav = document.getElementById('nav')
     let t
     if (window.innerWidth < 768) t = true
-    else t = blogNameWidth + menusWidth > $nav.offsetWidth - 100
+    else t = blogNameWidth + menusWidth + searchWidth > $nav.offsetWidth - 120
 
     if (t) {
       $nav.classList.add('hide-menu')
@@ -36,7 +45,8 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function closeMobileSidebar () {
-      $body.style.cssText = "overflow: ''; padding-right: ''"
+      $body.style.overflow = ''
+      $body.style.paddingRight = ''
       btf.fadeOut($menuMask, 0.5)
       $mobileSidebarMenus.classList.remove('open')
     }
@@ -60,7 +70,8 @@ document.addEventListener('DOMContentLoaded', function () {
  * 首頁top_img底下的箭頭
  */
   const scrollDownInIndex = () => {
-    document.getElementById('scroll-down').addEventListener('click', function () {
+    const $scrollDownEle = document.getElementById('scroll-down')
+    $scrollDownEle && $scrollDownEle.addEventListener('click', function () {
       btf.scrollToDest(document.getElementById('content-inner').offsetTop, 300)
     })
   }
@@ -210,73 +221,81 @@ document.addEventListener('DOMContentLoaded', function () {
  */
 
   let detectJgJsLoad = false
-  const runJustifiedGallery = function () {
-    let $justifiedGallery = document.querySelectorAll('#article-container .justified-gallery')
-    if ($justifiedGallery.length) {
-      $justifiedGallery = $($justifiedGallery)
-      const $imgList = $justifiedGallery.find('img')
-      $imgList.unwrap()
-      if ($imgList.length) {
-        $imgList.each(function (i, o) {
-          if ($(o).attr('data-lazy-src')) $(o).attr('src', $(o).attr('data-lazy-src'))
-          $(o).wrap('<div></div>')
-        })
-      }
+  const runJustifiedGallery = function (ele) {
+    const $justifiedGallery = $(ele)
+    const $imgList = $justifiedGallery.find('img')
+    $imgList.unwrap()
+    if ($imgList.length) {
+      $imgList.each(function (i, o) {
+        if ($(o).attr('data-lazy-src')) $(o).attr('src', $(o).attr('data-lazy-src'))
+        $(o).wrap('<div></div>')
+      })
+    }
 
-      if (detectJgJsLoad) btf.initJustifiedGallery($justifiedGallery)
-      else {
-        $('head').append(`<link rel="stylesheet" type="text/css" href="${GLOBAL_CONFIG.source.justifiedGallery.css}">`)
-        $.getScript(`${GLOBAL_CONFIG.source.justifiedGallery.js}`, function () {
-          btf.initJustifiedGallery($justifiedGallery)
-        })
-        detectJgJsLoad = true
-      }
+    if (detectJgJsLoad) btf.initJustifiedGallery($justifiedGallery)
+    else {
+      $('head').append(`<link rel="stylesheet" type="text/css" href="${GLOBAL_CONFIG.source.justifiedGallery.css}">`)
+      $.getScript(`${GLOBAL_CONFIG.source.justifiedGallery.js}`, function () {
+        btf.initJustifiedGallery($justifiedGallery)
+      })
+      detectJgJsLoad = true
     }
   }
 
   /**
  * fancybox和 mediumZoom
  */
-  const addLightBox = function () {
-    if (GLOBAL_CONFIG.lightbox === 'fancybox') {
-      const images = document.querySelectorAll('#article-container :not(a):not(.gallery-group) > img, #article-container > img')
-      if (images.length) {
-        btf.isJqueryLoad(() => {
-          const runFancybox = (ele) => {
-            ele.each(function (i, o) {
-              const $this = $(o)
-              const lazyloadSrc = $this.attr('data-lazy-src') || $this.attr('src')
-              const dataCaption = $this.attr('alt') || ''
-              $this.wrap(`<a href="${lazyloadSrc}" data-fancybox="group" data-caption="${dataCaption}" class="fancybox"></a>`)
-            })
+  const addFancybox = function (ele) {
+    const runFancybox = (ele) => {
+      ele.each(function (i, o) {
+        const $this = $(o)
+        const lazyloadSrc = $this.attr('data-lazy-src') || $this.attr('src')
+        const dataCaption = $this.attr('alt') || ''
+        $this.wrap(`<a href="${lazyloadSrc}" data-fancybox="group" data-caption="${dataCaption}" class="fancybox"></a>`)
+      })
 
-            $().fancybox({
-              selector: '[data-fancybox]',
-              loop: true,
-              transitionEffect: 'slide',
-              protect: true,
-              buttons: ['slideShow', 'fullScreen', 'thumbs', 'close'],
-              hash: false
-            })
-          }
+      $().fancybox({
+        selector: '[data-fancybox]',
+        loop: true,
+        transitionEffect: 'slide',
+        protect: true,
+        buttons: ['slideShow', 'fullScreen', 'thumbs', 'close'],
+        hash: false
+      })
+    }
 
-          if (typeof $.fancybox === 'undefined') {
-            $('head').append(`<link rel="stylesheet" type="text/css" href="${GLOBAL_CONFIG.source.fancybox.css}">`)
-            $.getScript(`${GLOBAL_CONFIG.source.fancybox.js}`, function () {
-              runFancybox($(images))
-            })
-          } else {
-            runFancybox($(images))
-          }
-        })
-      }
+    if (typeof $.fancybox === 'undefined') {
+      $('head').append(`<link rel="stylesheet" type="text/css" href="${GLOBAL_CONFIG.source.fancybox.css}">`)
+      $.getScript(`${GLOBAL_CONFIG.source.fancybox.js}`, function () {
+        runFancybox($(ele))
+      })
     } else {
-      const zoom = mediumZoom(document.querySelectorAll('#article-container :not(a)>img'))
-      zoom.on('open', function (event) {
-        const photoBg = $(document.documentElement).attr('data-theme') === 'dark' ? '#121212' : '#fff'
-        zoom.update({
-          background: photoBg
-        })
+      runFancybox($(ele))
+    }
+  }
+
+  const addMediumZoom = () => {
+    const zoom = mediumZoom(document.querySelectorAll('#article-container :not(a)>img'))
+    zoom.on('open', e => {
+      const photoBg = document.documentElement.getAttribute('data-theme') === 'dark' ? '#121212' : '#fff'
+      zoom.update({
+        background: photoBg
+      })
+    })
+  }
+
+  const jqLoadAndRun = () => {
+    const $fancyboxEle = GLOBAL_CONFIG.lightbox === 'fancybox'
+      ? document.querySelectorAll('#article-container :not(a):not(.gallery-group) > img, #article-container > img')
+      : []
+    const fbLengthNoZero = $fancyboxEle.length > 0
+    const $jgEle = document.querySelectorAll('#article-container .justified-gallery')
+    const jgLengthNoZero = $jgEle.length > 0
+
+    if (jgLengthNoZero || fbLengthNoZero) {
+      btf.isJqueryLoad(() => {
+        jgLengthNoZero && runJustifiedGallery($jgEle)
+        fbLengthNoZero && addFancybox($fancyboxEle)
       })
     }
   }
@@ -285,10 +304,18 @@ document.addEventListener('DOMContentLoaded', function () {
  * 滾動處理
  */
   const scrollFn = function () {
+    const $rightside = document.getElementById('rightside')
+    const innerHeight = window.innerHeight + 56
+
+    // 當滾動條小于 56 的時候
+    if (document.body.scrollHeight <= innerHeight) {
+      $rightside.style.cssText = 'opacity: 1; transform: translateX(-38px)'
+      return
+    }
+
     let initTop = 0
     let isChatShow = true
-    const $rightside = document.getElementById('rightside')
-    const $nav = document.getElementById('nav')
+    const $header = document.getElementById('page-header')
     const isChatBtnHide = typeof chatBtnHide === 'function'
     const isChatBtnShow = typeof chatBtnShow === 'function'
     window.addEventListener('scroll', btf.throttle(function (e) {
@@ -296,27 +323,31 @@ document.addEventListener('DOMContentLoaded', function () {
       const isDown = scrollDirection(currentTop)
       if (currentTop > 56) {
         if (isDown) {
-          if ($nav.classList.contains('visible')) $nav.classList.remove('visible')
+          if ($header.classList.contains('nav-visible')) $header.classList.remove('nav-visible')
           if (isChatBtnShow && isChatShow === true) {
             chatBtnHide()
             isChatShow = false
           }
         } else {
-          if (!$nav.classList.contains('visible')) $nav.classList.add('visible')
+          if (!$header.classList.contains('nav-visible')) $header.classList.add('nav-visible')
           if (isChatBtnHide && isChatShow === false) {
             chatBtnShow()
             isChatShow = true
           }
         }
-        $nav.classList.add('fixed')
+        $header.classList.add('nav-fixed')
         if (window.getComputedStyle($rightside).getPropertyValue('opacity') === '0') {
           $rightside.style.cssText = 'opacity: 1; transform: translateX(-38px)'
         }
       } else {
         if (currentTop === 0) {
-          $nav.classList.remove('fixed', 'visible')
+          $header.classList.remove('nav-fixed', 'nav-visible')
         }
         $rightside.style.cssText = "opacity: ''; transform: ''"
+      }
+
+      if (document.body.scrollHeight <= innerHeight) {
+        $rightside.style.cssText = 'opacity: 1; transform: translateX(-38px)'
       }
     }, 200))
 
@@ -351,9 +382,7 @@ document.addEventListener('DOMContentLoaded', function () {
       const contentMath = (docHeight > winHeight) ? (docHeight - winHeight) : (document.documentElement.scrollHeight - winHeight)
       const scrollPercent = (currentTop - headerHeight) / (contentMath)
       const scrollPercentRounded = Math.round(scrollPercent * 100)
-      const percentage = (scrollPercentRounded > 100) ? 100
-        : (scrollPercentRounded <= 0) ? 0
-          : scrollPercentRounded
+      const percentage = (scrollPercentRounded > 100) ? 100 : (scrollPercentRounded <= 0) ? 0 : scrollPercentRounded
       $cardToc.setAttribute('progress-percentage', percentage)
     }
 
@@ -361,7 +390,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const isAnchor = GLOBAL_CONFIG.isanchor
     const updateAnchor = function (anchor) {
       if (window.history.replaceState && anchor !== window.location.hash) {
-        window.history.replaceState(undefined, undefined, anchor)
+        if (!anchor) anchor = location.pathname
+        window.history.replaceState({}, '', anchor)
       }
     }
 
@@ -389,7 +419,7 @@ document.addEventListener('DOMContentLoaded', function () {
       const $target = e.target.classList.contains('toc-link')
         ? e.target
         : e.target.parentElement
-      btf.scrollToDest(document.querySelector(decodeURI($target.getAttribute('href'))).offsetTop, 300)
+      btf.scrollToDest(btf.getEleTop(document.getElementById(decodeURI($target.getAttribute('href')).replace('#', ''))), 300)
       if (window.innerWidth < 900) {
         mobileToc.close()
       }
@@ -410,7 +440,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const list = $article.querySelectorAll('h1,h2,h3,h4,h5,h6')
     let detectItem = ''
     const findHeadPosition = function (top) {
-      if ($tocLink.length === 0) {
+      if ($tocLink.length === 0 || top === 0) {
         return false
       }
 
@@ -418,13 +448,15 @@ document.addEventListener('DOMContentLoaded', function () {
       let currentIndex = ''
 
       list.forEach(function (ele, index) {
-        if (top > ele.offsetTop - 70) {
+        if (top > btf.getEleTop(ele) - 80) {
           currentId = '#' + encodeURI(ele.getAttribute('id'))
           currentIndex = index
         }
       })
 
       if (detectItem === currentIndex) return
+
+      if (isAnchor) updateAnchor(currentId)
 
       if (currentId === '') {
         $cardToc.querySelectorAll('.active').forEach(i => { i.classList.remove('active') })
@@ -437,9 +469,8 @@ document.addEventListener('DOMContentLoaded', function () {
       $cardToc.querySelectorAll('.active').forEach(item => { item.classList.remove('active') })
       const currentActive = $tocLink[currentIndex]
       currentActive.classList.add('active')
-      if (isAnchor) updateAnchor(currentId)
 
-      setTimeout(function () {
+      setTimeout(() => {
         autoScrollToc(currentActive)
       }, 0)
 
@@ -456,7 +487,20 @@ document.addEventListener('DOMContentLoaded', function () {
  */
   const rightSideFn = {
     switchReadMode: () => { // read-mode
-      document.body.classList.toggle('read-mode')
+      const $body = document.body
+      $body.classList.add('read-mode')
+      const newEle = document.createElement('button')
+      newEle.type = 'button'
+      newEle.className = 'fas fa-sign-out-alt exit-readmode'
+      $body.appendChild(newEle)
+
+      function clickFn () {
+        $body.classList.remove('read-mode')
+        newEle.remove()
+        newEle.removeEventListener('click', clickFn)
+      }
+
+      newEle.addEventListener('click', clickFn)
     },
     switchDarkMode: () => { // Switch Between Light And Dark Mode
       const nowMode = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light'
@@ -486,6 +530,25 @@ document.addEventListener('DOMContentLoaded', function () {
         ? saveToLocal.set('aside-status', 'show', 2)
         : saveToLocal.set('aside-status', 'hide', 2)
       $htmlDom.toggle('hide-aside')
+    },
+
+    adjustFontSize: (plus) => {
+      const fontSizeVal = parseInt(window.getComputedStyle(document.documentElement).getPropertyValue('--global-font-size'))
+      let newValue = ''
+      if (plus) {
+        if (fontSizeVal >= 20) return
+        newValue = fontSizeVal + 1
+        document.documentElement.style.setProperty('--global-font-size', newValue + 'px')
+        !document.getElementById('nav').classList.contains('hide-menu') && adjustMenu(true)
+      } else {
+        if (fontSizeVal <= 10) return
+        newValue = fontSizeVal - 1
+        document.documentElement.style.setProperty('--global-font-size', newValue + 'px')
+        document.getElementById('nav').classList.contains('hide-menu') && adjustMenu(true)
+      }
+
+      saveToLocal.set('global-font-size', newValue, 2)
+      // document.getElementById('font-text').innerText = newValue
     }
   }
 
@@ -506,6 +569,12 @@ document.addEventListener('DOMContentLoaded', function () {
         break
       case 'hide-aside-btn':
         rightSideFn.hideAsideBtn()
+        break
+      case 'font-plus':
+        rightSideFn.adjustFontSize(true)
+        break
+      case 'font-minus':
+        rightSideFn.adjustFontSize()
         break
       default:
         break
@@ -568,7 +637,7 @@ document.addEventListener('DOMContentLoaded', function () {
  */
   const addRuntime = () => {
     const $runtimeCount = document.getElementById('runtimeshow')
-    if ($runtimeCount !== null) {
+    if ($runtimeCount) {
       const publishDate = $runtimeCount.getAttribute('data-publishDate')
       $runtimeCount.innerText = btf.diffDate(publishDate) + ' ' + GLOBAL_CONFIG.runtime
     }
@@ -579,7 +648,7 @@ document.addEventListener('DOMContentLoaded', function () {
  */
   const addLastPushDate = () => {
     const $lastPushDateItem = document.getElementById('last-push-date')
-    if ($lastPushDateItem !== null) {
+    if ($lastPushDateItem) {
       const lastPushDate = $lastPushDateItem.getAttribute('data-lastPushDate')
       $lastPushDateItem.innerText = btf.diffDate(lastPushDate, true)
     }
@@ -627,7 +696,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
           if (!$tabItem.classList.contains('active')) {
             const $tabContent = $tabItem.parentNode.nextElementSibling
-            btf.siblings($tabItem, 'active')[0].classList.remove('active')
+            const $siblings = btf.siblings($tabItem, '.active')[0]
+            $siblings && $siblings.classList.remove('active')
             $tabItem.classList.add('active')
             const tabId = $this.getAttribute('data-href').replace('#', '')
             const childList = [...$tabContent.children]
@@ -646,7 +716,7 @@ document.addEventListener('DOMContentLoaded', function () {
     backToTop: () => {
       document.querySelectorAll('#article-container .tabs .tab-to-top').forEach(function (item) {
         item.addEventListener('click', function () {
-          btf.scrollToDest(btf.getParents(this, '.tabs').offsetTop, 300)
+          btf.scrollToDest(btf.getEleTop(btf.getParents(this, '.tabs')), 300)
         })
       })
     }
@@ -654,7 +724,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   const toggleCardCategory = function () {
     const $cardCategory = document.querySelectorAll('#aside-cat-list .card-category-list-item.parent i')
-    if ($cardCategory.length > 0) {
+    if ($cardCategory.length) {
       $cardCategory.forEach(function (item) {
         item.addEventListener('click', function (e) {
           e.preventDefault()
@@ -693,7 +763,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   const addPostOutdateNotice = function () {
     const data = GLOBAL_CONFIG.noticeOutdate
-    var diffDay = btf.diffDate(GLOBAL_CONFIG_SITE.postUpdate)
+    const diffDay = btf.diffDate(GLOBAL_CONFIG_SITE.postUpdate)
     if (diffDay >= data.limitDay) {
       const ele = document.createElement('div')
       ele.className = 'post-outdate-notice'
@@ -726,6 +796,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   const unRefreshFn = function () {
     window.addEventListener('resize', adjustMenu)
+    window.addEventListener('orientationchange', () => { setTimeout(adjustMenu(true), 100) })
 
     clickFnOfSubMenu()
     GLOBAL_CONFIG.islazyload && lazyloadImg()
@@ -750,8 +821,8 @@ document.addEventListener('DOMContentLoaded', function () {
     GLOBAL_CONFIG_SITE.isHome && scrollDownInIndex()
     GLOBAL_CONFIG.highlight && addHighlightTool()
     GLOBAL_CONFIG.isPhotoFigcaption && addPhotoFigcaption()
-    runJustifiedGallery()
-    GLOBAL_CONFIG.lightbox !== 'null' && addLightBox()
+    jqLoadAndRun()
+    GLOBAL_CONFIG.lightbox === 'mediumZoom' && addMediumZoom()
     scrollFn()
     addTableWrap()
     clickFnOfTagHide()
