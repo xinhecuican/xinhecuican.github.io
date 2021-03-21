@@ -11107,6 +11107,7 @@ The input will be terminated by a value of 0 for t.</p>
 <p>例如 ：<code>SELECT DATE_ADD('1998-01-02', INTERVAL 31 DAY);</code></p>
 <p>INTERVAL是经过的意思，也就是过31天。后面也可以加MONTH，YEAR，HOUR等。</p>
 <p>expr就是标准的日期时间或只有日期。要注意日期都是字符串，都要加引号。</p>
+<p>上面这些函数在where语句后使用容易出现问题，他们适合的位置是在select后做汇总函数。如果在where中选择一段时间可以使用<code>where date between '...' and '...'</code></p>
 <h2 id="数值处理函数"><a class="markdownIt-Anchor" href="#数值处理函数"></a> 数值处理函数</h2>
 <table>
 <thead>
@@ -15312,6 +15313,91 @@ LastByteRcvd - LastByteRead \le RcvBuffer
 <figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line">格式：</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> omp sections [clause..]</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="meta">#<span class="meta-keyword">pragma</span> omp section</span></span><br><span class="line">    &#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">#<span class="meta-keyword">pragma</span> omp section</span></span><br><span class="line">    &#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">clause:</span><br><span class="line"></span><br><span class="line">* <span class="keyword">private</span>()</span><br><span class="line">* firstprivate()</span><br><span class="line">* lastprivate()</span><br><span class="line">* reduction(<span class="keyword">operator</span>: <span class="built_in">list</span>)： reduction在每个线程结束时将私有变量进行运算。例如： reduction(+: ans)就是将每个线程的ans私有变量相加，然后赋值给全局ans</span><br><span class="line">* nowait</span><br></pre></td></tr></table></figure>
 <h1 id="single语句"><a class="markdownIt-Anchor" href="#single语句"></a> single语句</h1>
 <p>single指名该区域只能有一个线程执行。线程组中没有执行single语句会等待内部线程结束，使用nowait除外。</p>
+]]></content>
+      <categories>
+        <category>并行</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>GPU编程</title>
+    <url>/post/8e75958d.html</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="gpu结构"><a class="markdownIt-Anchor" href="#gpu结构"></a> GPU结构</h1>
+<p>每个GPU中有若干个<strong>GPC（图形计算簇）</strong>，每个GPC中又有若干个<strong>TPC（Texture Processing cluster)</strong>, 每个TPC中有若干个<strong>SM（Stream Multiprocessor)</strong>,每个SM中有若干个block，在block中有各种各样的核和寄存器。</p>
+<blockquote>
+<p>在GPU编程中，通常把cpu称作host，把gpu称作device。</p>
+</blockquote>
+<p>计算过程：</p>
+<ul>
+<li>数据从cpu拷贝到gpu显存中</li>
+<li>加载GPU程序并运行</li>
+<li>将运行完后的数据又送回CPU中</li>
+</ul>
+<h1 id="cuda编程"><a class="markdownIt-Anchor" href="#cuda编程"></a> CUDA编程</h1>
+<p>基本结构：</p>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">malloc();</span><br><span class="line">cudamalloc(); <span class="regexp">//</span>分配显存</span><br><span class="line">cudaMemcpy(): <span class="regexp">//</span>将内存中的内容放到显存中</span><br><span class="line">kernelName&lt;&lt;&lt;gridSize, blockSize&gt;&gt;&gt;(input_params);<span class="regexp">//</span>计算过程，input_params是运行的函数</span><br><span class="line"></span><br><span class="line">cudaMemcpy();</span><br><span class="line">cudaFree();</span><br></pre></td></tr></table></figure>
+<p>例如：</p>
+<figure class="highlight reasonml"><table><tr><td class="code"><pre><span class="line">__global__ void add(<span class="built_in">int</span> *a, <span class="built_in">int</span> *b, <span class="built_in">int</span> *c)</span><br><span class="line">&#123;</span><br><span class="line">    *c = *a + *b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">int</span> main(void) </span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">int</span> a, b, c;<span class="comment">// host copies of a, b, c</span></span><br><span class="line">    <span class="built_in">int</span> *d_a, *d_b, *d_c;<span class="comment">// device copies of a, b, c</span></span><br><span class="line">    <span class="keyword">in</span> tsize = sizeof(<span class="built_in">int</span>);<span class="comment">// Allocate space for device copies of a, b, c，</span></span><br><span class="line">    </span><br><span class="line">    分配内存</span><br><span class="line">    cuda<span class="constructor">Malloc((<span class="params">void</span><span class="operator">**</span>)</span>&amp;d_a, size);</span><br><span class="line">    cuda<span class="constructor">Malloc((<span class="params">void</span><span class="operator">**</span>)</span>&amp;d_b, size);</span><br><span class="line">    cuda<span class="constructor">Malloc((<span class="params">void</span><span class="operator">**</span>)</span>&amp;d_c, size);<span class="comment">// Setup input values，</span></span><br><span class="line">    </span><br><span class="line">    设置输入数据</span><br><span class="line">    a = <span class="number">2</span>;</span><br><span class="line">    b = <span class="number">7</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// Copy inputs to device，拷贝数据到GPU的显存</span></span><br><span class="line">    cuda<span class="constructor">Memcpy(<span class="params">d_a</span>, &amp;<span class="params">a</span>, <span class="params">size</span>, <span class="params">cudaMemcpyHostToDevice</span>)</span>;</span><br><span class="line">    cuda<span class="constructor">Memcpy(<span class="params">d_b</span>, &amp;<span class="params">b</span>, <span class="params">size</span>, <span class="params">cudaMemcpyHostToDevice</span>)</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// Launch add() kernel on GPU，执行kernel</span></span><br><span class="line">    add&lt;&lt;&lt;<span class="number">1</span>,<span class="number">1</span>&gt;&gt;&gt;(d_a, d_b, d_c);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// Copy result back to host，数据拷贝回host内存</span></span><br><span class="line">    cuda<span class="constructor">Memcpy(&amp;<span class="params">c</span>, <span class="params">d_c</span>, <span class="params">size</span>, <span class="params">cudaMemcpyDeviceToHost</span>)</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// Cleanup，释放内存cudaFree(d_a); </span></span><br><span class="line">    cuda<span class="constructor">Free(<span class="params">d_b</span>)</span>; cuda<span class="constructor">Free(<span class="params">d_c</span>)</span>;return <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>函数前的标识：</strong></p>
+<ul>
+<li><code>__global__</code>: 表示在device上执行，从host中调用。它的返回类型必须是void，并且它不会等待函数执行完主线程就会进行下一步。</li>
+<li><code>__device__</code>: 在device上执行，并且从device中调用</li>
+<li><code>__host__</code>: host执行，host调用，默认值</li>
+</ul>
+<p><strong>函数中变量类型：</strong></p>
+<ul>
+<li>
+<p><code>__device__</code>: grid中所有线程都可以访问</p>
+</li>
+<li>
+<p><code>__constant__</code>: 常量内存</p>
+</li>
+<li>
+<p><code>__shared__</code>: 只有同一个block中的线程才可以访问</p>
+</li>
+<li>
+<p>&lt;&lt;&lt;gridsize, blocksize&gt;&gt;&gt;: 调用的基本结构为 grid(网格）-&gt;block(块)-&gt;thread(线程).例如&lt;&lt;&lt;1, 1&gt;&gt;&gt;代表这个网格中有一个块，这个块中有一个线程。</p>
+</li>
+</ul>
+<p>grid和thread都是dim3型变量，dim3可以看成包含三个整数的结构体。我们可以自由的定义grid或thread为一维、二维或三维,他们的默认值都是1。例如：</p>
+<figure class="highlight mipsasm"><table><tr><td class="code"><pre><span class="line"><span class="keyword">dim3 </span><span class="keyword">block(3, </span><span class="number">3</span>);</span><br><span class="line"><span class="keyword">add&lt;&lt;&lt;1, </span><span class="keyword">block&gt;&gt;&gt;(...);</span></span><br><span class="line"><span class="keyword">表示有一个块，每块中有(3, </span><span class="number">3</span>)个线程</span><br><span class="line"></span><br><span class="line">上面的例子可以变成</span><br><span class="line"><span class="keyword">add&lt;&lt;&lt;N, </span><span class="number">1</span>&gt;&gt;&gt;(d_a, d_b, d_c);</span><br><span class="line"></span><br><span class="line">__global__ void <span class="keyword">add(int </span>*a, int *<span class="keyword">b, </span>int *c)</span><br><span class="line">&#123;</span><br><span class="line">    c[<span class="keyword">blockIdx.x] </span>= a[<span class="keyword">blockIdx.x] </span>+ <span class="keyword">b[blockIdx.x];</span></span><br><span class="line"><span class="keyword">&#125;</span></span><br></pre></td></tr></table></figure>
+<p>每一个线程都可以用(blockIdx, threadIdx)进行标识，这两个变量都是dim3类型的，因此上面的例子中就可以使用blockIdx.x表示这是第几个block.</p>
+<p>变量：</p>
+<ul>
+<li>gridDim: grid维度,dim3型</li>
+<li>blockDim: block维度</li>
+<li>blockIdx:</li>
+<li>threadIdx:</li>
+<li>warpSize: 大小固定为32</li>
+</ul>
+<p>每个grid都是在一个SM上的，而SM空间有限，因此每次可以使用的线程是有上限的，一般是1024.</p>
+<p><strong>内存分配：</strong></p>
+<p>内存分为两种</p>
+<ul>
+<li>可分配内存： malloc()/new() 操作所得到的内存，这种内存由cpu进行管理，可能被分页机制换下</li>
+<li>分页锁定内存： 这种内存受gpu控制，不受cpu调度影响，可以使用dma直接读取
+<ul>
+<li><code>cudaMallocHost(void **ptr, size_t size)</code></li>
+<li><code>cudaHostAlloc(void **pHost, size_t size, unsigned int flags)</code>:
+<ul>
+<li>cudaHostAllocPortable：多个CPU线程都可访问</li>
+<li>cudaHostAllocWriteCombined：数据传输快，但只允许host写（读速度慢)</li>
+<li>cudaHostAllocMapped：CPU/GPU都可访，属于内存映射</li>
+</ul>
+</li>
+<li><code>cudaHostRegister( void* ptr, size_tsize, unsigned intflags )</code>: 可分页内存转换为分页锁定内存</li>
+</ul>
+</li>
+</ul>
+<p><strong>显存分配</strong></p>
+<ul>
+<li>cudaMalloc()： 一维数组，数据连续存储</li>
+<li>cudaMallocPitch()： 二维数组，会自动对齐，可能会浪费部分内存空间</li>
+<li>cudaMalloc3D()：三维数组</li>
+</ul>
+<p><strong>统一寻址</strong></p>
+<p>统一寻址指的是系统自动在host和device之间搬运数据，同时保证host和device都可访问，并且需要进行显式同步。（因为系统会在运行函数时同时进行下一步）</p>
+<p>例如：</p>
+<figure class="highlight x86asm"><table><tr><td class="code"><pre><span class="line">__global__ void <span class="keyword">add</span>(<span class="keyword">int</span> *<span class="keyword">ret</span>, <span class="keyword">int</span> a, <span class="keyword">int</span> b)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">ret</span>[threadIdx<span class="number">.</span>x] = a + b + threadIdx<span class="number">.</span>x<span class="comment">;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> main()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">int</span> *<span class="keyword">ret</span><span class="comment">;</span></span><br><span class="line">    cudaMallocManaged(&amp;<span class="keyword">ret</span>, <span class="number">1000</span> * sizeof(<span class="keyword">int</span>))<span class="comment">;//自动进行显存内存分配及数据搬运</span></span><br><span class="line">    <span class="keyword">add</span>&lt;&lt;&lt;<span class="number">1</span>, <span class="number">1000</span>&gt;&gt;&gt;(<span class="keyword">ret</span>, <span class="number">10</span>, <span class="number">100</span>)<span class="comment">;</span></span><br><span class="line">    cudaDeviceSynchronized()<span class="comment">;//进行同步</span></span><br><span class="line">    for(<span class="keyword">int</span> i=<span class="number">0</span><span class="comment">; i&lt;1000; i++)</span></span><br><span class="line">    &#123;</span><br><span class="line">        printf(<span class="string">&quot;%d&quot;</span>, <span class="keyword">ret</span>[i])<span class="comment">;</span></span><br><span class="line">    &#125;</span><br><span class="line">    cudaFree(<span class="keyword">ret</span>)<span class="comment">;</span></span><br><span class="line">    return <span class="number">0</span><span class="comment">;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>并行</category>
