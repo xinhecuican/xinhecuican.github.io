@@ -15558,4 +15558,133 @@ LastByteRcvd - LastByteRead \le RcvBuffer
         <category>逻辑电路</category>
       </categories>
   </entry>
+  <entry>
+    <title>MPI编程</title>
+    <url>/post/bb25e9a9.html</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="简介"><a class="markdownIt-Anchor" href="#简介"></a> 简介</h1>
+<p>MPI是一种编程规范，它的实现是一个库，主要在Fortran和c语言上实现。它的目的是实现进程间通讯。</p>
+<h1 id="mpi基本函数"><a class="markdownIt-Anchor" href="#mpi基本函数"></a> MPI基本函数</h1>
+<h2 id="开始与结束"><a class="markdownIt-Anchor" href="#开始与结束"></a> 开始与结束</h2>
+<ul>
+<li>MPI_Init(&amp;argc, &amp;argv): 利用输入进来的参数进行初始化</li>
+<li>MPI_Finalize(): MPI终止时调用</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;mpi.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span> <span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> * argv[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> err;err = MPI_Init(&amp;argc, &amp;argv);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Hello world!\n&quot;</span>);</span><br><span class="line">    err = MPI_Finalize();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">运行</span><br><span class="line"></span><br><span class="line">mpirun -n <span class="number">4</span> ./hello.c</span><br></pre></td></tr></table></figure>
+<h2 id="身份标识"><a class="markdownIt-Anchor" href="#身份标识"></a> 身份标识</h2>
+<ul>
+<li>MPI_COMM_WORLD: 获得通信域(也就是同一组内的进程，例如上面mpirun -4代表启动4个进程，他们属于同一组）</li>
+<li>MPI_Comm_size(MPI_COMM_WORLD, &amp;size): 获得进程个数，赋值给size</li>
+<li>MPI_Comm_rank(MPI_COMM_WORLD, &amp;rank): 获得此进程在通信域内的编号，赋值给rank</li>
+</ul>
+<h2 id="数据类型"><a class="markdownIt-Anchor" href="#数据类型"></a> 数据类型</h2>
+<p>基本数据类型有：<br />
+<img src="/images/MPI%E7%BC%96%E7%A8%8B6.PNG" alt="" /></p>
+<p>自定义结构体：</p>
+<figure class="highlight reasonml"><table><tr><td class="code"><pre><span class="line">typedef <span class="keyword">struct</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">int</span> a<span class="literal">[<span class="number">4</span>]</span>;</span><br><span class="line">    double b<span class="literal">[<span class="number">4</span>]</span>;</span><br><span class="line">&#125;node;</span><br><span class="line"></span><br><span class="line">types<span class="literal">[<span class="number">0</span>]</span> = MPI_INT;</span><br><span class="line">length<span class="literal">[<span class="number">0</span>]</span> = <span class="number">4</span>;</span><br><span class="line">displacements<span class="literal">[<span class="number">0</span>]</span> = <span class="number">0</span>;</span><br><span class="line">types<span class="literal">[<span class="number">1</span>]</span> = MPI_DOUBLE;</span><br><span class="line">length<span class="literal">[<span class="number">1</span>]</span> = <span class="number">4</span>;</span><br><span class="line">displacements<span class="literal">[<span class="number">1</span>]</span> = <span class="number">4</span>;</span><br><span class="line"></span><br><span class="line"><span class="constructor">MPI_Type_struct(2, <span class="params">lengths</span>, <span class="params">displacements</span>, <span class="params">types</span>, &amp;<span class="params">buff_datatype</span>)</span>;</span><br><span class="line"><span class="constructor">MPI_Type_commit(&amp;<span class="params">buff_datatype</span>)</span>;</span><br><span class="line">然后就可以使用buff_dtattype这种类型了，这种类型也就表示了node </span><br></pre></td></tr></table></figure>
+<h2 id="信息传递"><a class="markdownIt-Anchor" href="#信息传递"></a> 信息传递</h2>
+<ul>
+<li>
+<p><code>int MPI_Send( void *buff, int count, MPI_Datatype datatype, int dest, int tag, MPI_Comm comm)</code>：</p>
+<ul>
+<li>buff: 是存储消息缓存的起始地址（一般用数组）</li>
+<li>count： 传递定义数据类型的多少项</li>
+<li>datatype: 传递的数据类型</li>
+<li>dest： 是目的进程的编号（由对方的MPI_Comm_rank获得的）</li>
+<li>tag： 消息标签，接收方的消息标签要和发送方的消息标签相同才可以接受，一两位目的进程可能不知接收一条信息，它需要标签进行区分。</li>
+<li>标识通信域，一般使用MPI_Comm_WORLD</li>
+</ul>
+</li>
+<li>
+<p><code>int MPI_Recv( void *buff, int count, MPI_Datatype datatype, int source, int tag, MPI_Comm comm, MPI_Status *status)</code>:</p>
+<ul>
+<li>buff： 用来接收消息的缓冲区</li>
+<li>接收的最大项数</li>
+<li></li>
+<li>source： 消息来源进程编号</li>
+<li>tag： 双方约定的信号量（这个源和目的地都应该相同，不然收不到）</li>
+<li>status： 状态信息，包括消息的源进程标识，消息标签，包含的数据项个数等。Status.MPI_SOURCE, Status.MPI_TAG , MPI_Get_count(&amp;Status, MPI_INT, &amp;C)可以读出</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight reasonml"><table><tr><td class="code"><pre><span class="line">#<span class="keyword">include</span> <span class="string">&quot;mpi.h&quot;</span></span><br><span class="line"><span class="built_in">int</span> foo(<span class="built_in">int</span> i)&#123;...&#125;</span><br><span class="line">main(<span class="built_in">int</span> argc,<span class="built_in">char</span>* argv<span class="literal">[]</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">int</span> i, tmp, sum=<span class="number">0</span>, group_size, my_rank, N;</span><br><span class="line">    <span class="constructor">MPI_Init(&amp;<span class="params">argc</span>, &amp;<span class="params">argv</span>)</span>;</span><br><span class="line">    <span class="constructor">MPI_Comm_size(MPI_COMM_WORLD, &amp;<span class="params">group_size</span>)</span>;</span><br><span class="line">    <span class="constructor">MPI_Comm_rank(MPI_COMM_WORLD, &amp;<span class="params">my_rank</span>)</span>;</span><br><span class="line">    <span class="keyword">if</span> (my_rank==<span class="number">0</span>) </span><br><span class="line">    &#123;</span><br><span class="line">        printf(<span class="string">&quot;Enter N:&quot;</span>);</span><br><span class="line">        scanf(<span class="string">&quot;%d&quot;</span>,&amp;N);</span><br><span class="line">        <span class="keyword">for</span> (i=<span class="number">1</span>;i&lt;group_size;i++) </span><br><span class="line">            <span class="constructor">MPI_Send(&amp;N, 1, MPI_INT, <span class="params">i</span>, <span class="params">i</span>, MPI_COMM_WORLD)</span>;</span><br><span class="line">        <span class="keyword">for</span> (i=my_rank;i&lt;N;i=i+group_size) </span><br><span class="line">            sum=sum+tmp;</span><br><span class="line">        <span class="keyword">for</span> (i=<span class="number">1</span>;i&lt;group_size;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="constructor">MPI_Recv(&amp;<span class="params">tmp</span>,1,MPI_INT,<span class="params">i</span>,<span class="params">i</span>,MPI_COMM_WORLD,&amp;<span class="params">status</span>)</span>;</span><br><span class="line">            sum=sum+tmp;</span><br><span class="line">        &#125;</span><br><span class="line">        printf(<span class="string">&quot;\n The result = %d&quot;</span>, sum);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="constructor">MPI_Recv(&amp;N,1,MPI_INT,0,<span class="params">my_rank</span>,MPI_COMM_WORLD,&amp;<span class="params">status</span>)</span>;</span><br><span class="line">        <span class="keyword">for</span> (i=my_rank;i&lt;N;i=i+group_size)  </span><br><span class="line">            sum=sum+foo(i);</span><br><span class="line">        <span class="constructor">MPI_Send(&amp;<span class="params">sum</span>,1,MPI_INT,0,<span class="params">my_rank</span>,MPI_COMM_WORLD)</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="constructor">MPI_Finalize()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>
+<p>int MPI_Sendrecv(void *sendbuf, int sendcount,MPI_Datatype sendtype, int ，dest, int sendtag, <code>void *recvbuf, int recvcount, MPI_Datatype recvtype, int source, int recvtag, MPI_Comm comm, MPI_Status *status</code>): 它的作用是捆绑发送接收，他可以避免由于发送接收次序错误而造成的死锁。同时它可以接收单个MPI_Send发来的消息也可以呗：MPI_Recv接收到</p>
+</li>
+<li>
+<p>MPI_PROC_NULL: 虚拟进程，当一个进程向这个进程发送消息时，会立刻成功返回，接收消息时也会立刻成功返回并且缓冲区没有任何改变。<strong>它可以写在source或dest中</strong></p>
+</li>
+</ul>
+<h2 id="组通信"><a class="markdownIt-Anchor" href="#组通信"></a> 组通信</h2>
+<ul>
+<li>MPI_Bcast( void* data, int count, MPI_Datatype datatype, int root,MPI_Comm communicator): 标号为root的进程给其他所有进程发送消息，包括他自己，对于root来说，data即是发送缓冲又是接收缓冲</li>
+</ul>
+<figure class="highlight reasonml"><table><tr><td class="code"><pre><span class="line"><span class="constructor">MPI_Init( &amp;<span class="params">argc</span>, &amp;<span class="params">argv</span> )</span>;</span><br><span class="line"><span class="constructor">MPI_Comm_rank( MPI_COMM_WORLD, &amp;<span class="params">rank</span> )</span>;</span><br><span class="line"><span class="keyword">do</span> </span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (rank<span class="operator"> == </span><span class="number">0</span>) </span><br><span class="line">        scanf( <span class="string">&quot;%d&quot;</span>, &amp;value );</span><br><span class="line">    <span class="constructor">MPI_Bcast( &amp;<span class="params">value</span>, 1, MPI_INT, 0, MPI_COMM_WORLD )</span>;<span class="comment">//其他进程也要写，用来接收</span></span><br><span class="line">    printf( <span class="string">&quot;Process %d got %d\n&quot;</span>, rank, value );</span><br><span class="line">&#125; <span class="keyword">while</span> (value &gt;= <span class="number">0</span>);</span><br><span class="line"><span class="constructor">MPI_Finalize( )</span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>MPI_Scatter(<br />
+void* send_data,<br />
+int send_count,<br />
+MPI_Datatype send_datatype,<br />
+void* recv_data,<br />
+int recv_count,<br />
+MPI_Datatype recv_datatype,<br />
+int root,<br />
+MPI_Comm communicator)
+<ul>
+<li>root发送给每个分组缓冲区中的一部分信息，非root进程会忽略发送缓冲。它是将每个接收缓冲区填满之后才会发给下一个进程，而不是平均分。</li>
+</ul>
+</li>
+</ul>
+<p><img src="/images/MPI%E7%BC%96%E7%A8%8B1.png" alt="" /></p>
+<ul>
+<li>
+<p>MPI_Gather(<br />
+void* send_data,<br />
+int send_count,<br />
+MPI_Datatype send_datatype,<br />
+void* recv_data,<br />
+int recv_count,<br />
+MPI_Datatype recv_datatype,<br />
+int root,<br />
+MPI_Comm communicator)</p>
+<ul>
+<li>它是接受所有进程的信息汇总到root进程中（包括它自己的信息).</li>
+</ul>
+</li>
+<li>
+<p>MPI_Allgather(<br />
+void* send_data,<br />
+int send_count,<br />
+MPI_Datatype send_datatype,<br />
+void* recv_data,<br />
+int recv_count,<br />
+// v: int* recvcnt, int* disp<br />
+MPI_Datatype recv_datatype,<br />
+MPI_Comm communicator):</p>
+<ul>
+<li>每个进程都把自己的信息发给其他所有进程，完成之后所有进程都有信息的聚合</li>
+</ul>
+</li>
+</ul>
+<p><img src="/images/MPI%E9%80%9A%E4%BF%A12.png" alt="" /></p>
+<ul>
+<li>MPI_Reduce(inbuf,result,count,datatype,op,root,comm): 进行聚合之后还进行了一次归约操作，归约操作有MAX, MIN, SUM, PROD, LAND, BAND(按位与), LOR, BOR, LXOR, BXOR, MAXLOC, MINLOC等。这是每一个数据每一个数据进行归约</li>
+<li>MPI_AllReduce: 和MPI_Reduce类似，没有root参数</li>
+<li>MPI_Reduce_Scattar(void* send_data, void* recv_data, int recvcounts, Op, Comm): 对数据进行归约之后再分给每个进程。</li>
+<li>MPI_Scan(void* sendbuf, void* recvbuf, int count, MPI_Datatype datatype, MPI_Op op, MPI_Comm comm): 每个进程都对它前面的进程进行归约，类似前缀和</li>
+</ul>
+<p><img src="/images/MPI%E7%BC%96%E7%A8%8B4.PNG" alt="" /></p>
+<ul>
+<li>int MPI_Alltoall(void *sendbuf, int sendcount, MPI_Datatype senddatatype, void *recvbuf, int recvcount, MPI_Datatype recvdatatype, MPI_Comm comm): 每个进程把第i块数据发送给第i个进程，又从第j个进程接收数据到自己的第j块中。</li>
+</ul>
+<p>例如： 进程1把自己第二块数据发送给进程2， 进程2接收到来自进程1的数据放到 第一块中，类似于矩阵转置。</p>
+<ul>
+<li>MPI_Comm(Comm): 等待同一群组中所有进程到达屏障时候才进行下一步操作</li>
+</ul>
+<p><img src="/images/MPI%E7%BC%96%E7%A8%8B5.PNG" alt="" /></p>
+]]></content>
+      <categories>
+        <category>并行</category>
+      </categories>
+  </entry>
 </search>
