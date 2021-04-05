@@ -15418,7 +15418,7 @@ LastByteRcvd - LastByteRead \le RcvBuffer
 <li>然后进行逻辑优化。去除冗余逻辑</li>
 <li>之后根据工艺库实现逻辑电路及其布线。工艺库由中芯国际和台积电等公司提供</li>
 </ul>
-<h1 id="systemverilog语法"><a class="markdownIt-Anchor" href="#systemverilog语法"></a> SystemVerilog语法</h1>
+<h1 id="语法基础"><a class="markdownIt-Anchor" href="#语法基础"></a> 语法基础</h1>
 <p>框架：</p>
 <figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> mux2(<span class="keyword">input</span> <span class="keyword">logic</span> D0, D1, sel, <span class="keyword">output</span> <span class="keyword">logic</span> y);</span><br><span class="line">    <span class="keyword">logic</span> a, b;</span><br><span class="line">    <span class="keyword">assign</span> a = D0 &amp; (~sel);</span><br><span class="line">    <span class="keyword">assign</span> b = D0 &amp; sel;</span><br><span class="line">    <span class="keyword">assign</span> y = a | b;</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
 <ul>
@@ -15429,11 +15429,11 @@ LastByteRcvd - LastByteRead \le RcvBuffer
 <ul>
 <li>内部变量定义： 类型 [位宽] 变量名1, 变量名2: 这和端口定义基本类似，除了没有input和output</li>
 </ul>
-<h2 id="变量-常量-运算符"><a class="markdownIt-Anchor" href="#变量-常量-运算符"></a> 变量、常量、运算符</h2>
+<h1 id="变量-常量-运算符"><a class="markdownIt-Anchor" href="#变量-常量-运算符"></a> 变量、常量、运算符</h1>
 <blockquote>
 <p>注释和c语言相同，也是<code>//</code>和<code>/*</code></p>
 </blockquote>
-<h3 id="常量"><a class="markdownIt-Anchor" href="#常量"></a> 常量</h3>
+<h2 id="常量"><a class="markdownIt-Anchor" href="#常量"></a> 常量</h2>
 <p>常量的格式为： <code>&lt;+/-&gt;&lt;位宽&gt;’&lt;进制&gt;&lt;数值&gt;</code></p>
 <ul>
 <li>+/-: 表示正负， EDA工具默认使用无符号数，也就是说加了<code>+</code>号和不加<code>+</code>号是不同的含义</li>
@@ -15444,7 +15444,7 @@ LastByteRcvd - LastByteRead \le RcvBuffer
 </ul>
 <p>例如：</p>
 <figure class="highlight 1c"><table><tr><td class="code"><pre><span class="line">-<span class="number">4</span>&#x27;b<span class="number">0011</span>: 首先转换成补码，为<span class="number">1101</span>，然后是4位，所以结果就是<span class="number">1101</span></span><br><span class="line">-4&#x27;d10: 转换成补码为<span class="number">10110</span>（因为是负数，最高位一定是<span class="number">1</span>），之后取<span class="number">4</span>位，结果为<span class="number">0110</span>。和我们想要得到的结果不同</span><br></pre></td></tr></table></figure>
-<h3 id="数据类型"><a class="markdownIt-Anchor" href="#数据类型"></a> 数据类型</h3>
+<h2 id="数据类型"><a class="markdownIt-Anchor" href="#数据类型"></a> 数据类型</h2>
 <p>大体上可以分为变量和线网两种类型。变量只能有一个驱动源，线网必须是多驱动源(也就是可能有多个输入碰到一起），线网通常被解释为连线，而变量既可以被解释为连线，也可以被解释为寄存器。<br />
 <img src="/images/%E7%A1%AC%E4%BB%B6%E6%8F%8F%E8%BF%B0%E8%AF%AD%E8%A8%801.PNG" alt="" /></p>
 <p>线网类型主要有wire和tri。其中wire因为也是单驱动源，已经被废弃（端口信号可能是线网类型）。tri可以用于定义多驱动源信号。</p>
@@ -15465,7 +15465,7 @@ LastByteRcvd - LastByteRead \le RcvBuffer
 <li>shortint: 定义16位信号，和byte类型</li>
 <li>int： 定义32位信号</li>
 </ul>
-<h3 id="运算符"><a class="markdownIt-Anchor" href="#运算符"></a> 运算符</h3>
+<h2 id="运算符"><a class="markdownIt-Anchor" href="#运算符"></a> 运算符</h2>
 <p><img src="/images/%E7%A1%AC%E4%BB%B6%E6%8F%8F%E8%BF%B0%E8%AF%AD%E8%A8%802.PNG" alt="" /></p>
 <p>大致和c语言相同，但是有一些还是略有区别。</p>
 <p><strong>缩减运算</strong></p>
@@ -15481,19 +15481,20 @@ LastByteRcvd - LastByteRead \le RcvBuffer
 <p>例如：</p>
 <figure class="highlight awk"><table><tr><td class="code"><pre><span class="line">logic [<span class="number">1</span> : <span class="number">0</span>] B, C;	 	<span class="regexp">//</span> 假设B = <span class="number">2</span>’b00，C = <span class="number">2</span>’b11，</span><br><span class="line">logic [<span class="number">3</span>: <span class="number">0</span>] Y;</span><br><span class="line">Y = &#123;B, C&#125;;		<span class="regexp">//</span> 正确，结果Y = <span class="number">4</span>’b0011</span><br><span class="line">Y = &#123;B[<span class="number">0</span>], C[<span class="number">1</span>], <span class="number">2</span>’b10&#125;;	<span class="regexp">//</span> 正确，结果Y = <span class="number">4</span>’b0110，注意，常数的位宽不能缺省</span><br><span class="line">Y = &#123;B, <span class="number">5</span>&#125;;		<span class="regexp">//</span> 错误，因为常数<span class="number">5</span>的位宽不确定</span><br><span class="line">Y = &#123;<span class="number">2</span>&#123;C&#125;&#125;;		<span class="regexp">//</span> 正确，结果Y = <span class="number">4</span>’b1111</span><br><span class="line">Y = &#123;B[<span class="number">0</span>], C[<span class="number">1</span>], &#123;<span class="number">2</span>&#123;B[<span class="number">1</span>]&#125;&#125;&#125;;	<span class="regexp">//</span> 正确，结果Y = <span class="number">4</span>’b0100</span><br></pre></td></tr></table></figure>
 <p>最后两个中出现了 数字加{C}的方式，这是将这个信号进行复制，格式为：<code>&#123;n&#123;A&#125;&#125;</code></p>
-<h2 id="行为建模"><a class="markdownIt-Anchor" href="#行为建模"></a> 行为建模</h2>
-<h3 id="持续性赋值语句的建模"><a class="markdownIt-Anchor" href="#持续性赋值语句的建模"></a> 持续性赋值语句的建模</h3>
+<h1 id="行为建模"><a class="markdownIt-Anchor" href="#行为建模"></a> 行为建模</h1>
+<h2 id="持续性赋值语句的建模"><a class="markdownIt-Anchor" href="#持续性赋值语句的建模"></a> 持续性赋值语句的建模</h2>
 <p>持续性赋值语句即使用<strong>assign</strong>的赋值语句，它是并行的，因此哪条语句在前哪条语句在后没有关系。它的使用方法如下：</p>
 <blockquote>
 <p>assign &lt;#延迟量&gt; 信号名 = 表达式,延迟量以纳秒为单位</p>
 </blockquote>
 <p>例如：<code>assign #5 out2 = ~(A&amp;B)</code></p>
 <p>持续性赋值语句的含义是只要右侧变量发生变化，则立刻把该值赋给左侧变量，对应到电路就是输入输出的关系。此外<strong>延迟量仅用于仿真，不能被综合</strong>。</p>
-<h3 id="基于过程块的建模"><a class="markdownIt-Anchor" href="#基于过程块的建模"></a> 基于过程块的建模</h3>
+<h2 id="基于过程块的建模"><a class="markdownIt-Anchor" href="#基于过程块的建模"></a> 基于过程块的建模</h2>
 <p>过程块内部的基本逻辑是顺序执行，每条语句之间有逻辑上的前后顺序（但是实际综合的时候可能会影响顺序）</p>
 <p>它由关键字initial或always定义，通过begin…end(相当于c语言中的{…})包围代码块。initial主要用于仿真验证。因此这里之间always</p>
 <p>always表示总是，也就是这个代码块处于无限循环当中，只要条件改变就会导致变化（always包围的代码块和掐他assign也是并行的）。</p>
-<h4 id="always_comb描述组合逻辑"><a class="markdownIt-Anchor" href="#always_comb描述组合逻辑"></a> always_comb（描述组合逻辑）</h4>
+<p>always可以看成c语言中的代码块，它的参数就是外面的输入和它所影响的输出。一旦外面对应数值发生改变里面也会立刻对应改变</p>
+<h3 id="always_comb描述组合逻辑"><a class="markdownIt-Anchor" href="#always_comb描述组合逻辑"></a> always_comb（描述组合逻辑）</h3>
 <p>模板：</p>
 <figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line">      <span class="keyword">always_comb</span>   <span class="keyword">begin</span></span><br><span class="line">            过程赋值语句;</span><br><span class="line">            高级语言结构，如<span class="keyword">if</span>…<span class="keyword">else</span>, <span class="keyword">for</span>等</span><br><span class="line">      <span class="keyword">end</span></span><br><span class="line">      </span><br><span class="line">      例如</span><br><span class="line">      <span class="keyword">module</span> mux2 (<span class="keyword">input</span>  <span class="keyword">logic</span> D0, D1, sel, </span><br><span class="line">                        <span class="keyword">output</span> <span class="keyword">logic</span> out);</span><br><span class="line">   <span class="keyword">always_comb</span> <span class="keyword">begin</span></span><br><span class="line">      <span class="comment">// 高级语言结构if…else</span></span><br><span class="line">      <span class="keyword">if</span> (sel == <span class="number">0</span>)</span><br><span class="line">         <span class="comment">// 过程赋值语句</span></span><br><span class="line">         out = D0;</span><br><span class="line">      <span class="keyword">else</span></span><br><span class="line">         out = D1;</span><br><span class="line">   <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p>在过程赋值语句中，<code>=</code>表示阻塞性赋值，也就是这条语句没有完成不进行下一步。并且左边<strong>必须是变量类型，不能是线网类型</strong>，这一点可能会导致一些错误</p>
@@ -15522,7 +15523,7 @@ LastByteRcvd - LastByteRead \le RcvBuffer
 </blockquote>
 <p>例如：</p>
 <figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> loop_demo(<span class="keyword">input</span> <span class="keyword">logic</span> [<span class="number">2</span> : <span class="number">0</span>] din, </span><br><span class="line">                                <span class="keyword">output</span> <span class="keyword">logic</span> [<span class="number">1</span> : <span class="number">0</span>] out);</span><br><span class="line">      <span class="keyword">int</span> num_bits</span><br><span class="line">      <span class="keyword">always_comb</span> <span class="keyword">begin</span></span><br><span class="line">            <span class="keyword">int</span> i;</span><br><span class="line">            num_bits = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">3</span>; i++) <span class="keyword">begin</span></span><br><span class="line">                  <span class="keyword">if</span> (din[i] == <span class="number">1</span>) </span><br><span class="line">                        num_bits = numbits + <span class="number">1</span>;</span><br><span class="line">                  <span class="keyword">else</span> num_bits = numbits;</span><br><span class="line">            <span class="keyword">end</span></span><br><span class="line">            <span class="keyword">assign</span> out = num_bits;</span><br><span class="line">      <span class="keyword">end</span></span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
-<h4 id="模块实例化"><a class="markdownIt-Anchor" href="#模块实例化"></a> 模块实例化</h4>
+<h3 id="模块实例化"><a class="markdownIt-Anchor" href="#模块实例化"></a> 模块实例化</h3>
 <p>创建模块之后可以在其他模块之中被调用，调用格式为：</p>
 <p><code>模块名 实例化名 （信息列表）</code></p>
 <ul>
@@ -15538,8 +15539,9 @@ LastByteRcvd - LastByteRead \le RcvBuffer
 <p>例如：</p>
 <figure class="highlight plain"><figcaption><span>mux2 (input  logic D0, D1, sel,</span></figcaption><table><tr><td class="code"><pre><span class="line">                        output logic y);</span><br><span class="line">   always_comb begin</span><br><span class="line">      if (sel &#x3D;&#x3D; 0)   out &#x3D; D0;</span><br><span class="line">      else   out &#x3D; D1;</span><br><span class="line">   end</span><br><span class="line">endmodule</span><br><span class="line">mux2 finalmux (low, high, sel[1], y);&#x2F;&#x2F;位置关联</span><br><span class="line">mux2 beginmux(.y(y), .D0(low), .D1(high), .sel(sel[1]));</span><br></pre></td></tr></table></figure>
 <p>其中<code>mux2</code>是这个模块的名字，也就相当于类名，finalmux是实例化后的名字，注意实例化后就立刻开始执行，不需要写额外的代码。</p>
+<p>模块和assign或者always语句是同一级别的，他们之间都是并行的</p>
 <p>此外系统一般还会提供一些非常基础的模块，如and, or等，这些模块可以不写实例化名字</p>
-<h4 id="参数化建模"><a class="markdownIt-Anchor" href="#参数化建模"></a> 参数化建模</h4>
+<h3 id="参数化建模"><a class="markdownIt-Anchor" href="#参数化建模"></a> 参数化建模</h3>
 <p><strong>参数化模块</strong></p>
 <p>在SystemVerilog HDL中，可以使用<strong>parameter</strong>来标识一个常量，除此之外他还可以用作传入模块的一个预定义变量</p>
 <p>例如：</p>
@@ -15553,6 +15555,106 @@ LastByteRcvd - LastByteRead \le RcvBuffer
 <p>generate通常和for，if，case配合使用，它可以自动生成代码</p>
 <figure class="highlight verilog"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> andN #(<span class="keyword">parameter</span> WIDTH = <span class="number">4</span>) (<span class="keyword">input</span> <span class="keyword">logic</span> [WIDTH – <span class="number">1</span> : <span class="number">0</span>] a, <span class="keyword">output</span> <span class="keyword">logic</span> y);</span><br><span class="line">      <span class="keyword">genvar</span> i;</span><br><span class="line">      <span class="keyword">logic</span> [WIDTH – <span class="number">1</span> : <span class="number">0</span>] x;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">generate</span></span><br><span class="line">            <span class="keyword">assign</span> x[<span class="number">0</span>] = a[<span class="number">0</span>];</span><br><span class="line">            <span class="keyword">for</span> (i = <span class="number">1</span>; i &lt; WIDTH; i = i+<span class="number">1</span>) <span class="keyword">begin</span> : forloop</span><br><span class="line">                  <span class="keyword">assign</span> x[i] = a[i] &amp; x[i - <span class="number">1</span>];</span><br><span class="line">            <span class="keyword">end</span></span><br><span class="line">      <span class="keyword">endgenerate</span></span><br><span class="line">             <span class="keyword">assign</span> y = x[WIDTH - <span class="number">1</span>];</span><br><span class="line"><span class="keyword">endmodule</span></span><br></pre></td></tr></table></figure>
 <p>注意想要使用generate，在for语句中必须写上begin和end，并且begin后面还要加上forloop.并且循环变量的类型是genvar.</p>
+<h1 id="测试"><a class="markdownIt-Anchor" href="#测试"></a> 测试</h1>
+<p>例如：</p>
+<figure class="highlight llvm"><table><tr><td class="code"><pre><span class="line">`timescale <span class="number">1</span>ns/<span class="number">1</span>ns		// 预编译指令，定义时间单位和时间精度</span><br><span class="line"><span class="keyword">module</span> sillyfunction_tb ( )<span class="comment">;   	// 测试程序没有输入/输出端口</span></span><br><span class="line">   logic a<span class="punctuation">,</span> b<span class="punctuation">,</span> <span class="keyword">c</span><span class="punctuation">,</span> y<span class="comment">;</span></span><br><span class="line">   sillyfunction dut (.a(a)<span class="punctuation">,</span> .b(b)<span class="punctuation">,</span> .<span class="keyword">c</span>(<span class="keyword">c</span>)<span class="punctuation">,</span> .y(y))<span class="comment">;   // 实例化待测模块</span></span><br><span class="line">   initial <span class="keyword">begin</span>	// 给出激励信号</span><br><span class="line">      a <span class="operator">=</span> <span class="number">0</span><span class="comment">; b = 0; c = 0; #10;</span></span><br><span class="line">      <span class="keyword">c</span> <span class="operator">=</span> <span class="number">1</span><span class="comment">; #10;</span></span><br><span class="line">      b <span class="operator">=</span> <span class="number">1</span><span class="comment">; c = 0; #10;</span></span><br><span class="line">      <span class="keyword">c</span> <span class="operator">=</span> <span class="number">1</span><span class="comment">; #10;</span></span><br><span class="line">      a <span class="operator">=</span> <span class="number">1</span><span class="comment">; b = 0; c = 0; #10;</span></span><br><span class="line">      <span class="keyword">c</span> <span class="operator">=</span> <span class="number">1</span><span class="comment">; #10;</span></span><br><span class="line">      b <span class="operator">=</span> <span class="number">1</span><span class="comment">; c = 0; #10;</span></span><br><span class="line">      <span class="keyword">c</span> <span class="operator">=</span> <span class="number">1</span><span class="comment">; #50;</span></span><br><span class="line">      $finish</span><br><span class="line">   <span class="keyword">end</span></span><br><span class="line">   initial <span class="keyword">begin</span>	// 输出结果，否则只产生波形</span><br><span class="line">      $monitor ($time<span class="punctuation">,</span> “a <span class="operator">=</span> <span class="variable">%a</span><span class="punctuation">,</span> b <span class="operator">=</span> <span class="variable">%b</span><span class="punctuation">,</span> <span class="keyword">c</span> <span class="operator">=</span> <span class="variable">%c</span><span class="punctuation">,</span> y <span class="operator">=</span> <span class="variable">%y</span>”<span class="punctuation">,</span> a<span class="punctuation">,</span> b<span class="punctuation">,</span> <span class="keyword">c</span><span class="punctuation">,</span> y)<span class="comment">;</span></span><br><span class="line">   <span class="keyword">end</span></span><br><span class="line">endmodule</span><br></pre></td></tr></table></figure>
+<h2 id="initial语句"><a class="markdownIt-Anchor" href="#initial语句"></a> initial语句</h2>
+<p>initial语句广泛应用于测试程序之中，它的特点就是所有语句都只会执行一次。</p>
+<p>但是需要注意的是多个initial语句时并发执行，如果有某一时刻两个initial语句对用一个变量进行赋值那么就会产生错误。</p>
+<h2 id="通过文件给予激励"><a class="markdownIt-Anchor" href="#通过文件给予激励"></a> 通过文件给予激励</h2>
+<p>我们可以把输入输出放到一个文件之中，然后程序从文件中获得激励信号并进行比对。</p>
+<figure class="highlight llvm"><table><tr><td class="code"><pre><span class="line"><span class="keyword">module</span> sillyfunction_tb ( )<span class="comment">;</span></span><br><span class="line">   logic a<span class="punctuation">,</span> b<span class="punctuation">,</span> <span class="keyword">c</span><span class="punctuation">,</span> y<span class="comment">;</span></span><br><span class="line">   logic [<span class="number">2</span> : <span class="number">0</span>] stim [<span class="number">7</span> : <span class="number">0</span>]<span class="comment">;	// 声明一个logic类型的数组</span></span><br><span class="line">   int i<span class="comment">;</span></span><br><span class="line">   sillyfunction dut (.a(a)<span class="punctuation">,</span> .b(b)<span class="punctuation">,</span> .<span class="keyword">c</span>(<span class="keyword">c</span>)<span class="punctuation">,</span> .y(y))<span class="comment">; </span></span><br><span class="line">   initial <span class="keyword">begin</span></span><br><span class="line">      $readmemb (“testvector.txt”<span class="punctuation">,</span> stim)<span class="comment">;	// 将所有激励读入数组stim</span></span><br><span class="line">      for (i <span class="operator">=</span> <span class="number">0</span><span class="comment">; i &lt; 8; i = i + 1) begin</span></span><br><span class="line">            &#123;a<span class="punctuation">,</span> b<span class="punctuation">,</span> <span class="keyword">c</span>&#125; <span class="operator">=</span> stim[i]<span class="comment">;   #10;	// 依次测试各个激励</span></span><br><span class="line">      <span class="keyword">end</span></span><br><span class="line">   <span class="keyword">end</span></span><br><span class="line">   initial <span class="keyword">begin</span></span><br><span class="line">      $monitor ($time<span class="punctuation">,</span> “a <span class="operator">=</span> <span class="variable">%a</span><span class="punctuation">,</span> b <span class="operator">=</span> <span class="variable">%b</span><span class="punctuation">,</span> <span class="keyword">c</span> <span class="operator">=</span> <span class="variable">%c</span><span class="punctuation">,</span> y <span class="operator">=</span> <span class="variable">%y</span>”<span class="punctuation">,</span> a<span class="punctuation">,</span> b<span class="punctuation">,</span> <span class="keyword">c</span><span class="punctuation">,</span> y)<span class="comment">;</span></span><br><span class="line">   <span class="keyword">end</span></span><br><span class="line">endmodule</span><br></pre></td></tr></table></figure>
+<p><strong>输入文件格式</strong></p>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line"><span class="number">0000</span>_0000</span><br><span class="line"><span class="number">0110</span>_0001 <span class="number">0011</span>_0010</span><br><span class="line"><span class="regexp">//</span> 地址<span class="number">3</span>~<span class="number">255</span>没有定义</span><br><span class="line">@<span class="number">100</span> <span class="regexp">//</span> hex</span><br><span class="line"><span class="number">1111</span>_1100</span><br><span class="line"><span class="regexp">//</span>地址<span class="number">257</span>~<span class="number">1022</span>没有定义</span><br><span class="line">@<span class="number">3</span>FF</span><br><span class="line"><span class="number">1110</span>_0010</span><br></pre></td></tr></table></figure>
+<ul>
+<li>可以使用<code>_</code>进行分隔，便于观察</li>
+<li>使用空格或者换行来区分单个数据</li>
+<li>使用<code>@+地址</code>来表示之后从第几位开始，注意这里不是第几个bit，而是第几个数据</li>
+</ul>
+<h2 id="系统任务函数"><a class="markdownIt-Anchor" href="#系统任务函数"></a> 系统任务（函数）</h2>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$time</td>
+<td>显示仿真时间，也就是第几十纳秒</td>
+</tr>
+<tr>
+<td>$stime</td>
+<td>返回32位时间</td>
+</tr>
+<tr>
+<td>$realtime</td>
+<td>显示实数的时间（有小数）</td>
+</tr>
+<tr>
+<td>$display</td>
+<td><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>d</mi><mi>i</mi><mi>s</mi><mi>p</mi><mi>l</mi><mi>a</mi><mi>y</mi><mo stretchy="false">(</mo><mi mathvariant="normal">“</mi><mi mathvariant="normal">显</mi><mi mathvariant="normal">示</mi><mi mathvariant="normal">格</mi><mi mathvariant="normal">式</mi><mi mathvariant="normal">控</mi><mi mathvariant="normal">制</mi><mi mathvariant="normal">符</mi><mi mathvariant="normal">”</mi><mo separator="true">,</mo><mo>&lt;</mo><mi mathvariant="normal">输</mi><mi mathvariant="normal">出</mi><mi mathvariant="normal">变</mi><mi mathvariant="normal">量</mi><mi mathvariant="normal">（</mi><mi mathvariant="normal">信</mi><mi mathvariant="normal">号</mi><mi mathvariant="normal">）</mi><mi mathvariant="normal">列</mi><mi mathvariant="normal">表</mi><mo>&gt;</mo><mo stretchy="false">)</mo><mo separator="true">;</mo><mo separator="true">,</mo><mi mathvariant="normal">例</mi><mi mathvariant="normal">如</mi><mi mathvariant="normal">‘</mi></mrow><annotation encoding="application/x-tex">display (“显示格式控制符”, &lt;输出变量（信号）列表&gt;);,例如`</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">d</span><span class="mord mathdefault">i</span><span class="mord mathdefault">s</span><span class="mord mathdefault">p</span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">a</span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mopen">(</span><span class="mord">“</span><span class="mord cjk_fallback">显</span><span class="mord cjk_fallback">示</span><span class="mord cjk_fallback">格</span><span class="mord cjk_fallback">式</span><span class="mord cjk_fallback">控</span><span class="mord cjk_fallback">制</span><span class="mord cjk_fallback">符</span><span class="mord">”</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.5782em;vertical-align:-0.0391em;"></span><span class="mord cjk_fallback">输</span><span class="mord cjk_fallback">出</span><span class="mord cjk_fallback">变</span><span class="mord cjk_fallback">量</span><span class="mord cjk_fallback">（</span><span class="mord cjk_fallback">信</span><span class="mord cjk_fallback">号</span><span class="mord cjk_fallback">）</span><span class="mord cjk_fallback">列</span><span class="mord cjk_fallback">表</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">&gt;</span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mclose">)</span><span class="mpunct">;</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord cjk_fallback">例</span><span class="mord cjk_fallback">如</span><span class="mord">‘</span></span></span></span>display ($time, &quot; a = %b b = %b c = %b y = %b&quot;, a, b, c, y);``%`</td>
+</tr>
+<tr>
+<td>$moniter</td>
+<td>和display作用类似，都是输出到控制台，不同的是display只有运行到display语句才会执行，而moniter只要显示的量改变就会执行</td>
+</tr>
+<tr>
+<td>$finish / $finish(n)</td>
+<td>中断仿真， n是中断仿真的时间</td>
+</tr>
+<tr>
+<td>$stop</td>
+<td>和finish用法相同</td>
+</tr>
+<tr>
+<td>$readmemb</td>
+<td>从文件中读取二进制数据，$readmemb (“数据文件名”, 数组（存储器）名, &lt;起始地址&gt;, &lt;结束地址&gt;);</td>
+</tr>
+<tr>
+<td>$readmemb</td>
+<td>从文件中读取十六进制数据</td>
+</tr>
+<tr>
+<td>$fopen</td>
+<td>$fopen(“文件名“, “操作模式“); 打开文件，操作模式有w,w+, a, a+。fopen会返回一个int型值，可以被fclose用来关闭文件</td>
+</tr>
+<tr>
+<td>$fclose</td>
+<td>关闭文件</td>
+</tr>
+</tbody>
+</table>
+<p><strong>打开文件将控制台输入导入文件示例</strong></p>
+<figure class="highlight gams"><table><tr><td class="code"><pre><span class="line">int MCD;</span><br><span class="line">MCD = <span class="symbol">$</span>fopen(“文件名“, “操作模式“);</span><br><span class="line"><span class="meta"><span class="meta-keyword">$fdisplay</span>( MCD, “显示格式控制符”, &lt;输出变量（信号）列表&gt;);</span></span><br><span class="line"><span class="meta"><span class="meta-keyword">$fmonitor</span>( MCD, “显示格式控制符”, &lt;输出变量（信号）列表&gt;);</span></span><br><span class="line"><span class="meta"><span class="meta-keyword">$fclose</span>( MCD);</span></span><br></pre></td></tr></table></figure>
+<p>display的<code>%</code>后面的参数可以为</p>
+<table>
+<thead>
+<tr>
+<th>%h</th>
+<th>%o</th>
+<th>%d</th>
+<th>%b</th>
+<th>%c</th>
+<th>%s</th>
+<th>%t</th>
+<th>%m</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>16进制</td>
+<td>8</td>
+<td>10</td>
+<td>2</td>
+<td>ASCII</td>
+<td>字符串</td>
+<td>时间</td>
+<td>模块名</td>
+</tr>
+</tbody>
+</table>
 ]]></content>
       <categories>
         <category>逻辑电路</category>
