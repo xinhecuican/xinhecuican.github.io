@@ -1392,6 +1392,13 @@
   </url>
   
   <url>
+    <loc>http://xinhecuican.github.io/categories/%E9%80%86%E5%90%91/</loc>
+    <lastmod>2021-04-23</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://xinhecuican.github.io/categories/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97/</loc>
     <lastmod>2021-04-23</lastmod>
     <changefreq>daily</changefreq>
@@ -1399,7 +1406,7 @@
   </url>
   
   <url>
-    <loc>http://xinhecuican.github.io/categories/%E9%80%86%E5%90%91/</loc>
+    <loc>http://xinhecuican.github.io/categories/Linux/</loc>
     <lastmod>2021-04-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1414,13 +1421,6 @@
   
   <url>
     <loc>http://xinhecuican.github.io/categories/java/</loc>
-    <lastmod>2021-04-23</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://xinhecuican.github.io/categories/Linux/</loc>
     <lastmod>2021-04-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
