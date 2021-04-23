@@ -1348,14 +1348,14 @@
   </url>
   
   <url>
-    <loc>http://xinhecuican.github.io/tags/%E5%BF%AB%E6%8E%92/</loc>
+    <loc>http://xinhecuican.github.io/tags/%E6%8E%92%E5%BA%8F/</loc>
     <lastmod>2021-04-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://xinhecuican.github.io/tags/%E6%8E%92%E5%BA%8F/</loc>
+    <loc>http://xinhecuican.github.io/tags/%E5%BF%AB%E6%8E%92/</loc>
     <lastmod>2021-04-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1378,6 +1378,13 @@
   </url>
   
   <url>
+    <loc>http://xinhecuican.github.io/categories/stl/</loc>
+    <lastmod>2021-04-23</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>http://xinhecuican.github.io/categories/%E7%AE%97%E6%B3%95/</loc>
     <lastmod>2021-04-23</lastmod>
     <changefreq>daily</changefreq>
@@ -1385,7 +1392,7 @@
   </url>
   
   <url>
-    <loc>http://xinhecuican.github.io/categories/stl/</loc>
+    <loc>http://xinhecuican.github.io/categories/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97/</loc>
     <lastmod>2021-04-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1497,14 +1504,14 @@
   </url>
   
   <url>
-    <loc>http://xinhecuican.github.io/categories/windows/</loc>
+    <loc>http://xinhecuican.github.io/categories/%E6%95%B0%E5%AD%A6/</loc>
     <lastmod>2021-04-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>http://xinhecuican.github.io/categories/%E6%95%B0%E5%AD%A6/</loc>
+    <loc>http://xinhecuican.github.io/categories/windows/</loc>
     <lastmod>2021-04-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1561,13 +1568,6 @@
   
   <url>
     <loc>http://xinhecuican.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL/</loc>
-    <lastmod>2021-04-23</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://xinhecuican.github.io/categories/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97/</loc>
     <lastmod>2021-04-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
