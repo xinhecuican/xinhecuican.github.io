@@ -3,7 +3,7 @@
   font-family:'myfont' ;  /* 字体名自定义即可 */
   src:url('https://cdn.jsdelivr.net/gh/xinhecuican/xinhecuican.github.io/fonts/小楷字体SJ2.ttf'); /* 字体文件路径 */
   font-display : swap;
-  font-weight: 700;
+  font-weight: 500;
 }
 
 @font-face
@@ -38,7 +38,6 @@ a#site-name
 #recent-posts>.recent-post-item, .layout_page>div:first-child:not(.recent-posts), .layout>#page, .layout>#post, .read-mode .layout_post>#post{
     /* 以下代表白色透明度为0.3 */
     background: rgba(255,255,255,.0);
-	
 }
 
 

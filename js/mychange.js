@@ -14,3 +14,20 @@ if(document.domain != 'localhost')
 		}
     }
 }
+
+var banner_index1 = Math.ceil(Math.random() * 3518);
+document.getElementById("page-header").style.backgroundImage = "url(https://cdn.jsdelivr.net/gh/xinhecuican/Resources/img/pic_" + banner_index1 + ".jpg)";
+console.log(document.getElementById("page-header").style);
+
+if(document.getElementById("recent-posts"))
+{
+	for(var key in document.getElementById("recent-posts").getElementsByTagName('img'))
+	{
+		if(isNaN(key))
+		{
+			break;
+		}
+		var banner_index = Math.ceil(Math.random() * 3518)
+		document.getElementById("recent-posts").getElementsByTagName('img')[key].src = "https://cdn.jsdelivr.net/gh/xinhecuican/Resources/img/pic_" + banner_index + ".jpg";
+	}
+}
