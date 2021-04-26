@@ -4,6 +4,8 @@ if(document.domain != 'localhost')
 {
 	if(document.getElementById("post"))
 	{
+		var banner_index1 = Math.ceil(Math.random() * 3518);
+		document.getElementById("page-header").style.backgroundImage = "url(https://cdn.jsdelivr.net/gh/xinhecuican/Resources/img/pic_" + banner_index1 + ".jpg)";
 		for (var key in document.getElementById("article-container").getElementsByTagName('img'))
 		{
   			if (isNaN(key))
@@ -15,9 +17,7 @@ if(document.domain != 'localhost')
     }
 }
 
-var banner_index1 = Math.ceil(Math.random() * 3518);
-document.getElementById("page-header").style.backgroundImage = "url(https://cdn.jsdelivr.net/gh/xinhecuican/Resources/img/pic_" + banner_index1 + ".jpg)";
-console.log(document.getElementById("page-header").style);
+
 
 if(document.getElementById("recent-posts"))
 {
