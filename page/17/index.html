@@ -52,7 +52,7 @@
   isHome: true,
   isHighlightShrink: false,
   isToc: false,
-  postUpdate: '2021-05-09 20:09:48'
+  postUpdate: '2021-05-11 20:30:25'
 }</script><noscript><style type="text/css">
   #nav {
     opacity: 1
@@ -144,78 +144,7 @@
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
 <!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Xinhecuican's Blog" type="application/atom+xml">
-</head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/null" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">186</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">Tags</div><div class="length-num">6</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">Categories</div><div class="length-num">29</div></a></div></div></div><hr><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Xinhecuican's Blog</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">Xinhecuican's Blog</h1><div id="site-subtitle"><span id="subtitle"></span></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="post_cover left_radius"><a href="/post/26671.html" title="队列">     <img class="post_bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="队列"></a></div><div class="recent-post-info"><a class="article-title" href="/post/26671.html" title="队列">队列</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-01-13T08:05:00.000Z" title="Created 2020-01-13 16:05:00">2020-01-13</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/stl/">stl</a></span></div><div class="content"> 队列基础
-队列是一种线性结构，有队头（front）队尾（rear）两个指针，每次拉进来一个元素会让队尾加一，而每次删除一个元素会让队头加一，这是一种先进先出的结构。
-队列特殊情况判断
-空队列 front=rear
-满队列 rear-front=N（N指的是开的数组的大小）
-POP 从队头删元素
-push 拉元素到队尾
-struct duilie&#123;    int a[N];    int front ,rear;    void restart()    &#123;        front=rear=0;    &#125;    bool empty()    &#123;        return (rear-front)==0?true:false;    &#125;    bool full()    &#123;        return rear-front==N-1?true:false;    &#125;    int top()    &#123;        return a[front];    &#125;    bool push(in ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/post/63711.html" title="归并排序">     <img class="post_bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="归并排序"></a></div><div class="recent-post-info"><a class="article-title" href="/post/63711.html" title="归并排序">归并排序</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-01-13T06:31:00.000Z" title="Created 2020-01-13 14:31:00">2020-01-13</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%AE%97%E6%B3%95/">算法</a></span></div><div class="content"> 基本原理
-归并排序运用了分治的思想，先将数组二分成一个元素（一个元素时看为有序），然后将这些元素不断合并，每合并一次排一次序，最后就可以得到有序的数组。
-比如说一个序列:12 ,23,1,44,233,10,9,8。我们先分成两段：12 ,23,1,44 和 233,10,9,8，
-发现还能再分成4段：12 ,23 和 1,44------233,10 和 9,8。
-再分成8段：12–23–1--44 和233–10–9--8。
-这时候开始把子序列进行排序合并，一个元素就是有序的。所以不用排序。
-合并成2个一组排序得到：12，23----1，44—10，233—8，9。
-再合并成4个一组排序得到：1，12，23，44—8，9，10，233。
-最后合并得到最终结果：1，8，9，10，12，23，44，233。
-合并过程看代码
-链接：https://www.jianshu.com/p/b50a6034eb90
- 图解
-
-这个图片蓝色部分就是拆的过程，而绿的部分为并的过程
- 代码实现
-void paixu(int first,int mid,int last,int a[],int tem ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/post/26737.html" title="前缀和">     <img class="post_bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="前缀和"></a></div><div class="recent-post-info"><a class="article-title" href="/post/26737.html" title="前缀和">前缀和</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-01-13T01:16:00.000Z" title="Created 2020-01-13 09:16:00">2020-01-13</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%AE%97%E6%B3%95/">算法</a></span></div><div class="content"> 前缀和概念
-前缀和指的是用另一个数组b[n]来保存a[n]中前n项的和
-例如，b[0]=a[0],b[1]=a[0]+a[1],…
- 应用
- 求数组某一区间长度数字的和
-如果我给你一串长度为n的数列a1,a2,a3…an,再给出m个询问，每次询问给出L，R两个数，要求给出区间[L,R]里的数的和，一般可能是从L到R遍历一次，但这样很花时间，有了前缀和之后可以直接b[R]-b[L]就得到L到R的和
- 差分
-差分就是将数列中的每一项分别与前一项数做差
-一个序列1 2 5 4 7 3，差分后得到1 1 3 -1 3 -4 -3
-这里注意得到的差分序列第一个数和原来的第一个数一样（相当于第一个数减0）
-差分序列最后比原序列多一个数（相当于0减最后一个数）
-例 给你一串长度为n的数列a1,a2,a3…an，要求对a[L]~a[R]进行m次操作：
-操作一：将a[L]~a[R]内的元素都加上P
-操作二：将a[L]~a[R]内的元素都减去P
-最后再给出一个询问求a[L]-a[R]内的元素之和？
-如果用一般做法就是遍历加减，时间复杂度高，现在可以直接让b[L] 加上P，再让b[R+1]减去P，这样因为 ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/post/46466.html" title="memset">     <img class="post_bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="memset"></a></div><div class="recent-post-info"><a class="article-title" href="/post/46466.html" title="memset">memset</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-01-11T10:52:00.000Z" title="Created 2020-01-11 18:52:00">2020-01-11</time></span></div><div class="content">memset(标识符，填充数据,大小)
-memset是一个字节一个字节填充的，所以一般只能填充0或-1因为这个一个字节和四个字节相同
-</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/post/54778.html" title="快速输入">     <img class="post_bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="快速输入"></a></div><div class="recent-post-info"><a class="article-title" href="/post/54778.html" title="快速输入">快速输入</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-01-11T10:47:00.000Z" title="Created 2020-01-11 18:47:00">2020-01-11</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%AE%97%E6%B3%95/">算法</a></span></div><div class="content">inline int read()&#123;    int x=0,f=1;    char ch=getchar();    while (ch&lt;&#x27;0&#x27;||ch&gt;&#x27;9&#x27;)&#123;if (ch==&#x27;-&#x27;) f=-1;ch=getchar();&#125;    while (ch&gt;=&#x27;0&#x27;&amp;&amp;ch&lt;=&#x27;9&#x27;)&#123;x=x*10+ch-&#x27;0&#x27;;ch=getchar();&#125;    return x*f;    &#125;
-这个快速输入只适合int类型，另外如果参加比赛，最好不要用cin，cout，速度较慢
-用scanf，printf更好
-</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/post/5490.html" title="qsort">     <img class="post_bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="qsort"></a></div><div class="recent-post-info"><a class="article-title" href="/post/5490.html" title="qsort">qsort</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-01-11T10:46:00.000Z" title="Created 2020-01-11 18:46:00">2020-01-11</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/stl/">stl</a></span></div><div class="content">自带的快排函数
-qsortvoid qsort(void *base, size_t nitems, size_t size, int (*compar)(const void , const void))
-参数
-base-- 指向要排序的数组的第一个元素的指针。
-nitems-- 由 base 指向的数组中元素的个数。
-size-- 数组中每个元素的大小，以字节为单位。
-compar-- 用来比较两个元素的函数，即函数指针（回调函数）
-回调函数：
-回调函数就是一个通过函数指针调用的函数。如果把函数的指针（地址）作为参数传递给另一个函数，当这个指针被用来调用其所指向的函数时，就说这是回调函数。 [2]
-compar参数
-compar参数指向一个比较两个元素的函数。比较函数的原型应该像下面这样。注意两个形参必须是const void *型，同时在调用compar 函数（compar实质为函数指针，这里称它所指向的函数也为compar）时，传入的实参也必须转换成const void *型。在compar函数内部会将const void *型转换成实际类型。
-int compar(const ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/post/27621.html" title="pair">     <img class="post_bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="pair"></a></div><div class="recent-post-info"><a class="article-title" href="/post/27621.html" title="pair">pair</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-01-11T10:28:00.000Z" title="Created 2020-01-11 18:28:00">2020-01-11</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/stl/">stl</a></span></div><div class="content">pair实际上是一个结构体，它可以把两种类型结合起来使用,定义在&lt;utility&gt;中
-定义：pair&lt;类型A,类型B&gt; 标识符
-操作 pa.first 表示类型A pa.second 表示类型B
-注意不能用-> 操作符，虽然我也不知道为什么
-</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/post/37318.html" title="迭代器支持的运算">     <img class="post_bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="迭代器支持的运算"></a></div><div class="recent-post-info"><a class="article-title" href="/post/37318.html" title="迭代器支持的运算">迭代器支持的运算</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-01-11T10:12:00.000Z" title="Created 2020-01-11 18:12:00">2020-01-11</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/stl/">stl</a></span></div><div class="content">之前写搜狗在线测试题目的时候，曾经想遍历一个set遍历。当时是这样写的。
-set::iterator b = a.begin()+1
-后来发现程序报错。究其原因是，set迭代器不支持加减数操作。
-查看了一下维基百科，下面是有关说明。
-1.所有迭代器都应该实现自增算符：iter++,++iter
-2.Bidirectional迭代器：是在前向迭代器的基础上，多了单步向后遍历的能力。也就是–iter,iter–。
-3.Random Access迭代器：在双向迭代器基础上，具有直接访问各数据元素的能力。随机迭代器增加了“迭代器算术运算”：
-iter+=i 迭代器递增i位
-iter-=i 迭代器递减i位
-iter+i 加i位后的迭代器
-iter-i 减i位后的迭代器
-iter[i] 加i位后的迭代器的解引用
-iter&lt;iter1 如果迭代器iter的位置在iter1前，返回true，否则返回false
-iter&lt;=iter1 如果iter的位置在iter1的前面或同一位置时返回true，否则返回false
-iter&gt;iter1 如果迭代器iter的位置在iter1后，返回tr ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/post/54708.html" title="vector">     <img class="post_bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="vector"></a></div><div class="recent-post-info"><a class="article-title" href="/post/54708.html" title="vector">vector</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-01-11T08:21:00.000Z" title="Created 2020-01-11 16:21:00">2020-01-11</time></span></div><div class="content"> vector的定义
+</head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/null" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">186</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">Tags</div><div class="length-num">6</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">Categories</div><div class="length-num">29</div></a></div></div></div><hr><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Xinhecuican's Blog</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">Xinhecuican's Blog</h1><div id="site-subtitle"><span id="subtitle"></span></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="post_cover left_radius"><a href="/post/54708.html" title="vector">     <img class="post_bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="vector"></a></div><div class="recent-post-info"><a class="article-title" href="/post/54708.html" title="vector">vector</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-01-11T08:21:00.000Z" title="Created 2020-01-11 16:21:00">2020-01-11</time></span></div><div class="content"> vector的定义
 vector&lt;数据类型&gt; 标识符
  vector的函数
 begin()返回开头元素的迭代器
@@ -234,13 +163,162 @@ sort排序，也要用&lt;algorithm&gt;默认升序
 bool Comp(const int &amp;a,const int &amp;b)&#123;    return a&gt;b;&#125;
 调用时:sort(vec.begin(),vec.end(),Comp)，这样就降序排序。
  二维数组
- ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/post/54612.html" title="prioity_queue">     <img class="post_bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="prioity_queue"></a></div><div class="recent-post-info"><a class="article-title" href="/post/54612.html" title="prioity_queue">prioity_queue</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-01-11T08:13:00.000Z" title="Created 2020-01-11 16:13:00">2020-01-11</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/stl/">stl</a></span></div><div class="content"> prioity_queue
+ ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/post/35532.html" title="unix文件系统">     <img class="post_bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="unix文件系统"></a></div><div class="recent-post-info"><a class="article-title" href="/post/35532.html" title="unix文件系统">unix文件系统</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-03-30T12:50:00.000Z" title="Created 2020-03-30 20:50:00">2020-03-30</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Linux/">Linux</a></span></div><div class="content">文件就是任意源，有一个名称，可以从中写入读出数据。
+ 文件类型
+unix中有三种文件类型，普通文件，目录和伪文件。
+普通文件是大多数时候所使用的文件，包括文本文件和二进制文件。例如，纯文本，shell脚本，源程序，配置文件，html文件等。
+目录不同之处在于他们用来组织，访问其他文件。从概念上讲，目录包含其他文件。这个文件其实类似于windows下的文件夹。
+伪文件有时候也称为设备文件。这种文件是物理设备的内部表示。例如键盘，显示器，打印机等，这些设备都可以当成一个文件进行访问。
+有一种特殊的伪文件时proc文件，这种文件可以访问linux内核中的信息，设置可以修改Linux内核中的数据。
+ 特殊文件
+特殊文件就是表示物理设备的伪文件。这些文件都被存放于/dev下
+一些常见的设备如下
+
+
+
+位置
+硬件
+
+
+
+
+/dev/sda
+SCSI硬盘
+
+
+/dev/sda
+第一分区
+
+
+/dev/hda
+硬盘
+
+
+/dev/Ip0
+打印机
+
+
+/dev/tty
+当前终端
+
+
+/dev/random
+随机数生成器
+
+
+/dev/null
+放弃输入 输入不返回内容
+
+
+/dev/zero
+放弃送站， ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/post/44250.html" title="set">     <img class="post_bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="set"></a></div><div class="recent-post-info"><a class="article-title" href="/post/44250.html" title="set">set</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-01-11T08:08:00.000Z" title="Created 2020-01-11 16:08:00">2020-01-11</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/stl/">stl</a></span></div><div class="content"> set之iterator
+定义：set::iterator iter
+运用：*iter
+遍历 for(iter=set.begin();iter!=set.end();iter++)
+还可以直接用auto it=set.begin() (auto是自动匹配类型)
+注意
+iterator只能用++，–运算符。不能*（iter-1），另外还要注意iter++后自身会改变
+例：set中有0,2,4，iter指向2，现在cout&lt;&lt;iter&lt;&lt;&quot; &quot;&lt;&lt;(iter–)&lt;&lt;endl;
+输出0,2，先执行iter–，我也不知道为什么
+ set之lower_bound()
+lower_bound()返回从first开始的第一个大于或等于val的元素的地址。如果所有元素都小于val，则返回last的地址，所以必须要
+set&lt;int&gt;::iterator iter;iter=st.lower_bound(一个数字)
+upper_bound()返回最后一个大于等于val的元素的地址
+ set基础
+定义：set&lt;数据类型 ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/post/10919.html" title="unix基础">     <img class="post_bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="unix基础"></a></div><div class="recent-post-info"><a class="article-title" href="/post/10919.html" title="unix基础">unix基础</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-02-13T03:25:00.000Z" title="Created 2020-02-13 11:25:00">2020-02-13</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Linux/">Linux</a></span></div><div class="content">
+操作系统有初始化功能，初始化过程只是引导过程的一部分
+
+引导过程是计算机启动时会运行一个小程序，然后再运行另一个程序，逐层运行，最后运行一个十分复杂的程序，这个程序名字是内核。
+内核是操作系统的核心，因此只要计算机开启，内核边一直运行。
+内核可以分为微内核和单内核两种。单内核较大，运行速度较快，但是由于没有采用模块化设计，维护修改比较困难。而微内核自己只能运行最基本的功能，其他功能要交给服务器去运行（微内核调用的其他程序），微内核速度慢，但适用于定制化的任务，如移动电话。
+ unix=内核+使用工具
+只有内核并不能带来很好的用户体验，因此还有许多其他的程序。最重要的是为用户提供计算机界面的程序，shell 和 GUI。
+shell 是一种提供基于文本的界面的程序，也就是平时所说的命令提示符。
+而 GUI（graphical user interface）是使用窗口，鼠标指针，图标等提供图形界面.
+这些工具称为Unix实用工具，有几百个。
+ 服务器和客户端
+早期由于主机昂贵而终端便宜，所以经常是多个主机连接一个终端。因此服务器和客户端的概念也因此产生。
+提供某种类型的服务的程序叫做服务 ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/post/38145.html" title="si和di">     <img class="post_bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="si和di"></a></div><div class="recent-post-info"><a class="article-title" href="/post/38145.html" title="si和di">si和di</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-01-24T00:32:00.000Z" title="Created 2020-01-24 08:32:00">2020-01-24</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%B1%87%E7%BC%96/">汇编</a></span></div><div class="content">si和di在8086cpu中的功能与bx类似，si与di不能分为两个8位寄存器来使用
+也就是说  ds：[si]是可以的
+如果不用这些寄存器直接写的话就会出现之前所说的编译器和exe对程序的不同处理
+例   mov ax,[si]在exe中就是 ds：[si]，但是如果是 mov，ax,[1]在exe中就是把ax中的数据放入1中
+甚至可以直接用[bx+si]的方式或[bx+si+idata]的方式来指明内存地址
+ 不同寻址方式的比较
+[idata]用于一个常量的寻址，直接定位一个内存单元
+[bx]用于一个变量来表示内存地址，间接定位内存单元
+只有bx,bp,di,si具有寻址能力，例如ds:[dx]等都是错误的
+并且这几个寄存器间组合还有要求，只有bx+si,bx+di,bp+si,bp+di这四种情况是正确的
+只要使用bp，它的段寄存器默认为ss
+</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/post/46925.html" title="scanf printf">     <img class="post_bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="scanf printf"></a></div><div class="recent-post-info"><a class="article-title" href="/post/46925.html" title="scanf printf">scanf printf</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-01-13T12:18:00.000Z" title="Created 2020-01-13 20:18:00">2020-01-13</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%9F%BA%E7%A1%80/">基础</a></span></div><div class="content"> scanf
+格式：scanf(const char *format, …)
+format – 这是 C 字符串，包含了以下各项中的一个或多个：空格字符、非空格字符 和 format 说明符。
+format 说明符形式为:
+[=%[*][width][modifiers]type=]
+*这是一个可选的星号，表示数据是从流 stream 中读取的，但是可以被忽视，即它不存储在对应的参数中。
+width	这指定了在当前读取操作中读取的最大字符数。
+modifiers	为对应的附加参数所指向的数据指定一个不同于整型（针对 d、i 和 n）、无符号整型（针对 o、u 和 x）或浮点型（针对 e、f 和 g）的大小： h ：短整型（针对 d、i 和 n），或无符号短整型（针对 o、u 和 x） l ：长整型（针对 d、i 和 n），或无符号长整型（针对 o、u 和 x），或双精度型（针对 e、f 和 g） L ：长双精度型（针对 e、f 和 g）
+type	一个字符，指定了要被读取的数据类型以及数据读取方式。具体参见下一个表格
+
+
+
+符号
+作用
+具体含义
+
+
+
+
+%a、%A
+读入一个浮点值(仅  ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/post/9197.html" title="union">     <img class="post_bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="union"></a></div><div class="recent-post-info"><a class="article-title" href="/post/9197.html" title="union">union</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-03-15T04:52:00.000Z" title="Created 2020-03-15 12:52:00">2020-03-15</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E5%9F%BA%E7%A1%80/">基础</a></span></div><div class="content">首先看一下结构体，c语言中的结构体占用字节数是所有类型字节数的总和。
+例如：
+struct node&#123;    int a;    int b;&#125;
+用sizeof测试一下结果是8，但是如果用union呢？会发现结果是4
+union中的参数共用同一块内存空间，它们在内存中起始地址都相同，也就是说同一时间内联合体中其实只会有一个参数存在，当另一个参数被赋值时，此时内存中存的就是另一个参数的值，而前面的参数会被覆盖
+但是size并不一定是根据最长的那个长度来决定的（实测不是，但是不懂），还要考虑内存对齐的问题
+如果此时已经给某一变量赋上了值，再用另外一个变量输出，那么内存中的编码并不会改变，只是会按找相应类型的编码方式进行编码然后输出。
+
+在c++中的使用
+
+大致相同，但是union中不能有类，如果我们在再类CA中添加了构造函数，或者添加析构函数，我们就会发现程序就会出现错误。由于union里面的东西共享内存，所以不能定义静态、引用类型的变量。由于在union里也不允许存放带有构造函数、析构函数和复制构造函数等的类的对象，但是可以存放对应的类对象指针
+
+应用 类型转换
+
+因 ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/post/27621.html" title="pair">     <img class="post_bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="pair"></a></div><div class="recent-post-info"><a class="article-title" href="/post/27621.html" title="pair">pair</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-01-11T10:28:00.000Z" title="Created 2020-01-11 18:28:00">2020-01-11</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/stl/">stl</a></span></div><div class="content">pair实际上是一个结构体，它可以把两种类型结合起来使用,定义在&lt;utility&gt;中
+定义：pair&lt;类型A,类型B&gt; 标识符
+操作 pa.first 表示类型A pa.second 表示类型B
+注意不能用-> 操作符，虽然我也不知道为什么
+</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/post/54612.html" title="prioity_queue">     <img class="post_bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="prioity_queue"></a></div><div class="recent-post-info"><a class="article-title" href="/post/54612.html" title="prioity_queue">prioity_queue</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-01-11T08:13:00.000Z" title="Created 2020-01-11 16:13:00">2020-01-11</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/stl/">stl</a></span></div><div class="content"> prioity_queue
 实际上是一个大顶堆，定义在&lt;queue&gt;中
 prioity_queue&lt;int&gt; qu为大顶堆
 priority_queue&lt;int,vector&lt;int&gt;,greater&lt;int&gt; &gt; qu;为小顶堆
 .push()
 .pop()取出元素，但不返回值
 .top()不取出元素，返回值
+</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/post/29378.html" title="ret 和 retf">     <img class="post_bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="ret 和 retf"></a></div><div class="recent-post-info"><a class="article-title" href="/post/29378.html" title="ret 和 retf">ret 和 retf</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-01-27T01:59:00.000Z" title="Created 2020-01-27 09:59:00">2020-01-27</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%B1%87%E7%BC%96/">汇编</a></span></div><div class="content"> ret
+ret指令用栈中的数据，修改ip中的内容，从而实现近转移
+过程：
+
+
+ip=ss*16+sp
+
+
+sp+=2
+
+
+相当于 pop ip
+ retf
+修改cs和ip 的内容，实现远转移
+过程
+
+ip=ss*16+sp
+sp+=2
+cs=ss*16+sp
+sp+=2
+
+相当于 pop ip ，pop cs
+例
+assume cs:code,ss:stackstack segment    db 16 dup (0)stack endscode segment    mov ax,4c00h    int 21hstart:mov ax,stack    mov ss,ax    mov sp,16    mov ax,0    push ax    mov bx,0    retcode endsend start
+这条指令相当于把ip变为0，指向第一条指令
 </div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/16/"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><span class="page-number current">17</span><a class="page-number" href="/page/18/">18</a><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/18/"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-newest-comments"><div class="item-headline"><i class="fas fa-bolt"></i><span>Newest Comments</span></div><div class="aside-list"><span>loading...</span></div></div><div class="card-widget card-categories"><div class="item-headline">
             <i class="fas fa-folder-open"></i>
             <span>Categories</span>
@@ -250,7 +328,7 @@ priority_queue&lt;int,vector&lt;int&gt;,greater&lt;int&gt; &gt; qu;为小顶堆
             <ul class="card-category-list" id="aside-cat-list">
             <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Linux/"><span class="card-category-list-name">Linux</span><span class="card-category-list-count">13</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Python/"><span class="card-category-list-name">Python</span><span class="card-category-list-count">3</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Unity/"><span class="card-category-list-name">Unity</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/c/"><span class="card-category-list-name">c++</span><span class="card-category-list-count">3</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/html/"><span class="card-category-list-name">html</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/java/"><span class="card-category-list-name">java</span><span class="card-category-list-count">23</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/js/"><span class="card-category-list-name">js</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/next/"><span class="card-category-list-name">next</span><span class="card-category-list-count">1</span></a></li>
             </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>Tags</span></div><div class="card-tag-cloud"><a href="/tags/AT-T/" style="font-size: 1.1em; color: #999">AT&T</a> <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 1.3em; color: #99a1ac">动态规划</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" style="font-size: 1.5em; color: #99a9bf">字符串</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E5%B8%B8%E9%87%8F/" style="font-size: 1.1em; color: #999">字符常量</a> <a href="/tags/%E5%BF%AB%E6%8E%92/" style="font-size: 1.1em; color: #999">快排</a> <a href="/tags/%E6%8E%92%E5%BA%8F/" style="font-size: 1.1em; color: #999">排序</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>Archives</span><a class="card-more-btn" href="/archives/" title="More">
-    <i class="fas fa-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/05/"><span class="card-archive-list-date">May 2021</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/04/"><span class="card-archive-list-date">April 2021</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/03/"><span class="card-archive-list-date">March 2021</span><span class="card-archive-list-count">9</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/02/"><span class="card-archive-list-date">February 2021</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/01/"><span class="card-archive-list-date">January 2021</span><span class="card-archive-list-count">6</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/12/"><span class="card-archive-list-date">December 2020</span><span class="card-archive-list-count">6</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/11/"><span class="card-archive-list-date">November 2020</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/10/"><span class="card-archive-list-date">October 2020</span><span class="card-archive-list-count">4</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">Article :</div><div class="item-count">186</div></div><div class="webinfo-item"><div class="item-name">Total Count :</div><div class="item-count">249.1k</div></div><div class="webinfo-item"><div class="item-name">UV :</div><div class="item-count" id="busuanzi_value_site_uv"></div></div><div class="webinfo-item"><div class="item-name">PV :</div><div class="item-count" id="busuanzi_value_site_pv"></div></div><div class="webinfo-item"><div class="item-name">Last Push :</div><div class="item-count" id="last-push-date" data-lastpushdate="2021-05-09T12:09:43.363Z"></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By 星河璀璨</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="external nofollow noopener noreferrer" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="font-plus" type="button" title="Increase font size"><i class="fas fa-plus"></i></button><button id="font-minus" type="button" title="Decrease font size"><i class="fas fa-minus"></i></button><button id="translateLink" type="button" title="Toggle Between Traditional Chinese And Simplified Chinese">繁</button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button id="chat_btn" type="button" title="rightside.chat_btn"><i class="fas fa-sms"></i></button><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">Local search</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"></div></div></div><hr><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script>function panguFn () {
+    <i class="fas fa-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/05/"><span class="card-archive-list-date">May 2021</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/04/"><span class="card-archive-list-date">April 2021</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/03/"><span class="card-archive-list-date">March 2021</span><span class="card-archive-list-count">9</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/02/"><span class="card-archive-list-date">February 2021</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/01/"><span class="card-archive-list-date">January 2021</span><span class="card-archive-list-count">6</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/12/"><span class="card-archive-list-date">December 2020</span><span class="card-archive-list-count">6</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/11/"><span class="card-archive-list-date">November 2020</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/10/"><span class="card-archive-list-date">October 2020</span><span class="card-archive-list-count">4</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">Article :</div><div class="item-count">186</div></div><div class="webinfo-item"><div class="item-name">Total Count :</div><div class="item-count">250.8k</div></div><div class="webinfo-item"><div class="item-name">UV :</div><div class="item-count" id="busuanzi_value_site_uv"></div></div><div class="webinfo-item"><div class="item-name">PV :</div><div class="item-count" id="busuanzi_value_site_pv"></div></div><div class="webinfo-item"><div class="item-name">Last Push :</div><div class="item-count" id="last-push-date" data-lastpushdate="2021-05-11T12:30:20.585Z"></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By 星河璀璨</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="external nofollow noopener noreferrer" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="font-plus" type="button" title="Increase font size"><i class="fas fa-plus"></i></button><button id="font-minus" type="button" title="Decrease font size"><i class="fas fa-minus"></i></button><button id="translateLink" type="button" title="Toggle Between Traditional Chinese And Simplified Chinese">繁</button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button id="chat_btn" type="button" title="rightside.chat_btn"><i class="fas fa-sms"></i></button><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">Local search</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"></div></div></div><hr><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script>function panguFn () {
   if (typeof pangu === 'object') pangu.autoSpacingPage()
   else {
     getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')

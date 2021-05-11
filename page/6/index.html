@@ -52,7 +52,7 @@
   isHome: true,
   isHighlightShrink: false,
   isToc: false,
-  postUpdate: '2021-05-09 20:09:48'
+  postUpdate: '2021-05-11 20:30:25'
 }</script><noscript><style type="text/css">
   #nav {
     opacity: 1
@@ -144,170 +144,292 @@
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
 <!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Xinhecuican's Blog" type="application/atom+xml">
-</head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/null" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">186</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">Tags</div><div class="length-num">6</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">Categories</div><div class="length-num">29</div></a></div></div></div><hr><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Xinhecuican's Blog</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">Xinhecuican's Blog</h1><div id="site-subtitle"><span id="subtitle"></span></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="post_cover left_radius"><a href="/post/235252ea.html" title="python wxpython">     <img class="post_bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="python wxpython"></a></div><div class="recent-post-info"><a class="article-title" href="/post/235252ea.html" title="python wxpython">python wxpython</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-07-08T00:58:00.000Z" title="Created 2020-07-08 08:58:00">2020-07-08</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Python/">Python</a></span></div><div class="content"> 事件处理
-事件就是状态改变时发出的信号，然后你可以通过绑定指定一个函数去处理。例如按下按钮就产生了一个事件，之后可以让一个函数去处理按下按钮之后的反应。
-绑定函数使用 Bind(event, handler, source=None, id=wx.ID_ANY, id2=wx.ID_ANY).event是产生的事件，handler是处理事件的方法,source是触发事件的对象。
-例如 Bind(wx.EVT_BUTTON, self.Button_enter, button1)这样button1按下时会使用Button_enter函数
- Frame
-方法： Wx.Frame (parent, id, title, pos, size, style, name)
+</head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/null" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">186</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">Tags</div><div class="length-num">6</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">Categories</div><div class="length-num">29</div></a></div></div></div><hr><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Xinhecuican's Blog</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">Xinhecuican's Blog</h1><div id="site-subtitle"><span id="subtitle"></span></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="post_cover left_radius"><a href="/post/26477.html" title="linux指令学习">     <img class="post_bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="linux指令学习"></a></div><div class="recent-post-info"><a class="article-title" href="/post/26477.html" title="linux指令学习">linux指令学习</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-02-16T02:20:00.000Z" title="Created 2020-02-16 10:20:00">2020-02-16</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Linux/">Linux</a></span></div><div class="content"> 命令语法
+一次输入多条命令，可以在命令之间用 ;分割开来
+语法： 命令名称 选项 参数
+选项有时被称为开关（switches）或标志（flags），选项通常是由一个连字符后面接着一些字母，或者两个连字符后接着一个单词构成。例如 --help，–version（显示版本信息）
+使用多个单字符选项时，可以把他们连接在一起，用一个连字符来表示。例如 ls -lF
+。注意，unix的选项区分大小写
+实际上许多长参数有着对应的短参数，但是长参数是一个完整的单词，为了便于记忆，有时也是用长参数，这时就要用两个连字符
+输入命令时，必须要把每个选项和参数用空格分隔开
+有些命令有默认值，有些命令没有默认值，例如 ls 如果只输入ls的话他会返回当前工作目录下所有文件
+手册中提示的语法
 
-parent是窗口父类，主要控制打开这个窗口时显示位置，一般显示在父窗口中央。如果是None显示在屏幕正中央。
-id是窗口标识，一般选-1让id自动生成。
-pos是左上角位置，用元组表示，例如(0,0),wx.DefaultPosition是由操作系统决定.
-size是长和宽，wx.DefaultSize 是由操作系统决定。 ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/post/3de4bc69.html" title="Python 爬取">     <img class="post_bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Python 爬取"></a></div><div class="recent-post-info"><a class="article-title" href="/post/3de4bc69.html" title="Python 爬取">Python 爬取</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-07-01T12:16:00.000Z" title="Created 2020-07-01 20:16:00">2020-07-01</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Python/">Python</a></span></div><div class="content"> requests
-requests用来爬取网站上的信息。有七个主要方法
+方括号中的项是可选的
+不再方括号中的项是必选项
+黑体字必须原样输入
+斜体字可以用适当的值代替
+有省略号代表可以重复多次
+如果一个单独的选项和参数组合在一起，这二者必须同时出现
+由竖线（|）字符分开的两个或者多个项，宝石可以从这个列表中选择任意一项
 
-r = requests.get(url， params， ** kwargs): url是你想爬取网站的url。通过get构造了一个向服务器请求资源的Request对象。返回一个包含服务器资源的Response对象。
-head(): 获取网页头部信息
-post(url, data, json, kwargs): 在后面添加数据。默认如果是列表等会存储到form字段下，如果是字符串会存在data字段下
-put(): 覆盖网页某一字段数据。例如上传字符串会把data字段覆盖
-patch(): 删改某一位置信息（和put的区别是put必须全部删除，patch只需要修改需要改的部分）
-delete(): 删除url处的资源
-request(method, url, ** kwargs): method有七种，分别是’GET’,'OPTIONS’等，注意其中delete是小写。
+ 用户提醒命令
 
-kwargs参数（get,put, patch要比request少params，head,delete相同，post11个）：
+who 用来显示用这个计算机的用户
+whoami 用 ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/post/7f3bcd7f.html" title="分治法">     <img class="post_bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="分治法"></a></div><div class="recent-post-info"><a class="article-title" href="/post/7f3bcd7f.html" title="分治法">分治法</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-10-17T13:29:00.000Z" title="Created 2020-10-17 21:29:00">2020-10-17</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%AE%97%E6%B3%95/">算法</a></span></div><div class="content"> 基础
+分治法是将大问题分解成若干个小问题，通过解决小问题解决大问题的方法。它和递归关系密切。
+大致流程
+if(|P| &lt;= n0) adhoc(p);divide p into small k part;for(int i=0; i&lt;k; i++)&#123;	yi = divide-and-conquer(pi);    //递归解决各个子问题&#125;return merge(y1,y2,...yk); 合并子问题的解
+ 例题
+ 找伪币
+假如有十六个硬币，有一个是伪币，伪币比较轻，试用一个天平找出伪币
+假如两两比较，最坏情况需要8次
+如果使用分治法，需要四次。首先8个8个比较，然后在轻的一堆中比较。
+ 计算a^n
+如果使用 a * a * a…。那么复杂度是O(n).使用分治法，
+a^n = a^(n/2) * a^(n/2) n%2 == 0
+a^n = a^(n/2) * a^(n/2) * a n%2 == 1
 
-param ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/post/a3a786d6.html" title="python time random turtle jieba">     <img class="post_bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="python time random turtle jieba"></a></div><div class="recent-post-info"><a class="article-title" href="/post/a3a786d6.html" title="python time random turtle jieba">python time random turtle jieba</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-06-29T00:45:00.000Z" title="Created 2020-06-29 08:45:00">2020-06-29</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Python/">Python</a></span></div><div class="content"> time
+所以 T(n) = T(n/2) + 0(1)
 
+其中T(n/2)是计算a^(n/2)所需要的时间， O(1)是两个数相乘需要的时间。由主定理可得， ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/post/34811d5f.html" title="贪心与k-优化">     <img class="post_bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="贪心与k-优化"></a></div><div class="recent-post-info"><a class="article-title" href="/post/34811d5f.html" title="贪心与k-优化">贪心与k-优化</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-07-22T10:48:00.000Z" title="Created 2020-07-22 18:48:00">2020-07-22</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%AE%97%E6%B3%95/">算法</a></span></div><div class="content"> 引例
+活动选择问题
+假设n个活动集合S，这些活动使用同一个资源。这个资源在某一时刻只能供一个活动使用，每个活动都有一个开始时间和一个结束时间。 我们想选出时间不重叠的数量最多的活动集（假设活动按照结束时间单调递增排序）。
+这个问题可以写出最优解的表达式但是求解的时候比较麻烦。
+我们是否可以这样考虑，我们每次都挑选最早结束的活动，这样就算有活动比他早开始，但是因为比他晚结束，所以同样是一个活动还是早结束的活动更优。
+代码比较简单，就不打了
+ 原理
+性质： 我们通过局部最优解构造全局最优解。也就是我们可以考虑当前问题最优的选择，而不比考虑子问题的解。
+如果一个问题最优解包含子问题最优解，称此问题有最优子结构性质。
+每个小问题的解可由贪心选择获得，则称这个问题具有贪心选择性质。
+ k-优化算法
 
-time(): 输出从1970年1月1日到现在时间时间差（以秒为单位）。可以用来获取程序运行时间。
+这里的k-优化是拿背包问题进行说明的，其他某些问题也可以使用。
 
+大致过程：
 
-gmtime(): 获取utc时间。返回一个struct_time对象
-
-
-localtime(): 获取本地时间,也是返回struct_time对象
-
-
-ctime(): 获取本地时间的字符串
-
-
-mktime(t): 把struct_time类型的t转化成时间差（从1970到现在）
-
-
-strftime(&quot;%Y-%m-%d %H:%M:%S&quot;, t): 格式化t.例如2020-02-02 01:02:03
-
-
-strptime(timestring, “…”): 将格式为…的timestring转化成struct_time
-
-
-sleep(): 进程睡眠
-
-
-perf_counter(): 用来计时。和time类似，但精度更高
-
-
- random
-
-seed(): 初始化随机数种子
-random(): 生成一个0到1的小数
-randint(a, b): 生成a到b的随机整数
-getrandbits(k): 生成一个kbit长的随机整数
-rand ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/post/17ad67a8.html" title="html元素">     <img class="post_bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="html元素"></a></div><div class="recent-post-info"><a class="article-title" href="/post/17ad67a8.html" title="html元素">html元素</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-06-14T00:33:00.000Z" title="Created 2020-06-14 08:33:00">2020-06-14</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/html/">html</a></span></div><div class="content">仅是记笔记，没有考虑格式。
-title： 几乎所有元素都可以插入，代表提示信息。id： 元素的标识，可以用于定位&lt;html&gt;&lt;/html&gt; 表示这是一个html&lt;title&gt;&lt;/tilte&gt; 网页标题&lt;head&gt;&lt;/head&gt;: 头部&lt;body&gt;&lt;/body&gt; 主体&lt;p&gt;&lt;/p&gt; 段落&lt;h1&gt;&lt;/h1&gt;,&lt;h2&gt;&lt;/h2&gt;  文章内部标题&lt;a href = &quot;link...&quot; title=&quot; ...&quot; id=&quot;...&quot; target=&quot; &quot;&gt; ...&lt;/a&gt; a元素可以让一个页面跳转到另一个页面（链接），href指定了目标文件，link代表的就是链接，如果使用相对目录，那么根目录就是当前html所在目录，可以用.. 返回上级目录。可以直接在link后加一个#... ，之后会直接跳转到#锁指向的位置（作用和id一样）.t ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/post/3319ed9a.html" title="java 图片操作">     <img class="post_bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="java 图片操作"></a></div><div class="recent-post-info"><a class="article-title" href="/post/3319ed9a.html" title="java 图片操作">java 图片操作</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-06-11T01:12:00.000Z" title="Created 2020-06-11 09:12:00">2020-06-11</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/java/">java</a></span></div><div class="content"> 读取图片
-通过Toolkit
-可以通过Toolkit工具从本地，网络或内存获取图片
-
-Image Toolkit.getDefaultToolkit().getImage(String filename)
-Image Toolkit.getDefaultToolkit().getImage(URL url)
-Image Toolkit.getDefaultToolkit().createImage(byte[] imageData)
-
-通过ImageIO
-方法：
-
-BufferedImage ImageIO.read(File input)
-ImageIO.read(URL input)
-ImageIO.read(InputStream input)
-
-一般用这种方法
-ImageIO常用方法
-
-int getWidth()： 获取图片宽度
-int getHeight()
-int getWidth(ImageObserver observer)
-int getHeight(ImageObserver observer)
-setRGB(int x, int y, int rgb)： 设置 ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/post/455a4c92.html" title="swing JTree">     <img class="post_bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="swing JTree"></a></div><div class="recent-post-info"><a class="article-title" href="/post/455a4c92.html" title="swing JTree">swing JTree</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-06-09T03:04:00.000Z" title="Created 2020-06-09 11:04:00">2020-06-09</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/java/">java</a></span></div><div class="content"> 基础
-树图形就像文件目录。由TreeNode表示节点，用TreePath表示这个节点的路径。
-创建时，先创建根节点，然后创建子节点连接，类似于树的链式表示。
-TreeNode 是一个接口，创建节点对象时，通常使用已实现该接口的的 DefaultMutableTreeNode 类。
- DefaultMutableTreeNode
-表示一个节点，可以进行增查改删等操作。
-构造方法：
-
-DefaultMutableTreeNode(Object userObject, boolean allowsChildren)：userObject是用户对象（节点名称），allowsChildren是是否允许拥有子节点
-
-方法：
-
-add()： 添加子节点
-insert(MutableTreeNode newChild, int childIndex) ： 在指定位置插入子节点
-getPreviousSibling()： 获得这个节点的前一个兄弟节点
-getNextSibling()
-getFirstChild()
-
-remove(int childIndex)： 移除子节点
-remove(Mutab ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/post/ade8c6d6.html" title="swing 表格">     <img class="post_bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="swing 表格"></a></div><div class="recent-post-info"><a class="article-title" href="/post/ade8c6d6.html" title="swing 表格">swing 表格</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-06-09T01:08:00.000Z" title="Created 2020-06-09 09:08:00">2020-06-09</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/java/">java</a></span></div><div class="content">学习自
- 基础表格
-JTable用来编辑二维表格。注意添加到容器时表头和内容要分开添加。表头获取是table.getTableHeader()。
-构造方法：
-
-JTable(int numRows, int numColumns)
-JTable(Object[][] rowData, Object[] columnNames)：columnnames是表头名称
-JTable(TableModel dm)： 用表格模型创建表格
-
-方法：
-setFont(Font f)//被选中字体颜色setSelectionForeground(Color selectionForeground)setForeground(Color fg)//字体颜色setSelectionBackground(Color selectionBackground)//网格颜色setGridColor(Color gridColor)//是否显示网格setShowGrid(boolean showGrid)//水平网格是否显示setShowHorizontalLines(boolean showHorizontalLi ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/post/ae8362df.html" title="swing面板和其他组件">     <img class="post_bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="swing面板和其他组件"></a></div><div class="recent-post-info"><a class="article-title" href="/post/ae8362df.html" title="swing面板和其他组件">swing面板和其他组件</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-06-06T07:05:00.000Z" title="Created 2020-06-06 15:05:00">2020-06-06</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/java/">java</a></span></div><div class="content">学习自
- 面板
- JPanel
-可以在大布局里设计另一种布局
- JScrollPane 滚动面板
-它可以显示在文本较多的时候显示水平或垂直滚动条。如JTextArea或JTextField（水平滚动）或JList等可以使用滚动面板
-JScrollPane内有一个ViewPort（视口），表示JScrollPane的显示区域，视口内包含一个需要滚动的组件。
-构造方法：
-
-JScrollPane(Component view, int vsbPolicy, int hsbPolicy): view是需要加入视口的组件，vsb和hsb是水平和垂直滚动策略。
-
-策略取值ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED    // 需要时显示（默认）ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER        // 从不显示ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS       // 总是显示水平就是把VERTICAL改成HORIZONAL
-方法：
-
-setV ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/post/604b49d0.html" title="Swing组件">     <img class="post_bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Swing组件"></a></div><div class="recent-post-info"><a class="article-title" href="/post/604b49d0.html" title="Swing组件">Swing组件</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-06-04T02:37:00.000Z" title="Created 2020-06-04 10:37:00">2020-06-04</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/java/">java</a></span></div><div class="content"> Border边框
-边框创建与设置
-Border border = BorderFactory.createXxxxBorder(...);jComponent.setBorder(border);//设置边框
-BorderFactory中的边框
-使用BorderFactory中的静态方法创建边框
+首先按密度进行排序
 
 
-createEmptyBorder()： 空边框
+先拿取k件物品，如果重量大于背包重量c，则放弃这个选择（具体请看下面例子）
+对其余物品使用贪心算法
+进行CnkC_n^kCnk​次上述过程找出贪心最优解
+
+k-优化算法的优点是它将贪心算法与最优 ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/post/15201.html" title="图论基础">     <img class="post_bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="图论基础"></a></div><div class="recent-post-info"><a class="article-title" href="/post/15201.html" title="图论基础">图论基础</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-02-04T07:51:00.000Z" title="Created 2020-02-04 15:51:00">2020-02-04</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%95%B0%E5%AD%A6/">数学</a></span></div><div class="content"> 最小生成树
+如果图中有权值，称为网，仅在无向图中考虑这些问题，生成树指删去一些边变为树
+ kruskal算法
+这个也被称为加边法，
+
+把图中所有边按权值从小到大排序
+把图中n个点看为n个独立的连通块
+选择端点分属两个联通块且权值最小的边，若可选择的边有多条，任选其中一条即可
+重复三，直至只剩一个连通块
+
+如何存边？
+struct node&#123;    int u,v,w;    friend operator &lt;(const node &amp;x,const node&amp; y)    &#123;        return x.w&lt;y.w;    &#125;&#125;e[maxm];
+其中u代表起点v代表终点，而w代表权值
+采用了并查集的思想
+怎么看加边后是否会变成环？只需要查找u，v的根节点，如果根节点相同则说明加边后 会变成环
+模板，n个点m条边，找最小生成树
+#include&lt;iostream&gt;#include&lt;vector&gt;#define MAXN 1000using namespace std;struct node& ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/post/51e63dcf.html" title="内联汇编">     <img class="post_bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="内联汇编"></a></div><div class="recent-post-info"><a class="article-title" href="/post/51e63dcf.html" title="内联汇编">内联汇编</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-12-06T08:49:00.000Z" title="Created 2020-12-06 16:49:00">2020-12-06</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/c/">c++</a></span></div><div class="content"> 简介
+内联汇编是在c语言代码中插入一段汇编语言，这在一些特殊的场合如操作系统中经常使用。有些时候我们想加快速度或者进行某些特殊的操作就可以使用内联汇编。
+ 语法
+
+关键字： asm
+
+例
+asm volatile(    &quot;movl %eax, %ebx&quot;);
+其中，volatile的含义是告诉编译器这段代码不需要优化，原封不动的让他执行。
+语法：
+asm(   汇编语言模板   : output operands /*可选*/   : input operands /*可选*/   : options     /*可选*/);
+可以只有output operands或只有input operands。但是如果有options，那么前面两个冒号都要打.
+options表示我们最多使用哪些寄存器。
+ 汇编模板
+可以使用AT&amp;T语法，也可以使用intel语法（没有测试过）。下面以AT&amp;T模板作为例子。
+它的语法和和汇编语言完全类似，同样是寄存器用%，立即数用$, 内存访问用()。
+注意：
+
+如果有多行汇编语句，那么语句与语句之间要用\n\t分隔开
+如果 ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/post/57339.html" title="标志寄存器">     <img class="post_bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="标志寄存器"></a></div><div class="recent-post-info"><a class="article-title" href="/post/57339.html" title="标志寄存器">标志寄存器</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-01-29T02:48:00.000Z" title="Created 2020-01-29 10:48:00">2020-01-29</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%B1%87%E7%BC%96/">汇编</a></span></div><div class="content">标志寄存器16位中只有9位有特殊作用
 
 
-createEmptyBorder(int top, int left, int bottom, int right)：
+
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
 
 
-createLineBorder(Color color)： 线边框。color是线的颜色
 
 
-createLineBorder(Color color, int thickness, boolean rounded)： thickness是线宽，rounded是是否有圆角
+CF
+0
+PF
+0
+AF
+0
+ZF
+SF
+TF
+IF
+DF
+OF
+0
+0
+0
+0
 
 
-createTitledBorder(Border border, String title, int titleJustification, int titlePosition, Font titleFont, Color title ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/post/2170659a.html" title="java 图形界面">     <img class="post_bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="java 图形界面"></a></div><div class="recent-post-info"><a class="article-title" href="/post/2170659a.html" title="java 图形界面">java 图形界面</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-06-01T12:31:00.000Z" title="Created 2020-06-01 20:31:00">2020-06-01</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/java/">java</a></span></div><div class="content"> AWT 和 Swing
-GUI基本类在java.awt包中，这个包也称为抽象窗口工具包（Abstract Window Toolkit，AWT）。
-java.awt包中有一个抽象类Component，它是除菜单类外所有类的父类，他有如下所有组件都有的方法
 
-getBackground(): 返回背景色
-getGraphics(): 返回组件用的画笔
-getHeight(): 返回组件高度
-getLocation(): 获得组件位置
-getSize(): 获得组件大小
-getWidth(): 获得组件宽度
-getX(): 获得组件x值
-getY():
-isVisible(): 组件是否可见
-setBackGround(): 设置背景色
-setBackGrounds(int x, int y, int width, int height): 设置位置及大小
-setEnabled(boolean b): 设置组件是否可用
-setFont(Font f): 设置字体
-setForground(Color c): 设置前景色
-setLocation(int x, int y): 设置组件位置
- ...</div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/5/"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/7/"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-newest-comments"><div class="item-headline"><i class="fas fa-bolt"></i><span>Newest Comments</span></div><div class="aside-list"><span>loading...</span></div></div><div class="card-widget card-categories"><div class="item-headline">
+ ZF
+ZF含义是执行完指令后结果是否为0，为0,ZF=1，不为0,ZF=0
+例如
+mov ax,1 ;ZF=0sub ax,1 ;ZF=1
+ PF
+奇偶标志位，它记录相关指令执行后，其结果的所有bit为中1的个数是否为偶数，如果1的个数为偶数，pf=1,反之则为0
+ SF
+符号标志位，看结果是否为负，如果为负，则SF=1
+ CF
+进位标志位，一般情况下，对无符号数运算时，它记录了超过最高位的值
+例如 ，add 255,255 这时已经超过最高位了，我们已经知道，超过最高位的数据都会被丢失，实际上它被保存在CF中，但只会保存一位
+做减法时，还有可能发生错位，例如，两个8位数据，-4+5，将产生错位。错位后，相当于计算 252+5，超过255，因此会记录，因为无符号数中负数就是255-该值。小的减大的时会产生借位
+ OF
+溢出标志位，在有符号数运算时，可能会产生溢出，即小于最 ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/post/22102.html" title="Linux重定向与管道">     <img class="post_bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Linux重定向与管道"></a></div><div class="recent-post-info"><a class="article-title" href="/post/22102.html" title="Linux重定向与管道">Linux重定向与管道</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-02-29T00:05:00.000Z" title="Created 2020-02-29 08:05:00">2020-02-29</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Linux/">Linux</a></span></div><div class="content"> 标准输入 标准输出和标准错误
+基本思想：每个基于文本的程序都可以从任何源接受输入，并向任何目标输出
+标准输入指的是一种读取数据的通用办法，标准输出有两种，一种是标准输出，另一种是标准错误
+而输入输出其实正常情况下有shell决定。为了保证程序的输出，需要告诉shell将输出目标设置成文件。
+ 重定向标准输出
+在登陆时，shell会自动将标准输入设置成键盘，将标准输出和标准错误设置成屏幕。
+但是每次输入命令时，可以告诉shell在此命令执行期间更换输入输出对象。
+如果想把一个命令输出送到一个文件中，例如sort命令 可以写成 sort &gt; names
+以这种命令输出时，如果文件不存在，shell会自动创建这个文件。如果文件存在，那他将会把文件内容全部清空然后再把内容输入到里面去
+如果我们只想追加内容到这个文件中，可以用 &gt;&gt; 。如果文件不存在，这个命令也会创建新文件，如果存在，那么会追加内容到后面。
+如果取消清空文件重新输入的选项，可以设置nonclobber选项。但是设置完之后，如果确实想替换掉这个文件，可以临时忽略掉noclobber，这时需要用&gt;|替换 & ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/post/95495db.html" title="Linux文件操作">     <img class="post_bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Linux文件操作"></a></div><div class="recent-post-info"><a class="article-title" href="/post/95495db.html" title="Linux文件操作">Linux文件操作</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-04-10T08:53:00.000Z" title="Created 2020-04-10 16:53:00">2020-04-10</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Linux/">Linux</a></span></div><div class="content"> touch 创建文件
+创建文件有许多种方式，例如用vi创建文件，利用重定向创建文件。
+语法： touch [-acm] [-t time] file…
+作用： 创建文件，改变文件的修改时间和访问时间。
+-m 改变修改时间
+-a 改变访问时间
+-t 用一个具体的时间去替换
+如果不加参数会将修改时间和访问时间全部修改。
+例如： touch * ，这个命令会修改目录下的所有文件的访问时间和修改时间。
+如果后面接的文件名不存在，touch将会创建一个文件。
+-c 不创建文件。如果文件存在，会修改时间，如果文件不存在，不进行操作。
+ 文件命名
+要求：
+
+文件名最长是255个字符
+文件名可以包含除了/外的任何字符
+
+虽然说创建文件名的时候没有太多的要求，但是最好创建有意义的名字并且不要实用一些特殊字符。例如-，虽然创建的时候不会出现问题，但是使用命令进行操作的时候却会带来麻烦。
+ cp 复制文件
+语法： cp [-ip] file1 file2
+file1是已有文件 file2是目标文件
+例如： cp /etc/passwd ~/pword
+这个命令会复制passwd文件到pword中，如果pw ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/post/97246020.html" title="Linux 过滤器">     <img class="post_bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Linux 过滤器"></a></div><div class="recent-post-info"><a class="article-title" href="/post/97246020.html" title="Linux 过滤器">Linux 过滤器</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-10-01T01:40:00.000Z" title="Created 2020-10-01 09:40:00">2020-10-01</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Linux/">Linux</a></span></div><div class="content">管道线中一个个的命令就是过滤器（从标准输入中接受数据，然后再传到标准输出中），但是在最前面的和在最后面的不一定是过滤器。
+ 基础
+ cat 复制
+cat的用途就是把标准输入中的数据复制到标准输出中
+应用：可以与重定向结合。cat &gt; data，这样从键盘中输入的数据将直接传到data文件中
+此外还可以让文件内容显示在控制台上，有 cat &lt; data，标准输入变成了data文件，标准输出是屏幕。为了方便，直接cat 文件名也是可以的
+此外，tail也有类似的功能，但是它只能显示最后的十行
+另外一个应用就是把一个文件复制到另一个文件。例如，cat &lt; data &gt; newdata
+ 增强cat功能
+cat &lt; file…= cat file …
+有三个点说明了可以同时输入多个文件，这样就为组合多个文件提供了途径
+cat data1 data2 data3 &gt;file
+后缀：
+ -n 在每行后面加一个行号
+ -b 与-n一起使用，不要对空白行加行号
+ -s 将多个连续的空白行变成一个空白行
+
+ split 分为不同文件
+语法 split [-d] [-a ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/post/1326.html" title="汇编指令 AT&amp;T版 64位">     <img class="post_bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="汇编指令 AT&amp;T版 64位"></a></div><div class="recent-post-info"><a class="article-title" href="/post/1326.html" title="汇编指令 AT&amp;T版 64位">汇编指令 AT&amp;T版 64位</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-03-11T23:46:00.000Z" title="Created 2020-03-12 07:46:00">2020-03-12</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%B1%87%E7%BC%96/">汇编</a></span></div><div class="content">用g++ -Og -S -masm=intel name.c 可以生成intel格式的汇编代码，-S是生成汇编代码，-Og是省去不重要的部分，如果不加这个，可能5条指令要变成十多条指令
+-fno-if-conversion 分支语句不要采用条件传输的方式，条件跳转的方式
+-g debug
+objdump -d 反汇编
+gdb 调试 b+ 标号 设置断点 info register 查看寄存器 r 执行到断点出
+n（next） 执行下一条命令
+gdb调试更多可看
+ mov 移动指令
+格式： movq a,b
+a是原操作数，b是目标操作数
+这个指令中的q代表的是64位
+
+
+
+长度
+类型
+别名
+缩写
+
+
+
+
+1
+char
+byte
+b
+
+
+2
+short
+word
+w
+
+
+4
+int
+double word（long word）
+l
+
+
+8
+long
+quad word
+q
+
+
+8
+char*
+quad word
+q
+
+
+4
+float
+…
+s
+
+
+8
+double
+…
+l
+
+
+
+
+
+
+源操作数
+目标操作数
+
+
+
+
+立即数（idata)
+寄存器 ，地址
+
+
+寄存器
+寄存器，地址
+
+
+地址
+寄 ...</div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/5/"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/7/"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-newest-comments"><div class="item-headline"><i class="fas fa-bolt"></i><span>Newest Comments</span></div><div class="aside-list"><span>loading...</span></div></div><div class="card-widget card-categories"><div class="item-headline">
             <i class="fas fa-folder-open"></i>
             <span>Categories</span>
             <a class="card-more-btn" href="/categories/" title="More">
@@ -316,7 +438,7 @@ setLocation(int x, int y): 设置组件位置
             <ul class="card-category-list" id="aside-cat-list">
             <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Linux/"><span class="card-category-list-name">Linux</span><span class="card-category-list-count">13</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Python/"><span class="card-category-list-name">Python</span><span class="card-category-list-count">3</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Unity/"><span class="card-category-list-name">Unity</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/c/"><span class="card-category-list-name">c++</span><span class="card-category-list-count">3</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/html/"><span class="card-category-list-name">html</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/java/"><span class="card-category-list-name">java</span><span class="card-category-list-count">23</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/js/"><span class="card-category-list-name">js</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/next/"><span class="card-category-list-name">next</span><span class="card-category-list-count">1</span></a></li>
             </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>Tags</span></div><div class="card-tag-cloud"><a href="/tags/AT-T/" style="font-size: 1.1em; color: #999">AT&T</a> <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 1.3em; color: #99a1ac">动态规划</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" style="font-size: 1.5em; color: #99a9bf">字符串</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E5%B8%B8%E9%87%8F/" style="font-size: 1.1em; color: #999">字符常量</a> <a href="/tags/%E5%BF%AB%E6%8E%92/" style="font-size: 1.1em; color: #999">快排</a> <a href="/tags/%E6%8E%92%E5%BA%8F/" style="font-size: 1.1em; color: #999">排序</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>Archives</span><a class="card-more-btn" href="/archives/" title="More">
-    <i class="fas fa-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/05/"><span class="card-archive-list-date">May 2021</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/04/"><span class="card-archive-list-date">April 2021</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/03/"><span class="card-archive-list-date">March 2021</span><span class="card-archive-list-count">9</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/02/"><span class="card-archive-list-date">February 2021</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/01/"><span class="card-archive-list-date">January 2021</span><span class="card-archive-list-count">6</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/12/"><span class="card-archive-list-date">December 2020</span><span class="card-archive-list-count">6</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/11/"><span class="card-archive-list-date">November 2020</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/10/"><span class="card-archive-list-date">October 2020</span><span class="card-archive-list-count">4</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">Article :</div><div class="item-count">186</div></div><div class="webinfo-item"><div class="item-name">Total Count :</div><div class="item-count">249.1k</div></div><div class="webinfo-item"><div class="item-name">UV :</div><div class="item-count" id="busuanzi_value_site_uv"></div></div><div class="webinfo-item"><div class="item-name">PV :</div><div class="item-count" id="busuanzi_value_site_pv"></div></div><div class="webinfo-item"><div class="item-name">Last Push :</div><div class="item-count" id="last-push-date" data-lastpushdate="2021-05-09T12:09:43.363Z"></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By 星河璀璨</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="external nofollow noopener noreferrer" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="font-plus" type="button" title="Increase font size"><i class="fas fa-plus"></i></button><button id="font-minus" type="button" title="Decrease font size"><i class="fas fa-minus"></i></button><button id="translateLink" type="button" title="Toggle Between Traditional Chinese And Simplified Chinese">繁</button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button id="chat_btn" type="button" title="rightside.chat_btn"><i class="fas fa-sms"></i></button><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">Local search</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"></div></div></div><hr><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script>function panguFn () {
+    <i class="fas fa-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/05/"><span class="card-archive-list-date">May 2021</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/04/"><span class="card-archive-list-date">April 2021</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/03/"><span class="card-archive-list-date">March 2021</span><span class="card-archive-list-count">9</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/02/"><span class="card-archive-list-date">February 2021</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/01/"><span class="card-archive-list-date">January 2021</span><span class="card-archive-list-count">6</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/12/"><span class="card-archive-list-date">December 2020</span><span class="card-archive-list-count">6</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/11/"><span class="card-archive-list-date">November 2020</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/10/"><span class="card-archive-list-date">October 2020</span><span class="card-archive-list-count">4</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">Article :</div><div class="item-count">186</div></div><div class="webinfo-item"><div class="item-name">Total Count :</div><div class="item-count">250.8k</div></div><div class="webinfo-item"><div class="item-name">UV :</div><div class="item-count" id="busuanzi_value_site_uv"></div></div><div class="webinfo-item"><div class="item-name">PV :</div><div class="item-count" id="busuanzi_value_site_pv"></div></div><div class="webinfo-item"><div class="item-name">Last Push :</div><div class="item-count" id="last-push-date" data-lastpushdate="2021-05-11T12:30:20.585Z"></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By 星河璀璨</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="external nofollow noopener noreferrer" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="font-plus" type="button" title="Increase font size"><i class="fas fa-plus"></i></button><button id="font-minus" type="button" title="Decrease font size"><i class="fas fa-minus"></i></button><button id="translateLink" type="button" title="Toggle Between Traditional Chinese And Simplified Chinese">繁</button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button id="chat_btn" type="button" title="rightside.chat_btn"><i class="fas fa-sms"></i></button><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">Local search</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"></div></div></div><hr><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script>function panguFn () {
   if (typeof pangu === 'object') pangu.autoSpacingPage()
   else {
     getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')

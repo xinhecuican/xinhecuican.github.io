@@ -52,7 +52,7 @@
   isHome: true,
   isHighlightShrink: false,
   isToc: false,
-  postUpdate: '2021-05-09 20:09:48'
+  postUpdate: '2021-05-11 20:30:25'
 }</script><noscript><style type="text/css">
   #nav {
     opacity: 1
@@ -144,170 +144,181 @@
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
 <!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Xinhecuican's Blog" type="application/atom+xml">
-</head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/null" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">186</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">Tags</div><div class="length-num">6</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">Categories</div><div class="length-num">29</div></a></div></div></div><hr><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Xinhecuican's Blog</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">Xinhecuican's Blog</h1><div id="site-subtitle"><span id="subtitle"></span></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="post_cover left_radius"><a href="/post/85b4e13b.html" title="java 常用类">     <img class="post_bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="java 常用类"></a></div><div class="recent-post-info"><a class="article-title" href="/post/85b4e13b.html" title="java 常用类">java 常用类</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-05-29T11:14:00.000Z" title="Created 2020-05-29 19:14:00">2020-05-29</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/java/">java</a></span></div><div class="content"> Object
-Object是所有java类共同的祖先。如果没有用extends，那么这个类将直接继承Object类。
-Object类有一个默认构造方法，构造子类实例时，都会优先使用这个构造方法。
-public Object()&#123;&#125;
-方法：
-
-equals(Object obj): 比较两个对象是否相等，只有当两个变量引用一个实例时才会为真。
-notify()
-notifyAll()
-wait()
-hashCode(): 返回对象哈希码。
-toString(): 返回当前对象字符串表示。如果println方法参数时Object，那么先会调用toString()
-finalize(): 垃圾回收时先调用这个方法
-getClass(): 返回运行时类。java引用变量有两种类型，编译时类型和运行时类型。运行时类型就是引用的实例。
-
- String 和 StringBuffer
-String是不可变类，里面字符串永远不会改变(也就是平常用双引号括起来的那些),StringBuffer是可变类
- String
-构造方法：
-
-String()
-String(String va ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/post/a444b428.html" title="排序">     <img class="post_bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="排序"></a></div><div class="recent-post-info"><a class="article-title" href="/post/a444b428.html" title="排序">排序</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-05-25T05:32:00.000Z" title="Created 2020-05-25 13:32:00">2020-05-25</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a></span></div><div class="content"> 插入排序
-稳定？不稳定： 稳定指的是两个相同的元素排序完成之后在表中相对位置不变。
- 直接插入
-当插入第i个时，前i-1个已经排好了。
-int tag = 0;for(int i=1; i&lt;n; i++)&#123;    if(a[i]&lt;a[i-1])    &#123;        tag = a[i];        int temp;        for(int k=i-1; k&gt;=0; k--)        &#123;            if(a[k]&gt;tag)            &#123;                a[k+1] = a[k];                temp = k;            &#125;            else            &#123;                break;            &#125;        &#125;        a[k+1] = tag;    &#125;&#125;
-默认第一个已经排好，从第二个开始从后往前排，如果第k ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/post/5be7e977.html" title="java I/O">     <img class="post_bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="java I/O"></a></div><div class="recent-post-info"><a class="article-title" href="/post/5be7e977.html" title="java I/O">java I/O</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-05-24T10:21:00.000Z" title="Created 2020-05-24 18:21:00">2020-05-24</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/java/">java</a></span></div><div class="content"> 概述
-java.io.InputStream代表字节输入流，java.io.OutputStream代表输出流。他们都是抽象类，InputStream中有以下方法：
-
-int read():读入一个字节，并且转化成unsigned int型整数
-int read(byte[] b): 从输入流中读取若干字节，保存在b数组中。如果到了输入流的结尾，返回1
-int read(byte[] b, int off, int len): 如上，这里只是多了在b数组中的开始位置和读取数目
-void close()： 关闭输入流。如果不关闭的话其他需要这个文件的就无法读取这个文件信息。类似于打开了一个应用程序再打开就说有一个实例正在运行。
-int available(): 放回从输入流中读取字节数目
-skip(long n): 从输入流中跳过n个字节
-boolean markSupported(),void mark(int readLimit), void reset(): 如果想要重复读入数据，就先用markSupported()判断这个流是否支持重复读入数据，如果支持，通过mark在当前位置 ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/post/d431fab4.html" title="Lambda">     <img class="post_bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Lambda"></a></div><div class="recent-post-info"><a class="article-title" href="/post/d431fab4.html" title="Lambda">Lambda</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-05-22T10:02:00.000Z" title="Created 2020-05-22 18:02:00">2020-05-22</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/java/">java</a></span></div><div class="content"> 基本用法
-例如：
-names.forEach((name)-&gt;System.out.println(name));names.forEach(System.out::println);//可以通过这种方式直接调用println
-基本语法； (Type1 param1,Type2 param2,...)-&gt;&#123;statment1, statment2... return statmentM;&#125;
-一般来讲，这个其实是接口或抽象类的简化。但是不是所有的类都可以使用Lambda的。
-只有声明了函数式接口：public @interface FunctionalInterface才可以被Lambda赋值。这个就是可以简写的原因。通过函数式接口可以直接定位到这个类的某一个函数，然后就可以省略函数名等一系列要素.
-例如：
-(String name)-&gt;&#123;              System.out.println(name);              return ;          &#125;
-这个是基础型，还有许多简化型：
-
-参数类型可以 ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/post/70263071.html" title="java 泛型">     <img class="post_bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="java 泛型"></a></div><div class="recent-post-info"><a class="article-title" href="/post/70263071.html" title="java 泛型">java 泛型</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-05-21T10:37:00.000Z" title="Created 2020-05-21 18:37:00">2020-05-21</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/java/">java</a></span></div><div class="content"> 发展过程
-由父类转给子类时允许的，但是会抛出ClassCastException。这种异常是运行时异常，编译期不会检查，这就加大了检查的难度。为了解决这个问题，从jdk5开始引入了泛型。泛型可以把ClassCastException转换成编译时类型不兼容错误。
-泛型符号是&lt;&gt;,里面可以使任意一种类（不能是int等基础类型，可以是Integer).
-例如： Set&lt;Object&gt; set = new HashSet&lt;Object&gt;();//实例中的类型必须要和前面相同
- 泛型类，数组，接口，方法
-泛型类
-例：
-public class Bag&lt;T&gt;&#123;    private T content;    public Bag(T content)    &#123;        this.content = content;    &#125;    public T get()    &#123;        return this.content;    &#125;         public void set(T co ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/post/d5381517.html" title="java 集合，列表，队列，映射">     <img class="post_bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="java 集合，列表，队列，映射"></a></div><div class="recent-post-info"><a class="article-title" href="/post/d5381517.html" title="java 集合，列表，队列，映射">java 集合，列表，队列，映射</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-05-16T10:30:00.000Z" title="Created 2020-05-16 18:30:00">2020-05-16</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/java/">java</a></span></div><div class="content"> 概念
-
-Set（集），集合中对象不以特定方式排序（有的实现类可以），没有重复元素
-List(列表），按照索引排序，可以有重复对象。List和数组类似。
-Queue（队列），先进先出
-Map（映射）： 有键值对。没有重复键对象，可以有重复值对象
-
-定义：
-Set&lt;String&gt; set = new HashSet&lt;String&gt;();
- Collection 和 Interator接口
-Collection声明了上面这些数据结构（不包含map）通用的方法。
+</head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/null" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">186</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">Tags</div><div class="length-num">6</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">Categories</div><div class="length-num">29</div></a></div></div></div><hr><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Xinhecuican's Blog</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">Xinhecuican's Blog</h1><div id="site-subtitle"><span id="subtitle"></span></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="post_cover left_radius"><a href="/post/38072.html" title="元字符的使用">     <img class="post_bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="元字符的使用"></a></div><div class="recent-post-info"><a class="article-title" href="/post/38072.html" title="元字符的使用">元字符的使用</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-02-22T00:39:00.000Z" title="Created 2020-02-22 08:39:00">2020-02-22</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Linux/">Linux</a></span></div><div class="content"> 元字符
+元字符指的是Linux中有特殊含义的字符，例如 ； 换行符等。
+ 字符引用和转义
+如果不想用元字符内在含义，只想打出这个字符，那么就需要用到引用字符。
+字符引用的方法有三种，使用反斜线，使用一对单引号或者使用一对双引号
+例如 echo a ; b 这样就会把他们当成不同的指令，但是如果 echo a\; b这样就会当成同一个指令，实际上\是转义字符，转义字符指的是把一个字符从一中状态转移到另一种状态
+单引号会将一切字符引用，这样有时例如我需要引用其中一个变量的值的时候就会出现问题
+这时我们就可以用到双引号，双引号不会引用 $ , \ , `(反引号），
+引用能力强弱 \&gt;''&gt;&quot;&quot;
+如果输入换行字符，单引号并不会转义它，但是\会转义它。
+反引号作用是输出程序结果。例如
+echo &quot; There are `ps aux | wc -l` processes &quot;输出 there are 268 processes
+反引号可以用 $(…)替代
+</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/post/31a6b40.html" title="进程和作业控制">     <img class="post_bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="进程和作业控制"></a></div><div class="recent-post-info"><a class="article-title" href="/post/31a6b40.html" title="进程和作业控制">进程和作业控制</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-04-14T13:14:00.000Z" title="Created 2020-04-14 21:14:00">2020-04-14</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Linux/">Linux</a></span></div><div class="content">进程就是加载到内存中准备执行的程序。当进程创建的时候，内核赋予了唯一的标识号，这个标识号叫做进程ID或PID。
+进程同一时间内可达数百个之多，为了管理这么多的进程。系统提供了一个调度器来维护。调度器维护一个所有进程的列表，每次选择一个进程（实际上可以一次选择多个进程），然后执行一个短暂的时间（时间片）。
+典型的时间片是10毫秒。为了为了下一个时间片还可以顺利的执行，系统必须要保存下一条指令的位置，环境的副本等。
+ 进程分叉到死亡
+当进程需要使用内核的服务时，会使用系统调用发送请求。在编写程序时，系统调用的使用方法取决于语言。例如，c语言使用标准库中的函数进行调用。
+下面列举一些常见的系统调用函数
 
 
 
-方法
-描述
+系统调用
+作用
 
 
 
 
-boolean add(Object o)
-加入对象
-
-
-void clear()
-删除所有对象
-
-
-boolean contains(Object o)
-判断集合中是否有特定对象
-
-
-boolean isEmpty()
+进程控制
 
 
 
-Iterator iterator()
-返回一个Iterator对象（迭代器）
+fork
+创建当前进程的一个副本
 
 
-boolean remove(Object o)
+wait
+等待另一个程序结束后执行（强制暂停当前进程）
+
+
+exec
+在当前进程中执行一个新进程
+
+
+exit
+中止当前进程
+
+
+kill
+杀死子进程
+
+
+文件I/O
 
 
 
-int size()
-返回数目
+open
+打开一个用于读取或写入的文件
 
 
-Object[] toArray()T[]toArray(T[] a)
-返回一个数组 ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/post/325cdbf2.html" title="java 数组">     <img class="post_bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="java 数组"></a></div><div class="recent-post-info"><a class="article-title" href="/post/325cdbf2.html" title="java 数组">java 数组</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-05-14T11:54:00.000Z" title="Created 2020-05-14 19:54:00">2020-05-14</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/java/">java</a></span></div><div class="content"> 基础
- 声明
-可以这样声明：
-int[] scores;String[] names;
-也可以这样声明
-int scores[];String names[];
-二维更为古怪
-int [][]x;int []x[];int x[][];
-这里注意一点，声明时不能往括号中加东西，会报错。例如：int x[1];//报错
-java中推荐吧括号放到前面，可能int[]也成了一个对象？
- 创建数组对象
-创建数组对象语法和c++中创建动态数组类似。
-int[] scores = new int[100];
-上面这个代码首先要在堆中分配空间，然后把里面的数据初始化。
-括号中的数字可以使常量，也可以是变量，甚至可以是0(表示里面没有数据).
- 访问数组的元素和长度
-和c++一样，下标索引。如果越界，会抛出ArrayIndexOutOfBoundsException异常
-所有数组都有length属性，表示数组的长度: public final length.
-所以我们可以直接输出这一属性，例如：
-int x[] = new int[40];System.out.println(x.length);  ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/post/f79e4123.html" title="虚拟内存">     <img class="post_bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="虚拟内存"></a></div><div class="recent-post-info"><a class="article-title" href="/post/f79e4123.html" title="虚拟内存">虚拟内存</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-05-12T05:37:00.000Z" title="Created 2020-05-12 13:37:00">2020-05-12</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/">计算机系统基础</a></span></div><div class="content"> 基础
-我们在生成程序的时候，会发现每个程序的起始地址都是一样的，那么这种一样的地址怎么赋给实际的物理地址上的呢？这就要依靠虚拟内存机制了。
-虚拟内存着力于解决进程间内存分配的问题，并且它还有一个作用是使进程之间相互隔绝。例如不小心产生了一个野指针指向了其他内存的位置，但是实际上却不会破坏其他程序而只会破坏自己的程序，这是因为虚拟内存限制了每个程序所使用的空间，如果超出限制就会报错。
-程序中所使用的空间叫做虚拟空间，一共有2的n次方。而系统上有一个物理地址空间。虚拟内存做的其实是把虚拟空间上的内存地址映射到物理空间上。在cpu中，有一个叫MMU的部件专门做虚拟地址和物理地址转化。
- 虚拟内存的组织形式
-虚拟内存中的内存其实是按页进行划分的。这类似与磁盘中的扇区概念，即使那个扇区中只有一个字节的数据，取数据时也是把一个扇区全取出来。
-虚拟内存页的大小一般是4kb到2mb之间。而物理内存也是按页进行分块，并且块的大小和虚拟内存页的大小相同。
-其实把程序加载到内存时也不是一股脑直接加载的，而是一块一块逐个加载，并且如果内存满了还有块替换策略，这实质上是把内存当做一级缓存使用。
-虚拟页有三种情 ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/post/28877bf.html" title="异常处理">     <img class="post_bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="异常处理"></a></div><div class="recent-post-info"><a class="article-title" href="/post/28877bf.html" title="异常处理">异常处理</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-05-11T23:44:00.000Z" title="Created 2020-05-12 07:44:00">2020-05-12</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%B3%BB%E7%BB%9F%E5%9F%BA%E7%A1%80/">计算机系统基础</a></span></div><div class="content"> 产生过程
-当程序运行时，可能会产生异常，当cpu检测到这些时间发生时，就会通过异常表跳转到异常处理程序，然后进行处理。
-异常表示常驻于内存中的，每个异常都有一个异常号，事件发送的是异常号，之后根据异常号找到异常表中的对应项再跳转过去。异常表的首地址存放在一个特殊的寄存器中。
-当一场处理结束之后，可能会跳转到下一条语句，可能跳转到当前语句，也可能终止程序。
-要注意，这里讲的异常是系统提供的异常，要把用户程序中设定的异常区分开。
- 类别
- 中断
-中断是用来和外部设备进行交互的，例如网卡，usb和磁盘。
-每当这些设备有操作完成时，都会发给cpu一个信号叫cpu去取数据（cpu上有一个特殊的引脚专门去接受这些数据）。之后cpu就会执行中断程序然后去取数据。
-一个显著的例子就是scanf，cpu不可能一到scanf就停止运行，肯定还要继续做各种各样的事。他只是调用了scanf函数给标准输入发出信号，有数据来了就告诉我。之后标准输入输入完成之后并不是直接存到内存中，而是先存到一个缓存中（例如键盘有usb缓存），然后告诉cpu要读数据，cpu才会执行中断去读数据。
-执行中断程序之前，首先要把所有寄 ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/post/33cb1151.html" title="查找">     <img class="post_bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="查找"></a></div><div class="recent-post-info"><a class="article-title" href="/post/33cb1151.html" title="查找">查找</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-05-10T07:00:00.000Z" title="Created 2020-05-10 15:00:00">2020-05-10</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a></span></div><div class="content"> 静态查找
- 顺序查找
-就是一个个找，过程不必多少。
-如果查找每个元素概率相等，那么查找第n个元素只需要一次，第n-1需要两次…。所以平均查找次数是 1+2+…+n / n = （n+1)/2
- 折半查找
-其实就是二分查找,代码
- 分块查找
-分块查找就是每个找出每个块中最大的元素然后单独建一个表，之后就可以先查找这个表然后根据表来查找。大致意思就是这样，具体代码
- 动态查找
- 二叉排序树（查找树）
-二叉查找树特点是左儿子都比父亲小，右儿子都比父亲大。
+read
+从文件中读取数据
 
-上面就不是二叉排序树，因为66比50还要大。
-用链表进行存储。
-struct node&#123;    node *lchild;    node *rchild;    int val;&#125;
-二叉树的查找算法：
 
-如果二叉树是空，那么直接返回
-如果该节点的val正好是要查找的数，则查找成功
-如果大，那么去右边找
-如果小，去坐标找
+write
+向文件中写入了数据
 
-插入
-先要进行查找，如果查找不成功才会插入。
-插入过程最好单独写一个函数，因为使用递归。如果要插入的点比当前点大，那么就去右边，反之就去左边。知道这个点是空为止，把要插入的点插入到这个空的点中。
- ...</div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/6/"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/8/"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-newest-comments"><div class="item-headline"><i class="fas fa-bolt"></i><span>Newest Comments</span></div><div class="aside-list"><span>loading...</span></div></div><div class="card-widget card-categories"><div class="item-headline">
+
+close
+关闭文件
+
+
+ ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/post/61312.html" title="linux目录操作">     <img class="post_bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="linux目录操作"></a></div><div class="recent-post-info"><a class="article-title" href="/post/61312.html" title="linux目录操作">linux目录操作</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-04-05T11:24:00.000Z" title="Created 2020-04-05 19:24:00">2020-04-05</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Linux/">Linux</a></span></div><div class="content"> 目录名和工作目录
+斜杠表示根目录，如果最后一个名称代表的是文件名。当然，这个文件名也可以是一个目录。
+工作目录又叫当前目录，也是进行操作的根目录（但不是系统的根目录），如果命令后面直接输入一个文件名，那么就是代表这个目录在工作目录中，系统也只会在当前目录中搜寻。
+ 绝对目录和相对目录
+绝对目录就是从根目录开始。在Linux系统中，根目录是home（这个根目录是当前用户的根目录）目录。
+相对目录就是从工作目录（当前目录）开始。大多数时候我们输入一个文件名其实都是输入相对目录，我们也可以输入绝对目录，但那样过于麻烦。
+ 路径名缩写
+第一个： …（两个点号）。这个符号的含义是父目录，也就是上级目录。用…可以回到上级目录然后在进入子目录
+例：现在绝对目录是 /home/abcd/ceshi，如果我想进入abcd的gongzuoqu目录，那么输入cd …/gongzuoqu即可。这是从左向右读的， …代表进入父目录，然后再进入父目录中的工作区目录。
+第二个： .(一个点号）。代表的是当前目录，注意任何不以/开头的路径名都被认为相对于工作目录。所以大部分情况下直接输入文件名即可，但是在某些情况下 ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/post/18431.html" title="shell内部命令与外部命令与搜索路径">     <img class="post_bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="shell内部命令与外部命令与搜索路径"></a></div><div class="recent-post-info"><a class="article-title" href="/post/18431.html" title="shell内部命令与外部命令与搜索路径">shell内部命令与外部命令与搜索路径</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-02-22T01:09:00.000Z" title="Created 2020-02-22 09:09:00">2020-02-22</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/Linux/">Linux</a></span></div><div class="content">有些命令是shell外部的，shell会解析参数然后调用外部的程序去处理它，另外还有一些是对shell起作用的，叫shell内置命令
+如果先查看内部命令，需要 man + shell名称 ，例如，man bash
+ 外部命令和搜索路径
+shell是如何知道那些程序都在哪呢？ 实际上shell是检查PATH环境变量，PATH包含一串字符，这串字符就是一系列目录名称，称作搜索路径。如果输入一个命令，shell会依次按这些目录去搜索命令
+先要看PATH 直接 echo $PATH即可
+ 修改搜索路径
+可以用export命令，export命令可以使PATH变量变成环境变量，这就意味着shell和随后所有进程都可以使用它，例如export PATH=&quot;/bin:/usr/bin:/usr/ucb:/usr/local/bin&quot;
+如果希望在搜索路径的末尾加上一条路径，可以 export PATH=&quot;$PATH:$HOME/bin&quot;
+如果想在最后加上一条指令，可以export PATH=&quot;$HOME/bin:$PATH&quot;
+如果把自己写的da ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/post/f8648a1d.html" title="java 多线程">     <img class="post_bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="java 多线程"></a></div><div class="recent-post-info"><a class="article-title" href="/post/f8648a1d.html" title="java 多线程">java 多线程</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-05-04T11:40:00.000Z" title="Created 2020-05-04 19:40:00">2020-05-04</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/java/">java</a></span></div><div class="content"> java线程运行机制
+java虚拟机中，执行程序是由线程完成的，每个线程都有独立的程序计数器（PC或rip
+)和栈
+栈中有三个区，局部变量区，操作数栈和栈数据区。
+操作数栈是线程的工作区，用来存放运算过程产生的临时变量（怎么有种寄存器的感觉）。
+栈数据区为线程执行指令提供相关信息，例如定位到堆区和方法区的特定数据（类成员变量），正常退出方法等（存放地址信息）。
+每次java虚拟机启动一个虚拟机进程时，虚拟机都会创建一个主线程。该线程从main开始执行。
+例如在一个类中定义了一个实例变量a,然后再main函数中调用了这个类的成员函数A()，这个函数会让成员变量加一。首先进入这个方法，然后发现a++;就去栈数据区取出a的地址，之后定位到堆区取出a进行操作。
+
+方法区存放了字节码
+堆区存放了线程所需要长时间保存的数据（类）
+栈区存放了临时数据，栈帧和跳转到其他区域地址。
+
+ 线程的创建和启动
+我们现在免费有了一个主线程，如果我们还想要创建其他线程的话，有两种方式。
+
+扩展java.lang.Thread类
+实现Runnable接口
+
+要注意一点，创建了线程并启动之后会有自己的栈区，堆区，方 ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/post/7ca31f7.html" title="神经网络（NN）">     <img class="post_bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="神经网络（NN）"></a></div><div class="recent-post-info"><a class="article-title" href="/post/7ca31f7.html" title="神经网络（NN）">神经网络（NN）</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-07-24T02:35:00.000Z" title="Created 2020-07-24 10:35:00">2020-07-24</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a></span></div><div class="content"> 多层向前神经网络
+该神经网络的层数大的有三层：输入层， 隐藏层（隐藏层可以有多层）， 输出层。
+该图是两层神经网络（输入层不算）
+每层由单元组成（例如决策树算法中的一和零）	。输入层就是传入一些特征向量。
+理解：
+下一层的神经元可以看成y，然后每个w可以看成k，那么其实就是一条直线。有些层次用来做 &amp;&amp; 或 || 的操作，这样就可以用多条直线对区域进行划分.
+权重： 每两层有线进行连接，线上的数值就是权重，我们是通过特征向量和权重相乘求和再用非线性方程转化得到下一层的
+3. 设计神经网络结构     3.1 使用神经网络训练数据之前，必须确定神经网络的层数，以及每层单元的个数     3.2 特征向量在被传入输入层时通常被先标准化(normalize）到0和1之间 （为了加速学习过程）     3.3 离散型变量可以被编码成每一个输入单元对应一个特征值可能赋的值          比如：特征值A可能取三个值（a0, a1, a2), 可以使用3个输入单元来代表A。                    如果A=a0, 那么代表a0的单元值就取1, 其他取0；      ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/post/2ba82a45.html" title="层次聚类">     <img class="post_bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="层次聚类"></a></div><div class="recent-post-info"><a class="article-title" href="/post/2ba82a45.html" title="层次聚类">层次聚类</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-07-30T02:34:00.000Z" title="Created 2020-07-30 10:34:00">2020-07-30</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a></span></div><div class="content"> 概念
+层次聚类（hierarchical clustering)就是不断把最近的类合并知道达到要求为止。这是一种树形结构
+大致过程：
+
+初始化，每个实例看做一类
+合并， 算出每两个类之间的距离，然后把距离最近的两个类合并成一个类
+终止条件可以是最近两个类之间的距离
+
+计算两个类之间距离的方法
+
+SingleLinkage: 这种方法是以两个类中最短距离代表两个类之间的距离。但是这种方法可能出现链式反应，即抓到了一个离其他点十分近的点就抓到了一群点，但实际上分属两团
+CompleteLinkage： 这种方法是找两个类中最长点距离
+AverageLinkage： 这种方法是把两个类中所有点的距离求出来再求平均值，或者也可以取中值
+
+ 应用
+from numpy import *&quot;&quot;&quot;Code for hierarchical clustering, modified from Programming Collective Intelligence by Toby Segaran (O&#x27;Reilly Media 2007, page 33). &q ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/post/280b588e.html" title="支持向量机">     <img class="post_bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="支持向量机"></a></div><div class="recent-post-info"><a class="article-title" href="/post/280b588e.html" title="支持向量机">支持向量机</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-07-21T02:39:00.000Z" title="Created 2020-07-21 10:39:00">2020-07-21</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a></span></div><div class="content"> 引入
+
+上图中黑色和白色的点分别代表一类事物，我们想用一条直线把这两类事物区分开，显而易见红线区分最好，那么为什么红线区分最好呢？
+这里引入了一个概念，边际。边际指的是做一个超平面，使得两侧离的最近的点的距离。
+如何选取使边际(margin)最大的超平面 (Max Margin Hyperplane)？
+超平面到一侧最近点的距离等于到另一侧最近点的距离，两侧的两个超平面平行。
+ 选取最大超平面
+超平面可以定义为： W * X + b = 0
+W是一个类似于权重的向量， X是我们给出的实例的特征向量， b是偏好
+超平面方程也可以写成这是二维的，b也就是w0.
+上方的点满足大于零，下方的点小于零
+
+
+H1就是上边界，也就是两个图中上面的这条线，至于为什么后面是1？这只是用来区分上边界还是下边界，可以通过w0进行调节。我们输入其实就是(x1,x2,…, yi)，yi就是类别标记
+两个公式可以合并
+在边界上的点叫做支持向量
+我们可以得出一个结论：分界的超平面和H1/H2之间的距离是1/||W||。
+也就是先平方再开方
+所以最大边界距离是2/||W||
+所以我们要找2/||W||最大值，也就是 ...</div></div></div><div class="recent-post-item"><div class="post_cover left_radius"><a href="/post/fa288682.html" title="numpy">     <img class="post_bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="numpy"></a></div><div class="recent-post-info"><a class="article-title" href="/post/fa288682.html" title="numpy">numpy</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-08-03T01:30:00.000Z" title="Created 2020-08-03 09:30:00">2020-08-03</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a></span></div><div class="content">numpy用于矩阵计算，内置了大量矩阵计算的函数，并且速度也比列表快
+创建
+import numpy as npa = [1, 2, 3]b = [[1,2],    [2, 3],    [5, 8]]c = np.array(a)d = np.array(b, int)
+通过array就把列表转化成了numpy的矩阵
+
+ones(shape, dtype): 这个是创建值全为1的矩阵，shape是矩阵的行和列数，dtype是矩阵数据类型。
+zeros(shape, dtype): 创建全是零的矩阵
+full(shape, constant_value, dtype): 创建指定数值的矩阵。其中constant_value是用来填充矩阵的值
+eye(N): 创建单位矩阵，N是矩阵的维度
+diag(v, k): 创建对角矩阵。v如果是一维则是创建对角矩阵，如果是二维是获取对角线上的元素。k=0表示获取主对角线上元素，k&gt;0则获取主对角线上方第k条对角线元素
+
+创建随机数组
+
+np.random.rand(shape): 创建一个值在0到1的随机数组。例如np.random.ran ...</div></div></div><div class="recent-post-item"><div class="post_cover right_radius"><a href="/post/766f9b60.html" title="K-means">     <img class="post_bg" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="K-means"></a></div><div class="recent-post-info"><a class="article-title" href="/post/766f9b60.html" title="K-means">K-means</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">Created</span><time datetime="2020-07-30T00:18:00.000Z" title="Created 2020-07-30 08:18:00">2020-07-30</time></span></div><div class="content"> 概念
+k-means算法属于非监督学习，也就是事先不知道给的数据属于那一类，需要自己去分类。它的基本思想是把数据点密集的一群分成一类。
+具体过程：
+
+随机选择k个类的初始中心
+在c次迭代中，对任意一个样本，求到各中心点之间的距离，将该样本归类到最近中心的那个类
+使用均值等方法更新中心点。
+如果两次更新匪类相同也结束
+
+例如划分三个点(1, 1) (2, 3) (4, 6)是一类，那么新的中心点是((1+2+4)/3, (1+3+6)/3),不一定要在原有点上
+ 实现
+import numpy as np# Function: K Means# -------------# K-Means is an algorithm that takes in a dataset and a constant# k and returns k centroids (which define clusters of data in the# dataset which are similar to one another).def kmeans(X, k, maxIt): # maxIt是初始化次数 ...</div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/6/"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/8/"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-newest-comments"><div class="item-headline"><i class="fas fa-bolt"></i><span>Newest Comments</span></div><div class="aside-list"><span>loading...</span></div></div><div class="card-widget card-categories"><div class="item-headline">
             <i class="fas fa-folder-open"></i>
             <span>Categories</span>
             <a class="card-more-btn" href="/categories/" title="More">
@@ -316,7 +327,7 @@ struct node&#123;    node *lchild;    node *rchild;    int val;&#125;
             <ul class="card-category-list" id="aside-cat-list">
             <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Linux/"><span class="card-category-list-name">Linux</span><span class="card-category-list-count">13</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Python/"><span class="card-category-list-name">Python</span><span class="card-category-list-count">3</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Unity/"><span class="card-category-list-name">Unity</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/c/"><span class="card-category-list-name">c++</span><span class="card-category-list-count">3</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/html/"><span class="card-category-list-name">html</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/java/"><span class="card-category-list-name">java</span><span class="card-category-list-count">23</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/js/"><span class="card-category-list-name">js</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/next/"><span class="card-category-list-name">next</span><span class="card-category-list-count">1</span></a></li>
             </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>Tags</span></div><div class="card-tag-cloud"><a href="/tags/AT-T/" style="font-size: 1.1em; color: #999">AT&T</a> <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" style="font-size: 1.3em; color: #99a1ac">动态规划</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/" style="font-size: 1.5em; color: #99a9bf">字符串</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E5%B8%B8%E9%87%8F/" style="font-size: 1.1em; color: #999">字符常量</a> <a href="/tags/%E5%BF%AB%E6%8E%92/" style="font-size: 1.1em; color: #999">快排</a> <a href="/tags/%E6%8E%92%E5%BA%8F/" style="font-size: 1.1em; color: #999">排序</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>Archives</span><a class="card-more-btn" href="/archives/" title="More">
-    <i class="fas fa-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/05/"><span class="card-archive-list-date">May 2021</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/04/"><span class="card-archive-list-date">April 2021</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/03/"><span class="card-archive-list-date">March 2021</span><span class="card-archive-list-count">9</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/02/"><span class="card-archive-list-date">February 2021</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/01/"><span class="card-archive-list-date">January 2021</span><span class="card-archive-list-count">6</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/12/"><span class="card-archive-list-date">December 2020</span><span class="card-archive-list-count">6</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/11/"><span class="card-archive-list-date">November 2020</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/10/"><span class="card-archive-list-date">October 2020</span><span class="card-archive-list-count">4</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">Article :</div><div class="item-count">186</div></div><div class="webinfo-item"><div class="item-name">Total Count :</div><div class="item-count">249.1k</div></div><div class="webinfo-item"><div class="item-name">UV :</div><div class="item-count" id="busuanzi_value_site_uv"></div></div><div class="webinfo-item"><div class="item-name">PV :</div><div class="item-count" id="busuanzi_value_site_pv"></div></div><div class="webinfo-item"><div class="item-name">Last Push :</div><div class="item-count" id="last-push-date" data-lastpushdate="2021-05-09T12:09:43.363Z"></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By 星河璀璨</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="external nofollow noopener noreferrer" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="font-plus" type="button" title="Increase font size"><i class="fas fa-plus"></i></button><button id="font-minus" type="button" title="Decrease font size"><i class="fas fa-minus"></i></button><button id="translateLink" type="button" title="Toggle Between Traditional Chinese And Simplified Chinese">繁</button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button id="chat_btn" type="button" title="rightside.chat_btn"><i class="fas fa-sms"></i></button><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">Local search</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"></div></div></div><hr><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script>function panguFn () {
+    <i class="fas fa-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/05/"><span class="card-archive-list-date">May 2021</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/04/"><span class="card-archive-list-date">April 2021</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/03/"><span class="card-archive-list-date">March 2021</span><span class="card-archive-list-count">9</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/02/"><span class="card-archive-list-date">February 2021</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/01/"><span class="card-archive-list-date">January 2021</span><span class="card-archive-list-count">6</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/12/"><span class="card-archive-list-date">December 2020</span><span class="card-archive-list-count">6</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/11/"><span class="card-archive-list-date">November 2020</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/10/"><span class="card-archive-list-date">October 2020</span><span class="card-archive-list-count">4</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>Info</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">Article :</div><div class="item-count">186</div></div><div class="webinfo-item"><div class="item-name">Total Count :</div><div class="item-count">250.8k</div></div><div class="webinfo-item"><div class="item-name">UV :</div><div class="item-count" id="busuanzi_value_site_uv"></div></div><div class="webinfo-item"><div class="item-name">PV :</div><div class="item-count" id="busuanzi_value_site_pv"></div></div><div class="webinfo-item"><div class="item-name">Last Push :</div><div class="item-count" id="last-push-date" data-lastpushdate="2021-05-11T12:30:20.585Z"></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By 星河璀璨</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="external nofollow noopener noreferrer" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="font-plus" type="button" title="Increase font size"><i class="fas fa-plus"></i></button><button id="font-minus" type="button" title="Decrease font size"><i class="fas fa-minus"></i></button><button id="translateLink" type="button" title="Toggle Between Traditional Chinese And Simplified Chinese">繁</button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button id="chat_btn" type="button" title="rightside.chat_btn"><i class="fas fa-sms"></i></button><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">Local search</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"></div></div></div><hr><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script>function panguFn () {
   if (typeof pangu === 'object') pangu.autoSpacingPage()
   else {
     getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
