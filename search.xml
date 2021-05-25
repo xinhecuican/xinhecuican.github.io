@@ -46,7 +46,32 @@ c-4.7,4.7,-12.3,7,-23,7s-12,-1,-12,-1s-109,-253,-109,-253c-72.7,-168,-109.3,
 -252,-110,-252c-10.7,8,-22,16.7,-34,26c-22,17.3,-33.3,26,-34,26s-26,-26,-26,-26
 s76,-59,76,-59s76,-60,76,-60z M1001 80H40000v40H1012z'/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.25612499999999994em;"><span></span></span></span></span></span></span></span></span></span></p>
 <h1 id="博弈树"><a class="markdownIt-Anchor" href="#博弈树"></a> 博弈树</h1>
-<p>博弈树指的是二者一人下一步最终一人赢一人输或者两者平局，例如下围棋或者下象棋，博弈树就是为了解决这类问题而发明的。</p>
+<h2 id="博弈理论基础"><a class="markdownIt-Anchor" href="#博弈理论基础"></a> 博弈理论基础</h2>
+<p>博弈有三个要素：博弈的参与人员、策略集和收益。博弈的目标就是为了获得尽可能多的收益。当然收益并不是指狭隘的输赢，存在双输和双赢的情况。</p>
+<p>博弈的假设有三点，满足三点才可以进行下面的推导</p>
+<ol>
+<li>理性人： 博弈者足够聪明，可以选择对自己最有利的判断并执行</li>
+<li>规则透明： 相互了解对方的策略集（例如打牌就不是，你不知道对方的牌就不知道对方接下来会怎么出牌）</li>
+<li>自我利益最大化</li>
+</ol>
+<p>博弈的一个典型例子**“囚徒困境”**</p>
+<p>警察抓到了两个嫌疑犯，但是没有证据，现在需要诱供。他对两个嫌疑犯说，如果两个人都抵赖，那么没有证据抓你们，但是我可以找一个由头给你们判一年。如果你坦白他抵赖，那么他判十年你释放。如果两个人都坦白，那么只需要判四年。</p>
+<p><img src="/images/%E5%8D%9A%E5%BC%88%E6%A0%914.PNG" alt="" /></p>
+<p>如上图如果a坦白，b抵赖，那么a获得好处比抵赖更多，如果b坦白，a也坦白获得的价值比抵赖更多。现在就很简单了，无论b如何选择，a选择坦白都可以获得更好的结果。于是两人都会这样选择，最后两个人都会坦白。</p>
+<p>从直观上理解，两个人都抵赖最终可能结果会更好，但是基于完全理性人的假设却让他们避开了这个结果，最终获得双输的局面。</p>
+<p>这其实是规则设计者精心设计的，警察想尽办法让选择坦白更为有利。此外还有旁观者（学者）视角和当事人视角进行观察。从当事人视角，选择坦白更为有利，从旁观者视角，选择抵赖更为有利。</p>
+<p><strong>博弈的求解</strong></p>
+<p>博弈最终就是要寻求均衡，也就是博弈参与人都不想改变当前情况。可以使用收益矩阵进行刻画并求得均衡情况。</p>
+<ul>
+<li>严格占优策略： 无论你如何选择，我这样选择总是最优</li>
+<li>严格最佳应对： 如果你这样做，我这样做才可以收益最大。</li>
+</ul>
+<p>如果双方都有严格占优策略那么毫无疑问均衡情况就是两个都选严格占优策略的情况。</p>
+<p>如果一方有严格占优策略那么该方必定会选严格占优策略，那么另一方也必定会选择严格最佳应对，那么此时也可以达到均衡。</p>
+<p>但是有时候比一定有严格占优策略。例如，两个人去约会结果迷路了，他们实现指定了学校门口和车站两个地点进行集合，则此时收益矩阵为<img src="/images/%E5%8D%9A%E5%BC%88%E6%A0%915.PNG" alt="" /></p>
+<p>这个时候我们就需要使用均衡的定义去判断均衡情况了。如果两个人都在车站或门口显然他们不想改变当前状况。如果一个在车站一个在门口那么无疑任何一个人移动位置可以得到更高的收益，于是他们此时还想变更选择，因此不是均衡情况。</p>
+<p>可以得知上迷昂有两个均衡情况。并且可能会选择哪个是随机的。但是至少我们可以缩减选择的范围。</p>
+<h2 id="博弈树-2"><a class="markdownIt-Anchor" href="#博弈树-2"></a> 博弈树</h2>
 <p>例： 一字棋问题</p>
 <p>设有一个3行3列的棋盘,如图4.5所示。两个棋手轮流走每个棋手走步时往空格上摆一个自己的棋子,谁先使自己的棋子成三子一线为赢。设MAX方的棋子用×标记。MIN方的棋子用O标记,并规定MIN方先走步。</p>
 <p>MAX是要让结果朝有利于自己的方向发展，因此他会选评估函数最大的值，而MIN会选最小的值</p>
@@ -12056,13 +12081,13 @@ R = remainder \frac{D * 2^r}{G}
 <li>终止传输后，等待一个随机时间年，返回步骤2</li>
 </ol>
 <p>这里要求随机时间量是因为多个适配器会在接近时间发现碰撞，如果等待相同时间同时传输则又会发生碰撞。</p>
-<p>随机选择的时间在[0, 1, 2, …, <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mn>2</mn><mi>n</mi></msup><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">2^{n} - 1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.747722em;vertical-align:-0.08333em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">n</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span>]范围内</p>
+<p>随机选择的时间在[0, 1, 2, …, <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mn>2</mn><mi>n</mi></msup><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">2^{n} - 1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.747722em;vertical-align:-0.08333em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">n</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">1</span></span></span></span>]范围内，其中n是碰撞次数</p>
 <p>它的效率为 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mfrac><mn>1</mn><mrow><mn>1</mn><mo>+</mo><mn>5</mn><msub><mi>d</mi><mrow><mi>p</mi><mi>r</mi><mi>o</mi><mi>p</mi></mrow></msub><mi mathvariant="normal">/</mi><msub><mi>d</mi><mrow><mi>t</mi><mi>r</mi><mi>a</mi><mi>n</mi><mi>s</mi></mrow></msub></mrow></mfrac></mrow><annotation encoding="application/x-tex">\frac{1}{1 + 5d_{prop} / d_{trans}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.3874279999999999em;vertical-align:-0.5423199999999999em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.845108em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span><span class="mbin mtight">+</span><span class="mord mtight">5</span><span class="mord mtight"><span class="mord mathdefault mtight">d</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.16454285714285716em;"><span style="top:-2.357em;margin-left:0em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">p</span><span class="mord mathdefault mtight" style="margin-right:0.02778em;">r</span><span class="mord mathdefault mtight">o</span><span class="mord mathdefault mtight">p</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2818857142857143em;"><span></span></span></span></span></span></span><span class="mord mtight">/</span><span class="mord mtight"><span class="mord mathdefault mtight">d</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.29634285714285713em;"><span style="top:-2.357em;margin-left:0em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">t</span><span class="mord mathdefault mtight" style="margin-right:0.02778em;">r</span><span class="mord mathdefault mtight">a</span><span class="mord mathdefault mtight">n</span><span class="mord mathdefault mtight">s</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.143em;"><span></span></span></span></span></span></span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.5423199999999999em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></p>
-<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>d</mi><mrow><mi>p</mi><mi>r</mi><mi>o</mi><mi>p</mi></mrow></msub></mrow><annotation encoding="application/x-tex">d_{prop}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.980548em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord mathdefault">d</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.15139200000000003em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">p</span><span class="mord mathdefault mtight" style="margin-right:0.02778em;">r</span><span class="mord mathdefault mtight">o</span><span class="mord mathdefault mtight">p</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span></span></span></span>表示信号在适配器传播所需最大时间，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>d</mi><mrow><mi>t</mi><mi>r</mi><mi>a</mi><mi>n</mi><mi>s</mi></mrow></msub></mrow><annotation encoding="application/x-tex">d_{trans}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.84444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">d</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2805559999999999em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">t</span><span class="mord mathdefault mtight" style="margin-right:0.02778em;">r</span><span class="mord mathdefault mtight">a</span><span class="mord mathdefault mtight">n</span><span class="mord mathdefault mtight">s</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>表示传输一个最大长度的以太网帧的时间</p>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>d</mi><mrow><mi>p</mi><mi>r</mi><mi>o</mi><mi>p</mi></mrow></msub></mrow><annotation encoding="application/x-tex">d_{prop}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.980548em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord mathdefault">d</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.15139200000000003em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">p</span><span class="mord mathdefault mtight" style="margin-right:0.02778em;">r</span><span class="mord mathdefault mtight">o</span><span class="mord mathdefault mtight">p</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span></span></span></span>表示信号在任意两个适配器传播所需最大时间，<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>d</mi><mrow><mi>t</mi><mi>r</mi><mi>a</mi><mi>n</mi><mi>s</mi></mrow></msub></mrow><annotation encoding="application/x-tex">d_{trans}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.84444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">d</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.2805559999999999em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">t</span><span class="mord mathdefault mtight" style="margin-right:0.02778em;">r</span><span class="mord mathdefault mtight">a</span><span class="mord mathdefault mtight">n</span><span class="mord mathdefault mtight">s</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>表示传输一个最大长度的以太网帧的时间</p>
 <h3 id="轮流协议"><a class="markdownIt-Anchor" href="#轮流协议"></a> 轮流协议</h3>
 <p>轮流就是每个节点轮流来，他和前面的时隙ALOHA不同的是这里轮流的基础是帧而不是一定的时间。</p>
-<p>一种实现方法为让一个节点作为主节点，有他向其他节点发送报文来告诉他可以传输几个帧，传输完成之后主节点又进行调度。</p>
-<p>另一种是用一个称为令牌的特殊帧在节点之间以某种固定次序传递。</p>
+<p>一种实现方法为让一个节点作为主节点，由他向其他节点发送报文来告诉他可以传输几个帧，传输完成之后主节点又进行调度，告诉另一个节点它可以传送多少个帧（可以通过通道上是否有信号来判断是否传输完成）</p>
+<p>另一种是用一个称为令牌的特殊帧在节点之间以某种固定次序传递。如果接收到令牌的节点没有数据要发送，那么它立刻发送给下一个节点。如果有数据要发送，那么它发送最大数目的帧数，然后发送令牌给下一个节点。</p>
 <h1 id="交换局域网"><a class="markdownIt-Anchor" href="#交换局域网"></a> 交换局域网</h1>
 <p>在链路层，帧不通过网络层地址进行传输和识别，他有自己的一套寻址方法</p>
 <p><img src="/images/%E9%93%BE%E8%B7%AF%E5%B1%821.jpg" alt="" /></p>
@@ -12076,10 +12101,27 @@ R = remainder \frac{D * 2^r}{G}
 <p>我们可以获得目的IP是因为DNS解析，但是我们怎么获得目的适配器（主机）的MAC地址呢？这就需要ARP了。</p>
 <p>ARP可以将IP地址转换成MAC地址。他和DNS作用类似但是又有不同。DNS可以在全球范围内解析但是ARP只能解析同一个局域网中的地址。</p>
 <p>ARP是通过ARP表进行工作的，ARP表包含IP地址、MAC地址、TTL三部分，例如：</p>
-<p>| IP地址 | MAC地址 | TTL<br />
-|-|-|<br />
-| 222.222.222.221 | 88-B2-2F-54-1A-0F | 13:45:00 |<br />
-| 222.222.222.223 | 5C-66-AB-90-75-B1 | 13:52:00 |</p>
+<table>
+<thead>
+<tr>
+<th>IP地址</th>
+<th>MAC地址</th>
+<th>TTL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>222.222.222.221</td>
+<td>88-B2-2F-54-1A-0F</td>
+<td>13:45:00</td>
+</tr>
+<tr>
+<td>222.222.222.223</td>
+<td>5C-66-AB-90-75-B1</td>
+<td>13:52:00</td>
+</tr>
+</tbody>
+</table>
 <p>这个表并不包含所有MAC地址。并且它的过期时间一般也不长（20分钟），想要通过这个表找到目标MAC地址，就需要发送一个特殊的<strong>ARP分组</strong>。ARP分组包括发送和接收的IP和MAC地址。</p>
 <ul>
 <li>如果ARP表中有对应IP，则直接返回MAC地址</li>
@@ -12130,6 +12172,12 @@ R = remainder \frac{D * 2^r}{G}
 <li>如果表中有地址并且接口是x，则直接丢弃。（因为这表明它已经在这个接口内广播过了）</li>
 </ol>
 <p>交换机表具有<strong>自学习</strong>功能，它可以自动更新表项。每次有入帧就将发出地址和接口记录。并且在一段时间后会抛弃表项。</p>
+<p>具体过程为：</p>
+<ol>
+<li>交换机表初始为空</li>
+<li>对于每个接口接收到的帧，该交换机在表中存储该帧的源地址字段的地址和到来的接口及时间。</li>
+<li>经过一段时间后，如果没有收到以该地址作为源地址的帧，那么就删除这个地址。（表示没有发送到这台机器上的数据）</li>
+</ol>
 <h2 id="虚拟局域网"><a class="markdownIt-Anchor" href="#虚拟局域网"></a> 虚拟局域网</h2>
 <p>局域网一般都是一块一块的，每个部分都有自己的交换机，并且交换机之间互联。但是这种构建方式有一些缺点。</p>
 <ul>
@@ -16589,6 +16637,70 @@ DevRTT &amp;= (1 - \beta) * DevRTT + \beta * | SampleRTT - EstimatedRTT|
 </ul>
 <p>例如：</p>
 <figure class="highlight n1ql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> cust_name, cust_contact <span class="keyword">FROM</span> customers </span><br><span class="line"><span class="keyword">WHERE</span> cust_id <span class="keyword">IN</span> (<span class="keyword">SELECT</span> orders</span><br><span class="line">                  <span class="keyword">FROM</span> orders</span><br><span class="line">                  <span class="keyword">WHERE</span> order_num <span class="keyword">IN</span> (<span class="keyword">SELECT</span> order_num</span><br><span class="line">                               <span class="keyword">FROM</span> orderitems</span><br><span class="line">                               <span class="keyword">WHERE</span> prod_id = <span class="string">&#x27;TNT2&#x27;</span>));</span><br></pre></td></tr></table></figure>
+<h2 id="子查询"><a class="markdownIt-Anchor" href="#子查询"></a> 子查询</h2>
+<ul>
+<li>第一种就是上面所示用的IN中使用子查询</li>
+<li>第二种是在SELECT后就使用</li>
+</ul>
+<p>例如：</p>
+<figure class="highlight n1ql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> cust_name, cust_state,</span><br><span class="line">    (<span class="keyword">SELECT</span> <span class="built_in">COUNT</span>(*)</span><br><span class="line">    <span class="keyword">FROM</span> orders</span><br><span class="line">    <span class="keyword">WHERE</span> orders.cust_id = customers.cust_id)orders</span><br><span class="line"><span class="keyword">FROM</span> customers</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> cust_name;</span><br></pre></td></tr></table></figure>
+<p>或者</p>
+<figure class="highlight n1ql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="built_in">title</span></span><br><span class="line"><span class="keyword">from</span> Movies Old</span><br><span class="line"><span class="keyword">where</span> year &lt;<span class="keyword">any</span></span><br><span class="line">(</span><br><span class="line">    <span class="keyword">select</span> year</span><br><span class="line">    <span class="keyword">from</span> Movies</span><br><span class="line">    <span class="keyword">where</span> <span class="built_in">title</span> = Old.<span class="built_in">title</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<h2 id="通配符与正则表达式"><a class="markdownIt-Anchor" href="#通配符与正则表达式"></a> 通配符与正则表达式</h2>
+<blockquote>
+<p>想要使用通配符，必须要使用<strong>LIKE</strong>操作符。LIKE后面加上搜索模式进行匹配。</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>通配符</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>%</td>
+<td>匹配任意字符任意次数</td>
+</tr>
+<tr>
+<td>_</td>
+<td>匹配任意一个字符</td>
+</tr>
+</tbody>
+</table>
+<p>例如：<code>select cust_address FROM customers WHERE cust_address LIKE &quot;%Lane&quot;;</code></p>
+<blockquote>
+<p>使用正则表达式只需要将LIKE换成REGEXP即可。<a href="https://xinhecuican.github.io/post/26477.html">正则表达式语法可看这篇文章的正则表达式部分</a></p>
+</blockquote>
+<h2 id="拼接字段"><a class="markdownIt-Anchor" href="#拼接字段"></a> 拼接字段</h2>
+<p>可以用Concat函数拼接不同的字段。例如：<code>Concat(vend_name, '(', vend_country, ')')</code>由四部分拼接而成。</p>
+<p>有时候需要删除右侧多余的空格，可以使用<code>RTrim(str)</code>。如果想删除左侧空格或者两侧空格可以使用LTrim或Trim.</p>
+<p>例：</p>
+<p><code>SELECT Concat(RTrim(vend_name), ' (', RTrim(vend_country), ') ') FROM vendors ORDER BY vend_name;</code></p>
+<p>结果输出： ACME (USA)</p>
+<p>可以使用<strong>AS</strong>关键字为拼接后的字段赋予别名。</p>
+<p>例：<code>SELECT Concat(RTrim(vend_name), ' (', RTrim(vend_country), ') ') AS vend_title FROM vendors ORDER BY vend_name;</code></p>
+<p>输出</p>
+<figure class="highlight less"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">vend_title</span></span><br><span class="line"><span class="selector-tag">ACME</span> (USA) </span><br><span class="line"><span class="selector-tag">Anvils</span> <span class="selector-tag">R</span> <span class="selector-tag">Us</span> (USA) </span><br><span class="line"><span class="selector-tag">Furball</span> <span class="selector-tag">Inc</span>. (USA) </span><br><span class="line"><span class="selector-tag">Jet</span> <span class="selector-tag">Set</span> (England) </span><br><span class="line"><span class="selector-tag">Jouets</span> <span class="selector-tag">Et</span> <span class="selector-tag">Ours</span> (France) </span><br><span class="line"><span class="selector-tag">LT</span> <span class="selector-tag">Supplies</span> (USA) </span><br></pre></td></tr></table></figure>
+<p>除了让Concat结果赋予名字外，还可以对算术计算结果赋予名字。算术计算支持加减乘除。</p>
+<p>例如：<code>quantity * item_price AS expanded_price</code></p>
+<h2 id="组合查询"><a class="markdownIt-Anchor" href="#组合查询"></a> 组合查询</h2>
+<p>UNION是将几个SELECT的输出结合到一起。</p>
+<p>例如：</p>
+<figure class="highlight n1ql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> vend_id, prod_id, prod_price</span><br><span class="line"><span class="keyword">FROM</span> products</span><br><span class="line"><span class="keyword">WHERE</span> prod_price &lt;= <span class="number">5</span></span><br><span class="line"><span class="keyword">UNION</span></span><br><span class="line"><span class="keyword">SELECT</span> vend_id, prod_id, prod_price</span><br><span class="line"><span class="keyword">FROM</span> products</span><br><span class="line"><span class="keyword">WHERE</span> vend_id <span class="keyword">IN</span> (<span class="number">1001</span>, <span class="number">1002</span>);</span><br><span class="line"></span><br><span class="line">等同于：</span><br><span class="line"><span class="keyword">SELECT</span> vend_id, prod_id, prod_pric</span><br><span class="line"><span class="keyword">FROM</span> products</span><br><span class="line"><span class="keyword">WHERE</span> prod_pric &lt;= <span class="number">5</span> <span class="keyword">OR</span> vend_id <span class="keyword">IN</span> (<span class="number">1001</span>, <span class="number">1002</span>);</span><br></pre></td></tr></table></figure>
+<p>这个例子中似乎直接用OR更为方便。但是如果在复杂的表达式或者查询两个表的时候可能会更加清楚</p>
+<blockquote>
+<p>except和union用法相同，union是结果的并集，而except是差集，intersect是交集</p>
+</blockquote>
+<p>例如：</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line">(<span class="keyword">select</span> <span class="keyword">name</span>, address <span class="keyword">from</span> MovieStar)</span><br><span class="line"><span class="keyword">except</span></span><br><span class="line">(<span class="keyword">select</span> <span class="keyword">name</span>, address <span class="keyword">from</span> MovieExec)</span><br><span class="line">这里是挑选出不是制片人的电影明星</span><br><span class="line"></span><br><span class="line">(<span class="keyword">select</span> <span class="keyword">name</span>, address <span class="keyword">from</span> MovieStar <span class="keyword">where</span> gender = <span class="string">&#x27;f&#x27;</span>)</span><br><span class="line"><span class="keyword">intersect</span></span><br><span class="line">(<span class="keyword">select</span> <span class="keyword">name</span>, address <span class="keyword">from</span> MovieExec <span class="keyword">where</span> netWorth &gt; <span class="number">10000000</span>);</span><br><span class="line">这里是 挑选出性别是nv的明星并且她是制片人并且她的财富大于10000000</span><br></pre></td></tr></table></figure>
+<p>注意：</p>
+<ul>
+<li>每两个SELECT之间都要有UNION</li>
+<li>每个SELECT查询的内容必须相同</li>
+<li>UNION查询会自动去除重复的行。如果使用<strong>UNION ALL</strong>的话就可以不去除重复的行。</li>
+<li>排序（ORDER BY）必须要在最后一个SELECT语句之后</li>
+</ul>
 <h2 id="select子句的顺序"><a class="markdownIt-Anchor" href="#select子句的顺序"></a> SELECT子句的顺序</h2>
 <table>
 <thead>
@@ -16636,51 +16748,6 @@ DevRTT &amp;= (1 - \beta) * DevRTT + \beta * | SampleRTT - EstimatedRTT|
 </tr>
 </tbody>
 </table>
-<h2 id="子查询"><a class="markdownIt-Anchor" href="#子查询"></a> 子查询</h2>
-<ul>
-<li>第一种就是上面所示用的IN中使用子查询</li>
-<li>第二种是在SELECT后就使用</li>
-</ul>
-<p>例如：</p>
-<figure class="highlight n1ql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> cust_name, cust_state,</span><br><span class="line">    (<span class="keyword">SELECT</span> <span class="built_in">COUNT</span>(*)</span><br><span class="line">    <span class="keyword">FROM</span> orders</span><br><span class="line">    <span class="keyword">WHERE</span> orders.cust_id = customers.cust_id) <span class="keyword">AS</span> orders</span><br><span class="line"><span class="keyword">FROM</span> customers</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> cust_name;</span><br></pre></td></tr></table></figure>
-<h2 id="通配符与正则表达式"><a class="markdownIt-Anchor" href="#通配符与正则表达式"></a> 通配符与正则表达式</h2>
-<blockquote>
-<p>想要使用通配符，必须要使用<strong>LIKE</strong>操作符。LIKE后面加上搜索模式进行匹配。</p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>通配符</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>%</td>
-<td>匹配任意字符任意次数</td>
-</tr>
-<tr>
-<td>_</td>
-<td>匹配任意一个字符</td>
-</tr>
-</tbody>
-</table>
-<p>例如：<code>select cust_address FROM customers WHERE cust_address LIKE &quot;%Lane&quot;;</code></p>
-<blockquote>
-<p>使用正则表达式只需要将LIKE换成REGEXP即可。<a href="https://xinhecuican.github.io/post/26477.html">正则表达式语法可看这篇文章的正则表达式部分</a></p>
-</blockquote>
-<h2 id="拼接字段"><a class="markdownIt-Anchor" href="#拼接字段"></a> 拼接字段</h2>
-<p>可以用Concat函数拼接不同的字段。例如：<code>Concat(vend_name, '(', vend_country, ')')</code>由四部分拼接而成。</p>
-<p>有时候需要删除右侧多余的空格，可以使用<code>RTrim(str)</code>。如果想删除左侧空格或者两侧空格可以使用LTrim或Trim.</p>
-<p>例：</p>
-<p><code>SELECT Concat(RTrim(vend_name), ' (', RTrim(vend_country), ') ') FROM vendors ORDER BY vend_name;</code></p>
-<p>结果输出： ACME (USA)</p>
-<p>可以使用<strong>AS</strong>关键字为拼接后的字段赋予别名。</p>
-<p>例：<code>SELECT Concat(RTrim(vend_name), ' (', RTrim(vend_country), ') ') AS vend_title FROM vendors ORDER BY vend_name;</code></p>
-<p>输出</p>
-<figure class="highlight less"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">vend_title</span></span><br><span class="line"><span class="selector-tag">ACME</span> (USA) </span><br><span class="line"><span class="selector-tag">Anvils</span> <span class="selector-tag">R</span> <span class="selector-tag">Us</span> (USA) </span><br><span class="line"><span class="selector-tag">Furball</span> <span class="selector-tag">Inc</span>. (USA) </span><br><span class="line"><span class="selector-tag">Jet</span> <span class="selector-tag">Set</span> (England) </span><br><span class="line"><span class="selector-tag">Jouets</span> <span class="selector-tag">Et</span> <span class="selector-tag">Ours</span> (France) </span><br><span class="line"><span class="selector-tag">LT</span> <span class="selector-tag">Supplies</span> (USA) </span><br></pre></td></tr></table></figure>
-<p>除了让Concat结果赋予名字外，还可以对算术计算结果赋予名字。算术计算支持加减乘除。</p>
-<p>例如：<code>quantity * item_price AS expanded_price</code></p>
 <h1 id="函数"><a class="markdownIt-Anchor" href="#函数"></a> 函数</h1>
 <h2 id="类型"><a class="markdownIt-Anchor" href="#类型"></a> 类型</h2>
 <ul>
@@ -16943,31 +17010,25 @@ DevRTT &amp;= (1 - \beta) * DevRTT + \beta * | SampleRTT - EstimatedRTT|
 <p>例如某见物品（ID=DTNTR）有问题，因此想知道生产该物品的供应商生产的其他物品是否有问题。这个查询首先要找到生产ID是DTNTR的物品的供应商，然后找到这个供应商生产的其他物品。</p>
 <figure class="highlight n1ql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> prod_id, prod_name</span><br><span class="line"><span class="keyword">FROM</span> products</span><br><span class="line"><span class="keyword">WHERE</span> vend_id = (<span class="keyword">SELECT</span> vend_id</span><br><span class="line">                 <span class="keyword">FROM</span> products</span><br><span class="line">                 <span class="keyword">WHERE</span> prod_id = <span class="string">&quot;DTNTR&quot;</span>);</span><br><span class="line">                 </span><br><span class="line">等价于：</span><br><span class="line"></span><br><span class="line"><span class="keyword">SELECT</span> prod_id, prod_name</span><br><span class="line"><span class="keyword">FROM</span> products, vendors</span><br><span class="line"><span class="keyword">WHERE</span> vendors.vend_id = products.vend_id</span><br><span class="line">  <span class="keyword">AND</span> products.prod_id = <span class="string">&#x27;DTNTR&#x27;</span>;</span><br></pre></td></tr></table></figure>
 <p>自联结使用子查询代替联结。这样可以避免列名重复而导致的一些问题，但是有时候处理联结比处理查询快很多，所以要综合比较。</p>
+<p>例如：departments(pk_departments, dept_name)和dept_emp(fk_dept_emp_employees, fk_dept_emp_departments, from_date, to_date)进行联结</p>
+<figure class="highlight n1ql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> departments</span><br><span class="line"><span class="keyword">join</span> dept_emp <span class="keyword">on</span></span><br><span class="line">departments.pk_departments = dept_emp.fk_dept_emp_departments;</span><br></pre></td></tr></table></figure>
+<p>结果为<img src="/images/sql%E8%AF%AD%E5%8F%A5%E9%80%9F%E6%9F%A515.PNG" alt="" /></p>
 <h2 id="自然联结"><a class="markdownIt-Anchor" href="#自然联结"></a> 自然联结</h2>
 <p>标准的联结会返回所有数据，甚至完全相同的列会多次出现。而自然联结就是为了避免多次出现。自然联结通过对表使用通配符（*），对其他所有表使用明确的子集来完成。</p>
 <p>例如：</p>
 <figure class="highlight mipsasm"><table><tr><td class="code"><pre><span class="line">SELECT c.*, o.<span class="keyword">order_num, </span>o.<span class="keyword">order_date,</span></span><br><span class="line"><span class="keyword"> </span>      oi.prod_id, oi.quantity, oi.item_price</span><br><span class="line">FROM customers AS c, <span class="keyword">orders </span>AS o, <span class="keyword">orderitems </span>AS oi</span><br><span class="line">WHERE c.cust_id = o.cust_id</span><br><span class="line">  <span class="keyword">AND </span>oi.<span class="keyword">order_num </span>= o.<span class="keyword">order_num</span></span><br><span class="line"><span class="keyword"> </span> <span class="keyword">AND </span>prod_id = <span class="string">&#x27;FB&#x27;</span>;</span><br><span class="line">  </span><br></pre></td></tr></table></figure>
 <p>在这个例子中，通配符只对第一个表使用，其他列都明确给出。</p>
-<p>我们也可以使用natural join进行自然连接。natural join就是找名字相同的列进行连接。例如：</p>
+<p>我们也可以使用natural join进行自然连接。natural join就是找名字相同的列进行连接,并且名字相同的列只会出现一个。例如：</p>
 <figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> customers.Name, orders.Order_No</span><br><span class="line"><span class="keyword">FROM</span> customers</span><br><span class="line"><span class="keyword">NATURAL</span> <span class="keyword">JOIN</span> orders;</span><br></pre></td></tr></table></figure>
+<p>自然联结会把名字相同的列合并</p>
+<figure class="highlight sql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">alter</span> <span class="keyword">table</span> dept_emp <span class="keyword">rename</span> fk_dept_emp_departments <span class="keyword">to</span> pk_departments ;//改名</span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> departments <span class="keyword">natural</span> <span class="keyword">join</span> dept_emp;</span><br></pre></td></tr></table></figure>
+<p><img src="/images/sql%E8%AF%AD%E5%8F%A5%E9%80%9F%E6%9F%A516.PNG" alt="" /></p>
 <h2 id="外部联结"><a class="markdownIt-Anchor" href="#外部联结"></a> 外部联结</h2>
 <p>外部联结指的是即使相关表没有关联行也进行输出。</p>
 <figure class="highlight n1ql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> customers.cust_id, orders.order_num</span><br><span class="line"><span class="keyword">FROM</span> customers <span class="keyword">LEFT</span> <span class="keyword">OUTER</span> <span class="keyword">JOIN</span> orders</span><br><span class="line"><span class="keyword">ON</span>  customers.cust_id = orders.cust_id</span><br><span class="line"></span><br><span class="line">输出</span><br><span class="line">cust_id order_num</span><br><span class="line"><span class="number">10001</span>	<span class="number">20005</span></span><br><span class="line"><span class="number">10001</span>	<span class="number">20009</span></span><br><span class="line"><span class="number">10002</span>	<span class="literal">null</span></span><br><span class="line"><span class="number">10003</span>	<span class="number">20006</span></span><br><span class="line"><span class="number">10004</span>	<span class="number">20007</span></span><br><span class="line"><span class="number">10005</span>	<span class="number">20008</span></span><br></pre></td></tr></table></figure>
 <p>上面的orders表中没有10002，但是输出却包含了10002.它是以左边的customer为基准的，在右边的表中寻找是否与左边的表有关联，有关联输出对应值，没有关联输出null。当然如果有右边有多个匹配还是输出多个的。</p>
 <p>他和普通的连接的最大区别是左边一定全部输出，如果右边没有就输出为空。</p>
 <p>如果是RIGHT OUTER JOIN，则不会输出10002.</p>
-<h1 id="组合查询union"><a class="markdownIt-Anchor" href="#组合查询union"></a> 组合查询（UNION）</h1>
-<p>UNION是将几个SELECT的输出结合到一起。</p>
-<p>例如：</p>
-<figure class="highlight n1ql"><table><tr><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> vend_id, prod_id, prod_price</span><br><span class="line"><span class="keyword">FROM</span> products</span><br><span class="line"><span class="keyword">WHERE</span> prod_price &lt;= <span class="number">5</span></span><br><span class="line"><span class="keyword">UNION</span></span><br><span class="line"><span class="keyword">SELECT</span> vend_id, prod_id, prod_price</span><br><span class="line"><span class="keyword">FROM</span> products</span><br><span class="line"><span class="keyword">WHERE</span> vend_id <span class="keyword">IN</span> (<span class="number">1001</span>, <span class="number">1002</span>);</span><br><span class="line"></span><br><span class="line">等同于：</span><br><span class="line"><span class="keyword">SELECT</span> vend_id, prod_id, prod_pric</span><br><span class="line"><span class="keyword">FROM</span> products</span><br><span class="line"><span class="keyword">WHERE</span> prod_pric &lt;= <span class="number">5</span> <span class="keyword">OR</span> vend_id <span class="keyword">IN</span> (<span class="number">1001</span>, <span class="number">1002</span>);</span><br></pre></td></tr></table></figure>
-<p>这个例子中似乎直接用OR更为方便。但是如果在复杂的表达式或者查询两个表的时候可能会更加清楚</p>
-<p>注意：</p>
-<ul>
-<li>每两个SELECT之间都要有UNION</li>
-<li>每个SELECT查询的内容必须相同</li>
-<li>UNION查询会自动去除重复的行。如果使用<strong>UNION ALL</strong>的话就可以不去除重复的行。</li>
-<li>排序（ORDER BY）必须要在最后一个SELECT语句之后</li>
-</ul>
 <h1 id="数据修改"><a class="markdownIt-Anchor" href="#数据修改"></a> 数据修改</h1>
 <h2 id="插入insert"><a class="markdownIt-Anchor" href="#插入insert"></a> 插入（INSERT）</h2>
 <p>数据插入的关键字是<strong>INSERT</strong>。它可以插入完整的行，也可以插入行的一部分，还可以插入查询结果。</p>
@@ -17464,7 +17525,7 @@ check约束可以在插入更新时进行检查，如果符合条件就进行插
 <li>tf.random.uniform(shape, minval=0, maxval=none, dtype=tf.float32): 创建从minval到maxval均匀分布的张量</li>
 <li>tf.range(limit, delta=1):创建[0, limit)，步长为1的整型序列</li>
 </ul>
-<p>可以使用start🔚step的方式进行切片，例如<code>x[:,0:28:2,0:28:2,:]</code>,这是一个四维张量</p>
+<p>可以使用start/:end/:step的方式进行切片，例如<code>x[:,0:28:2,0:28:2,:]</code>,这是一个四维张量</p>
 <p>此外，可以使用<code>...</code>省略若干维度的数据。例如<code>x[0:2,...,1:]</code></p>
 <h2 id="更改维度"><a class="markdownIt-Anchor" href="#更改维度"></a> 更改维度</h2>
 <p>我们知道，数据在内存中多个维度，都是一维线性存储的，我们平常使用的多个维度只是为了方便访问。例如x = tf.range(96)创建了一个96个数据的一维数组，但是如果shape是[2, 4, 4, 3]在内存中和这个数组完全相同。基于这点，我们可以进行reshape</p>
@@ -17510,6 +17571,53 @@ b_1 &amp; b_2 &amp; b_3
 <p>对齐的方式是将维度向右对齐。然后将不存在的维度扩展为1，之后用已经存在的维度进行填充。<img src="/images/tensorflow1.PNG" alt="" /></p>
 </li>
 </ul>
+<h2 id="运算"><a class="markdownIt-Anchor" href="#运算"></a> 运算</h2>
+<p>加减乘除运算已经重载（乘是直接相乘而不是矩阵乘法）</p>
+<ul>
+<li>tf.math.log(x): 自然对数，如果是其他log可以使用换底公式<span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mo><mi>log</mi><mo>⁡</mo></mo><mi>a</mi></msub><mi>x</mi><mo>=</mo><mfrac><mrow><msub><mo><mi>log</mi><mo>⁡</mo></mo><mi>e</mi></msub><mi>x</mi></mrow><mrow><msub><mo><mi>log</mi><mo>⁡</mo></mo><mi>e</mi></msub><mi>a</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">\log_{a}x = \frac{\log_{e}x}{\log_{e}a}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.93858em;vertical-align:-0.24414em;"></span><span class="mop"><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.057252em;"><span style="top:-2.4558600000000004em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">a</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.24414em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathdefault">x</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.513324em;vertical-align:-0.5311079999999999em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.982216em;"><span style="top:-2.6550000000000002em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mop mtight"><span class="mop mtight">lo<span style="margin-right:0.01389em;">g</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.04167428571428572em;"><span style="top:-2.2341314285714287em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">e</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.26586857142857145em;"><span></span></span></span></span></span></span><span class="mspace mtight" style="margin-right:0.19516666666666668em;"></span><span class="mord mathdefault mtight">a</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.496108em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mop mtight"><span class="mop mtight">lo<span style="margin-right:0.01389em;">g</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.04167428571428572em;"><span style="top:-2.2341314285714287em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">e</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.26586857142857145em;"><span></span></span></span></span></span></span><span class="mspace mtight" style="margin-right:0.19516666666666668em;"></span><span class="mord mathdefault mtight">x</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.5311079999999999em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></li>
+<li><code>@</code>: 矩阵相乘运算符。此外还可以使用tf.matmul(a, b)。tensorflow的矩阵相乘可以是批量的形式，也就是当两个数的维度大于2时，会选择最后两个维度进行运算，前面的维度视为batch维度。a和b可以相乘的条件是a的倒数第一个维度必须和b的倒数第二个维度相等。</li>
+</ul>
+<h1 id="tensorflow进阶"><a class="markdownIt-Anchor" href="#tensorflow进阶"></a> tensorflow进阶</h1>
+<h2 id="合并与分割"><a class="markdownIt-Anchor" href="#合并与分割"></a> 合并与分割</h2>
+<p>合并指的是在某个维度上合并为一个张量。例如原来有一张照片它的shape为[1, 28, 28, 3]，第一个维度是照片数目，第二个和第三个指像素点数目，第四个是三个通道。现在我想把它加入其他的一堆照片中[102, 28, 28, 3]。</p>
+<p>合并可以使用拼接(concatenate)或堆叠(stack),拼接不会产生新的维度，而堆叠会产生新的维度。</p>
+<ul>
+<li>
+<p>tf.concat(tensors, axis): 按照axis维度进行合并，除了axis维度不同外，其他维度都必须相同，以上面的例子说明<code>tf.concat([a, b], axis=0)</code>.</p>
+</li>
+<li>
+<p>tf.stack(tensors, axis): 堆叠会创建一个新的维度，axis指定创建新维度的位置。堆叠的张量的维度必须相同。它的作用如把两张照片合并成一个相册。</p>
+</li>
+<li>
+<p>tf.split(x, num_of_size_splits, axis): num_of_size_splits是分割方案，可以直接输入一个数字表示分割为几份，也可以输入一个列表具体的控制划分方式</p>
+<p>例如我要把十份数据划分，可以直接num_of_size_splits=10,表示划分成10份，每份大小是1，如果原来是[10, 20, 5],那么现在是[1, 20, 5].如果num_of_size_splits=[4, 2, 2, 2],那么会产生4份，第一份有四个小块[4, 20, 5],后面三个都是两小块</p>
+</li>
+</ul>
+<h2 id="数据统计"><a class="markdownIt-Anchor" href="#数据统计"></a> 数据统计</h2>
+<p><strong>向量范数</strong></p>
+<p>向量范数是一种表示向量长度的方法，有以下几种范数</p>
+<ol>
+<li>L1范数：所有数的绝对值之和<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">∣</mi><mi mathvariant="normal">∣</mi><mi>x</mi><mi mathvariant="normal">∣</mi><msub><mi mathvariant="normal">∣</mi><mn>1</mn></msub><mo>=</mo><munder><mo>∑</mo><mi>i</mi></munder><mi mathvariant="normal">∣</mi><msub><mi>x</mi><mi>i</mi></msub><mi mathvariant="normal">∣</mi></mrow><annotation encoding="application/x-tex">||x||_1 = \sum_i |x_i |
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">∣</span><span class="mord">∣</span><span class="mord mathdefault">x</span><span class="mord">∣</span><span class="mord"><span class="mord">∣</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:2.327674em;vertical-align:-1.277669em;"></span><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.0500050000000003em;"><span style="top:-1.872331em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span><span style="top:-3.050005em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∑</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.277669em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">∣</span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord">∣</span></span></span></span></span></p>
+</li>
+<li>L2范数： 所有数的平方和再开根号<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">∣</mi><mi mathvariant="normal">∣</mi><mi>x</mi><mi mathvariant="normal">∣</mi><msub><mi mathvariant="normal">∣</mi><mn>2</mn></msub><mo>=</mo><msqrt><mrow><munder><mo>∑</mo><mi>i</mi></munder><mi mathvariant="normal">∣</mi><msub><mi>x</mi><mi>i</mi></msub><msup><mi mathvariant="normal">∣</mi><mn>2</mn></msup></mrow></msqrt></mrow><annotation encoding="application/x-tex">||x||_2 = \sqrt{\sum_i |x_i |^2}
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">∣</span><span class="mord">∣</span><span class="mord mathdefault">x</span><span class="mord">∣</span><span class="mord"><span class="mord">∣</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:3.04em;vertical-align:-1.5199570000000002em;"></span><span class="mord sqrt"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.5200429999999998em;"><span class="svg-align" style="top:-5em;"><span class="pstrut" style="height:5em;"></span><span class="mord" style="padding-left:1em;"><span class="mop op-limits"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.0500050000000003em;"><span style="top:-1.872331em;margin-left:0em;"><span class="pstrut" style="height:3.05em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span><span style="top:-3.050005em;"><span class="pstrut" style="height:3.05em;"></span><span><span class="mop op-symbol large-op">∑</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.277669em;"><span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">∣</span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord">∣</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.740108em;"><span style="top:-2.9890000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span></span></span></span></span></span></span><span style="top:-3.4800429999999998em;"><span class="pstrut" style="height:5em;"></span><span class="hide-tail" style="min-width:1.02em;height:3.08em;"><svg width='400em' height='3.08em' viewBox='0 0 400000 3240' preserveAspectRatio='xMinYMin slice'><path d='M473,2793c339.3,-1799.3,509.3,-2700,510,-2702
+c3.3,-7.3,9.3,-11,18,-11H400000v40H1017.7s-90.5,478,-276.2,1466c-185.7,988,
+-279.5,1483,-281.5,1485c-2,6,-10,9,-24,9c-8,0,-12,-0.7,-12,-2c0,-1.3,-5.3,-32,
+-16,-92c-50.7,-293.3,-119.7,-693.3,-207,-1200c0,-1.3,-5.3,8.7,-16,30c-10.7,
+21.3,-21.3,42.7,-32,64s-16,33,-16,33s-26,-26,-26,-26s76,-153,76,-153s77,-151,
+77,-151c0.7,0.7,35.7,202,105,604c67.3,400.7,102,602.7,104,606z
+M1001 80H400000v40H1017z'/></svg></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.5199570000000002em;"><span></span></span></span></span></span></span></span></span></span></p>
+</li>
+<li><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">∞</mi></mrow><annotation encoding="application/x-tex">\infty</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord">∞</span></span></span></span>-范数： 所有数的绝对值中的最大值<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">∣</mi><mi mathvariant="normal">∣</mi><mi>x</mi><mi mathvariant="normal">∣</mi><msub><mi mathvariant="normal">∣</mi><mi mathvariant="normal">∞</mi></msub><mo>=</mo><mi>m</mi><mi>a</mi><msub><mi>x</mi><mi>i</mi></msub><mo stretchy="false">(</mo><mi mathvariant="normal">∣</mi><msub><mi>x</mi><mi>i</mi></msub><mi mathvariant="normal">∣</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">||x||_{\infty} = max_i(|x_i |)
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">∣</span><span class="mord">∣</span><span class="mord mathdefault">x</span><span class="mord">∣</span><span class="mord"><span class="mord">∣</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">∞</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">m</span><span class="mord mathdefault">a</span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord">∣</span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord">∣</span><span class="mclose">)</span></span></span></span></span></p>
+</li>
+</ol>
+<p>可以通过tf.norm(x, ord)求得范数，其中ord=1,2分别是l1, l2范数，ord是np.inf时是<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">∞</mi></mrow><annotation encoding="application/x-tex">\infty</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord">∞</span></span></span></span>范数</p>
+<p>可以使用tf.reduce_max, tf.reduce_min, tf.reduce_mean, tf.reduce_sum求最大值，最小值，均值，和。</p>
+<p>例如：</p>
+<figure class="highlight sas"><table><tr><td class="code"><pre><span class="line"><span class="meta">x</span> = tf.random<span class="meta">.normal(</span>[4,10])</span><br><span class="line">tf.reduce<span class="meta">_max(</span><span class="meta">x</span>,axis=1)</span><br></pre></td></tr></table></figure>
+<p>使用tf.equal()判断两个向量是否相等，他会返回一个和两个向量shape相同的向量，用true和false表示对应位置的数是否相同，然后使用tf.reduce_sum()就可以知道相同的个数了</p>
 ]]></content>
   </entry>
   <entry>
@@ -17576,7 +17684,7 @@ b_1 &amp; b_2 &amp; b_3
 <li>boolean：</li>
 <li>string： 可以通过num.tostring()转换为字符串.可以使用单引号(’), 双引号(&quot;),反引号(`)表示。其中反引号可以跨行定义字符串，跨行字符串会保留反引号内部的空格</li>
 <li>number： 数值,可以表示整型和浮点型，并且表示范围几乎无穷大</li>
-<li>object： 表示值是对象或null（null表示空对象，但是null == undefined会返回true)</li>
+<li>object： 表示值是对象或null（null表示空对象，但是null == undefined会返回true)。我们还可以使用<code>instanceof</code>来具体判断是哪种对象</li>
 <li>function：</li>
 <li>symbol： 表示值是符号</li>
 </ul>
@@ -17620,7 +17728,175 @@ b_1 &amp; b_2 &amp; b_3
 <p><strong>with</strong></p>
 <p>with作用是把代码作用域设定为特定的对象.<strong>严格模式不允许使用with</strong></p>
 <p>例如</p>
-<figure class="highlight nix"><table><tr><td class="code"><pre><span class="line"><span class="keyword">with</span>(location)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="attr">qs</span> = search.substring(<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">let</span> <span class="attr">hostName</span> = hostname;</span><br><span class="line">    <span class="keyword">let</span> <span class="attr">url</span> = href;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">否则要写</span><br><span class="line"><span class="keyword">let</span> <span class="attr">qs</span> = location.search.substring(<span class="number">1</span>);</span><br><span class="line"><span class="keyword">let</span> <span class="attr">hostName</span> = hostname;</span><br><span class="line"><span class="keyword">let</span> <span class="attr">url</span> = href;</span><br></pre></td></tr></table></figure>
+<figure class="highlight nix"><table><tr><td class="code"><pre><span class="line"><span class="keyword">with</span>(location)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="attr">qs</span> = search.substring(<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">let</span> <span class="attr">hostName</span> = hostname;</span><br><span class="line">    <span class="keyword">let</span> <span class="attr">url</span> = href;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">否则要写</span><br><span class="line"><span class="keyword">let</span> <span class="attr">qs</span> = location.search.substring(<span class="number">1</span>);</span><br><span class="line"><span class="keyword">let</span> <span class="attr">hostName</span> = hostname;</span><br><span class="line"><span class="keyword">let</span> <span class="attr">url</span> = href;</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>js</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>js变量、作用域、内存</title>
+    <url>/post/fcee082f.html</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="原始值和引用值"><a class="markdownIt-Anchor" href="#原始值和引用值"></a> 原始值和引用值</h1>
+<p>原始值就是最简单的数据类型，而引用值就是对象。</p>
+<p>原始值不能有属性，尽管给原始值添加属性不会报错</p>
+<figure class="highlight sqf"><table><tr><td class="code"><pre><span class="line">let <span class="built_in">name</span> = <span class="string">&#x27;Nicholas&#x27;</span>;</span><br><span class="line"><span class="built_in">name</span>.age = <span class="number">27</span>;</span><br><span class="line">console.<span class="built_in">log</span>(<span class="built_in">name</span>.age);<span class="comment">//undefined</span></span><br></pre></td></tr></table></figure>
+<p>原始值赋给另一个值时，会在内存中复制一份，因此两份互不干扰</p>
+<figure class="highlight apache"><table><tr><td class="code"><pre><span class="line"><span class="attribute">let</span> num<span class="number">1</span> = <span class="number">5</span>;</span><br><span class="line"><span class="attribute">let</span> num<span class="number">2</span> = num<span class="number">1</span>;</span><br><span class="line"><span class="attribute">num1</span> = <span class="number">3</span>;</span><br><span class="line"><span class="attribute">console</span>.log(num<span class="number">2</span>);//<span class="number">5</span></span><br></pre></td></tr></table></figure>
+<p>把引用值从一个变量赋给另一个变量时，实际上是复制了指向这个对象的指针(对象本身在堆中)，因此一个变量对对象进行修改另一个也会修改。</p>
+<p>js函数只存在值传递，也就是说参数是原变量复制一份传进去的，也就是说如果传递的是对象我们在函数中修改了对象的属性在函数外也是成立的。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">setName</span>(<span class="params">obj</span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    obj.name = <span class="string">&#x27;b&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> person = <span class="keyword">new</span> <span class="built_in">Object</span>();</span><br><span class="line">setName(person);</span><br><span class="line"><span class="built_in">console</span>.log(person.name);<span class="comment">//b</span></span><br><span class="line">---</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">setName</span>(<span class="params">obj</span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    obj.name = <span class="string">&#x27;b&#x27;</span>;</span><br><span class="line">    obj = <span class="keyword">new</span> <span class="built_in">Object</span>();<span class="comment">//如果是引用传递，那么函数外的obj的值也会随之更改，他将指向新的Object对象</span></span><br><span class="line">    obj.name = <span class="string">&#x27;a&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> person = <span class="keyword">new</span> <span class="built_in">Object</span>();</span><br><span class="line">setName(person);</span><br><span class="line"><span class="built_in">console</span>.log(person.name);<span class="comment">//b</span></span><br></pre></td></tr></table></figure>
+<p>我们可以使用instanceof来判断具体的引用类型。使用方法为<code>variable instanceof constructor</code></p>
+<figure class="highlight coffeescript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(person <span class="keyword">instanceof</span> <span class="built_in">Object</span>);//person是<span class="built_in">Object</span>类型吗</span><br><span class="line"><span class="built_in">console</span>.log(colors <span class="keyword">instanceof</span> <span class="built_in">Array</span>);//colors是<span class="built_in">Array</span>类型吗</span><br></pre></td></tr></table></figure>
+<h1 id="作用域"><a class="markdownIt-Anchor" href="#作用域"></a> 作用域</h1>
+<p>变量或函数的上下文决定了他们可以访问那些数据。每个上下文都有一个关联的<strong>变量对象</strong>，而这个上下文的所有变量和函数都存在于这个对象上，虽然无法直接访问对象，但是后台处理时会用到它。</p>
+<p>全局上下文是最外层的上下文。在浏览器中，全局上下文是window对象，因此所有通过var定义的全局变量和函数都会成为window对象的属性和方法。let和const声明的全局变量不会挂在window对象中，因为他们声明的全局变量是无效的。</p>
+<p>每个函数都有自己的上下文，他们在一个上下文栈中。上下文在所有代码被执行完后会销毁</p>
+<p>例如：</p>
+<figure class="highlight qml"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="built_in">color</span> = <span class="string">&#x27;blue&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">changeColor</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">let</span> anotherColor = <span class="string">&#x27;red&#x27;</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">swapColors</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">let</span> tempColor = anotherColor;</span><br><span class="line">        anotherColor = <span class="built_in">color</span>;</span><br><span class="line">        <span class="built_in">color</span> = tempColor;</span><br><span class="line">    &#125;</span><br><span class="line">    swapColors();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">changeColor();</span><br></pre></td></tr></table></figure>
+<p><img src="/images/js%E5%8F%98%E9%87%8F%E3%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F%E3%80%81%E5%86%85%E5%AD%981.jpg" alt="" /></p>
+<p>上下文代码执行时，有一个变量的作用域链，如图所示。里层可以访问外层，而外层不能访问里层。</p>
+<p>with和catch都会变更上下文，catch会创建一个新的上下文。而with会添加到作用域链的尾部</p>
+<h2 id="变量声明"><a class="markdownIt-Anchor" href="#变量声明"></a> 变量声明</h2>
+<p><strong>var</strong></p>
+<p>使用var时，会自动添加到最接近的上下文。在函数中，最接近的上下文是函数局部上下文。</p>
+<blockquote>
+<p>如果变量未经声明直接赋值，那么会被自动添加到全局上下文</p>
+</blockquote>
+<figure class="highlight scilab"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span><span class="params">(num1, num2)</span></span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">sum</span> = num1 + num2;<span class="comment">//直接赋值</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">sum</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let result = add(<span class="number">10</span>, <span class="number">20</span>); <span class="comment">//30</span></span><br><span class="line">console.<span class="built_in">log</span>(<span class="built_in">sum</span>);<span class="comment">//30，因为它是全局上下文，所以在外部可以访问到</span></span><br></pre></td></tr></table></figure>
+<p><strong>let</strong>和<strong>const</strong>作用域都是块级的，也就是说是由最近的一队<code>&#123;&#125;</code>决定的。</p>
+<h1 id="垃圾回收"><a class="markdownIt-Anchor" href="#垃圾回收"></a> 垃圾回收</h1>
+<p>js和java一样，都是使用垃圾回收机制。垃圾回收是自动回收的。基本思路是每隔一定时间会自动执行看那些变量不再使用。</p>
+<p><strong>标记清理</strong></p>
+<p>js最常用的垃圾回收策略是标记清理。只有在上下文中的变量才有可能被清理，不再上下文中的变量因为其他的上下文还可能使用因此永运不应该释放他们的内存。</p>
+<p>给变量加标记的方法有多种，例如当变量进入上下文时，反转某一位，或者维护在上下文或不在上下文的列表。</p>
+<p>垃圾回收程序运行时，会标记内存中存储的所有变量，之后会将所有在上下文以及被上下文引用的变量的标记去掉，在此之后再被标记就是待删除的了。</p>
+<p>现在大多数浏览器都是使用这种方法。这种方式的好处是在上下文结束后会释放相关变量</p>
+<p><strong>引用计数</strong></p>
+<p>引用计数的思路是每个值都记录被引用的次数。</p>
+<figure class="highlight scala"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="class"><span class="keyword">object</span> </span>= <span class="keyword">new</span> <span class="type">Object</span>();<span class="comment">//引用一次</span></span><br><span class="line"><span class="keyword">var</span> objectb = <span class="class"><span class="keyword">object</span></span>;<span class="comment">//引用两次</span></span><br><span class="line"><span class="class"><span class="keyword">object</span> </span>= <span class="literal">null</span>;<span class="comment">//引用一次</span></span><br></pre></td></tr></table></figure>
+<p>但是有时候会导致内存泄露，例如</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">let</span> objecta = <span class="keyword">new</span> <span class="built_in">Object</span>();</span><br><span class="line">    <span class="keyword">let</span> objectb = <span class="keyword">new</span> <span class="built_in">Object</span>();</span><br><span class="line">    </span><br><span class="line">    objecta.otherobject = objectb;</span><br><span class="line">    objectb.otherobject = objecta;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>现在objecta和objectb都有两个引用并且是相互引用，也就是说他们永运都不会释放。</p>
+<h2 id="内存泄露及应对"><a class="markdownIt-Anchor" href="#内存泄露及应对"></a> 内存泄露及应对</h2>
+<p>下面是一些内存泄露的情况</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">setName</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    name = <span class="string">&#x27;Jake&#x27;</span>;<span class="comment">//没类型，是全局变量</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> name = <span class="string">&#x27;Jake&#x27;</span>;</span><br><span class="line"><span class="built_in">setInterval</span>(<span class="function">()=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(name);<span class="comment">//定时器会一直运行</span></span><br><span class="line">&#125;, <span class="number">100</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> outer = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">let</span> name = <span class="string">&#x27;Jake&#x27;</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">只要outer变量存在，那么name就不会被清除。</span><br></pre></td></tr></table></figure>
+<p><strong>静态分配和对象池</strong></p>
+<p>浏览器决定何时运行回收程序的一个标准就是对象更替的速度，如果有很多对象初始化，然后又一下子超出作用域，那么就会更频繁的调用垃圾回收程序。</p>
+<p>例如：</p>
+<figure class="highlight gml"><table><tr><td class="code"><pre><span class="line">function addVector(a, b)</span><br><span class="line">&#123;</span><br><span class="line">    let resultant = new Vector();</span><br><span class="line">    resultant.<span class="symbol">x</span> = a.<span class="symbol">x</span> + b.<span class="symbol">x</span>;</span><br><span class="line">    resultant.<span class="symbol">y</span> = a.<span class="symbol">y</span> + b.<span class="symbol">y</span>;</span><br><span class="line">    <span class="keyword">return</span> resultant;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个函数是两个向量相加，其中的临时变量resultant会很快创建又被清除，造成了浪费。</p>
+<p>解决这个问题的方法是不要创建临时变量，而始终用一个变量</p>
+<figure class="highlight gml"><table><tr><td class="code"><pre><span class="line">function addVector(a, b, resultant)</span><br><span class="line">&#123;</span><br><span class="line">    resultant.<span class="symbol">x</span> = a.<span class="symbol">x</span> + b.<span class="symbol">x</span>;</span><br><span class="line">    resultant.<span class="symbol">y</span> = a.<span class="symbol">y</span> + b.<span class="symbol">y</span>;</span><br><span class="line">    <span class="keyword">return</span> resultant;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>如果是从外部传入的变量那么在函数结束之后就不会被清除。但是这样的话resultant需要自己控制释放，不然可能多个结果引用同一个对象</p>
+<p>我们可以使用对象池来管理一组对象，需要时可以使用它，不需要时释放控制权，但是只是提交给对象池，并不代表这个对象被销毁。</p>
+<figure class="highlight apache"><table><tr><td class="code"><pre><span class="line"><span class="attribute">let</span> v<span class="number">1</span> = vectorPool.allocate();</span><br><span class="line"><span class="attribute">let</span> v<span class="number">2</span> = vectorPool.allocate();</span><br><span class="line"><span class="attribute">let</span> v<span class="number">3</span> = vectorPool.allocate();</span><br><span class="line"></span><br><span class="line"><span class="attribute">v1</span>.x = <span class="number">10</span>;</span><br><span class="line"><span class="attribute">v1</span>.y = <span class="number">5</span>;</span><br><span class="line"><span class="attribute">v2</span>.x = -<span class="number">3</span>;</span><br><span class="line"><span class="attribute">v2</span>.y = -<span class="number">6</span>;</span><br><span class="line"></span><br><span class="line"><span class="attribute">addVector</span>(v<span class="number">1</span>, v<span class="number">2</span>, v<span class="number">3</span>);</span><br><span class="line"></span><br><span class="line"><span class="attribute">console</span>.log(v<span class="number">3</span>.x, v<span class="number">3</span>.y);//<span class="number">7</span> -<span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="attribute">vectorPool</span>.free(v<span class="number">1</span>);</span><br><span class="line"><span class="attribute">vectorPool</span>.free(v<span class="number">2</span>);</span><br><span class="line"><span class="attribute">vectorPool</span>.free(v<span class="number">3</span>);</span><br></pre></td></tr></table></figure>
+<pre class="highlight"><code class=""></code></pre>
+]]></content>
+      <categories>
+        <category>js</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>js对象</title>
+    <url>/post/d6f3a755.html</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="基础操作"><a class="markdownIt-Anchor" href="#基础操作"></a> 基础操作</h1>
+<p>创建自定义对象的方式通常是创建一个Object的新实例，然后添加属性和方法</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> person = <span class="keyword">new</span> <span class="built_in">Object</span>();</span><br><span class="line">person.name = <span class="string">&#x27;Nicholas&#x27;</span>;</span><br><span class="line">person.age = <span class="number">29</span>;</span><br><span class="line">person.job = <span class="string">&#x27;engineer&#x27;</span>;</span><br><span class="line">person.sayName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>.name);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这是早期创建对象的方式。如果使用对象字面量可以这样写</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> person = </span><br><span class="line">&#123;</span><br><span class="line">    name: <span class="string">&#x27;Nicholas&#x27;</span>;</span><br><span class="line">    age: <span class="number">29</span>;</span><br><span class="line">    job: <span class="string">&#x27;engineer&#x27;</span>;</span><br><span class="line">    sayName()</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="built_in">this</span>.name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="属性类型"><a class="markdownIt-Anchor" href="#属性类型"></a> 属性类型</h2>
+<p>属性有些是对象中的成员变量，还有些类似于c#中的属性(property).这些属性都有一些内置的attribute（特性），我们可以修改这些特性。为了标识某一个内部特性，一般使用两个中括号括起来，例如<code>[[Enumberable]]</code></p>
+<p>使用<code>Object.defineProperty()</code>可以更改属性的特性</p>
+<p><strong>数据属性</strong></p>
+<p>数据属性就是平常的变量，它包含一个保存数据值的位置，只会从这个位置读取，也会写入到这个位置，它的特性为</p>
+<ul>
+<li><code>[[Configurable]]</code>: 是否可以通过delete删除并重新定义，是否可以修改特性，是否可以把它改为可访问，它是下面配置的基础。默认是true</li>
+<li><code>[[Enumerable]]</code>: 是否可以通过for-in返回，默认情况下是true</li>
+<li><code>[[Writable]]</code>: 属性是否可以被修改，如果设置为false可以给这个变量赋值但是赋值无效。默认情况下是true</li>
+<li><code>[[Value]]</code>: 包含属性实际的值</li>
+</ul>
+<p>修改特性可以同时设置一个或多个值</p>
+<figure class="highlight sqf"><table><tr><td class="code"><pre><span class="line">let person = &#123;&#125;;</span><br><span class="line">Object.defineProperty(person, <span class="string">&#x27;name&#x27;</span>,</span><br><span class="line">&#123;</span><br><span class="line">    writeable: <span class="literal">false</span>,</span><br><span class="line">    value: <span class="string">&#x27;Nicholas&#x27;</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">console.<span class="built_in">log</span>(person.<span class="built_in">name</span>); <span class="comment">//Nicholas</span></span><br><span class="line">person.<span class="built_in">name</span> = <span class="string">&#x27;Greg&#x27;</span>;</span><br><span class="line">console.<span class="built_in">log</span>(person.<span class="built_in">name</span>);<span class="comment">//Nicholas</span></span><br></pre></td></tr></table></figure>
+<p>一个属性被设置为不可配置之后，就不可以设置为可配置了。</p>
+<figure class="highlight ruby"><table><tr><td class="code"><pre><span class="line">let person = &#123;&#125;;</span><br><span class="line">Object.<span class="function"><span class="keyword">def</span><span class="title">ineProperty</span><span class="params">(person, <span class="string">&#x27;name&#x27;</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">&#123;</span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="symbol">configurable:</span> <span class="literal">false</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="symbol">value:</span> <span class="string">&#x27;Nicholas&#x27;</span></span></span></span><br><span class="line"><span class="function"><span class="params">&#125;)</span></span>;</span><br><span class="line"></span><br><span class="line">Object.<span class="function"><span class="keyword">def</span><span class="title">ineProperty</span><span class="params">(person, <span class="string">&#x27;name&#x27;</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">&#123;</span></span></span><br><span class="line"><span class="function"><span class="params">    <span class="symbol">configurable:</span> <span class="literal">true</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">&#125;)</span></span>;<span class="regexp">//</span>报错</span><br></pre></td></tr></table></figure>
+<p><strong>访问器属性</strong></p>
+<p>访问器有一个getter和一个setter函数，但是和c#中的属性不完全一样，c#中属性可以默认内部有一个值，但是访问器只可以对其他的值进行操作</p>
+<ul>
+<li><code>[[configurable]]</code>: 和上面一样</li>
+<li><code>[[Enumerable]]</code>:</li>
+<li><code>[[Get]]</code>: 默认是undefined</li>
+<li><code>[[Set]]</code>: 默认是undefined</li>
+</ul>
+<p>访问器属性不能直接定义，必须使用Object.defineProperty()</p>
+<figure class="highlight haxe"><table><tr><td class="code"><pre><span class="line">let book = </span><br><span class="line">&#123;</span><br><span class="line">    year_: <span class="type">2017</span>, <span class="comment">//认为是私有属性</span></span><br><span class="line">    edition: <span class="type">1</span></span><br><span class="line"><span class="type"></span>&#125;</span><br><span class="line"></span><br><span class="line">Object.defineProperty(book, <span class="string">&#x27;year&#x27;</span>,</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">set</span>(<span class="keyword">new</span><span class="type">Value</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">new</span><span class="type">Value</span> &gt; <span class="number">2017</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">this</span>.year_ = <span class="keyword">new</span><span class="type">Value</span>;</span><br><span class="line">            <span class="built_in">this</span>.edition += <span class="keyword">new</span><span class="type">Value</span> - <span class="number">2017</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">get</span>()</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.year_;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">book.year = <span class="number">2018</span>;</span><br></pre></td></tr></table></figure>
+<p><strong>读取属性特性</strong></p>
+<p>使用<code>Object.getOwnPropertyDescriptor(object_name, property_name)</code>获取属性的属性描述符,例如</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> descriptor = <span class="built_in">Object</span>.getOwnPropertyDescriptor(book, <span class="string">&#x27;year_&#x27;</span>);</span><br><span class="line"><span class="built_in">console</span>.log(descriptor.value);<span class="comment">//2017</span></span><br><span class="line"><span class="built_in">console</span>.log(descriptor.configurable);<span class="comment">//false</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span>(descriptor.get));<span class="comment">// undefined</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>此外还有<code>Object.getOwnPropertyDescriptors()</code>方法，他会返回每一个对象的特性</p>
+<p><strong>合并对象</strong></p>
+<ul>
+<li>Object.assign(): 将一个目标对象和多个源对象进行合并。将每个源对象的可枚举(Object.propertyIsEnumerable())和自有(Object.hasOwnProperty())属性复制到目标对象.对于每个符合条件的属性，会使用源对象上的[[get]]获得属性，然后使用目标对象的[[set]]设置属性</li>
+</ul>
+<figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="attr">dest</span> = &#123;&#125;<span class="comment">;</span></span><br><span class="line"></span><br><span class="line"><span class="attr">result</span> = Object.assign(dest, &#123;a: <span class="string">&#x27;foo&#x27;</span>&#125;, &#123;b: <span class="string">&#x27;bar&#x27;</span>&#125;)<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<p>assign()是浅复制，也就是说只会复制对象的引用，他们指向内存中的位置是相同的。并且如果出错无法回滚。</p>
+<h2 id="增强语法"><a class="markdownIt-Anchor" href="#增强语法"></a> 增强语法</h2>
+<ol>
+<li>属性值简写<br />
+在给对象添加变量时，经常发现属性名和变量名是一样的<figure class="highlight pgsql"><table><tr><td class="code"><pre><span class="line">letname = <span class="string">&#x27;Matt&#x27;</span>;</span><br><span class="line">let person = </span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">name</span>: <span class="type">name</span>;</span><br><span class="line">&#125;</span><br><span class="line">console.log(person);</span><br></pre></td></tr></table></figure>
+为了简单，有一种简写为<figure class="highlight xquery"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span><span class="built_in"> name</span> = <span class="string">&#x27;Matt&#x27;</span>;</span><br><span class="line"><span class="keyword">let</span> person = </span><br><span class="line">&#123;</span><br><span class="line">   <span class="built_in"> name</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li>可计算属性<br />
+可计算属性是用动态赋予变量名，例如<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> nameKey = <span class="string">&#x27;name&#x27;</span>;</span><br><span class="line"><span class="keyword">const</span> ageKey = <span class="string">&#x27;age&#x27;</span>;</span><br><span class="line"><span class="keyword">let</span> uniqueToken = <span class="number">0</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getUniqueKey</span>(<span class="params">key</span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">`<span class="subst">$&#123;key&#125;</span>_<span class="subst">$&#123;uniqueToken++&#125;</span>`</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> person =</span><br><span class="line">&#123;</span><br><span class="line">    [getUniqueKey(nameKey)] = <span class="string">&#x27;Matt&#x27;</span>;<span class="comment">//变量名是会变的。如name_0,name_1</span></span><br><span class="line">    [getUniqueKey(ageKey)] = <span class="number">27</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li>简写方法名<br />
+在给对象定义方法时，通常要写方法名加冒号再加方法，现在可以直接使用方法名<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">//原来</span></span><br><span class="line"><span class="keyword">let</span> person =</span><br><span class="line">&#123;</span><br><span class="line">    say_name: <span class="function"><span class="keyword">function</span>(<span class="params">name</span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">`My name is <span class="subst">$&#123;name&#125;</span>`</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//现在</span></span><br><span class="line"><span class="keyword">let</span> person = </span><br><span class="line">&#123;</span><br><span class="line">    say_name(name)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">`My name is <span class="subst">$&#123;name&#125;</span>`</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+简写还可以用于get和set，并且方法名可以用可计算属性代替<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> person = </span><br><span class="line">&#123;</span><br><span class="line">    name_: <span class="string">&#x27;&#x27;</span>,</span><br><span class="line">    <span class="keyword">get</span> <span class="title">name</span>()</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.name_;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li>对象解构<br />
+原来想要赋值必须一个个赋值，现在可以使用一条语句进行赋值<figure class="highlight ceylon"><table><tr><td class="code"><pre><span class="line"><span class="comment">//原来赋值</span></span><br><span class="line"><span class="keyword">let</span> personName = person.name;</span><br><span class="line"><span class="keyword">let</span> personAge = person.age;</span><br><span class="line"></span><br><span class="line"><span class="comment">//现在</span></span><br><span class="line"><span class="keyword">let</span> &#123;name: personName, age: personAge&#125; = person;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="创建对象"><a class="markdownIt-Anchor" href="#创建对象"></a> 创建对象</h1>
+<p><strong>工厂模式</strong></p>
+<p>例如:</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createPerson</span>(<span class="params">name, age, job</span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">let</span> o = <span class="keyword">new</span> <span class="built_in">Object</span>();</span><br><span class="line">    o.name = name;</span><br><span class="line">    o.ageg = age;</span><br><span class="line">    o.job = job;</span><br><span class="line">    o.sayName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="built_in">this</span>.name);</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">return</span> o;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> person = createPerson(<span class="string">&#x27;a&#x27;</span>, <span class="number">29</span>, <span class="string">&#x27;doctor&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<p><strong>构造函数模式</strong></p>
+<p>例如：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name, age, job</span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.name = name;</span><br><span class="line">    <span class="built_in">this</span>.age = age;</span><br><span class="line">    <span class="built_in">this</span>.job = job;</span><br><span class="line">    <span class="built_in">this</span>.sayName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="built_in">this</span>.name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> person = <span class="keyword">new</span> Person(<span class="string">&#x27;a&#x27;</span>, <span class="number">29</span>, <span class="string">&#x27;doctor&#x27;</span>);</span><br></pre></td></tr></table></figure>
+<p>构造函数不需要显示的创建对象，并且没有return。它使用new新建对象并且构造函数最好首字母大写。</p>
+<p>它的创建过程为：</p>
+<ol>
+<li>在内存中创建一个新对象</li>
+<li>将新对象内部的[[Prototype]]特性赋值为构造函数的prototype属性</li>
+<li>构造函数内部的this被赋值为当前对象</li>
+<li>执行构造函数内部代码（给对象添加属性）</li>
+<li>如果构造函数返回非空对象，则返回该对象，否则返回新创建的对象</li>
+</ol>
+<p>但是这种创建方式有一些问题。例如上例中的sayName，在js中函数实际上是一个对象，因此每定一个一个函数相当于创建了一个对象，这会带来空间的浪费，因此可以这样</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name, age, job</span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.name = name;</span><br><span class="line">    <span class="built_in">this</span>.age = age;</span><br><span class="line">    <span class="built_in">this</span>.job = job;</span><br><span class="line">    <span class="built_in">this</span>.sayName = sayName;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sayName</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>.name);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>原型模式</strong></p>
+<p>每个函数都会创建一个prototype属性，这个属性是一个对象，这个对象就是通过调用构造函数创建的对象的原型。在原型对象上定义的变量或属性可以被所有对象实例共享。原来直接赋给对象实例的值，可以赋给他们的原型</p>
+<figure class="highlight reasonml"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="constructor">Person()</span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="module-access"><span class="module"><span class="identifier">Person</span>.</span></span>prototype.name = <span class="character">&#x27;a&#x27;</span>;</span><br><span class="line"><span class="module-access"><span class="module"><span class="identifier">Person</span>.</span></span>prototype.age = <span class="number">29</span>;</span><br><span class="line"><span class="module-access"><span class="module"><span class="identifier">Person</span>.</span></span>prototype.job = &#x27;engineer&#x27;;</span><br><span class="line"><span class="module-access"><span class="module"><span class="identifier">Person</span>.</span></span>prototype.sayName = <span class="keyword">function</span><span class="literal">()</span>&#123;console.log(this.name);&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> person = <span class="keyword">new</span> <span class="constructor">Person()</span>;</span><br><span class="line">person.say<span class="constructor">Name()</span>;</span><br></pre></td></tr></table></figure>
+<p>我们可以把所有方法添加到原型上，这样就不会出现上面的创建一个对象就创建一个函数的情况了。</p>
+<h2 id="原型"><a class="markdownIt-Anchor" href="#原型"></a> 原型</h2>
+<p>只要创建一个函数，就会为这个函数创建一个prototype属性（指向原型）。所有原型会默认获得一个<code>constructor</code>属性，指向关联的构造函数。</p>
+<p>原型对象默认只会有constructor属性，其他属性都继承于Object， Object的原型是null。每次创建新实例时，内部的[[Prototype]]特性就会指向原型，一般可以通过<code>__proto__</code>访问这个原型。如果没有这个属性还可以使用getPrototypeOf()获得prototype。</p>
+<p><img src="/images/js%E5%AF%B9%E8%B1%A11.jpg" alt="" /></p>
+<h2 id="原型层级"><a class="markdownIt-Anchor" href="#原型层级"></a> 原型层级</h2>
+<p>通过对象访问属性时，会按照属性的名称开始搜索。首先搜索对象实例本身，如果本身没有则会搜索原型，再搜索原型的原型，知道搜索到null。</p>
+<p>虽然可以通过实例读取到原型对象上的值，但是不能修改这些值。如果在实例上创建了和原名对象中同名的属性，则会覆盖原型对象上的属性</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line">Person.prototype.name = <span class="string">&#x27;a&#x27;</span>;</span><br><span class="line">Person.prototype.age = <span class="number">29</span>;</span><br><span class="line">Person.prototype.sayName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="built_in">console</span>.log(<span class="built_in">this</span>.name);&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> person1 = <span class="keyword">new</span> Person();</span><br><span class="line"><span class="keyword">let</span> person2 = <span class="keyword">new</span> Person();</span><br><span class="line"></span><br><span class="line">person1.name = <span class="string">&#x27;b&#x27;</span>;</span><br><span class="line"><span class="built_in">console</span>.log(person1.name);<span class="comment">//b，来自实例</span></span><br><span class="line"><span class="built_in">console</span>.log(person2.name);<span class="comment">//a,来自原型</span></span><br></pre></td></tr></table></figure>
+<p>如果想要恢复对原型属性的访问，则必须使用delete删除这个属性</p>
+<figure class="highlight sqf"><table><tr><td class="code"><pre><span class="line">delete person1.<span class="built_in">name</span>;</span><br><span class="line">console.<span class="built_in">log</span>(person1.<span class="built_in">name</span>);<span class="comment">//a</span></span><br></pre></td></tr></table></figure>
+<h3 id="访问控制"><a class="markdownIt-Anchor" href="#访问控制"></a> 访问控制</h3>
+<p>我们可以使用hasOwnProperty()判断某个属性是实例上的还是原型上的，而in操作符只要可以访问就会返回true</p>
+<figure class="highlight 1c"><table><tr><td class="code"><pre><span class="line">console.<span class="built_in">log</span>(<span class="string">&quot;name&quot;</span> in person2);<span class="comment">//true</span></span><br><span class="line">console.<span class="built_in">log</span>(person2.hasOwnProperty(<span class="string">&quot;name&quot;</span>);<span class="comment">//false</span></span><br></pre></td></tr></table></figure>
+<p>如果使用for-in循环，那么可以通过对象访问且可枚举的属性都会返回，包括实例和原型属性。如果想要获得对象上所有可枚举的实例属性，可以使用Object.keys()方法，这个方法只会返回该对象而不会返回原型的</p>
+<figure class="highlight reasonml"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="constructor">Person()</span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="module-access"><span class="module"><span class="identifier">Person</span>.</span></span>prototype.name = <span class="character">&#x27;a&#x27;</span>;</span><br><span class="line"><span class="module-access"><span class="module"><span class="identifier">Person</span>.</span></span>prototype.age = <span class="number">29</span>;</span><br><span class="line"><span class="module-access"><span class="module"><span class="identifier">Person</span>.</span></span>prototype.job = &#x27;engineer&#x27;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> keys = <span class="module-access"><span class="module"><span class="identifier">Object</span>.</span></span>keys(<span class="module-access"><span class="module"><span class="identifier">Person</span>.</span></span>prototype);<span class="comment">//[&#x27;name&#x27;, &#x27;age&#x27;, &#x27;job&#x27;]</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> person = <span class="keyword">new</span> <span class="constructor">Person()</span>;</span><br><span class="line">keys = <span class="module-access"><span class="module"><span class="identifier">Object</span>.</span></span>keys(person);<span class="comment">//[&#x27;&#x27;]</span></span><br><span class="line"></span><br><span class="line">person.name = <span class="character">&#x27;b&#x27;</span>;</span><br><span class="line">person.age = <span class="number">23</span>;</span><br><span class="line">keys = <span class="module-access"><span class="module"><span class="identifier">Object</span>.</span></span>keys(person);<span class="comment">//[&#x27;name&#x27;, &#x27;age&#x27;]</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(value <span class="keyword">in</span> person)</span><br><span class="line">&#123;</span><br><span class="line">    console.log(value);<span class="comment">//name, age, job</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果我们想要获得所有实例属性，无论是否可以枚举，则可以使用Object.getOwnPropertyNames()</p>
+<figure class="highlight delphi"><table><tr><td class="code"><pre><span class="line">let keys = <span class="keyword">Object</span>.getOwnPropertyNames(person.prototype);</span><br><span class="line">console.log(keys)<span class="comment">//[&#x27;constructor&#x27;, &#x27;name&#x27;, &#x27;age&#x27;, &#x27;job&#x27;]</span></span><br><span class="line">多了一个<span class="function"><span class="keyword">constructor</span>，是不可枚举属性</span></span><br></pre></td></tr></table></figure>
+<p>除了getOwnPropertyNames()外，还有getOwnPropertySymbols()获得所有的symbol</p>
+<p>for-in循环和keys的枚举顺序是不确定的。而getOwnProperty的顺序是先以升序枚举数值键，然后以插入顺序枚举字符串和符号键。</p>
 ]]></content>
       <categories>
         <category>js</category>
