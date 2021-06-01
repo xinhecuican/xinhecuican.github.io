@@ -1,6 +1,6 @@
 var name = "xinhecuican";
 var repository = "xinhecuican.github.io";
-var total_picture = 12211
+var total_picture = 15049
 if(document.domain != 'localhost')
 {
 	if(document.getElementById("post"))

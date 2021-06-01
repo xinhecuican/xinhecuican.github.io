@@ -3,11 +3,11 @@
   <title>Xinhecuican&#39;s Blog</title>
   
   
-  <link href="http://xinhecuican.github.io/atom.xml" rel="self"/>
+  <link href="https://xinhecuican.github.io/atom.xml" rel="self"/>
   
-  <link href="http://xinhecuican.github.io/"/>
+  <link href="https://xinhecuican.github.io/"/>
   <updated>2021-05-31T11:35:01.846Z</updated>
-  <id>http://xinhecuican.github.io/</id>
+  <id>https://xinhecuican.github.io/</id>
   
   <author>
     <name>星河璀璨</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>js常用对象</title>
-    <link href="http://xinhecuican.github.io/post/8e93d915.html"/>
-    <id>http://xinhecuican.github.io/post/8e93d915.html</id>
+    <link href="https://xinhecuican.github.io/post/8e93d915.html"/>
+    <id>https://xinhecuican.github.io/post/8e93d915.html</id>
     <published>2021-05-30T06:04:00.000Z</published>
     <updated>2021-05-31T11:35:01.846Z</updated>
     
@@ -33,15 +33,15 @@
     
     
     
-    <category term="js" scheme="http://xinhecuican.github.io/categories/js/"/>
+    <category term="js" scheme="https://xinhecuican.github.io/categories/js/"/>
     
     
   </entry>
   
   <entry>
     <title>贝叶斯方法</title>
-    <link href="http://xinhecuican.github.io/post/cc8f0814.html"/>
-    <id>http://xinhecuican.github.io/post/cc8f0814.html</id>
+    <link href="https://xinhecuican.github.io/post/cc8f0814.html"/>
+    <id>https://xinhecuican.github.io/post/cc8f0814.html</id>
     <published>2021-05-28T07:20:00.000Z</published>
     <updated>2021-05-28T07:58:46.075Z</updated>
     
@@ -55,15 +55,15 @@
     
     
     
-    <category term="机器学习" scheme="http://xinhecuican.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    <category term="机器学习" scheme="https://xinhecuican.github.io/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
     
   </entry>
   
   <entry>
     <title>js函数</title>
-    <link href="http://xinhecuican.github.io/post/39e6b899.html"/>
-    <id>http://xinhecuican.github.io/post/39e6b899.html</id>
+    <link href="https://xinhecuican.github.io/post/39e6b899.html"/>
+    <id>https://xinhecuican.github.io/post/39e6b899.html</id>
     <published>2021-05-27T00:21:00.000Z</published>
     <updated>2021-05-30T01:37:30.870Z</updated>
     
@@ -77,15 +77,15 @@
     
     
     
-    <category term="js" scheme="http://xinhecuican.github.io/categories/js/"/>
+    <category term="js" scheme="https://xinhecuican.github.io/categories/js/"/>
     
     
   </entry>
   
   <entry>
     <title>js对象</title>
-    <link href="http://xinhecuican.github.io/post/d6f3a755.html"/>
-    <id>http://xinhecuican.github.io/post/d6f3a755.html</id>
+    <link href="https://xinhecuican.github.io/post/d6f3a755.html"/>
+    <id>https://xinhecuican.github.io/post/d6f3a755.html</id>
     <published>2021-05-23T02:54:00.000Z</published>
     <updated>2021-05-26T11:04:12.299Z</updated>
     
@@ -99,15 +99,15 @@
     
     
     
-    <category term="js" scheme="http://xinhecuican.github.io/categories/js/"/>
+    <category term="js" scheme="https://xinhecuican.github.io/categories/js/"/>
     
     
   </entry>
   
   <entry>
     <title>js变量、作用域、内存</title>
-    <link href="http://xinhecuican.github.io/post/fcee082f.html"/>
-    <id>http://xinhecuican.github.io/post/fcee082f.html</id>
+    <link href="https://xinhecuican.github.io/post/fcee082f.html"/>
+    <id>https://xinhecuican.github.io/post/fcee082f.html</id>
     <published>2021-05-22T12:20:00.000Z</published>
     <updated>2021-05-23T02:53:29.181Z</updated>
     
@@ -121,15 +121,15 @@
     
     
     
-    <category term="js" scheme="http://xinhecuican.github.io/categories/js/"/>
+    <category term="js" scheme="https://xinhecuican.github.io/categories/js/"/>
     
     
   </entry>
   
   <entry>
     <title>js基础语法</title>
-    <link href="http://xinhecuican.github.io/post/6e47d1b5.html"/>
-    <id>http://xinhecuican.github.io/post/6e47d1b5.html</id>
+    <link href="https://xinhecuican.github.io/post/6e47d1b5.html"/>
+    <id>https://xinhecuican.github.io/post/6e47d1b5.html</id>
     <published>2021-05-20T12:56:00.000Z</published>
     <updated>2021-05-26T11:36:03.369Z</updated>
     
@@ -143,15 +143,15 @@
     
     
     
-    <category term="js" scheme="http://xinhecuican.github.io/categories/js/"/>
+    <category term="js" scheme="https://xinhecuican.github.io/categories/js/"/>
     
     
   </entry>
   
   <entry>
     <title>tensorflow</title>
-    <link href="http://xinhecuican.github.io/post/1b09f60c.html"/>
-    <id>http://xinhecuican.github.io/post/1b09f60c.html</id>
+    <link href="https://xinhecuican.github.io/post/1b09f60c.html"/>
+    <id>https://xinhecuican.github.io/post/1b09f60c.html</id>
     <published>2021-05-16T12:26:00.000Z</published>
     <updated>2021-05-30T12:58:11.630Z</updated>
     
@@ -170,8 +170,8 @@
   
   <entry>
     <title>A*搜索与博弈树</title>
-    <link href="http://xinhecuican.github.io/post/19899506.html"/>
-    <id>http://xinhecuican.github.io/post/19899506.html</id>
+    <link href="https://xinhecuican.github.io/post/19899506.html"/>
+    <id>https://xinhecuican.github.io/post/19899506.html</id>
     <published>2021-05-07T07:59:00.000Z</published>
     <updated>2021-05-30T01:07:18.072Z</updated>
     
@@ -185,15 +185,15 @@
     
     
     
-    <category term="算法" scheme="http://xinhecuican.github.io/categories/%E7%AE%97%E6%B3%95/"/>
+    <category term="算法" scheme="https://xinhecuican.github.io/categories/%E7%AE%97%E6%B3%95/"/>
     
     
   </entry>
   
   <entry>
     <title>支配、覆盖、独立、匹配</title>
-    <link href="http://xinhecuican.github.io/post/fc31ea9a.html"/>
-    <id>http://xinhecuican.github.io/post/fc31ea9a.html</id>
+    <link href="https://xinhecuican.github.io/post/fc31ea9a.html"/>
+    <id>https://xinhecuican.github.io/post/fc31ea9a.html</id>
     <published>2021-05-01T05:40:00.000Z</published>
     <updated>2021-05-01T07:22:15.557Z</updated>
     
@@ -207,15 +207,15 @@
     
     
     
-    <category term="数学" scheme="http://xinhecuican.github.io/categories/%E6%95%B0%E5%AD%A6/"/>
+    <category term="数学" scheme="https://xinhecuican.github.io/categories/%E6%95%B0%E5%AD%A6/"/>
     
     
   </entry>
   
   <entry>
     <title>Hadoop和Spark</title>
-    <link href="http://xinhecuican.github.io/post/8ecb5fd.html"/>
-    <id>http://xinhecuican.github.io/post/8ecb5fd.html</id>
+    <link href="https://xinhecuican.github.io/post/8ecb5fd.html"/>
+    <id>https://xinhecuican.github.io/post/8ecb5fd.html</id>
     <published>2021-04-22T00:12:00.000Z</published>
     <updated>2021-04-23T10:23:35.198Z</updated>
     
@@ -229,15 +229,15 @@
     
     
     
-    <category term="并行计算" scheme="http://xinhecuican.github.io/categories/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97/"/>
+    <category term="并行计算" scheme="https://xinhecuican.github.io/categories/%E5%B9%B6%E8%A1%8C%E8%AE%A1%E7%AE%97/"/>
     
     
   </entry>
   
   <entry>
     <title>时序逻辑设计</title>
-    <link href="http://xinhecuican.github.io/post/30a5dc7e.html"/>
-    <id>http://xinhecuican.github.io/post/30a5dc7e.html</id>
+    <link href="https://xinhecuican.github.io/post/30a5dc7e.html"/>
+    <id>https://xinhecuican.github.io/post/30a5dc7e.html</id>
     <published>2021-04-20T10:40:00.000Z</published>
     <updated>2021-05-06T12:11:32.354Z</updated>
     
@@ -251,15 +251,15 @@
     
     
     
-    <category term="逻辑电路" scheme="http://xinhecuican.github.io/categories/%E9%80%BB%E8%BE%91%E7%94%B5%E8%B7%AF/"/>
+    <category term="逻辑电路" scheme="https://xinhecuican.github.io/categories/%E9%80%BB%E8%BE%91%E7%94%B5%E8%B7%AF/"/>
     
     
   </entry>
   
   <entry>
     <title>Unity旋转</title>
-    <link href="http://xinhecuican.github.io/post/bcf345af.html"/>
-    <id>http://xinhecuican.github.io/post/bcf345af.html</id>
+    <link href="https://xinhecuican.github.io/post/bcf345af.html"/>
+    <id>https://xinhecuican.github.io/post/bcf345af.html</id>
     <published>2021-04-11T01:28:00.000Z</published>
     <updated>2021-04-11T13:05:49.823Z</updated>
     
@@ -273,15 +273,15 @@
     
     
     
-    <category term="Unity" scheme="http://xinhecuican.github.io/categories/Unity/"/>
+    <category term="Unity" scheme="https://xinhecuican.github.io/categories/Unity/"/>
     
     
   </entry>
   
   <entry>
     <title>MPI编程</title>
-    <link href="http://xinhecuican.github.io/post/bb25e9a9.html"/>
-    <id>http://xinhecuican.github.io/post/bb25e9a9.html</id>
+    <link href="https://xinhecuican.github.io/post/bb25e9a9.html"/>
+    <id>https://xinhecuican.github.io/post/bb25e9a9.html</id>
     <published>2021-04-01T23:18:00.000Z</published>
     <updated>2021-04-24T12:22:23.378Z</updated>
     
@@ -295,15 +295,15 @@
     
     
     
-    <category term="并行" scheme="http://xinhecuican.github.io/categories/%E5%B9%B6%E8%A1%8C/"/>
+    <category term="并行" scheme="https://xinhecuican.github.io/categories/%E5%B9%B6%E8%A1%8C/"/>
     
     
   </entry>
   
   <entry>
     <title>硬件描述语言</title>
-    <link href="http://xinhecuican.github.io/post/b75632a1.html"/>
-    <id>http://xinhecuican.github.io/post/b75632a1.html</id>
+    <link href="https://xinhecuican.github.io/post/b75632a1.html"/>
+    <id>https://xinhecuican.github.io/post/b75632a1.html</id>
     <published>2021-03-24T13:00:00.000Z</published>
     <updated>2021-04-07T13:53:15.766Z</updated>
     
@@ -317,15 +317,15 @@
     
     
     
-    <category term="逻辑电路" scheme="http://xinhecuican.github.io/categories/%E9%80%BB%E8%BE%91%E7%94%B5%E8%B7%AF/"/>
+    <category term="逻辑电路" scheme="https://xinhecuican.github.io/categories/%E9%80%BB%E8%BE%91%E7%94%B5%E8%B7%AF/"/>
     
     
   </entry>
   
   <entry>
     <title>GPU编程</title>
-    <link href="http://xinhecuican.github.io/post/8e75958d.html"/>
-    <id>http://xinhecuican.github.io/post/8e75958d.html</id>
+    <link href="https://xinhecuican.github.io/post/8e75958d.html"/>
+    <id>https://xinhecuican.github.io/post/8e75958d.html</id>
     <published>2021-03-21T06:30:00.000Z</published>
     <updated>2021-03-21T07:47:50.770Z</updated>
     
@@ -339,15 +339,15 @@
     
     
     
-    <category term="并行" scheme="http://xinhecuican.github.io/categories/%E5%B9%B6%E8%A1%8C/"/>
+    <category term="并行" scheme="https://xinhecuican.github.io/categories/%E5%B9%B6%E8%A1%8C/"/>
     
     
   </entry>
   
   <entry>
     <title>OpenMP并行编程</title>
-    <link href="http://xinhecuican.github.io/post/75223936.html"/>
-    <id>http://xinhecuican.github.io/post/75223936.html</id>
+    <link href="https://xinhecuican.github.io/post/75223936.html"/>
+    <id>https://xinhecuican.github.io/post/75223936.html</id>
     <published>2021-03-16T13:17:00.000Z</published>
     <updated>2021-03-24T13:01:30.874Z</updated>
     
@@ -361,15 +361,15 @@
     
     
     
-    <category term="并行" scheme="http://xinhecuican.github.io/categories/%E5%B9%B6%E8%A1%8C/"/>
+    <category term="并行" scheme="https://xinhecuican.github.io/categories/%E5%B9%B6%E8%A1%8C/"/>
     
     
   </entry>
   
   <entry>
     <title>组合逻辑设计</title>
-    <link href="http://xinhecuican.github.io/post/70d4f4af.html"/>
-    <id>http://xinhecuican.github.io/post/70d4f4af.html</id>
+    <link href="https://xinhecuican.github.io/post/70d4f4af.html"/>
+    <id>https://xinhecuican.github.io/post/70d4f4af.html</id>
     <published>2021-03-07T07:46:00.000Z</published>
     <updated>2021-03-19T11:59:44.009Z</updated>
     
@@ -383,15 +383,15 @@
     
     
     
-    <category term="逻辑电路" scheme="http://xinhecuican.github.io/categories/%E9%80%BB%E8%BE%91%E7%94%B5%E8%B7%AF/"/>
+    <category term="逻辑电路" scheme="https://xinhecuican.github.io/categories/%E9%80%BB%E8%BE%91%E7%94%B5%E8%B7%AF/"/>
     
     
   </entry>
   
   <entry>
     <title>git操作</title>
-    <link href="http://xinhecuican.github.io/post/46390b34.html"/>
-    <id>http://xinhecuican.github.io/post/46390b34.html</id>
+    <link href="https://xinhecuican.github.io/post/46390b34.html"/>
+    <id>https://xinhecuican.github.io/post/46390b34.html</id>
     <published>2021-03-06T03:38:46.000Z</published>
     <updated>2021-03-06T07:32:20.910Z</updated>
     
@@ -412,8 +412,8 @@
   
   <entry>
     <title>逻辑门与CMOS晶体管</title>
-    <link href="http://xinhecuican.github.io/post/6ee50502.html"/>
-    <id>http://xinhecuican.github.io/post/6ee50502.html</id>
+    <link href="https://xinhecuican.github.io/post/6ee50502.html"/>
+    <id>https://xinhecuican.github.io/post/6ee50502.html</id>
     <published>2021-03-05T23:37:00.000Z</published>
     <updated>2021-03-07T07:47:14.388Z</updated>
     
@@ -432,8 +432,8 @@
   
   <entry>
     <title>关系数据库模型</title>
-    <link href="http://xinhecuican.github.io/post/bcc68732.html"/>
-    <id>http://xinhecuican.github.io/post/bcc68732.html</id>
+    <link href="https://xinhecuican.github.io/post/bcc68732.html"/>
+    <id>https://xinhecuican.github.io/post/bcc68732.html</id>
     <published>2021-03-04T12:00:00.000Z</published>
     <updated>2021-05-20T10:49:27.075Z</updated>
     
@@ -447,7 +447,7 @@
     
     
     
-    <category term="数据库" scheme="http://xinhecuican.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    <category term="数据库" scheme="https://xinhecuican.github.io/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
     
     
   </entry>
