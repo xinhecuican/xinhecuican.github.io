@@ -1,8 +1,7 @@
 
 @font-face{
   font-family:'myfont' ;  /* 字体名自定义即可 */
-  /*src:url('https://cdn.jsdelivr.net/gh/xinhecuican/xinhecuican.github.io/fonts/小楷字体SJ2.ttf');*/ /* 字体文件路径 */
-  src:url('https://xinhecuican.github.io/fonts/FZKTJW.TTF');
+  src:url('https://cdn.jsdelivr.net/gh/xinhecuican/xinhecuican.github.io/fonts/小楷字体SJ2.ttf');/* 字体文件路径 */
   font-display : swap;
   font-weight: 500;
 }
