@@ -58,6 +58,8 @@ window.addEventListener('load', () => {
         const $resultContent = document.getElementById('local-search-results')
         $input.addEventListener('input', function () {
           let str = '<div class="search-result-list">'
+		  let temp_str = ''
+		  let str_list = new Array()
           const keywords = this.value.trim().toLowerCase().split(/[\s]+/)
           $resultContent.innerHTML = ''
           if (this.value.trim().length <= 0) return
@@ -65,6 +67,7 @@ window.addEventListener('load', () => {
           // perform local searching
           datas.forEach(function (data) {
             let isMatch = true
+			let title_match = false
             if (!data.title || data.title.trim() === '') {
               data.title = 'Untitled'
             }
@@ -85,6 +88,10 @@ window.addEventListener('load', () => {
                   if (indexContent < 0) {
                     indexContent = 0
                   }
+				  if(indexTitle > 0)
+				  {
+					  title_match  = true;
+				  }
                   if (i === 0) {
                     firstOccur = indexContent
                   }
@@ -95,9 +102,11 @@ window.addEventListener('load', () => {
             }
 
             // show search results
-            if (isMatch) {
+            if (isMatch) 
+			{
               const content = data.content.trim().replace(/<[^>]+>/g, '')
-              if (firstOccur >= 0) {
+              if (firstOccur >= 0) 
+			  {
                 // cut out 130 characters
                 let start = firstOccur - 30
                 let end = firstOccur + 100
@@ -123,20 +132,37 @@ window.addEventListener('load', () => {
                   dataTitle = dataTitle.replace(regS, '<span class="search-keyword">' + keyword + '</span>')
                 })
 
-                str += '<div class="local-search__hit-item"><a href="' + dataUrl + '" class="search-result-title">' + dataTitle + '</a>'
+                temp_str += '<div class="local-search__hit-item"><a href="' + dataUrl + '" class="search-result-title">' + dataTitle + '</a>'
                 count += 1
 
                 if (dataContent !== '') {
-                  str += '<p class="search-result">' + matchContent + '...</p>'
+                  temp_str += '<p class="search-result">' + matchContent + '...</p>'
                 }
+				
               }
-              str += '</div>'
+              temp_str += '</div>'
+			  if(title_match)
+			  {
+			  	str_list.unshift(temp_str);
+			  }
+			  else
+			  {
+			  	str_list.push(temp_str);
+			  }
             }
           })
           if (count === 0) {
             str += '<div id="local-search__hits-empty">' + GLOBAL_CONFIG.localSearch.languages.hits_empty.replace(/\$\{query}/, this.value.trim()) +
               '</div>'
           }
+		  else
+		  {
+			  for(let i=0; i<count; i++)
+			  {
+				  str += str_list[i];
+			  }
+			  
+		  }
           str += '</div>'
           $resultContent.innerHTML = str
           window.pjax && window.pjax.refresh($resultContent)
