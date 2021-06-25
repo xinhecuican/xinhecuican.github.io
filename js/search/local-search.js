@@ -58,8 +58,8 @@ window.addEventListener('load', () => {
         const $resultContent = document.getElementById('local-search-results')
         $input.addEventListener('input', function () {
           let str = '<div class="search-result-list">'
-		  let temp_str = ''
-		  let str_list = new Array()
+		  
+		  let str_list = []
           const keywords = this.value.trim().toLowerCase().split(/[\s]+/)
           $resultContent.innerHTML = ''
           if (this.value.trim().length <= 0) return
@@ -68,6 +68,7 @@ window.addEventListener('load', () => {
           datas.forEach(function (data) {
             let isMatch = true
 			let title_match = false
+			let temp_str = ''
             if (!data.title || data.title.trim() === '') {
               data.title = 'Untitled'
             }
@@ -88,7 +89,7 @@ window.addEventListener('load', () => {
                   if (indexContent < 0) {
                     indexContent = 0
                   }
-				  if(indexTitle > 0)
+				  if(indexTitle >= 0)
 				  {
 					  title_match  = true;
 				  }
