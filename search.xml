@@ -5229,6 +5229,70 @@ man文档显示的内容</li>
 <li>random(): 返回0-1的随机数，其中包含0但不包含1</li>
 <li>等等</li>
 </ul>
+<h1 id="集合引用类型"><a class="markdownIt-Anchor" href="#集合引用类型"></a> 集合引用类型</h1>
+<h2 id="array"><a class="markdownIt-Anchor" href="#array"></a> Array</h2>
+<p>创建数组</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> colors = <span class="keyword">new</span> <span class="built_in">Array</span>();</span><br><span class="line"><span class="keyword">let</span> colors = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">3</span>);<span class="comment">//创建长度为3的数组</span></span><br><span class="line"><span class="keyword">let</span> names = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="string">&quot;Greg&quot;</span>);<span class="comment">//只包含一个元素的数组</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> colors = [<span class="string">&#x27;red&#x27;</span>, <span class="string">&#x27;blue&#x27;</span>, <span class="string">&#x27;green&#x27;</span>]<span class="comment">//使用数组字面量创建数组</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> colors = [,,,,,];<span class="comment">//创建包含5个元素的数组</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>from(data, func, this): 从data转换为数组，data可以是集合，map等。func是进行的一些操作。this是func中的this值，但是func不能是箭头函数</li>
+<li>of(): 将一组参数转换成数组</li>
+</ul>
+<figure class="highlight apache"><table><tr><td class="code"><pre><span class="line"><span class="attribute">const</span> a<span class="number">1</span> =<span class="meta"> [1, 2, 3, 4]</span></span><br><span class="line"><span class="attribute">const</span> a<span class="number">2</span> = Array.from(a<span class="number">1</span>, x=&gt;x**<span class="number">2</span>)</span><br><span class="line"><span class="attribute">const</span> a<span class="number">3</span> = Array.from(a<span class="number">1</span>, function(x) &#123;return x**this.exponent&#125;, &#123;exponent: <span class="number">2</span>&#125;);</span><br><span class="line"></span><br><span class="line"><span class="attribute">Array</span>.of(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>)</span><br></pre></td></tr></table></figure>
+<p><strong>索引</strong></p>
+<p>数组索引和c++最大的不同是它可以动态变化，例如</p>
+<figure class="highlight rust"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> colors = [<span class="symbol">&#x27;red</span>&#x27;, <span class="symbol">&#x27;blue</span>&#x27;, green&#x27;];</span><br><span class="line">colors[<span class="number">3</span>] = <span class="symbol">&#x27;yellow</span>&#x27;;<span class="comment">//添加一个元素</span></span><br></pre></td></tr></table></figure>
+<p>Array中有一个属性length代表了数组的长度,这个值是可以进行设置的，从而改变数组长度(如果缩减长度会导致原有内容消失)</p>
+<figure class="highlight rsl"><table><tr><td class="code"><pre><span class="line">let colors = [<span class="string">&#x27;red&#x27;</span>, <span class="string">&#x27;blue&#x27;</span>, <span class="string">&#x27;green&#x27;</span>]</span><br><span class="line">colors[<span class="number">99</span>] = <span class="string">&#x27;black&#x27;</span>;</span><br><span class="line">console.<span class="built_in">log</span>(colors.<span class="built_in">length</span>)<span class="comment">//100</span></span><br><span class="line">colors.<span class="built_in">length</span> = <span class="number">2</span></span><br><span class="line">console.<span class="built_in">log</span>(colors[<span class="number">2</span>])<span class="comment">//undefined</span></span><br><span class="line">colors.<span class="built_in">length</span> = <span class="number">3</span></span><br><span class="line">console.<span class="built_in">log</span>(colors[<span class="number">2</span>])<span class="comment">//undefined，缩减后数据被删除了</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//可以很方便的添加数据</span></span><br><span class="line">colors[<span class="built_in">length</span>] = <span class="string">&#x27;yellow&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<p><strong>方法</strong></p>
+<ul>
+<li>keys(),values(), entries(): keys是索引的迭代器，values是值的迭代器，entries()是键值对的迭代器，例如 <figure class="highlight sas"><table><tr><td class="code"><pre><span class="line">const <span class="meta">key</span> = <span class="meta">Array</span>.<span class="meta">from</span>(a.keys())</span><br><span class="line">console<span class="meta">.log(</span><span class="meta">key</span>)//0, 1, 2, 3</span><br><span class="line">const value = <span class="meta">Array</span>.<span class="meta">from</span>(a.values())</span><br><span class="line">console<span class="meta">.log(</span>value)//<span class="string">&#x27;foo&#x27;</span>, <span class="string">&#x27;bar&#x27;</span>, <span class="string">&#x27;baz&#x27;</span>, <span class="string">&#x27;qux&#x27;</span></span><br><span class="line">const entries = <span class="meta">Array</span>.<span class="meta">from</span>(a.entries())</span><br><span class="line">console<span class="meta">.log(</span>entires)//[0, <span class="string">&#x27;foo&#x27;</span>], [1, <span class="string">&#x27;bar&#x27;</span>], [2, <span class="string">&#x27;baz&#x27;</span>], [3, <span class="string">&#x27;qux&#x27;</span>]</span><br><span class="line"></span><br><span class="line">for(const [idx, element] of a.entires())</span><br><span class="line">&#123;</span><br><span class="line">    console<span class="meta">.log(</span>idx);</span><br><span class="line">    console<span class="meta">.log(</span>element);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li>fill(sum, begin, end): 从begin到end填充sum</li>
+<li>copyWithin(index, begin, end): 复制数组begin到end的内容并且插入到以index开始的位置中</li>
+<li>toString(): 每个值都会调用toString()方法</li>
+<li>push(): 拖入任意数量的值并且放入末尾</li>
+<li>pop(): 删除最后一项</li>
+<li>shift(): 取得第一项</li>
+<li>unshift()： 从第一个位置插入</li>
+<li>sort(func): 排序，可以按照指定的func进行排序</li>
+<li>reverse(): 反向排序</li>
+<li>concat(): 拼接</li>
+<li>indexOf(), includes(), lastIndexOf(): 搜索某一个元素在数组中的位置，indexOf(), includes()从前往后搜索，lastIndexOf()从后往前.indexOf()和lastIndexOf()没有搜索到返回-1.includes()没有搜索到返回false。他们进行比较时使用====，也就是两项必须严格相等</li>
+<li>every(func): 对每一项都运行函数，如果全部返回为真，则结果为真</li>
+<li>filter(func): 运行函数为true的项会组成数组返回</li>
+<li>foreach(func): 对每一项都运行函数</li>
+<li>map(func): 对每一项都运行函数，返回由函数结果构成的数组</li>
+<li>some(func): 只要有一项返回为true结果就为true <figure class="highlight nim"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> number = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">4</span>]</span><br><span class="line"><span class="keyword">let</span> <span class="literal">result</span> = number.every((item, index, <span class="built_in">array</span>)=&gt;item &gt; <span class="number">2</span>);//<span class="literal">false</span></span><br><span class="line"><span class="keyword">let</span> mapres = number.map((item, index, <span class="built_in">array</span>)=&gt;item * <span class="number">2</span>);</span><br><span class="line">number.forEach((item, index, <span class="built_in">array</span>)=&gt;<span class="meta">&#123;...&#125;</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li>reduce(func): 对数组中数据进行归约 <figure class="highlight maxima"><table><tr><td class="code"><pre><span class="line"><span class="built_in">let</span> <span class="built_in">values</span> = [<span class="number">1</span>, <span class="number">4</span>, <span class="number">9</span>, <span class="number">16</span>]</span><br><span class="line"><span class="built_in">let</span> <span class="built_in">sum</span> = <span class="built_in">values</span>.reduce((prev, cur, index, <span class="built_in">array</span>)=&gt; prev + cur);//<span class="number">30</span></span><br><span class="line"></span><br><span class="line">第一次执行时prev=<span class="number">1</span>,cur=<span class="number">4</span>,第二次执行prev=<span class="number">5</span>(前面的归约结果), cur=<span class="number">9</span>（第三项</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="map"><a class="markdownIt-Anchor" href="#map"></a> Map</h2>
+<p>创建：</p>
+<figure class="highlight dart"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> m = <span class="keyword">new</span> <span class="built_in">Map</span>();</span><br><span class="line"><span class="keyword">const</span> m1 = <span class="keyword">new</span> <span class="built_in">Map</span>([</span><br><span class="line">    [<span class="string">&#x27;key1&#x27;</span>, <span class="string">&#x27;val1&#x27;</span>],</span><br><span class="line">    [<span class="string">&#x27;key2&#x27;</span>, <span class="string">&#x27;val2&#x27;</span>],</span><br><span class="line">    [<span class="string">&#x27;key3&#x27;</span>, <span class="string">&#x27;val3&#x27;</span>]</span><br><span class="line">]);</span><br></pre></td></tr></table></figure>
+<p>map和object类型都可以插入键值对，但是他们还是有很大区别的。Object类型的键只能是数值，字符串或符号，而map可以是任意类型。其次map内部是有序的（插入顺序），而Object是无序的。我们可以使用entries()获得一个个按照插入顺序排列的(key, value)形式的数组</p>
+<figure class="highlight awk"><table><tr><td class="code"><pre><span class="line"><span class="keyword">for</span>(let pair of m.entries())</span><br><span class="line">&#123;</span><br><span class="line">    alert(pair);</span><br><span class="line">&#125;</span><br><span class="line"><span class="regexp">//</span>[key1, val1]</span><br><span class="line"><span class="regexp">//</span>[key2, val2]</span><br><span class="line"><span class="regexp">//</span>[key3, val3]</span><br></pre></td></tr></table></figure>
+<p>函数：</p>
+<ul>
+<li>set(): 添加键值对</li>
+<li>get()/has(): 输入键，查询值</li>
+<li>delete()/clear(): 删除 <figure class="highlight arduino"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> m = <span class="keyword">new</span> Map();</span><br><span class="line">m.<span class="built_in">get</span>(<span class="string">&quot;firstName&quot;</span>);</span><br><span class="line">m.<span class="built_in">set</span>(<span class="string">&quot;firstName&quot;</span>, <span class="string">&quot;Matt&quot;</span>);</span><br><span class="line"></span><br><span class="line">m.has(<span class="string">&quot;firstName&quot;</span>);<span class="comment">//true</span></span><br><span class="line"></span><br><span class="line">m.<span class="keyword">delete</span>(<span class="string">&quot;firstName&quot;</span>);</span><br></pre></td></tr></table></figure>
+</li>
+<li>keys()/values(): 返回key或value的迭代器</li>
+</ul>
+<p>键和值在迭代器遍历时是可以修改的，但是在Map内部不会修改。当然，这种修改不会影响使用这个键访问值</p>
+<figure class="highlight processing"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> m = <span class="keyword">new</span> Map([[<span class="string">&quot;key1&quot;</span>, <span class="string">&quot;val1&quot;</span>]]);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(le tkey of m.keys())</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">key</span> = <span class="string">&quot;newKey&quot;</span>;</span><br><span class="line">    alert(m.<span class="built_in">get</span>(<span class="string">&quot;key1&quot;</span>)<span class="comment">//val1,说明在map内没有被修改</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> keyObj = &#123;id: <span class="number">1</span>&#125;;</span><br><span class="line"><span class="keyword">const</span> m1 = <span class="keyword">new</span> Map([[keyObj, <span class="string">&quot;val1&quot;</span>]]);</span><br><span class="line"><span class="keyword">for</span>(let <span class="built_in">key</span> of m.keys())</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">key</span>.id = <span class="string">&quot;newKey&quot;</span>;</span><br><span class="line">    alert(m.<span class="built_in">get</span>(<span class="built_in">key</span>);<span class="comment">//val1</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>WeakMap</strong></p>
+<p>弱映射表示映射的键是弱的，一旦键的引用被清除，这个键值对就会被清除。</p>
+<p>他和普通的Map不同在于普通的map的键是在对象中独立存在的，除非调用delete否则不会被清除，而WeakMap中键直接引用外部变量，外部变量被清除这个键值对也就被清除。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> w = <span class="keyword">new</span> <span class="built_in">WeakMap</span>();</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> container = &#123; <span class="attr">key</span>: &#123;&#125;&#125;;</span><br><span class="line"></span><br><span class="line">w.set(container.key, <span class="string">&#x27;val&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">remove_reference</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    container.key = <span class="literal">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>由于container对象保有对key的引用，所以这个键值对暂时不会被清除，一旦调用remove_reference清除了外部引用之后，这个键值对将自动清除。</p>
+<p>因为引用被删除就会自动回收，所以它可以很方便的给某些数据添加额外属性，省的每次都要delete</p>
+<figure class="highlight dart"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> w = <span class="keyword">new</span> WeakMap();</span><br><span class="line"><span class="keyword">const</span> loginButton = <span class="built_in">document</span>.<span class="built_in">querySelector</span>(<span class="string">&#x27;#login&#x27;</span>);</span><br><span class="line">w.<span class="keyword">set</span>(loginButton, &#123;disabled: <span class="keyword">true</span>&#125;);</span><br></pre></td></tr></table></figure>
+<h2 id="set"><a class="markdownIt-Anchor" href="#set"></a> set</h2>
+<p>set的基本函数和map类似，并且它的插入也是按序的。但是js里面的set和其他的set不同。它并没有提供集合操作方法，需要我们自己实现。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> union(a, ...bSets)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">const</span> unionSet = <span class="keyword">new</span> My_set(a);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">const</span> b <span class="keyword">of</span> bSets)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">const</span> bValue <span class="keyword">of</span> b)</span><br><span class="line">        &#123;</span><br><span class="line">            unionSet.add(bValue);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> unionSet;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> intersect(a, ...bSets)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">const</span> interset = <span class="keyword">new</span> My_set(a);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">const</span> aValue <span class="keyword">of</span> interSet)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">const</span> b <span class="keyword">of</span> bSets)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(!b.has(aValue)</span><br><span class="line">            &#123;</span><br><span class="line">                interset.delete(aValue);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>此外，他也有WeakSet，效果和WeakMap相同</p>
 ]]></content>
       <categories>
         <category>js</category>
@@ -16829,8 +16893,18 @@ D_x(z) = min\{c(x, y) + D_y(z), c(x, z) + D_z(z)\} = min\{3, 7\} = 3
 <p><img src="/images/%E7%BD%91%E7%BB%9C%E5%B1%826.jpg" alt="" /></p>
 <p>使用BGP选择策略时要传递一些信息，这些信息统称为路由，其中最重要的两个属性是AS-PATH和NEXT-HOP</p>
 <ul>
-<li>AS-PATH: 指的是已经通过的自治系统的列表，它可以痛啊哦路径并且检测环路。例如从1a到3d，当他到达3a时AS-PATH = “AS2 AS3”,而如果是1d到3d，那么值为AS3</li>
-<li>NEXT-HOP: 指的是AS-PATH中起始位置的IP地址（注意AS-PATH中不包含起始的自治系统）。例如上面第一个例子NEXT-HOP = 2a左边端口地址。第二个例子NEXT-HOP = 3d左边端口地址。</li>
+<li>
+<p>AS-PATH: 指的是已经通过的自治系统的列表，它可以痛啊哦路径并且检测环路。例如从1a到3d，当他到达3a时AS-PATH = “AS2 AS3”,而如果是1d到3d，那么值为AS3</p>
+</li>
+<li>
+<p>NEXT-HOP: 指的是AS-PATH中起始位置的IP地址（注意AS-PATH中不包含起始的自治系统）。例如上面第一个例子NEXT-HOP = 2a左边端口地址。第二个例子NEXT-HOP = 3d左边端口地址。</p>
+</li>
+<li>
+<p>eBGP：外部BGP，从其他的自治区域获得可达性信息</p>
+</li>
+<li>
+<p>iBGP: 内部BGP，从自治区域内部获得可达性信息</p>
+</li>
 </ul>
 <h3 id="热土豆路由选择"><a class="markdownIt-Anchor" href="#热土豆路由选择"></a> 热土豆路由选择</h3>
 <p>热土豆选择算法是一种贪心算法，它的思想是尽快将数据穿输出自己的自治系统。假设我们已经知道了到终点的所有可能路径，然后计算起始点到NEXT-HOP之间的最短开销，然后把这个最短开销对应的接口和终点自治系统记录(x, I)到自己的转发表上</p>
