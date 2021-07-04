@@ -1,0 +1,255 @@
+<!DOCTYPE html><html lang="zh-Hans" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>js迭代器和生成器 | Xinhecuican's Blog</title><meta name="author" content="星河璀璨"><meta name="copyright" content="星河璀璨"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="迭代器 在很多语言中都有迭代器，例如 QList&lt;int&gt;::iterator iter &#x3D; list.begin();while(iter !&#x3D; list.end())&amp;#123;    iter &#x3D; iter-&gt;next();&amp;#125;在js中let set &#x3D; new Set().add(3).add(1).add(4) 通过上面的例子可以看出，迭代器的关键是不断返回一">
+<meta property="og:type" content="article">
+<meta property="og:title" content="js迭代器和生成器">
+<meta property="og:url" content="https://xinhecuican.github.io/post/1931a47d.html">
+<meta property="og:site_name" content="Xinhecuican&#39;s Blog">
+<meta property="og:description" content="迭代器 在很多语言中都有迭代器，例如 QList&lt;int&gt;::iterator iter &#x3D; list.begin();while(iter !&#x3D; list.end())&amp;#123;    iter &#x3D; iter-&gt;next();&amp;#125;在js中let set &#x3D; new Set().add(3).add(1).add(4) 通过上面的例子可以看出，迭代器的关键是不断返回一">
+<meta property="og:locale">
+<meta property="og:image" content="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg">
+<meta property="article:published_time" content="2021-07-04T10:29:00.000Z">
+<meta property="article:modified_time" content="2021-07-04T13:10:27.008Z">
+<meta property="article:author" content="星河璀璨">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg"><link rel="shortcut icon" href="/img/favicon.png"><!--link(rel="canonical" href=urlNoIndex())--><link rel="preconnect" href="//cdn.jsdelivr.net"><link rel="preconnect" href="//busuanzi.ibruce.info"><meta name="google-site-verification" content="zmX9zYZL0QVB6fFG_e98QsQogwE11Vdf5hOd4xMbgN4"><meta name="baidu-site-verification" content="EVZv9BO5R3"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"We didn't find any results for the search: ${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"Traditional Chinese Activated Manually","cht_to_chs":"Simplified Chinese Activated Manually","day_to_night":"Dark Mode Activated Manually","night_to_day":"Light Mode Activated Manually","bgLight":"#49b1f5","bgDark":"#121212","position":"bottom-left"},
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-07-04 21:10:27'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const fontSizeVal = saveToLocal.get('global-font-size')
+    if (fontSizeVal !== undefined) {
+      document.documentElement.style.setProperty('--global-font-size', fontSizeVal + 'px')
+    }
+    })(window)</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/l-lin/font-awesome-animation/dist/font-awesome-animation.min.css" media="defer" onload="this.media='all'"><link rel="stylesheet" href="/css/background.css"><link rel="stylesheet" href="footer.min.css"><!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Xinhecuican's Blog" type="application/atom+xml">
+</head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/null" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">196</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">Tags</div><div class="length-num">6</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">Categories</div><div class="length-num">28</div></a></div></div></div><hr><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Xinhecuican's Blog</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">js迭代器和生成器</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2021-07-04T10:29:00.000Z" title="Created 2021-07-04 18:29:00">2021-07-04</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2021-07-04T13:10:27.008Z" title="Updated 2021-07-04 21:10:27">2021-07-04</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/js/">js</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">Word count:</span><span class="word-count">1.4k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">Reading time:</span><span>5min</span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="迭代器"><a class="markdownIt-Anchor" href="#迭代器"></a> 迭代器</h1>
+<p>在很多语言中都有迭代器，例如</p>
+<figure class="highlight routeros"><table><tr><td class="code"><pre><span class="line">QList&lt;int&gt;::iterator iter = list.begin();</span><br><span class="line"><span class="keyword">while</span>(iter != list.end())</span><br><span class="line">&#123;</span><br><span class="line">    iter = iter-&gt;next();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">在js中</span><br><span class="line">let <span class="builtin-name">set</span> = new <span class="builtin-name">Set</span>().<span class="builtin-name">add</span>(3).<span class="builtin-name">add</span>(1).<span class="builtin-name">add</span>(4)</span><br></pre></td></tr></table></figure>
+<p>通过上面的例子可以看出，迭代器的关键是不断返回一个相同类型的不同实例。在js中，实现Iterable接口就可以认为是一个迭代器。<strong>迭代器</strong>是按需创建的一次性对象，每个迭代器都会关联一个可迭代对象，而迭代器会暴露迭代其关联对象的API（例如next）</p>
+<p>实现Iterator接口需要实现两种能力： 自我识别能力和创建实现Iterator接口的对象的能力。这意味着需要暴露一个属性作为默认迭代器，并且这个属性还要以Symbol.iterator作为键。默认迭代器必须引用一个迭代器工厂函数，调用这个工厂函数必须返回一个新迭代器。</p>
+<p>常见的实现了Iterator接口的类：字符串、数组、map、set、arguments、NodeList</p>
+<p>可以使用for-of循环、数组解构、Array.from()等对迭代器进行遍历</p>
+<h2 id="自定义迭代器"><a class="markdownIt-Anchor" href="#自定义迭代器"></a> 自定义迭代器</h2>
+<figure class="highlight kotlin"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Counter</span></span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(limit)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">this</span>.count = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">this</span>.limit = limit;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    next()</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">this</span>.count &lt;= <span class="keyword">this</span>.limit)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> &#123;done: <span class="literal">false</span>, value: <span class="keyword">this</span>.count++&#125;;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> &#123;done:<span class="literal">true</span>, value: undefined&#125;;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    [Symbol.iterator]()</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上述类实现了迭代器，首先我们可以使用iterator获得迭代类，并且next可以用来返回下一个对象。</p>
+<p>但是这种方法并不理想，因为每个实例只能够被迭代一次。为了可以迭代多次，可以创建一个计数器</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Counter</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="title">constructor</span>(<span class="params">limit</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">this</span>.limit = limit;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    [<span class="built_in">Symbol</span>.iterator]()</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">let</span> count = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">let</span> limit = <span class="built_in">this</span>.limit;</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">        &#123;</span><br><span class="line">            next()</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(count &lt;= limit)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">return</span> &#123;<span class="attr">done</span>: <span class="literal">false</span>, <span class="attr">value</span>: cont++&#125;;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">return</span> &#123;<span class="attr">done</span>: <span class="literal">true</span>, <span class="attr">value</span>: <span class="literal">undefined</span>&#125;;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在这种情况下，每次调用Symbol.iterator时数据总是会变为初始状态。</p>
+<p><strong>提前终止</strong></p>
+<p>可以增加return()来提前终止迭代器。在for-of循环中，可以通过break、continue、return或throw提前退出</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Counter</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="title">constructor</span>(<span class="params">limit</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">this</span>.limit = limit;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    [<span class="built_in">Symbol</span>.iterator]()</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">let</span> count = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">let</span> limit = <span class="built_in">this</span>.limit;</span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">        &#123;</span><br><span class="line">            next()</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span>(count &lt;= limit)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">return</span> &#123;<span class="attr">done</span>:<span class="literal">false</span>, <span class="attr">value</span>: count++&#125;;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span></span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">return</span> &#123;<span class="attr">done</span>:<span class="literal">true</span>&#125;;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;,</span><br><span class="line">            <span class="keyword">return</span>()</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">return</span> &#123;<span class="attr">done</span>:<span class="literal">true</span>&#125;;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="生成器"><a class="markdownIt-Anchor" href="#生成器"></a> 生成器</h1>
+<p>构造: 在函数名称前加一个星号(*)来表示它是生成器</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>* <span class="title">generatorFn</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> generatorFn = <span class="function"><span class="keyword">function</span>*(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> foo = </span><br><span class="line">&#123;</span><br><span class="line">    * <span class="function"><span class="title">generatorFn</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    * <span class="function"><span class="title">generatorFn</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Bar</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">static</span> * <span class="function"><span class="title">generatorFn</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line">*号两边空格数目不影响解析</span><br></pre></td></tr></table></figure>
+<h2 id="yield"><a class="markdownIt-Anchor" href="#yield"></a> yield</h2>
+<p>调用生成器会产生一个生成器对象。这个对象实现了Iterator。每次调用next()都会跳转到下一个yield</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>* <span class="title">generatorFn</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">yield</span> <span class="string">&#x27;foo&#x27;</span>;</span><br><span class="line">    <span class="keyword">yield</span> <span class="string">&#x27;bar&#x27;</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;baz&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> generator = generatorFn();</span><br><span class="line"><span class="built_in">console</span>.log(generator.next());<span class="comment">//foo</span></span><br><span class="line"><span class="built_in">console</span>.log(generator.next());<span class="comment">//bar</span></span><br><span class="line"><span class="built_in">console</span>.log(generator.next());<span class="comment">//baz</span></span><br></pre></td></tr></table></figure>
+<p>每次执行到yield后就输出并停止执行，但是它的状态时保存的，下一次可以继续使用上一次yield中的变量。</p>
+<p>碰到yield，next返回的done是false如果碰到return则done为true。即return终止迭代。</p>
+<p>yield只有在生成器函数内部定义中有效，诸如闭包，内部函数等使用都会报错</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>* <span class="title">generator</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">yield</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span>* <span class="title">gene</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    (<span class="function">()=&gt;</span>&#123;<span class="keyword">yield</span>;&#125;)();</span><br><span class="line">&#125;</span><br><span class="line">上面两种都会报错</span><br></pre></td></tr></table></figure>
+<p><strong>yield接收输入</strong></p>
+<p>yield除了作为输出返回值使用，<strong>他还可以接收传给next的第一个值</strong>。但是第一次调用next输入的参数是无效的，这一次调用是为了启动生成器函数。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>* <span class="title">gene</span>(<span class="params">initial</span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(initial);</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">yield</span>);</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">yield</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> generator = gene(<span class="string">&#x27;foo&#x27;</span>);</span><br><span class="line"></span><br><span class="line">generator(<span class="string">&#x27;bar&#x27;</span>);<span class="comment">//foo，是因为第一次执行到yield就停止，并且没有输入任何参数</span></span><br><span class="line">generator(<span class="string">&#x27;baz&#x27;</span>);<span class="comment">//baz,第一个yield接收这个参数</span></span><br><span class="line">generator(<span class="string">&#x27;qux&#x27;</span>);<span class="comment">//qux</span></span><br></pre></td></tr></table></figure>
+<p>yield可以同时用于输入和输出</p>
+<figure class="highlight lua"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>* <span class="title">generator</span><span class="params">()</span></span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">yield</span> <span class="string">&#x27;foo&#x27;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">let gene = generator();</span><br><span class="line"></span><br><span class="line">gene.<span class="built_in">next</span>();//foo,做输出用</span><br><span class="line">gene.<span class="built_in">next</span>(<span class="string">&quot;bar&quot;</span>);//bar,<span class="built_in">yield</span>接收输入并<span class="keyword">return</span></span><br></pre></td></tr></table></figure>
+<p><strong>yield与*配合</strong></p>
+<p>yield后面可以接*来多次返回值，例如</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>* <span class="title">gene</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">yield</span>* [<span class="number">1</span>, <span class="number">2</span>];</span><br><span class="line">    <span class="keyword">yield</span>* [<span class="number">3</span>, <span class="number">4</span>];</span><br><span class="line">    <span class="keyword">yield</span>* [<span class="number">5</span>, <span class="number">6</span>];</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">const</span> x <span class="keyword">of</span> gene())</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(x);<span class="comment">//1, 2, 3, 4, 5, 6</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以使用这个很方便的实现递归操作</p>
+<figure class="highlight isbl"><table><tr><td class="code"><pre><span class="line"><span class="variable">function</span> <span class="function"><span class="title">nTimes</span>(<span class="variable">n</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="title">if</span>(<span class="variable">n</span> &gt; <span class="number">0</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="variable">yield</span>* <span class="function"><span class="title">nTimes</span>(<span class="variable">n</span> - <span class="number">1</span>);</span></span><br><span class="line"><span class="function">        <span class="variable">yield</span> <span class="variable">n</span> - <span class="number">1</span>;</span></span><br><span class="line"><span class="function">    &#125;</span></span><br><span class="line"><span class="function">&#125;</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="title">for</span>(<span class="variable">const</span> <span class="variable">x</span> <span class="variable">of</span> <span class="title">nTimes</span>(<span class="number">3</span>))</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="variable">console.log</span>(<span class="variable">x</span>);<span class="comment">//0, 1, 2</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">过程为</span><br><span class="line"><span class="function"><span class="title">nTimes</span>(<span class="number">2</span>);</span></span><br><span class="line"><span class="function"><span class="title">nTimes</span>(<span class="number">1</span>);</span></span><br><span class="line"><span class="function"><span class="title">nTimes</span>(<span class="number">0</span>);</span></span><br><span class="line"><span class="function"><span class="number">0</span></span></span><br><span class="line"><span class="function"><span class="number">1</span></span></span><br><span class="line"><span class="function"><span class="number">2</span></span></span><br></pre></td></tr></table></figure>
+<p>也可以使用这种方法为类添加迭代器</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="title">constructor</span>(<span class="params"></span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">this</span>.values = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    *[<span class="built_in">Symbol</span>.iterator]()</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">yield</span>* <span class="built_in">this</span>.values;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="提前终止生成器"><a class="markdownIt-Anchor" href="#提前终止生成器"></a> 提前终止生成器</h2>
+<p>所有的生成器都有return()方法，他会直接让生成器进入关闭状态，并且之后都无法恢复。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>* <span class="title">generatorFn</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">const</span> x <span class="keyword">of</span> [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">yield</span> x;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> g = generatorFn();</span><br><span class="line"><span class="built_in">console</span>.log(g.next());<span class="comment">//&#123;done:false, value: 1&#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(g.return(<span class="number">4</span>));<span class="comment">//&#123;done:true, value: 4&#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(g);<span class="comment">//generatorFn&#123;&lt;closed&gt;&#125;</span></span><br></pre></td></tr></table></figure>
+<p>此外，还可以通过throw将错误抛出，如果错误未被处理，生成器将关闭.但是如果生成器函数内部处理了这个错误，那么生成器不会关闭</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">gene</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">const</span> x <span class="keyword">of</span> [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">try</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">yield</span> x;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">catch</span>(e)&#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> g = gene();</span><br><span class="line"><span class="built_in">console</span>.log(g.next());<span class="comment">//1</span></span><br><span class="line">g.throw(<span class="string">&#x27;foo&#x27;</span>);产生错误但是生成器内部接住了</span><br><span class="line"><span class="built_in">console</span>.log(g.next());<span class="comment">//3</span></span><br></pre></td></tr></table></figure>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined" rel="external nofollow noopener noreferrer" target="_blank">星河璀璨</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://xinhecuican.github.io/post/1931a47d.html">https://xinhecuican.github.io/post/1931a47d.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/post/cbf07f5d.html"><img class="next-cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">c++ 两个类互相引用</div></div></a></div></nav><hr><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> Comment</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%BF%AD%E4%BB%A3%E5%99%A8"><span class="toc-number">1.</span> <span class="toc-text"> 迭代器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E8%BF%AD%E4%BB%A3%E5%99%A8"><span class="toc-number">1.1.</span> <span class="toc-text"> 自定义迭代器</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%94%9F%E6%88%90%E5%99%A8"><span class="toc-number">2.</span> <span class="toc-text"> 生成器</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#yield"><span class="toc-number">2.1.</span> <span class="toc-text"> yield</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%90%E5%89%8D%E7%BB%88%E6%AD%A2%E7%94%9F%E6%88%90%E5%99%A8"><span class="toc-number">2.2.</span> <span class="toc-text"> 提前终止生成器</span></a></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2021 By 星河璀璨</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="external nofollow noopener noreferrer" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="font-plus" type="button" title="Increase font size"><i class="fas fa-plus"></i></button><button id="font-minus" type="button" title="Decrease font size"><i class="fas fa-minus"></i></button><button id="translateLink" type="button" title="Toggle Between Traditional Chinese And Simplified Chinese">繁</button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="chat_btn" type="button" title="rightside.chat_btn"><i class="fas fa-sms"></i></button><a id="to_comment" href="#post-comment" title="Scroll To Comments"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">Local search</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"></div></div></div><hr><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    let initData = {
+      el: '#vcomment',
+      appId: 'UJ3adzdUjnlMT2KmVU6dfoyO-MdYXbMMI',
+      appKey: 'SGFIXvul1h4NATEJbvSGuU0i',
+      placeholder: '邮箱和网址都可以不用填哟',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'zh-CN',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: true,
+      path: window.location.pathname,
+      master: '1ee9943f931df37af9dc1c57f5859da4',
+    }
+
+    if (true) { 
+      initData.requiredFields= ('nick'.split(','))
+    }
+    
+    if (false) {
+      const otherData = false
+      initData = Object.assign({}, initData, otherData)
+    }
+    
+    const valine = new Valine(initData)
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/gh/HCLonely/Valine@latest/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.querySelector('#vcomment'),loadValine)
+  else setTimeout(() => loadValine(), 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script src="/js/mychange.js"></script><script defer src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/hexo-theme-volantis@latest/source/js/issues.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
