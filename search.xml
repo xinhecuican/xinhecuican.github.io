@@ -4558,7 +4558,7 @@ java对每个创建的对象都会设置一个原型，指向原型对象。原�
 <figure class="highlight xquery"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span><span class="built_in"> compare</span> = createComp(<span class="string">&#x27;name&#x27;</span>);</span><br><span class="line"><span class="keyword">let</span> result =<span class="built_in"> compare</span>(<span class="built_in">&#123;name</span>: <span class="string">&#x27;a&#x27;</span>&#125;, <span class="built_in">&#123;name</span>: <span class="string">&#x27;b&#x27;</span>&#125;);</span><br><span class="line"></span><br><span class="line">compare = null//清除引用，现在createComp才会被销毁</span><br></pre></td></tr></table></figure>
 <p><strong>闭包中的this对象</strong></p>
 <figure class="highlight typescript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">window</span>.identity = <span class="string">&#x27;The Window&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> <span class="built_in">object</span> = </span><br><span class="line">&#123;</span><br><span class="line">    identity: <span class="string">&#x27;object&#x27;</span>,</span><br><span class="line">    getIdentityFunc()</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">this</span>.identity;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">object</span>.getIdentityFunc()());<span class="comment">//The Window</span></span><br></pre></td></tr></table></figure>
-<p>结果返回按常理说应该是object，但是却是window。因为object.getIdentityFunc()返回一个函数，然后这个函数在全局执行。如果我们想要让他的this是对象，可以</p>
+<p>结果返回按常理说应该是object，但是却是window。考虑对象的生成过程，其中有一步就是把this变量赋给函数，但是没有赋给函数的函数，也就是说闭包内部的this是原始window。如果我们想要让他的this是对象，可以</p>
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> object = </span><br><span class="line">&#123;</span><br><span class="line">    identity: <span class="string">&#x27;object&#x27;</span>,</span><br><span class="line">    getIdentityFunc()</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">let</span> that = <span class="built_in">this</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">        </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> that.identity;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h1 id="私有变量"><a class="markdownIt-Anchor" href="#私有变量"></a> 私有变量</h1>
 <p>例如：</p>
@@ -18895,6 +18895,198 @@ check约束可以在插入更新时进行检查，如果符合条件就进行插
 <p>此外，还可以通过throw将错误抛出，如果错误未被处理，生成器将关闭.但是如果生成器函数内部处理了这个错误，那么生成器不会关闭</p>
 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">gene</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">const</span> x <span class="keyword">of</span> [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">try</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">yield</span> x;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">catch</span>(e)&#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> g = gene();</span><br><span class="line"><span class="built_in">console</span>.log(g.next());<span class="comment">//1</span></span><br><span class="line">g.throw(<span class="string">&#x27;foo&#x27;</span>);产生错误但是生成器内部接住了</span><br><span class="line"><span class="built_in">console</span>.log(g.next());<span class="comment">//3</span></span><br></pre></td></tr></table></figure>
 ]]></content>
+      <categories>
+        <category>js</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>js 代理和反射</title>
+    <url>/post/6a44c331.html</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="代理基础"><a class="markdownIt-Anchor" href="#代理基础"></a> 代理基础</h1>
+<p>代理是目标对象的抽象。代理类似于c++的指针，可以通过代理操作对象，但是它又是一个独立的变量。在代理上的修改会反映到目标对象上，在目标对象上的修改也会对代理起作用</p>
+<p><strong>创建</strong></p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> target = </span><br><span class="line">&#123;</span><br><span class="line">    id: <span class="string">&#x27;target&#x27;</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> handler = &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> proxy = <span class="keyword">new</span> <span class="built_in">Proxy</span>(target, handler);<span class="comment">//两个参数，第一个是操作的对象，第二个是处理程序对象，用来定义捕获器</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(proxy.id);<span class="comment">//target</span></span><br><span class="line"></span><br><span class="line">可以通过revocable()定义撤销代理，并且还可以通过一个返回值进行撤销,撤销完成后再使用代理会产生异常</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> target = &#123;<span class="attr">foo</span>: <span class="string">&#x27;bar&#x27;</span>&#125;;</span><br><span class="line"><span class="keyword">const</span> handler = &#123; <span class="function"><span class="title">get</span>(<span class="params"></span>)</span>&#123; <span class="keyword">return</span> <span class="string">&#x27;intercepted&#x27;</span>;&#125;&#125;;</span><br><span class="line"><span class="keyword">const</span> &#123;proxy, revoke&#125; = <span class="built_in">Proxy</span>.revocable(traget, handler);</span><br><span class="line"><span class="built_in">console</span>.log(proxy.foo);<span class="comment">//intercepted</span></span><br><span class="line"><span class="built_in">console</span>.log(target.foo);<span class="comment">//bar</span></span><br><span class="line"></span><br><span class="line">revoke();<span class="comment">//执行撤销，是Proxy.revocable的一个返回值</span></span><br><span class="line"><span class="built_in">console</span>.log(proxy.foo);</span><br></pre></td></tr></table></figure>
+<p><strong>代理的一些不足</strong></p>
+<p>由于代理和原对象毕竟是两个对象，所以在涉及this时可能会出现问题</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> wm = ew <span class="built_in">WeakMap</span>();</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="title">constructor</span>(<span class="params">user_id</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        wm.set(<span class="built_in">this</span>.user_id);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">set</span> <span class="title">id</span>(<span class="params">user_id</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        wm.set(<span class="built_in">this</span>, user_id);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">get</span> <span class="title">id</span>()</span><br><span class="line">    &#123;</span><br><span class="line">        wm.get(<span class="built_in">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> user = <span class="keyword">new</span> User(<span class="number">123</span>);</span><br><span class="line"><span class="built_in">console</span>.log(user.id);<span class="comment">//123</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> userInstanceProxy = <span class="keyword">new</span> <span class="built_in">Proxy</span>(user, &#123;&#125;);</span><br><span class="line"><span class="built_in">console</span>.log(userInstanceProxy.id);<span class="comment">//undefine</span></span><br><span class="line">这是因为user和userInstanceProxy对象不同，因此<span class="built_in">this</span>不同，导致无法检索</span><br></pre></td></tr></table></figure>
+<h2 id="捕获器trap"><a class="markdownIt-Anchor" href="#捕获器trap"></a> 捕获器（trap）</h2>
+<p>使用代理主要就是为了定义捕获器。捕获器<strong>是target中基本操作的拦截器</strong>。每次调用代理时，首先会调用捕获器函数，从而进行拦截和修改。捕获器类似于sql中的触发器</p>
+<p>例如</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> target = </span><br><span class="line">&#123;</span><br><span class="line">    foo: <span class="string">&#x27;bar&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> handler =</span><br><span class="line">&#123;</span><br><span class="line">    get()</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;handler override&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> proxy = <span class="keyword">new</span> <span class="built_in">Proxy</span>(target, handler);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(proxy.foo);<span class="comment">//handler override</span></span><br><span class="line"><span class="built_in">console</span>.log(proxy[<span class="string">&#x27;foo&#x27;</span>]);<span class="comment">//handler override</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.create(proxy)[<span class="string">&#x27;foo&#x27;</span>]);<span class="comment">//handler override</span></span><br></pre></td></tr></table></figure>
+<p>通过定义get()捕获器，之后每次执行get操作时，都会触发get捕获器.诸如<code>.</code>、<code>[]</code>等操作都认为是get操作。但是在原对象上执行的操作不受影响。</p>
+<p>捕获器可以访问当前是在操作哪个变量，从而执行相应的操作，例如</p>
+<figure class="highlight qml"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> target =</span><br><span class="line">&#123;</span><br><span class="line">    <span class="attribute">foo</span>: <span class="string">&#x27;bar&#x27;</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> handler =</span><br><span class="line">&#123;</span><br><span class="line">    get(rapTarget, <span class="keyword">property</span><span class="string"></span>, receiver)<span class="comment">//trapTarget是代理的目标对象，receiver是代理自己</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(trapTarget === target);</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="keyword">property</span><span class="string">)</span>;</span><br><span class="line">        <span class="built_in">console</span>.log(receiver === proxy);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> proxy = <span class="keyword">new</span> <span class="built_in">Proxy</span>(target, handler);</span><br><span class="line">proxy.foo;<span class="comment">//true, foo, true</span></span><br></pre></td></tr></table></figure>
+<p><strong>捕获器不变式</strong></p>
+<p>捕获器可以捕获大部分基本操作，但是有一些操作会导致异常。捕获器不变式就是保证不会出现异常的约束。</p>
+<p>例如：目标对象有一个不可写的属性，如果捕获器中返回了一个其他值，那么就会出现TypeError</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> target = &#123;&#125;;</span><br><span class="line"><span class="built_in">Object</span>.defineProperty(target, <span class="string">&#x27;foo&#x27;</span>,&#123;</span><br><span class="line">    configurable: <span class="literal">false</span>,</span><br><span class="line">    writable: <span class="literal">false</span>,</span><br><span class="line">    value: <span class="string">&#x27;bar&#x27;</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> handler = </span><br><span class="line">&#123;</span><br><span class="line">    get()</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;qux&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> proxy = <span class="keyword">new</span> <span class="built_in">Proxy</span>(target, handler);</span><br><span class="line"><span class="built_in">console</span>.log(proxy.foo);<span class="comment">//TypeError</span></span><br></pre></td></tr></table></figure>
+<p>捕获器总共可以捕获13种基本操作</p>
+<p><strong>get()</strong></p>
+<p>get会拦截获取属性值的操作，对应的反射方法为Reflect.get()</p>
+<ul>
+<li>get(target, property, receiver): target是目标对象，property是操作属性的名字，receiver是带你对象</li>
+</ul>
+<p>拦截的操作有:</p>
+<ul>
+<li>proxy.property</li>
+<li>proxy[property]</li>
+<li>Object.create(proxy)[property]</li>
+<li>Reflect.get(proxy, property, receiver)//反射是调用原函数</li>
+</ul>
+<p><strong>set</strong></p>
+<p>set拦截设置属性值的操作，反射方法为Reflect.set()</p>
+<ul>
+<li>bool set(target, property, value, receiver): value是设置的值，返回值为true代表操作成功，false表示操作失败</li>
+</ul>
+<p>拦截的操作：</p>
+<ul>
+<li>proxy.property = value</li>
+<li>proxy[property] = value</li>
+<li>Object.create(proxy)[property] = value</li>
+<li>Reflect.set(proxy, property, value, receiver)</li>
+</ul>
+<p>捕获器不变式(约束):</p>
+<ul>
+<li>如果target的property不可写且不可配置，则不能修改目标属性的值</li>
+<li>如果target.property不可配置并且[[Set]]为undefined，则不能修改属性值</li>
+</ul>
+<p><strong>has</strong></p>
+<p>has会捕获in操作符中的操作，反射为Reflect.has()</p>
+<ul>
+<li>bool has(target, property): 返回值表示这个属性是否存在</li>
+</ul>
+<p>拦截的操作：</p>
+<ul>
+<li>property in proxy</li>
+<li>property in Object.create(proxy)</li>
+<li>with(proxy) { (property);}</li>
+<li>Reflect.has(proxy, property);</li>
+</ul>
+<p>不变式：</p>
+<ul>
+<li>如果target.property存在且不可配置，则必须返回true</li>
+<li>target.property存在且目标对象不可扩展（不能添加新的属性，通过Object.preventExtensions(object)设置),则必须返回true</li>
+</ul>
+<p><strong>defineProperty</strong></p>
+<p>拦截Object.defineProperty(),反射方法为Reflect.defineProperty()</p>
+<ul>
+<li>bool defineProperty(target, property, descriptor): 返回值表示是否成功定义。descriptor有enumrable、configurable、writable、value、get、set</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> my Target = &#123;&#125;;</span><br><span class="line"><span class="keyword">const</span> proxy = <span class="keyword">new</span> <span class="built_in">Proxy</span>(myTarget, &#123;</span><br><span class="line">    defineProperty(target, property, descriptor)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">Reflect</span>.defineProperty(...arguments);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>不变式：</p>
+<ul>
+<li>如果目标对象不可扩展，则无法定义属性</li>
+<li>如果有一个可配置属性，不可添加同名的不可配置属性</li>
+<li>如果有一个不可配置属性，不可添加同名的配置属性</li>
+</ul>
+<p><strong>getWonPropertyDescriptor</strong></p>
+<p>捕获Object.getOwnPropertyDescriptor()。反射方法为Relfect.getOwnPropertyDescriptor()</p>
+<ul>
+<li>Object getOwnPropertyDescriptor(target, property): 返回描述对象，如果对象不存在则返回undefined</li>
+</ul>
+<p>不变式：</p>
+<ul>
+<li>target.property存在且可配置，这必须返回对应对象</li>
+<li>target.property存在且target不可扩展，则处理程序必须返回一个表示该属性存在的对象</li>
+<li>target.property不存在，则返回undefined</li>
+</ul>
+<p><strong>deleteProperty</strong></p>
+<p>会在delete操作符中调用，对应的反射方法为Reflect.deleteProperty()</p>
+<ul>
+<li>bool deleteProperty(target, property): 返回值表示删除属性是否成功</li>
+</ul>
+<p>不变式：</p>
+<ul>
+<li>如果target.property存在且不可配置，则处理程序不能删除这个属性</li>
+</ul>
+<p><strong>onwKeys</strong></p>
+<p>拦截Object.keys()（返回对象属性的属性名）,反射方法为Reflect.ownKeys()</p>
+<ul>
+<li>list ownKyes(target): 返回可枚举对象</li>
+</ul>
+<p>不变式：</p>
+<ul>
+<li>返回的枚举对象必须包含所有的不可配置的自有属性</li>
+<li>如果对象不可扩展，则返回可枚举对象必须准确包含自有属性键</li>
+</ul>
+<p><strong>getPrototypeOf</strong></p>
+<p>捕获获得prototype的操作。反射API为Reflect.getPrototypeOf()</p>
+<ul>
+<li>object getPrototypeOf(target): 返回值是原型对象或者是NULL</li>
+</ul>
+<p>拦截的操作：</p>
+<ul>
+<li>Object.getPrototypeOf(proxy)</li>
+<li>Reflect.getPrototypeOf(proxy)</li>
+<li><code>proxy.__proto__</code></li>
+<li>Object.prototype.isPrototypeOf(proxy)</li>
+<li>proxy instanceof Object</li>
+</ul>
+<p>捕获器不变式：</p>
+<ul>
+<li>如果target不可扩展，则唯一有效的返回值是Object</li>
+</ul>
+<p><strong>setPrototypeOf</strong></p>
+<p>捕获Object.setPrototypeOf(),反射的API为Reflect.setPrototypeOf()</p>
+<ul>
+<li>bool setPrototypeOf(target, prototype): 返回值表示设置是否成功</li>
+</ul>
+<p>不变式：</p>
+<ul>
+<li>如果target不可扩展，则唯一有效的参数是这个对象的原型</li>
+</ul>
+<p><strong>isExtensible</strong></p>
+<p>捕获Object.isExtensible，反射API为Reflect.isExtensible()</p>
+<ul>
+<li>bool isExtensible(target): 返回值表示target是否可扩展</li>
+</ul>
+<p>不变式：</p>
+<ul>
+<li>如果target可扩展，则处理程序必须返回true</li>
+<li>如果target不可扩展，则处理程序必须返回false</li>
+</ul>
+<p><strong>preventExtensions</strong></p>
+<p>…</p>
+<p>返回值表示target是否已经不可扩展</p>
+<p>不变式： 如果Object.isExtensible(proxy)是false，那么处理程序必须返回true</p>
+<p><strong>apply</strong></p>
+<p>它会在调用函数时调用，反射方法为Reflect.apply()</p>
+<ul>
+<li>apply(target, thisArg, argumentsList): thisArg是调用函数时的this参数，返回值任意</li>
+</ul>
+<p>拦截的操作：</p>
+<ul>
+<li>proxy(…argumentList)</li>
+<li>Fuction.prototype.apply(thisArg, argumentList)</li>
+<li>Function.prototype.call(thisArg, …argumentsList)</li>
+<li>Reflect.apply(target, thisArgument, argumentList)</li>
+</ul>
+<p>不变式：</p>
+<ul>
+<li>target必须是一个函数对象</li>
+</ul>
+<p><strong>construct</strong></p>
+<p>它会在new操作符中被调用，反射方法为Reflect.construct()</p>
+<ul>
+<li>Object construct(target, argumentsList, newTarget): target是目标构造函数，newTarget是最初被调用的构造函数（可能子类调用了父类的构造函数）。返回值是构造完成的对象</li>
+</ul>
+<p>不变式：</p>
+<ul>
+<li>target必须可以被用作构造函数</li>
+</ul>
+<h2 id="代理的应用"><a class="markdownIt-Anchor" href="#代理的应用"></a> 代理的应用</h2>
+<p><strong>跟踪属性访问</strong></p>
+<p>我们可以通过捕获get、set和has等操作，对对象进行监控</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> user = </span><br><span class="line">&#123;</span><br><span class="line">    name: <span class="string">&#x27;Jake&#x27;</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> proxy = <span class="keyword">new</span> <span class="built_in">Proxy</span>(user, &#123;</span><br><span class="line">    get(target, property, receiver)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;getting $&#123;property&#125;&#x27;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">Reflect</span>.get(...arguments);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    set(target, property, value, receiver)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;setting $&#123;property&#125;=$&#123;value&#125;&#x27;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">Reflect</span>.set(...arguments);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">proxy.name;<span class="comment">//getting name</span></span><br><span class="line">proxy.age = <span class="number">27</span> <span class="comment">// setting age=27</span></span><br></pre></td></tr></table></figure>
+<p><strong>隐藏属性</strong></p>
+<p>因为代理内部对外部代码是不可见的，所以可以很方便的隐藏对象属性.此外，还可以通过set拒绝属性访问，通过apply对函数参数进行审查。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> hidden = [<span class="string">&#x27;foo&#x27;</span>, <span class="string">&#x27;bar&#x27;</span>];</span><br><span class="line"><span class="keyword">const</span> targetObject = </span><br><span class="line">&#123;</span><br><span class="line">   foo: <span class="number">1</span>,</span><br><span class="line">   bar: <span class="number">2</span>,</span><br><span class="line">   baz: <span class="number">3</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> proxy = <span class="keyword">new</span> <span class="built_in">Proxy</span>(targetObject, &#123;</span><br><span class="line">    get(target, property)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(hidden.includes(property))</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">Reflect</span>.get(...arguments);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">undefined</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p><strong>数据绑定</strong></p>
+<p>可以在构造时就添加入列表，避免错误。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> list = []</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="title">constructor</span>(<span class="params">name</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">this</span>.name_ = name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> proxy = <span class="keyword">new</span> <span class="built_in">Proxy</span>(User, &#123;</span><br><span class="line">    <span class="title">constructor</span>(<span class="params"></span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">const</span> newUser = <span class="built_in">Reflect</span>.construct(...arguments);</span><br><span class="line">        list.push(newUser);</span><br><span class="line">        <span class="keyword">return</span> newUser;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h1 id="反射"><a class="markdownIt-Anchor" href="#反射"></a> 反射</h1>
+<p>在java或c#语言中，反射的含义是通过函数名字字符串找到对应的函数.例如</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> target = </span><br><span class="line">&#123;</span><br><span class="line">    foo: <span class="string">&#x27;bar&#x27;</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> handler = </span><br><span class="line">&#123;</span><br><span class="line">    get()</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">Reflect</span>.get(...arguments);<span class="comment">//通过Reflect.get反射到了target的get方法并且可以直接访问原对象</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> proxy = <span class="keyword">new</span> <span class="built_in">Proxy</span>(target, handler);</span><br><span class="line"><span class="built_in">console</span>.log(proxy.foo);<span class="comment">//bar</span></span><br><span class="line"><span class="built_in">console</span>.log(proxy.foo);<span class="comment">//bar</span></span><br><span class="line"></span><br><span class="line">我们可以使用这种方法获得本应该获得的结果，并且还可以加上一些修饰，例如</span><br><span class="line">get()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">Reflect</span>.get(...arguments) + <span class="string">&quot;!&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>js</category>
       </categories>
