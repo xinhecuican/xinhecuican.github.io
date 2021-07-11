@@ -19228,6 +19228,7 @@ check约束可以在插入更新时进行检查，如果符合条件就进行插
 <p>子控件选择器是对某些复杂控件中的小部件进行设置，这一般是对官方给的控件中某些部分进行管理。</p>
 <p>例如</p>
 <figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">QComboBox</span><span class="selector-pseudo">::down-arrow</span>//<span class="selector-tag">QComBox</span>的向下箭头</span><br><span class="line">&#123;</span><br><span class="line">    <span class="attribute">image</span>: <span class="built_in">url</span>(down-arrow.png);</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">QComboBox</span><span class="selector-pseudo">::down-arrow</span><span class="selector-pseudo">:pressed</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="attribute">position</span>: relative;</span><br><span class="line">    <span class="attribute">top</span>: <span class="number">1px</span>; <span class="attribute">left</span>: <span class="number">1px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a href="http://qtdebug.com/qtbook-qss-subcontrol/">子控件选择器可以看这</a></p>
 ]]></content>
       <categories>
         <category>c++</category>
