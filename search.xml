@@ -19672,6 +19672,29 @@ processState(state);<br />
   <entry>
     <title>简截</title>
     <url>/post/f0fbe9f2.html</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="简介"><a class="markdownIt-Anchor" href="#简介"></a> 简介</h1>
+<p>简截是一款截图软件。它的主要功能是图片透明化，例如：</p>
+<table>
+<thead>
+<tr>
+<th>透明化前</th>
+<th>透明化后</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="/images/简截1.png"></td>
+<td><img src="/images/简截2.png"></td>
+</tr>
+</tbody>
+</table>
+<p>此外他还支持多种截图模式并且可以图片上编辑</p>
+<h1 id="下载及代码"><a class="markdownIt-Anchor" href="#下载及代码"></a> 下载及代码</h1>
+]]></content>
+  </entry>
+  <entry>
+    <title>简截代码结构</title>
+    <url>/post/35b71592.html</url>
     <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css">]]></content>
   </entry>
 </search>
