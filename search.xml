@@ -19749,13 +19749,12 @@ processState(state);<br />
 <li>deleteData(offset, count): 在offset处删除count个字符</li>
 <li>insertData(offset, text): 在offset插入text</li>
 <li>replaceData(offset, count, text): 用text替换offset开始的count个字符</li>
-<li>splitText(offset): 从offset处将文本节点拆分成两个文本节点</li>
+<li>splitText(offset): 从offset处将文本节点拆分成两个文本节点。原</li>
 <li>substringData(offset, count): 提取offset到offset+count的文本</li>
 <li>length:</li>
 </ul>
 <p>除了上述方法进行操作外，我们还可以直接通过nodeValue进行修改，这些修改都会立刻反映。</p>
-<figure class="highlight xquery"><table><tr><td class="code"><pre><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>hello world<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="keyword">let</span> textNode = div.firstChild;</span><br><span class="line">div.firstChild.nodeValue = <span class="string">&quot;other message&quot;</span>;</span><br><span class="line">div.firstChild.nodeValue = <span class="string">&quot;Some &lt;strong&gt;other&lt;/strong&gt; message&quot;</span>;</span><br><span class="line">//会转义，输出为 Some &amp;<span class="literal">lt</span>;strong&amp;<span class="literal">gt</span>;other&amp;<span class="literal">lt</span>;/strong&amp;<span class="literal">gt</span>; message</span><br></pre></td></tr></table></figure>
-]]></content>
+<figure class="highlight xquery"><table><tr><td class="code"><pre><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>hello world<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="keyword">let</span> textNode = div.firstChild;</span><br><span class="line">div.firstChild.nodeValue = <span class="string">&quot;other message&quot;</span>;</span><br><span class="line">div.firstChild.nodeValue = <span class="string">&quot;Some &lt;strong&gt;other&lt;/strong&gt; message&quot;</span>;</span><br><span class="line">//会转义，输出为 Some &amp;<span class="literal">lt</span>;strong&amp;<span class="literal">gt</span>;other&amp;<span class="literal">lt</span>;/strong&amp;<span class="literal">gt</span>; message</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>js</category>
       </categories>
@@ -20035,5 +20034,29 @@ processState(state);<br />
 <h2 id="config"><a class="markdownIt-Anchor" href="#config"></a> Config</h2>
 <h1 id="upgrateupdate"><a class="markdownIt-Anchor" href="#upgrateupdate"></a> Upgrate（Update）</h1>
 ]]></content>
+  </entry>
+  <entry>
+    <title>B/B+树</title>
+    <url>/post/69629cf2.html</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="缘起"><a class="markdownIt-Anchor" href="#缘起"></a> 缘起</h1>
+<p>B树属于动态查找树，二叉树，平衡二叉树，红黑树都是动态查找树。<a href="https://xinhecuican.github.io/post/33cb1151.html">关于查找的基础内容可看</a>。他们的查找效率都可以达到<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>l</mi><mi>o</mi><msubsup><mi>g</mi><mn>2</mn><mi>n</mi></msubsup></mrow><annotation encoding="application/x-tex">log_2^n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9425479999999999em;vertical-align:-0.24810799999999997em;"></span><span class="mord mathdefault" style="margin-right:0.01968em;">l</span><span class="mord mathdefault">o</span><span class="mord"><span class="mord mathdefault" style="margin-right:0.03588em;">g</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-2.4518920000000004em;margin-left:-0.03588em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.24810799999999997em;"><span></span></span></span></span></span></span></span></span></span>，其中n是树的深度。</p>
+<p>虽然他们的查找效率和遍历相比已经有很大提升了，但是和哈希相比又大大不如。QMap（红黑树为数据结构）在n=10之后效率就比不过QHash(哈希为数据结构)，越到后面差距越大。但是在数据库中却是使用B树作为数据结构。因为数据库除了考虑速度还要考虑空间，而hash对空间要求大。因此日常对空间不敏感的程序尽量使用hash。</p>
+<p>前面已经说了，决定查找次数的是树的深度。假如有65535个数据，那么树的深度为16，那么平均查找深度为 (1 + 2 * 2 + 3 * 4 + 4 * 8 + 5 * 16 + … + 16 * 32768) / 65535 = 14.如果14个数据块位于2个不同的磁盘块上（因为是指针不是连续存储），那么就需要2次磁盘读取，所需时间便在毫秒以上。他和直接查找也显现不出太多优势。</p>
+<p>因此减少树高就是非常必要的了。一种解决思路就是由二叉树变为多叉树，每一层容纳的数量变多了，树高自然就减少了。此外，各个分支如果树高大致相同毫无疑问平均查找次数是最少的，这就是平衡二叉树的思想。而如果将这两种思路结合就形成了多路平衡查找树也就是B树。</p>
+<h1 id="结构"><a class="markdownIt-Anchor" href="#结构"></a> 结构</h1>
+<p>一颗m阶的B树定义如下：</p>
+<ol>
+<li>每个节点最多有m-1个关键字（有m个子节点）</li>
+<li>根节点最少有一个关键字</li>
+<li>非根节点至少有m/2 - 1个关键字</li>
+<li>所有比当前节点小的节点都在左子树，比当前节点大的节点都在右子树</li>
+<li>所有的叶子节点都在同一层，也就是说他们的深度都相同（保证是平衡二叉树）</li>
+</ol>
+<p>例如: <img src="/images/b%E6%A0%911.png" alt="" /></p>
+<p>这是一个四阶的二叉树，它最多可以容纳三个关键字但是最多可以有四个子树。为了保证效率在实际应用中阶数一般都大于100.它是将(key, value)作为一个整体看待的，key作为索引，value保存值。例如<code>map[39] = &quot;hello&quot;</code>。</p>
+]]></content>
+      <categories>
+        <category>数据结构</category>
+      </categories>
   </entry>
 </search>
