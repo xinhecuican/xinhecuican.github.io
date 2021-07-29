@@ -19673,6 +19673,11 @@ processState(state);<br />
 <li>Node.firstChild</li>
 <li>Node.lastChild</li>
 <li>Node.hasChildNodes():</li>
+<li>childElementCount: 返回子元素的数量(不包括文本节点和注释）</li>
+<li>firstElementChild: 第一个元素节点</li>
+<li>lastElementChild:</li>
+<li>previousElementSibling: 后一个Element节点</li>
+<li>classList: 获得该节点下所有类名</li>
 </ul>
 <p><strong>操纵节点：</strong></p>
 <ul>
@@ -19688,12 +19693,18 @@ processState(state);<br />
 <li>getElementById(id): 通过id查找对应的元素，例如 <figure class="highlight xquery"><table><tr><td class="code"><pre><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">img</span> <span class="attr">id</span>=<span class="string">&quot;test&quot;</span> <span class="attr">src</span>=<span class="string">&quot;...&quot;</span>&gt;</span>...<span class="tag">&lt;/<span class="name">img</span>&gt;</span></span></span><br><span class="line"><span class="keyword">let</span> img =<span class="built_in"> document</span>.getElementById(<span class="string">&quot;test);</span></span><br><span class="line"><span class="string">console.log(img.src);</span></span><br></pre></td></tr></table></figure>
 </li>
 <li>getElementsByTagName(): 查找该文档下所有该元素名的元素，如<code>getElementsByTagName(&quot;p&quot;);</code>。此外，获得之后可以通过中括号访问对应name的元素。以下面的文档为例：<code>let inputs = getElementsByTagName(&quot;input&quot;); console.log(inputs[&quot;color&quot;]);</code></li>
+<li>getElementByClassName(): 通过类名获得元素</li>
 <li>getElementsByName()： 通过name获得元素，例如 <figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">fieldset</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">legend</span>&gt;</span>Which color do you Prefer?<span class="tag">&lt;/<span class="name">legend</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;radio&quot;</span> <span class="attr">value</span>=<span class="string">&quot;red&quot;</span> <span class="attr">name</span>=<span class="string">&quot;color&quot;</span> <span class="attr">id</span>=<span class="string">&quot;colorRed&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;colorRed&quot;</span>&gt;</span>Red<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;radio&quot;</span> <span class="attr">value</span>=<span class="string">&quot;green&quot;</span> <span class="attr">name</span>=<span class="string">&quot;color&quot;</span> <span class="attr">id</span>=<span class="string">&quot;colorGreen&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;colorGreen&quot;</span>&gt;</span>Green<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">fieldset</span>&gt;</span></span><br><span class="line">  </span><br><span class="line">getElementsByName(&quot;color&quot;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 </li>
 <li>document.anchors: 返回所有<strong>带name属性</strong>的<code>&lt;a&gt;</code>元素</li>
 <li>document.images: 返回所有<code>&lt;img&gt;</code>元素</li>
 <li>document.links: 返回所有<strong>带href</strong>的<code>&lt;a&gt;</code>元素</li>
 </ul>
+<h2 id="焦点管理"><a class="markdownIt-Anchor" href="#焦点管理"></a> 焦点管理</h2>
+<p>通过<code>document.activeElement</code>可以获得当前获得焦点的DOM元素。并且可以通过捕捉用户输入然后调用focus()方法让某个元素获得焦点。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> button = <span class="built_in">document</span>.getElementById(<span class="string">&quot;myButton&quot;</span>);</span><br><span class="line">button.focus();</span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">document</span>.activeElement == button);<span class="comment">//true</span></span><br></pre></td></tr></table></figure>
+<p>默认情况下，加载完会设置body为焦点元素，没有加载完时是null。</p>
+<p>使用hasFocus()方法判断是否有焦点</p>
 <h2 id="element类型"><a class="markdownIt-Anchor" href="#element类型"></a> Element类型</h2>
 <p>element是元素类型，例如li，p，html等都是元素。他们具有以下特征：</p>
 <ol>
@@ -19716,6 +19727,14 @@ processState(state);<br />
 <ul>
 <li>getAttribute(name): 通过属性名获得属性，例如<code>element.getAttribute(&quot;id&quot;);</code>。style属性会返回一个css字符串，而通过DOM访问会返回一个css对象。事件处理函数相同，如果使用getAttribute()会返回函数的字符串，而使用DOM访问会返回函数</li>
 <li>setAttribute(name, value): 设置属性</li>
+<li>insertAdjacentHTML(location, str): 在某个位置插入html字符串，location有
+<ul>
+<li>beforebegin: 插入当前元素的前面，作为一个兄弟节点</li>
+<li>afterbegin： 插入当前元素内部，作为第一个子节点</li>
+<li>beforeend： 当前元素后面</li>
+<li>afterend： 当前元素最后一个子节点</li>
+</ul>
+</li>
 </ul>
 <p>此外，我们可以直接为DOM对象中的属性赋值，例如：</p>
 <figure class="highlight ini"><table><tr><td class="code"><pre><span class="line"><span class="attr">div.id</span> = <span class="string">&quot;other_id&quot;</span><span class="comment">;</span></span><br><span class="line"><span class="attr">div.align</span> = <span class="string">&quot;left&quot;</span><span class="comment">;</span></span><br></pre></td></tr></table></figure>
@@ -19754,7 +19773,109 @@ processState(state);<br />
 <li>length:</li>
 </ul>
 <p>除了上述方法进行操作外，我们还可以直接通过nodeValue进行修改，这些修改都会立刻反映。</p>
-<figure class="highlight xquery"><table><tr><td class="code"><pre><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>hello world<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="keyword">let</span> textNode = div.firstChild;</span><br><span class="line">div.firstChild.nodeValue = <span class="string">&quot;other message&quot;</span>;</span><br><span class="line">div.firstChild.nodeValue = <span class="string">&quot;Some &lt;strong&gt;other&lt;/strong&gt; message&quot;</span>;</span><br><span class="line">//会转义，输出为 Some &amp;<span class="literal">lt</span>;strong&amp;<span class="literal">gt</span>;other&amp;<span class="literal">lt</span>;/strong&amp;<span class="literal">gt</span>; message</span><br></pre></td></tr></table></figure>]]></content>
+<figure class="highlight xquery"><table><tr><td class="code"><pre><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>hello world<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="keyword">let</span> textNode = div.firstChild;</span><br><span class="line">div.firstChild.nodeValue = <span class="string">&quot;other message&quot;</span>;</span><br><span class="line">div.firstChild.nodeValue = <span class="string">&quot;Some &lt;strong&gt;other&lt;/strong&gt; message&quot;</span>;</span><br><span class="line">//会转义，输出为 Some &amp;<span class="literal">lt</span>;strong&amp;<span class="literal">gt</span>;other&amp;<span class="literal">lt</span>;/strong&amp;<span class="literal">gt</span>; message</span><br></pre></td></tr></table></figure>
+<h1 id="jquery"><a class="markdownIt-Anchor" href="#jquery"></a> jQuery</h1>
+<p>jQuery可以让我们以<a href="https://xinhecuican.github.io/post/676848e4.html">css选择器</a>的形式快速对元素进行定位</p>
+<p><strong>搜索</strong></p>
+<ul>
+<li>querySelector(str): 接收css选择符，返回该模式下第一个后代元素，没有返回null。他会从当前节点的子节点开始搜索 <figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> selected = <span class="built_in">document</span>.querySeelctor(<span class="string">&quot;.selected&quot;</span>);<span class="comment">//搜索selected类的第一个元素</span></span><br><span class="line"><span class="keyword">let</span> img = <span class="built_in">document</span>.body.querySelector(<span class="string">&quot;img.button&quot;</span>);<span class="comment">//选择类名为button的图片</span></span><br></pre></td></tr></table></figure>
+</li>
+<li>querySelectorAll(str): 他会返回所有匹配的节点，返回格式为NodeList</li>
+<li>match(str): 存在返回true，不存在返回false</li>
+</ul>
+<h1 id="htmldocument扩展"><a class="markdownIt-Anchor" href="#htmldocument扩展"></a> HTMLDocument扩展</h1>
+<p>HTML5扩展了HTMLDocument属性，增添了一些新的功能。</p>
+<ol>
+<li>document.readyState: 他有两个值，loading和complete表示文档加载状态。</li>
+<li>document.compatMode: 表示当前位于什么渲染模式，有标准模式和混杂模式。标准模式是&quot;CSS1Compat&quot;,混杂模式是&quot;BackCompat&quot;.</li>
+<li>document.head: 可以通过这个访问<code>&lt;head&gt;</code>元素</li>
+<li>document.characterSet: 字符集，默认值是&quot;UTF-16&quot;</li>
+</ol>
+<h2 id="自定义属性"><a class="markdownIt-Anchor" href="#自定义属性"></a> 自定义属性</h2>
+<p>html5允许元素指定非标准的属性，但要是用data-告诉浏览器这是自定属性，例如：<br />
+<code>&lt;div id=&quot;myDiv&quot; data-appid=&quot;12345&quot; data-myName=&quot;Nicholas&quot;&gt;&lt;/div&gt;</code></p>
+<p>自定属性可以通过dataset访问。dataSet是DOMStringMap实例，包含键值对映射。每个属性都可以使用data-name中的那么进行访问。</p>
+<p>例如</p>
+<figure class="highlight erlang"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="keyword">div</span> = document.getElementById(<span class="string">&quot;myDiv&quot;</span>);</span><br><span class="line"><span class="keyword">let</span> appid = <span class="keyword">div</span>.dataset.appId;</span><br><span class="line"><span class="keyword">let</span> myName = <span class="keyword">div</span>.dataset.myName;</span><br></pre></td></tr></table></figure>
+<h2 id="innerhtml和outerhtml"><a class="markdownIt-Anchor" href="#innerhtml和outerhtml"></a> innerHTML和outerHTML</h2>
+<p>innerHTML返回该元素所有后代的字符串，如果我们进行插入，他会把字符串清空变成我们插入的字符串，例如：</p>
+<figure class="highlight xquery"><table><tr><td class="code"><pre><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;content&quot;</span>&gt;</span></span></span><br><span class="line"><span class="xml">  </span><span class="xml"><span class="tag">&lt;<span class="name">p</span>&gt;</span>This is a </span><span class="xml"><span class="tag">&lt;<span class="name">strong</span>&gt;</span>paragraph<span class="tag">&lt;/<span class="name">strong</span>&gt;</span></span><span class="xml"> with a list following it.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="xml">  </span><span class="xml"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span></span><br><span class="line"><span class="xml">    </span><span class="xml"><span class="tag">&lt;<span class="name">li</span>&gt;</span>Item 1<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line"><span class="xml">    </span><span class="xml"><span class="tag">&lt;<span class="name">li</span>&gt;</span>Item 2<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line"><span class="xml">    </span><span class="xml"><span class="tag">&lt;<span class="name">li</span>&gt;</span>Item 3<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line">querySelector(<span class="string">&quot;#content&quot;</span>).innerHTML</span><br><span class="line"></span><br><span class="line">//返回</span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">p</span>&gt;</span>This is a </span><span class="xml"><span class="tag">&lt;<span class="name">strong</span>&gt;</span>paragraph<span class="tag">&lt;/<span class="name">strong</span>&gt;</span></span><span class="xml"> with a list following it.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span></span><br><span class="line"><span class="xml">  </span><span class="xml"><span class="tag">&lt;<span class="name">li</span>&gt;</span>Item 1<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line"><span class="xml">  </span><span class="xml"><span class="tag">&lt;<span class="name">li</span>&gt;</span>Item 2<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line"><span class="xml">  </span><span class="xml"><span class="tag">&lt;<span class="name">li</span>&gt;</span>Item 3<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">document</span>.body.getElementById(<span class="string">&quot;content&quot;</span>).innerHTML = <span class="string">&quot;hello world&quot;</span>;</span><br><span class="line"></span><br><span class="line">原结构变成</span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;content&quot;</span>&gt;</span>hello world<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+<p><strong>outerHTML</strong>会返回调用者的HTML字符串，它的使用方式和innerHTML类似</p>
+<h2 id="滚动"><a class="markdownIt-Anchor" href="#滚动"></a> 滚动</h2>
+<ul>
+<li>scrollIntoView(alignToTop, scrollIntoViewOptions):
+<ul>
+<li>alignToTop: 如果是true，那么滚动后和窗口顶部平齐，否则和窗口底部平齐</li>
+<li>scrollIntoViewOptions: 是一个对象，里面有三个属性。behavior，block，inline
+<ul>
+<li>behavior: 定义过渡动画，有&quot;smooth&quot;, “auto”</li>
+<li>block: 定义垂直方向对齐，有&quot;start&quot;,“center”,“end”,“nearest”</li>
+<li>inline: 定义水平方向对齐，和垂直方向相同</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">document</span><span class="selector-class">.froms</span><span class="selector-attr">[0]</span><span class="selector-class">.scrollIntoView</span>();</span><br><span class="line"><span class="selector-tag">document</span><span class="selector-class">.forms</span><span class="selector-attr">[0]</span><span class="selector-class">.scrollIntoView</span>(<span class="selector-tag">true</span>, &#123;<span class="attribute">block</span>: <span class="string">&quot;start&quot;</span>&#125;);</span><br></pre></td></tr></table></figure>
+<h2 id="尺寸"><a class="markdownIt-Anchor" href="#尺寸"></a> 尺寸</h2>
+<p>元素的布局如图所示<img src="/images/dom2.png" alt="" /></p>
+<p><strong>设置margin和border</strong></p>
+<ul>
+<li>offsetHeight： border的高度（包括里面的）</li>
+<li>offsetWidth： border的宽度</li>
+<li>offsetLeft： border到margin左边界的距离</li>
+<li>offsetTop： border到margin上边界的距离</li>
+<li>offsetParent： 当前节点的偏移量上的父节点</li>
+</ul>
+<p>要计算一个元素在页面中的偏移量，需要把自己和所有父节点的offsetLeft和offsetTop相加</p>
+<figure class="highlight nsis"><table><tr><td class="code"><pre><span class="line">function getElementL</span><br><span class="line">ocation(element)</span><br><span class="line">&#123;</span><br><span class="line">    let <span class="literal">left</span> = element.offsetLeft<span class="comment">;</span></span><br><span class="line">    let <span class="literal">top</span> = element.offsetTop<span class="comment">;</span></span><br><span class="line">    let <span class="literal">current</span> = element.offsetParent<span class="comment">;</span></span><br><span class="line">    while(<span class="literal">current</span> !== null)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="literal">left</span> += <span class="literal">current</span>.offsetLeft<span class="comment">;</span></span><br><span class="line">        <span class="literal">top</span> += <span class="literal">current</span>.offsetTop<span class="comment">;</span></span><br><span class="line">        <span class="literal">current</span> = <span class="literal">current</span>.offsetParent<span class="comment">;</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>padding</strong></p>
+<ul>
+<li>clientWidth: padding整体宽度（包括最里面的）</li>
+<li>clientHeight：高度</li>
+</ul>
+<p><strong>滚动尺寸</strong></p>
+<ul>
+<li>scrollHeight： 没有滚动条出现时元素总高度</li>
+<li>scrollWidth： 总宽度</li>
+<li>scrollLeft： 距离最左边的长度（包括隐藏的）</li>
+<li>scrollTop： 距离最上面的长度</li>
+</ul>
+<h1 id="样式设置"><a class="markdownIt-Anchor" href="#样式设置"></a> 样式设置</h1>
+<p>使用js可以动态修改样式表，样式表对应的元素属性是style。任何支持style属性的元素在js中都有一个对应的style属性，可以通过style对该元素样式表进行修改。</p>
+<p>样式表创建共有三种方法：通过<code>&lt;link&gt;</code>创建、通过<code>&lt;style&gt;</code>创建、通过style属性创建。</p>
+<p>样式表在装潢为js变量时名字有所改变，连字符全部删除，然后后面变成大写。例如：</p>
+<figure class="highlight maxima"><table><tr><td class="code"><pre><span class="line"><span class="built_in">background</span>-<span class="built_in">image</span> //js： <span class="built_in">style</span>.backgroundImage</span><br><span class="line"><span class="built_in">font</span>-family //js: <span class="built_in">style</span>.fontFamily</span><br></pre></td></tr></table></figure>
+<p>大多数属性名都是直接进行转换，但是float不能进行转换，因为它是关键字。因此在js的style中将它命名为cssFloat</p>
+<p>属性和方法：</p>
+<ul>
+<li>cssText: 返回css字符串，可以通过它一次性设置所有属性，例如： <figure class="highlight maxima"><table><tr><td class="code"><pre><span class="line">myDiv.<span class="built_in">style</span>.cssText = <span class="string">&quot;width: 25px; height: 100px; background-color: green&quot;</span>;</span><br><span class="line">console.<span class="built_in">log</span>(myDiv.<span class="built_in">style</span>.cssText);</span><br></pre></td></tr></table></figure>
+</li>
+<li>length： 返回属性数量</li>
+<li>parentRule: 返回CSSRule对象</li>
+<li>getPropertyPriority(propertyName): 如果使用了!important，则返回important,否则返回空字符串</li>
+<li>getPropertyValue(name): 返回属性的字符串值</li>
+<li>item(index): 返回index的属性名</li>
+<li>removeProperty(name):</li>
+<li>setProperty(name, value, priority): 设置属性</li>
+</ul>
+<p>可以使用length对css属性进行遍历</p>
+<figure class="highlight maxima"><table><tr><td class="code"><pre><span class="line"><span class="built_in">let</span> prop, value;</span><br><span class="line"><span class="keyword">for</span>(<span class="built_in">let</span> i=<span class="number">0</span>, len=myDiv.<span class="built_in">style</span>.<span class="built_in">length</span>; i&lt;len; i++)</span><br><span class="line">&#123;</span><br><span class="line">    prop = myDiv.<span class="built_in">style</span>[i];</span><br><span class="line">    value = myDiv.<span class="built_in">style</span>.getPropertyValue(prop);</span><br><span class="line">    console.<span class="built_in">log</span>(`prop: $&#123;value&#125;`);</span><br><span class="line">&#125;</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line"><span class="built_in">style</span>中只包含<span class="built_in">style</span>属性为设个属性设置的值，不包含其他样式表继承过来的值，因此设置可能回合最终结果有偏差.可以通过getComputedStyle()获得最终结果，</span><br><span class="line"></span><br><span class="line">* getComputedStyle(element, str): 返回值是一个只读的<span class="built_in">style</span>类型。element是想要获得可计算属性的元素，str是伪元素字符串（<span class="string">&quot;:after&quot;</span>等)</span><br><span class="line"></span><br><span class="line">例如</span><br></pre></td></tr></table></figure>
+<p>let myDive = document.getElementById(“myDiv”);<br />
+let computeStyle = document.defaultView.getComputedStyle(myDiv, null);</p>
+<figure class="highlight markdown"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="section">## 操作样式表</span></span><br><span class="line"></span><br><span class="line">除了修改style提供的样式外，另外两种方法提供的样式我们也可以进行操作。HTMLLinkElement是通过<span class="code">`&lt;link&gt;`</span>创建的样式表, HTMLStyleElement是通过<span class="code">`&lt;style&gt;`</span>创建的样式表。CSSStyleSheet是通用样式表，可以表示上面两种，他只有一个属性可读写。</span><br><span class="line"></span><br><span class="line">CSSStyleSheet中的属性：</span><br><span class="line"></span><br><span class="line"><span class="bullet">*</span> disabled： 表示样式表是否被禁用，可读写</span><br><span class="line"><span class="bullet">*</span> href： 如果是<span class="code">`&lt;link&gt;`</span>形式创建的样式表，返回url</span><br><span class="line"><span class="bullet">*</span> media： 表示支持媒体的集合，有一个length属性和item()方法</span><br><span class="line"><span class="bullet">*</span> ownerNode: 拥有该样式表的节点，要么是<span class="code">`&lt;link&gt;`</span>要么是<span class="code">`&lt;style&gt;`</span>,如果是@import形式导入的那么是null</span><br><span class="line"><span class="bullet">*</span> parentStyleSheet: 指向包含它的样式表</span><br><span class="line"><span class="bullet">*</span> title： ownerNode的title属性</span><br><span class="line"><span class="bullet">*</span> type： 样式表的类型</span><br><span class="line"><span class="bullet">*</span> cssRules： 规则集合</span><br><span class="line"><span class="bullet">*</span> ownerRule： 如果是由@import导入，则返回父样式表规则集合</span><br><span class="line"><span class="bullet">*</span> deleteRule(index):</span><br><span class="line"><span class="bullet">*</span> insertRule(rule, index);</span><br><span class="line"></span><br><span class="line"><span class="section">### 规则</span></span><br><span class="line"></span><br><span class="line">CSSRule表示一条规则, 一个选择器加样式就是一条规则。一般使用的是CSSStyleRule（其他@import,@font-face等很少用js操作）。下面是CSSStyleRule的属性</span><br><span class="line"><span class="bullet">*</span> cssText： 返回规则的文本</span><br><span class="line"><span class="bullet">*</span> parentRule： 如果被其他规则包含，返回父规则，否则返回null</span><br><span class="line"><span class="bullet">*</span> parentStyleSheet： 返回当前样式表</span><br><span class="line"><span class="bullet">*</span> style</span><br><span class="line"><span class="bullet">*</span> type： 表示规则类型，值固定为1</span><br><span class="line"><span class="bullet">*</span> selectorText： 返回规则的选择符文本，也就是# .等选择器</span><br><span class="line"></span><br><span class="line">例如：</span><br></pre></td></tr></table></figure>
+<p>let sheet = document.styleSheets[0];<br />
+let rules = sheet.cssRules || sheet.rules;<br />
+let rule = rules[0];<br />
+rule.style.backgroundColor = “red”;</p>
+<pre class="highlight"><code class="">
+* insertRule(str, index): 添加新的规则,例如`sheet.insertRule(&quot;body &#123;background-color: silver&#125;&quot;, 0);`
+* deleteRule(index):
+
+# 遍历
+
+</code></pre>
+]]></content>
       <categories>
         <category>js</category>
       </categories>
@@ -20043,7 +20164,8 @@ processState(state);<br />
 <p>虽然他们的查找效率和遍历相比已经有很大提升了，但是和哈希相比又大大不如。QMap（红黑树为数据结构）在n=10之后效率就比不过QHash(哈希为数据结构)，越到后面差距越大。但是在数据库中却是使用B树作为数据结构。因为数据库除了考虑速度还要考虑空间，而hash对空间要求大。因此日常对空间不敏感的程序尽量使用hash。</p>
 <p>前面已经说了，决定查找次数的是树的深度。假如有65535个数据，那么树的深度为16，那么平均查找深度为 (1 + 2 * 2 + 3 * 4 + 4 * 8 + 5 * 16 + … + 16 * 32768) / 65535 = 14.如果14个数据块位于2个不同的磁盘块上（因为是指针不是连续存储），那么就需要2次磁盘读取，所需时间便在毫秒以上。他和直接查找也显现不出太多优势。</p>
 <p>因此减少树高就是非常必要的了。一种解决思路就是由二叉树变为多叉树，每一层容纳的数量变多了，树高自然就减少了。此外，各个分支如果树高大致相同毫无疑问平均查找次数是最少的，这就是平衡二叉树的思想。而如果将这两种思路结合就形成了多路平衡查找树也就是B树。</p>
-<h1 id="结构"><a class="markdownIt-Anchor" href="#结构"></a> 结构</h1>
+<h1 id="b树"><a class="markdownIt-Anchor" href="#b树"></a> B树</h1>
+<h2 id="结构"><a class="markdownIt-Anchor" href="#结构"></a> 结构</h2>
 <p>一颗m阶的B树定义如下：</p>
 <ol>
 <li>每个节点最多有m-1个关键字（有m个子节点）</li>
@@ -20083,6 +20205,37 @@ processState(state);<br />
 <p>然后再删除32，变成<img src="/images/b%E6%A0%919.png" alt="" /></p>
 <p>这时右子树不够了，然后左子树也不能再往上提，因此进行合并<img src="/images/b%E6%A0%9110.png" alt="" /></p>
 <p>然后审查父亲，发现有两个，满足条件，因此结束。</p>
+<h1 id="b树-2"><a class="markdownIt-Anchor" href="#b树-2"></a> B+树</h1>
+<p>B+树基本结构和B树相同，并且有所延伸</p>
+<ol>
+<li>B+树分为内部节点（索引节点）和叶子节点，内部节点只负责索引，不保存数据，由叶子节点保存数据</li>
+<li>每个叶子节点都有指向相邻叶子节点的指针（链表），并且从小到大排列</li>
+</ol>
+<p><img src="/images/b%E6%A0%9111.png" alt="" /></p>
+<h2 id="插入-2"><a class="markdownIt-Anchor" href="#插入-2"></a> 插入</h2>
+<ol>
+<li>根据key找到插入位置，如果插入后&lt;=m-1,则结束。否则分裂节点。前m/2变为左子树，第m/2+1个节点的key（在子树中节点还存在）拉到父节点中，然后把m/2+1到m-1的节点的作为右子树。当前节点到父节点进行第2步</li>
+<li>对于索引类节点，进行分裂时作为父节点的节点不在子树中保留，和B树类似</li>
+</ol>
+<p>B+树插入和B树最大的不同是在叶子节点的数据是不会删除的，这样带来一个好处是遍历速度明显加快，假如保存每个叶子节点所拥有的数据可以直接达到类似于索引的效果。缺点是会有一些相同的记录，带来了空间上的浪费。</p>
+<p><img src="/images/b%E6%A0%9112.png" alt="" /></p>
+<p>假设这是初始情况，现在插入16.中间节点是10，将10作为索引放入父节点中。m为5，m/2=2。因此左子树有2个元素，右子树有三个。</p>
+<p><img src="/images/b%E6%A0%9113.png" alt="" /></p>
+<h2 id="删除-2"><a class="markdownIt-Anchor" href="#删除-2"></a> 删除</h2>
+<ol>
+<li>删除叶子节点中的key，如果大于ceil(m)/2 - 1，则删除结束，否则进行第二步</li>
+<li>如果兄弟节点有富余，向兄弟节点借（拿）一个记录，并且他们的父节点变成拿的那个节点。如果没有富余到第3步</li>
+<li>进行合并，删除索引节点并且左右子树合并成一个。然后检查索引节点是否满足要求，之后和B树相同。</li>
+</ol>
+<blockquote>
+<p>问： 如果删除的节点正好是索引节点有关系吗？</p>
+</blockquote>
+<p>因为索引节点正常情况下是右子树中最小的那个，删除之后左子树还是都比父节点小，右子树比父节点大，并没有破坏关系，可以正常插入删除，因此没有影响。</p>
+<p><img src="/images/b%E6%A0%9114.png" alt="" /></p>
+<p>现在删除7，因为左子树正好是m/2-1，因此只能合并，删除7的索引合并节点变成</p>
+<p><img src="/images/b%E6%A0%9115.png" alt="" /></p>
+<p>之后合并索引节点变成</p>
+<p><img src="/images/b%E6%A0%9116.png" alt="" /></p>
 ]]></content>
       <categories>
         <category>数据结构</category>
