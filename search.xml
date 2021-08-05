@@ -20430,4 +20430,363 @@ TreeWalker是NodeIterator的升级版，除了前面所说的方法外，还有�
         <category>js</category>
       </categories>
   </entry>
+  <entry>
+    <title>js事件</title>
+    <url>/post/9fabc801.html</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="事件流过程"><a class="markdownIt-Anchor" href="#事件流过程"></a> 事件流过程</h1>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Event Bubbling Example<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;myDiv&quot;</span>&gt;</span>Click Me<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br><span class="line"></span><br><span class="line">当点击div后.click事件冒泡顺序：</span><br><span class="line"></span><br><span class="line">1. div</span><br><span class="line">2. body</span><br><span class="line">3. html</span><br><span class="line">4. document</span><br><span class="line">也就是从内部不断的向父节点传递，直到传递到根节点</span><br></pre></td></tr></table></figure>
+<p>但是如果使用事件捕获，会出现不同的结果。它的顺序正好和前面讲的相反。</p>
+<p>而在事件流中，真正的处理顺序是事件捕获、到达目标和事件冒泡。事件捕获时从根节点到达目标节点的过程，事件冒泡是从目标节点到根节点的过程。</p>
+<h1 id="事件处理程序"><a class="markdownIt-Anchor" href="#事件处理程序"></a> 事件处理程序</h1>
+<p>事件是用户或浏览器执行的动作，例如单击，单击，悬停等。事件处理程序的名字统一以on开头，例如onclick, onload等。</p>
+<p><strong>html事件处理程序</strong></p>
+<p>有些处理函数可以在html中直接指定。例如：</p>
+<p><code>&lt;input type=&quot;button&quot; value=&quot;click me&quot; onclick=&quot;console.log('click')&quot;/&gt;</code></p>
+<p>这里是直接传递了一个函数字符串，也可以使用函数名，例如：</p>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">  <span class="function"><span class="keyword">function</span> <span class="title">showMessage</span>(<span class="params"></span>)</span></span></span><br><span class="line">  &#123;</span><br><span class="line"><span class="javascript">      <span class="built_in">console</span>.log(<span class="string">&quot;hello world&quot;</span>);</span></span><br><span class="line">  &#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;button&quot;</span> <span class="attr">value</span>=<span class="string">&quot;click me&quot;</span> <span class="attr">onclick</span>=<span class="string">&quot;showMessage()&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<p>事件处理函数的作用域有了一些变化，首先有一个event变量，它保存的是event对象</p>
+<figure class="highlight ada"><table><tr><td class="code"><pre><span class="line">&lt;input <span class="keyword">type</span>=<span class="string">&quot;button&quot;</span>  value=<span class="string">&quot;click me&quot;</span> onclick=<span class="string">&quot;console.log(event.type)&quot;</span>/&gt;</span><br><span class="line">//event.<span class="keyword">type</span> <span class="type">= </span>button</span><br></pre></td></tr></table></figure>
+<p>其次，this表示的是这个事件的目标元素，上面的例子中是input，也就是说可以使用<code>this.value</code>访问input的value元素</p>
+<p>但是它会导致html和js的强耦合，难以对事件处理代码进行修改，因此不推荐这种模式。</p>
+<p><strong>dom进行事件处理</strong></p>
+<p>每个元素都有一些事件处理属性，例如</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> btn = <span class="built_in">document</span>.getElementById(<span class="string">&quot;myBtn&quot;</span>);</span><br><span class="line">btn.onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;clicked&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line">btn.onclick = <span class="literal">null</span>;<span class="comment">//移除事件处理程序</span></span><br></pre></td></tr></table></figure>
+<p>另外一种方法是使用addEventListener</p>
+<ul>
+<li>addEventListener(event_name, func, call_state):
+<ul>
+<li>event_name: 事件名，例如&quot;click&quot;</li>
+<li>func: 事件处理函数</li>
+<li>call_state: 一个布尔值，为真(默认值）则在冒泡阶段调用，否则在捕获阶段调用</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight coffeescript"><table><tr><td class="code"><pre><span class="line">let btn = <span class="built_in">document</span>.getElementById(<span class="string">&quot;mybtn&quot;</span>);</span><br><span class="line">btn.addEventListener(<span class="string">&quot;click&quot;</span>, <span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>.id);//mybtn</span><br><span class="line">&#125;, <span class="literal">false</span>);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>removeEventListener(event_name, func, call_state): 和上面参数相同，只有三个参数完全匹配才可以删除对应的eventListener,并且只有这种方式才可以删除由addEventListener加入的事件处理程序。</li>
+</ul>
+<p>匿名函数创建的eventListener无法删除</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">btn.removeEventListener(<span class="string">&quot;click&quot;</span>, <span class="function">()=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>.id);</span><br><span class="line">&#125;, <span class="literal">false</span>);</span><br><span class="line"><span class="comment">//删除无效，因为两个匿名函数不同</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> handler = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>.id);</span><br><span class="line">&#125;;</span><br><span class="line">btn.addEventListener(<span class="string">&quot;click&quot;</span>, handler, <span class="literal">false</span>);</span><br><span class="line">btn.removeEventListener(<span class="string">&quot;click&quot;</span>, handler, <span class="literal">false</span>);<span class="comment">//有效</span></span><br></pre></td></tr></table></figure>
+<p><strong>IE事件处理</strong></p>
+<p>IE和dom类似，只是函数不同，它是attachEvent()和detachEvent()，但是和addEventListener相比少了最后一个参数，他在IE8之前只能指定冒泡模式，并且它的事件名字需要加上on，例如</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> btn = <span class="built_in">document</span>.getElementById(<span class="string">&quot;mybtn&quot;</span>);</span><br><span class="line">btn.attachEvent(<span class="string">&quot;onclick&quot;</span>, ()=&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;click&quot;</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h1 id="事件对象"><a class="markdownIt-Anchor" href="#事件对象"></a> 事件对象</h1>
+<p>event是事件处理函数的唯一参数，他有一系列关于事件的属性和方法</p>
+<h2 id="dom事件对象"><a class="markdownIt-Anchor" href="#dom事件对象"></a> DOM事件对象</h2>
+<p>不同的事件中包含的属性和方法也不一样，下面是一些共有的属性和方法</p>
+<table>
+<thead>
+<tr>
+<th>属性/方法</th>
+<th>类型</th>
+<th>读/写</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>bubbles</td>
+<td>bool</td>
+<td>r</td>
+<td>表示事件是否冒泡</td>
+</tr>
+<tr>
+<td>cancelable</td>
+<td>bool</td>
+<td>r</td>
+<td>表示事件默认行为是否可以被取消</td>
+</tr>
+<tr>
+<td>defaultPrevented</td>
+<td>bool</td>
+<td>r</td>
+<td>true表示已经调用preventDefault()方法</td>
+</tr>
+<tr>
+<td>trusted</td>
+<td>bool</td>
+<td>r</td>
+<td>true表示该事件是由浏览器生成的</td>
+</tr>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>r</td>
+<td>触发的事件类型</td>
+</tr>
+<tr>
+<td>currentTarget</td>
+<td>元素</td>
+<td>r</td>
+<td>当前事件处理程序的元素(this)</td>
+</tr>
+<tr>
+<td>target</td>
+<td>元素</td>
+<td>r</td>
+<td>事件的目标元素，冒泡的第一个程序</td>
+</tr>
+<tr>
+<td>detail</td>
+<td>整数</td>
+<td>r</td>
+<td>一些其他信息</td>
+</tr>
+<tr>
+<td>eventPhase</td>
+<td>整数</td>
+<td>r</td>
+<td>事件所处的阶段，一共有三个阶段.1表示捕获，2表示到达目标，3表示冒泡</td>
+</tr>
+<tr>
+<td>preventDefault()</td>
+<td>函数</td>
+<td>r</td>
+<td>取消事件的默认行为</td>
+</tr>
+<tr>
+<td>stopImmediatePropagation()</td>
+<td>函数</td>
+<td>r</td>
+<td>取消后续的捕获或冒泡，并组织调用后续的事件处理程序</td>
+</tr>
+<tr>
+<td>stopPropagation()</td>
+<td>函数</td>
+<td>r</td>
+<td>取消后续的捕获或冒泡</td>
+</tr>
+</tbody>
+</table>
+<p>例如单击时导航到指定url是链接的默认行为，选中复选框是点击复选框的默认行为，下面程序可以取消选中：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">document</span>.querySelector(<span class="string">&quot;#id-checkbox&quot;</span>).addEventListener(<span class="string">&quot;click&quot;</span>, <span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line">         <span class="built_in">document</span>.getElementById(<span class="string">&quot;output-box&quot;</span>).innerHTML += <span class="string">&quot;Sorry! &lt;code&gt;preventDefault()&lt;/code&gt; won&#x27;t let you check this!&lt;br&gt;&quot;</span>;</span><br><span class="line">         event.preventDefault();</span><br><span class="line">&#125;, <span class="literal">false</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="ie事件对象"><a class="markdownIt-Anchor" href="#ie事件对象"></a> IE事件对象</h2>
+<p>IE中event对象在window.event中，因为是单线程一次只会执行一个事件处理函数因此这样做也没有问题。他也有一些共有的属性和方法</p>
+<table>
+<thead>
+<tr>
+<th>属性/方法</th>
+<th>类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>cancelBubble</td>
+<td>bool</td>
+<td>是否在冒泡阶段</td>
+</tr>
+<tr>
+<td>returnValue</td>
+<td>bool</td>
+<td>可读写，设置为false 表示取消默认行为</td>
+</tr>
+<tr>
+<td>srcElement</td>
+<td>元素</td>
+<td>事件目标（和DOM中的target相同）</td>
+</tr>
+<tr>
+<td>type</td>
+<td>string</td>
+<td>事件类型</td>
+</tr>
+</tbody>
+</table>
+<h1 id="事件类型"><a class="markdownIt-Anchor" href="#事件类型"></a> 事件类型</h1>
+<ul>
+<li>用户界面事件（UIEvent): 与<a href="https://xinhecuican.github.io/post/f3d3ee5b.html#window%E5%AF%B9%E8%B1%A1">BOM</a>交互的通用事件.</li>
+<li>焦点事件（FocusEvent): 在元素获得和失去焦点时从触发</li>
+<li>滚轮事件(WheelEvent): 使用滚轮或者起到相同功能的设备时触发</li>
+<li>键入事件（InputEvent): 输入文本触发</li>
+<li>键盘事件(KeyboardEvent):</li>
+<li>合成事件（CompositionEvent): 间接输入文本(使用输入法）时产生的事件</li>
+</ul>
+<h2 id="uievent"><a class="markdownIt-Anchor" href="#uievent"></a> UIEvent</h2>
+<p>UIEvent包括很多种事件，他不一定和用户操作有关，有些在DOM出现之前就已经存在了，保留它主要是为了向后兼容。</p>
+<ul>
+<li>load： 在window上页面加载完成之后触发，在<code>&lt;frameset&gt;</code>的所有<code>&lt;frame&gt;</code>加载完成后触发，在<code>&lt;img&gt;</code>图片加载完成后触发， <code>&lt;object&gt;</code>相应对象加载完成后触发</li>
+<li>unload： 当window界面完全卸载后触发，所有<code>&lt;frame&gt;</code>卸载后触发，<code>&lt;object&gt;</code>卸载完成后触发</li>
+<li>abort： <code>&lt;object&gt;</code>对象在加载完成前被用户终止下载触发</li>
+<li>error: 报错时触发</li>
+<li>select: 文本框(<code>&lt;input&gt;</code>和<code>&lt;textarea&gt;</code>）上被选择若干个字符触发</li>
+<li>resize: 窗口被缩放时触发</li>
+<li>scroll： 滚动时在被滚动的元素上出发</li>
+</ul>
+<h2 id="focusevent"><a class="markdownIt-Anchor" href="#focusevent"></a> FocusEvent</h2>
+<ul>
+<li>blur: 失去焦点时触发，这个事件不冒泡</li>
+<li>focus： 获得焦点时触发，不冒泡</li>
+<li>DOMFocusIn： 获得焦点时触发，这个事件会冒泡，另外现在主要是focusin</li>
+<li>DOMFocusOut： 和上面一样，推荐使用focusout</li>
+</ul>
+<h2 id="鼠标和滚轮事件"><a class="markdownIt-Anchor" href="#鼠标和滚轮事件"></a> 鼠标和滚轮事件</h2>
+<p>鼠标事件主要是点击，双击等，总共有9种鼠标事件。</p>
+<ul>
+<li>click： 用户单击左键或回车键时触发。</li>
+<li>dblclick: 双击</li>
+<li>mousedown： 按下任意鼠标按键触发</li>
+<li>mouseenter: 从元素外部到元素内部时触发，这个事件不冒泡，也不会在移动到该元素的子元素时触发</li>
+<li>mouseleave: 元素内部到元素外部触发，…</li>
+<li>mousemove: 在元素内移动时<strong>反复</strong>触发</li>
+<li>mouseout: 从元素移动到其他元素时触发，会冒泡并且移动到子元素也会触发</li>
+<li>mouseover: 移动到元素内触发， 和上面一样</li>
+<li>mouseup: 释放鼠标键触发</li>
+<li>mousewheel: 鼠标滚轮滚动事件，除了共有的属性外还有一个wheelDelta的属性。鼠标向外滚动时为120，向内部滚动时为-120.</li>
+</ul>
+<p>几个类似事件的触发也是有先后顺序的，mousedown和mouseup都触发完毕之后才会触发click事件。连续两次click才会有dblclick触发：</p>
+<ol>
+<li>mousedown</li>
+<li>mouseup</li>
+<li>click</li>
+<li>mousedown</li>
+<li>mouseup</li>
+<li>click</li>
+<li>dblclick</li>
+</ol>
+<p><strong>坐标</strong></p>
+<p>客户端坐标是相对于窗口的坐标，可以通过event.clientX和event.clientY获取。</p>
+<p><img src="/images/js%E4%BA%8B%E4%BB%B61.png" alt="" /></p>
+<p>页面坐标是相对于这个页面来说的，滚动页面有一部分是不可见的，页面坐标就是包括这部分不可见的计算从该点到左上角的距离。它通过pageX和pageY获取</p>
+<p>屏幕坐标是相对于屏幕左上角，可以通过screenX和screenY获取</p>
+<p><strong>右键菜单</strong>js事件1.png</p>
+<p>为了自定义右键菜单，出现了contextmenu事件，她会在右键菜单命令出现时触发。可以通过preventDefault()阻止默认的右键菜单。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">  &lt;head&gt;</span><br><span class="line">    &lt;title&gt;example&lt;/title&gt;</span><br><span class="line">  &lt;/head&gt;</span><br><span class="line">  &lt;body&gt;</span><br><span class="line">    &lt;div id=<span class="string">&quot;myidv&quot;</span>&gt;right click&lt;/div&gt;</span><br><span class="line">    &lt;ul id=<span class="string">&quot;mymenu&quot;</span> style=<span class="string">&quot;position:absolute;visibility:hidden;background-color:silver&quot;</span>&gt;<span class="comment">//一开始是隐藏的</span></span><br><span class="line">      &lt;li&gt;<span class="xml"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;http://www.somewhere.com&quot;</span>&gt;</span>somewhere<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span>&lt;/li&gt;</span><br><span class="line">    &lt;/ul&gt;</span><br><span class="line">  &lt;/body&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line"></span><br><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">&quot;load&quot;</span>, <span class="function">(<span class="params">event</span>)=&gt;</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">let</span> div = <span class="built_in">document</span>.getElementById(<span class="string">&quot;mydiv&quot;</span>);</span><br><span class="line">    div.addEventListener(<span class="string">&quot;contextmenu&quot;</span>, <span class="function">(<span class="params">event</span>)=&gt;</span></span><br><span class="line">    &#123;</span><br><span class="line">        event.preventDefault();</span><br><span class="line">        <span class="keyword">let</span> menu = <span class="built_in">document</span>.getElementById(<span class="string">&quot;mymenu&quot;</span>);</span><br><span class="line">        menu.style.left = event.clientX + <span class="string">&quot;px&quot;</span>;</span><br><span class="line">        menu.style.top = event.clientY + <span class="string">&quot;px&quot;</span>;</span><br><span class="line">        menu.style.visibility = <span class="string">&quot;visible&quot;</span>;</span><br><span class="line">    &#125;);</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">document</span>.addEventListener(<span class="string">&quot;click&quot;</span>, <span class="function">(<span class="params">event</span>)=&gt;</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">document</span>.getElementById(<span class="string">&quot;mymenu&quot;</span>).style.visibility = <span class="string">&quot;hidden&quot;</span>;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p><strong>修饰键</strong></p>
+<p>有时候鼠标还需要根据ctrl，alt等修饰键判断状态，在js中定义了四个键属性：shiftKey，ctrlKey,altKey,metaKey。按下则为true，没有按下则为false</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> div = <span class="built_in">document</span>.getElementById(<span class="string">&quot;mydiv&quot;</span>);</span><br><span class="line">div.addEventListener(<span class="string">&quot;click&quot;</span>, <span class="function">(<span class="params">event</span>)=&gt;</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(event.shiftKey)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&quot;enter shift&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>相关元素</strong></p>
+<p>对于mouseout、mouseover等事件，除了关心事件的触发者，还关心现在移动到了哪个元素，也就是相关元素。它的属性是event.relatedTarget</p>
+<p>对于mouseout事件来说，触发者是失去光标的元素，相关元素是获得光标的元素。</p>
+<p><strong>其他属性</strong></p>
+<ul>
+<li>event.button: 表示现在按下的是哪个按键
+<ul>
+<li>0： 没有按下任何键</li>
+<li>1： 按下左键（主键）</li>
+<li>2： 按下右键(副键）</li>
+<li>3： 同时按下左右键</li>
+<li>4： 按下中键</li>
+<li>5： 同时按下主键和中键</li>
+<li>6： 按下副键和中键</li>
+<li>7： 同时按下三个键</li>
+</ul>
+</li>
+<li>altleft: 是否按下左边的ctrl</li>
+<li>ctrlleft:</li>
+<li>shiftleft:</li>
+<li>offsetX: 光标相对于元素边界的x坐标</li>
+<li>offsetY:</li>
+</ul>
+<h2 id="键盘和输入事件"><a class="markdownIt-Anchor" href="#键盘和输入事件"></a> 键盘和输入事件</h2>
+<p>事件：</p>
+<ul>
+<li>keydown： 按下按键触发</li>
+<li>keyup： 释放按键触发</li>
+</ul>
+<p>对于字符类按键（a，b，c等），keydown和keyup会重复触发。对于非字符键(ctrl,alt等）如果只按一下，会触发keydown和keyup。如果持续按下，会一直触发keydown，待释放再触发keyup。</p>
+<p>属性：</p>
+<ul>
+<li>keyCode： 键码，用来表示按下了哪个按键。</li>
+<li>charcode： 只有在keydown时才会被设置值，是按键对应的ascii值。</li>
+<li>keycode： 和charcode相同</li>
+<li>key： 返回按键的字符串，如果是非字符按键则返回按键名（Shift,ArrowDown)</li>
+<li>getModifierState(name): 获得修饰键状态，例如：<code>event.getModifierState(&quot;Shift&quot;);</code></li>
+</ul>
+<p><strong>textInput</strong></p>
+<p>textInput在输入字符时触发，他有一些属性和方法：</p>
+<ul>
+<li>data： 输入的字符</li>
+<li>inputMethod： 输入方法
+<ul>
+<li>0： 不确定</li>
+<li>1： 表示键盘</li>
+<li>2： 粘贴</li>
+<li>3： 拖放</li>
+<li>4 ： 输入法</li>
+<li>5： 表单</li>
+<li>6： 手写</li>
+<li>7： 语音</li>
+<li>8： 组合</li>
+<li>9： 脚本</li>
+</ul>
+</li>
+</ul>
+<p><strong>合成事件</strong></p>
+<p>在使用输入法输入时，如果是一些其他语言（如中文），往往若干个输入才可以合成一个词，这时就需要一些新的事件进行管理</p>
+<ul>
+<li>compositionstart: 打开时触发，表示输入即将开始</li>
+<li>compositionupdate: 输入字段触发</li>
+<li>compositionend: 关闭时触发，包含本次合成中输入的全部内容</li>
+</ul>
+<h2 id="html事件"><a class="markdownIt-Anchor" href="#html事件"></a> html事件</h2>
+<p><strong>beforeunload</strong></p>
+<p>这个事件在window上触发，它可以在用户退出前提供一个对话框询问是否退出。一般在表单填上后退出时进行提示。可以通过returnValue修改提示内容</p>
+<figure class="highlight coffeescript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">&quot;beforeunload&quot;</span>, <span class="function"><span class="params">(event)</span>=&gt;</span>&#123;</span><br><span class="line">    let message = <span class="string">&quot;hello world&quot;</span>;</span><br><span class="line">    event.returnValue = message;</span><br><span class="line">    <span class="keyword">return</span> message;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p><strong>DOMContentLoaded</strong></p>
+<p>load事件会在图片等全部加载完成后才会触发，所需时间比较长。而DOMContentLoaded会在DOM树构建完成之后触发，不用等待图片，js，css等文件加载完成。它在document或window上。</p>
+<p><strong>hashchange</strong></p>
+<p>它会在url散列值（#后面的部分）触发时通知开发者。他有两个新属性，oldURL和newURL，分别存储变化前后的url。它在window对象中。</p>
+]]></content>
+      <categories>
+        <category>js</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>ld链接脚本语法</title>
+    <url>/post/60b30b31.html</url>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><table>
+<thead>
+<tr>
+<th>语法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ENTRY(symbol)</td>
+<td>将符号symbol的值作为入口地址（主函数）。ld中有多种方法指定入口地址，他们的优先级如下排列。   1. ld中的-e选项 2. 脚本中的ENTRY 3. _start符号 4. .text段第一个字节地址 5. 0</td>
+</tr>
+<tr>
+<td>STARTUP(filename)</td>
+<td>将文件filename作为链接中的第一个输入文件</td>
+</tr>
+<tr>
+<td>SEARCH_DIR(path)</td>
+<td>库查找目录</td>
+</tr>
+<tr>
+<td>INPUT(file, file, …)</td>
+<td>将指定文件作为输入文件</td>
+</tr>
+<tr>
+<td>INCLUDE filename</td>
+<td>将指定文件包含进链接脚本（这是对脚本来说的，相当与在脚本中写了#include 加入其他脚本)</td>
+</tr>
+<tr>
+<td>PROVIDE(symbol)</td>
+<td>在链接脚本中添加某个符号</td>
+</tr>
+</tbody>
+</table>
+<p>此外，最基本的命令就是定义段的SECTIONS了，它的格式为：</p>
+<figure class="highlight css"><table><tr><td class="code"><pre><span class="line"><span class="selector-tag">SECTIONS</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="attribute">secname </span>: &#123; contents &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">secname</span>是输出文件的对应段，<span class="selector-tag">contents</span>是输入文件的段</span><br><span class="line"></span><br><span class="line">其中<span class="selector-tag">contents</span>的语法为： <span class="selector-tag">filename</span>(<span class="selector-tag">sections</span>)</span><br><span class="line">表示要把某个文件中的某个段添加到<span class="selector-tag">secname</span>中</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">file1</span><span class="selector-class">.o</span>(<span class="selector-class">.data</span>): 将<span class="selector-tag">file1</span><span class="selector-class">.o</span>的<span class="selector-class">.data</span>段添加到输出文件的对应段中</span><br><span class="line">*(<span class="selector-class">.data</span>): 将所有输入文件的<span class="selector-class">.data</span>段添加到对应段中。此外，还可以使用其他正则表达式</span><br></pre></td></tr></table></figure>
+<p>例如：</p>
+<pre class="highlight"><code class="">ENTRY(nomain)//以nomain函数作为程序入口
+
+SECTIONS
+&#123;
+    . = 0x08048000 + SIZEOF_HEADERS;//以这个地址作为当前虚拟地址
+    tinytext : &#123;*(.text) *(.data) *(.rodata) &#125;
+    /DISCARD/ : &#123;*(.comment)&#125;//抛弃.comment段
+|
+```'
+
+
+</code></pre>
+]]></content>
+      <categories>
+        <category>c++</category>
+      </categories>
+  </entry>
 </search>
