@@ -12,6 +12,34 @@
 	src:url('https://cdn.jsdelivr.net/gh/xinhecuican/xinhecuican.github.io/fonts/Snell-Roundhand字体.ttf');
 	font-display: swap;
 }
+/*修改页面宽度*/
+.layout
+{
+	max-width: 1270px;
+}
+
+/*修改代码框样式*/
+#article-container figure.highlight
+{
+	border: 1px solid #00a1ff;
+	border-radius: 8px;
+}
+
+#article-container .highlight-tools
+{
+	background-color: rgba(73, 177, 245, .3);
+}
+
+/*图表样式定义*/
+.table-wrap tr:nth-child(even)
+{
+	background: rgba(73, 177, 245, 0.1) ;
+}
+
+.table-wrap tr:hover
+{
+	background-color: #bfc6c7;
+}
 
 h1#site-title
 {

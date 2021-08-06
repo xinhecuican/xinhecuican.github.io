@@ -1,0 +1,262 @@
+<!DOCTYPE html><html lang="zh-Hans" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>js 动画 | Xinhecuican's Blog</title><meta name="author" content="星河璀璨"><meta name="copyright" content="星河璀璨"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="动画 过去想要实现动画都是使用定时器，但是定时器的精度不高，可能导致动画播放不平滑。为了使计时精确，便是用requestAnimationFrame(func).并且这个函数还可以有一个参数，它的类型是DOMHighResTimeStamp，表示开始执行回调函数的时刻。 没执行一次requestAnimationFrame(func),他就会执行一次回调函数。但是这并不是一定的，如果调用太快他会">
+<meta property="og:type" content="article">
+<meta property="og:title" content="js 动画">
+<meta property="og:url" content="https://xinhecuican.github.io/post/121540ac.html">
+<meta property="og:site_name" content="Xinhecuican&#39;s Blog">
+<meta property="og:description" content="动画 过去想要实现动画都是使用定时器，但是定时器的精度不高，可能导致动画播放不平滑。为了使计时精确，便是用requestAnimationFrame(func).并且这个函数还可以有一个参数，它的类型是DOMHighResTimeStamp，表示开始执行回调函数的时刻。 没执行一次requestAnimationFrame(func),他就会执行一次回调函数。但是这并不是一定的，如果调用太快他会">
+<meta property="og:locale">
+<meta property="og:image" content="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg">
+<meta property="article:published_time" content="2021-08-05T12:06:00.000Z">
+<meta property="article:modified_time" content="2021-08-06T13:16:09.993Z">
+<meta property="article:author" content="星河璀璨">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg"><link rel="shortcut icon" href="/img/favicon.png"><!--link(rel="canonical" href=urlNoIndex())--><link rel="preconnect" href="//cdn.jsdelivr.net"><link rel="preconnect" href="//busuanzi.ibruce.info"><meta name="google-site-verification" content="zmX9zYZL0QVB6fFG_e98QsQogwE11Vdf5hOd4xMbgN4"><meta name="baidu-site-verification" content="EVZv9BO5R3"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"We didn't find any results for the search: ${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: 'Just',
+    min: 'minutes ago',
+    hour: 'hours ago',
+    day: 'days ago',
+    month: 'months ago'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"Traditional Chinese Activated Manually","cht_to_chs":"Simplified Chinese Activated Manually","day_to_night":"Dark Mode Activated Manually","night_to_day":"Light Mode Activated Manually","bgLight":"#49b1f5","bgDark":"#121212","position":"bottom-left"},
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-08-06 21:16:09'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const fontSizeVal = saveToLocal.get('global-font-size')
+    if (fontSizeVal !== undefined) {
+      document.documentElement.style.setProperty('--global-font-size', fontSizeVal + 'px')
+    }
+    })(window)</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/l-lin/font-awesome-animation/dist/font-awesome-animation.min.css" media="defer" onload="this.media='all'"><link rel="stylesheet" href="/css/background.css"><link rel="stylesheet" href="footer.min.css"><!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Xinhecuican's Blog" type="application/atom+xml">
+</head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/null" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">Articles</div><div class="length-num">208</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">Tags</div><div class="length-num">6</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">Categories</div><div class="length-num">28</div></a></div></div></div><hr><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Xinhecuican's Blog</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">js 动画</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">Created</span><time class="post-meta-date-created" datetime="2021-08-05T12:06:00.000Z" title="Created 2021-08-05 20:06:00">2021-08-05</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">Updated</span><time class="post-meta-date-updated" datetime="2021-08-06T13:16:09.993Z" title="Updated 2021-08-06 21:16:09">2021-08-06</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/js/">js</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">Word count:</span><span class="word-count">869</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">Reading time:</span><span>3min</span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="动画"><a class="markdownIt-Anchor" href="#动画"></a> 动画</h1>
+<p>过去想要实现动画都是使用定时器，但是定时器的精度不高，可能导致动画播放不平滑。为了使计时精确，便是用requestAnimationFrame(func).并且这个函数还可以有一个参数，它的类型是DOMHighResTimeStamp，表示开始执行回调函数的时刻。</p>
+<p>没执行一次requestAnimationFrame(func),他就会执行一次回调函数。但是这并不是一定的，如果调用太快他会自动进行合并。可以认为有一个任务队列，调用这个函数将它插入这个队列中，但是如果队列中有这个函数就不会插入。</p>
+<figure class="highlight reasonml"><table><tr><td class="code"><pre><span class="line"><span class="keyword">function</span> update<span class="constructor">Progress(<span class="params">time</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    var div = document.get<span class="constructor">ElementById(<span class="string">&quot;status&quot;</span>)</span>;</span><br><span class="line">    div.style.width = (parse<span class="constructor">Int(<span class="params">div</span>.<span class="params">style</span>.<span class="params">width</span>, 10)</span> + <span class="number">5</span>) + <span class="string">&quot;%&quot;</span>;</span><br><span class="line">    <span class="keyword">if</span>(div.style.left != <span class="string">&quot;100%&quot;</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        request<span class="constructor">AnimationFrame(<span class="params">updateProgress</span>)</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">request<span class="constructor">AnimationFrame(<span class="params">updateProgress</span>)</span>;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>window.cancelAnimationFrame(ID): 前面一个函数的返回值是一个ID，</li>
+</ul>
+<h1 id="canvas"><a class="markdownIt-Anchor" href="#canvas"></a> canvas</h1>
+<p><code>&lt;canvas&gt;</code>元素创建一个画布。创建它时至少要提供width和height属性，否则不会显示。开始标签和结束标签中的内容是不支持<code>&lt;canvas&gt;</code>时提示的内容。</p>
+<p><code>&lt;canvas id=&quot;drawing&quot; width=&quot;200&quot; height=&quot;200&quot;&gt;A drawing of something&lt;/canvas&gt;</code></p>
+<p>想要在canvas上进行绘图，首先要获得绘图上下文，使用<code>getContext(&quot;2d&quot;)</code>可以获得2D图形绘图对象。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> drawing = <span class="built_in">document</span>.getElementById(<span class="string">&quot;drawing&quot;</span>);</span><br><span class="line"><span class="keyword">if</span>(drawing.getContext)<span class="comment">//测试是否存在getContext函数</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">let</span> context = drawing.getContext(<span class="string">&quot;2d&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以使用<code>toDateURL(type)</code>获得<code>&lt;canvas&gt;</code>上的图像，参数为图片的类型。</p>
+<figure class="highlight reasonml"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> drawing = document.get<span class="constructor">ElementById(<span class="string">&quot;image/png&quot;</span>)</span>;</span><br><span class="line"><span class="keyword">if</span>(drawing.getContext)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">let</span> imgURI = drawing.<span class="keyword">to</span><span class="constructor">DataURL(<span class="string">&quot;image/png&quot;</span>)</span>;</span><br><span class="line">    <span class="keyword">let</span> image = document.create<span class="constructor">Element(<span class="string">&quot;img&quot;</span>)</span>;</span><br><span class="line">    imge.src = imgURI;</span><br><span class="line">    document.body.append<span class="constructor">Child(<span class="params">image</span>)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="2d绘图"><a class="markdownIt-Anchor" href="#2d绘图"></a> 2D绘图</h2>
+<p>属性：</p>
+<ul>
+<li>width:</li>
+<li>height: 画布的长宽，默认是在画布的左上角，其他的坐标值都根据该点计算</li>
+<li>fillStyle: 填充样式</li>
+<li>strokeStyle: 边框样式</li>
+</ul>
+<p><strong>绘制矩形</strong>：</p>
+<ul>
+<li>fillRect(x, y, w, h): 填充矩形，填充的样式由fillStyle决定</li>
+<li>strokeRect(x, y, w, h):</li>
+<li>clearRect(x, y, w, h):</li>
+</ul>
+<p>例如：</p>
+<figure class="highlight xquery"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> drawing =<span class="built_in"> document</span>.getElementById(<span class="string">&quot;drawing&quot;</span>);</span><br><span class="line"><span class="keyword">if</span>(drawing.getContext)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="keyword">context</span> = drawing.getContext(<span class="string">&quot;2d&quot;</span>);</span><br><span class="line">    <span class="keyword">context</span>.fillStyle = <span class="string">&quot;#ff0000&quot;</span>;</span><br><span class="line">    <span class="keyword">context</span>.fillRect(<span class="number">10</span>, <span class="number">10</span>, <span class="number">50</span>, <span class="number">50</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">context</span>.fillStyle = <span class="string">&quot;rgba(0, 0, 255, 0.5)&quot;</span>;</span><br><span class="line">    <span class="keyword">context</span>.fillRect(<span class="number">30</span>, <span class="number">30</span>, <span class="number">50</span>, <span class="number">50</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/images/canvas1.png" alt></p>
+<p><strong>绘制路径</strong></p>
+<p>首先调用context.beginPath()表示开始绘制，然后再调用下列方法进行绘制（只是描点，并没有真正开始绘制，还需要运行绘制完成操作才可以进行绘制）</p>
+<ul>
+<li>arc(x, y, radius, startAngle, endAngle, counterclockwise): 以(x, y)为中心，radius为半径绘制一条弧形。counterclockwise表示是否逆时针开始（默认是顺时针）</li>
+<li>arcTo(x1, y1, x2, y2, radius): 从(x1, y1)到(x2, y2)绘制一条半径为raidus的弧</li>
+<li>bezierCurveTo(c1x, c1y, c2x,c2y, x, y): 绘制一条以(c1x, c1y)和(c2x, c2y)为控制点，从上一点到(x, y)的弧线(三次贝塞尔曲线） <figure class="highlight reasonml"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> drawing = document.get<span class="constructor">ElementById(<span class="string">&quot;drawing_canvas&quot;</span>)</span>;</span><br><span class="line"><span class="keyword">if</span> (drawing.getContext)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">let</span> ctx = drawing.get<span class="constructor">Context(<span class="string">&quot;2d&quot;</span>)</span>;</span><br><span class="line">    ctx.<span class="keyword">begin</span><span class="constructor">Path()</span>;</span><br><span class="line">    ctx.move<span class="constructor">To(20, 20)</span>;</span><br><span class="line">    ctx.bezier<span class="constructor">CurveTo(20, 100, 200, 100, 200, 20)</span>;</span><br><span class="line">    ctx.stroke<span class="literal">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+结果为<img src="/images/canvas2.png" alt></li>
+<li>lineTo(x, y): 从上一点到(x, y)绘制直线</li>
+<li>moveTo(x, y): 画笔移动到(x, y)</li>
+<li>quadraticCurveTo(cx, cy, x, y): 以(cx, cy)为控制点，绘制一条虫上一点到(x, y)的弧线(二次贝塞尔曲线)</li>
+<li>rect(x, y, width, height):</li>
+</ul>
+<p>绘制完成之后的操作函数</p>
+<ul>
+<li>closePath(): 绘制前面所有的线和一条道起点的线</li>
+<li>fill(): 填充路径</li>
+<li>stroke(): 绘制路径，使用这个函数才会真正在画面上有显示</li>
+<li>clip(): 创建一个剪切区域</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined" rel="external nofollow noopener noreferrer" target="_blank">星河璀璨</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://xinhecuican.github.io/post/121540ac.html">https://xinhecuican.github.io/post/121540ac.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a target="_blank" rel="external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/post/60b30b31.html"><img class="next-cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">ld链接脚本语法</div></div></a></div></nav><hr><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> Comment</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>Catalog</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8A%A8%E7%94%BB"><span class="toc-number">1.</span> <span class="toc-text"> 动画</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#canvas"><span class="toc-number">2.</span> <span class="toc-text"> canvas</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2d%E7%BB%98%E5%9B%BE"><span class="toc-number">2.1.</span> <span class="toc-text"> 2D绘图</span></a></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2021 By 星河璀璨</div><div class="framework-info"><span>Framework </span><a target="_blank" rel="external nofollow noopener noreferrer" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>Theme </span><a target="_blank" rel="external nofollow noopener noreferrer" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="Read Mode"><i class="fas fa-book-open"></i></button><button id="font-plus" type="button" title="Increase font size"><i class="fas fa-plus"></i></button><button id="font-minus" type="button" title="Decrease font size"><i class="fas fa-minus"></i></button><button id="translateLink" type="button" title="Toggle Between Traditional Chinese And Simplified Chinese">繁</button><button id="darkmode" type="button" title="Toggle Between Light And Dark Mode"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="Toggle between single-column and double-column"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="Setting"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="Table Of Contents"><i class="fas fa-list-ul"></i></button><button id="chat_btn" type="button" title="rightside.chat_btn"><i class="fas fa-sms"></i></button><a id="to_comment" href="#post-comment" title="Scroll To Comments"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="Back To Top"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">Local search</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"></div></div></div><hr><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><script src="/js/search/local-search.js"></script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    let initData = {
+      el: '#vcomment',
+      appId: 'UJ3adzdUjnlMT2KmVU6dfoyO-MdYXbMMI',
+      appKey: 'SGFIXvul1h4NATEJbvSGuU0i',
+      placeholder: '邮箱和网址都可以不用填哟',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'zh-CN',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: true,
+      path: window.location.pathname,
+      master: '1ee9943f931df37af9dc1c57f5859da4',
+    }
+
+    if (true) { 
+      initData.requiredFields= ('nick'.split(','))
+    }
+    
+    if (false) {
+      const otherData = false
+      initData = Object.assign({}, initData, otherData)
+    }
+    
+    const valine = new Valine(initData)
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/gh/HCLonely/Valine@latest/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.querySelector('#vcomment'),loadValine)
+  else setTimeout(() => loadValine(), 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script src="/js/mychange.js"></script><script defer src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/hexo-theme-volantis@latest/source/js/issues.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
