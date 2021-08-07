@@ -13730,17 +13730,17 @@ f(S, T) &amp;= f(S, V) - f(S, S) (由上面第四个公式）\\
   <entry>
     <title>链接</title>
     <url>/post/4551c130.html</url>
-    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h3 id="基础"><a class="markdownIt-Anchor" href="#基础"></a> 基础</h3>
+    <content><![CDATA[<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1 id="基础"><a class="markdownIt-Anchor" href="#基础"></a> 基础</h1>
 <p>记得gcc编译器编译的步骤吗？预处理，编译，汇编，链接。首先前两步是为了生成.s的汇编文件，然后第三步就是生成机器码。但是如果第三步就已经完成了所有事为什么还要第四步呢？</p>
 <p>首先我们要知道，编译时是各个文件独立编译的，也就是说这个时候如果分配了地址很可能发生这个函数的地址和另外一个文件中函数的地址相同的尴尬事情发生，为了避免这种事情，在编译到.o文件的时候一些其他文件要用的函数和变量使用一个符号来表示的，然后在链接阶段再来连连看把地址安上。</p>
-<h3 id="目标文件"><a class="markdownIt-Anchor" href="#目标文件"></a> 目标文件</h3>
+<h1 id="目标文件"><a class="markdownIt-Anchor" href="#目标文件"></a> 目标文件</h1>
 <p>目标文件有三种：</p>
 <ul>
 <li>可重定位目标文件，也就是汇编后形成的.o文件。可以和其他文件链接新城可执行文件</li>
 <li>可执行目标文件，也就是可执行文件</li>
 <li>共享目标文件，一种特殊的可重定向目标文件，可以在运行时重定向（动态链接）</li>
 </ul>
-<h4 id="可重定位目标文件"><a class="markdownIt-Anchor" href="#可重定位目标文件"></a> 可重定位目标文件</h4>
+<h2 id="可重定位目标文件"><a class="markdownIt-Anchor" href="#可重定位目标文件"></a> 可重定位目标文件</h2>
 <p><img src="/images/elf.png" alt="" /></p>
 <p>上面是一个elf文件结构图，这是现在linux中目标文件格式。各种目标文件中都有类似的格式。</p>
 <ol>
@@ -13756,7 +13756,7 @@ f(S, T) &amp;= f(S, V) - f(S, S) (由上面第四个公式）\\
 <li>…</li>
 <li>节头部表； 存放每一节相对于elf开始位置的偏移量。</li>
 </ol>
-<h3 id="符号和符号表"><a class="markdownIt-Anchor" href="#符号和符号表"></a> 符号和符号表</h3>
+<h1 id="符号和符号表"><a class="markdownIt-Anchor" href="#符号和符号表"></a> 符号和符号表</h1>
 <p>每个.o文件中都有一个符号表。总共有三种符号</p>
 <ul>
 <li>全局符号：由该文件定义并且能被其他模块引用的全局符号。全局符号表示非静态函数和全局变量</li>
@@ -13766,9 +13766,12 @@ f(S, T) &amp;= f(S, V) - f(S, S) (由上面第四个公式）\\
 <figure class="highlight arduino"><table><tr><td class="code"><pre><span class="line">符号表的构成：</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Elf64_Symbol</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> name;<span class="comment">//在符号表中的字节偏移</span></span><br><span class="line">    <span class="keyword">char</span> type:<span class="number">4</span>,<span class="comment">//符号类型，是数据还是函数还是文件还是未定义</span></span><br><span class="line">       binding:<span class="number">4</span>;<span class="comment">//符号是本地（static）还是全局的</span></span><br><span class="line">    <span class="keyword">char</span> reserved;</span><br><span class="line">    <span class="keyword">short</span> section;</span><br><span class="line">    <span class="keyword">long</span> value;<span class="comment">//符号地址</span></span><br><span class="line">    <span class="keyword">long</span> <span class="built_in">size</span>;<span class="comment">//符号大小，对于函数是函数指令字节总个数</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>例：<img src="/images/%E7%AC%A6%E5%8F%B7%E8%A1%A8.webp" alt="" /></p>
 <p>其中ndx中的UND是undefine。</p>
-<h3 id="静态链接完成的任务"><a class="markdownIt-Anchor" href="#静态链接完成的任务"></a> 静态链接完成的任务</h3>
-<p>静态链接就是编译时完成的链接，与之对应的运行时的链接。静态链接主要完成了两个任务，符号解析和重定位</p>
-<h4 id="符号解析"><a class="markdownIt-Anchor" href="#符号解析"></a> 符号解析</h4>
+<h1 id="静态链接完成的任务"><a class="markdownIt-Anchor" href="#静态链接完成的任务"></a> 静态链接完成的任务</h1>
+<p>静态链接就是编译时完成的链接，与之对应的运行时的链接。静态链接主要完成了两个任务，符号解析和重定位。</p>
+<h2 id="符号解析"><a class="markdownIt-Anchor" href="#符号解析"></a> 符号解析</h2>
+<p>符号解析时，各个文件都加载到虚拟内存空间之中，并且此时各个段进行合并并且位置确定了。因此此时我们可以确定各个符号的地址。</p>
+<p>例如合并完成之后.text段起始地址为0x8048094, .data段起始地址为0x8049108。然后开始计算各个符号的虚拟地址。然后我们可以从符号表中得知符号在文件中的偏移量，然后可以推断出在段中的偏移量，段的首地址加上偏移量就是符号的地址。</p>
+<p>符号表地址填写完成之后，就可以进行符号解析了。</p>
 <p>符号解析就是将上面的符号表一一对应起来，例如上面第二种符号就匹配其他文件的第一种符号。</p>
 <p>但是这里还有一些问题，因为开始编译是各做各的，所以难免出现名字相同的情况，甚至一个文件中也有函数重载导致重名的情况。这是符号解析中的难题。</p>
 <p>对于一个文件中的重载，gcc链接器会对这些符号进行重整。例如同样是A函数，可能通过链接器的重整一个符号名就成了A1，另外一个成了A2。</p>
@@ -13788,13 +13791,15 @@ f(S, T) &amp;= f(S, V) - f(S, S) (由上面第四个公式）\\
 <li>使用全局变量记得初始化</li>
 <li>确定要引用外部变量时用extern</li>
 </ol>
-<h4 id="重定位"><a class="markdownIt-Anchor" href="#重定位"></a> 重定位</h4>
+<h2 id="重定位"><a class="markdownIt-Anchor" href="#重定位"></a> 重定位</h2>
+<p>前面的符号解析我们已经可以获得每一个符号的地址，但是这些地址并没有填入代码中（因为开始不知道这个文件会被放在哪，所以没办法了填入虚拟地址）。而重定位就是将正确的地址填入代码中。</p>
+<p>重定位表中的值其实就是他们在对应段中的偏移，可以通过这个找到重定位的位置。</p>
 <p>重定位有两步</p>
 <ol>
 <li>重定位节和符号定义：这一部分是把上面所说的每一个文件中的节。例如所有文件的.data节合成为一个节。之后就把内存地址赋给新的节，并且赋给每个符号。这时就有运行时的内存地址了。</li>
 <li>重定位节的符号引用。</li>
 </ol>
-<h5 id="重定位条目"><a class="markdownIt-Anchor" href="#重定位条目"></a> 重定位条目</h5>
+<h3 id="重定位条目"><a class="markdownIt-Anchor" href="#重定位条目"></a> 重定位条目</h3>
 <p>在重定位之前，符号并没有赋值，这个时候就有重定位条目确定我们要怎么把地址赋给每一个符号。</p>
 <p>代码重定位条目存放在.rel.text中，数据重定位条目在.rel.data中。</p>
 <p>重定位条目内容：</p>
@@ -13804,7 +13809,123 @@ f(S, T) &amp;= f(S, V) - f(S, S) (由上面第四个公式）\\
 <p>下面讲怎么重定位。</p>
 <p>如果是相对地址：</p>
 <figure class="highlight reasonml"><table><tr><td class="code"><pre><span class="line">refaddr = ADDR + <span class="module-access"><span class="module"><span class="identifier">R</span>.</span></span>offset;<span class="comment">//ADDR是函数首地址，例如main函数首地址，offset是偏移量</span></span><br><span class="line"><span class="comment">//refaddr是需要修改内存的首地址，例如e8 00 00 00 00，后面四个零就是我们要填充的地址，那么refaddr是第一个00的地址</span></span><br><span class="line">*refptr(refaddr地址的内容) = <span class="constructor">ADDR(<span class="params">r</span>.<span class="params">symbol</span>)</span> + r.addend - refaddr);</span><br><span class="line"></span><br><span class="line"><span class="comment">/*这一段就是计算相对跳转地址的，addr是对应符号的绝对地址，本来addr-refaddr就是相对跳转地址，但是注意这里的相对跳转地址是当前指令的，而我们要从下一条指令进行跳转，所以要加上一个addend，用下一个指令起始地址来减，所以这里的addend是-4，因为refaddr指向e8后面，加上4就是下一条指令，而因为是末地址减首地址所以addend是负数。*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//绝对地址</span></span><br><span class="line"></span><br><span class="line">refaddr 同上;</span><br><span class="line">*refptr = <span class="constructor">ADDR(<span class="params">r</span>.<span class="params">symbol</span>)</span> + r.addend;</span><br><span class="line"><span class="comment">//这个相对简单，内容就是对应符号绝对地址嘛，但是这里也要加addend因为有可能是数组等因此还要加上数组的偏移量。</span></span><br></pre></td></tr></table></figure>
-<h3 id="静态链接库"><a class="markdownIt-Anchor" href="#静态链接库"></a> 静态链接库</h3>
+<h1 id="动态链接"><a class="markdownIt-Anchor" href="#动态链接"></a> 动态链接</h1>
+<p>动态链接库指的是在程序加载或运行阶段进行链接。在程序开始时（程序不是从main开始，前面还有一段代码负责初始化）会启用动态链接器。动态链接比静态链接会慢2%-5%</p>
+<p>但是动态链接无法提前进行重定位。只有在程序真正开始运行时才会进行重定位（装载时重定位）。但这时便有一个问题，程序的虚拟地址大致相同，比如linux中程序入口大多在0x8048000，因此难免会产生碰撞。因此便需要重定位将新来的程序移动到另一个位置。但是这时必须每一个进程都要有一份副本，动态链接节省空间的优势也就没有了。</p>
+<h2 id="地址无关代码"><a class="markdownIt-Anchor" href="#地址无关代码"></a> 地址无关代码</h2>
+<p>全局变量或函数的访问大致可以分为四种：</p>
+<ol>
+<li>模块内部的函数调用、跳转</li>
+<li>模块内部的数据访问</li>
+<li>模块外部的函数调用、跳转</li>
+<li>模块外部的数据访问，如其他模块定义的	全局变量等</li>
+</ol>
+<p>模块内部可以直接使用静态链接的方法。但是实际上有一种特殊情况是使用动态链接的方法。</p>
+<figure class="highlight autoit"><table><tr><td class="code"><pre><span class="line">extern <span class="built_in">int</span> <span class="keyword">global</span><span class="comment">;</span></span><br><span class="line"><span class="built_in">int</span> foo()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">global</span> = <span class="number">1</span><span class="comment">;</span></span><br><span class="line">&#125;</span><br><span class="line">这种情况下<span class="keyword">Global</span>可能是模块内部其他文件的变量，也可能是其他模块的变量，如果按照静态链接，最终结果可能是</span><br><span class="line">movl $0x1, XXXXX //XXXXX是<span class="keyword">global</span>的地址</span><br><span class="line">由于可执行文件在运行时并不对代码进行重定位（没有修改权限改不了），因此如果是跨模块调用问题就明显了。因为此时<span class="keyword">global</span>变量没有对应符号，链接失败，只有一个无效地址，而动态链接在运行时才会确定符号的地址。</span><br><span class="line"></span><br><span class="line">解决方法是将它看做第四种情况，使用GOT</span><br></pre></td></tr></table></figure>
+<p>模块外部需要利用到GOT。</p>
+<p>GOT 全局偏移量表，他其实就是一个数组，这个表用来存全局变量的地址，在data段开始的地方，而静态链接的时候那些符号的跳转地址都是跳转到这个表中，然后在运行时这个跳转表才会真正赋予地址。</p>
+<p>例：</p>
+<figure class="highlight mel"><table><tr><td class="code"><pre><span class="line">mov <span class="number">0x100010</span>(%rip), %rax</span><br><span class="line">addl $0x1, (%rax)</span><br><span class="line"></span><br><span class="line">第一行就是跳转到跳转表然后取出里面地址，然后第二段取出之歌地址中的值并加一</span><br></pre></td></tr></table></figure>
+<h2 id="pic数据引用"><a class="markdownIt-Anchor" href="#pic数据引用"></a> pic数据引用</h2>
+<p>上面是程序运行前将所有文件全部绑定了，但是绑定的时候有可能有很多函数并不需要用，这样就拖延了程序启动的时间。为了加快程序启动，可以在使用函数时再进行链接，这时就需要PLT表。</p>
+<p>PLT 过程链接表。举个例子</p>
+<p><img src="/images/%E9%93%BE%E6%8E%A5.jpg" alt="" /></p>
+<p>这个例子是从右上角开始的，先调用函数到了PLT表，之后跳转到GOT[4]所指位置，第一次GOT[4]指向4005c6也就是下一条指令，第一次后GOT[4]就会变成函数地址。</p>
+<p>4005c6是把addvec的ID拖入栈中，然后跳转到GOT[2]的位置同时把GOT[1]放到栈中，GOT[1]是解析函数用到的信息，GOT[2]是动态链接器地址。跳到GOT[2]后就根据栈中的内容链接函数并把GOT[4]的值变成函数首地址。</p>
+<p>在真正的文件中GOT拆分成了两个表.got和.got.plt。.got是保存全局变量地址，.got.plt保存外部函数地址。此外.got.plt的前三项有特殊含义</p>
+<ul>
+<li>第一项是.dynamic段的地址，包含了动态链接相关信息</li>
+<li>第二项是本模块的ID</li>
+<li>第三项是动态链接器的地址，它传入两个参数函数ID和模块ID</li>
+</ul>
+<h2 id="动态链接相关节和段"><a class="markdownIt-Anchor" href="#动态链接相关节和段"></a> 动态链接相关节和段</h2>
+<p><strong>.interp</strong></p>
+<p>.interp保存的是动态链接器的地址，例如在linux中.interp中的内容可能是<code>&quot;/lib/ld-linux.so.2&quot;</code>.</p>
+<p><strong>.dynamic</strong></p>
+<p>.dynamic保存了动态链接器所需要的基本信息。它是Elf32_Dyn类型的数组，Elf32_Dyn的定义为：</p>
+<figure class="highlight crystal"><table><tr><td class="code"><pre><span class="line">typedef <span class="class"><span class="keyword">struct</span></span></span><br><span class="line">&#123;</span><br><span class="line">    Elf32_Sword d_tag;<span class="regexp">//</span>类型</span><br><span class="line">    <span class="class"><span class="keyword">union</span>//类型的值</span></span><br><span class="line">    &#123;</span><br><span class="line">        Elf32_Word d_val;</span><br><span class="line">        Elf32_Addr d_ptr;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;Elf32_Dyn;</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>d_tag</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DT_SYMTAB</td>
+<td>动态链接符号表的地址， d_ptr表示.dynsym的地址</td>
+</tr>
+<tr>
+<td>DT_STRTAB</td>
+<td>动态链接字符串表的地址, d_ptr表示.dynstr的地址</td>
+</tr>
+<tr>
+<td>DT_STRSZ</td>
+<td>字符串表的大小, d_val表示大小</td>
+</tr>
+<tr>
+<td>DT_HASH</td>
+<td>动态链接哈希表地址</td>
+</tr>
+<tr>
+<td>DT_SONAME</td>
+<td>本共享对象的SO-NAME</td>
+</tr>
+<tr>
+<td>DT_RPATH</td>
+<td>动态链接共享对象搜索路径</td>
+</tr>
+<tr>
+<td>DT_INIT</td>
+<td>初始化代码地址</td>
+</tr>
+<tr>
+<td>DT_FINIT</td>
+<td>结束代码地址</td>
+</tr>
+<tr>
+<td>DT_NEED</td>
+<td>依赖的共享对象文件，d_ptr表示共享对象文件名</td>
+</tr>
+<tr>
+<td>DT_REL/DT_RELA</td>
+<td>动态链接重定位表地址</td>
+</tr>
+<tr>
+<td>DT_RELENT/DT_RELAENT</td>
+<td>重定位表入口数量</td>
+</tr>
+</tbody>
+</table>
+<p><strong>.dynsym</strong></p>
+<p>动态链接符号表，他只保存和动态链接相关的符号，其他的符号如模块私有变量不保存，他们保存在.symtab中，.symtab保存了所有的符号。</p>
+<p><strong>.rel.dyn和.rel.plt</strong></p>
+<p>这两种都是重定位表，和前面的.rel.text和.rel.data一样，.rel.dyn是保存代码段的重定位表，.rel.plt是数据段的重定位表。</p>
+<p>前面已经说了两种重定位类型R_X86_64_PC32和R_X86_64_32，这里还要接受R_X86_64_RELATIVE、R_X86_64_GLOB_DAT和R_X86_64_JUMP_SLOT</p>
+<p>其中R_X86_64_GLOB_DAT和R_X86_64_JUMP_SLOT会将对应位置修改为GOT表中的对应项，然后将对应项修改为符号的地址。</p>
+<p>R_X86_64_RELATIVE是针对共享对象的数据段的，它实际上没办法做到地址无关。因为他可能会包含绝对地址引用。例如：</p>
+<figure class="highlight arduino"><table><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">int</span> a;</span><br><span class="line"><span class="keyword">static</span> <span class="keyword">int</span>* p = &amp;a;</span><br></pre></td></tr></table></figure>
+<p>由于a的地址在开始时不确定的，但是它的值可以使相对文件的偏移B，假设在装载后文件的基地址为A，那么实际上p的值是A+B，也就是需要将<strong>p的值</strong>加上B。因此这种重定位条目会有p的地址和B。</p>
+<h2 id="动态链接过程"><a class="markdownIt-Anchor" href="#动态链接过程"></a> 动态链接过程</h2>
+<ol>
+<li>动态链接器自举： 由于动态链接器本身也是一个程序，因此他本身也需要链接，这时只能不依赖其他系统库、运行库并且设计一段代码完成自身初始化。</li>
+<li>装载共享对象： 将所有符号表合并成一个，称为全局符号表。然后链接器开始寻找现有文件中依赖的库或对象，然后将这些对象的符号表也添加进全局符号表。要注意的是如果某个符号已经在全局符号表中存在，那么这个符号将被忽略。</li>
+<li>重定位和初始化，根据每个文件的重定位表对表项进行重定位，然后执行初始化函数。</li>
+</ol>
+<h2 id="相关函数"><a class="markdownIt-Anchor" href="#相关函数"></a> 相关函数</h2>
+<p><strong>dlopen()</strong></p>
+<p><code>void* dlopen(const char* filename, int flag);</code></p>
+<p>打开一个动态库，加载到进程空间并完成初始化。第二个参数时符号解析方式,RTLD_LAZY表示延迟绑定，RTLD_NOW表示加载时就绑定。</p>
+<p><strong>dlsym</strong></p>
+<p><code>void* dlsym(void* handle, char* symbol);</code></p>
+<p>作用： 通过符号名找到符号</p>
+<p>第一个参数时dlopen返回的句柄，第二个参数是符号的名字。失败将返回NULL，否则如果是常量将返回值，如果是变量将返回地址。</p>
+<p><strong>dlerror</strong></p>
+<p>通过dlerror判断上述函数是否执行成功，然后是NULL表示执行成功。</p>
+<p><strong>dlclose</strong></p>
+<p>卸载已经加载的模块。</p>
+<h1 id="静态链接库"><a class="markdownIt-Anchor" href="#静态链接库"></a> 静态链接库</h1>
 <p>过去我们有两种选择进行连接，第一种是把一堆常用函数放到一个可重定向文件中，另一种是把所有常有函数都分开，然后一个个链接。第一种占用空间太大，可能为了一两个函数加了一两千个函数，第二中编译时太难写，所以使用了静态链接库。</p>
 <p>静态链接库集合了上面两种方法，首先它是一个可重定向目标文件。但是不同在于他有一个符号表需要哪个函数就把那个函数链接进去，这样就兼顾上面二者的优点。</p>
 <p>可以使用<code>gcc -static -o prog2c main2.c -L. -lvector</code>其中L是链接库的路径，l是库名，一般库开头都是lib所以lib可以省略，后缀名可以省略。</p>
@@ -13813,24 +13934,15 @@ f(S, T) &amp;= f(S, V) - f(S, S) (由上面第四个公式）\\
 <p>此外，对于一些常用函数如cout等，如果每个程序都复制一次，那么还是太浪费空间。</p>
 <p>而且如果库函数有错误或者考虑不周需要修改，那么对于绝大多数程序来说都是一个灾难，因为大型程序重新编译一下可能会导致冲突等不可预料的后果。</p>
 <p>为了解决这些问题，提出了动态链接</p>
-<h3 id="动态链接库"><a class="markdownIt-Anchor" href="#动态链接库"></a> 动态链接库</h3>
-<p>动态链接库指的是在程序加载或运行阶段进行链接。在程序开始时（程序不是从main开始，前面还有一段代码负责初始化）会启用动态链接器。</p>
-<h4 id="pic数据引用"><a class="markdownIt-Anchor" href="#pic数据引用"></a> pic数据引用</h4>
-<p>GOT 全局偏移量表，这个表用来存全局变量的地址，在data段开始的地方，而静态链接的时候那些符号的跳转地址都是跳转到这个表中，然后在运行时这个跳转表才会真正赋予地址。</p>
-<p>例：</p>
-<figure class="highlight mel"><table><tr><td class="code"><pre><span class="line">mov <span class="number">0x100010</span>(%rip), %rax</span><br><span class="line">addl $0x1, (%rax)</span><br><span class="line"></span><br><span class="line">第一行就是跳转到跳转表然后取出里面地址，然后第二段取出之歌地址中的值并加一</span><br></pre></td></tr></table></figure>
-<p>PLT 过程链接表。举个例子</p>
-<p><img src="/images/%E9%93%BE%E6%8E%A5.jpg" alt="" /></p>
-<p>这个例子是从右上角开始的，先调用函数到了PLT表，之后跳转到GOT[4]所指位置，第一次GOT[4]指向4005c6也就是下一条指令，第一次后GOT[4]就会变成函数地址。</p>
-<p>4005c6是把addvec的ID拖入栈中，然后跳转到GOT[2]的位置同时把GOT[1]放到栈中，GOT[1]是解析函数用到的信息，GOT[2]是动态链接器地址。跳到GOT[2]后就根据栈中的内容链接函数并把GOT[4]的值变成函数首地址。</p>
-<h3 id="库打桩技术"><a class="markdownIt-Anchor" href="#库打桩技术"></a> 库打桩技术</h3>
+<h1 id="动态链接库"><a class="markdownIt-Anchor" href="#动态链接库"></a> 动态链接库</h1>
+<h1 id="库打桩技术"><a class="markdownIt-Anchor" href="#库打桩技术"></a> 库打桩技术</h1>
 <p>总体来说库打桩是指自己写一个库然后先于系统库加载这时程序运行的就是你自己写的库了。</p>
-<h4 id="链接时库打桩"><a class="markdownIt-Anchor" href="#链接时库打桩"></a> 链接时库打桩</h4>
+<h2 id="链接时库打桩"><a class="markdownIt-Anchor" href="#链接时库打桩"></a> 链接时库打桩</h2>
 <p>例：</p>
 <figure class="highlight arduino"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> malloc(size) mymalloc(size)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> malloc(ptr) myfree(ptr)</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> *<span class="title">mymalloc</span><span class="params">(<span class="keyword">size_t</span> <span class="built_in">size</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">void</span> *ptr = <span class="built_in">malloc</span>(<span class="built_in">size</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;malloc(%d)=%p\n&quot;</span>, (<span class="keyword">int</span>)<span class="built_in">size</span>, ptr);</span><br><span class="line">    <span class="keyword">return</span> ptr;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">myfree</span><span class="params">(<span class="keyword">void</span> *ptr)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">free</span>(ptr);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;free(%p)\n&quot;</span>, ptr);</span><br><span class="line">&#125;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
 <p>通过上面就可以实现不使用库函数而使用自己的函数了。这个函数便于跟踪内存请求和释放情况。但是每个文件都要写太过麻烦。</p>
 <p>也可以把这个单独写成一个文件，然后通过编译器<code>gcc -Wl ,--wrap,malloc -Wl,--wrap,free -o int1 int.0 mymalloc.o</code>进行链接</p>
-<h4 id="运行时库打桩"><a class="markdownIt-Anchor" href="#运行时库打桩"></a> 运行时库打桩</h4>
+<h2 id="运行时库打桩"><a class="markdownIt-Anchor" href="#运行时库打桩"></a> 运行时库打桩</h2>
 <p>运行时库打桩基于LD_PRELOAD环境变量。在这个变量路径下的库会先于系统库进行加载。</p>
 <p><a href="https://blog.csdn.net/qq_18150497/article/details/78010331">更多内容请看</a></p>
 ]]></content>
@@ -20830,8 +20942,15 @@ check约束可以在插入更新时进行检查，如果符合条件就进行插
 <ul>
 <li>width:</li>
 <li>height: 画布的长宽，默认是在画布的左上角，其他的坐标值都根据该点计算</li>
-<li>fillStyle: 填充样式</li>
+<li>fillStyle: 填充样式，gradient是渐变</li>
 <li>strokeStyle: 边框样式</li>
+<li>context.font: 以css语法决定的字体样式，例如<code>10px Arial</code></li>
+<li>textAlign: 对齐方式，可以为start、end、left、right、center。推荐使用start和end，不使用left和right</li>
+<li>textBaseLine: 指定文本的基线，可以为top、bottom、hanging、middle、alphabetic、ideographic。top表示y坐标在文本顶部，bottom表示y坐标在文本底部</li>
+<li>shadowColor: css颜色值</li>
+<li>shadowOffsetX: 阴影相对于路径的x坐标偏移量，默认是0</li>
+<li>shodowOffsetY:</li>
+<li>showdowBlur： 阴影的模糊量</li>
 </ul>
 <p><strong>绘制矩形</strong>：</p>
 <ul>
@@ -20843,6 +20962,7 @@ check约束可以在插入更新时进行检查，如果符合条件就进行插
 <figure class="highlight xquery"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> drawing =<span class="built_in"> document</span>.getElementById(<span class="string">&quot;drawing&quot;</span>);</span><br><span class="line"><span class="keyword">if</span>(drawing.getContext)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="keyword">context</span> = drawing.getContext(<span class="string">&quot;2d&quot;</span>);</span><br><span class="line">    <span class="keyword">context</span>.fillStyle = <span class="string">&quot;#ff0000&quot;</span>;</span><br><span class="line">    <span class="keyword">context</span>.fillRect(<span class="number">10</span>, <span class="number">10</span>, <span class="number">50</span>, <span class="number">50</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">context</span>.fillStyle = <span class="string">&quot;rgba(0, 0, 255, 0.5)&quot;</span>;</span><br><span class="line">    <span class="keyword">context</span>.fillRect(<span class="number">30</span>, <span class="number">30</span>, <span class="number">50</span>, <span class="number">50</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><img src="/images/canvas1.png" alt="" /></p>
 <p><strong>绘制路径</strong></p>
+<p>路径由多个点组成，可以闭合也可以不闭合，可以利用它绘制各种复杂的图形。</p>
 <p>首先调用context.beginPath()表示开始绘制，然后再调用下列方法进行绘制（只是描点，并没有真正开始绘制，还需要运行绘制完成操作才可以进行绘制）</p>
 <ul>
 <li>arc(x, y, radius, startAngle, endAngle, counterclockwise): 以(x, y)为中心，radius为半径绘制一条弧形。counterclockwise表示是否逆时针开始（默认是顺时针）</li>
@@ -20853,6 +20973,7 @@ check约束可以在插入更新时进行检查，如果符合条件就进行插
 <li>moveTo(x, y): 画笔移动到(x, y)</li>
 <li>quadraticCurveTo(cx, cy, x, y): 以(cx, cy)为控制点，绘制一条虫上一点到(x, y)的弧线(二次贝塞尔曲线)</li>
 <li>rect(x, y, width, height):</li>
+<li>isPointInPath(x, y): 检测点是否在路径中</li>
 </ul>
 <p>绘制完成之后的操作函数</p>
 <ul>
@@ -20861,6 +20982,41 @@ check约束可以在插入更新时进行检查，如果符合条件就进行插
 <li>stroke(): 绘制路径，使用这个函数才会真正在画面上有显示</li>
 <li>clip(): 创建一个剪切区域</li>
 </ul>
+<p><strong>绘制文本</strong></p>
+<ul>
+<li>fillText(str, x, y, maxpexel): 以(x, y)为基准点开始绘制str，最大像素为maxpexel。他会使用fillstyle属性</li>
+<li>strokeText(str, x, y, maxpexel): 参数含义和上面相同</li>
+<li>measureText(): 获得一个文本属性对象，目前这个对象只有width一个属性</li>
+</ul>
+<p>例如：</p>
+<figure class="highlight maxima"><table><tr><td class="code"><pre><span class="line"><span class="built_in">context</span>.<span class="built_in">font</span> = <span class="string">&quot;bold 14px Arial&quot;</span>;</span><br><span class="line"><span class="built_in">context</span>.textAlign = <span class="string">&quot;center&quot;</span>;</span><br><span class="line"><span class="built_in">context</span>.textBaseLine = <span class="string">&quot;middle&quot;</span>;</span><br><span class="line"><span class="built_in">context</span>.fillText(<span class="string">&quot;12&quot;</span>, <span class="number">100</span>, <span class="number">20</span>);</span><br></pre></td></tr></table></figure>
+<figure class="highlight maxima"><table><tr><td class="code"><pre><span class="line">//使用measureText限制最大宽度</span><br><span class="line"><span class="built_in">let</span> fontSize = <span class="number">100</span>;</span><br><span class="line"><span class="built_in">context</span>.<span class="built_in">font</span> = fontSize + <span class="string">&quot;px Arial&quot;</span>;</span><br><span class="line"><span class="keyword">while</span>(<span class="built_in">context</span>.measureText(<span class="string">&quot;hello world&quot;</span>).<span class="built_in">width</span> &gt; <span class="number">140</span>)</span><br><span class="line">&#123;</span><br><span class="line">    fontSize--;</span><br><span class="line">    <span class="built_in">context</span>.<span class="built_in">font</span> = fontSize + <span class="string">&quot;px Arial&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">context</span>.fillText(<span class="string">&quot;hello world&quot;</span>, <span class="number">10</span>, <span class="number">10</span>);</span><br></pre></td></tr></table></figure>
+<p><strong>变换</strong></p>
+<p>可以对图像进行缩放，平移，旋转等操作</p>
+<ul>
+<li>rotate(angle): 以原点为中心旋转angle角度</li>
+<li>scale(scalex, scaley): 进行缩放，x乘以scalex，y乘以scaley <figure class="highlight reasonml"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> drawing = document.get<span class="constructor">ElementById(<span class="string">&quot;drawing_canvas&quot;</span>)</span>;</span><br><span class="line"><span class="keyword">if</span> (drawing.getContext)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">let</span> ctx = drawing.get<span class="constructor">Context(<span class="string">&quot;2d&quot;</span>)</span>;</span><br><span class="line">    ctx.<span class="keyword">begin</span><span class="constructor">Path()</span>;</span><br><span class="line">    ctx.scale(<span class="number">1</span>, <span class="number">0.5</span>);</span><br><span class="line">    ctx.stroke<span class="constructor">Rect(0, 0, 100, 100)</span>;<span class="comment">//一个正方形</span></span><br><span class="line">    ctx.stroke<span class="literal">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<img src="/images/js%E5%8A%A8%E7%94%BB3.png" alt="" /></li>
+<li>translate(x, y): 把坐标原点移动到(x, y)主要是为了配合rotate使用</li>
+<li>transform(m1_1, m1_2, m2_1, m2_2, dx, dy): 综合缩放旋转和移动，<a href="https://www.w3school.com.cn/tags/canvas_transform.asp">具体可看</a></li>
+</ul>
+<p><strong>绘制图像</strong></p>
+<ul>
+<li>drawImage(image, x, y, w, h, dstx, dsty, dstw, dsth): x，y，w，h是原图像的截取区域，dstx…是绘图区域中的一部分。</li>
+</ul>
+<p><strong>渐变</strong></p>
+<ul>
+<li>createLinearGradient(x1, y1, x2, y2): 创建从(x1, y1)到(x2, y2)的渐变对象</li>
+<li>createRadialGradient(x, y, radius, dstx, dsty, dstr): 放射性渐变，六个参数控制两个圆，第一个是内部圆，第二个是外部圆。</li>
+</ul>
+<p>获得渐变对象之后，可以使用addColorStop()方法创建色标.并且这个对象可以赋值给fillStyle和strokeStyle</p>
+<ul>
+<li>gradient.addColorStop(loc, color): loc是0-1范围的值，color是颜色</li>
+</ul>
+<p>例如：</p>
+<figure class="highlight reasonml"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> drawing = document.get<span class="constructor">ElementById(<span class="string">&quot;drawing_canvas&quot;</span>)</span>;</span><br><span class="line"><span class="keyword">if</span> (drawing.getContext)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">let</span> ctx = drawing.get<span class="constructor">Context(<span class="string">&quot;2d&quot;</span>)</span>;</span><br><span class="line">    <span class="keyword">let</span> gradient = ctx.create<span class="constructor">LinearGradient(30, 30, 70, 70)</span>;</span><br><span class="line">    gradient.add<span class="constructor">ColorStop(0, <span class="string">&quot;white&quot;</span>)</span>;</span><br><span class="line">    gradient.add<span class="constructor">ColorStop(1, <span class="string">&quot;black&quot;</span>)</span>;</span><br><span class="line">    ctx.fillStyle = gradient;</span><br><span class="line">    ctx.fill<span class="constructor">Rect(50, 50, 50, 50)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/images/js%E5%8A%A8%E7%94%BB4.png" alt="" /><br />
+正常情况下应该一半黑一半白，但是这里几乎都是黑色，因为渐变的范围是(30, 30)到(70, 70)，到了矩形部分已经快渐变完了，因此显示都是黑色。因此为了显示比较好的渐变要渐变范围和图形范围相适应。</p>
 ]]></content>
       <categories>
         <category>js</category>
