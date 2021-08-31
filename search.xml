@@ -12035,9 +12035,14 @@ y_4 l_{41} &amp;+ y_4 l_{42} &amp;+ y_4 l_{43} &amp;+ y_4 &amp;= b_{\pi [4]}\\
 <p>此外他还支持多种截图模式并且可以图片上编辑</p>
 <h1 id="下载及代码"><a class="markdownIt-Anchor" href="#下载及代码"></a> 下载及代码</h1>
 <div class="btns rounded grid2">
-            <a class="button" href='https://github.com/xinhecuican/easy-capture/releases/download/0.1.0/easy_capture_v0.1.0.exe' title='直接下载'><i class='fas fa-download'></i>直接下载</a>
-<a class="button" href='https://pan.baidu.com/s/1N3WG0Qxfym1VLl8A0eb-xQ' title='百度网盘(提取码h2yn)'><i class='fas fa-book-open'></i>百度网盘(提取码h2yn)</a>
+            <a class="button" href='https://github.com/xinhecuican/easy-capture/releases/download/0.2.0/easy_capture_0_2_0.exe' title='直接下载'><i class='fas fa-download'></i>直接下载</a>
+<a class="button" href='https://pan.baidu.com/s/1ZwhngEa8pEf1hfaJlub3UQ' title='百度网盘(提取码jh1b)'><i class='fas fa-book-open'></i>百度网盘(提取码jh1b)</a>
           </div>
+<details ><summary> 历史版本 </summary>
+              <div class='content'>
+              <ul><li>0.1.0: <a href="https://pan.baidu.com/s/1N3WG0Qxfym1VLl8A0eb-xQ">https://pan.baidu.com/s/1N3WG0Qxfym1VLl8A0eb-xQ</a> (提取码h2yn)</li></ul>
+              </div>
+            </details>
 <p><a href="https://github.com/xinhecuican/easy-capture">github地址页</a></p>
 <p><a href="https://xinhecuican.github.io/post/35b71592.html">源码结构及一些编写心得</a></p>
 <p>欢迎拿走源码自己修改。也可以在评论区提意见（我设置了邮箱提醒）。</p>
@@ -12057,7 +12062,8 @@ y_4 l_{41} &amp;+ y_4 l_{42} &amp;+ y_4 l_{43} &amp;+ y_4 &amp;= b_{\pi [4]}\\
 <h3 id="自由截图-滚动截图"><a class="markdownIt-Anchor" href="#自由截图-滚动截图"></a> 自由截图、滚动截图</h3>
 <p>自由截图是画出一片区域，这片区域可以不闭合，画完会立刻确认。</p>
 <p><img src="/images/%E7%AE%80%E6%88%AA5.gif" alt="" /></p>
-<p>滚动截图暂未完成，将在下一版本展现</p>
+<p>滚动截图</p>
+<p><img src="/images/%E7%AE%80%E6%88%AA8.gif" alt="" /></p>
 <h2 id="绘制"><a class="markdownIt-Anchor" href="#绘制"></a> 绘制</h2>
 <p>当前仅支持笔和荧光笔绘制，并且支持撤销、恢复和擦除。</p>
 <p><img src="/images/%E7%AE%80%E6%88%AA6.gif" alt="" /></p>
@@ -20951,6 +20957,8 @@ check约束可以在插入更新时进行检查，如果符合条件就进行插
 <li>shadowOffsetX: 阴影相对于路径的x坐标偏移量，默认是0</li>
 <li>shodowOffsetY:</li>
 <li>showdowBlur： 阴影的模糊量</li>
+<li>globalAlpha: 透明度</li>
+<li>globalCompositionOperation: 图像合成模式</li>
 </ul>
 <p><strong>绘制矩形</strong>：</p>
 <ul>
@@ -21000,10 +21008,6 @@ check约束可以在插入更新时进行检查，如果符合条件就进行插
 <li>translate(x, y): 把坐标原点移动到(x, y)主要是为了配合rotate使用</li>
 <li>transform(m1_1, m1_2, m2_1, m2_2, dx, dy): 综合缩放旋转和移动，<a href="https://www.w3school.com.cn/tags/canvas_transform.asp">具体可看</a></li>
 </ul>
-<p><strong>绘制图像</strong></p>
-<ul>
-<li>drawImage(image, x, y, w, h, dstx, dsty, dstw, dsth): x，y，w，h是原图像的截取区域，dstx…是绘图区域中的一部分。</li>
-</ul>
 <p><strong>渐变</strong></p>
 <ul>
 <li>createLinearGradient(x1, y1, x2, y2): 创建从(x1, y1)到(x2, y2)的渐变对象</li>
@@ -21017,6 +21021,19 @@ check约束可以在插入更新时进行检查，如果符合条件就进行插
 <figure class="highlight reasonml"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> drawing = document.get<span class="constructor">ElementById(<span class="string">&quot;drawing_canvas&quot;</span>)</span>;</span><br><span class="line"><span class="keyword">if</span> (drawing.getContext)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">let</span> ctx = drawing.get<span class="constructor">Context(<span class="string">&quot;2d&quot;</span>)</span>;</span><br><span class="line">    <span class="keyword">let</span> gradient = ctx.create<span class="constructor">LinearGradient(30, 30, 70, 70)</span>;</span><br><span class="line">    gradient.add<span class="constructor">ColorStop(0, <span class="string">&quot;white&quot;</span>)</span>;</span><br><span class="line">    gradient.add<span class="constructor">ColorStop(1, <span class="string">&quot;black&quot;</span>)</span>;</span><br><span class="line">    ctx.fillStyle = gradient;</span><br><span class="line">    ctx.fill<span class="constructor">Rect(50, 50, 50, 50)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><img src="/images/js%E5%8A%A8%E7%94%BB4.png" alt="" /><br />
 正常情况下应该一半黑一半白，但是这里几乎都是黑色，因为渐变的范围是(30, 30)到(70, 70)，到了矩形部分已经快渐变完了，因此显示都是黑色。因此为了显示比较好的渐变要渐变范围和图形范围相适应。</p>
+<p><strong>图像处理</strong></p>
+<ul>
+<li>drawImage(image, x, y, w, h, dstx, dsty, dstw, dsth): x，y，w，h是原图像的截取区域，dstx…是绘图区域中的一部分。</li>
+<li>createPattern(img, repeat): 第一个参数时一个<code>&lt;img&gt;</code>元素，第二个参数是重复方式，有repeat、repeat-x、repeat-y和no-repeat</li>
+</ul>
+<figure class="highlight maxima"><table><tr><td class="code"><pre><span class="line"><span class="built_in">let</span> <span class="built_in">image</span> = document.images[<span class="number">0</span>];</span><br><span class="line">pattern = <span class="built_in">context</span>.createPattern(<span class="built_in">image</span>, <span class="string">&quot;repeat&quot;</span>);</span><br><span class="line"><span class="built_in">context</span>.filstyle = pattern;</span><br><span class="line"><span class="built_in">context</span>.fillRect(<span class="number">10</span>, <span class="number">10</span>, <span class="number">150</span>, <span class="number">150</span>);//会在这个范围内重复显示图像</span><br></pre></td></tr></table></figure>
+<ul>
+<li>getImageData(x, y, w, h): 获得区域内的图像数据，返回的对象中有width、height、data三个属性。</li>
+<li>putImageData(data, x, y): 将imageData对象放到(x, y)起点处</li>
+</ul>
+<p>data属性表示像素，它是一个一维数组，前四个表示第一个像素的r,g,b,a。</p>
+<figure class="highlight nix"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="attr">data</span> = imageData.data;</span><br><span class="line"><span class="keyword">let</span> <span class="attr">red</span> = data[<span class="number">0</span>];</span><br><span class="line"><span class="keyword">let</span> <span class="attr">green</span> = datat[<span class="number">1</span>];</span><br><span class="line"><span class="keyword">let</span> <span class="attr">blue</span> = data[<span class="number">2</span>];</span><br><span class="line"><span class="keyword">let</span> <span class="attr">alpha</span> = data[<span class="number">3</span>];</span><br><span class="line"><span class="keyword">let</span> <span class="attr">red2</span> = data[<span class="number">4</span>];</span><br></pre></td></tr></table></figure>
+<p>globalCompositionOperation是多个形状之间如何融合。<a href="http://www.wuhoushu.com/2020/04/07/canvas%E5%AD%A6%E4%B9%A021%E4%B9%8BglobalCompositionOperation%E5%AD%A6%E4%B9%A0/">各属性具体讲解</a></p>
 ]]></content>
       <categories>
         <category>js</category>
