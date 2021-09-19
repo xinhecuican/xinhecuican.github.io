@@ -15,7 +15,12 @@
 /*修改页面宽度*/
 .layout
 {
-	max-width: 1270px;
+	max-width: 1400px;
+}
+
+.layout > div:first-child
+{
+	width: 70%;
 }
 
 /*修改代码框样式*/
