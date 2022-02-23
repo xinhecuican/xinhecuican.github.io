@@ -1742,13 +1742,6 @@
   </url>
   
   <url>
-    <loc>https://www.xinhecuican.tech/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/</loc>
-    <lastmod>2022-02-23</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://www.xinhecuican.tech/categories/Python/</loc>
     <lastmod>2022-02-23</lastmod>
     <changefreq>daily</changefreq>
@@ -1756,7 +1749,7 @@
   </url>
   
   <url>
-    <loc>https://www.xinhecuican.tech/categories/stl/</loc>
+    <loc>https://www.xinhecuican.tech/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%BE%E5%BD%A2%E5%AD%A6/</loc>
     <lastmod>2022-02-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1764,6 +1757,13 @@
   
   <url>
     <loc>https://www.xinhecuican.tech/categories/%E7%AE%97%E6%B3%95/</loc>
+    <lastmod>2022-02-23</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.xinhecuican.tech/categories/stl/</loc>
     <lastmod>2022-02-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
@@ -1798,14 +1798,14 @@
   </url>
   
   <url>
-    <loc>https://www.xinhecuican.tech/categories/java/</loc>
+    <loc>https://www.xinhecuican.tech/categories/Linux/</loc>
     <lastmod>2022-02-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://www.xinhecuican.tech/categories/Linux/</loc>
+    <loc>https://www.xinhecuican.tech/categories/java/</loc>
     <lastmod>2022-02-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
