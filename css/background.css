@@ -56,9 +56,9 @@ a#site-name
 	font-family: titlefont;
 }
 
-#footer {
+/* #footer {
     background: transparent;
-}
+} */
 
 @media screen and (min-device-width: 600px)
 {
