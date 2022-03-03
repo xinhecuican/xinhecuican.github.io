@@ -42,7 +42,7 @@ window.addEventListener('load', () => {
   })
 
   function search (path) {
-    fetch(GLOBAL_CONFIG.root + path)
+    fetch("https://cdn.jsdelivr.net/gh/xinhecuican/xinhecuican.github.io/" + path)
       .then(response => response.text())
       .then(str => new window.DOMParser().parseFromString(str, 'text/xml'))
       .then(data => {
